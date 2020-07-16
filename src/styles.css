@@ -1,0 +1,148 @@
+/* You can add global styles to this file, and also import other style files */
+.width-5{width: 5% !important;}
+.width-10{width: 10% !important;}
+.width-20{width: 20% !important;}
+.width-30{width: 30% !important;}
+.width-40{width: 40% !important;}
+.width-50{width: 50% !important;}
+.width-60{width: 60% !important;}
+.width-70{width: 70% !important;}
+.width-75{width: 75% !important;}
+.width-80{width: 80% !important;}
+.width-85{width: 85% !important;}
+.width-90{width: 90% !important;}
+.width-95{width: 95% !important;}
+.width-100{width: 100% !important;}
+
+/* ******************/
+.no-border{border: none !important;}
+
+
+.family{font-family: 'Montserrat', sans-serif;}
+.family-300{font-family: 'Montserrat', sans-serif;font-weight: 300;}
+.family-400{font-family: 'Montserrat', sans-serif;font-weight: 400;}
+.family-500{font-family: 'Montserrat', sans-serif;font-weight: 500;}
+.family-600{font-family: 'Montserrat', sans-serif;font-weight: 600;}
+.family-700{font-family: 'Montserrat', sans-serif;font-weight: 600;}
+
+
+.display-flex{display: flex;}
+.flex-direction-column{flex-direction: column;}
+.justify-content-center{justify-content: center;}
+.justify-content-flex-end{justify-content:flex-end;}
+.align-items-center{align-items: center;}
+.align-content-center{align-content: center;}
+.justify-content-space-between{justify-content: space-between;} 
+.justufy-content-flex-end{justify-content: flex-end;}
+
+/* SIZE 5X1*/
+.size-50{font-size: 50px;}
+.size-45{font-size: 45px;}
+.size-40{font-size: 40px;}
+.size-30{font-size: 30px;}
+.size-35{font-size: 35px;}
+.size-25{font-size: 25px;}
+.size-20{font-size: 20px;}
+.size-15{font-size: 15px;}
+.size-10{font-size: 10px;}
+.size-5{font-size: 5px;}
+
+/* SIZE 3X1*/
+.size-36{font-size: 36px;}
+.size-33{font-size: 33px;}
+.size-27{font-size: 27px;}
+.size-24{font-size: 24px;}
+.size-21{font-size: 21px;}
+.size-18{font-size: 18px;}
+.size-12{font-size: 12px;}
+.size-9{font-size: 9px;}
+.size-6{font-size: 6px;}
+.size-3{font-size: 3px;}
+
+/* SIZE 2X1*/
+.size-26{font-size: 26px;}
+.size-22{font-size: 22px;}
+.size-16{font-size: 16px;}
+.size-14{font-size: 14px;}
+.size-8{font-size: 8px;}
+.size-4{font-size: 4px;}
+.size-2{font-size: 2px;}
+
+.black{color: black;}
+.white{color:white;}
+.red{color:red;}
+.blue{color:blue;}
+.yellow{color:yellow;}
+.green{color:green;}
+
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+  
+.fast {
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+  
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+  
+.fadeIn {animation-name: fadeIn;}
+
+::placeholder {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.form-control.width-60.edit-input{
+    background: #f6f6f6;
+    border: 1px solid #e9e9e9;
+    border-radius: 12px;
+}
+
+.cursor-poniter{cursor: pointer;}
+#registrarme:hover{color:#F09207}
+#inisiar-sesion:hover{color:#F09207}
+
+/* ICONO DE LUPA PARA LOS BUSCADORES */
+.ref input{
+    border-color: gray;
+    border-style: solid;
+    padding: 10px 20px 10px 25px;
+    /* background-image: url(../src/assets/img/iconos/iconos-lupa.png); */
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: right;
+    border: 1px solid #e9e9e9 !important;
+    border-radius: 12px;
+}
+
+.boxp:hover {
+    background: rgba(255, 255, 255,1);
+    color: rgb(82, 82, 82);
+    box-shadow: 0 24px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.boxp {
+    border-radius: 10px;
+    margin-top: 5%;
+    background-color: rgba(255, 255,255,1);
+    text-align: center;
+    position: relative;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.button-hover:hover{background: #F09207 !important;}
+.background-white{background: white !important;}
+li{list-style: none;}
+a:hover{color: #F09207; text-decoration: none !important;cursor: pointer;}
+.col-form-label{padding-left: 0% !important;}
