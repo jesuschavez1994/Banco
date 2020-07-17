@@ -3,10 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { RespuestaMDB } from '../interfaces/interfaces';
 import { environment } from '../../environments/environment';
 
-
-
-const URL = 'https://api.themoviedb.org/3';
-const apiKey = 'aac1706fe8a46b5700714aead65c5e39';
+const URL = environment.url;
+const apiKey = environment.apiKey;
 
 @Injectable({
   providedIn: 'root'

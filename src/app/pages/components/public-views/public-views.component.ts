@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicioService } from '../../services/servicio.service';
-import { Pelicula, RespuestaMDB} from '../../interfaces/interfaces';
+import { ServicioService } from '../../../services/servicio.service';
+import { Pelicula, RespuestaMDB} from '../../../interfaces/interfaces';
 import { Router, ActivatedRoute } from '@angular/router';
 
 

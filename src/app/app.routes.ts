@@ -1,10 +1,9 @@
 import { RouterModule, Routes } from '@angular/router';
-import { PublicViewsComponent } from './components/public-views/public-views.component';
-import { ViewProductoComponent } from './components/public-views/view-producto.component';
-import { LoginUsuarioComponent } from './components/login-usuario/login-usuario.component';
+import { PublicViewsComponent } from './pages/components/public-views/public-views.component';
+import { LoginUsuarioComponent } from './pages/components/login-usuario/login-usuario.component';
 import { TerminosYCondicionesComponent } from './views/terminos-ycondiciones/terminos-ycondiciones.component';
-import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
-import { HomeComponent } from './components/home/home.component';
+import { DetalleProductoComponent } from './pages/components/detalle-producto/detalle-producto.component';
+import { HomeComponent } from './pages/components/home/home.component';
 
 
 
