@@ -13,6 +13,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LoginUsuarioComponent } from './components/login-usuario/login-usuario.component';
 import { FormDataUsuarioComponent } from './form/form-data-usuario/form-data-usuario.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CardShimmerComponent } from './components/card-shimmer/card-shimmer.component';
+import { CardShimmerDetalleProductoComponent } from './components/card-shimmer-detalle-producto/card-shimmer-detalle-producto.component';
+import { SharedModule } from '../shared/shared.module';
+import { RegisterComponent } from './components/login-usuario/register-usuario/register/register.component';
+
+import { RegisterNegocioComponent } from './components/login-usuario/register-negocio/register-negocio.component';
+import { FormDataNegocioComponent } from './form/form-data-negocio/form-data-negocio.component';
+
 
 
 @NgModule({
@@ -27,6 +35,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         PublicViewsComponent,
         FormDataUsuarioComponent,
         LoginUsuarioComponent,
+        CardShimmerComponent,
+        CardShimmerDetalleProductoComponent,
+        RegisterComponent,
+      
+        RegisterNegocioComponent,
+      
+        FormDataNegocioComponent,
     ],
     exports: [],
     imports : [
@@ -35,6 +50,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         PipesModule,
         ReactiveFormsModule,
         FormsModule,
+        SharedModule
     ]
 })
 

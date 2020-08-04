@@ -1,0 +1,21 @@
+
+img {width:11%}
+.founduss-logo:focus{outline-style: none;}
+
+@media(min-width:300px) and (max-width:991px){
+    .width-30{
+        width: 100% !important;
+        display: flex;
+        flex-direction: column;
+    }
+    #inisiar-sesion{
+        margin-left: 0px !important;
+    }
+    .nav-item.menu{
+        margin-bottom: 10px;
+    }
+    img {
+        width:150px
+    }
+    
+}

@@ -25,6 +25,7 @@
             ],
             "styles": [
               "src/styles.css",
+              "src/_animations.scss",
               "src/assets/font-awesome/css/font-awesome.min.css",
               "src/assets/bootstrap4/css/bootstrap.min.css"
             ],
@@ -123,6 +124,10 @@
               "devServerTarget": "BancoDeProductos:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }

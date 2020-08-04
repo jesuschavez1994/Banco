@@ -10,7 +10,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
         SidebarComponent,
     ],
     imports: [ APP_ROUTING, ],
-    exports: [ NavbarComponent, ]
+    exports: [ NavbarComponent,  SidebarComponent]
 })
 
 export class SharedModule { }

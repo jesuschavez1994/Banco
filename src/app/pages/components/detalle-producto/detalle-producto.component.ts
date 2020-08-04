@@ -11,14 +11,23 @@ import { ServicioService } from '../../../services/servicio.service';
 export class DetalleProductoComponent implements OnInit {
 
   producto: any = {};
+  loadcard: boolean;
+
 
   constructor(  private activatedRoute: ActivatedRoute,
                 private publicViews: PublicViewsComponent,
                 private services: ServicioService
               ) {
+
+    this.loadcard = true;
     this.activatedRoute.params.subscribe( params => {
       // console.log(params['id']);
-      this.services.getproducto(params['id']).subscribe( producto => this.producto = producto);
+      this.services.getproducto(params['id']).subscribe( producto => {
+        setTimeout(() => {
+          this.producto = producto;
+          this.loadcard = false;
+        }, 2000);
+      });
     });
   }
 

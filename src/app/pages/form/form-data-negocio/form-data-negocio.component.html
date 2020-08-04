@@ -1,0 +1,143 @@
+<div class="container animated fadeIn">
+    <div class="row display-flex justify-content-center">
+        <div class="col-md-5">
+
+            <form [formGroup]="forma" (ngSubmit)="registrarNegocio()" novalidate="novalidate">
+
+
+                <div class="form-group row">
+                    <div class="col-12">
+                      <label class="col-4 col-form-label family-400">Usuario</label>
+                      <input class="form-control"
+                             type="text"
+                             placeholder="Nombre"
+                             formControlName="username"
+                             [ngClass]="{'is-invalid':  (!forma.controls['username'].valid || forma.controls['username'].errors?.minlength)&& forma.controls['username'].touched, 'is-valid': forma.controls['username'].valid }" 
+                      >
+                      
+                      <div  *ngIf="forma.get('username').errors?.required"  
+                            class="invalid-feedback">
+                            Este campo es requerido
+                      </div>
+                      <div  *ngIf="forma.get('username').errors?.minlength"  
+                            class="invalid-feedback">
+                            Por lo menos 5 caracteres
+                      </div>
+              
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                      <label class="col-4 col-form-label family-400">Correo</label>
+                      <input  class="form-control"
+                              type="email"
+                              placeholder="Correo electrónico"
+                              formControlName="correo"
+                              [ngClass]="{'is-invalid':  (!forma.controls['correo'].valid || forma.controls['correo'].errors?.minlength)&& forma.controls['correo'].touched, 'is-valid': forma.controls['correo'].valid }"
+                      >
+                
+                      <div  *ngIf="forma.get('correo').errors?.required"  
+                            class="invalid-feedback">
+                            Este campo es requerido
+                      </div>
+                      <div  *ngIf="forma.get('correo').errors?.pattern"  
+                            class="invalid-feedback">
+                            No posee la forma de un correo: example@gmail.com
+                      </div> 
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                      <label class="col-4 col-form-label family-400">Contraseña</label>
+                      <input  class="form-control"
+                              type="password"
+                              placeholder="Password"
+                              formControlName="password1"
+                              [ngClass]="{'is-invalid':  (!forma.get('password1').valid || forma.get('password1').errors?.minlength)&& forma.get('password1').touched, 'is-valid': forma.get('password1').valid }"
+                      >
+                
+                      <div  *ngIf="forma.get('password1').errors?.required"  
+                            class="invalid-feedback">
+                            Este campo es requerido
+                      </div>
+                      <div  *ngIf="forma.get('password1').errors?.minlength"  
+                            class="invalid-feedback">
+                            La contraseña debe tener al menos 8 caracteres
+                      </div> 
+                
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+          
+                    <div class="col-12">
+                        <label  class="col-5 col-form-label family-400">Repetir contraseña</label>
+                        <input  class="form-control"
+                                type="password"
+                                placeholder="Repetir Password"
+                                formControlName="password2"
+                                [ngClass]="{'is-invalid':  (!forma.get('password2').valid || forma.get('password2').errors?.minlength)&& forma.get('password2').touched, 'is-valid': forma.get('password2').valid }"
+                        >
+                
+                      <div  *ngIf="forma.get('password2').errors?.required"  
+                            class="invalid-feedback">
+                            Este campo es requerido
+                      </div>
+                
+                      <div   *ngIf="forma.get('password2').errors?.minlength"  
+                              class="invalid-feedback">
+                              La contraseña debe tener al menos 8 caracteres
+                      </div> 
+                
+                      <div   *ngIf="((forma.get('password2').value !== forma.get('password1').value) && forma.get('password2').errors?.noiguales)"  
+                              class="invalid-feedback">
+                              ¡Las contraseñas no son iguales!
+                      </div> 
+                        
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label  class="col-12 col-form-label family-400 pl-3">Acepto términos y condiciones</label>
+                    <div class="col-12">
+                      <input type="checkbox" formControlName="terminos">
+                      <p class="family-400 size-12">
+                        Haciendo click en Registrar Declarara ser una persona natural y debe ingresar 
+                        y aceptar los <a  [routerLink]="['/terminos-ycondiciones']" class="terminos-link family-700">Términos y Condiciones</a> de nuestra plataforma, así como también recibir 
+                        correos electrónicos relacionados con miembros y servicios desde Founduss.cl
+                      </p>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="input-group col-md-12">
+                      <button [disabled]="!forma.valid" 
+                              type="submit" 
+                              class="btn btn-outline-primary btn-block"
+                              (click)="registrar()">
+          
+                        
+                        Crear usuario
+                      </button>
+                    </div>
+                  </div>
+                
+                  {{forma.valid}}
+                  <br>
+                  {{forma.status}}
+                  <br>
+                  <!-- <pre>
+                    {{forma.value | json}}
+                  </pre> -->
+                  <br>
+                  <br>
+
+
+            </form>
+
+        </div>
+    </div>
+</div>

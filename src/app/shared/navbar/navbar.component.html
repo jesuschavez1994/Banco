@@ -1,27 +1,48 @@
-<nav class="navbar navbar-expand-lg navbar-light background-white mb-5">
-    <img src="../assets/img/Navbar/Logo Founduss.svg" width="11%">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link family-500 size-15" [routerLink]="['public-views']">Productos</a>
-        </li>
-      </ul>
-      <ul class="ref width-70 mb-0">
-        <input class="form-control edit-input" placeholder="Busca un producto o una farmacia...">
-      </ul>
-      <ul class="mb-0 pl-3 width-30 display-flex justify-content-around">
-        <li class="nav-item" routerLinkActive="active">
-          <a class="family-500 cursor-poniter size-14 black" id="registrarme" [routerLink]="['login-usuario']">Regístrarme</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="family-500 ml-2 cursor-poniter size-14 black" id="inisiar-sesion">Iniciar sesión</a>
-        </li>
-        
-      </ul>
-    </div>
-    <div class="link-sesion">
-    </div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+  <img src="assets/img/Navbar/Logo Founduss.svg" [routerLink]="['home']" class="founduss-logo">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item mr-3 ml-3" routerLinkActive="active">
+        <a class="nav-link family-500 size-15" [routerLink]="['public-views']">Productos</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0 width-80">
+      <input class="form-control mr-sm-2 width-95" type="search" placeholder="Buscar producto..." aria-label="Search">
+    </form>
+    <ul class="mb-0 pl-3 width-30 display-flex justify-content-around">
+      <li class="nav-item menu" routerLinkActive="active">
+        <a class="family-500 cursor-poniter size-14 black" id="registrarme" data-toggle="modal" data-target="#exampleModalCenter" >Regístrarme</a>
+      </li>
+      <li class="nav-item menu" routerLinkActive="active">
+        <a class="family-500 ml-2 cursor-poniter size-14 black" id="inisiar-sesion" [routerLink]="['login-usuario']">Iniciar sesión</a>
+      </li>
+    </ul>
+  </div>
 </nav>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" [routerLink]="['register']">Persona</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" [routerLink]="['register-negocio']">Farmacia</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

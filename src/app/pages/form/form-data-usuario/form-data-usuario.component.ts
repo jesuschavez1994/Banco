@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { UsuarioService } from '../../../services/usuario/usuario.service';
+import { Usuario } from 'src/app/models/usuario.model';
+
+
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-data-usuario',
@@ -10,35 +15,20 @@ import { Observable } from 'rxjs';
 export class FormDataUsuarioComponent {
 
   forma: FormGroup;
-  loadding: boolean = false;
+  loadding = false;
 
-  // usuario: any = {
-
-  //    nombrecompleto: {
-  //    nombre: 'fernando',
-  //    apellido: 'herrera'
-  //   },
-
-  //   correo: 'fernando.herrera85@gmail.com',
-  //   // pasatiempos: ['Correr', 'Caminar', 'Dormir']
-  // };
   controls: any;
 
- constructor() {
-
-  //  console.log(this.usuario);
+ constructor(
+   public usuarioServices: UsuarioService,
+   public router: Router
+ ) {
 
    this.forma = new FormGroup({
-
-       nombrecompleto: new FormGroup({
-
          nombre: new FormControl('' , [Validators.required, Validators.minLength(5)]),
-
-         apellido: new FormControl('' , [Validators.required, Validators.minLength(5)])}),
-
+         apellido: new FormControl('' , [Validators.required, Validators.minLength(5)]),
          correo: new FormControl('' , [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
-
-         username: new FormControl('', Validators.required, this.existeUsuario),
+         username: new FormControl('', [Validators.required, Validators.minLength(5)]),
          password1: new FormControl('', [Validators.required, Validators.minLength(8)]),
          password2: new FormControl(),
          terminos: new FormControl('', Validators.required),
@@ -75,6 +65,7 @@ export class FormDataUsuarioComponent {
         setTimeout ( () => {
           if ( control.value === 'jesus'){
             resolve({ existe: true});
+            console.log('existe usuario');
           }else{
             resolve(null);
           }
@@ -85,24 +76,28 @@ export class FormDataUsuarioComponent {
     return promesa;
   }
 
-   agregarPasatiempos(){
-     // tslint:disable-next-line: no-unused-expression
-       // tslint:disable-next-line: no-string-literal
-       (this.forma.controls['pasatiempos'] as FormArray).push(
-         new FormControl('Dormir', Validators.required)
-       );
 
-  }
-
-  guardarCambios(){
+  registrarUsuario(){
    console.log(this.forma.value);
    console.log(this.forma);
 
+   const usuario = new Usuario(
+    this.forma.value.nombre,
+    this.forma.value.correo,
+    this.forma.value.username,
+    this.forma.value.password1
+   );
+    // tslint:disable-next-line: align
+    this.usuarioServices.crearUsuario(usuario).subscribe( res => {
+      console.log('usuario', res);
+      this.router.navigate(['/login-usuario']);
+    });
   }
 
   usuarioCreado(){
     this.loadding = true;
     setTimeout(() => this.loadding = false, 3000);
   }
+
 
 }

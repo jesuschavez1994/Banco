@@ -38,6 +38,7 @@ export class PublicViewsComponent implements OnInit {
 
     this.loading = true;
 
+
     if (termino.length === 0){
       setTimeout(() => {
       this.producto = [];

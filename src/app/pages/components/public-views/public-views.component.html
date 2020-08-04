@@ -1,86 +1,100 @@
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-        <app-banner-tienda></app-banner-tienda>
 
-        <router-outlet></router-outlet>
+
+<section class="display-flex">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-2">
+                <app-sidebar></app-sidebar>
+            </div>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-10">
+                <app-banner-tienda></app-banner-tienda>
+                <router-outlet></router-outlet>
+
+                <div class="animated fadeIn">
+                    <div class="row">
+                        <div class="ref col-lg-12 mb-5 mt-2 display-flex justify-content-center">
+                            <input #termino type="search" class="form-control width-60 edit-input" placeholder="Busca un producto en esta tienda..." (keyup)="buscar(termino.value)" (search)="buscar(termino.value)">
+                            <button type="button" class="btn btn-outline-dark button-filtro button-hover family-500">FILTRAR POR<i class="fa fa-angle-down pl-2"></i></button>
+                        </div>
+                    </div>
+                </div>
         
-        <div class="container animated fadeIn">
-            <div class="row">
-                <div class="ref col mb-5 mt-2 display-flex justufy-content-flex-end">
-                    <input #termino type="search" class="form-control width-60 edit-input" placeholder="Busca un producto en esta tienda..." (keyup)="buscar(termino.value)" (search)="buscar(termino.value)">
-                    <button type="button" class="btn btn-outline-dark button-filtro button-hover family-500">FILTRAR POR<i class="fa fa-angle-down pl-2"></i></button>
+        
+        
+                <div>
+                    <div class="row justify-content-center">
+                        
+                        <div class="col-sm-10 col-md-12 col-lg-12 col-xl-10">
+        
+                            <!-- <app-loading *ngIf="loading"></app-loading> -->
+                            <app-card-shimmer *ngIf="loading"></app-card-shimmer>
+        
+                            <div class="card-columns" *ngIf="producto.length === 0">
+                                <div    class="card no-border animated fadeIn puntero" 
+                                        *ngFor="let item of PeliculasRecientes"
+                                        [routerLink]="['detalle-producto', item.id]">
+        
+                                    <img [src]="item.backdrop_path | imagen" width="100%">
+                                    <div class="card-body">
+                                        <h5 class="card-title family-500 size-14 black">{{item.original_title}}</h5>
+                                        <p class="card-text family-400 size-12 black"> 
+                                            {{item.overview | slice: 0:oculto }} ... 
+                                        </p>
+                                        <span class="badge badge-primary puntero" (click)=" MostrarInfo( $event ) " *ngIf="oculto !==250" >Leer más</span>
+                                        <p class="mb-0">
+                                            <i class="fa fa-star dorado" aria-hidden="true"></i>
+                                            <i class="fa fa-star dorado" aria-hidden="true"></i>
+                                            <i class="fa fa-star dorado" aria-hidden="true"></i>
+                                            <i class="fa fa-star dorado" aria-hidden="true"></i>
+                                            <i class="blue-light ml-2">{{item.vote_average}} </i>
+                                        </p>
+        
+                                        <i class="ml-2 family-400 size-12">{{item.vote_average | currency: 'USD':true}} </i>
+                                        <p class="card-text"><small class="text-muted">Fecha : <span>{{item.release_date}}</span></small></p>
+                                    </div>
+                                </div>
+                            </div> 
+        
+                            <div class="card-columns">
+                                <div    class="card no-border animated fadeIn puntero" 
+                                        *ngFor="let productos of producto"
+                                        [routerLink]="['detalle-producto', productos.id]">
+        
+                                    <img [src]="productos.backdrop_path | imagen" width="100%">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{productos.original_title}}</h5>
+                                        <p class="card-text family-400 size-12 black"> 
+                                            {{productos.overview | slice: 0:oculto }} ... 
+                                        </p>
+
+                                        <span   class="badge badge-primary" 
+                                                (click)="MostrarInfo( $event )" 
+                                                *ngIf="oculto !==250" 
+                                                >Leer más
+                                        </span>
+                                
+                                        <p class="mb-0">
+                                            <i class="fa fa-star dorado" aria-hidden="true"></i>
+                                            <i class="fa fa-star dorado" aria-hidden="true"></i>
+                                            <i class="fa fa-star dorado" aria-hidden="true"></i>
+                                            <i class="fa fa-star dorado" aria-hidden="true"></i>
+                                            <i class="blue-light ml-2">{{productos.vote_average}} </i>
+                                        </p>
+        
+                                        <i class="ml-2 family-400 size-12">{{productos.vote_average | currency: 'USD':true}} </i>
+        
+                                        <p class="card-text"><small class="text-muted">Fecha : <span>{{productos.release_date}}</span></small></p>
+                                    </div>
+                                </div>
+                            </div> 
+        
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        
-        
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-        
-                    <app-loading *ngIf="loading"></app-loading>
-        
-                    <div class="card-columns" *ngIf="producto.length === 0">
-                        <div    class="card no-border animated fadeIn puntero" 
-                                *ngFor="let item of PeliculasRecientes"
-                                [routerLink]="['detalle-producto', item.id]">
-        
-                            <img [src]="item.backdrop_path | imagen" width="100%">
-                            <div class="card-body">
-                                <h5 class="card-title family-500 size-14 black">{{item.original_title}}</h5>
-                                <p class="card-text family-400 size-12 black"> 
-                                    {{item.overview | slice: 0:oculto }} ... 
-                                </p>
-                                <span class="badge badge-primary puntero" (click)=" MostrarInfo( $event ) " *ngIf="oculto !==250" >Leer más</span>
-                                <p class="mb-0">
-                                    <i class="fa fa-star dorado" aria-hidden="true"></i>
-                                    <i class="fa fa-star dorado" aria-hidden="true"></i>
-                                    <i class="fa fa-star dorado" aria-hidden="true"></i>
-                                    <i class="fa fa-star dorado" aria-hidden="true"></i>
-                                    <i class="blue-light ml-2">{{item.vote_average}} </i>
-                                </p>
-        
-                                <i class="ml-2 family-400 size-12">{{item.vote_average | currency: 'USD':true}} </i>
-                                <p class="card-text"><small class="text-muted">Fecha : <span>{{item.release_date}}</span></small></p>
-                            </div>
-                        </div>
-                    </div> 
-        
-                    <div class="card-columns">
-                        <div    class="card no-border animated fadeIn puntero" 
-                                *ngFor="let productos of producto"
-                                [routerLink]="['detalle-producto', productos.id]">
-        
-                            <img [src]="productos.backdrop_path | imagen" width="100%">
-                            <div class="card-body">
-                                <h5 class="card-title">{{productos.original_title}}</h5>
-                                <p class="card-text family-400 size-12 black"> 
-                                    {{productos.overview | slice: 0:oculto }} ... 
-                                </p>
-                                <span class="badge badge-primary" (click)=" MostrarInfo( $event ) " *ngIf="oculto !==250" >Leer más</span>
-                                <p class="mb-0">
-                                    <i class="fa fa-star dorado" aria-hidden="true"></i>
-                                    <i class="fa fa-star dorado" aria-hidden="true"></i>
-                                    <i class="fa fa-star dorado" aria-hidden="true"></i>
-                                    <i class="fa fa-star dorado" aria-hidden="true"></i>
-                                    <i class="blue-light ml-2">{{productos.vote_average}} </i>
-                                </p>
-        
-                                <i class="ml-2 family-400 size-12">{{productos.vote_average | currency: 'USD':true}} </i>
-        
-                                <p class="card-text"><small class="text-muted">Fecha : <span>{{productos.release_date}}</span></small></p>
-                            </div>
-                        </div>
-                    </div> 
-        
-                </div>
-            </div>
-        </div>
-
-       </div>
-    </div>
     
-</div>
+    </div>
+
+</section>

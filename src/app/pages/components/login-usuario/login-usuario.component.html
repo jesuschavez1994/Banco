@@ -1,1 +1,120 @@
-<app-form-data-usuario></app-form-data-usuario>
+<div class="container animated fadeIn">
+    <div class="row display-flex justify-content-center">
+        <div class="col-md-5">
+            
+            <form [formGroup]="forma"  (ngSubmit)="loginRegister()" novalidate="novalidate" >
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <label class="col-4 col-form-label family-400">Correo</label>
+                        <input  class="form-control"
+                                type="email"
+                                placeholder="Ingrese el correo"
+                                formControlName="email"
+                                [ngModel]="email"  
+                                [ngClass]="{'is-invalid':  (!forma.controls['email'].valid || forma.controls['email'].errors?.minlength)&& forma.controls['email'].touched, 'is-valid': forma.controls['email'].valid }"
+                        >
+              
+                        <div    *ngIf="forma.get('email').errors?.required"  
+                                class="invalid-feedback">
+                                Este campo es requerido
+                        </div>
+                        <div    *ngIf="forma.get('email').errors?.pattern"  
+                                class="invalid-feedback">
+                                No posee la forma de un correo: example@gmail.com
+                        </div> 
+            
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <label class="col-4 col-form-label family-400">Password</label>
+                        <input  class="form-control"
+                                type="password"
+                                placeholder="Ingrese contraseña"
+                                formControlName="password"
+                                [ngClass]="{'is-invalid':  (!forma.get('password').valid || forma.get('password').errors?.minlength)&& forma.get('password').touched, 'is-valid': forma.get('password').valid }"
+                        >
+
+                        <div    *ngIf="forma.get('password').errors?.required"  
+                                class="invalid-feedback">
+                                Este campo es requerido
+                        </div>
+                        <div    *ngIf="forma.get('password').errors?.minlength"  
+                                class="invalid-feedback">
+                                La contraseña debe tener al menos 8 caracteres
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                      <label class="col-5 col-form-label family-400">User name</label>
+                      <input  class="form-control"
+                              type="text"
+                              placeholder="Usuario"
+                              formControlName="username"
+                              [ngClass]="{'is-invalid':  (!forma.controls['username'].valid || forma.controls['username'].errors?.minlength)&& forma.controls['username'].touched, 'is-valid': forma.controls['username'].valid }"
+                      >
+                      
+                      <div  *ngIf="forma.get('username').errors?.required"  
+                            class="invalid-feedback">
+                            Este campo es requerido
+                      </div>
+                      <div  *ngIf="forma.get('username').errors?.pattern"  
+                            class="invalid-feedback">
+                            Por lo menos 5 caracteres
+                      </div> 
+                    </div>
+                  </div>
+
+
+                <div class="form-group row">
+                    <div class="input-group col-md-12">
+                        <button [disabled]="!forma.valid" 
+                                type="submit" 
+                                class="btn btn-outline-primary btn-block"
+                                (click)="Ingresar()">
+                                Ingresar
+
+                      </button>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="checkbox checkbox-primary pull-left p-t-0">
+                            <input  name="recuerdame" 
+                                    id="checkbox-signup" 
+                                    type="checkbox" 
+                                    class="filled-in chk-col-light-blue"
+                                    formControlName="recuerdame"       
+                            >
+
+                            <label for="checkbox-signup" class="ml-2"> Recordar usuario </label>
+                        </div>
+
+                        <a  id="to-recover" class="text-dark pull-right">
+                            <i class="fa fa-lock m-r-5"></i> 
+                            ¿Olvidaste tú contraseña?
+                        </a> 
+                    </div>
+                </div>
+
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center">
+                        ¿Aún no tienes cuenta? <a routerLink="/register" class="text-primary">Crear cuenta</a>
+                    </div>
+                </div>
+
+                <pre>
+                    {{forma.value | json}}</pre> 
+
+            </form>
+
+            
+            
+        </div>
+    </div>
+</div>

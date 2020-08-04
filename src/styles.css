@@ -64,6 +64,7 @@
 .size-22{font-size: 22px;}
 .size-16{font-size: 16px;}
 .size-14{font-size: 14px;}
+.size-13{font-size: 13px;}
 .size-8{font-size: 8px;}
 .size-4{font-size: 4px;}
 .size-2{font-size: 2px;}
@@ -146,3 +147,5 @@
 li{list-style: none;}
 a:hover{color: #F09207; text-decoration: none !important;cursor: pointer;}
 .col-form-label{padding-left: 0% !important;}
+
+.puntero{cursor: pointer;}
