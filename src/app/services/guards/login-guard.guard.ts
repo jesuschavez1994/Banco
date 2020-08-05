@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class LoginGuardGuard implements CanActivate {
   canActivate() {
+    console.log('Paso por el login Guard');
     return true;
   }
 }

@@ -38,9 +38,7 @@ import { FormDataNegocioComponent } from './form/form-data-negocio/form-data-neg
         CardShimmerComponent,
         CardShimmerDetalleProductoComponent,
         RegisterComponent,
-      
         RegisterNegocioComponent,
-      
         FormDataNegocioComponent,
     ],
     exports: [],

@@ -12,6 +12,7 @@ import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 import { PipesModule } from './pipes/pipes.module';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { ServiceModule } from './services/service.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
     PipesModule,
     APP_ROUTING,
     PagesModule,
-    SharedModule
+    SharedModule,
+    ServiceModule
   ],
   providers: [],
   bootstrap: [AppComponent]
