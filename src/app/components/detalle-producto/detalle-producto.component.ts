@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PublicViewsComponent } from '../../../pages/components/public-views/public-views.component';
-import { ServicioService } from '../../../services/servicio.service';
+import { PublicViewsComponent } from '../../pages/components/public-views/public-views.component';
+import { ServicioService } from '../../services/servicio.service';
 
 @Component({
   selector: 'app-detalle-producto',

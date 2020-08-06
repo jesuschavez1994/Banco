@@ -13,6 +13,8 @@ import { SharedModule } from './shared/shared.module';
 import { PipesModule } from './pipes/pipes.module';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ServiceModule } from './services/service.module';
+import { FormularioRegisterModule } from './form-register/formulario-register.module';
+import { VistasPublicasModule } from './vistas-publicas/vistas-publicas.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { ServiceModule } from './services/service.module';
     APP_ROUTING,
     PagesModule,
     SharedModule,
-    ServiceModule
+    ServiceModule,
+    FormularioRegisterModule,
+    VistasPublicasModule
   ],
   providers: [],
   bootstrap: [AppComponent]

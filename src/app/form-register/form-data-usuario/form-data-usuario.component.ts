@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { UsuarioService } from '../../../services/usuario/usuario.service';
+import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Usuario } from 'src/app/models/usuario.model';
 
 
