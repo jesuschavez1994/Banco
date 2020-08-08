@@ -37,7 +37,6 @@ export class UsuarioService {
       localStorage.removeItem('email');
     }
 
-    let url = '/login';
     return this.postQuery(`/api/login`, usuario ).map(( resp: any) => {
       localStorage.setItem('email', resp.email);
       localStorage.setItem('token', resp.remember_token);
