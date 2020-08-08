@@ -1,15 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICIOS } from 'src/app/config/config';
 import { Observable, Subject } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+  'Content-Type': 'application/json'
+  })
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
+
+  private postQuery<T>(query: string, data: any){
+    query = URL_SERVICIOS + query;
+    return this.http.post<T>( query, data, httpOptions );
+
+  }
 
   constructor(
     public http: HttpClient
@@ -25,13 +37,11 @@ export class UsuarioService {
       localStorage.removeItem('email');
     }
 
-    let url = URL_SERVICIOS + '/login';
-    return this.http.post( url, usuario ).map(( resp: any) => {
-      localStorage.setItem('id', resp.id);
-      localStorage.setItem('token', resp.token);
-      localStorage.setItem('usuario', JSON.stringify(resp.usuario));
+    let url = '/login';
+    return this.postQuery(`/api/login`, usuario ).map(( resp: any) => {
+      localStorage.setItem('email', resp.email);
+      localStorage.setItem('token', resp.remember_token);
     });
-
   }
 
   crearUsuario( usuario: Usuario ) {

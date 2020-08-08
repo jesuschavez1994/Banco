@@ -11,19 +11,29 @@
 .width-80{width: 80% !important;}
 .width-85{width: 85% !important;}
 .width-90{width: 90% !important;}
+.width-93{width: 93% !important;}
 .width-95{width: 95% !important;}
 .width-100{width: 100% !important;}
+
+.correo-icon{background-image: url(./assets/img/LoginIconos/email.svg);}
+.user-name-icon{background-image: url(./assets/img/LoginIconos/usuario.svg);}
+.password-icon{background-image: url(./assets/img/LoginIconos/contraseña.svg);}
+
+.height-100{height: 100%;}
+.height-67{height: 67%;}
 
 /* ******************/
 .no-border{border: none !important;}
 
-
+/* Familias */
 .family{font-family: 'Montserrat', sans-serif;}
 .family-300{font-family: 'Montserrat', sans-serif;font-weight: 300;}
 .family-400{font-family: 'Montserrat', sans-serif;font-weight: 400;}
 .family-500{font-family: 'Montserrat', sans-serif;font-weight: 500;}
 .family-600{font-family: 'Montserrat', sans-serif;font-weight: 600;}
 .family-700{font-family: 'Montserrat', sans-serif;font-weight: 600;}
+
+.fredoka{font-family: 'Fredoka One', cursive;}
 
 
 .display-flex{display: flex;}
@@ -69,6 +79,8 @@
 .size-4{font-size: 4px;}
 .size-2{font-size: 2px;}
 
+.tex-align-center{text-align: center;}
+
 .black{color: black;}
 .white{color:white;}
 .red{color:red;}
@@ -113,20 +125,6 @@
 .cursor-poniter{cursor: pointer;}
 #registrarme:hover{color:#F09207}
 #inisiar-sesion:hover{color:#F09207}
-
-/* ICONO DE LUPA PARA LOS BUSCADORES */
-.ref input{
-    border-color: gray;
-    border-style: solid;
-    padding: 10px 20px 10px 25px;
-    /* background-image: url(../src/assets/img/iconos/iconos-lupa.png); */
-    background-size: 20px 20px;
-    background-repeat: no-repeat;
-    background-position-y: center;
-    background-position-x: right;
-    border: 1px solid #e9e9e9 !important;
-    border-radius: 12px;
-}
 
 .boxp:hover {
     background: rgba(255, 255, 255,1);
