@@ -1,12 +1,8 @@
 
 
 <div class="container animated fadeIn">
-  <div class="row display-flex justify-content-center">
+  <div class="row display-flex align-items-center justify-content-center height-100vh">
 
-    <div class="col-12 col-sm-12 col-lg-8 col-xl-8 flotador height-100 animated fadeIn">
-      <img class="height-67 width-93" src="../../../assets/img/LoginIconos/medicinas.svg">
-    </div>
-    
     <div class="col-10 col-sm-9 col-md-7 col-lg-5 col-xl-4 sobreEncima box height-75">
 
       <div class="display-flex justify-content-center img-login">
@@ -70,7 +66,7 @@
                     formControlName="password1"
                     [ngClass]="{'is-invalid':  (!forma.get('password1').valid || forma.get('password1').errors?.minlength)&& forma.get('password1').touched, 'is-valid': forma.get('password1').valid }"
             >
-      
+
             <div  *ngIf="forma.get('password1').errors?.required"  
                   class="invalid-feedback">
                   Este campo es requerido
@@ -78,6 +74,7 @@
             <div  *ngIf="forma.get('password1').errors?.minlength"  
                   class="invalid-feedback">
                   La contraseña debe tener al menos 8 caracteres
+
             </div> 
       
           </div>
@@ -133,28 +130,27 @@
                     type="submit" 
                     class="btn btn-outline-primary btn-block fredoka"
                     (click)="usuarioCreado()">
-
-              <!-- <i  [ngClass]="{'fa-save': !loadding, 'fa-refresh fa-spin': loadding}"
-                  class="fa">
-              </i> -->
               Registrarme
             </button>
           </div>
         </div>
-<!--       
-        {{forma.valid}}
-        <br>
-        {{forma.status}}
-        <br>
-        <pre>
-          {{forma.value | json}}
-        </pre> 
-        <br>
-        <br> -->
+
+        
         
       </form>
 
+        
+
     </div>
   </div>
+  {{forma.valid}}
+        <br>
+        {{forma.status}}
+        <br>
+        <!-- <pre>
+          {{forma.value | json}}
+        </pre>  -->
+        <br>
+        <br>
 </div>
 

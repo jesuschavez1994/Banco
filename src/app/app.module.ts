@@ -15,6 +15,7 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ServiceModule } from './services/service.module';
 import { FormularioRegisterModule } from './form-register/formulario-register.module';
 import { VistasPublicasModule } from './vistas-publicas/vistas-publicas.module';
+import { LoginModule } from './Login/login.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { VistasPublicasModule } from './vistas-publicas/vistas-publicas.module';
     SharedModule,
     ServiceModule,
     FormularioRegisterModule,
-    VistasPublicasModule
+    VistasPublicasModule,
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]

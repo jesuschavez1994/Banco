@@ -13,8 +13,12 @@ input {
     background-position: left calc(.375em + .1875rem) center !important;
     background-size: calc(.75em + .375rem) calc(.75em + .375rem);
 }
-button{
-    background-color: #F09207 !important;
+
+.line-low{border-color: #979797;border-bottom: 1px solid #c0c0c0 ;width: 38%;}
+
+#RegisterForm{background-color: #F09207;}
+.orange{
+    background-color: #F09207;
     border: none !important;
     cursor: pointer;
     color: white !important;
@@ -24,7 +28,7 @@ button{
 .recorder{font-size: 13px;}
 .box{border:1px solid #d3d3d3;border-radius: 10px;position: relative;display: flex;justify-content: center;align-items: center;}
 .height{height: 75vh;}
-.img-login{position: absolute;top: -9%;left: 39%;}
+.img-login{position: absolute;top: -8%;left: 39%;}
 /* Iconos SVG */
 
 ::placeholder{font-family: 'Montserrat', sans-serif;font-weight: 400; font-size: 12px;color:#595959}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, AbstractControl, } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Usuario } from 'src/app/models/usuario.model';
@@ -22,38 +22,35 @@ export class FormDataUsuarioComponent {
  constructor(
    public usuarioServices: UsuarioService,
    public router: Router
- ) {
+ )
+  {
 
-   this.forma = new FormGroup({
-         nombre: new FormControl('' , [Validators.required, Validators.minLength(5)]),
-         correo: new FormControl('' , [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
-         password1: new FormControl('', [Validators.required, Validators.minLength(8)]),
-         password2: new FormControl(),
-         terminos: new FormControl('', Validators.required),
+    this.forma = new FormGroup({
+      nombre: new FormControl('' , [Validators.required, Validators.minLength(5)]),
+      correo: new FormControl('' , [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
+      password1: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      password2: new FormControl(),
+      terminos: new FormControl('', Validators.required),
 
-       });
+    });
 
-       // tslint:disable-next-line: align
-       // tslint:disable-next-line: no-string-literal
-   this.forma.controls['password2'].setValidators([
-         Validators.required,
-         Validators.minLength(8),
-         this.noIgual.bind(this.forma)
-       ]);
+    this.forma.controls['password2'].setValidators([
+      Validators.required,
+      Validators.minLength(8),
+      this.noIgual.bind(this.forma)
+    ]);
 
   }
+
 
   // Validación personalizada
   noIgual( control: FormControl): { [s: string]: boolean} {
     const forma: any = this;
-    // tslint:disable-next-line: no-string-literal
-     // tslint:disable-next-line: align
-     // tslint:disable-next-line: no-string-literal
     if ( control.value !== forma.controls['password1'].value ) {
-       return{
-         noiguales: true
-       };
-     }
+      return{
+        noiguales: true
+      };
+    }
     return null;
   }
 
@@ -82,7 +79,6 @@ export class FormDataUsuarioComponent {
    const usuario = new Usuario(
     this.forma.value.nombre,
     this.forma.value.correo,
-    this.forma.value.username,
     this.forma.value.password1
    );
     // tslint:disable-next-line: align

@@ -19,8 +19,13 @@
 .user-name-icon{background-image: url(./assets/img/LoginIconos/usuario.svg);}
 .password-icon{background-image: url(./assets/img/LoginIconos/contraseña.svg);}
 
+/* height en % */
 .height-100{height: 100%;}
 .height-67{height: 67%;}
+
+/* height en vh */
+.height-100vh{height: 100vh;}
+
 
 /* ******************/
 .no-border{border: none !important;}

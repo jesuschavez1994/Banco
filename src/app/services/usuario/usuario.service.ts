@@ -5,6 +5,7 @@ import { URL_SERVICIOS } from 'src/app/config/config';
 import { Observable, Subject } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { tokenName } from '@angular/compiler';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,21 +13,40 @@ const httpOptions = {
   })
 };
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
+  usuario: Usuario;
+  token: string;
+
   private postQuery<T>(query: string, data: any){
     query = URL_SERVICIOS + query;
     return this.http.post<T>( query, data, httpOptions );
-
   }
 
   constructor(
     public http: HttpClient
   ) {
-    console.log('Servicio POST LISTO PARA USAR');
+  }
+
+  loginGoogle( token: string ){
+    let url = URL_SERVICIOS + '/google';
+    return this.http.post(url, { token } ).map((resp: any) => {
+      this.guardarStorage( resp.id, resp.token, resp.usuario);
+    });
+    // return this.postQuery(`/api/login/google`, {token} );
+  }
+
+  guardarStorage(id: string, token: string, usuario: Usuario){
+    localStorage.setItem('id', id);
+    localStorage.setItem('token', token);
+    localStorage.setItem('usuario', JSON.stringify(usuario));
+
+    this.usuario = usuario;
+    this.token = token;
   }
 
   login(usuario: Usuario, recordar: boolean = false){
@@ -37,9 +57,9 @@ export class UsuarioService {
       localStorage.removeItem('email');
     }
 
-    return this.postQuery(`/api/login`, usuario ).map(( resp: any) => {
-      localStorage.setItem('email', resp.email);
-      localStorage.setItem('token', resp.remember_token);
+    return this.postQuery(`/login`, usuario ).map(( resp: any) => {
+      // this.guardarStorage( resp.email, resp.remember_token );
+      this.guardarStorage( resp.id, resp.token, resp.usuario);
     });
   }
 
