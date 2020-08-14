@@ -3,16 +3,20 @@ import { CommonModule } from '@angular/common';
 import { LoginUsuarioComponent } from './Logins/login-usuario.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { APP_ROUTING } from '../app.routes';
-import { ButtomGoogleSesionComponent } from './buttom-google-sesion/buttom-google-sesion.component';
+import { ComponentsModule } from '../components/components.module';
+import { SharedModule } from '../shared/shared.module';
+
 
 
 @NgModule({
-  declarations: [LoginUsuarioComponent, ButtomGoogleSesionComponent],
+  declarations: [LoginUsuarioComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    APP_ROUTING
+    APP_ROUTING,
+    ComponentsModule,
+    SharedModule
   ],
   exports: [LoginUsuarioComponent]
 })

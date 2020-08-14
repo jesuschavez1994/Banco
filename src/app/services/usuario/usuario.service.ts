@@ -57,9 +57,8 @@ export class UsuarioService {
       localStorage.removeItem('email');
     }
 
-    return this.postQuery(`/login`, usuario ).map(( resp: any) => {
-      // this.guardarStorage( resp.email, resp.remember_token );
-      this.guardarStorage( resp.id, resp.token, resp.usuario);
+    return this.postQuery(`/login`, usuario).map((resp: any) => {
+      this.guardarStorage(resp.id, resp.token, resp.usuario);
     });
   }
 

@@ -1,19 +1,34 @@
 
+<!-- Menú redirect to home -->
+<app-navbar-to-home></app-navbar-to-home>
+<!-- End menú redirect to home -->
 
 <div class="container animated fadeIn">
   <div class="row display-flex align-items-center justify-content-center height-100vh">
 
-    <div class="col-10 col-sm-9 col-md-7 col-lg-5 col-xl-4 sobreEncima box height-75">
+    <div class="col-10 col-sm-9 col-md-7 col-lg-5 col-xl-4 sobreEncima box">
 
       <div class="display-flex justify-content-center img-login">
         <img class="user-naranja" src="../../../assets/img/LoginIconos/user naranja.svg">
       </div>
 
-      <form [formGroup]="forma" (ngSubmit)="registrarUsuario()" novalidate="novalidate">
+      <form [formGroup]="forma" (ngSubmit)="registrarUsuario()" novalidate="novalidate" class="height-100">
 
-        <div class="form-group row mb-4 tex-align-center">
+        <div class="form-group row mb-4 mt-5 tex-align-center">
           <div class="col-12">
               <h5 class="fredoka">Regístro de usuario</h5>
+          </div>
+        </div>
+
+        <!---Registro servicio de Google-->
+        <app-buttom-google-sesion [text]="['Registrarse con google']"></app-buttom-google-sesion>
+        <!---end servicio de Google-->
+
+        <div class="form-group row">
+          <div class="input-group col-md-12 justify-content-space-between">
+            <p class="line-low mt-3"></p>
+            <span>o</span>
+            <p class="line-low mt-3"></p>
           </div>
         </div>
 
@@ -37,7 +52,7 @@
       
           </div>
         </div>
-      
+
         <div class="form-group row">
           <div class="col-12">
             <input  class="form-control correo-icon"
@@ -60,6 +75,26 @@
 
         <div class="form-group row">
           <div class="col-12">
+            <input  class="form-control"
+                    type="text"
+                    placeholder="User name"
+                    formControlName="username"
+                    [ngClass]="{'is-invalid':  (!forma.controls['username'].valid || forma.controls['username'].errors?.minlength)&& forma.controls['username'].touched, 'is-valid': forma.controls['username'].valid }"
+            >
+            
+            <div  *ngIf="forma.get('username').errors?.required"  
+                  class="invalid-feedback">
+                  Este campo es requerido
+            </div>
+            <div  *ngIf="forma.get('username').errors?.pattern"  
+                  class="invalid-feedback">
+                  Por lo menos 5 caracteres
+            </div> 
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-12">
             <input  class="form-control password-icon"
                     type="password"
                     placeholder="contraseña"
@@ -74,7 +109,6 @@
             <div  *ngIf="forma.get('password1').errors?.minlength"  
                   class="invalid-feedback">
                   La contraseña debe tener al menos 8 caracteres
-
             </div> 
       
           </div>
@@ -143,14 +177,14 @@
 
     </div>
   </div>
-  {{forma.valid}}
+  <!-- {{forma.valid}}
         <br>
         {{forma.status}}
-        <br>
+        <br> -->
         <!-- <pre>
           {{forma.value | json}}
         </pre>  -->
-        <br>
-        <br>
+        <!-- <br>
+        <br> -->
 </div>
 

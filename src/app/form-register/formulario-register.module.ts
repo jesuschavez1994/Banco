@@ -5,6 +5,8 @@ import { APP_ROUTING } from '../app.routes';
 // Importamos los formularios de registros //
 import { FormDataUsuarioComponent } from './form-data-usuario/form-data-usuario.component';
 import { FormDataNegocioComponent } from './form-data-negocio/form-data-negocio.component';
+import { ComponentsModule } from '../components/components.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { FormDataNegocioComponent } from './form-data-negocio/form-data-negocio.
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    APP_ROUTING
+    APP_ROUTING,
+    ComponentsModule,
+    SharedModule
   ],
   exports: [FormDataUsuarioComponent, FormDataNegocioComponent]
 })

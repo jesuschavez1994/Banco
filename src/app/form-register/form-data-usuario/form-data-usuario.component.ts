@@ -28,12 +28,12 @@ export class FormDataUsuarioComponent {
     this.forma = new FormGroup({
       nombre: new FormControl('' , [Validators.required, Validators.minLength(5)]),
       correo: new FormControl('' , [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
+      username: new FormControl('', [Validators.required, Validators.minLength(5)]),
       password1: new FormControl('', [Validators.required, Validators.minLength(8)]),
       password2: new FormControl(),
       terminos: new FormControl('', Validators.required),
 
     });
-
     this.forma.controls['password2'].setValidators([
       Validators.required,
       Validators.minLength(8),
@@ -79,6 +79,7 @@ export class FormDataUsuarioComponent {
    const usuario = new Usuario(
     this.forma.value.nombre,
     this.forma.value.correo,
+    this.forma.value.username,
     this.forma.value.password1
    );
     // tslint:disable-next-line: align

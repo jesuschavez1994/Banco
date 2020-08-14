@@ -1,3 +1,7 @@
+<!-- Menú redirect to home -->
+<app-navbar-to-home></app-navbar-to-home>
+<!-- End menú redirect to home -->
+
 <div class="container animated fadeIn">
     <div class="row display-flex align-items-center justify-content-center height-100vh">
 
@@ -8,7 +12,6 @@
                 <img class="user-naranja" src="../../../assets/img/LoginIconos/user naranja.svg">
             </div>
             
-            
             <form [formGroup]="forma"  (ngSubmit)="loginRegister()" novalidate="novalidate" class="formGroup">
 
                 <div class="form-group row mb-4 mt-5">
@@ -18,8 +21,8 @@
                 </div>
 
                 <!--Iniciar sesión por Google-->
-                <app-buttom-google-sesion></app-buttom-google-sesion>
-                <!------------------------------>
+                <app-buttom-google-sesion [text]="['Inisiar sesión con google']"></app-buttom-google-sesion>
+                <!--End Iniciar sesión por Google-->
                 
                 <div class="form-group row">
                     <div class="input-group col-md-12 justify-content-space-between">
@@ -102,8 +105,6 @@
                     </div>
                 </div>
 
-                
-
                 <div class="form-group mb-5 mt-5">
                     <div class="col-sm-12 text-center">
 
@@ -118,17 +119,13 @@
 
                     </div>
                 </div>
-<!--                                 
+                <!--                                 
                 {{forma.valid}}
                 <br>
                 <pre>
                     {{forma.value | json}}
                 </pre>  -->
-
             </form>
-
-            
-            
         </div>
     </div>
 </div>
