@@ -1,27 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, AbstractControl, } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Usuario } from 'src/app/models/usuario.model';
 
 
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.reducer';
+import { ActivarLoadingAction, DesactivarLoadingAction } from '../../shared/ui.accions';
 
 @Component({
   selector: 'app-form-data-usuario',
   templateUrl: './form-data-usuario.component.html',
   styleUrls: ['./form-data-usuario.component.css']
 })
-export class FormDataUsuarioComponent {
+export class FormDataUsuarioComponent implements OnInit, OnDestroy {
 
   forma: FormGroup;
   loadding = false;
+  cargando: boolean;
+  subscription: Subscription;
 
   controls: any;
 
  constructor(
    public usuarioServices: UsuarioService,
-   public router: Router
+   public router: Router,
+   public store: Store<AppState>
  )
   {
 
@@ -40,6 +46,18 @@ export class FormDataUsuarioComponent {
       this.noIgual.bind(this.forma)
     ]);
 
+  }
+
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnInit() {
+    this.store.select('ui').subscribe( ui => {
+     this.cargando =  ui.isLoading;
+    });
+
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
 
@@ -73,19 +91,23 @@ export class FormDataUsuarioComponent {
 
 
   registrarUsuario(){
-   console.log(this.forma.value);
-   console.log(this.forma);
 
-   const usuario = new Usuario(
-    this.forma.value.nombre,
-    this.forma.value.correo,
-    this.forma.value.username,
-    this.forma.value.password1
-   );
-    // tslint:disable-next-line: align
+    this.store.dispatch( new ActivarLoadingAction() );
+
+    console.log(this.forma.value);
+    console.log(this.forma);
+
+    const usuario = new Usuario(
+      this.forma.value.nombre,
+      this.forma.value.correo,
+      this.forma.value.username,
+      this.forma.value.password1
+    );
+
     this.usuarioServices.crearUsuario(usuario).subscribe( res => {
       console.log('usuario', res);
       this.router.navigate(['/login-usuario']);
+      this.store.dispatch( new DesactivarLoadingAction() );
     });
   }
 

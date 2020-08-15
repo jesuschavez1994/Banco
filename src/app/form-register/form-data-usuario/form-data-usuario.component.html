@@ -160,12 +160,22 @@
       
         <div class="form-group row">
           <div class="input-group col-md-12">
-            <button [disabled]="!forma.valid" 
+            <button *ngIf="!cargando"
+                    [disabled]="!forma.valid" 
                     type="submit" 
                     class="btn btn-outline-primary btn-block fredoka"
                     (click)="usuarioCreado()">
               Registrarme
             </button>
+
+            <button *ngIf="cargando"
+                    [disabled]="true" 
+                    type="submit" 
+                    class="btn btn-outline-primary btn-block fredoka"
+                    (click)="usuarioCreado()">
+                    Creando Usuario ...
+            </button>
+
           </div>
         </div>
 

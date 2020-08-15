@@ -17,6 +17,12 @@ import { FormularioRegisterModule } from './form-register/formulario-register.mo
 import { VistasPublicasModule } from './vistas-publicas/vistas-publicas.module';
 import { LoginModule } from './Login/login.module';
 
+// ngrx => PATRÓN REDUX//
+import { StoreModule } from '@ngrx/store';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { appReducers } from './app.reducer';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +39,12 @@ import { LoginModule } from './Login/login.module';
     ServiceModule,
     FormularioRegisterModule,
     VistasPublicasModule,
-    LoginModule
+    LoginModule,
+    StoreModule.forRoot(appReducers),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
