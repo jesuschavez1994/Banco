@@ -1,14 +1,23 @@
+<!-- Menú redirect to home -->
+<app-navbar-to-home></app-navbar-to-home>
+<!-- End menú redirect to home -->
+
+
 <div class="container animated fadeIn">
     <div class="row display-flex justify-content-center">
         <div class="col-md-5">
 
             <form [formGroup]="forma" (ngSubmit)="registrarNegocio()" novalidate="novalidate">
 
+              <div class="form-group row mb-4 mt-5 tex-align-center">
+                <div class="col-12">
+                    <h5 class="fredoka">Regístro de farmacia</h5>
+                </div>
+              </div>
 
                 <div class="form-group row">
                     <div class="col-12">
-                      <label class="col-4 col-form-label family-400">Usuario</label>
-                      <input class="form-control"
+                      <input class="form-control user-name-icon"
                              type="text"
                              placeholder="Nombre"
                              formControlName="username"
@@ -29,8 +38,7 @@
 
                 <div class="form-group row">
                     <div class="col-12">
-                      <label class="col-4 col-form-label family-400">Correo</label>
-                      <input  class="form-control"
+                      <input  class="form-control correo-icon"
                               type="email"
                               placeholder="Correo electrónico"
                               formControlName="correo"
@@ -50,8 +58,7 @@
 
                 <div class="form-group row">
                     <div class="col-12">
-                      <label class="col-4 col-form-label family-400">Contraseña</label>
-                      <input  class="form-control"
+                      <input  class="form-control password-icon"
                               type="password"
                               placeholder="Password"
                               formControlName="password1"
@@ -74,8 +81,7 @@
                 <div class="form-group row">
           
                     <div class="col-12">
-                        <label  class="col-5 col-form-label family-400">Repetir contraseña</label>
-                        <input  class="form-control"
+                        <input  class="form-control password-icon"
                                 type="password"
                                 placeholder="Repetir Password"
                                 formControlName="password2"

@@ -34,9 +34,7 @@ export class UsuarioService {
 
   loginGoogle( token: string ){
     let url = URL_SERVICIOS + '/google';
-    return this.http.post(url, { token } ).map((resp: any) => {
-      this.guardarStorage( resp.id, resp.token, resp.usuario);
-    });
+    return this.http.post(url, { token } );
     // return this.postQuery(`/api/login/google`, {token} );
   }
 

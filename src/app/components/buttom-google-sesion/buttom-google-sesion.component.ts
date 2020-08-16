@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UsuarioService } from '../../services/usuario/usuario.service';
+import { Usuario } from '../../models/usuario.model';
 
 declare const gapi: any;
 
@@ -11,6 +12,9 @@ declare const gapi: any;
 })
 export class ButtomGoogleSesionComponent implements OnInit {
 
+  usuario: Usuario;
+  token: string;
+
   auth2: any;
   @Input() text: any;
 
@@ -19,6 +23,15 @@ export class ButtomGoogleSesionComponent implements OnInit {
   ngOnInit(): void {
     this.googleInit();
 
+  }
+
+  guardarStorage(id: string, token: string, usuario: Usuario){
+    localStorage.setItem('id', id);
+    localStorage.setItem('token', token);
+    localStorage.setItem('usuario', JSON.stringify(usuario));
+
+    this.usuario = usuario;
+    this.token = token;
   }
 
   googleInit(){
@@ -36,11 +49,13 @@ export class ButtomGoogleSesionComponent implements OnInit {
   attachSignin( element ) {
 
     this.auth2.attachClickHandler( element, {}, (googleUser) => {
-      //  let profile = googleUser.getBasicProfile();
+      // const profile = googleUser.getBasicProfile();
+      // console.log(profile);
       const token = googleUser.getAuthResponse().id_token;
       console.log(token);
       this.usuarioServices.loginGoogle(token).subscribe( resp => {
-        console.log('Respuesta Google', resp);
+        // this.guardarStorage( resp.id, resp.token, resp.usuario);
+        console.log(resp);
       });
     });
 

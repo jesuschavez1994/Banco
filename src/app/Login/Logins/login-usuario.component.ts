@@ -65,7 +65,7 @@ export class LoginUsuarioComponent implements OnInit, OnDestroy {
     console.log(this.forma.value);
     // tslint:disable-next-line: prefer-const
     let usuario = new Usuario(
-      null,
+      this.forma.value.nombre,
       this.forma.value.email,
       this.forma.value.username,
       this.forma.value.password
