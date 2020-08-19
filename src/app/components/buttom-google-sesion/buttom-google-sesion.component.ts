@@ -14,9 +14,10 @@ export class ButtomGoogleSesionComponent implements OnInit {
 
   usuario: Usuario;
   token: string;
+  google: any;
 
   auth2: any;
-  @Input() text: any;
+  @Input() text: string;
 
   constructor(public usuarioServices: UsuarioService) { }
 
@@ -25,17 +26,16 @@ export class ButtomGoogleSesionComponent implements OnInit {
 
   }
 
-  guardarStorage(id: string, token: string, usuario: Usuario){
-    localStorage.setItem('id', id);
-    localStorage.setItem('token', token);
+  guardarStorage(usuario: string, email: string){
+    // localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
+    localStorage.setItem('email', email);
 
-    this.usuario = usuario;
-    this.token = token;
+    //  this.usuario = usuario;
+    // this.token = token;
   }
 
   googleInit(){
-
     gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init({
         clienye_id: '536569115758-6ncc5uh0o0hr6s6vmd06gn47bjiorre6.apps.googleusercontent.com',
@@ -47,15 +47,18 @@ export class ButtomGoogleSesionComponent implements OnInit {
   }
 
   attachSignin( element ) {
-
     this.auth2.attachClickHandler( element, {}, (googleUser) => {
-      // const profile = googleUser.getBasicProfile();
-      // console.log(profile);
+      const profile = googleUser.getBasicProfile();
       const token = googleUser.getAuthResponse().id_token;
       console.log(token);
-      this.usuarioServices.loginGoogle(token).subscribe( resp => {
-        // this.guardarStorage( resp.id, resp.token, resp.usuario);
-        console.log(resp);
+      this.usuarioServices.loginGoogle(profile.getName(),
+        profile.getEmail(),
+        profile.getId(),
+        profile.getImageUrl()
+      ).subscribe( resp => {
+        this.google = resp;
+        console.log('Respuesta desde Google', this.google);
+        this.guardarStorage(this.google, this.google.email);
       });
     });
 

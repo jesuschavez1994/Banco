@@ -32,11 +32,12 @@ export class UsuarioService {
   ) {
   }
 
-  loginGoogle( token: string ){
-    let url = URL_SERVICIOS + '/google';
-    return this.http.post(url, { token } );
+  loginGoogle( nombre: string, email: string, id: string, img: string ){
+    const url = '/api/login/google/callback';
+    return this.postQuery(url, { nombre, email, id, img} );
     // return this.postQuery(`/api/login/google`, {token} );
   }
+
 
   guardarStorage(id: string, token: string, usuario: Usuario){
     localStorage.setItem('id', id);
@@ -61,7 +62,7 @@ export class UsuarioService {
   }
 
   crearUsuario( usuario: Usuario ) {
-    let url = URL_SERVICIOS + '/usuario';
+    const url = URL_SERVICIOS + '/usuario';
     return this.http.post( url, usuario );
   }
 

@@ -2,16 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Servicios //
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule  } from '@angular/common/http';
 // Rutas //
 import { APP_ROUTING } from './app.routes';
+
 // Modulos Personalizados//
 import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 import { PipesModule } from './pipes/pipes.module';
-import { DashboardComponent } from './views/dashboard/dashboard.component';
+
 import { ServiceModule } from './services/service.module';
 import { FormularioRegisterModule } from './form-register/formulario-register.module';
 import { VistasPublicasModule } from './vistas-publicas/vistas-publicas.module';
@@ -22,11 +23,16 @@ import { StoreModule } from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { appReducers } from './app.reducer';
+import { DashboardComponent } from './vistas-privadas/dashboard/dashboard.component';
+import { AccountComponent } from './vistas-privadas/account/account.component';
+import { VIEW_ROUTING } from './vistas-privadas/view.routes';
+import { InterceptorService } from './services/Interceotores/interceptor.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -34,11 +40,14 @@ import { appReducers } from './app.reducer';
     HttpClientModule,
     PipesModule,
     APP_ROUTING,
+    VIEW_ROUTING,
     PagesModule,
     SharedModule,
     ServiceModule,
     FormularioRegisterModule,
     VistasPublicasModule,
+    ReactiveFormsModule,
+    FormsModule,
     LoginModule,
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({
@@ -46,7 +55,8 @@ import { appReducers } from './app.reducer';
       logOnly: environment.production,
     }),
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

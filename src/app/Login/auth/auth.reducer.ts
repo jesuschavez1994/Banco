@@ -1,8 +1,8 @@
 import * as fromAuth from './auth.actions';
-import { Usuario } from '../../models/usuario.model';
+import { UserStore } from '../../models/models-@ngrx/userStore.models';
 
 export interface AuthState {
-    user: Usuario;
+    user: UserStore;
 }
 
 const estadoInicial: AuthState = {

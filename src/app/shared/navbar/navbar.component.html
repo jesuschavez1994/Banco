@@ -1,24 +1,34 @@
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
-  <img src="assets/img/Navbar/Logo Founduss.svg" [routerLink]="['home']" class="founduss-logo">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <img src="assets/img/Navbar/Logo Founduss.svg" [routerLink]="['home']" class="founduss-logo puntero">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse justify-content-flex-end" id="navbarSupportedContent">
     <ul class="navbar-nav">
       <li class="nav-item mr-3 ml-3" routerLinkActive="active">
         <a class="nav-link family-500 size-15" [routerLink]="['/public-views']">Productos</a>
       </li>
+      <li class="nav-item mr-3 ml-3" routerLinkActive="active">
+        <a class="nav-link family-500 size-15">Quienes Somos</a>
+      </li>
+      <li class="nav-item mr-3 ml-3" routerLinkActive="active">
+        <a class="nav-link family-500 size-15">Farmacias aliadas</a>
+      </li>
+      <li class="nav-item mr-3 ml-3" routerLinkActive="active">
+        <a class="nav-link family-500 size-15">Contactanos</a>
+      </li>
+      
     </ul>
-    <form class="form-inline my-2 my-lg-0 width-80">
+    <!-- <form class="form-inline my-2 my-lg-0 width-80">
       <input class="form-control mr-sm-2 width-95" type="search" placeholder="Buscar producto..." aria-label="Search">
-    </form>
+    </form> -->
     <ul class="mb-0 pl-3 width-30 display-flex justify-content-around">
       <li class="nav-item menu" routerLinkActive="active">
-        <a class="family-500 cursor-poniter size-14 black" id="registrarme" data-toggle="modal" data-target="#exampleModalCenter" >Regístrarme</a>
+        <a class="family-500 cursor-poniter size-16 black fredoka" id="registrarme" data-toggle="modal" data-target="#exampleModalCenter" >Regístrarme</a>
       </li>
       <li class="nav-item menu" routerLinkActive="active">
-        <a class="family-500 ml-2 cursor-poniter size-14 black" id="inisiar-sesion" [routerLink]="['/login-usuario']">Iniciar sesión</a>
+        <a class="family-500 ml-2 cursor-poniter size-16 black fredoka" id="inisiar-sesion" [routerLink]="['/login-usuario']">Iniciar sesión</a>
       </li>
     </ul>
   </div>

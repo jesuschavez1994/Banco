@@ -1,0 +1,175 @@
+<div class="container">
+    <div class="row">
+       <div class="col-md-5">
+            <h2>
+                Configuracion de mi cuenta
+                
+            </h2>
+            <button (click)="storeService.logout()">exit</button>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+       <div class="col-md-12">
+
+           
+            <form   [formGroup]="forma"
+                    (ngSubmit)="ActualizarDatosUser()" 
+                    novalidate="novalidate">
+                <div class="col-md-5">
+
+                    <div class="form-group row mb-0 mt-4">
+                        <div class="col-12">
+                            <h5 class="family-500 orange">Información de contacto</h5>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-10">
+                            <label class="family-600 size-12">Nombre</label>
+                            <input  class="form-control"
+                                    type="text"
+                                    placeholder="Nombre de usuario"
+                                    formControlName="name"
+                                    value = {{items.name}}
+                                    [ngClass]="{'is-invalid':  (!forma.controls['name'].valid || forma.controls['name'].errors?.minlength)&& forma.controls['name'].touched, 'is-valid': forma.controls['name'].valid }" 
+                            >
+                    
+                            
+            
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-10">
+                            <label class="family-600 size-12">Correo</label>
+                            <input  class="form-control"
+                                    type="email"
+                                    value = {{items.email}}
+                                    placeholder="Correo electrónico"
+                                    formControlName="email"
+                                    [ngClass]="{'is-invalid':  (!forma.controls['email'].valid || forma.controls['email'].errors?.minlength)&& forma.controls['email'].touched, 'is-valid': forma.controls['email'].valid }"
+                            >
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-10">
+                            <label class="family-600 size-12">Telefono</label>
+                            <input  class="form-control"
+                                    type="text"
+                                    placeholder="Ingrese telefono"
+                                    formControlName="phone"
+                                    [ngClass]="{'is-invalid':  (!forma.controls['phone'].valid || forma.controls['phone'].errors?.minlength)&& forma.controls['phone'].touched, 'is-valid': forma.controls['phone'].valid }"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <h5 class="family-500 orange">Contraseña</h5>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-10">
+                            <label class="family-600 size-12">Nueva contraseña</label>
+                            <input  class="form-control"
+                                    type="password"
+                                    placeholder="Password"
+                                    formControlName="password1"
+                                    [ngClass]="{'is-invalid':  (!forma.get('password1').valid || forma.get('password1').errors?.minlength)&& forma.get('password1').touched, 'is-valid': forma.get('password1').valid }"
+                            >
+                
+                            <div    *ngIf="forma.get('password1').errors?.required"  
+                                    class="invalid-feedback">
+                                    Este campo es requerido
+                            </div>
+                            <div    *ngIf="forma.get('password1').errors?.minlength"  
+                                    class="invalid-feedback">
+                                    La contraseña debe tener al menos 8 caracteres
+                            </div> 
+                
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-10">
+                            <label class="family-600 size-12">Repita contraseña</label>
+                            <input  class="form-control"
+                                    type="password"
+                                    placeholder="Password"
+                                    formControlName="password2"
+                                    [ngClass]="{'is-invalid':  (!forma.get('password2').valid || forma.get('password2').errors?.minlength)&& forma.get('password2').touched, 'is-valid': forma.get('password2').valid }"
+                            >
+                
+                            <div    *ngIf="forma.get('password2').errors?.required"  
+                                    class="invalid-feedback">
+                                    Este campo es requerido
+                            </div>
+                            <div    *ngIf="forma.get('password2').errors?.minlength"  
+                                    class="invalid-feedback">
+                                    La contraseña debe tener al menos 8 caracteres
+                            </div> 
+                
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <h5 class="family-500 orange">Cuentas conectadas</h5>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <p>Servicios que usas para iniciar sesión en founduss</p>
+
+                            <div class="display-flex align-items-center">
+                                <i class="fas fa-trash-alt mr-4"></i>
+                                <img src="../../../assets/img//LoginIconos/Google.svg" width="7%">
+                                <span class="pl-1">Google</span>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-0 mt-4">
+                        <div class="col-12">
+                            <h5 class="family-500 orange">
+                                Desactivar mi cuenta
+                            </h5>
+                        </div>
+                        <p>
+                            Si desactivas tu cuenta ya no podrás acceder
+                            a tu tienda, ni iniciar sesión en founduss. 
+                            Si quieres desactivar es´ta cuenta, está no se eliminaráapp-categorias,
+                            <span class="family-500 orange">
+                                para eliminar tu cuenta ponte en contacto con nuestro equipo de ayuda
+                            </span>
+
+                            <button  type="submit" 
+                                    class="btn btn-outline-primary btn-block fredoka mt-4 col-10 button"
+                            >
+                            Desactivar cuenta
+                            </button>
+
+
+                        </p>
+                    </div>
+                </div>
+                
+                <button type="submit">
+                    guardar
+                </button>
+
+            </form>
+
+       </div>
+    </div>
+</div>

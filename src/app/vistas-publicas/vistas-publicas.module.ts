@@ -17,7 +17,7 @@ import { LoginModule } from '../Login/login.module';
     FormularioRegisterModule,
     SharedModule,
     APP_ROUTING,
-    LoginModule
+    LoginModule,
   ],
   exports: [
     HomeComponent,

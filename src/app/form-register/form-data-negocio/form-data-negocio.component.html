@@ -2,16 +2,34 @@
 <app-navbar-to-home></app-navbar-to-home>
 <!-- End menú redirect to home -->
 
-
-<div class="container animated fadeIn">
+<div class="container animated fadeIn" id="storeRegister">
     <div class="row display-flex justify-content-center">
-        <div class="col-md-5">
+        <div class="col-10 col-sm-9 col-md-7 col-lg-5 col-xl-4 sobreEncima box">
 
-            <form [formGroup]="forma" (ngSubmit)="registrarNegocio()" novalidate="novalidate">
+          <div class="display-flex justify-content-center img-login">
+            <img class="user-naranja" src="../../../assets/img/LoginIconos/store.svg">
+          </div>
 
-              <div class="form-group row mb-4 mt-5 tex-align-center">
+            <form [formGroup]="forma" 
+                  (ngSubmit)="registrarNegocio()" 
+                  novalidate="novalidate"
+                  >
+
+              <div class="form-group row mt-5 tex-align-center">
                 <div class="col-12">
                     <h5 class="fredoka">Regístro de farmacia</h5>
+                </div>
+              </div>
+
+              <!---Registro servicio de Google-->
+              <app-buttom-google-register></app-buttom-google-register>
+              <!---end servicio de Google-->
+
+              <div class="form-group row">
+                <div class="input-group col-md-12 justify-content-space-between">
+                  <p class="line-low mt-3"></p>
+                  <span>o</span>
+                  <p class="line-low mt-3"></p>
                 </div>
               </div>
 
@@ -19,16 +37,16 @@
                     <div class="col-12">
                       <input class="form-control user-name-icon"
                              type="text"
-                             placeholder="Nombre"
-                             formControlName="username"
-                             [ngClass]="{'is-invalid':  (!forma.controls['username'].valid || forma.controls['username'].errors?.minlength)&& forma.controls['username'].touched, 'is-valid': forma.controls['username'].valid }" 
+                             placeholder="Nombre de usuario"
+                             formControlName="name"
+                             [ngClass]="{'is-invalid':  (!forma.controls['name'].valid || forma.controls['name'].errors?.minlength)&& forma.controls['name'].touched, 'is-valid': forma.controls['name'].valid }" 
                       >
                       
-                      <div  *ngIf="forma.get('username').errors?.required"  
+                      <div  *ngIf="forma.get('name').errors?.required"  
                             class="invalid-feedback">
                             Este campo es requerido
                       </div>
-                      <div  *ngIf="forma.get('username').errors?.minlength"  
+                      <div  *ngIf="forma.get('name').errors?.minlength"  
                             class="invalid-feedback">
                             Por lo menos 5 caracteres
                       </div>
@@ -107,9 +125,13 @@
                 </div>
 
                 <div class="form-group row">
-                    <label  class="col-12 col-form-label family-400 pl-3">Acepto términos y condiciones</label>
                     <div class="col-12">
-                      <input type="checkbox" formControlName="terminos">
+                      <div class="checkbox checkbox-primary  p-t-0">
+                        <input type="checkbox" formControlName="terminos" id="checkAceptoTerminos">
+                        <label  class="family-500 pl-3 size-13" for="checkAceptoTerminos">
+                          Acepto términos y condiciones
+                        </label>
+                      </div>
                       <p class="family-400 size-12">
                         Haciendo click en Registrar Declarara ser una persona natural y debe ingresar 
                         y aceptar los <a  [routerLink]="['/terminos-ycondiciones']" class="terminos-link family-700">Términos y Condiciones</a> de nuestra plataforma, así como también recibir 
@@ -119,22 +141,22 @@
                 </div>
 
                 <div class="form-group row">
-                    <div class="input-group col-md-12">
-                      <button [disabled]="!forma.valid" 
-                              type="submit" 
-                              class="btn btn-outline-primary btn-block"
-                              (click)="registrar()">
-          
-                        
-                        Crear usuario
-                      </button>
-                    </div>
+                  <div class="input-group col-md-12">
+                    <button [disabled]="!forma.valid" 
+                            type="submit" 
+                            class="btn btn-outline-primary btn-block fredoka"
+                            (click)="registrar()"
+                           
+                            >
+                            Regístrarme
+                    </button>
                   </div>
+                </div>
                 
-                  {{forma.valid}}
+                  <!-- {{forma.valid}}
                   <br>
                   {{forma.status}}
-                  <br>
+                  <br> -->
                   <!-- <pre>
                     {{forma.value | json}}
                   </pre> -->

@@ -7,10 +7,19 @@ import { FormDataUsuarioComponent } from './form-data-usuario/form-data-usuario.
 import { FormDataNegocioComponent } from './form-data-negocio/form-data-negocio.component';
 import { ComponentsModule } from '../components/components.module';
 import { SharedModule } from '../shared/shared.module';
+import { RutStoreComponent } from './rut-store/rut-store.component';
+import { ButtomGoogleRegisterComponent } from './buttom-google-register/buttom-google-register.component';
+import { RutStoreGoogleComponent } from './rut-store-google/rut-store-google.component';
+
 
 
 @NgModule({
-  declarations: [FormDataUsuarioComponent, FormDataNegocioComponent],
+  // tslint:disable-next-line: max-line-length
+  declarations: [FormDataUsuarioComponent,
+    FormDataNegocioComponent,
+    RutStoreComponent,
+    ButtomGoogleRegisterComponent,
+    RutStoreGoogleComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -19,6 +28,6 @@ import { SharedModule } from '../shared/shared.module';
     ComponentsModule,
     SharedModule
   ],
-  exports: [FormDataUsuarioComponent, FormDataNegocioComponent]
+  exports: [FormDataUsuarioComponent, FormDataNegocioComponent, RutStoreComponent]
 })
 export class FormularioRegisterModule { }

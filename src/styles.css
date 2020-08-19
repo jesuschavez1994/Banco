@@ -2,6 +2,7 @@
 .width-5{width: 5% !important;}
 .width-10{width: 10% !important;}
 .width-20{width: 20% !important;}
+.width-25{width: 25% !important;}
 .width-30{width: 30% !important;}
 .width-40{width: 40% !important;}
 .width-50{width: 50% !important;}
@@ -18,6 +19,7 @@
 .correo-icon{background-image: url(./assets/img/LoginIconos/email.svg);}
 .user-name-icon{background-image: url(./assets/img/LoginIconos/usuario.svg);}
 .password-icon{background-image: url(./assets/img/LoginIconos/contraseña.svg);}
+.icon-magnifying-glass{background-image: url(./assets/img/iconos/iconos-lupa.png);}
 
 /* height en % */
 .height-100{height: 100%;}
@@ -92,6 +94,7 @@
 .blue{color:blue;}
 .yellow{color:yellow;}
 .green{color:green;}
+.orange{color:#F09207;}
 
 
 .animated {
@@ -150,5 +153,4 @@
 li{list-style: none;}
 a:hover{color: #F09207; text-decoration: none !important;cursor: pointer;}
 .col-form-label{padding-left: 0% !important;}
-
 .puntero{cursor: pointer;}

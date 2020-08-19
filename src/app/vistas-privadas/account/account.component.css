@@ -1,0 +1,13 @@
+.button{
+    background-color: #F09207 !important;
+    border: none !important;
+    cursor: pointer;
+    color: white !important;
+}
+
+.cancel{
+    background-color: #b9b9b9 !important;
+    border: none !important;
+    cursor: pointer;
+    color: white !important;
+}

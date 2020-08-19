@@ -21,7 +21,7 @@ export class DetalleProductoComponent implements OnInit {
 
     this.loadcard = true;
     this.activatedRoute.params.subscribe( params => {
-      // console.log(params['id']);
+      // tslint:disable-next-line: no-string-literal
       this.services.getproducto(params['id']).subscribe( producto => {
         setTimeout(() => {
           this.producto = producto;

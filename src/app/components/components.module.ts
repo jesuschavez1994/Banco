@@ -11,6 +11,7 @@ import { DetalleProductoComponent } from './detalle-producto/detalle-producto.co
 import { ButtomGoogleSesionComponent } from './buttom-google-sesion/buttom-google-sesion.component';
 
 
+
 @NgModule({
   declarations: [
     BannerTiendaComponent,
@@ -19,12 +20,11 @@ import { ButtomGoogleSesionComponent } from './buttom-google-sesion/buttom-googl
     CardShimmerDetalleProductoComponent,
     TerminosCondicionesComponent,
     DetalleProductoComponent,
-    ButtomGoogleSesionComponent
+    ButtomGoogleSesionComponent,
   ],
   imports: [
     CommonModule,
     APP_ROUTING,
-
   ],
   exports: [
     BannerTiendaComponent,
