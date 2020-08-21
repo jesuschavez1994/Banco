@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICIOS } from 'src/app/config/config';
-import { Negocio } from '../../models/negocio.model';
 import { RegistroEmpresa } from '../../models/rut.model';
 import { Router } from '@angular/router';
 
@@ -12,15 +11,7 @@ import { DesactivarLoadingAction } from '../../shared/ui.accions';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
 import { SetUserAction } from '../../Login/auth/auth.actions';
-
-
-// const httpOptions = {
-//   headers: new HttpHeaders({
-//   'Content-Type': 'application/json',
-//   Authorization: 'Bearer ' + localStorage.getItem('token'),
-//   Accept: 'application/json'
-//   })
-// };
+import { Usuario } from 'src/app/models/usuario.model';
 
 
 @Injectable({
@@ -28,10 +19,9 @@ import { SetUserAction } from '../../Login/auth/auth.actions';
 })
 export class StoreService {
 
-  // headers = new Headers();
-  respServidor: any ;
 
-  user: Negocio;
+  respServidor: any ;
+  usuario: Usuario;
   token: string;
   headers: any;
 
@@ -57,31 +47,30 @@ export class StoreService {
 
     if ( localStorage.getItem('token')) {
       this.token = localStorage.getItem('token');
-      this.user = JSON.parse( localStorage.getItem('usuario') );
+      this.usuario = JSON.parse( localStorage.getItem('usuario') );
 
     } else {
       this.token = '';
-      this.user = null;
-
+      this.usuario = null;
     }
 
   }
 
-  guardarStorage(id: string, token: string, negocio: Negocio){
+  guardarStorage(id: string, token: string, user: Usuario){
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
-    localStorage.setItem('usuario', JSON.stringify(negocio));
+    localStorage.setItem('usuario', JSON.stringify(user));
 
-    this.user = negocio;
+    this.usuario = user;
     this.token = token;
   }
 
-  async crearStore(store: Negocio){
+  async crearStore(user: Usuario){
 
     const url = '/api/signup';
 
     try{
-      await this.postQuery(url, store).subscribe( userStore => {
+      await this.postQuery(url, user).subscribe( userStore => {
         console.log('STORE', userStore);
 
          // Redux//
@@ -100,7 +89,6 @@ export class StoreService {
     }
 
   }
-
 
   async registroRut(rut: RegistroEmpresa){
 
@@ -123,7 +111,7 @@ export class StoreService {
   logout() {
     const url = '/api/logout';
     return this.execQuery(url).subscribe( data => {
-      this.user = null;
+      this.usuario = null;
       this.token = '';
       localStorage.removeItem('token');
       localStorage.removeItem('id');

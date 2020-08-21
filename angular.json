@@ -25,14 +25,23 @@
             ],
             "styles": [
               "src/styles.css",
+              "src/assets/Fonstastic/styles.css",
               "src/_animations.scss",
               "src/assets/font-awesome/css/font-awesome.min.css",
               "src/assets/bootstrap4/css/bootstrap.min.css"
             ],
             "scripts": [
+              "src/assets/jquery/jquery.min.js",
               "src/assets/jquery/jquery-3.5.1.slim.min.js",
               "src/assets/jquery/tether.min.js",
-              "src/assets/bootstrap4/js/bootstrap.min.js"
+              "src/assets/js/custom.js",
+              "src/assets/js/perfect-scrollbar.jquery.min.js",
+              "src/assets/js/waves.js",
+              "src/assets/js/sidebarmenu.js",
+              "src/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js",
+              "src/assets/plugins/sparkline/jquery.sparkline.min.js",
+              "src/assets/bootstrap4/js/bootstrap.min.js",
+              "src/assets/bootstrap4/js/popper.min.js"
             ]
           },
           "configurations": {

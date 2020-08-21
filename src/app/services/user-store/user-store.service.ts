@@ -4,6 +4,8 @@ import { URL_SERVICIOS } from 'src/app/config/config';
 import { Negocio } from '../../models/negocio.model';
 import { RegistroEmpresa } from '../../models/rut.model';
 import { Router } from '@angular/router';
+import { UserStore } from 'src/app/models/user-store.model';
+import { Usuario } from 'src/app/models/usuario.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,7 +20,7 @@ const httpOptions = {
 })
 export class UserStoreService {
 
-  user: Negocio;
+  user: Usuario;
   token: string;
 
   constructor(
@@ -32,9 +34,9 @@ export class UserStoreService {
     return this.http.get<T>( query );
   }
 
-  private putQuery<T>(query: string){
+  private putQuery<T>(query: string, data: any){
     query = URL_SERVICIOS + query;
-    return this.http.put<T>( query, httpOptions );
+    return this.http.put<T>( query, data );
   }
 
 
@@ -53,9 +55,9 @@ export class UserStoreService {
 
   }
 
-  putDatos(id: string){
+  ActualizarUsuarioNegocio(id: string, user: Usuario){
     const url = `/api/users/${id}`;
-    return this.putQuery(url);
+    return this.putQuery(url, user);
   }
 
   getStore(){

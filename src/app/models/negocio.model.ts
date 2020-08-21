@@ -7,7 +7,8 @@ export class Negocio {
         public role: string = 'store',
         public img?: string,
         public google?: boolean,
-        public id?: string
+        public id?: string,
+        public phone?: string
     ) { }
 
 }

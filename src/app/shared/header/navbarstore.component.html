@@ -1,0 +1,92 @@
+<header class="topbar">
+    <nav class="navbar top-navbar navbar-expand-md navbar-light">
+        <!-- ============================================================== -->
+        <!-- Logo -->
+        <!-- ============================================================== -->
+        <div class="navbar-header">
+            <a class="navbar-brand" [routerLink]="['home']">
+                
+                
+                <!--End Logo icon -->
+                <!-- Logo text --><span>
+                         <!-- dark Logo text -->
+                         <img src="../../../assets/img/Navbar/Logo Founduss.svg" width="10%" alt="homepage" class="dark-logo" />
+                         <!-- Light Logo text -->    
+                         <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span>  
+                          
+                    <!-- <img src="../../../assets/img/Navbar/Logo Founduss.svg" alt="homepage" href="/home" class="dark-logo"/> -->
+                         
+                
+            </a>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Logo -->
+        <!-- ============================================================== -->
+        <div class="navbar-collapse">
+            <!-- ============================================================== -->
+            <!-- toggle and nav items -->
+            <!-- ============================================================== -->
+            <ul class="navbar-nav width-80">
+                <form class="form-inline my-2 my-lg-0 width-100">
+                    <input class="form-control mr-sm-2 width-95 icon-magnifying-glass" type="search" placeholder="Buscar producto..." aria-label="Search">
+                </form>
+            </ul>
+            <!-- ============================================================== -->
+            <!-- User profile and search -->
+            <!-- ============================================================== -->
+            <ul class="navbar-nav my-lg-0 width-20 display-flex justify-content-center">
+                <!-- ============================================================== -->
+                <!-- Search -->
+                <!-- ============================================================== -->
+              
+
+                <!-- ============================================================== -->
+                <!-- Icon Configuration -->
+                <!-- ============================================================== -->
+              
+                  
+                     <!-- > <img src="../../../assets//img/Navbar/configuration.svg">  -->
+             
+                  
+             
+                <!-- ============================================================== -->
+                <!-- End Configuration -->
+                <!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+                <!-- Profile -->
+                <!-- ============================================================== -->
+                <li class="nav-item dropdown">
+
+                    <button   class="btn btn-primary button fredoka width-100" data-toggle="dropdown" 
+                            aria-haspopup="true" 
+                            aria-expanded="false">
+                            Mi Tienda
+                    </button>
+                 
+                  
+                    <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                        <ul class="dropdown-user">
+                            <li>
+                                    <div class="dw-user-box" align="center">
+                                  <div class="u-img"><img src="../../../assets/images/users/1.jpg" alt="user"></div> 
+                                  <div class="u-text">
+                                       <h4> {{ items.name }} </h4> 
+                                       <p class="text-muted"> {{ items.email }} </p> 
+                                  </div>
+                                </div>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li><a  routerLink="/perfil"><i class="pr-2 fa fa-user"></i> Perfil</a></li>
+                            <li><a href="#"><i class="pr-2 fas fa-cog"></i>Configuración de tu cuenta</a></li>
+                            <li><a (click)="storeService.logout()"><i class="pr-2 fas fa-sign-out-alt"></i>Salir</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+      </div>
+    </nav>
+</header>
+
+
+

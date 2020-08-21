@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { Negocio } from '../../models/negocio.model';
 import { StoreService } from '../../services/store/store.service';
+import { Usuario } from 'src/app/models/usuario.model';
 
 @Component({
   selector: 'app-form-data-negocio',
@@ -19,12 +19,12 @@ export class FormDataNegocioComponent implements OnInit {
   ) {
 
     this.forma = new FormGroup({
-
-          name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-          correo: new FormControl('' , [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
-          password1: new FormControl('', [Validators.required, Validators.minLength(8)]),
-          password2: new FormControl(),
-          terminos: new FormControl('', Validators.required),
+      username: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      email: new FormControl('' , [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
+      password1: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      password2: new FormControl(),
+      terminos: new FormControl('', Validators.required),
     });
 
     // tslint:disable-next-line: align
@@ -52,13 +52,14 @@ export class FormDataNegocioComponent implements OnInit {
 
   registrarNegocio(){
 
-    const negocio = new Negocio(
+    const user = new Usuario(
+      this.forma.value.username,
       this.forma.value.name,
-      this.forma.value.correo,
+      this.forma.value.email,
       this.forma.value.password1
     );
 
-    this.storeServices.crearStore(negocio);
+    this.storeServices.crearStore(user);
   }
 
   registrar(){}
