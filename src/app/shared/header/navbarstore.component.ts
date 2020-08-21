@@ -9,7 +9,8 @@ import { StoreService } from '../../services/store/store.service';
 })
 export class NavbarstoreComponent implements OnInit {
 
-  items: any = {};
+  items: any =  localStorage.getItem('usuario');
+  toObject = JSON.parse(this.items);
 
   constructor(
     public userStoreServices: UserStoreService,
@@ -17,16 +18,8 @@ export class NavbarstoreComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getUserConnet();
   }
 
-  getUserConnet(){
-    this.userStoreServices.getStore().subscribe( resp => {
-      console.log(resp);
-      this.items = resp;
-      console.log(this.items);
-  });
-}
 
 buscar( ){}
 

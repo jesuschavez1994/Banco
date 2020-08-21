@@ -85,6 +85,10 @@ File: scss
     background-position: right calc(.375em + .1875rem) center !important;
     background-size: calc(.75em + .375rem) calc(.75em + .375rem);
 }
+
+.dropdown-menu{
+  top: 120% !important;
+}
  
  a:hover,
  a:focus {
@@ -1022,7 +1026,7 @@ File: scss
   Topbar
  *******************/
  .fix-header .topbar {
-   position: fixed;
+   /* position: fixed; */
    width: 100%;
    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05); }
@@ -1185,11 +1189,8 @@ File: scss
      z-index: 10;
      border: 5px solid #ef5350;
      border-radius: 70px;
-     -moz-animation: heartbit 1s ease-out;
      -moz-animation-iteration-count: infinite;
-     -o-animation: heartbit 1s ease-out;
      -o-animation-iteration-count: infinite;
-     -webkit-animation: heartbit 1s ease-out;
      -webkit-animation-iteration-count: infinite;
      animation-iteration-count: infinite; }
    .notify .point {
@@ -5743,7 +5744,7 @@ File: scss
      padding: 25px 15px 25px 15px; }
    /*Header*/
    .topbar {
-     position: fixed;
+     /* position: fixed; */
      width: 100%; }
      .topbar .top-navbar {
        -webkit-box-orient: horizontal;
