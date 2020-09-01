@@ -1,0 +1,112 @@
+
+
+<section class="display-flex">
+
+    <app-navbarstore id="header"></app-navbarstore>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-2">
+                <aside>
+                    <nav>
+                        <ul class="pt-5">
+                
+                            <li class="family-400 size-16 pb-2 pt-2 puntero">
+                                <a routerLinkActive="active" [routerLink]="['/contact']">Contacto</a>
+                            </li>
+                            <li class="family-400 size-16 pb-2 pt-2 puntero">
+                                <a>Productos</a>
+                            </li>
+                            <li class="family-400 size-16 pb-2 puntero">
+                                <a>Sincronización</a>
+                            </li>
+                            <li class="family-400 size-16 pb-2 puntero">
+                                <a>Ventas</a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </aside>
+            </div>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-10">
+                <app-banner-tienda></app-banner-tienda>
+
+                <div class="container pt-3 pb-4"> 
+                    <div class="row">
+                        <div class="col-md-6 pl-4">
+                            <h5 class="name-store family-500 size-24 pl-2">
+                                
+                            </h5>
+                            <span class="pl-2 family-300 size-16">
+                               
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <form   [formGroup]="forma" 
+                        (ngSubmit)="actualizarDatosStore()" 
+                        novalidate="novalidate">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 pl-4 pt-1">
+
+                                <section>
+                                    <div class="example-label">Raised</div>
+                                    <div class="example-button-row">
+                                      <button mat-raised-button>Basic</button>
+                                      <button mat-raised-button color="primary">Primary</button>
+                                      <button mat-raised-button color="accent">Accent</button>
+                                      <button mat-raised-button color="warn">Warn</button>
+                                      <button mat-raised-button disabled>Disabled</button>
+                                    </div>
+                                  </section>
+
+                                <div class="form-group row">
+                                    <div class="col-12">
+
+                                        <textarea   class="width-100" 
+                                                    formControlName="description" 
+                                                    placeholder="Indique una descripción"></textarea>
+
+                                    </div>
+                                  </div>
+
+                                
+                            </div>
+                            <div class="col-md-6">
+                                <div class="display-flex">
+                                    <span class="orange family-500">Información de contacto</span>
+                                    <button class="button-edit family-400 ml-3" [routerLink]="['contact-information-edit']">Editar</button>
+                                </div>
+                                <app-contact-information></app-contact-information>
+                                <router-outlet></router-outlet>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8 mb-4">
+                                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="5">
+                                    <agm-marker [latitude]="lat" [longitude]="lng">
+                                        
+                                    </agm-marker>
+                                </agm-map>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline-primary fredoka"
+                            type="submit"
+                            (click)="Actualizar()">
+                        Guardar cambios
+                    </button>
+
+                </form>
+
+            </div>
+            
+        </div>
+    </div>
+</section>

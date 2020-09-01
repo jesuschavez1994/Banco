@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { StoreService } from '../../services/store/store.service';
 import { Usuario } from 'src/app/models/usuario.model';
 
+
 @Component({
   selector: 'app-form-data-negocio',
   templateUrl: './form-data-negocio.component.html',
@@ -60,6 +61,9 @@ export class FormDataNegocioComponent implements OnInit {
     );
 
     this.storeServices.crearStore(user);
+
+
+    console.log(this.forma);
   }
 
   registrar(){}

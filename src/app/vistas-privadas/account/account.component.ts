@@ -6,26 +6,32 @@ import { StoreService } from '../../services/store/store.service';
 import { Negocio } from '../../models/negocio.model';
 import { Usuario } from 'src/app/models/usuario.model';
 
+
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
+
 export class AccountComponent implements OnInit {
 
   forma: FormGroup;
   items: any = {};
-
   userStore: Negocio;
-
   usuario: Usuario;
   token: string;
+  User: any =  localStorage.getItem('usuario');
+  toObject = JSON.parse(this.User);
 
   constructor(
     public userStoreServices: UserStoreService, public storeService: StoreService,
   ) {
 
-    this.usuario = this.storeService.usuario;
+
+
+    this.usuario = this.toObject.user;
+
+    console.log(this.usuario);
 
     this.forma = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(5)]),
@@ -71,6 +77,9 @@ guardarStorage(id: string, token: string, user: Usuario){
   this.token = token;
 }
 
+Reset(){
+  this.forma.reset(this.usuario);
+}
 
 
 }

@@ -9,9 +9,10 @@ import { DashboardComponent } from './vistas-privadas/dashboard/dashboard.compon
 import { HomeComponent } from './vistas-publicas/home/home.component';
 import { RegisterComponent } from './vistas-publicas/Registers/Usuario/register.component';
 import { RutStoreComponent } from './form-register/rut-store/rut-store.component';
-import { RutStoreGoogleComponent } from './form-register/rut-store-google/rut-store-google.component';
 import { AccountComponent } from './vistas-privadas/account/account.component';
 import { LoginGuardGuard } from './services/guards/login-guard.guard';
+import { ContactComponent } from './vistas-privadas/contact/contact.component';
+import { ContactInformationEditComponent } from './vistas-privadas/components/contact-information-edit/contact-information-edit.component';
 
 
 const APP_ROUTES: Routes = [
@@ -32,10 +33,13 @@ const APP_ROUTES: Routes = [
         canActivate: [ LoginGuardGuard ],
     },
 
-    {   path: 'rut-store-google',
-        component: RutStoreGoogleComponent,
+    {   path: 'contact',
+        component: ContactComponent,
+        canActivate: [ LoginGuardGuard ],
+        children: [
+            { path: 'contact-information-edit', component: ContactInformationEditComponent},
+        ]
     },
-
 
     {path: 'login-usuario', component: LoginUsuarioComponent},
     {path: 'dashboard', component: DashboardComponent},

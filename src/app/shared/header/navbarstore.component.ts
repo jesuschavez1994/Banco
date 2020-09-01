@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserStoreService } from '../../services/user-store/user-store.service';
 import { StoreService } from '../../services/store/store.service';
+import { Usuario } from 'src/app/models/usuario.model';
 
 @Component({
   selector: 'app-navbarstore',
@@ -9,13 +10,21 @@ import { StoreService } from '../../services/store/store.service';
 })
 export class NavbarstoreComponent implements OnInit {
 
-  items: any =  localStorage.getItem('usuario');
-  toObject = JSON.parse(this.items);
+  // items: any =  localStorage.getItem('usuario');
+  // toObject = JSON.parse(this.items);
+
+  usuario: Usuario;
+
+  User: any =  localStorage.getItem('usuario');
+  toObject = JSON.parse(this.User);
 
   constructor(
     public userStoreServices: UserStoreService,
-    public storeService: StoreService
-  ) { }
+    public storeService: StoreService,
+
+  ) {
+    this.usuario = this.toObject.user;
+   }
 
   ngOnInit(): void {
   }

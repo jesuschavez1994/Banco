@@ -4,6 +4,15 @@ import { URL_SERVICIOS } from 'src/app/config/config';
 import { RegistroEmpresa } from '../../models/rut.model';
 import { Router } from '@angular/router';
 
+
+// import swal from 'sweetalert';
+
+import { Observable } from 'rxjs/Observable';
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
+
 // IMPORTACIONES PARA USAR EL PATRÓN REDUX //
 import { UserStore } from '../../models/models-@ngrx/userStore.models';
 import { ActivarLoadingAction } from '../../shared/ui.accions';
@@ -12,7 +21,6 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
 import { SetUserAction } from '../../Login/auth/auth.actions';
 import { Usuario } from 'src/app/models/usuario.model';
-
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +33,13 @@ export class StoreService {
   token: string;
   headers: any;
 
+
   constructor(
     public http: HttpClient,
     private store: Store<AppState>,
-    private router: Router
+    private router: Router,
+    // tslint:disable-next-line: no-shadowed-variable
+
   ) {
     this.cargarStorage();
   }
@@ -69,39 +80,58 @@ export class StoreService {
 
     const url = '/api/signup';
 
-    try{
-      await this.postQuery(url, user).subscribe( userStore => {
-        console.log('STORE', userStore);
+    await this.postQuery(url, user).subscribe( userStore => {
 
-         // Redux//
-        this.respServidor = userStore;
-        const storeconnect = new UserStore(this.respServidor.user);
-        this.store.dispatch(new SetUserAction(storeconnect));
-        this.store.dispatch( new ActivarLoadingAction() );
-        // End Redux//
+      // Redux//
+      this.respServidor = userStore;
+      const storeconnect = new UserStore(this.respServidor.user);
+      this.store.dispatch(new SetUserAction(storeconnect));
+      this.store.dispatch( new ActivarLoadingAction() );
+      // End Redux//
 
-        this.guardarStorage(this.respServidor.user.id, this.respServidor.remember_token, this.respServidor.user);
-        this.router.navigate(['/rut-store']);
+      this.guardarStorage(this.respServidor.user.id, this.respServidor.remember_token, this.respServidor);
+      this.router.navigate(['/rut-store']);
 
-      });
-    }catch (err){
+    },
+    err => {
       console.log(err);
-    }
+      if (err.error.errors.email) {
+        // swal({
+        //   text: 'El correo ya ha sido registrado',
+        //   icon: 'warning',
+        //   dangerMode: true,
+        // });
+      }
+
+      if (err.error.errors.register) {
+        // swal({
+        //   text: 'El nombre de usuario ya existe',
+        //   icon: 'warning',
+        //   dangerMode: true,
+        // });
+      }
+
+    });
 
   }
 
-  async registroRut(rut: RegistroEmpresa){
+  registroRut(nameStore: RegistroEmpresa){
 
     const url = '/api/signup/store';
 
-    try{
-      await this.postQuery(url, rut).subscribe( resp => {
-        this.router.navigate(['/account']);
-        this.store.dispatch(new DesactivarLoadingAction() );
-      });
-    }catch (err){
+    this.postQuery(url, nameStore).subscribe( resp => {
+      window.location.href = '#/account';
+      // this.router.navigate(['/account']);
+      this.store.dispatch(new DesactivarLoadingAction() );
+    }, err => {
       console.log(err);
-    }
+      // swal({
+      //     text: err.error.message,
+      //     icon: 'warning',
+      //     dangerMode: true,
+      //   });
+    });
+
   }
 
   estaLogueado(){
@@ -119,5 +149,6 @@ export class StoreService {
       this.router.navigate(['/home']);
     });
   }
+
 
 }

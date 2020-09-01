@@ -29,43 +29,24 @@ export class RutStoreComponent implements OnInit {
 
     ) {
 
-    this.cargarStorage();
-
     this.forma = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      rut: new FormControl('', [Validators.required, Validators.minLength(9)]),
+      rut: new FormControl('', [Validators.required, Validators.maxLength(9)]),
     });
 
   }
 
   registrarRut(){
 
-    const rut  = new RegistroEmpresa(
+    const RazonSocialYRut  = new RegistroEmpresa(
       this.forma.value.name,
       this.forma.value.rut,
       localStorage.getItem('id')
     );
 
-    console.log(rut);
-
-    this.storageService.registroRut(rut);
+    this.storageService.registroRut(RazonSocialYRut);
 
   }
-
-  cargarStorage() {
-
-    if ( localStorage.getItem('token')) {
-      this.token = localStorage.getItem('token');
-      this.user = JSON.parse( localStorage.getItem('usuario') );
-
-    } else {
-      this.token = '';
-      this.user = null;
-
-    }
-
-  }
-
 
 
   ngOnInit(): void {

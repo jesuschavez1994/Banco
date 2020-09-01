@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 // Servicios //
 import { HttpClientModule  } from '@angular/common/http';
 // Rutas //
@@ -28,6 +29,10 @@ import { VIEW_ROUTING } from './vistas-privadas/view.routes';
 import { InterceptorService } from './services/Interceotores/interceptor.service';
 import { PrivateviewModule } from './vistas-privadas/privateview.module';
 
+// Angular material //
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +40,8 @@ import { PrivateviewModule } from './vistas-privadas/privateview.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
     AppRoutingModule,
     HttpClientModule,
     PipesModule,

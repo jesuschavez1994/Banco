@@ -69,7 +69,21 @@ File: scss
    -moz-osx-font-smoothing: grayscale; }
 
    .dark-logo{
-       width: 70%;
+       width: 90%;
+   }
+
+   header{
+    box-shadow: 0 1px rgba(64,87,109,.07);
+   }
+
+   .a-menu-user{
+     display: flex !important;
+     align-items: center !important;
+    
+   }
+
+   .Gear:hover{
+    background-color: rgba(57,76,96,.15);
    }
 
    input {
@@ -88,6 +102,10 @@ File: scss
 
 .dropdown-menu{
   top: 120% !important;
+}
+
+.name-user{
+  color: #0e1318;
 }
  
  a:hover,
@@ -110,20 +128,16 @@ File: scss
  html body .mdi:before,
  html body .mdi-set {
    line-height: initial; }
+
+   .active{
+     background:rgb(241, 241, 241) ;
+   }
  
  /*******************
  Headings
  *******************/
- h1,
- h2,
- h3,
- h4,
- h5,
- h6 {
-   color: #455a64;
-   font-family: "Montserrat", sans-serif;
-   font-weight: 400; }
  
+
  h1 {
    line-height: 40px;
    font-size: 36px; }
@@ -1039,7 +1053,8 @@ File: scss
    height: calc(100% - 70px); }
  
  .topbar {
-   position: relative;
+   position: fixed;
+   background: white;
    z-index: 50; }
    .topbar .navbar-collapse {
      padding: 0 10px; }
@@ -1109,7 +1124,7 @@ File: scss
            padding-left: 10px; }
            .topbar ul.dropdown-user li .dw-user-box .u-text h4 {
              margin: 0px;
-             font-size: 15px; }
+             font-size: 0.98rem; }
            .topbar ul.dropdown-user li .dw-user-box .u-text p {
              margin-bottom: 2px;
              font-size: 12px; }
@@ -1122,7 +1137,7 @@ File: scss
        .topbar ul.dropdown-user li a {
          padding: 9px 15px;
          display: block;
-         color: #67757c; }
+         color: #0e1318; }
          .topbar ul.dropdown-user li a:hover {
            background: #e9edf2;
            color: #F09207;
@@ -1571,7 +1586,7 @@ File: scss
  ******************/
  .mega-dropdown {
    position: static;
-   width: 100%; }
+   }
    .mega-dropdown .dropdown-menu {
      width: 100%;
      padding: 30px;
@@ -5594,13 +5609,21 @@ File: scss
  .hidden-xs-up {
    display: none !important; }
  
- @media (max-width: 575px) {
+  @media (max-width: 575px) {
    .hidden-xs-down {
-     display: none !important; } }
+     display: none !important; } 
+  }
  
- @media (min-width: 576px) {
+  @media (min-width: 576px) {
    .hidden-sm-up {
-     display: none !important; } }
+     display: none !important; } 
+  }
+
+  @media(max-width: 790px){
+    .width-25{
+      width: 30% !important;
+    }
+  }
  
  @media (max-width: 767px) {
    .hidden-sm-down {

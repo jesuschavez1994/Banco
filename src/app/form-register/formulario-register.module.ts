@@ -9,7 +9,7 @@ import { ComponentsModule } from '../components/components.module';
 import { SharedModule } from '../shared/shared.module';
 import { RutStoreComponent } from './rut-store/rut-store.component';
 import { ButtomGoogleRegisterComponent } from './buttom-google-register/buttom-google-register.component';
-import { RutStoreGoogleComponent } from './rut-store-google/rut-store-google.component';
+
 
 
 
@@ -18,8 +18,7 @@ import { RutStoreGoogleComponent } from './rut-store-google/rut-store-google.com
   declarations: [FormDataUsuarioComponent,
     FormDataNegocioComponent,
     RutStoreComponent,
-    ButtomGoogleRegisterComponent,
-    RutStoreGoogleComponent],
+    ButtomGoogleRegisterComponent,],
   imports: [
     CommonModule,
     ReactiveFormsModule,

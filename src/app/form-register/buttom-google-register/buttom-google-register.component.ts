@@ -3,7 +3,9 @@ import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Router } from '@angular/router';
 
+
 declare const gapi: any;
+// import swal from 'sweetalert';
 
 
 @Component({
@@ -15,7 +17,7 @@ export class ButtomGoogleRegisterComponent implements OnInit {
 
   usuario: Usuario;
   token: string;
-  google: any;
+
   auth2: any;
 
   constructor(
@@ -25,15 +27,6 @@ export class ButtomGoogleRegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.googleInit();
-  }
-
-  guardarStorage(usuario: string, email: string){
-    // localStorage.setItem('token', token);
-    localStorage.setItem('usuario', JSON.stringify(usuario));
-    localStorage.setItem('email', email);
-
-    //  this.usuario = usuario;
-    // this.token = token;
   }
 
   googleInit(){
@@ -48,21 +41,20 @@ export class ButtomGoogleRegisterComponent implements OnInit {
   }
 
   attachSignin( element ) {
+
+    // tslint:disable-next-line: no-inferrable-types
+    const role:string = 'store';
+
     this.auth2.attachClickHandler( element, {}, (googleUser) => {
       const profile = googleUser.getBasicProfile();
+      console.log(profile);
       const token = googleUser.getAuthResponse().id_token;
       console.log(token);
-      this.usuarioServices.loginGoogle(
+      this.usuarioServices.RegisterGoogle(
         profile.getName(),
         profile.getEmail(),
-        profile.getId(),
-        profile.getImageUrl()
-      ).subscribe( resp => {
-        this.google = resp;
-        console.log('Respuesta desde Google', this.google);
-        this.guardarStorage(this.google, this.google.email);
-        this.router.navigate(['/rut-store-google']);
-      });
+        role
+      );
     });
 
   }

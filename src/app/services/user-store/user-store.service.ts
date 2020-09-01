@@ -6,6 +6,7 @@ import { RegistroEmpresa } from '../../models/rut.model';
 import { Router } from '@angular/router';
 import { UserStore } from 'src/app/models/user-store.model';
 import { Usuario } from 'src/app/models/usuario.model';
+import { DataStore } from '../../models/dataStore.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -60,8 +61,20 @@ export class UserStoreService {
     return this.putQuery(url, user);
   }
 
+  ActualizarDataStore(userId: string, id: string, data: DataStore){
+
+    const url = `/api/users/${userId}/stores/${id}`;
+    return this.putQuery(url, data).subscribe();
+
+  }
+
   getStore(){
     const url = '/api/users';
+    return this.execQuery(url);
+  }
+
+  getStoreAccountEdit(){
+    const url = '/api/users/3/stores';
     return this.execQuery(url);
   }
 
