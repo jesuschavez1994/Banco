@@ -30,8 +30,8 @@ import { InterceptorService } from './services/Interceotores/interceptor.service
 import { PrivateviewModule } from './vistas-privadas/privateview.module';
 
 // Angular material //
+import { AgmCoreModule } from '@agm/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -40,9 +40,8 @@ import {MatButtonModule} from '@angular/material/button';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     PipesModule,
     APP_ROUTING,
@@ -61,6 +60,9 @@ import {MatButtonModule} from '@angular/material/button';
       maxAge: 25,
       logOnly: environment.production,
     }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'
+    })
   ],
   providers: [
   ],

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { URL_SERVICIOS } from 'src/app/config/config';
 import { Negocio } from '../../models/negocio.model';
 import { RegistroEmpresa } from '../../models/rut.model';
@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { UserStore } from 'src/app/models/user-store.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { DataStore } from '../../models/dataStore.model';
+import { Observable, throwError } from 'rxjs';
+import 'rxjs/add/operator/map';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -68,14 +70,21 @@ export class UserStoreService {
 
   }
 
+  getDataStore(userId: string, id: string){
+    const url = `/api/users/${userId}/stores/${id}`;
+    return this.execQuery(url);
+  }
+
   getStore(){
     const url = '/api/users';
     return this.execQuery(url);
   }
 
-  getStoreAccountEdit(){
-    const url = '/api/users/3/stores';
-    return this.execQuery(url);
+  getStoreAccountEdit(id: string): Observable<any>{
+    const url = `/api/users/${id}/stores`;
+    return this.execQuery(url).map( (resp: any) => {
+      return resp;
+    });
   }
 
 }

@@ -1,49 +1,212 @@
-<section>
+
+<span class="orange family-500">Información de contacto</span>
+<button class="button-edit family-400 ml-3" [routerLink]="['contact-information-edit']">Atrás</button>
+
+<form   [formGroup]="forma" 
+        (ngSubmit)="editInformationContact()" 
+        novalidate="novalidate"
+        class="pt-3">
+
     <div class="form-group row">
-        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
-            <label class="OpenSans-600 size-12">Correo</label>
+        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
             <input  class="form-control email-icon"
                     type="email"
-                    
+                    [(ngModel)]="usuario.email_1"
                     placeholder="Correo electrónico"
-                    formControlName="email"
+                    formControlName="email_1"
+                    [ngClass]="{'is-invalid':  (!forma.controls['email_1'].valid || forma.controls['email_1'].errors?.minlength)&& forma.controls['email_1'].touched, 'is-valid': forma.controls['email_1'].valid }"
                        
             >
-
+            <div    *ngIf="forma.get('email_1').errors?.required"  
+                    class="invalid-feedback">
+                    Este campo es requeridoemail
+            </div>
+            <div   *ngIf="forma.get('email_1').errors?.pattern"  
+                    class="invalid-feedback">
+                    No posee la forma de un correo: example@gmail.com
+            </div>
         </div>
+    </div>
 
-        <a class="icon-plus">
-            <img    src="../../../assets/img/iconos/icons-main/icons/plus-circle.svg"
-                    width="18" 
-                    height="18" 
-                    title="agregar campo"
+    <div class="form-group row">
+        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
+            <input  class="form-control email-icon"
+                    type="email"
+                    [(ngModel)]="usuario.email_2"
+                    placeholder="Correo electrónico"
+                    formControlName="email_2"
+                    [ngClass]="{'is-invalid':  (!forma.controls['email_2'].valid || forma.controls['email_2'].errors?.minlength)&& forma.controls['email_2'].touched, 'is-valid': forma.controls['email_2'].valid }"
+                       
             >
-        </a>
-
+            <div    *ngIf="forma.get('email_2').errors?.required"  
+                    class="invalid-feedback">
+                    Este campo es requeridoemail
+            </div>
+            <div   *ngIf="forma.get('email_2').errors?.pattern"  
+                    class="invalid-feedback">
+                    No posee la forma de un correo: example@gmail.com
+            </div>
+        </div>
     </div>
 
 
     <div class="form-group row">
-        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
-            <label class="OpenSans-600 size-12">Telefono</label>
-            <input  class="form-control email-icon"
+        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
+            
+            <input  class="form-control"
                     type="phone"
-                    
                     placeholder="Ingrese teléfono"
-                    formControlName="phone"
+                    [(ngModel)]="usuario.phone_1"
+                    formControlName="phone_1"
+                    [ngClass]="{'is-invalid':  (!forma.controls['phone_1'].valid || forma.controls['phone_1'].errors?.minlength)&& forma.controls['phone_1'].touched, 'is-valid': forma.controls['phone_1'].valid }"
                        
             >
 
-        </div>
+            <div    *ngIf="forma.get('phone_1').errors?.required"  
+                    class="invalid-feedback">
+                    Este campo es requerido
+            </div>
+            <div   *ngIf="forma.get('phone_1').errors?.pattern"  
+                    class="invalid-feedback">
+                    No posee la forma de un correo: example@gmail.com
+            </div>
 
-        <a class="icon-plus">
-            <img    src="../../../assets/img/iconos/icons-main/icons/plus-circle.svg"
-                    width="18" 
-                    height="18" 
-                    title="agregar campo"
-            >
-        </a>
+        </div>
 
     </div>
 
-</section>
+    <div class="form-group row">
+        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
+            
+            <input  class="form-control"
+                    type="phone"
+                    placeholder="Ingrese teléfono"
+                    [(ngModel)]="usuario.phone_2"
+                    formControlName="phone_2"
+                    [ngClass]="{'is-invalid':  (!forma.controls['phone_2'].valid || forma.controls['phone_2'].errors?.minlength)&& forma.controls['phone_2'].touched, 'is-valid': forma.controls['phone_2'].valid }"
+                       
+            >
+
+            <div    *ngIf="forma.get('phone_2').errors?.required"  
+                    class="invalid-feedback">
+                    Este campo es requerido
+            </div>
+            <div   *ngIf="forma.get('phone_2').errors?.pattern"  
+                    class="invalid-feedback">
+                    No posee la forma de un correo: example@gmail.com
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="form-group row">
+        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
+    
+            <input  class="form-control"
+                    type="phone"
+                    placeholder="Página web"
+                    [(ngModel)]="usuario.webside"
+                    formControlName="webside"
+                    [ngClass]="{'is-invalid':  (!forma.controls['webside'].valid || forma.controls['webside'].errors?.minlength)&& forma.controls['webside'].touched, 'is-valid': forma.controls['webside'].valid }"
+                       
+            >
+
+            <div    *ngIf="forma.get('webside').errors?.required"  
+                    class="invalid-feedback">
+                    Este campo es requerido
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="form-group row">
+        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
+    
+            <input  class="form-control"
+                    type="phone"
+                    placeholder="Dirección"
+                    [(ngModel)]="usuario.direction"
+                    formControlName="direction"
+                    [ngClass]="{'is-invalid':  (!forma.controls['direction'].valid || forma.controls['direction'].errors?.minlength)&& forma.controls['direction'].touched, 'is-valid': forma.controls['direction'].valid }"
+                       
+            >
+
+            <div    *ngIf="forma.get('direction').errors?.required"  
+                    class="invalid-feedback">
+                    Este campo es requerido
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="form-group row">
+        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
+            <span class="orange family-500">Redes sociales</span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
+    
+            <input  class="form-control facebook-icon"
+                    type="phone"
+                    placeholder="Facebook"
+                    [(ngModel)]="social.facebook"
+                    formControlName="facebook"
+                    [ngClass]="{'is-invalid':  (!forma.controls['facebook'].valid || forma.controls['facebook'].errors?.minlength)&& forma.controls['facebook'].touched, 'is-valid': forma.controls['facebook'].valid }"
+                       
+            >
+
+            <div    *ngIf="forma.get('facebook').errors?.required"  
+                    class="invalid-feedback">
+                    Este campo es requerido
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="form-group row">
+        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
+    
+            <input  class="form-control instagram-icon"
+                    type="phone"
+                    placeholder="Instagram"
+                    [(ngModel)]="social.instagram"
+                    formControlName="instagram"
+                    [ngClass]="{'is-invalid':  (!forma.controls['instagram'].valid || forma.controls['instagram'].errors?.minlength)&& forma.controls['instagram'].touched, 'is-valid': forma.controls['instagram'].valid }"
+                       
+            >
+
+            <div    *ngIf="forma.get('instagram').errors?.required"  
+                    class="invalid-feedback">
+                    Este campo es requerido
+            </div>
+
+        </div>
+
+    </div>
+  
+    <div class="form-group row">
+        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
+            <input  class="form-control twitter-icon"
+                    type="phone"
+                    placeholder="Twitter"
+                    [(ngModel)]="social.twitter"
+                    formControlName="twitter"
+                    [ngClass]="{'is-invalid':  (!forma.controls['twitter'].valid || forma.controls['twitter'].errors?.minlength)&& forma.controls['twitter'].touched, 'is-valid': forma.controls['twitter'].valid }"
+                       
+            >
+
+            <div    *ngIf="forma.get('twitter').errors?.required"  
+                    class="invalid-feedback">
+                    Este campo es requerido
+            </div>
+        </div>
+    </div>
+
+</form>
+    

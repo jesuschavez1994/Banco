@@ -1,0 +1,93 @@
+<span class="orange family-500">Datos del negocio</span>
+<button class="button-edit family-400 ml-3" [routerLink]="['contact-information-edit']">Atrás</button>
+
+
+<form   [formGroup]="forma" 
+        (ngSubmit)="editDescriptions()" 
+        novalidate="novalidate"
+        class="pt-3">
+    
+      <div class="form-group row">
+            <div class="col-12">
+                  <input     class="form-control"
+                              type="text"
+                              [(ngModel)]="usuario.social_reason"
+                              placeholder="Nombre comercial"
+                              formControlName="social_reason"
+                              [ngClass]="{'is-invalid':  (!forma.controls['social_reason'].valid || forma.controls['social_reason'].errors?.minlength)&& forma.controls['social_reason'].touched, 'is-valid': forma.controls['social_reason'].valid }" 
+                  >
+                  
+                  <div  *ngIf="forma.get('social_reason').errors?.required"  
+                        class="invalid-feedback">
+                        Este campo es requerido
+                  </div>
+                  <div  *ngIf="forma.get('social_reason').errors?.minlength"  
+                        class="invalid-feedback">
+                        Por lo menos 5 caracteres
+                  </div>
+            
+            </div>
+      </div>
+
+      <div class="form-group row">
+            <div class="col-12">
+                  <input     class="form-control"
+                              type="text"
+                              placeholder="Rut"
+                              [(ngModel)]="usuario.rut"
+                              formControlName="rut"
+                              [ngClass]="{'is-invalid':  (!forma.controls['rut'].valid || forma.controls['rut'].errors?.minlength)&& forma.controls['rut'].touched, 'is-valid': forma.controls['rut'].valid }" 
+                  >
+                  
+                  <div *ngIf="forma.get('rut').errors?.required"  
+                        class="invalid-feedback">
+                        Este campo es requerido
+                  </div>
+
+                  <div *ngIf="forma.get('rut').errors?.minlength"  
+                        class="invalid-feedback">
+                        Por lo menos 5 caracteres
+                  </div>
+      
+            </div>
+      </div>
+
+      <div class="form-group row">
+            <div class="col-12">
+                  <input class="form-control"
+                        type="text"
+                        [(ngModel)]="usuario.name"
+                        placeholder="Razón social"
+                        formControlName="name"
+                        [ngClass]="{'is-invalid':  (!forma.controls['name'].valid || forma.controls['name'].errors?.minlength)&& forma.controls['name'].touched, 'is-valid': forma.controls['name'].valid }" 
+                  >
+              
+                  <div  *ngIf="forma.get('name').errors?.required"  
+                        class="invalid-feedback">
+                        Este campo es requerido
+                  </div>
+                  <div  *ngIf="forma.get('name').errors?.minlength"  
+                        class="invalid-feedback">
+                        Por lo menos 5 caracteres
+                  </div>
+      
+            </div>
+      </div>
+
+      <div class="form-group row">
+            <div class="col-12">
+
+                  <textarea   class="form-control"
+                              type="text"
+                              [(ngModel)]="usuario.description"
+                              placeholder="Indique la descripción"
+                              formControlName="description"></textarea>
+                  
+
+            </div>
+      </div>
+
+       
+</form>
+
+

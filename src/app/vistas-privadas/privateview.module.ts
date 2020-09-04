@@ -10,23 +10,45 @@ import { ContactInformationEditComponent } from './components/contact-informatio
 import { ContactInformationComponent } from './components/contact-information/contact-information.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MapaComponent } from './components/mapa/mapa.component';
+import { MapEditarComponent } from './components/map-editar/map-editar.component';
+
 // Mapa //
 import { AgmCoreModule } from '@agm/core';
 import {MatButtonModule} from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
+import {MatGridListModule} from '@angular/material/grid-list';
+
+import { ContactDescriptionEditComponent } from './components/contact-description-edit/contact-description-edit.component';
+import { ContactDescriptionComponent } from './components/contact-description/contact-description.component';
 
 @NgModule({
+    entryComponents: [
+      MapEditarComponent,
+      ContactDescriptionEditComponent
+    ],
     // tslint:disable-next-line: max-line-length
     declarations: [DashboardComponent,
       FormAccountComponent,
       ContactComponent,
       ContactInformationEditComponent,
       ContactInformationComponent,
-      MapaComponent],
+      MapaComponent,
+      MapEditarComponent,
+      ContactDescriptionEditComponent,
+      ContactDescriptionComponent],
 
     imports: [CommonModule,
       SharedModule,
+      MatInputModule,
+      MatGridListModule,
+      MatSnackBarModule,
       MatButtonModule,
+      MatDialogModule,
+      MatCardModule,
       BrowserAnimationsModule,
       ComponentsModule,
       APP_ROUTING,

@@ -1,1 +1,2 @@
 [0815/224515.652:ERROR:process_info.cc(375)] NtQuerySystemInformation SystemExtendedHandleInformation: La longitud del registro de información especificado no coincide con la longitud que se requiere para la clase de información especificada. (0xc0000004)
+[0903/071147.374:ERROR:settings.cc(320)] Settings magic is not 1129342067

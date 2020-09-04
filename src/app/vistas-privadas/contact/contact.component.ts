@@ -3,8 +3,6 @@ import { UserStoreService } from '../../services/user-store/user-store.service';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { DataStore } from '../../models/dataStore.model';
 
-
-
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -13,10 +11,9 @@ import { DataStore } from '../../models/dataStore.model';
 export class ContactComponent implements OnInit {
 
   forma: FormGroup;
-  name: any;
+  name: any = null;
+  title = false;
 
-  lat = 51.678418;
-  lng = 7.809007;
 
   // tslint:disable-next-line: ban-types
   dataStore: Object = {};
@@ -24,22 +21,53 @@ export class ContactComponent implements OnInit {
   constructor(public userStoreServices: UserStoreService) {
 
     this.forma = new FormGroup({
-      description: new FormControl(''),
+      social_reason: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      rut: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      description: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      email_1: new FormControl('' , [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
+      email_2: new FormControl('' , [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
+      phone_1: new FormControl('', [Validators.required, Validators.minLength(10)]),
+      phone_2: new FormControl('', [Validators.required, Validators.minLength(10)]),
+      webside: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      direction: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      facebook: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      instagram: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      twitter: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      adress_latitude: new FormControl(),
+      adress_longitude: new FormControl(),
     });
 
   }
 
   ngOnInit(){
-    this.userStoreServices.getStoreAccountEdit().subscribe( data => {
-      this.dataStore = data;
-      console.log(this.dataStore[0].id);
-    });
+    this.traerIdStore();
   }
+
+  async traerIdStore(){
+    await this.userStoreServices.getStoreAccountEdit(localStorage.getItem('id')).subscribe( data => {
+     this.dataStore = data;
+     this.title = true;
+   });
+  }
+
 
   actualizarDatosStore(){
 
     const data = new DataStore(
+      this.forma.value.social_reason,
+      this.forma.value.rut,
+      this.forma.value.name,
       this.forma.value.description,
+      this.forma.value.email_1,
+      this.forma.value.email_2,
+      this.forma.value.phone_1,
+      this.forma.value.phone_2,
+      this.forma.value.webside,
+      this.forma.value.direction,
+      this.forma.value.facebook,
+      this.forma.value.instagram,
+      this.forma.value.twitter,
     );
 
     this.userStoreServices.ActualizarDataStore
@@ -54,5 +82,9 @@ export class ContactComponent implements OnInit {
   }
 
   Actualizar(){}
+
+  coordenadas(e){
+    console.log('mapa', e);
+  }
 
 }

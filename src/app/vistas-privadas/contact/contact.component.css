@@ -3,5 +3,4 @@
 .button-edit{background: white;border: none;color: rgb(136, 136, 136); border-bottom: 1px solid rgba(136, 136, 136, .34);}
 button:focus {outline: none !important; outline: none !important; }
 .name-store{color:#0e1318;}
-agm-map {height: 400px;}
-
+.agm-map-container { height: 300px; }

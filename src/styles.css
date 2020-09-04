@@ -24,6 +24,11 @@
 .icon-magnifying-glass{background-image: url(./assets/img/iconos/iconos-lupa.png);}
 .icon-phone{background-image: url(./assets/img/iconos//icons-main/icons/telephone.svg);}
 
+/* Redes Sociales */
+.facebook-icon{background-image: url(./assets/img/Redes_Sociales/facebook.svg);}
+.instagram-icon{background-image: url(./assets/img/Redes_Sociales/instagram.svg);}
+.twitter-icon{background-image: url(./assets/img/Redes_Sociales/twiter.svg);}
+
 /* height en % */
 .height-100{height:100%;}
 .height-90{height: 90%;}
@@ -191,8 +196,11 @@ a:hover{color: #F09207; text-decoration: none !important;cursor: pointer;}
 .puntero{cursor: pointer;}
 
 
-
-
+/* Edit angular material */
+.mat-h5, .mat-typography h5{
+  font-family: 'Montserrat', sans-serif;font-weight: 500;
+  font-size: 20px !important;
+}
 
 
 /*

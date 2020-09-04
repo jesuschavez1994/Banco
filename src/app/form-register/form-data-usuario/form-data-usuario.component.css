@@ -22,6 +22,10 @@ button{
     color: white !important;
 }
 
+textarea{
+    min-height: 250px;
+}
+
 .flotador{z-index: -1;position: absolute;}
 .sobreEncima{z-index: 10;background: white;}
 .height-75{height: 84vh;}
