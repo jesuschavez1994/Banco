@@ -20,16 +20,18 @@ export class AccountComponent implements OnInit {
   userStore: Negocio;
   usuario: Usuario;
   token: string;
-  User: any =  localStorage.getItem('usuario');
-  toObject = JSON.parse(this.User);
+  datosUsuario: any[] = [];
+  // User: any =  localStorage.getItem('usuario');
+  // toObject = JSON.parse(this.User);
 
   constructor(
-    public userStoreServices: UserStoreService, public storeService: StoreService,
+    public userStoreServices: UserStoreService,
+    public storeService: StoreService,
   ) {
 
 
 
-    this.usuario = this.toObject.user;
+    // this.usuario = this.toObject.user;
 
     console.log(this.usuario);
 
@@ -45,7 +47,9 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getUserConnet();
+    this.userStoreServices.getStore().subscribe(resp => {
+      this.datosUsuario.push(resp);
+    });
   }
 
 
@@ -62,18 +66,15 @@ ActualizarDatosUser(user: Usuario){
   this.userStoreServices.ActualizarUsuarioNegocio(localStorage.getItem('id'), Userstore).subscribe( usuarioActualizado => {
     console.log('Data', usuarioActualizado);
     const usuarioDB: any = usuarioActualizado;
-    this.guardarStorage(usuarioDB.id, localStorage.getItem('token'), usuarioDB);
+    this.guardarStorage(usuarioDB.id, localStorage.getItem('token'));
     // this.guardarStorage(data.id, )
   });
 
 }
 
-guardarStorage(id: string, token: string, user: Usuario){
+guardarStorage(id: string, token: string){
   localStorage.setItem('id', id);
   localStorage.setItem('token', token);
-  localStorage.setItem('usuario', JSON.stringify(user));
-
-  this.usuario = user;
   this.token = token;
 }
 

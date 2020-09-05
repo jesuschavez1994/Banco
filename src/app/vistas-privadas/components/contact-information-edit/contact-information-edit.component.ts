@@ -13,20 +13,21 @@ export class ContactInformationEditComponent implements OnInit {
 
   @Input() forma: FormGroup;
   // tslint:disable-next-line: ban-types
-  dataStore: Object = {};
-  dataStoreEdit = {};
+  dataStore: any[] = [];
+  dataStoreEdit: any[] = [];
+  redesSociales: any[] = [];
   title = false;
   informationEdit: InformationEditStore;
 
   social: Usuario;
-  User: any =  localStorage.getItem('usuario');
-  toObject = JSON.parse(this.User);
+  // User: any =  localStorage.getItem('usuario');
+  // toObject = JSON.parse(this.User);
   usuario: Usuario;
 
   constructor(public userStoreServices: UserStoreService,  private formBuilder: FormBuilder) {
 
-    this.usuario = this.toObject.contact;
-    this.social = this.toObject.social;
+    // this.usuario = this.toObject.contact;
+    // this.social = this.toObject.social;
 
   }
 
@@ -45,19 +46,21 @@ export class ContactInformationEditComponent implements OnInit {
   async traerdata(){
     await this.userStoreServices
     .getDataStore(localStorage.getItem('id'), this.dataStore[0].id)
-    .subscribe(resp => {
+    .subscribe( ( resp: any ) => {
       // tslint:disable-next-line: no-string-literal
-      this.dataStoreEdit = resp;
-      console.log('data', this.dataStoreEdit);
-      this.guardarStorage( this.dataStoreEdit );
+      this.dataStoreEdit.push(resp.contact);
+      this.redesSociales.push(resp.social);
+      this.title = true;
+      console.log('información de contacto', this.dataStoreEdit);
+      // this.guardarStorage( this.dataStoreEdit );
 
     });
   }
 
-  guardarStorage(informationEdit: InformationEditStore){
-    localStorage.setItem('usuario', JSON.stringify(informationEdit));
-    this.informationEdit = informationEdit;
-  }
+  // guardarStorage(informationEdit: InformationEditStore){
+  //   localStorage.setItem('usuario', JSON.stringify(informationEdit));
+  //   this.informationEdit = informationEdit;
+  // }
 
 
 }

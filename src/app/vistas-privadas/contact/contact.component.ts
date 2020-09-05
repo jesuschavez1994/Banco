@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserStoreService } from '../../services/user-store/user-store.service';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { DataStore } from '../../models/dataStore.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contact',
@@ -13,12 +14,17 @@ export class ContactComponent implements OnInit {
   forma: FormGroup;
   name: any = null;
   title = false;
+  // tslint:disable-next-line: variable-name
+  adress_lat: any;
+  // tslint:disable-next-line: variable-name
+  adress_lng: any;
 
 
   // tslint:disable-next-line: ban-types
-  dataStore: Object = {};
+  dataStore: any[] = [];
 
-  constructor(public userStoreServices: UserStoreService) {
+  constructor(public userStoreServices: UserStoreService,
+              public snackBar: MatSnackBar) {
 
     this.forma = new FormGroup({
       social_reason: new FormControl('', [Validators.required, Validators.minLength(5)]),
@@ -34,8 +40,8 @@ export class ContactComponent implements OnInit {
       facebook: new FormControl('', [Validators.required, Validators.minLength(5)]),
       instagram: new FormControl('', [Validators.required, Validators.minLength(5)]),
       twitter: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      adress_latitude: new FormControl(),
-      adress_longitude: new FormControl(),
+      address_latitude: new FormControl(),
+      address_longitude: new FormControl(),
     });
 
   }
@@ -68,6 +74,8 @@ export class ContactComponent implements OnInit {
       this.forma.value.facebook,
       this.forma.value.instagram,
       this.forma.value.twitter,
+      this.adress_lat,
+      this.adress_lng,
     );
 
     this.userStoreServices.ActualizarDataStore
@@ -81,10 +89,17 @@ export class ContactComponent implements OnInit {
 
   }
 
-  Actualizar(){}
+  Actualizar(){
+    this.snackBar.open('Cambios Guardados', 'cerrar', { duration: 3000 });
+  }
 
-  coordenadas(e){
-    console.log('mapa', e);
+  adress_latitude(e){
+    console.log('lat', e);
+    return this.adress_lat = e;
+  }
+  adress_longitude(e){
+    console.log('lng', e);
+    return this.adress_lng = e;
   }
 
 }

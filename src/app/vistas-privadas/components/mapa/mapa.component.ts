@@ -14,7 +14,9 @@ export class MapaComponent implements OnInit {
 
   marcadores: Marcador[] = [] ;
   // tslint:disable-next-line: variable-name
-  @Output() adrees_mapa: EventEmitter<Marcador>;
+  @Output() adrees_latitude: EventEmitter<any>;
+  // tslint:disable-next-line: variable-name
+  @Output() adress_longitude: EventEmitter<any>;
 
   latitud = -33.4372;
   longitud = -70.6506;
@@ -24,7 +26,8 @@ export class MapaComponent implements OnInit {
 
   constructor(public snackBar: MatSnackBar, public dialog: MatDialog) {
 
-    this.adrees_mapa = new EventEmitter();
+    this.adrees_latitude = new EventEmitter();
+    this.adress_longitude = new EventEmitter();
 
     if ( localStorage.getItem('marcadores' )){
       this.marcadores = JSON.parse(localStorage.getItem('marcadores'));
@@ -40,7 +43,8 @@ export class MapaComponent implements OnInit {
     const nuevoMarcador = new Marcador( coords.lat, coords.lng );
     this.marcadores.push( nuevoMarcador );
     this.guardarStorage();
-    this.adrees_mapa.emit(nuevoMarcador);
+    this.adrees_latitude.emit(coords.lat);
+    this.adress_longitude.emit(coords.lng);
     this.snackBar.open('Marcador agregado', 'cerrar', { duration: 3000 });
   }
 

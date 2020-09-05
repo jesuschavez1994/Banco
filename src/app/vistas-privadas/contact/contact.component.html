@@ -31,14 +31,14 @@
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-10">
                 <app-banner-tienda></app-banner-tienda>
 
-                <div class="container pt-3 pb-4"> 
+                <div class="container pt-3 pb-4" *ngFor="let data of dataStore"> 
                     <div class="row">
                         <div class="col-md-6 pl-4">
-                            <h5 *ngIf="title" class="name-store family-500 size-24 pl-2">
-                                {{dataStore[0].name}}
+                            <h5 class="name-store family-500 size-24 pl-2">
+                                {{data.name}}
                             </h5>
-                            <span *ngIf="title" class="pl-2 family-300 size-16">
-                               RUT {{dataStore[0].rut}}
+                            <span  class="pl-2 family-300 size-16">
+                               RUT {{data.rut}}
                             </span>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                             <div class="col-md-6 pl-4">
                             <!--======================================================================-->
                             <!--================== Descipcion de la tienda EDITABLE ==================-->
-                            <app-contact-description-edit [forma]="forma"></app-contact-description-edit>
+                            <app-contact-description-edit class="animated fadeIn" [forma]="forma"></app-contact-description-edit>
                             <!--======================================================================-->
                             <!--====================== End Descipcion de la tienda ===================-->
                             </div>
@@ -64,7 +64,7 @@
                                     
                                 </div>
                                 <!-- ================ INFORMACIón DE CONTACTO EDITABLE ===================-->
-                                <app-contact-information-edit [forma]="forma"></app-contact-information-edit>
+                                <app-contact-information-edit class="animated fadeIn" [forma]="forma"></app-contact-information-edit>
                                 <!--======================================================================-->
                                 <!-- ====================END INFORMACIón DE CONTACTO======================-->
                                 <router-outlet></router-outlet>
@@ -76,7 +76,7 @@
 
                                 <!-- ==================  GOOGLE MAPS================= -->
                                 <!-- ===============================================  -->
-                                <app-mapa (adrees_mapa)="coordenadas($event)"></app-mapa>
+                                <app-mapa class="animated fadeIn" (adrees_latitude)="adress_latitude($event)" (adress_longitude)="adress_longitude( $event )"></app-mapa>
                                 <!-- ================================================ -->
                                 <!-- ===================END GOOGLE MAPS============== -->
                             </div>

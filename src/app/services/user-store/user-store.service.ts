@@ -42,8 +42,6 @@ export class UserStoreService {
     return this.http.put<T>( query, data );
   }
 
-
-
   cargarStorage() {
 
     if ( localStorage.getItem('token')) {
@@ -64,10 +62,8 @@ export class UserStoreService {
   }
 
   ActualizarDataStore(userId: string, id: string, data: DataStore){
-
     const url = `/api/users/${userId}/stores/${id}`;
     return this.putQuery(url, data).subscribe();
-
   }
 
   getDataStore(userId: string, id: string){

@@ -23,6 +23,9 @@ export class LoginUsuarioComponent implements OnInit, OnDestroy {
   cargando: boolean;
   subscription: Subscription;
 
+  usuario: Usuario;
+  token: string;
+
   constructor( public usuarioServices: UsuarioService,
                public router: Router,
                private store: Store<AppState>
@@ -65,19 +68,26 @@ export class LoginUsuarioComponent implements OnInit, OnDestroy {
     console.log(this.forma.value);
     // tslint:disable-next-line: prefer-const
     let usuario = new Usuario(
-      this.forma.value.nombre,
+      this.forma.value.username = null,
+      this.forma.value.name = null,
       this.forma.value.email,
-      this.forma.value.username,
       this.forma.value.password
     );
 
-    this.usuarioServices.login(usuario, this.forma.value.recuerdame).subscribe( resp => {
+    this.usuarioServices.login(usuario, this.forma.value.recuerdame).subscribe( (resp: any) => {
       console.log(this.forma.value.recuerdame);
+      this.guardarStorage(resp.remember_token, resp.user.id);
       console.log(resp);
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/account']);
       this.store.dispatch( new DesactivarLoadingAction() );
     });
 
+  }
+
+  guardarStorage(token: string, id: string){
+    localStorage.setItem('token', token);
+    localStorage.setItem('id', id);
+    this.token = token;
   }
 
 }

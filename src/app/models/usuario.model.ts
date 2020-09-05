@@ -26,6 +26,10 @@ export class Usuario {
         public description?: string,
         // tslint:disable-next-line: variable-name
         public social_reason?: string,
+        // tslint:disable-next-line: variable-name
+        public adress_latitude?: string,
+        // tslint:disable-next-line: variable-name
+        public adress_longitude?: string,
 
     ) { }
 

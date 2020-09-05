@@ -14,19 +14,23 @@ export class NavbarstoreComponent implements OnInit {
   // toObject = JSON.parse(this.items);
 
   usuario: Usuario;
+  datosUsuario: any[] = [];
 
-  User: any =  localStorage.getItem('usuario');
-  toObject = JSON.parse(this.User);
+  // User: any =  localStorage.getItem('usuario');
+  // toObject = JSON.parse(this.User);
 
   constructor(
     public userStoreServices: UserStoreService,
     public storeService: StoreService,
 
   ) {
-    this.usuario = this.toObject.user;
+    // this.usuario = this.toObject.user;
    }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.userStoreServices.getStore().subscribe(resp => {
+      this.datosUsuario.push(resp);
+    });
   }
 
 

@@ -20,9 +20,9 @@ export class DataStore {
         public instagram?: string,
         public twitter?: string,
         // tslint:disable-next-line: variable-name
-        public adress_latitude?: string,
+        public address_latitude?: string,
         // tslint:disable-next-line: variable-name
-        public adress_longitude?: string,
+        public address_longitude?: string,
 
     ) { }
 

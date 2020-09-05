@@ -84,15 +84,15 @@ export class UsuarioService {
 
   login(usuario: Usuario, recordar: boolean = false){
 
+    const url = '/api/login';
+
     if ( recordar ) {
       localStorage.setItem('email', usuario.email );
     }else {
       localStorage.removeItem('email');
     }
 
-    return this.postQuery(`/login`, usuario).map((resp: any) => {
-      this.guardarStorage(resp.id, resp.token, resp.usuario);
-    });
+    return this.postQuery(url, usuario);
   }
 
   crearUsuario( usuario: Usuario ) {
