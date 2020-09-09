@@ -1,9 +1,9 @@
 
-    <span class="orange family-500">Descripción</span>
-    <button class="button-edit family-400 ml-3" (click)="editarDescription()" type="button">Editar</button>
 
     <div class="form-group row">
-        <div class="col-12">
-                  
+        <div class="col-12" *ngFor="let item of dataStoreEdit">
+            <textarea   disabled="true" 
+                        class="width-100 family-400 pt-3 size-16" 
+                        style="min-height: 250px; border:none;">{{item.description}}</textarea>
         </div>
     </div>

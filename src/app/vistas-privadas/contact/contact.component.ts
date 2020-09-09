@@ -19,6 +19,9 @@ export class ContactComponent implements OnInit {
   // tslint:disable-next-line: variable-name
   adress_lng: any;
 
+  editar = false;
+  editarDescripcion = false;
+
 
   // tslint:disable-next-line: ban-types
   dataStore: any[] = [];
@@ -74,8 +77,8 @@ export class ContactComponent implements OnInit {
       this.forma.value.facebook,
       this.forma.value.instagram,
       this.forma.value.twitter,
-      this.adress_lat,
-      this.adress_lng,
+      this.forma.value.address_latitude,
+      this.forma.value.address_latitude,
     );
 
     this.userStoreServices.ActualizarDataStore
@@ -93,13 +96,29 @@ export class ContactComponent implements OnInit {
     this.snackBar.open('Cambios Guardados', 'cerrar', { duration: 3000 });
   }
 
-  adress_latitude(e){
+  adress_latitude( e ){
     console.log('lat', e);
     return this.adress_lat = e;
   }
-  adress_longitude(e){
+  adress_longitude( e ){
     console.log('lng', e);
     return this.adress_lng = e;
+  }
+
+  atras(){
+    this.editar = false;
+  }
+
+  Editar(){
+    this.editar = true;
+  }
+
+  EditarDescripcion(){
+    this.editarDescripcion = true;
+  }
+
+  atrasDescripcion(){
+    this.editarDescripcion = false;
   }
 
 }

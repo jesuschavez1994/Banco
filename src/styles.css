@@ -171,6 +171,7 @@
 }
 
 .cursor-poniter{cursor: pointer;}
+.text-align-end{text-align: end;}
 #registrarme:hover{color:#F09207}
 #inisiar-sesion:hover{color:#F09207}
 
@@ -199,7 +200,7 @@ a:hover{color: #F09207; text-decoration: none !important;cursor: pointer;}
 /* Edit angular material */
 .mat-h5, .mat-typography h5{
   font-family: 'Montserrat', sans-serif;font-weight: 500;
-  font-size: 20px !important;
+  font-size: 28px !important;
 }
 
 

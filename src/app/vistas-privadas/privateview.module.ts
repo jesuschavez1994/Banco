@@ -11,6 +11,7 @@ import { ContactInformationComponent } from './components/contact-information/co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MapaComponent } from './components/mapa/mapa.component';
 import { MapEditarComponent } from './components/map-editar/map-editar.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 // Mapa //
 import { AgmCoreModule } from '@agm/core';
@@ -24,6 +25,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 
 import { ContactDescriptionEditComponent } from './components/contact-description-edit/contact-description-edit.component';
 import { ContactDescriptionComponent } from './components/contact-description/contact-description.component';
+import { AsideComponent } from './shared/aside/aside.component';
 
 @NgModule({
     entryComponents: [
@@ -39,10 +41,12 @@ import { ContactDescriptionComponent } from './components/contact-description/co
       MapaComponent,
       MapEditarComponent,
       ContactDescriptionEditComponent,
-      ContactDescriptionComponent],
+      ContactDescriptionComponent,
+      AsideComponent],
 
     imports: [CommonModule,
       SharedModule,
+      ImageCropperModule,
       MatInputModule,
       MatGridListModule,
       MatSnackBarModule,

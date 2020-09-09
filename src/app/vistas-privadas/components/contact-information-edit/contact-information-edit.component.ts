@@ -20,16 +20,10 @@ export class ContactInformationEditComponent implements OnInit {
   informationEdit: InformationEditStore;
 
   social: Usuario;
-  // User: any =  localStorage.getItem('usuario');
-  // toObject = JSON.parse(this.User);
+
   usuario: Usuario;
 
-  constructor(public userStoreServices: UserStoreService,  private formBuilder: FormBuilder) {
-
-    // this.usuario = this.toObject.contact;
-    // this.social = this.toObject.social;
-
-  }
+  constructor(public userStoreServices: UserStoreService,  private formBuilder: FormBuilder) {}
 
   ngOnInit() {
 
@@ -57,10 +51,6 @@ export class ContactInformationEditComponent implements OnInit {
     });
   }
 
-  // guardarStorage(informationEdit: InformationEditStore){
-  //   localStorage.setItem('usuario', JSON.stringify(informationEdit));
-  //   this.informationEdit = informationEdit;
-  // }
 
 
 }

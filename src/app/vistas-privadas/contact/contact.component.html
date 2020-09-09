@@ -6,35 +6,17 @@
     
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-2">
-                <aside>
-                    <nav>
-                        <ul class="pt-5">
-                
-                            <li class="family-400 size-16 pb-2 pt-2 puntero">
-                                <a routerLinkActive="active" [routerLink]="['/contact']">Contacto</a>
-                            </li>
-                            <li class="family-400 size-16 pb-2 pt-2 puntero">
-                                <a>Productos</a>
-                            </li>
-                            <li class="family-400 size-16 pb-2 puntero">
-                                <a>Sincronización</a>
-                            </li>
-                            <li class="family-400 size-16 pb-2 puntero">
-                                <a>Ventas</a>
-                            </li>
-                            
-                        </ul>
-                    </nav>
-                </aside>
-            </div>
+            
+            <app-aside></app-aside>
+
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-10">
+
                 <app-banner-tienda></app-banner-tienda>
 
                 <div class="container pt-3 pb-4" *ngFor="let data of dataStore"> 
                     <div class="row">
                         <div class="col-md-6 pl-4">
-                            <h5 class="name-store family-500 size-24 pl-2">
+                            <h5 class="name-store family-600 size-27 pl-2">
                                 {{data.name}}
                             </h5>
                             <span  class="pl-2 family-300 size-16">
@@ -42,7 +24,6 @@
                             </span>
                         </div>
                     </div>
-                    
                 </div>
 
                 <form   [formGroup]="forma" 
@@ -53,21 +34,73 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6 pl-4">
-                            <!--======================================================================-->
-                            <!--================== Descipcion de la tienda EDITABLE ==================-->
-                            <app-contact-description-edit class="animated fadeIn" [forma]="forma"></app-contact-description-edit>
-                            <!--======================================================================-->
-                            <!--====================== End Descipcion de la tienda ===================-->
+
+                                <div class="display-flex">
+
+                                    <span class="orange family-500">Datos del negocio</span>
+
+                                    <button class="button-edit family-400 ml-3" 
+                                            (click)="atrasDescripcion()"
+                                            *ngIf="editarDescripcion">
+                                            Atrás
+                                    </button>
+
+                                    <button class="button-edit family-400 ml-3" 
+                                            (click)="EditarDescripcion()"
+                                            *ngIf="!editarDescripcion">
+                                            Editar
+                                    </button>
+                                
+                                </div>
+
+                                <!--======================================================================-->
+                                <!--================== DESCRIPCIÓN DE LA TIENDA  EDITABLE ==================-->
+                                <app-contact-description-edit   *ngIf="editarDescripcion" 
+                                                                class="animated fadeIn" 
+                                                                [forma]="forma">
+                                </app-contact-description-edit>
+                                <!--======================================================================-->
+                                <!--====================== End DESCRIPCIÓN DE LA TIENDA  ===================-->
+
+                                <!--======================================================= =============-->
+                                <!--================== PARRAFO DESCRIPCIÓN DE LA TIENDA =================-->
+                                <app-contact-description *ngIf="!editarDescripcion"></app-contact-description>
+                                <!--======================================================================-->
+                                <!--================= END PARRAFO DESCRIPCIÓN DE LA TIENDA ===============-->
+
                             </div>
                             <div class="col-md-6">
                                 <div class="display-flex">
-                                    
+
+                                    <span class="orange family-500 size-18">Información de contacto</span>
+                                    <button class="button-edit family-400 ml-3" 
+                                            (click)="atras()"
+                                            *ngIf="editar">
+                                            Atrás
+                                    </button>
+
+                                    <button class="button-edit family-400 ml-3" 
+                                            (click)="Editar()"
+                                            *ngIf="!editar">
+                                            Editar
+                                    </button>
+                                
                                 </div>
+
                                 <!-- ================ INFORMACIón DE CONTACTO EDITABLE ===================-->
-                                <app-contact-information-edit class="animated fadeIn" [forma]="forma"></app-contact-information-edit>
+                                <app-contact-information-edit   *ngIf="editar" 
+                                                                class="animated fadeIn" 
+                                                                [forma]="forma">
+                                </app-contact-information-edit>
                                 <!--======================================================================-->
+
                                 <!-- ====================END INFORMACIón DE CONTACTO======================-->
-                                <router-outlet></router-outlet>
+
+                                <!-- ================ TABLA INFORMACIón DE CONTACTO ======================-->
+                                <app-contact-information *ngIf="!editar" class="width-90"></app-contact-information>
+                                <!--======================================================================-->
+                                <!-- ====================END TABLA INFORMACIón DE CONTACTO================-->
+
                             </div>
                         </div>
 

@@ -37,8 +37,8 @@
         <div class="container-fluid">
             <div class="container pt-4">
                 <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="OpenSans-700 pl-3 pb-3 h2-title">Configuración de tu cuenta</h2>
+                   
+                        <!-- <h2 class="OpenSans-700 pl-3 pb-3 h2-title">Configuración de tu cuenta</h2> -->
                         <!-- ============================================================== -->
                         <!-- Formulario de Configuración  -->
                         <!-- ============================================================== -->
@@ -46,11 +46,14 @@
                                 (ngSubmit)="ActualizarDatosUser(forma.value)" 
                                 novalidate="novalidate"
                                 *ngFor="let data of datosUsuario"
+                                class="col-md-6"
                                 >
 
-                               
-                            <div class="scrool">
-                                <div class="col-md-6">
+                            <div class="row">
+
+                                <h2 class="OpenSans-700 pl-3 pb-3 h2-title">Configuración de tu cuenta</h2>
+
+                                <div class="col-md-12">
 
                                     <div class="form-group row mb-0 mt-4">
                                         <div class="col-12">
@@ -239,8 +242,9 @@
                                             </button>  
                                     </div>
                                 </div>
+                                
                             </div>
-                            <footer class="pt-4 pb-4 pl-0 col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
+                            <footer class="pt-4 pb-4 pl-0 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                 <button class="btn btn-outline-secondary width-30 mr-3 fredoka" 
                                         type="submit"
                                         (click)="Reset()"
@@ -256,10 +260,63 @@
                                 </button>
                             </footer>
                         </form>
+
+                        <form   [formGroup]="cropper"
+                                enctype='multipart/form-data' 
+                                (ngSubmit)="CropperImg()"
+                                enctype="multipart/form-data" 
+                                class="col-md-4">
+
+                            <div class="col-md-12">
+                                <section>
+                                    <label  for="cropper" 
+                                            class="cursor-poniter width-100 text-align-end pr-5">
+                                        Editar
+                                    </label>
+                                    <div class="display-flex flex-direction-column align-items-center">
+                                        <input accept="image/*" type="file" (change)="fileChangeEvent($event)" id="cropper"/>
+                                        <image-cropper style="width: 310px"
+                                            
+                                            [imageChangedEvent]="imageChangedEvent"
+                                            [maintainAspectRatio]="true"
+                                            [aspectRatio]="2 / 2"
+                                            [resizeToWidth]="300"
+                                            [resizeToHeight]="300"
+                                            format="png"
+                                            (imageCropped)="imageCropped($event)"
+                                            (imageLoaded)="imageLoaded()"
+                                            (cropperReady)="cropperReady()"
+                                            (loadImageFailed)="loadImageFailed()"
+                                        ></image-cropper>
+
+                                        <label  *ngIf="textFooterImages" 
+                                                class="family-400 size-14 pt-1">
+                                            Las imágenes deben ser de 600X600 px y 2MG
+                                        </label>
+
+                                    </div>
+                                </section>
+                            </div>
+
+                            <footer class="display-flex justify-content-flex-end pr-5">
+                                <button     class="btn btn-outline-primary button width-30 fredoka" 
+                                            type="submit"
+                                            *ngIf="textFooterImages"
+                                            (click)="cambiarImagen()"
+                                            >
+                                            Aceptar
+                                </button>
+                            </footer>
+
+                            <section>
+                                <img *ngIf="!mostrarAvatar" [src]="IMG_USER" class="w150">
+                            </section>
+
+                        </form>
                         <!-- ============================================================== -->
                         <!-- End Formulario de Configuración  -->
                         <!-- ============================================================== -->
-                   </div>
+                   
                 </div>
             </div>
         </div>

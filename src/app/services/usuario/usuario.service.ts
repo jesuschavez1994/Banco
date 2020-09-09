@@ -11,7 +11,17 @@ import { tokenName } from '@angular/compiler';
 
 const httpOptions = {
   headers: new HttpHeaders({
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
+  Authorization: 'Bearer ' + localStorage.getItem('token'),
+  Accept: 'application/json'
+  })
+};
+
+const Options = {
+  headers: new HttpHeaders({
+  'Content-Type': 'application/json',
+  Authorization: 'Bearer ' + localStorage.getItem('token'),
+  Accept: 'application/json'
   })
 };
 
@@ -28,6 +38,11 @@ export class UsuarioService {
   private postQuery<T>(query: string, data: any){
     query = URL_SERVICIOS + query;
     return this.http.post<T>( query, data, httpOptions );
+  }
+
+  private execQuery<T>( query: string ) {
+    query = URL_SERVICIOS + query;
+    return this.http.get<T>( query );
   }
 
   constructor(
@@ -99,6 +114,20 @@ export class UsuarioService {
     const url = URL_SERVICIOS + '/usuario';
     return this.http.post( url, usuario )
     ;
+  }
+
+  subirArchivo( archivo: any, userId: string, ){
+    const url = `/api/users/${userId}/images`;
+    return this.postQuery( url, archivo);
+  }
+
+  cambiarImagen( archivo: any, userId: string ) {
+   return this.subirArchivo(archivo, userId);
+  }
+
+  datosUserImages(userId: string){
+    const query = `/api/users/${userId}/images`;
+    return this.execQuery(query);
   }
 
 
