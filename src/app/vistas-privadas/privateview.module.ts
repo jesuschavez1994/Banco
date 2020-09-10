@@ -26,6 +26,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { ContactDescriptionEditComponent } from './components/contact-description-edit/contact-description-edit.component';
 import { ContactDescriptionComponent } from './components/contact-description/contact-description.component';
 import { AsideComponent } from './shared/aside/aside.component';
+import { PhotoUserEditComponent } from './components/photo-user-edit/photo-user-edit.component';
+import { PhotoUserComponent } from './components/photo-user/photo-user.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
     entryComponents: [
@@ -42,7 +45,9 @@ import { AsideComponent } from './shared/aside/aside.component';
       MapEditarComponent,
       ContactDescriptionEditComponent,
       ContactDescriptionComponent,
-      AsideComponent],
+      AsideComponent,
+      PhotoUserEditComponent,
+      PhotoUserComponent],
 
     imports: [CommonModule,
       SharedModule,
@@ -56,6 +61,7 @@ import { AsideComponent } from './shared/aside/aside.component';
       BrowserAnimationsModule,
       ComponentsModule,
       APP_ROUTING,
+      MatProgressSpinnerModule,
       FormsModule,
       ReactiveFormsModule,
       AgmCoreModule.forRoot({
@@ -63,6 +69,7 @@ import { AsideComponent } from './shared/aside/aside.component';
       })
       ],
 
-    exports: []
+    exports: [PhotoUserEditComponent,
+      PhotoUserComponent]
   })
   export class PrivateviewModule { }

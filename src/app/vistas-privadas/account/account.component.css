@@ -92,19 +92,6 @@
     border-radius: 4px;
 }
 
-input[type="file" i] {
-    appearance: initial;
-    visibility: hidden;
-    background-color: initial;
-    cursor: default;
-    align-items: baseline;
-    color: transparent;
-    text-align: start !important;
-    padding: initial;
-    border: initial;
-
-}
-
 @media (min-width: 1200px){
     .container, .container-lg, .container-md, .container-sm, .container-xl {
         max-width: 1260px !important;

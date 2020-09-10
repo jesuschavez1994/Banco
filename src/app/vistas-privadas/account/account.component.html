@@ -4,9 +4,9 @@
     <app-navbarstore id="header"></app-navbarstore>
 
     
-    <aside class="left-sidebar">
+    <!-- <aside class="left-sidebar"> -->
         <!-- Sidebar scroll-->
-            <nav class="sidebar-nav">
+            <!-- <nav class="sidebar-nav">
                 <ul id="sidebarnav" class="in pl-3 pr-3">
                     <li class="family-300 nav-item" routerLinkActive="active">
                         <a class="nav-link size-16" [routerLink]="['/account']">
@@ -24,9 +24,9 @@
                         </a>
                     </li>
                 </ul>
-            </nav>
+            </nav> -->
         <!-- End Sidebar scroll-->
-    </aside>
+    <!-- </aside> -->
     <!-- ============================================================== -->
     <!-- Page wrapper  -->
     <!-- ============================================================== -->
@@ -261,58 +261,18 @@
                             </footer>
                         </form>
 
-                        <form   [formGroup]="cropper"
-                                enctype='multipart/form-data' 
-                                (ngSubmit)="CropperImg()"
-                                enctype="multipart/form-data" 
-                                class="col-md-4">
-
-                            <div class="col-md-12">
-                                <section>
-                                    <label  for="cropper" 
-                                            class="cursor-poniter width-100 text-align-end pr-5">
-                                        Editar
-                                    </label>
-                                    <div class="display-flex flex-direction-column align-items-center">
-                                        <input accept="image/*" type="file" (change)="fileChangeEvent($event)" id="cropper"/>
-                                        <image-cropper style="width: 310px"
-                                            
-                                            [imageChangedEvent]="imageChangedEvent"
-                                            [maintainAspectRatio]="true"
-                                            [aspectRatio]="2 / 2"
-                                            [resizeToWidth]="300"
-                                            [resizeToHeight]="300"
-                                            format="png"
-                                            (imageCropped)="imageCropped($event)"
-                                            (imageLoaded)="imageLoaded()"
-                                            (cropperReady)="cropperReady()"
-                                            (loadImageFailed)="loadImageFailed()"
-                                        ></image-cropper>
-
-                                        <label  *ngIf="textFooterImages" 
-                                                class="family-400 size-14 pt-1">
-                                            Las imágenes deben ser de 600X600 px y 2MG
-                                        </label>
-
-                                    </div>
-                                </section>
-                            </div>
-
-                            <footer class="display-flex justify-content-flex-end pr-5">
-                                <button     class="btn btn-outline-primary button width-30 fredoka" 
-                                            type="submit"
-                                            *ngIf="textFooterImages"
-                                            (click)="cambiarImagen()"
-                                            >
-                                            Aceptar
-                                </button>
-                            </footer>
-
-                            <section>
-                                <img *ngIf="!mostrarAvatar" [src]="IMG_USER" class="w150">
-                            </section>
-
-                        </form>
+                       <!-- ============================================================== -->
+                        <!-- SUVIDA DEL AVATAR DEL USUARIO  -->
+                        <!-- ============================================================== --> 
+                        <section class="col-md-4">
+                            <app-photo-user-edit></app-photo-user-edit>
+                            <app-photo-user></app-photo-user>
+                        </section>
+                        <!-- ============================================================== -->
+                        <!-- End SUVIDA DEL AVATAR DEL USUARIO -->
+                        <!-- ============================================================== -->
+                        
+                        
                         <!-- ============================================================== -->
                         <!-- End Formulario de Configuración  -->
                         <!-- ============================================================== -->

@@ -33,6 +33,7 @@ import { PrivateviewModule } from './vistas-privadas/privateview.module';
 import { AgmCoreModule } from '@agm/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
