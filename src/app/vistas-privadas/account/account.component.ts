@@ -23,6 +23,8 @@ export class AccountComponent implements OnInit {
   usuario: Usuario;
   token: string;
   datosUsuario: any[] = [];
+  // tslint:disable-next-line: variable-name
+  card_shimmer = true;
   // tslint:disable-next-line: member-ordering
 
   constructor(
@@ -47,6 +49,7 @@ export class AccountComponent implements OnInit {
 
   ngOnInit() {
     this.userStoreServices.getStore().subscribe(resp => {
+      this.card_shimmer = false;
       this.datosUsuario.push(resp);
     });
   }

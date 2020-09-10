@@ -1,19 +1,29 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { URL_SERVICIOS } from '../config/config';
+import { UsuarioService } from '../services/usuario/usuario.service';
 
-const URL = 'https://image.tmdb.org/t/p';
+const URL = URL_SERVICIOS;
+
 @Pipe({
   name: 'imagen'
 })
 export class ImagenPipe implements PipeTransform {
 
-  // https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.j
+  constructor(public usuarioService: UsuarioService){}
 
-  transform(img: string, size: string ="w500"): string {
-    // if (!img){
-    //   return '../../assets/img/no-image-banner.jpg';
-    // }
-    const imgUrl = `${URL}/${size}/${img}`;
+  transform(img: string): string {
+
+
+    if (!img){
+       return '../../assets/img/avatar.svg';
+    }
+
+    if (img.indexOf('https') >= 0){
+      return img;
+    }
+
+    const imgUrl = `${URL}/${img}`;
     return imgUrl;
   }
 

@@ -5,6 +5,7 @@ import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { URL_SERVICIOS } from 'src/app/config/config';
 
+
 @Component({
   selector: 'app-navbarstore',
   templateUrl: './navbarstore.component.html',
@@ -25,12 +26,14 @@ export class NavbarstoreComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.userStoreServices.getStore().subscribe(resp => {
+    this.userStoreServices.getStore().subscribe( resp => {
       this.datosUsuario.push(resp);
+      console.log('RESPUESTA', this.datosUsuario[0]);
     });
 
     this.usuarioService.datosUserImages(localStorage.getItem('id')).subscribe( (Response: any) => {
-      this.IMG_USER = URL_SERVICIOS + '/' + Response[0].src;
+      // this.IMG_USER = Response[0].src;
+      // this.datosUsuario.push(Response);
     });
 
   }

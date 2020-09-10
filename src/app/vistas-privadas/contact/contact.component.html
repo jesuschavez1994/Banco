@@ -22,9 +22,14 @@
                             <span  class="pl-2 family-300 size-16">
                                RUT {{data.rut}}
                             </span>
+                            
                         </div>
                     </div>
                 </div>
+
+                <app-card-shimmer-title-store *ngIf="cardShimmerInputs"></app-card-shimmer-title-store>
+
+
 
                 <form   [formGroup]="forma" 
                         (ngSubmit)="actualizarDatosStore()" 
@@ -37,7 +42,7 @@
 
                                 <div class="display-flex">
 
-                                    <span class="orange family-500">Datos del negocio</span>
+                                    <span class="orange family-500 size-18">Datos del negocio</span>
 
                                     <button class="button-edit family-400 ml-3" 
                                             (click)="atrasDescripcion()"
@@ -59,12 +64,16 @@
                                                                 class="animated fadeIn" 
                                                                 [forma]="forma">
                                 </app-contact-description-edit>
+
+                                
+
                                 <!--======================================================================-->
                                 <!--====================== End DESCRIPCIÓN DE LA TIENDA  ===================-->
 
                                 <!--======================================================= =============-->
                                 <!--================== PARRAFO DESCRIPCIÓN DE LA TIENDA =================-->
                                 <app-contact-description *ngIf="!editarDescripcion"></app-contact-description>
+                                <app-card-shimmer-table-informacion *ngIf="cardShimmerInputs"></app-card-shimmer-table-informacion>
                                 <!--======================================================================-->
                                 <!--================= END PARRAFO DESCRIPCIÓN DE LA TIENDA ===============-->
 
@@ -92,6 +101,9 @@
                                                                 class="animated fadeIn" 
                                                                 [forma]="forma">
                                 </app-contact-information-edit>
+
+                               <app-card-shimmer-table-informacion *ngIf="cardShimmerInputs"></app-card-shimmer-table-informacion>
+
                                 <!--======================================================================-->
 
                                 <!-- ====================END INFORMACIón DE CONTACTO======================-->

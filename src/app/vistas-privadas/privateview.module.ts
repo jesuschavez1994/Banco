@@ -29,6 +29,11 @@ import { AsideComponent } from './shared/aside/aside.component';
 import { PhotoUserEditComponent } from './components/photo-user-edit/photo-user-edit.component';
 import { PhotoUserComponent } from './components/photo-user/photo-user.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { CardShimmerFormConfigurationComponent } from './components/Cards-Shimmer/card-shimmer-form-configuration/card-shimmer-form-configuration.component';
+import { CardShimmerPhotoUserEditComponent } from './components/Cards-Shimmer/card-shimmer-photo-user-edit/card-shimmer-photo-user-edit.component';
+import { CardShimmerTableInformacionComponent } from './components/Cards-Shimmer/card-shimmer-table-informacion/card-shimmer-table-informacion.component';
+import { CardShimmerTitleStoreComponent } from './components/Cards-Shimmer/card-shimmer-title-store/card-shimmer-title-store.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
     entryComponents: [
@@ -47,10 +52,15 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
       ContactDescriptionComponent,
       AsideComponent,
       PhotoUserEditComponent,
-      PhotoUserComponent],
+      PhotoUserComponent,
+      CardShimmerFormConfigurationComponent,
+      CardShimmerPhotoUserEditComponent,
+      CardShimmerTableInformacionComponent,
+      CardShimmerTitleStoreComponent],
 
     imports: [CommonModule,
       SharedModule,
+      PipesModule,
       ImageCropperModule,
       MatInputModule,
       MatGridListModule,
@@ -70,6 +80,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
       ],
 
     exports: [PhotoUserEditComponent,
-      PhotoUserComponent]
+      PhotoUserComponent,
+      CardShimmerFormConfigurationComponent]
   })
   export class PrivateviewModule { }

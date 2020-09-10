@@ -22,7 +22,8 @@ export class PhotoUserEditComponent implements OnInit {
   mostrarAvatar = false;
   IMG_USER: string;
   spinner = false;
-
+  alert = false;
+  Recortador = false;
   // sALIDAS//
   // tslint:disable-next-line: variable-name
   @Output() mostarComponent: EventEmitter<any>;
@@ -46,8 +47,18 @@ export class PhotoUserEditComponent implements OnInit {
       this.imageChangedEvent = null;
       return;
     }
-    this.mostrarAvatar = true;
-    this.imageChangedEvent = archivo;
+
+    if ( archivo ) {
+      this.alert = true;
+      this.Recortador = false;
+      this.mostrarAvatar = true;
+      setTimeout(() => {
+        this.imageChangedEvent = archivo;
+        this.alert = false;
+        this.Recortador = true;
+        this.mostrarAvatar = true;
+      }, 3000);
+    }
     this.textFooterImages = true;
   }
 
@@ -56,13 +67,10 @@ export class PhotoUserEditComponent implements OnInit {
     this.cropper.get('avatar').setValue(this.croppedImage);
   }
   imageLoaded() {
-    // show cropper
   }
   cropperReady() {
-    // cropper ready
   }
   loadImageFailed() {
-    // show message
   }
   CropperImg(){
     //  this.usuarioService.subirArchivo(localStorage.getItem('id'))
@@ -83,7 +91,8 @@ export class PhotoUserEditComponent implements OnInit {
 
   GetAvatar(){
     this.usuarioService.datosUserImages(localStorage.getItem('id')).subscribe( (Response: any) => {
-      this.IMG_USER = URL_SERVICIOS + '/' + Response[0].src;
+      this.IMG_USER = Response[0].src;
+      console.log(this.IMG_USER);
       this.spinner = true;
     });
   }

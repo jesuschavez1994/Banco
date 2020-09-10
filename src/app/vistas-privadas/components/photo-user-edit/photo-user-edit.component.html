@@ -14,12 +14,14 @@
             <div class="display-flex flex-direction-column align-items-center">
                 <input accept="image/*" type="file" (change)="fileChangeEvent($event)" id="cropper"/>
                 <image-cropper style="width: 310px"
-                    *ngIf="mostrarAvatar"                        
+                    *ngIf="Recortador"                        
                     [imageChangedEvent]="imageChangedEvent"
                     [maintainAspectRatio]="true"
                     [aspectRatio]="2 / 2"
                     [resizeToWidth]="300"
                     [resizeToHeight]="300"
+                    [cropperMinWidth]="250"
+                    [cropperMinHeight]="250"
                     format="png"
                     (imageCropped)="imageCropped($event)"
                     (imageLoaded)="imageLoaded()"
@@ -27,7 +29,7 @@
                     (loadImageFailed)="loadImageFailed()"
                 ></image-cropper>
 
-                <label  *ngIf="mostrarAvatar" 
+                <label  *ngIf="Recortador" 
                     class="family-400 size-14 pt-1">
                     Las imágenes deben ser de 600X600 px y 2MG
                 </label>
@@ -39,7 +41,7 @@
     <footer class="display-flex justify-content-flex-end pr-5">
         <button     class="btn btn-outline-primary button width-30 fredoka" 
                     type="submit"
-                    *ngIf="mostrarAvatar"
+                    *ngIf="Recortador"
                     (click)="cambiarImagen()"
                     >
                     Aceptar
@@ -47,8 +49,10 @@
     </footer>
 
     <section>
-        <mat-spinner *ngIf="!spinner"></mat-spinner>
-        <img [src]="IMG_USER" class="w150" *ngIf="!mostrarAvatar">
+        <!-- <app-card-shimmer-photo-user-edit class="animated fadeIn" *ngIf="!spinner"></app-card-shimmer-photo-user-edit> -->
+        <app-card-shimmer-photo-user-edit class="animated fadeIn" *ngIf="alert"></app-card-shimmer-photo-user-edit>
+        <!-- <mat-spinner *ngIf="!spinner"></mat-spinner> -->
+        <img [src]="IMG_USER | imagen" class="w150" *ngIf="!mostrarAvatar">
     </section>
 
 </form>

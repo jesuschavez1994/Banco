@@ -18,7 +18,7 @@ export class ContactComponent implements OnInit {
   adress_lat: any;
   // tslint:disable-next-line: variable-name
   adress_lng: any;
-
+  cardShimmerInputs = true;
   editar = false;
   editarDescripcion = false;
 
@@ -56,6 +56,7 @@ export class ContactComponent implements OnInit {
   async traerIdStore(){
     await this.userStoreServices.getStoreAccountEdit(localStorage.getItem('id')).subscribe( data => {
      this.dataStore = data;
+     this.cardShimmerInputs = false;
      this.title = true;
    });
   }
