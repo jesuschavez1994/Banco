@@ -34,6 +34,13 @@ import { CardShimmerPhotoUserEditComponent } from './components/Cards-Shimmer/ca
 import { CardShimmerTableInformacionComponent } from './components/Cards-Shimmer/card-shimmer-table-informacion/card-shimmer-table-informacion.component';
 import { CardShimmerTitleStoreComponent } from './components/Cards-Shimmer/card-shimmer-title-store/card-shimmer-title-store.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { ScheduleStoreComponent } from './components/schedule-store/schedule-store.component';
+import { ComponentsComponent } from './components/components.component';
+import { SheduleStoreEditComponent } from './components/shedule-store-edit/shedule-store-edit.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
+// ANT DESING OF ANGULAR //
+
 
 @NgModule({
     entryComponents: [
@@ -56,10 +63,14 @@ import { PipesModule } from '../pipes/pipes.module';
       CardShimmerFormConfigurationComponent,
       CardShimmerPhotoUserEditComponent,
       CardShimmerTableInformacionComponent,
-      CardShimmerTitleStoreComponent],
+      CardShimmerTitleStoreComponent,
+      ScheduleStoreComponent,
+      ComponentsComponent,
+      SheduleStoreEditComponent],
 
     imports: [CommonModule,
       SharedModule,
+      MatSlideToggleModule,
       PipesModule,
       ImageCropperModule,
       MatInputModule,

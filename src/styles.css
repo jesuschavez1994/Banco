@@ -149,6 +149,14 @@
     animation-name: flipInY;
 }
 
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: #0a50d1 !important;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: rgba(96, 195, 235, 0.54) !important;
+}
+
 
   
 @keyframes fadeIn {
@@ -6082,6 +6090,9 @@ File: scss
      margin-top: 10px;
      overflow: hidden; } }
  
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

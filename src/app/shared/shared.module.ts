@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
         CategoriasComponent,
         NavbarstoreComponent
     ],
-    imports: [ APP_ROUTING, PipesModule,CommonModule],
+    imports: [ APP_ROUTING, PipesModule, CommonModule],
     exports: [ NavbarComponent,  SidebarComponent, NavbarToHomeComponent, CategoriasComponent, NavbarstoreComponent]
 })
 

@@ -28,12 +28,10 @@ export class NavbarstoreComponent implements OnInit {
   ngOnInit() {
     this.userStoreServices.getStore().subscribe( resp => {
       this.datosUsuario.push(resp);
-      console.log('RESPUESTA', this.datosUsuario[0]);
     });
 
     this.usuarioService.datosUserImages(localStorage.getItem('id')).subscribe( (Response: any) => {
-      // this.IMG_USER = Response[0].src;
-      // this.datosUsuario.push(Response);
+      this.IMG_USER = Response[0].src;
     });
 
   }

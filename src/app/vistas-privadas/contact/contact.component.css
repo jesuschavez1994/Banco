@@ -4,3 +4,31 @@
 button:focus {outline: none !important; outline: none !important; }
 .name-store{color:#0e1318;}
 .agm-map-container { height: 300px; }
+
+
+.ui-autocomplete {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.well {
+    margin: 5px 0;
+}
+
+.m-top-50 {
+    margin-top: 50px;
+}
+
+.m-top-15 {
+    margin-top: 15px;
+}
+
+
+
+@media (min-width: 576px){
+    .modal-dialog {
+        max-width: 60% !important;
+        margin: 1.75rem auto;
+    }
+}

@@ -36,6 +36,8 @@
                         novalidate="novalidate"
                         >
 
+                        
+
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6 pl-4">
@@ -43,7 +45,7 @@
                                 <div class="display-flex">
 
                                     <span class="orange family-500 size-18">Datos del negocio</span>
-
+                                    
                                     <button class="button-edit family-400 ml-3" 
                                             (click)="atrasDescripcion()"
                                             *ngIf="editarDescripcion">
@@ -117,7 +119,28 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-10 mb-4">
+                            <div class="col-md-4">
+                                <span class="orange family-500 size-20 pl-2">Horario</span>
+                                    <button class="button-edit family-400 ml-3" 
+                                            (click)="atrasHorario()"
+                                            *ngIf="editar">
+                                            Atrás
+                                    </button>
+
+                                    <button class="button-edit family-400 ml-3" 
+                                            (click)="EditarHorario()"
+                                            data-toggle="modal" 
+                                            data-target="#staticBackdrop"
+                                            type="button"
+                                            *ngIf="!editar">
+                                            Editar
+                                    </button>
+                                    
+                                <app-schedule-store></app-schedule-store>
+                                <app-shedule-store-edit></app-shedule-store-edit>
+                            </div>
+                            
+                            <div class="col-md-8 mb-4">
 
                                 <!-- ==================  GOOGLE MAPS================= -->
                                 <!-- ===============================================  -->
@@ -142,3 +165,44 @@
         </div>
     </div>
 </section>
+
+
+<!-- Horario De Trabajo del Negocio -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="family-400 size-14" id="staticBackdropLabel">Horario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+              <div class="row">
+
+                    <div class="col-md-12 display-flex" *ngFor="let item of Day; let i = index">
+
+                        <label class="family-400 black size-16 col-md-2 pt-2 pb-2">
+                            {{item.dia}}
+                        </label>
+
+                        <mat-slide-toggle class="ml-2" (change)="toogle($event, i)">
+                            {{item.isChecked}}
+                        </mat-slide-toggle>
+
+                        <div class="col-md-10" *ngIf="item.isChecked === 'Abierto'">
+                            <input id="example-1" class="form-control" />
+                        </div>
+
+                    </div>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Aceptar</button>
+        </div>
+      </div>
+    </div>
+</div>

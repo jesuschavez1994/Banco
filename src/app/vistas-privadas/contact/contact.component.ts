@@ -4,12 +4,17 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { DataStore } from '../../models/dataStore.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
+declare let $: any;
+
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
+
+  time: Date | null = null;
+  defaultOpenValue = new Date(0, 0, 0, 0, 0, 0);
 
   forma: FormGroup;
   name: any = null;
@@ -21,6 +26,41 @@ export class ContactComponent implements OnInit {
   cardShimmerInputs = true;
   editar = false;
   editarDescripcion = false;
+  estado = 'Cerrado';
+
+
+  Day = [
+    {
+      dia: 'Lunes',
+      isChecked: this.estado,
+    },
+    {
+      dia: 'Martes',
+      isChecked: this.estado,
+    },
+    {
+      dia: 'Miercoles',
+      isChecked: this.estado,
+    },
+    {
+      dia: 'Jueves',
+      isChecked: this.estado,
+    },
+    {
+      dia: 'Viernes',
+      isChecked: this.estado,
+    },
+    {
+      dia: 'Sabado',
+      isChecked: this.estado,
+    },
+    {
+      dia: 'Domingo',
+      isChecked: this.estado,
+    }
+  ];
+
+
 
 
   // tslint:disable-next-line: ban-types
@@ -64,6 +104,9 @@ export class ContactComponent implements OnInit {
 
   actualizarDatosStore(){
 
+    this.forma.get('address_latitude').setValue(this.adress_lat);
+    this.forma.get('address_longitude').setValue(this.adress_lng);
+
     const data = new DataStore(
       this.forma.value.social_reason,
       this.forma.value.rut,
@@ -79,7 +122,7 @@ export class ContactComponent implements OnInit {
       this.forma.value.instagram,
       this.forma.value.twitter,
       this.forma.value.address_latitude,
-      this.forma.value.address_latitude,
+      this.forma.value.address_longitude,
     );
 
     this.userStoreServices.ActualizarDataStore
@@ -122,4 +165,30 @@ export class ContactComponent implements OnInit {
     this.editarDescripcion = false;
   }
 
+  EditarHorario(){}
+
+  atrasHorario(){}
+
+  toogle(e, index){
+
+    switch (index){
+      case 0:
+        return  this.Day[0].isChecked = 'Abierto';
+      case 1:
+        return  this.Day[1].isChecked = 'Abierto';
+      case 2:
+        return  this.Day[2].isChecked = 'Abierto';
+      case 3:
+        return  this.Day[3].isChecked = 'Abierto';
+      case 4:
+        return  this.Day[4].isChecked = 'Abierto';
+      case 5:
+        return  this.Day[5].isChecked = 'Abierto';
+      case 6:
+        return  this.Day[6].isChecked = 'Abierto';
+    }
+
+  }
+
 }
+

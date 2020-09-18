@@ -9,6 +9,8 @@ import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 
 
+
+
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -49,6 +51,7 @@ export class AccountComponent implements OnInit {
 
   ngOnInit() {
     this.userStoreServices.getStore().subscribe(resp => {
+      console.log('xx', resp);
       this.card_shimmer = false;
       this.datosUsuario.push(resp);
     });
