@@ -150,5 +150,15 @@ export class StoreService {
     });
   }
 
+  Shedule(userId: string, storeId: string, shedules: any){
+    const url = `/api/users/${userId}/stores/${storeId}/schedules`;
+    return this.postQuery(url, shedules);
+  }
+
+  GetShedule(userId: string, storeId: string){
+    const url = `/api/users/${userId}/stores/${storeId}/schedules`;
+    return this.execQuery(url);
+  }
+
 
 }

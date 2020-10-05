@@ -23,12 +23,73 @@ button:focus {outline: none !important; outline: none !important; }
 .m-top-15 {
     margin-top: 15px;
 }
+.cdk-overlay-container{
+    z-index: 1060 !important;
+}
+.modal-backdrop {
+    z-index: 990 !important;
+}
+.modal{
+    z-index: 991 !important;
+}
 
+.modal-body{
+    max-height: 480px;
+    overflow-y: auto;
+}
 
+.addbutton{
+    max-height: 40px;
+    transform: translateY(5px);
+}
 
-@media (min-width: 576px){
+.cancel{
+    max-height: 40px;
+    transform: translateY(25px);
+}
+
+/* Edit scroll */
+
+::-webkit-scrollbar {
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+.shedules1, .shedules2, .shedules3,  .shedules4,  .shedules5,  .shedules6{
+    display: none;
+}
+
+@media(min-width:577px) and (max-width:860px){
+    .modal-dialog {
+        max-width: 90% !important;
+        margin: 1.75rem auto;
+    }
+}
+
+@media(min-width:861px) and (max-width:5000px){
     .modal-dialog {
         max-width: 60% !important;
+        margin: 1.75rem auto;
+    }
+}
+
+@media(min-width:200px) and (max-width:576px){
+    .modal-dialog {
+        max-width: 90% !important;
         margin: 1.75rem auto;
     }
 }

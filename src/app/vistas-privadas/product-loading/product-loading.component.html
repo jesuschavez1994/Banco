@@ -1,0 +1,186 @@
+<section class="display-flex">
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <form   [formGroup]="forma"
+                    (ngSubmit)="addProducts()" 
+                    novalidate="novalidate"
+                    class="row width-95 pt-5"
+                    >
+
+                    <section class="col-md-4">
+
+                    </section>
+
+                    <section class="col-md-8">
+
+                        <div class="form-group row">
+                            <div class="col-11 col-sm-10 col-md-12 col-lg-12 col-xl-12">
+                                <label class="family-500 size-16">Nombre</label>
+                                <textarea  class="form-control"
+                                        type="text"
+                                        placeholder="Ingresar nombre del producto"
+                                        formControlName="name"
+                                        [ngClass]="{'is-invalid':  (!forma.controls['name'].valid || forma.controls['name'].errors?.minlength)&& forma.controls['name'].touched, 'is-valid': forma.controls['name'].valid }"     
+                                ></textarea>
+                                <div    *ngIf="forma.get('name').errors?.required"  
+                                        class="invalid-feedback">
+                                        Ingresa un nombre del producto
+                                </div>
+                                <div    *ngIf="forma.get('name').errors?.minlength"  
+                                        class="invalid-feedback">
+                                        Por lo menos 5 caracteres
+                                </div>
+                            </div>
+                        </div>
+    
+    
+                        <div class="form-group row">
+                            <div class="col-11 col-sm-10 col-md-12 col-lg-12 col-xl-12">
+                                <label class="family-500 size-16">Descripción</label>
+                                <textarea   class="form-control text-area" 
+                                            type="text"
+                                            placeholder="Ingresar descripción del producto" 
+                                            formControlName="description"
+                                            [ngClass]="{'is-invalid':  (!forma.controls['description'].valid || forma.controls['description'].errors?.minlength)&& forma.controls['description'].touched, 'is-valid': forma.controls['description'].valid }"     
+                                            ></textarea>
+    
+                                <div    *ngIf="forma.get('description').errors?.required"  
+                                        class="invalid-feedback">
+                                        Ingresa un nombre de usuario para mostrar que sea valido
+                                </div>
+                                <div    *ngIf="forma.get('description').errors?.minlength"  
+                                        class="invalid-feedback">
+                                        Por lo menos 5 caracteres
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+    
+                            <div class="form-group col-md-3">
+                                <label for="inputState" class="family-500 size-14">Marca</label>
+                                <select id="inputState" 
+                                        class="form-control"
+                                        formControlName="mark">
+                                  <option selected class="family-300">Seleccionar</option>
+                                  <option *ngFor="let item of marks">{{item.name}}</option>
+                                </select>
+                            </div>
+    
+                            <div class="form-group col-md-3">
+                                <label for="inputState" class="family-500 size-14">Fabricante</label>
+                                <select id="inputState" 
+                                        class="form-control"
+                                        formControlName="factory">
+                                  <option selected class="family-300">Seleccionar</option>
+                                  <option *ngFor="let item of factories">{{item.name}}</option>
+                                </select>
+                            </div>
+    
+    
+                            <div class="form-group col-md-3">
+                                <label for="inputState" class="family-500 size-14">Categoria</label>
+                                <select id="inputState" 
+                                        class="form-control"
+                                        formControlName="category"
+                                        (change)="onChange($event.target.value)"
+                                        >
+                                    <option selected class="family-300">Seleccionar</option>
+                                    <option     *ngFor="let item of category; let i = index" 
+                                                title="{{ item.name }}"
+                                                (change)="SelectCategory(i)">
+                                                {{item.name}}
+                                    </option>
+                                </select>
+                            </div>
+    
+                            <div class="form-group col-md-3">
+                                <label for="inputState" class="family-500 size-14">Subcategoria</label>
+                                <select id="inputState" 
+                                        class="form-control"
+                                        formControlName="subcategory_id">
+                                    <option selected class="family-300">Seleccionar</option>
+                                    <option *ngFor="let item of subcategory" >
+                                      {{ item.name }}
+                                    </option>
+                                </select>
+                            </div>
+    
+                        </div>
+    
+                        <div class="row">
+    
+                            <div class="form-group col-md-3">
+                                <label class="family-500 size-16">Precio</label>
+                                <input  class="form-control"
+                                        type="text"
+                                        placeholder="Precio"
+                                        formControlName="price"
+                                        [ngClass]="{'is-invalid':  (!forma.controls['price'].valid || forma.controls['price'].errors?.minlength)&& forma.controls['price'].touched, 'is-valid': forma.controls['price'].valid }" 
+                                >
+                                <div    *ngIf="forma.get('price').errors?.required"  
+                                        class="invalid-feedback">
+                                        Debe indicar el precio del producto.
+                                </div>
+                                <div    *ngIf="forma.get('price').errors?.minlength"  
+                                        class="invalid-feedback">
+                                        Por lo menos 5 caracteres.
+                                </div>
+                            </div>
+    
+                            <div class="form-group col-md-3">
+                                <label class="family-500 size-16">Cantidad</label>
+                                <input  class="form-control"
+                                        formControlName="quantity"
+                                        type="number"
+                                        [ngClass]="{'is-invalid':  (!forma.controls['quantity'].valid || forma.controls['quantity'].errors?.minlength)&& forma.controls['quantity'].touched, 'is-valid': forma.controls['quantity'].valid }" 
+                                >
+                                <div    *ngIf="forma.get('quantity').errors?.required"  
+                                        class="invalid-feedback">
+                                        Debe indicar la cantidad del producto.
+                                </div>
+                            </div>
+    
+                            <div class="form-group col-md-3">
+                                <label for="inputState" class="family-500 size-14">Recetas Médicas</label>
+                                <select id="inputState" 
+                                        class="form-control" 
+                                        formControlName="recipe">
+                                  <option selected class="family-300">Seleccionar</option>
+                                  <option *ngFor="let item of recipes">{{ item.name }}</option>
+                                </select>
+                            </div>
+    
+                            <div class="form-group col-md-3">
+                                <label for="inputState" class="family-500 size-14">Delivery</label>
+                                <select id="inputState" 
+                                        class="form-control"
+                                        formControlName="delivery">
+                                  <option selected class="family-300">Seleccionar</option>
+                                  <option>...</option>
+                                </select>
+                            </div>
+    
+                            <div class="form-group col-md-3">
+                                <label for="inputState" class="family-500 size-14">Disponible</label>
+                                <select id="inputState" 
+                                        class="form-control"
+                                        formControlName="aviable">
+                                  <option selected class="family-300">Seleccionar</option>
+                                  <option>Si</option>
+                                  <option>No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    
+
+                
+            </form>
+        </div>
+    </div>
+</section>

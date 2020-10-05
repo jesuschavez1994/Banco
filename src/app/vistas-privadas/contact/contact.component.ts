@@ -1,10 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserStoreService } from '../../services/user-store/user-store.service';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { DataStore } from '../../models/dataStore.model';
+import { DataStore, Shedules } from '../../models/dataStore.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { NgForm } from '@angular/forms';
+import {NgbTimepickerConfig} from '@ng-bootstrap/ng-bootstrap';
+import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
+import { StoreService } from '../../services/store/store.service';
 
 declare let $: any;
+
+const botonGuardar: HTMLButtonElement = document.querySelector('#guardar');
+
+function enviarFormulario(){
+  // tslint:disable-next-line: prefer-const
+  let formulario = [];
+  for (let i = 0; i < 6; i++){
+    // tslint:disable-next-line: prefer-const
+    let formularioConstante: HTMLFormElement = document.querySelector('#createForms' + i);
+    formulario[i] = formularioConstante;
+    formulario[i].submit();
+    console.log(formulario[i]);
+  }
+}
+
+switch (document.readyState) {
+    case 'complete':
+    botonGuardar.addEventListener('click', enviarFormulario);
+    break;
+}
 
 @Component({
   selector: 'app-contact',
@@ -13,10 +37,17 @@ declare let $: any;
 })
 export class ContactComponent implements OnInit {
 
-  time: Date | null = null;
-  defaultOpenValue = new Date(0, 0, 0, 0, 0, 0);
+  @ViewChild('sheduleform') formulario: HTMLFormElement;
+
+  // ========== PARAMETROS PARA EL USO DEL HORARIO ============/////
+  time: NgbTimeStruct = {hour: 13, minute: 30, second: 0};
+  times = new Date();
+  times2 = new Date();
+  // ========== END PARAMETROS PARA EL USO DEL HORARIO ============/////
+  // formulario: HTMLFormElement;
 
   forma: FormGroup;
+  schedule: FormGroup;
   name: any = null;
   title = false;
   // tslint:disable-next-line: variable-name
@@ -27,47 +58,88 @@ export class ContactComponent implements OnInit {
   editar = false;
   editarDescripcion = false;
   estado = 'Cerrado';
+  enviaForm = false;
 
+  // Arrays para el horario de la tIenda //
+  ArrayDays: any[] = [];
+  TimeSelect: any[] = [];
+  MyArrayOfDay: any[] = [];
+  TimeSelectModificado: any[];
+  dias: any[] = [];
+  array: any[] = [];
+  ArrayGlobal: any[] = [];
+  SchedulesEnd: any[] = [];
+  quitarValueUndefined: any[] = [];
 
   Day = [
     {
       dia: 'Lunes',
       isChecked: this.estado,
+      selectOpenHour: this.times,
+      selectCloseHour: this.times,
+      lateShiftOpen: this.times2,
+      lateShiftClose: this.times2,
     },
     {
       dia: 'Martes',
       isChecked: this.estado,
+      selectOpenHour: this.times,
+      selectCloseHour: this.times,
+      lateShiftOpen: this.times2,
+      lateShiftClose: this.times2,
     },
     {
       dia: 'Miercoles',
       isChecked: this.estado,
+      selectOpenHour: this.times,
+      selectCloseHour: this.times,
+      lateShiftOpen: this.times2,
+      lateShiftClose: this.times2,
     },
     {
       dia: 'Jueves',
       isChecked: this.estado,
+      selectOpenHour: this.times,
+      selectCloseHour: this.times,
+      lateShiftOpen: this.times2,
+      lateShiftClose: this.times2,
     },
     {
       dia: 'Viernes',
       isChecked: this.estado,
+      selectOpenHour: this.times,
+      selectCloseHour: this.times,
+      lateShiftOpen: this.times2,
+      lateShiftClose: this.times2,
     },
     {
       dia: 'Sabado',
       isChecked: this.estado,
+      selectOpenHour: this.times,
+      selectCloseHour: this.times,
+      lateShiftOpen: this.times2,
+      lateShiftClose: this.times2,
     },
     {
       dia: 'Domingo',
       isChecked: this.estado,
+      selectOpenHour: this.times,
+      selectCloseHour: this.times,
+      lateShiftOpen: this.times2,
+      lateShiftClose: this.times2,
     }
   ];
-
-
-
 
   // tslint:disable-next-line: ban-types
   dataStore: any[] = [];
 
   constructor(public userStoreServices: UserStoreService,
-              public snackBar: MatSnackBar) {
+              public storeService: StoreService,
+              public snackBar: MatSnackBar,
+              config: NgbTimepickerConfig) {
+
+    config.seconds = false;
+    config.spinners = true;
 
     this.forma = new FormGroup({
       social_reason: new FormControl('', [Validators.required, Validators.minLength(5)]),
@@ -87,10 +159,183 @@ export class ContactComponent implements OnInit {
       address_longitude: new FormControl(),
     });
 
+
+    this.schedule = new FormGroup({
+      open0: new FormControl(this.times, Validators.required),
+      close0: new FormControl(this.times, Validators.required),
+      open1: new FormControl(this.times, Validators.required),
+      close1: new FormControl(this.times, Validators.required),
+      open2: new FormControl(this.times, Validators.required),
+      close2: new FormControl(this.times, Validators.required),
+      open3: new FormControl(this.times, Validators.required),
+      close3: new FormControl(this.times, Validators.required),
+      open4: new FormControl(this.times, Validators.required),
+      close4: new FormControl(this.times, Validators.required),
+      open5: new FormControl(this.times, Validators.required),
+      close5: new FormControl(this.times, Validators.required),
+      open6: new FormControl(this.times, Validators.required),
+      close6: new FormControl(this.times, Validators.required),
+    });
+
   }
 
   ngOnInit(){
     this.traerIdStore();
+  }
+
+  SendSchedule(){
+
+    const data = new Shedules(
+      this.quitarValueUndefined
+    );
+
+    this.storeService.Shedule(
+      localStorage.getItem('id'),
+      localStorage.getItem('storeId'),
+      data)
+      .subscribe( resp => {
+        console.log(resp);
+      });
+  }
+
+  enviarShedules(){
+    // tslint:disable-next-line: prefer-for-of
+    for (let count = 0; count < this.TimeSelect.length; count++){
+      this.dias.push(this.TimeSelect[count].day);
+      console.log(this.TimeSelect[count].day);
+      console.log(this.TimeSelect.length);
+    }
+
+    console.log('ccc', this.dias);
+
+    // Calculamos los indices de los dias//
+    function IndexArray(dias){
+      // tslint:disable-next-line: prefer-const
+      let index = [];
+      // tslint:disable-next-line: one-variable-per-declaration
+      let lunes = false, martes = false,  miercoles = false, jueves = false, viernes = false, sabado = false, domingo = false;
+
+      // tslint:disable-next-line: prefer-for-of
+      for (let i = 0; i < dias.length; i++){
+
+        switch (dias[i]){
+          case 'Lunes':
+            if (lunes === false){
+              console.log('LUNES', dias.lastIndexOf('Lunes'));
+              if (dias.lastIndexOf('Lunes') !== -1 ){
+                index.push(dias.lastIndexOf('Lunes'));
+                lunes = true;
+              }else{ return; }
+            }
+          // tslint:disable-next-line: align
+          break;
+          // tslint:disable-next-line: no-switch-case-fall-through
+          case 'Martes':
+            if (martes === false){
+              console.log('MARTES', dias.lastIndexOf('Martes'));
+              if (dias.lastIndexOf('Martes') !== -1){
+                index.push(dias.lastIndexOf('Martes'));
+                martes = true;
+              }else{ return; }
+            }
+          // tslint:disable-next-line: align
+          break;
+          // tslint:disable-next-line: no-switch-case-fall-through
+          case 'Miercoles':
+            if (miercoles === false){
+              console.log('Miercoles', dias.lastIndexOf('Miercoles'));
+              if (dias.lastIndexOf('Miercoles') !== -1){
+                index.push(dias.lastIndexOf('Miercoles'));
+                miercoles = true;
+              }else{ return; }
+            }
+          // tslint:disable-next-line: align
+          break;
+          // tslint:disable-next-line: no-switch-case-fall-through
+          case 'Jueves':
+            if (jueves === false){
+              console.log('Jueves', dias.lastIndexOf('Jueves'));
+              if (dias.lastIndexOf('Jueves') !== -1){
+                index.push(dias.lastIndexOf('Jueves'));
+                jueves = true;
+              }else{ return; }
+            }
+          // tslint:disable-next-line: align
+          break;
+          // tslint:disable-next-line: no-switch-case-fall-through
+          case 'Viernes':
+            if (viernes === false){
+              console.log('Viernes', dias.lastIndexOf('Viernes'));
+              if (dias.lastIndexOf('Viernes') !== -1){
+                index.push(dias.lastIndexOf('Viernes'));
+                viernes = true;
+              }else{ return; }
+            }
+          // tslint:disable-next-line: align
+          break;
+          // tslint:disable-next-line: no-switch-case-fall-through
+          case 'Sabado':
+            if (sabado === false){
+              console.log('Sabado', dias.lastIndexOf('Viernes'));
+              if (dias.lastIndexOf('Sabado') !== -1){
+                index.push(dias.lastIndexOf('Sabado'));
+                sabado = true;
+              }else{ return; }
+            }
+          // tslint:disable-next-line: align
+          break;
+          // tslint:disable-next-line: no-switch-case-fall-through
+          case 'Domingo':
+            if (domingo === false){
+              console.log('Domingo', dias.lastIndexOf('Domingo'));
+              if (dias.lastIndexOf('Domingo') !== -1){
+                index.push(dias.lastIndexOf('Domingo'));
+                domingo = true;
+              }else{ return; }
+            }
+          // tslint:disable-next-line: align
+          break;
+        }
+      }
+      return [index];
+      // End Function //
+    }
+
+    // tslint:disable-next-line: prefer-const
+    let indice = IndexArray(this.dias);
+
+    function dayLaborables(arr, myArray){
+       // tslint:disable-next-line: prefer-const
+      let c = [];
+      // tslint:disable-next-line: prefer-for-of
+      for (let i = 0; i < arr.length; i++){
+        setTimeout(() => {
+          c.push(myArray[arr[i]]);
+        }, 100);
+        console.log('LAboral', c.push(myArray[arr[i]]));
+      }
+      return [c];
+    }
+
+    const Schedules = dayLaborables(indice[0], this.TimeSelect);
+
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < Schedules[0].length; i++){
+      if  (Schedules[0][i] !== 'undefined'){
+        this.SchedulesEnd.push(Schedules[0][i]);
+        console.log('Shedules', this.SchedulesEnd);
+      }
+    }
+
+    // tslint:disable-next-line: only-arrow-functions
+    this.quitarValueUndefined = this.SchedulesEnd.filter(function(dato){
+      // tslint:disable-next-line: triple-equals
+      return dato != undefined;
+    });
+
+    console.log('Sin Undefined', this.quitarValueUndefined);
+
+    this.SendSchedule();
   }
 
   async traerIdStore(){
@@ -169,26 +414,43 @@ export class ContactComponent implements OnInit {
 
   atrasHorario(){}
 
-  toogle(e, index){
-
-    switch (index){
-      case 0:
-        return  this.Day[0].isChecked = 'Abierto';
-      case 1:
-        return  this.Day[1].isChecked = 'Abierto';
-      case 2:
-        return  this.Day[2].isChecked = 'Abierto';
-      case 3:
-        return  this.Day[3].isChecked = 'Abierto';
-      case 4:
-        return  this.Day[4].isChecked = 'Abierto';
-      case 5:
-        return  this.Day[5].isChecked = 'Abierto';
-      case 6:
-        return  this.Day[6].isChecked = 'Abierto';
-    }
-
+  log(time: Date, i, day: string) {
+    this.schedule.get('open' + i).valueChanges.subscribe( openSelect => {
+      this.schedule.get('close' + i).valueChanges.subscribe( closeSelet => {
+        this.TimeSelect.push({open: openSelect.toTimeString().slice(0, 8), close: closeSelet.toTimeString().slice(0, 8), day});
+        console.log(this.TimeSelect);
+        return this.TimeSelect;
+      });
+    });
   }
 
+  addNewHour(index){
+    document.getElementById('addButton' + index).style.display = 'none';
+    switch (index){
+      case index:
+        return document.getElementById(index).style.display = 'flex';
+    }
+  }
+
+  cancel(index){
+    document.getElementById('addButton' + index).style.display = 'block';
+    return document.getElementById(index).style.display = 'none';
+  }
+
+  toogle(e, index){
+    if (e.checked){
+      switch (index){
+        case index:
+          return  this.Day[index].isChecked = 'Abierto';
+      }
+    }else{
+      switch (index){
+        case index:
+          return  this.Day[index].isChecked = 'Cerrado';
+      }
+    }
+  }
 }
+
+
 

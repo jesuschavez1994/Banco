@@ -65,7 +65,6 @@ export class LoginUsuarioComponent implements OnInit, OnDestroy {
 
     this.store.dispatch( new ActivarLoadingAction() );
 
-    console.log(this.forma.value);
     // tslint:disable-next-line: prefer-const
     let usuario = new Usuario(
       this.forma.value.username = null,
@@ -76,6 +75,7 @@ export class LoginUsuarioComponent implements OnInit, OnDestroy {
 
     this.usuarioServices.login(usuario, this.forma.value.recuerdame).subscribe( (resp: any) => {
       console.log(this.forma.value.recuerdame);
+      console.log('FFFF', resp);
       this.guardarStorage(resp.remember_token, resp.user.id);
       console.log(resp);
       this.router.navigate(['/account']);
@@ -87,6 +87,7 @@ export class LoginUsuarioComponent implements OnInit, OnDestroy {
   guardarStorage(token: string, id: string){
     localStorage.setItem('token', token);
     localStorage.setItem('id', id);
+    // localStorage.setItem('storeId', storeId);
     this.token = token;
   }
 

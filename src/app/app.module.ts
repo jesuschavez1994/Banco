@@ -35,6 +35,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { ca_ES } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import ca from '@angular/common/locales/ca';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+registerLocaleData(ca);
 
 @NgModule({
   declarations: [
@@ -66,10 +74,11 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     }),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'
-    })
+    }),
+    NgbModule
   ],
   providers: [
-  ],
+  { provide: NZ_I18N, useValue: ca_ES }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -39,8 +39,10 @@ import { ComponentsComponent } from './components/components.component';
 import { SheduleStoreEditComponent } from './components/shedule-store-edit/shedule-store-edit.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
-// ANT DESING OF ANGULAR //
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { ProductLoadingComponent } from './product-loading/product-loading.component';
+import { MyStoreComponent } from './pages/my-store/my-store.component';
 
 @NgModule({
     entryComponents: [
@@ -66,7 +68,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
       CardShimmerTitleStoreComponent,
       ScheduleStoreComponent,
       ComponentsComponent,
-      SheduleStoreEditComponent],
+      SheduleStoreEditComponent,
+      ProductLoadingComponent,
+      MyStoreComponent],
 
     imports: [CommonModule,
       SharedModule,
@@ -82,12 +86,14 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
       BrowserAnimationsModule,
       ComponentsModule,
       APP_ROUTING,
+      NzTimePickerModule,
       MatProgressSpinnerModule,
       FormsModule,
       ReactiveFormsModule,
       AgmCoreModule.forRoot({
         apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'
-      })
+      }),
+      NgbModule
       ],
 
     exports: [PhotoUserEditComponent,

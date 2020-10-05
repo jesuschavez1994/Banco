@@ -27,3 +27,9 @@ export class DataStore {
     ) { }
 
 }
+
+export class Shedules {
+    constructor(
+        public schedules?: any[],
+    ){}
+}

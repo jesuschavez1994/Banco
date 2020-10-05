@@ -13,7 +13,8 @@ import { AccountComponent } from './vistas-privadas/account/account.component';
 import { LoginGuardGuard } from './services/guards/login-guard.guard';
 import { ContactComponent } from './vistas-privadas/contact/contact.component';
 import { ContactInformationEditComponent } from './vistas-privadas/components/contact-information-edit/contact-information-edit.component';
-
+import { ProductLoadingComponent } from './vistas-privadas/product-loading/product-loading.component';
+import { MyStoreComponent } from './vistas-privadas/pages/my-store/my-store.component';
 
 const APP_ROUTES: Routes = [
 
@@ -33,13 +34,33 @@ const APP_ROUTES: Routes = [
         canActivate: [ LoginGuardGuard ],
     },
 
-    {   path: 'contact',
-        component: ContactComponent,
+    // VISTAS ADMINISTRATIVAS DEL STORE //
+
+    {
+        path: 'my-store',
+        component: MyStoreComponent,
         canActivate: [ LoginGuardGuard ],
         children: [
-            { path: 'contact-information-edit', component: ContactInformationEditComponent},
+            {
+                path: 'contact',
+                component: ContactComponent,
+            },
+            {
+                path: 'product-loading',
+                component: ProductLoadingComponent
+            },
+
+            {path: '**', pathMatch: 'full', redirectTo: 'contact'},
         ]
     },
+
+    // {   path: 'contact',
+    //     component: ContactComponent,
+    //     canActivate: [ LoginGuardGuard ],
+    //     children: [
+    //         { path: 'contact-information-edit', component: ContactInformationEditComponent},
+    //     ]
+    // },
 
     {path: 'login-usuario', component: LoginUsuarioComponent},
     {path: 'dashboard', component: DashboardComponent},

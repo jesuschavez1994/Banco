@@ -7,6 +7,7 @@ import { StoreService } from './store/store.service';
 import { UserStoreService } from './user-store/user-store.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './Interceotores/interceptor.service';
+import { ProductLoadingComponent } from '../vistas-privadas/product-loading/product-loading.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { InterceptorService } from './Interceotores/interceptor.service';
     LoginGuardGuard,
     UserStoreService,
     InterceptorService,
+    ProductLoadingComponent,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

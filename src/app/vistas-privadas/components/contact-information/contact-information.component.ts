@@ -27,6 +27,7 @@ export class ContactInformationComponent implements OnInit {
     .subscribe( ( resp: any ) => {
       // tslint:disable-next-line: no-string-literal
       this.dataStoreEdit.push(resp.contact);
+      localStorage.setItem('storeId', resp.contact.store_id);
       console.log('contacto', this.dataStoreEdit);
       this.redesSociales.push(resp.social);
       // this.guardarStorage( this.dataStoreEdit );

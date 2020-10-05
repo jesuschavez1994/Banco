@@ -2,14 +2,10 @@
 
 <section class="display-flex">
 
-    <app-navbarstore id="header"></app-navbarstore>
-    
     <div class="container-fluid">
         <div class="row">
-            
-            <app-aside></app-aside>
-
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-10">
+        
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
                 <app-banner-tienda></app-banner-tienda>
 
@@ -135,7 +131,7 @@
                                             *ngIf="!editar">
                                             Editar
                                     </button>
-                                    
+                                   
                                 <app-schedule-store></app-schedule-store>
                                 <app-shedule-store-edit></app-shedule-store-edit>
                             </div>
@@ -166,43 +162,157 @@
     </div>
 </section>
 
+<!-- ===========================================-->
+<!-- ========== Horario del Negocio MODAL  ============-->
+<!-- ===========================================-->
+<div    class="modal fade" 
+        id="staticBackdrop" 
+        data-backdrop="static" 
+        data-keyboard="false" 
+        tabindex="-1" 
+        aria-labelledby="staticBackdropLabel" 
+        aria-hidden="true"
+        >
 
-<!-- Horario De Trabajo del Negocio -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="family-400 size-14" id="staticBackdropLabel">Horario</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="container">
-              <div class="row">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
 
-                    <div class="col-md-12 display-flex" *ngFor="let item of Day; let i = index">
+                    <h5 class="family-400 size-14" 
+                        id="staticBackdropLabel">
+                        Horario
+                    </h5>
 
-                        <label class="family-400 black size-16 col-md-2 pt-2 pb-2">
-                            {{item.dia}}
-                        </label>
+                    <button type="button" 
+                            class="close" 
+                            data-dismiss="modal" 
+                            aria-label="Close">
 
-                        <mat-slide-toggle class="ml-2" (change)="toogle($event, i)">
-                            {{item.isChecked}}
-                        </mat-slide-toggle>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <!-- =================SELECTED HOUR switch=================-->
+                            <!-- ======================================================-->
+                                <div    class="col-md-12 display-flex align-items-center p-10" 
+                                        *ngFor="let item of Day; let i = index">
 
-                        <div class="col-md-10" *ngIf="item.isChecked === 'Abierto'">
-                            <input id="example-1" class="form-control" />
+                                    <label class="family-500 black size-16 col-md-2 pt-2 pb-2">
+                                        {{item.dia}}
+                                    </label>
+
+                                    <mat-slide-toggle   class="ml-2" (change)="toogle($event, i)">
+                                        {{item.isChecked}}
+                                    </mat-slide-toggle>
+                                    <div class="display-flex justify-content-around width-100">
+                                        <div    class="width-100 display-flex pl-4 flex-direction-column" 
+                                                *ngIf="item.isChecked === 'Abierto'"
+                                                id="parentElement">
+
+                                            <form   (ngSubmit)="SendSchedule()" 
+                                                    [formGroup]="schedule" 
+                                                    id="createForms{{i}}"
+                                                    #sheduleform 
+                                                    class="display-flex align-items-center"
+                                                    >
+
+                                                <div class="form-group display-flex flex-direction-column">
+                                                    <label class="family-400 size-12">
+                                                        Abre a las
+                                                    </label>
+            
+                                                    <nz-time-picker 
+                                                                    [(ngModel)]="item.selectOpenHour" 
+                                                                    nzFormat="HH:mm"
+                                                                    class="mr-3"
+                                                                    formControlName="open{{i}}"
+                                                                    (nzOpenChange)="log($event, i, item.dia)">
+                                                    </nz-time-picker>
+                                                </div>
+            
+                                                <div class="form-group display-flex flex-direction-column">
+                                                    <label class="family-400 size-12">
+                                                        Cierra a las
+                                                    </label>
+                                                    <nz-time-picker [(ngModel)]="item.selectCloseHour" 
+                                                                    nzFormat="HH:mm"
+                                                                    formControlName="close{{i}}"
+                                                                    (nzOpenChange)="log($event, i, item.dia)">
+                                                    </nz-time-picker>
+                                                </div>
+
+                                                <button mat-button color="primary" 
+                                                        class="ml-2 addbutton" 
+                                                        id="addButton{{i}}" 
+                                                        (click)="addNewHour(i)">
+                                                        Añadir horario
+                                                </button>
+                                                <!-- <input type="submit" id="submit{{i}}" class="hidden" /> -->
+                                            </form>
+
+                                            <section class="display-flex display-none" id="{{i}}">
+                                                <div class="form-group display-flex flex-direction-column">
+
+                                                    <label class="family-400 size-12">
+                                                        Abre a las
+                                                    </label>
+            
+                                                    <nz-time-picker [(ngModel)]="item.lateShiftOpen" 
+                                                                    nzFormat="HH:mm" 
+                                                                   
+                                                                    class="mr-3">
+                                                    </nz-time-picker>
+                                                    
+                                                    
+            
+                                                </div>
+            
+                                                <div class="form-group display-flex flex-direction-column">
+                                                    <label class="family-400 size-12">
+                                                        Abre a las
+                                                    </label>
+            
+                                                    <nz-time-picker [(ngModel)]="item.lateShiftClose" 
+                                                                    nzFormat="HH:mm" 
+                                                                    
+                                                                    class="mr-3">
+                                                    </nz-time-picker>
+                                                </div>
+                                                <button mat-button color="primary" class="ml-2 cancel" (click)="cancel(i)">Cancelar</button>
+                                            </section>
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                    <!-- <label for="submit{{i}}">Submit</label> -->
+                                </div>
+                            <!-- ======================================================-->
+                            <!-- ======================================================-->
                         </div>
-
                     </div>
-              </div>
-          </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" 
+                            class="btn btn-secondary" 
+                            data-dismiss="modal">
+                            Cerrar
+                    </button>
+
+                    <button type="button"
+                            id="guardar"
+                            (click)="enviarShedules()"
+                            class="btn btn-primary"
+                            >
+                            Aceptar
+                    </button>
+                    
+                </div>
+               
+                
+            </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Aceptar</button>
-        </div>
-      </div>
-    </div>
 </div>
+
