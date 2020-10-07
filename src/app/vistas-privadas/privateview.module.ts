@@ -44,6 +44,35 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { ProductLoadingComponent } from './product-loading/product-loading.component';
 import { MyStoreComponent } from './pages/my-store/my-store.component';
 
+
+// ALYLE //
+
+import {
+  HAMMER_GESTURE_CONFIG,
+  HammerModule
+} from '@angular/platform-browser';
+
+/** Import Alyle UI */
+import {
+  LyTheme2,
+  StyleRenderer,
+  LY_THEME,
+  LY_THEME_NAME,
+  LyHammerGestureConfig
+} from '@alyle/ui';
+
+import { LyIconModule } from '@alyle/ui/icon';
+
+/** Import the component modules */
+import { LyButtonModule } from '@alyle/ui/button';
+import { LyToolbarModule } from '@alyle/ui/toolbar';
+import { LyImageCropperModule } from '@alyle/ui/image-cropper';
+
+/** Import themes */
+import { MinimaLight, MinimaDark } from '@alyle/ui/themes/minima';
+import { ProductLoadComponent } from './components/product-load/product-load/product-load.component';
+
+
 @NgModule({
     entryComponents: [
       MapEditarComponent,
@@ -51,6 +80,7 @@ import { MyStoreComponent } from './pages/my-store/my-store.component';
     ],
     // tslint:disable-next-line: max-line-length
     declarations: [DashboardComponent,
+      ProductLoadComponent,
       FormAccountComponent,
       ContactComponent,
       ContactInformationEditComponent,
@@ -84,6 +114,13 @@ import { MyStoreComponent } from './pages/my-store/my-store.component';
       MatDialogModule,
       MatCardModule,
       BrowserAnimationsModule,
+      // MODULOS Alyle //
+      LyButtonModule,
+      LyToolbarModule,
+      LyImageCropperModule,
+      LyIconModule,
+      // END MODULOS Alyle //
+      HammerModule,
       ComponentsModule,
       APP_ROUTING,
       NzTimePickerModule,
@@ -96,8 +133,22 @@ import { MyStoreComponent } from './pages/my-store/my-store.component';
       NgbModule
       ],
 
-    exports: [PhotoUserEditComponent,
+    exports: [
+      PhotoUserEditComponent,
       PhotoUserComponent,
-      CardShimmerFormConfigurationComponent]
+      CardShimmerFormConfigurationComponent
+    ],
+
+    providers: [
+      [ LyTheme2 ],
+      [ StyleRenderer ],
+      // Theme that will be applied to this module
+      { provide: LY_THEME_NAME, useValue: 'minima-light' },
+      { provide: LY_THEME, useClass: MinimaLight, multi: true }, // name: `minima-light`
+      { provide: LY_THEME, useClass: MinimaDark, multi: true }, // name: `minima-dark`
+      // Gestures
+      { provide: HAMMER_GESTURE_CONFIG, useClass: LyHammerGestureConfig }
+    ],
+
   })
   export class PrivateviewModule { }

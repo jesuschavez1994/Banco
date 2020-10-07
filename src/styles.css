@@ -23,6 +23,7 @@
 .password-icon{background-image: url(./assets/img/LoginIconos/contraseña.svg);}
 .icon-magnifying-glass{background-image: url(./assets/img/iconos/iconos-lupa.png);}
 .icon-phone{background-image: url(./assets/img/iconos//icons-main/icons/telephone.svg);}
+.box{ background-image: url(./assets/img/Box/box.svg);}
 
 /* Redes Sociales */
 .facebook-icon{background-image: url(./assets/img/Redes_Sociales/facebook.svg);}
@@ -78,6 +79,11 @@
 .justify-content-space-between{justify-content: space-between;} 
 .justify-content-space-around{justify-content: space-around;}
 .justufy-content-flex-end{justify-content: flex-end;}
+
+.position-relative{position: relative;}
+.position-absolute{position: absolute;}
+.top-0{top: 0;}
+.right-0{right: 0%;}
 
 /* SIZE 5X1*/
 .size-50{font-size: 50px;}

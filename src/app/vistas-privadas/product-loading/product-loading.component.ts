@@ -55,7 +55,6 @@ export class ProductLoadingComponent implements OnInit {
 
     // RECETA MEDICA //
     this._productLoadingService.GetRecetaMedica(localStorage.getItem('id')).subscribe( response => {
-      console.log('recipes', response);
       this.recipes = response;
     });
 

@@ -1,0 +1,71 @@
+<div [className]="classes.actions">
+    <button class="button-box" 
+            ly-button color="primary" 
+            (click)="_fileInput.click()" 
+            (click)="addProduct(i)" 
+            *ngFor="let item of [0, 1, 2 ,3]; let i = index">
+            <ly-icon [ngClass]="{'box': NoBox, 'second': true}" class="Size"></ly-icon>
+            <!-- <span>Select File</span> -->
+    </button>
+    <!-- <span [className]="classes.flex"></span> -->
+    <!-- Hidden input -->
+    <input #_fileInput type="file" (change)="cropper.selectInputEvent($event)" accept="image/*" hidden>
+
+    
+</div>
+
+<div class="display-flex">
+    <img class="pl-2 pr-2" *ngFor="let item of ImgURL; let i = index" [src]="item">
+</div>
+  
+<ly-img-cropper [withClass]="classes.cropper"
+    class="mt-5"
+    [config]="myConfig"
+    (cropped)="onCropped($event)"
+    (ready)="ready = true"
+    (cleaned)="ready = false"
+    >
+    <!-- <span>Drag and drop image</span> -->
+    <section class="position-relative display-flex width-100">
+        <img class="width-100" src="../../../../../assets/img/Caja de Producto default/Caja 1000x1000_Mesa de trabajo 1 copia.svg">
+    </section>
+    
+</ly-img-cropper>
+
+  <div *ngIf="cropper.isLoaded">
+    <button (click)="cropper.zoomIn()" ly-button appearance="icon"><ly-icon>zoom_in</ly-icon></button>
+    <button (click)="cropper.zoomOut()" ly-button appearance="icon"><ly-icon>zoom_out</ly-icon></button>
+    <button (click)="cropper.rotate(-90)" ly-button appearance="icon"><ly-icon>rotate_90_degrees_ccw</ly-icon></button>
+    <button (click)="cropper.clean()" ly-button>Clean</button>
+</div>
+  
+<button *ngIf="cropper.isLoaded" color="accent" (click)="cropper.crop()" ly-button>
+    <ly-icon>crop</ly-icon>crop
+</button>
+  
+<!-- <input class ="box"/> -->
+    <!-- <button raised ly-button bg="accent" *ngIf="cropper.isCropped">Upload</button> -->
+
+    <!-- <section class="display-flex justify-content-center">
+        <article *ngFor="let item of BoxDefault">
+            <img    [src]="item.box"
+                    style="width: 80px; height: 80px;">
+        </article>
+    </section> -->
+
+    <!-- <button ly-button
+            (click)="load('loading1')"
+            [disabled]="loading1"
+            *ngIf="cropper.isCropped"
+            raised
+            >
+            <span [lyStyle]="loading1 ? 'opacity:0' : null">
+            Upload File
+            </span>
+            <ly-icon [lyStyle]="loading1 ? 'opacity:0' : null" [lyPe]="1">Aceptar</ly-icon>
+            <div [class]="styles.spinner" *ngIf="loading1">
+                <svg viewBox="22 22 44 44">
+                    <circle [class]="styles.spinnerCircle" cx="44" cy="44" r="20.2" fill="none" stroke-width="3.6"></circle>
+                </svg>
+            </div>
+    </button> -->
