@@ -1,18 +1,18 @@
-<div [className]="classes.actions">
+<!-- <div [className]="classes.actions">
     <button class="button-box" 
             ly-button color="primary" 
             (click)="_fileInput.click()" 
             (click)="addProduct(i)" 
             *ngFor="let item of [0, 1, 2 ,3]; let i = index">
-            <ly-icon [ngClass]="{'box': NoBox, 'second': true}" class="Size"></ly-icon>
+            <ly-icon [ngClass]="{'box': NoBox, 'second': true}" class="Size"></ly-icon> -->
             <!-- <span>Select File</span> -->
-    </button>
+    <!-- </button> -->
     <!-- <span [className]="classes.flex"></span> -->
     <!-- Hidden input -->
-    <input #_fileInput type="file" (change)="cropper.selectInputEvent($event)" accept="image/*" hidden>
+    <!-- <input #_fileInput type="file" (change)="cropper.selectInputEvent($event)" accept="image/*" hidden> -->
 
     
-</div>
+<!-- </div>
 
 <div class="display-flex">
     <img class="pl-2 pr-2" *ngFor="let item of ImgURL; let i = index" [src]="item">
@@ -24,9 +24,9 @@
     (cropped)="onCropped($event)"
     (ready)="ready = true"
     (cleaned)="ready = false"
-    >
+    > -->
     <!-- <span>Drag and drop image</span> -->
-    <section class="position-relative display-flex width-100">
+    <!-- <section class="position-relative display-flex width-100">
         <img class="width-100" src="../../../../../assets/img/Caja de Producto default/Caja 1000x1000_Mesa de trabajo 1 copia.svg">
     </section>
     
@@ -41,7 +41,7 @@
   
 <button *ngIf="cropper.isLoaded" color="accent" (click)="cropper.crop()" ly-button>
     <ly-icon>crop</ly-icon>crop
-</button>
+</button> -->
   
 <!-- <input class ="box"/> -->
     <!-- <button raised ly-button bg="accent" *ngIf="cropper.isCropped">Upload</button> -->
@@ -69,3 +69,4 @@
                 </svg>
             </div>
     </button> -->
+    <!-- ../../../../../assets/img/Caja de Producto default/Caja 1000x1000_Mesa de trabajo 1 copia.svg -->

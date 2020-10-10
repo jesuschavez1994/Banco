@@ -18,4 +18,29 @@ input[type="file" i] {
 
 }
 
+ul{
+    padding-left: 1%;
+}
+
+li{
+    width: 100%;
+    padding: 0%;
+}
+
+a{
+    width: 100%;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    white-space: nowrap;
+    transition: background-color .15s ease-in-out,opacity .15s ease-in-out;
+    color: unset;
+    text-decoration: unset;
+}
+
+li :hover{
+    background-color: rgba(64,87,109,.07);
+}
 

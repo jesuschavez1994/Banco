@@ -160,5 +160,15 @@ export class StoreService {
     return this.execQuery(url);
   }
 
+  DetalleProduct(userId: string, storeId: string, data: any){
+    const url = `/api/users/${userId}/stores/${storeId}/products`;
+    return this.postQuery(url, data);
+  }
+
+  ImagenProduct(userId: string, storeId: string, idProduct: string, data: any){
+    const url = `/api/users/${userId}/stores/${storeId}/products/${idProduct}/images`;
+    return this.postQuery(url, data);
+  }
+
 
 }

@@ -1,22 +1,89 @@
 <section class="display-flex">
 
+    
+
     <div class="container-fluid">
         <div class="row">
 
             <form   [formGroup]="forma"
                     (ngSubmit)="addProducts()" 
                     novalidate="novalidate"
-                    class="row width-95 pt-5"
+                    class="row width-100 pt-5 pl-3"
                     >
+                
+                    <!-- ====== SUBIDA DE PRODUCTO =====-->
+                    <!-- =============================== -->
+                    <section class="col-12 col-sm-12 col-md-4">
 
-                    <section class="col-md-4">
-                        <app-product-load></app-product-load>
+                        <div class="display-flex justify-content-center">
+                            <ng-container>
+
+                                <div  *ngFor="let item of [0, 1, 2, 3]; let i = index">
+
+                                    <figure class="img-box{{i}} ml-1 mr-1" 
+                                            (mouseover)="hover=true" 
+                                            (mouseleave)="hover=false"
+                                            >
+
+                                        <i  class="figure__icon material-icons" 
+                                            name="camera"
+                                            id="iconCamera"
+                                            *ngIf="hover === true"
+                                            >
+                                            camera_alt
+                                        </i>
+
+                                        <input  type="file" 
+                                            (change)="onFileChange( $event, i)"
+                                            class="figure__input cursor-poniter"
+                                        />
+
+                                        <img    [src]="this.File[i].image | boxDefault " 
+                                                style="width: 80px; height: 80px" 
+                                        />
+
+                                    </figure>
+
+                                </div>
+                                
+                            </ng-container>
+
+                        </div>
+
+                        <figure (mouseover)="icon=true" 
+                                (mouseleave)="icon=false">
+
+                            <i  class="figure material-icons" 
+                                name="camera"
+                                *ngIf="icon === true">
+                                camera_alt
+                            </i>
+
+                            <ng-container>
+                                <input  type="file" 
+                                        (change)="onFileChange($event)"
+                                        class="figure__input cursor-poniter" 
+                                        
+                                />
+                                <img    class="width-95" 
+                                        src="../../../../../assets/img/Box/box.svg"
+                                        *ngIf="this.forma.value.file.length <= 1"
+                                        
+                                >
+                                <img    class="width-100"
+                                        [src]="this.forma.value.file"
+                                        *ngIf="this.forma.value.file.length > 1"
+                                >
+                            </ng-container>
+                        </figure>
+                        <!-- ====== END SUBIDA DE PRODUCTO =====-->
+                        <!-- ===================================-->
                     </section>
 
-                    <section class="col-md-8">
+                    <section class="col-12 col-sm-12 col-md-7">
 
                         <div class="form-group row">
-                            <div class="col-11 col-sm-10 col-md-12 col-lg-12 col-xl-12">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                 <label class="family-500 size-16">Nombre</label>
                                 <textarea  class="form-control"
                                         type="text"
@@ -37,7 +104,7 @@
     
     
                         <div class="form-group row">
-                            <div class="col-11 col-sm-10 col-md-12 col-lg-12 col-xl-12">
+                            <div class="col-12 col-sm-10 col-md-12 col-lg-12 col-xl-12">
                                 <label class="family-500 size-16">Descripción</label>
                                 <textarea   class="form-control text-area" 
                                             type="text"
@@ -48,7 +115,7 @@
     
                                 <div    *ngIf="forma.get('description').errors?.required"  
                                         class="invalid-feedback">
-                                        Ingresa un nombre de usuario para mostrar que sea valido
+                                        Debe indicar una descripción del producto
                                 </div>
                                 <div    *ngIf="forma.get('description').errors?.minlength"  
                                         class="invalid-feedback">
@@ -74,8 +141,10 @@
                                 <select id="inputState" 
                                         class="form-control"
                                         formControlName="factory">
-                                  <option selected class="family-300">Seleccionar</option>
-                                  <option *ngFor="let item of factories">{{item.name}}</option>
+                                        <option selected class="family-300">Seleccionar</option>
+                                        <option *ngFor="let item of factories">
+                                                {{item.name}}
+                                        </option>
                                 </select>
                             </div>
     
@@ -88,10 +157,10 @@
                                         (change)="onChange($event.target.value)"
                                         >
                                     <option selected class="family-300">Seleccionar</option>
-                                    <option     *ngFor="let item of category; let i = index" 
-                                                title="{{ item.name }}"
-                                                (change)="SelectCategory(i)">
-                                                {{item.name}}
+                                    <option *ngFor="let item of category; let i = index" 
+                                            title="{{ item.name }}"
+                                            >
+                                            {{item.name}}
                                     </option>
                                 </select>
                             </div>
@@ -100,11 +169,12 @@
                                 <label for="inputState" class="family-500 size-14">Subcategoria</label>
                                 <select id="inputState" 
                                         class="form-control"
-                                        formControlName="subcategory_id">
-                                    <option selected class="family-300">Seleccionar</option>
-                                    <option *ngFor="let item of subcategory" >
-                                      {{ item.name }}
-                                    </option>
+                                        formControlName="subcategory_id"
+                                        (change)="Subcategory($event.target.value)">
+                                        <option selected class="family-300">Seleccionar</option>
+                                        <option *ngFor="let item of subcategory" >
+                                        {{ item.name }}
+                                        </option>
                                 </select>
                             </div>
     
@@ -133,11 +203,12 @@
                             <div class="form-group col-md-3">
                                 <label class="family-500 size-16">Cantidad</label>
                                 <input  class="form-control"
-                                        formControlName="quantity"
+                                        formControlName="stock"
                                         type="number"
-                                        [ngClass]="{'is-invalid':  (!forma.controls['quantity'].valid || forma.controls['quantity'].errors?.minlength)&& forma.controls['quantity'].touched, 'is-valid': forma.controls['quantity'].valid }" 
+                                        placeholder="Cantidad"
+                                        [ngClass]="{'is-invalid':  (!forma.controls['stock'].valid || forma.controls['stock'].errors?.minlength)&& forma.controls['stock'].touched, 'is-valid': forma.controls['stock'].valid }" 
                                 >
-                                <div    *ngIf="forma.get('quantity').errors?.required"  
+                                <div    *ngIf="forma.get('stock').errors?.required"  
                                         class="invalid-feedback">
                                         Debe indicar la cantidad del producto.
                                 </div>
@@ -157,9 +228,11 @@
                                 <label for="inputState" class="family-500 size-14">Delivery</label>
                                 <select id="inputState" 
                                         class="form-control"
-                                        formControlName="delivery">
-                                  <option selected class="family-300">Seleccionar</option>
-                                  <option>...</option>
+                                        formControlName="delivery"
+                                        (change)="Delivery($event.target.value)">
+                                        <option selected class="family-300">Seleccionar</option>
+                                        <option>Si</option>
+                                        <option>No</option>
                                 </select>
                             </div>
     
@@ -167,7 +240,8 @@
                                 <label for="inputState" class="family-500 size-14">Disponible</label>
                                 <select id="inputState" 
                                         class="form-control"
-                                        formControlName="aviable">
+                                        formControlName="aviable"
+                                        (change)="Disponibilidad($event.target.value)">
                                   <option selected class="family-300">Seleccionar</option>
                                   <option>Si</option>
                                   <option>No</option>
@@ -176,6 +250,16 @@
                         </div>
 
                     </section>
+
+                    <div class="col-md-11 display-flex justify-content-flex-end">
+                        <hr size=1 width="70%">
+                        <button class="btn btn-primary button fredoka" 
+                            type="submit"
+                            >
+                            Guardar Cambios
+                        </button>
+                    </div>
+
             </form>
         </div>
     </div>

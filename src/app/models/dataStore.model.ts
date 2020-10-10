@@ -33,3 +33,38 @@ export class Shedules {
         public schedules?: any[],
     ){}
 }
+
+export class DetalleProduct {
+    constructor(
+        // tslint:disable-next-line: variable-name
+        public name: string,
+        public description?: string,
+        // tslint:disable-next-line: variable-name
+        public price?: string,
+        // tslint:disable-next-line: variable-name
+        public mark?: string,
+        // tslint:disable-next-line: variable-name
+        public factory?: string,
+        // tslint:disable-next-line: variable-name
+        public category?: string,
+        // tslint:disable-next-line: variable-name
+        public subcategory_id?: string,
+        public delivery?: string,
+        public aviable?: string,
+        public stock?: string,
+        public recipe?: string,
+        // tslint:disable-next-line: variable-name
+        public file?: string,
+        // tslint:disable-next-line: variable-name
+        public address_longitude?: string,
+
+    ) { }
+}
+
+export class ImgLoad {
+
+    constructor(
+        public images: any,
+    ) { }
+
+}

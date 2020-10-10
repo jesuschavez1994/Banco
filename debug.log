@@ -1,2 +1,4 @@
 [0815/224515.652:ERROR:process_info.cc(375)] NtQuerySystemInformation SystemExtendedHandleInformation: La longitud del registro de información especificado no coincide con la longitud que se requiere para la clase de información especificada. (0xc0000004)
 [0903/071147.374:ERROR:settings.cc(320)] Settings magic is not 1129342067
+[1008/235317.431:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[1008/235317.938:ERROR:exception_snapshot_win.cc(99)] thread ID 8408 not found in process
