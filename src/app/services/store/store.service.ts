@@ -170,5 +170,10 @@ export class StoreService {
     return this.postQuery(url, data);
   }
 
+  ShowProducts(userId: string, storeId: string){
+    const url = `/api/users/${userId}/stores/${storeId}/products`;
+    return this.execQuery(url);
+  }
+
 
 }

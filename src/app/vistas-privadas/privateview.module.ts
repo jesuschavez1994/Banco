@@ -71,6 +71,7 @@ import { LyImageCropperModule } from '@alyle/ui/image-cropper';
 /** Import themes */
 import { MinimaLight, MinimaDark } from '@alyle/ui/themes/minima';
 import { ProductLoadComponent } from './components/product-load/product-load/product-load.component';
+import { ViewProductsLoadsComponent } from './components/view-products-loads/view-products-loads.component';
 
 
 @NgModule({
@@ -100,7 +101,8 @@ import { ProductLoadComponent } from './components/product-load/product-load/pro
       ComponentsComponent,
       SheduleStoreEditComponent,
       ProductLoadingComponent,
-      MyStoreComponent],
+      MyStoreComponent,
+      ViewProductsLoadsComponent],
 
     imports: [CommonModule,
       SharedModule,

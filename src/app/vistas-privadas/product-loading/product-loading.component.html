@@ -1,6 +1,13 @@
 <section class="display-flex">
-
+    <button class="btn btn-primary button mt-5 fredoka" 
+            type="button"
+            (click)="Reset()"      
+            >
+            + Agregar nuevo producto
+    </button>
+</section>
     
+<section class="display-flex">
 
     <div class="container-fluid">
         <div class="row">
@@ -27,15 +34,15 @@
 
                                         <i  class="figure__icon material-icons" 
                                             name="camera"
-                                            id="iconCamera"
                                             *ngIf="hover === true"
                                             >
                                             camera_alt
                                         </i>
 
-                                        <input  type="file" 
-                                            (change)="onFileChange( $event, i)"
-                                            class="figure__input cursor-poniter"
+                                        <input  type="file"
+                                                formControlName="input{{i}}"
+                                                (change)="onFileChange($event, i)"
+                                                class="figure__input cursor-poniter"
                                         />
 
                                         <img    [src]="this.File[i].image | boxDefault " 
@@ -62,6 +69,7 @@
                             <ng-container>
                                 <input  type="file" 
                                         (change)="onFileChange($event)"
+                                        formControlName="input4"
                                         class="figure__input cursor-poniter" 
                                         
                                 />
@@ -127,8 +135,8 @@
                         <div class="row">
     
                             <div class="form-group col-md-3">
-                                <label for="inputState" class="family-500 size-14">Marca</label>
-                                <select id="inputState" 
+                                <label for="Marca" class="family-500 size-14">Marca</label>
+                                <select id="Marca" 
                                         class="form-control"
                                         formControlName="mark">
                                   <option selected class="family-300">Seleccionar</option>
@@ -137,8 +145,8 @@
                             </div>
     
                             <div class="form-group col-md-3">
-                                <label for="inputState" class="family-500 size-14">Fabricante</label>
-                                <select id="inputState" 
+                                <label for="Fabricante" class="family-500 size-14">Fabricante</label>
+                                <select id="Fabricante"
                                         class="form-control"
                                         formControlName="factory">
                                         <option selected class="family-300">Seleccionar</option>
@@ -150,8 +158,8 @@
     
     
                             <div class="form-group col-md-3">
-                                <label for="inputState" class="family-500 size-14">Categoria</label>
-                                <select id="inputState" 
+                                <label for="Categoria" class="family-500 size-14">Categoria</label>
+                                <select id="Categoria" 
                                         class="form-control"
                                         formControlName="category"
                                         (change)="onChange($event.target.value)"
@@ -166,8 +174,8 @@
                             </div>
     
                             <div class="form-group col-md-3">
-                                <label for="inputState" class="family-500 size-14">Subcategoria</label>
-                                <select id="inputState" 
+                                <label for="Subcategoria" class="family-500 size-14">Subcategoria</label>
+                                <select id="Subcategoria" 
                                         class="form-control"
                                         formControlName="subcategory_id"
                                         (change)="Subcategory($event.target.value)">
@@ -215,8 +223,8 @@
                             </div>
     
                             <div class="form-group col-md-3">
-                                <label for="inputState" class="family-500 size-14">Recetas Médicas</label>
-                                <select id="inputState" 
+                                <label for="Receta" class="family-500 size-14">Recetas Médicas</label>
+                                <select id="Receta" 
                                         class="form-control" 
                                         formControlName="recipe">
                                   <option selected class="family-300">Seleccionar</option>
@@ -225,8 +233,8 @@
                             </div>
     
                             <div class="form-group col-md-3">
-                                <label for="inputState" class="family-500 size-14">Delivery</label>
-                                <select id="inputState" 
+                                <label for="Delivery" class="family-500 size-14">Delivery</label>
+                                <select id="Delivery" 
                                         class="form-control"
                                         formControlName="delivery"
                                         (change)="Delivery($event.target.value)">
@@ -237,8 +245,8 @@
                             </div>
     
                             <div class="form-group col-md-3">
-                                <label for="inputState" class="family-500 size-14">Disponible</label>
-                                <select id="inputState" 
+                                <label for="Disponible" class="family-500 size-14">Disponible</label>
+                                <select id="Disponible" 
                                         class="form-control"
                                         formControlName="aviable"
                                         (change)="Disponibilidad($event.target.value)">
@@ -255,12 +263,30 @@
                         <hr size=1 width="70%">
                         <button class="btn btn-primary button fredoka" 
                             type="submit"
+                            (click)="Send()"
                             >
                             Guardar Cambios
                         </button>
                     </div>
-
             </form>
         </div>
     </div>
 </section>
+
+<section>
+    <app-view-products-loads></app-view-products-loads>
+</section>
+
+<div class="card-columns">
+    <div class="card" *ngFor="let item of MyProduct; let i = index">
+      <img [src]="item.images[0].src_size.m | imgProductLoad" class="card-img-top" alt="..." *ngIf="item.images.length >= 1">
+      <img src="../../../assets/img/Box/box.svg" class="card-img-top" alt="..." *ngIf="item.images.length === 0">
+      <div class="card-body">
+        <span class="card-title">{{item.name}}</span>
+        <p class="card-text">{{item.description}}</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+
+

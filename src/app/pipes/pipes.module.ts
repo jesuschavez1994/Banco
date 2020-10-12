@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ImagenPipe } from './imagen.pipe';
 import { ProductoPipe } from './producto.pipe';
 import { BoxDefaultPipe } from './box/box-default.pipe';
+import { ImgProductLoadPipe } from './imagenLoad/img-product-load.pipe';
 
 
 
@@ -10,12 +11,14 @@ import { BoxDefaultPipe } from './box/box-default.pipe';
   declarations: [
     ImagenPipe,
     ProductoPipe,
-    BoxDefaultPipe
+    BoxDefaultPipe,
+    ImgProductLoadPipe
   ],
   exports: [
     ImagenPipe,
     ProductoPipe,
-    BoxDefaultPipe
+    BoxDefaultPipe,
+    ImgProductLoadPipe
   ],
   imports: [
     CommonModule

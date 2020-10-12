@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ProductLoadingService } from '../../services/product-loading/product-loading.service';
 import { DetalleProduct, ImgLoad } from '../../models/dataStore.model';
 import { StoreService } from '../../services/store/store.service';
+import { ProductosLoads } from 'src/app/interfaces/InterfaceProducto';
+import { DataProductDB } from '../../interfaces/InterfaceProducto';
 
 
 
@@ -13,20 +15,6 @@ import { StoreService } from '../../services/store/store.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductLoadingComponent implements OnInit {
-
-  forma: FormGroup;
-  category: any;
-  subcategory: any;
-  marks: any;
-  factories: any;
-  recipes: any;
-  subcategoria: string;
-  // Con input //
-  // tslint:disable-next-line: max-line-length
-  File: any[] = [{image: null, name: null, position: null}, {image: null, name: null, position: null}, {image: null, name: null, position: null}, {image: null, name: null, position: null}];
-  hover = false;
-  icon = false;
-  imagen: File;
   // tslint:disable-next-line: variable-name
   constructor(public _productLoadingService: ProductLoadingService, private _cd: ChangeDetectorRef, public storeService: StoreService) {
 
@@ -42,32 +30,74 @@ export class ProductLoadingComponent implements OnInit {
       aviable: new FormControl('Seleccionar'),
       stock: new FormControl('', [Validators.required, Validators.minLength(1)]),
       recipe: new FormControl('Seleccionar'),
-      file: new FormControl('')
+      file: new FormControl(''),
+      input0: new FormControl(''),
+      input1: new FormControl(''),
+      input2: new FormControl(''),
+      input3: new FormControl(''),
+      input4: new FormControl(''),
     });
 
   }
 
+  forma: FormGroup;
+  detalle: DetalleProduct;
+  category: any;
+  subcategory: any;
+  marks: any;
+  factories: any;
+  recipes: any;
+  subcategoria: string;
+  // Con input //
+  // tslint:disable-next-line: max-line-length
+  File: any[] = [{image: null, name: null, position: null}, {image: null, name: null, position: null}, {image: null, name: null, position: null}, {image: null, name: null, position: null}];
+  hover = false;
+  icon = false;
+  imagen = [];
+  sendImagen = [];
+  guard = false;
+
+  foods = [];
+  // tslint:disable-next-line: ban-types
+  MyProduct: DataProductDB[] = [];
+
   ngOnInit() {
     // GET CATEGORIAS //
-    this._productLoadingService.GetCategorias(localStorage.getItem('id')).subscribe( response => {
+    this._productLoadingService.GetCategorias(
+      localStorage.getItem('id'))
+      .subscribe( response => {
       return this.category = response;
     });
 
     // GET MARCA //
-    this._productLoadingService.GetMark(localStorage.getItem('id')).subscribe( response => {
+    this._productLoadingService.GetMark(
+      localStorage.getItem('id'))
+      .subscribe( response => {
       this.marks = response;
       console.log(this.marks);
     });
 
     // GET FABRICANTE //
-    this._productLoadingService.GetFactories(localStorage.getItem('id')).subscribe( response => {
+    this._productLoadingService.GetFactories(
+      localStorage.getItem('id'))
+      .subscribe( response => {
       console.log('factories', response);
       this.factories = response;
     });
 
     // RECETA MEDICA //
-    this._productLoadingService.GetRecetaMedica(localStorage.getItem('id')).subscribe( response => {
+    this._productLoadingService.GetRecetaMedica(
+      localStorage.getItem('id'))
+      .subscribe( response => {
       this.recipes = response;
+    });
+
+    this.storeService.ShowProducts(
+      localStorage.getItem('id'),
+      localStorage.getItem('storeId'))
+      .subscribe( (resp: ProductosLoads) => {
+        this.MyProduct = resp.data;
+        console.log(this.MyProduct);
     });
 
 
@@ -81,7 +111,9 @@ export class ProductLoadingComponent implements OnInit {
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.category.length; i++){
       if ( this.category[i].name ===  centroId){
-        this._productLoadingService.GetSubcategorias(localStorage.getItem('id'), i).subscribe( (response: any) => {
+        this._productLoadingService.GetSubcategorias(
+          localStorage.getItem('id'), i)
+          .subscribe( (response: any) => {
           console.log('sub', response);
           return this.subcategory = response;
         });
@@ -130,8 +162,11 @@ export class ProductLoadingComponent implements OnInit {
           localStorage.getItem('id'),
           localStorage.getItem('storeId'),
           response.delivery.id,
-          images).subscribe( resp => {
-          console.log(resp);
+          images).subscribe( (resp: any) => {
+          this.imagen.push(resp[0]);
+          console.log('resp', this.imagen);
+          this.guard = true;
+          this.Send();
         });
     });
 
@@ -154,9 +189,6 @@ export class ProductLoadingComponent implements OnInit {
         // need to run CD since file load runs outside of zone
         this._cd.markForCheck();
         this.File.splice(index, 1, { image: this.forma.value.file, name: event.target.files[0].name, position: index + 1 });
-        if (this.File.length > 1){
-          this.File.splice(index, 1, this.File[index]);
-        }
         console.log(this.File);
       };
     }
@@ -181,7 +213,42 @@ export class ProductLoadingComponent implements OnInit {
   }
 
   Reset(){
-    this.forma.reset();
+    this.forma.controls.name.setValue('');
+    this.forma.controls.description.setValue('');
+    this.forma.controls.price.setValue('');
+    this.forma.controls.mark.setValue('Seleccionar');
+    this.forma.controls.factory.setValue('Seleccionar');
+    this.forma.controls.category.setValue('Seleccionar');
+    this.forma.controls.subcategory_id.setValue('Seleccionar');
+    this.forma.controls.delivery.setValue('Seleccionar');
+    this.forma.controls.aviable.setValue('Seleccionar');
+    this.forma.controls.stock.setValue('');
+    this.forma.controls.recipe.setValue('Seleccionar');
+    this.forma.controls.file.setValue('');
+    this.forma.controls.input0.reset();
+    this.forma.controls.input1.reset();
+    this.forma.controls.input2.reset();
+    this.forma.controls.input3.reset();
+    this.forma.controls.input4.reset();
+    for ( let i = 0; i < this.File.length; i++){
+      this.File.splice(i, 1, {image: null, name: null, position: null});
+    }
+    console.log(this.File);
+  }
+
+  Send(){
+
+    if (this.guard === true){
+      this.sendImagen = [...this.sendImagen];
+      console.log('IMGES', this.sendImagen);
+      this.guard = false;
+    }
+
+  }
+
+  addFood(food) {
+    this.foods = [...this.foods, food];
+    console.log(this.foods);
   }
 
 }
