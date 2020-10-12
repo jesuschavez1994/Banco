@@ -30,6 +30,9 @@ hr{color: rgb(180, 179, 179)}
     opacity: 0;
 }
 
+.card:hover{
+    opacity: .6;
+}
 @media (min-width: 576px){
     .card-columns {
         -moz-column-count: 3;
@@ -38,6 +41,13 @@ hr{color: rgb(180, 179, 179)}
         column-gap: 1.25rem;
         orphans: 1;
         widows: 1;
+    }
+}
+
+@media (min-width: 576px){
+    .card-columns .card {
+    display: inline-block;
+    width: 85%;
     }
 }
 

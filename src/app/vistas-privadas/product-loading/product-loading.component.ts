@@ -55,7 +55,8 @@ export class ProductLoadingComponent implements OnInit {
   icon = false;
   imagen = [];
   sendImagen = [];
-  guard = false;
+  guard = true;
+  LastPage: number;
 
   foods = [];
   // tslint:disable-next-line: ban-types
@@ -96,8 +97,11 @@ export class ProductLoadingComponent implements OnInit {
       localStorage.getItem('id'),
       localStorage.getItem('storeId'))
       .subscribe( (resp: ProductosLoads) => {
+        this.LastPage = resp.last_page;
+        console.log('DB', resp);
         this.MyProduct = resp.data;
         console.log(this.MyProduct);
+        this.guard = false;
     });
 
 
