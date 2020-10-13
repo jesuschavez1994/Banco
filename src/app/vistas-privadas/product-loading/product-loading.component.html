@@ -280,18 +280,42 @@
 <section>
 
     <div class="card-columns col-md-11">
-        <div class="card cursor-poniter" *ngFor="let item of MyProduct; let i = index">
-        <img [src]="item.images[0].src_size.xl | imgProductLoad" class="card-img-top" alt="..." *ngIf="item.images.length >= 1">
-        <img src="../../../assets/img/Box/box.svg" class="card-img-top" alt="..." *ngIf="item.images.length === 0">
-        <div class="card-body">
-            <span class="card-title">{{item.name}}</span>
-            <p class="card-text">{{item.description}}</p>
-            <h4 class="card-text">{{item.price}} $</h4>
-        </div>
+        <div    class="card cursor-poniter position-relative" 
+                *ngFor="let item of MyProduct; let i = index">
+
+                <i  class="material-icons position-absolute left-85 top-5" 
+                    name="create"
+                    >
+                    create
+                </i>
+
+                <i  class="material-icons position-absolute left-85 top-15" 
+                    name="delete"
+                    >
+                    delete
+                </i>
+
+                <img    [src]="item.images[0].src_size.xl | imgProductLoad" 
+                        class="card-img-top" 
+                        alt="{{item.name}}" 
+                        *ngIf="item.images.length >= 1"
+                >
+
+                <img    src="../../../assets/img/Box/box.svg" 
+                        class="card-img-top" 
+                        alt="..." 
+                        *ngIf="item.images.length === 0"
+                >
+
+                <div class="card-body">
+                    <span class="card-title">{{item.name}}</span>
+                    <p class="card-text">{{item.description}}</p>
+                    <h4 class="card-text">{{item.price}} $</h4>
+                </div>
         </div>
     </div>
 
-    <footer>
+    <footer *ngIf="!guard">
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
               <li class="page-item">

@@ -46,6 +46,30 @@
 /* height en vh */
 .height-100vh{height: 100vh;}
 
+
+/* Left */
+.left-85{left: 85%;}
+.left-80{left: 80%;}
+.left-75{left: 75%;}
+.left-70{left: 70%;}
+.left-65{left: 65%;}
+.left-60{left: 60%;}
+
+/* top*/
+.top-50{top: 50%;}
+.top-45{top: 45%;}
+.top-40{top: 40%;}
+.top-35{top: 35%;}
+.top-30{top: 30%;}
+.top-25{top: 25%;}
+.top-20{top: 20%;}
+.top-15{top: 15%;}
+.top-10{top: 10%;}
+.top-5{top: 5%;}
+
+
+
+
 .p-10{
   padding: 10px;
 }
