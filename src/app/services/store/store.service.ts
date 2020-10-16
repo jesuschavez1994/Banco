@@ -54,6 +54,11 @@ export class StoreService {
     return this.http.get<T>( query );
   }
 
+  private DeleteQuery<T>( query: string ) {
+    query = URL_SERVICIOS + query;
+    return this.http.delete<T>( query );
+  }
+
   cargarStorage() {
 
     if ( localStorage.getItem('token')) {
@@ -170,9 +175,14 @@ export class StoreService {
     return this.postQuery(url, data);
   }
 
-  ShowProducts(userId: string, storeId: string){
-    const url = `/api/users/${userId}/stores/${storeId}/products`;
+  ShowProducts(userId: string, storeId: string, page: number){
+    const url = `/api/users/${userId}/stores/${storeId}/products`  + '?page=' + page;
     return this.execQuery(url);
+  }
+
+  DeleteProduct(userId: string, storeId: string, idProduct: number){
+    const url = `/api/users/${userId}/stores/${storeId}/products/${idProduct}`;
+    return this.DeleteQuery(url);
   }
 
 

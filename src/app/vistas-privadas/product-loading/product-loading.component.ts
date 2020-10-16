@@ -6,6 +6,8 @@ import { StoreService } from '../../services/store/store.service';
 import { ProductosLoads } from 'src/app/interfaces/InterfaceProducto';
 import { DataProductDB } from '../../interfaces/InterfaceProducto';
 
+import {ActivatedRoute, Params, Router} from '@angular/router';
+
 
 
 @Component({
@@ -16,7 +18,12 @@ import { DataProductDB } from '../../interfaces/InterfaceProducto';
 })
 export class ProductLoadingComponent implements OnInit {
   // tslint:disable-next-line: variable-name
-  constructor(public _productLoadingService: ProductLoadingService, private _cd: ChangeDetectorRef, public storeService: StoreService) {
+  constructor(public _productLoadingService: ProductLoadingService,
+              // tslint:disable-next-line: variable-name
+              private _cd: ChangeDetectorRef,
+              public storeService: StoreService,
+              private route: ActivatedRoute,
+              private router: Router) {
 
     this.forma = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
@@ -50,17 +57,33 @@ export class ProductLoadingComponent implements OnInit {
   subcategoria: string;
   // Con input //
   // tslint:disable-next-line: max-line-length
-  File: any[] = [{image: null, name: null, position: null}, {image: null, name: null, position: null}, {image: null, name: null, position: null}, {image: null, name: null, position: null}];
+  File: any[] =
+  [
+    {image: null, name: null, position: null},
+    {image: null, name: null, position: null},
+    {image: null, name: null, position: null},
+    {image: null, name: null, position: null}
+  ];
   hover = false;
   icon = false;
   imagen = [];
   sendImagen = [];
-  guard = true;
+  cardShimmer = true;
   LastPage: number;
+  // tslint:disable-next-line: no-inferrable-types
+  oculto: number = 100;
 
   foods = [];
   // tslint:disable-next-line: ban-types
   MyProduct: DataProductDB[] = [];
+  // tslint:disable-next-line: no-inferrable-types
+  pagesActual: number = 1;
+  // tslint:disable-next-line: variable-name
+  last_Page_Pagination: number;
+  // tslint:disable-next-line: no-inferrable-types
+  totalProductAPI: number = 0;
+  // tslint:disable-next-line: no-inferrable-types
+  page: number = 1;
 
   ngOnInit() {
     // GET CATEGORIAS //
@@ -93,15 +116,12 @@ export class ProductLoadingComponent implements OnInit {
       this.recipes = response;
     });
 
-    this.storeService.ShowProducts(
-      localStorage.getItem('id'),
-      localStorage.getItem('storeId'))
-      .subscribe( (resp: ProductosLoads) => {
-        this.LastPage = resp.last_page;
-        console.log('DB', resp);
-        this.MyProduct = resp.data;
-        console.log(this.MyProduct);
-        this.guard = false;
+    this.getData(this.page);
+
+    // sistema que nos permita leer el parámetro de la página una vez que cambiamos entre estas usando la función
+    this.route.queryParams.subscribe(params => {
+      this.page = parseInt(params.page, 10) || 1;
+      this.getData(this.page);
     });
 
 
@@ -169,7 +189,6 @@ export class ProductLoadingComponent implements OnInit {
           images).subscribe( (resp: any) => {
           this.imagen.push(resp[0]);
           console.log('resp', this.imagen);
-          this.guard = true;
           this.Send();
         });
     });
@@ -242,12 +261,6 @@ export class ProductLoadingComponent implements OnInit {
 
   Send(){
 
-    if (this.guard === true){
-      this.sendImagen = [...this.sendImagen];
-      console.log('IMGES', this.sendImagen);
-      this.guard = false;
-    }
-
   }
 
   addFood(food) {
@@ -255,4 +268,46 @@ export class ProductLoadingComponent implements OnInit {
     console.log(this.foods);
   }
 
+  Delete(i: number){
+    console.log(i);
+    this.storeService.DeleteProduct(
+      localStorage.getItem('id'),
+      localStorage.getItem('storeId'),
+      this.MyProduct[i].id).subscribe( resp => {
+      console.log(resp);
+      // this.ngOnInit();
+    });
+  }
+
+  // Funcion para el cambio de paginación //
+
+  // En este caso lo que hará es que “reasignará”
+  // la URL y obtendrá la información usando la nueva página
+  pageChanged(page: number) {
+    this.page = page;
+    const queryParams: Params = {page};
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams
+      }
+    );
+    this.getData(this.page);
+  }
+
+  getData(page: number){
+
+    this.storeService.ShowProducts(localStorage.getItem('id'), localStorage.getItem('storeId'), page)
+      .subscribe( (resp: ProductosLoads) => {
+        this.MyProduct = resp.data;
+        console.log(this.MyProduct);
+        this.last_Page_Pagination = resp.last_page;
+        this.totalProductAPI = resp.total;
+        console.log('Total de Productos API', this.totalProductAPI);
+        console.log('LAST PAGE', this.last_Page_Pagination);
+        return  this.cardShimmer = false;
+    });
+
+  }
 }

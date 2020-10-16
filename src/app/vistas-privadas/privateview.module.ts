@@ -44,6 +44,10 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { ProductLoadingComponent } from './product-loading/product-loading.component';
 import { MyStoreComponent } from './pages/my-store/my-store.component';
 
+// PAGINATION //
+
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+
 
 // ALYLE //
 
@@ -105,6 +109,7 @@ import { ViewProductsLoadsComponent } from './components/view-products-loads/vie
       ViewProductsLoadsComponent],
 
     imports: [CommonModule,
+      NgxPaginationModule,
       SharedModule,
       MatSlideToggleModule,
       PipesModule,
