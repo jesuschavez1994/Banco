@@ -9,7 +9,6 @@ import { DataProductDB } from '../../interfaces/InterfaceProducto';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
 
-
 @Component({
   selector: 'app-product-loading',
   templateUrl: './product-loading.component.html',
@@ -86,6 +85,7 @@ export class ProductLoadingComponent implements OnInit {
   page: number = 1;
 
   ngOnInit() {
+
     // GET CATEGORIAS //
     this._productLoadingService.GetCategorias(
       localStorage.getItem('id'))
@@ -310,4 +310,5 @@ export class ProductLoadingComponent implements OnInit {
     });
 
   }
+  
 }

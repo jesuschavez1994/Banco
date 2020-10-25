@@ -17,6 +17,12 @@
 .width-95{width: 95% !important;}
 .width-100{width: 100% !important;}
 
+.ngx-pagination{
+  display: flex !important;
+  justify-content: center !important;
+  padding: 0px !important;
+}
+
 
 .correo-icon{background-image: url(./assets/img/LoginIconos/email.svg);}
 .user-name-icon{background-image: url(./assets/img/LoginIconos/usuario.svg);}

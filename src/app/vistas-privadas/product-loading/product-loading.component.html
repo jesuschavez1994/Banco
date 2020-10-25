@@ -15,7 +15,7 @@
             <form   [formGroup]="forma"
                     (ngSubmit)="addProducts()" 
                     novalidate="novalidate"
-                    class="row width-100 pt-5 pl-3"
+                    class="row width-100 pl-3"
                     >
                 
                     <!-- ====== SUBIDA DE PRODUCTO =====-->
@@ -279,7 +279,7 @@
 <!-- <app-card-shimmer *ngIf="cardShimmer"></app-card-shimmer> -->
 <section>
     <div class="card-columns col-md-11">
-        <div    class="card cursor-poniter position-relative height" 
+        <div    class="card cursor-poniter position-relative height"
                 *ngFor="let item of MyProduct  | paginate: { itemsPerPage: 28, currentPage: page, totalItems: totalProductAPI }; let i = index;">
 
                 <i  class="material-icons position-absolute left-85 top-5 icon-gris" 
@@ -317,21 +317,27 @@
                 >
 
                 <div class="card-body">
-                    <span class="card-title family-500 size-12">
+                    <p class="card-title family-500 size-12" title="{{item.name}} ">
                         {{item.name | slice: 0:30}} 
-                    </span>
+                        <span *ngIf="item.name.length > 60">...</span>
+                    </p>
                     <p class="card-text family-400 size-11" title="{{item.description}}">
-                        {{item.description | slice: 0:oculto}} ...
+                        {{item.description | slice: 0:oculto}} 
+                        <span *ngIf="item.description.length > 50">...</span>
                     </p>
                     <span class="family-500 size-16 black">
                         {{item.price | currency: 'USD': true:'1.3-3'}} 
+                    </span>
+                    <span class="family-500 size-14 black" *ngIf="item.price === null">
+                        Precio a consultar
                     </span>
                 </div>
         </div>
     </div>
     <!-- PAGINACIÓN -->
-    <footer *ngIf="!cardShimmer">
-        <pagination-controls    
+    <footer class="col-md-11" *ngIf="!cardShimmer">
+        <pagination-controls    previousLabel = "Anterior"
+                                nextLabel = "Siguiente"
                                 (pageChange)="pageChanged($event)">
         </pagination-controls>
     </footer>

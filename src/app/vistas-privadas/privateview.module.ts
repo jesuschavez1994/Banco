@@ -77,7 +77,6 @@ import { MinimaLight, MinimaDark } from '@alyle/ui/themes/minima';
 import { ProductLoadComponent } from './components/product-load/product-load/product-load.component';
 import { ViewProductsLoadsComponent } from './components/view-products-loads/view-products-loads.component';
 
-
 @NgModule({
     entryComponents: [
       MapEditarComponent,
