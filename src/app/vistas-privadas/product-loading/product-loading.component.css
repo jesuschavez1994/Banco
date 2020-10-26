@@ -35,7 +35,7 @@ hr{color: rgb(180, 179, 179)}
 
 
 @media (min-width:1201px){
-    .card-columns {
+    .card-deck {
         -moz-column-count: 4 !important;
         column-count: 4;
         -moz-column-gap: 1.25rem;
@@ -46,7 +46,7 @@ hr{color: rgb(180, 179, 179)}
 }
 
 @media (min-width: 993px) and (max-width:1200px){
-    .card-columns {
+    .card-deck {
         -moz-column-count: 3 !important;
         column-count: 3;
         -moz-column-gap: 1.25rem;
@@ -58,7 +58,7 @@ hr{color: rgb(180, 179, 179)}
 
 
 @media (min-width:768px) and (max-width:992px){
-    .card-columns {
+    .card-deck {
         -moz-column-count: 2 !important;
         column-count: 2;
         -moz-column-gap: 1.25rem;
@@ -69,7 +69,7 @@ hr{color: rgb(180, 179, 179)}
 }
 
 @media (min-width:100) and (max-width:767px){
-    .card-columns {
+    .card-deck {
         -moz-column-count: 2 !important;
         column-count: 2;
         -moz-column-gap: 1.25rem;
@@ -78,5 +78,12 @@ hr{color: rgb(180, 179, 179)}
         widows: 1;
     }
 }
+
+@media (min-width: 576px){
+    .card-deck {
+        display: block !important;
+    }
+}
+
 
 

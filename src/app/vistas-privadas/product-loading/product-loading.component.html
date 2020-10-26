@@ -134,7 +134,7 @@
     
                         <div class="row">
     
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="Marca" class="family-500 size-14">Marca</label>
                                 <select id="Marca" 
                                         class="form-control"
@@ -144,7 +144,7 @@
                                 </select>
                             </div>
     
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="Fabricante" class="family-500 size-14">Fabricante</label>
                                 <select id="Fabricante"
                                         class="form-control"
@@ -157,7 +157,7 @@
                             </div>
     
     
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="Categoria" class="family-500 size-14">Categoria</label>
                                 <select id="Categoria" 
                                         class="form-control"
@@ -173,7 +173,13 @@
                                 </select>
                             </div>
     
-                            <div class="form-group col-md-3">
+                            
+    
+                        </div>
+    
+                        <div class="row">
+
+                            <div class="form-group col-md-4">
                                 <label for="Subcategoria" class="family-500 size-14">Subcategoria</label>
                                 <select id="Subcategoria" 
                                         class="form-control"
@@ -186,11 +192,7 @@
                                 </select>
                             </div>
     
-                        </div>
-    
-                        <div class="row">
-    
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label class="family-500 size-16">Precio</label>
                                 <input  class="form-control"
                                         type="number"
@@ -208,7 +210,7 @@
                                 </div>
                             </div>
     
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label class="family-500 size-16">Cantidad</label>
                                 <input  class="form-control"
                                         formControlName="stock"
@@ -222,7 +224,7 @@
                                 </div>
                             </div>
     
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="Receta" class="family-500 size-14">Recetas Médicas</label>
                                 <select id="Receta" 
                                         class="form-control" 
@@ -232,7 +234,7 @@
                                 </select>
                             </div>
     
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="Delivery" class="family-500 size-14">Delivery</label>
                                 <select id="Delivery" 
                                         class="form-control"
@@ -244,7 +246,7 @@
                                 </select>
                             </div>
     
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="Disponible" class="family-500 size-14">Disponible</label>
                                 <select id="Disponible" 
                                         class="form-control"
@@ -272,12 +274,15 @@
         </div>
     </div>
 </section>
-<!-- 
-<section>
-    <app-view-products-loads></app-view-products-loads>
-</section> -->
+ 
+<section class="card-deck col-md-11">
+    <app-view-products-loads    *ngFor="let item of MyProduct| paginate: { itemsPerPage: 28, currentPage: page, totalItems: totalProductAPI }; let i = index;"
+                                [item]="item"
+                                [index]="i">
+    </app-view-products-loads>
+</section> 
 <!-- <app-card-shimmer *ngIf="cardShimmer"></app-card-shimmer> -->
-<section>
+<!-- <section>
     <div class="card-columns col-md-11">
         <div    class="card cursor-poniter position-relative height"
                 *ngFor="let item of MyProduct  | paginate: { itemsPerPage: 28, currentPage: page, totalItems: totalProductAPI }; let i = index;">
@@ -333,17 +338,18 @@
                     </span>
                 </div>
         </div>
-    </div>
-    <!-- PAGINACIÓN -->
-    <footer class="col-md-11" *ngIf="!cardShimmer">
+    </div> -->
+    <!-- 
+</section>
+     -->
+     
+     <!-- PAGINACIÓN -->
+     <footer class="col-md-11" *ngIf="!cardShimmer">
         <pagination-controls    previousLabel = "Anterior"
                                 nextLabel = "Siguiente"
                                 (pageChange)="pageChanged($event)">
         </pagination-controls>
     </footer>
-
-</section>
-    
 
 
 

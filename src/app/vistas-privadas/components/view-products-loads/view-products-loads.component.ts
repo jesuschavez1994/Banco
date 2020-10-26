@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StoreService } from '../../../services/store/store.service';
+import { DataProductDB } from '../../../interfaces/InterfaceProducto';
 
 @Component({
   selector: 'app-view-products-loads',
@@ -10,8 +11,10 @@ import { StoreService } from '../../../services/store/store.service';
 })
 export class ViewProductsLoadsComponent implements OnInit {
 
-  // @Input() producto: any = {};
-  // @Input() data: string[];
+  @Input() index: number;
+  @Input() item: DataProductDB;
+  // tslint:disable-next-line: no-inferrable-types
+  oculto: number = 100;
 
   // tslint:disable-next-line: ban-types
   showCards = false;
@@ -19,6 +22,10 @@ export class ViewProductsLoadsComponent implements OnInit {
   constructor(private cd: ChangeDetectorRef, public storeService: StoreService) { }
 
   ngOnInit() {
+  }
+
+  refresh(){
+    this.cd.detectChanges();
   }
 
 }

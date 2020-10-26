@@ -70,7 +70,6 @@ export class ProductLoadingComponent implements OnInit {
   cardShimmer = true;
   LastPage: number;
   // tslint:disable-next-line: no-inferrable-types
-  oculto: number = 100;
 
   foods = [];
   // tslint:disable-next-line: ban-types
@@ -185,7 +184,7 @@ export class ProductLoadingComponent implements OnInit {
         this.storeService.ImagenProduct(
           localStorage.getItem('id'),
           localStorage.getItem('storeId'),
-          response.delivery.id,
+          response.id,
           images).subscribe( (resp: any) => {
           this.imagen.push(resp[0]);
           console.log('resp', this.imagen);
@@ -301,7 +300,7 @@ export class ProductLoadingComponent implements OnInit {
     this.storeService.ShowProducts(localStorage.getItem('id'), localStorage.getItem('storeId'), page)
       .subscribe( (resp: ProductosLoads) => {
         this.MyProduct = resp.data;
-        console.log(this.MyProduct);
+        console.log('MY PRODUCTOS', this.MyProduct);
         this.last_Page_Pagination = resp.last_page;
         this.totalProductAPI = resp.total;
         console.log('Total de Productos API', this.totalProductAPI);
@@ -310,5 +309,4 @@ export class ProductLoadingComponent implements OnInit {
     });
 
   }
-  
 }
