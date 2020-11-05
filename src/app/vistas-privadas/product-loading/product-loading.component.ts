@@ -262,11 +262,6 @@ export class ProductLoadingComponent implements OnInit {
 
   }
 
-  addFood(food) {
-    this.foods = [...this.foods, food];
-    console.log(this.foods);
-  }
-
   Delete(i: number){
     console.log(i);
     this.storeService.DeleteProduct(
@@ -308,5 +303,10 @@ export class ProductLoadingComponent implements OnInit {
         return  this.cardShimmer = false;
     });
 
+  }
+
+  addFood(food) {
+    this.foods = [...this.foods, food];
+    console.log(this.foods);
   }
 }
