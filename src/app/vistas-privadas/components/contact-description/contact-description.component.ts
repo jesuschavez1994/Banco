@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import { Description } from '../../classes/descriptionStore.class';
-import { UserStoreService } from '../../../services/user-store/user-store.service';
+import { Description } from '@classes/descriptionStore.class';
+import { UserStoreService } from '@services/user-store/user-store.service';
 
 @Component({
   selector: 'app-contact-description',

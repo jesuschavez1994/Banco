@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, AbstractControl, } from '@angular/forms';
-import { UserStoreService } from '../../services/user-store/user-store.service';
+import { UserStoreService } from '@services/user-store/user-store.service';
+import { UsuarioService } from '@services/usuario/usuario.service';
+import { StoreService } from '@services/store/store.service';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { StoreService } from '../../services/store/store.service';
-import { Negocio } from '../../models/negocio.model';
-import { Usuario } from 'src/app/models/usuario.model';
-
-import { UsuarioService } from '../../services/usuario/usuario.service';
-
-
-
+import { Negocio } from '@models/negocio.model';
+import { Usuario } from '@models/usuario.model';
 
 @Component({
   selector: 'app-account',

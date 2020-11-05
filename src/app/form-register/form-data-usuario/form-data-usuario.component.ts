@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, AbstractControl, } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
-import { UsuarioService } from '../../services/usuario/usuario.service';
-import { Usuario } from 'src/app/models/usuario.model';
+import { UsuarioService } from '@services/usuario/usuario.service';
+import { Usuario } from '@models/usuario.model';
 
 
 import { Router } from '@angular/router';

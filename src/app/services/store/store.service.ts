@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { URL_SERVICIOS } from 'src/app/config/config';
-import { RegistroEmpresa } from '../../models/rut.model';
+import { URL_SERVICIOS } from '../../config/config';
+import { RegistroEmpresa } from '@models/rut.model';
 import { Router } from '@angular/router';
 
 
@@ -14,7 +14,7 @@ import 'rxjs/add/operator/catch';
 
 
 // IMPORTACIONES PARA USAR EL PATRÓN REDUX //
-import { UserStore } from '../../models/models-@ngrx/userStore.models';
+import { UserStore } from '@models/models-@ngrx/userStore.models';
 import { ActivarLoadingAction } from '../../shared/ui.accions';
 import { DesactivarLoadingAction } from '../../shared/ui.accions';
 import { Store } from '@ngrx/store';
@@ -165,17 +165,17 @@ export class StoreService {
     return this.execQuery(url);
   }
 
-  DetalleProduct(userId: string, storeId: string, data: any){
+  createProduct(userId: string, storeId: string, data: any){
     const url = `/api/users/${userId}/stores/${storeId}/products`;
     return this.postQuery(url, data);
   }
 
-  ImagenProduct(userId: string, storeId: string, idProduct: string, data: any){
+  ImagenProduct(userId: string, storeId: string, idProduct: number, data: any){
     const url = `/api/users/${userId}/stores/${storeId}/products/${idProduct}/images`;
     return this.postQuery(url, data);
   }
 
-  ShowProducts(userId: string, storeId: string, page: number){
+  geatAllProducts(userId: string, storeId: string, page?: number){
     const url = `/api/users/${userId}/stores/${storeId}/products`  + '?page=' + page;
     return this.execQuery(url);
   }

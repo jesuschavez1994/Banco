@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserStoreService } from '../../../services/user-store/user-store.service';
+import { UserStoreService } from '@services/user-store/user-store.service';
 
 @Component({
   selector: 'app-contact-information',

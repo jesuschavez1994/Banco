@@ -1,8 +1,8 @@
 import { Component, OnInit,  Output, EventEmitter } from '@angular/core';
-import { UsuarioService } from '../../../services/usuario/usuario.service';
+import { UsuarioService } from '@services/usuario/usuario.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { FormGroup, FormControl, Validators, FormArray, AbstractControl, } from '@angular/forms';
-import { Avatar } from '../../../models/avatar.model';
+import { Avatar } from '@models/avatar.model';
 import { URL_SERVICIOS } from 'src/app/config/config';
 
 @Component({

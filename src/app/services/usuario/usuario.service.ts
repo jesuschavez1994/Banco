@@ -8,24 +8,6 @@ import 'rxjs/add/operator/catch';
 import { tokenName } from '@angular/compiler';
 // import swal from 'sweetalert';
 
-
-const httpOptions = {
-  headers: new HttpHeaders({
-  'Content-Type': 'application/json',
-  Authorization: 'Bearer ' + localStorage.getItem('token'),
-  Accept: 'application/json'
-  })
-};
-
-const Options = {
-  headers: new HttpHeaders({
-  'Content-Type': 'application/json',
-  Authorization: 'Bearer ' + localStorage.getItem('token'),
-  Accept: 'application/json'
-  })
-};
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -37,7 +19,7 @@ export class UsuarioService {
 
   private postQuery<T>(query: string, data: any){
     query = URL_SERVICIOS + query;
-    return this.http.post<T>( query, data, httpOptions );
+    return this.http.post<T>( query, data );
   }
 
   private execQuery<T>( query: string ) {

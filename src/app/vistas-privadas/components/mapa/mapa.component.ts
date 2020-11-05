@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Marcador } from '../../classes/marcador.class';
+import { Marcador } from '@classes/marcador.class';
 import { GoogleMapsAPIWrapper } from '@agm/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';

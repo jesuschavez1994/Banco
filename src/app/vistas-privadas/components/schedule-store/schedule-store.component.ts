@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef  } from '@angular/core';
-import { StoreService } from '../../../services/store/store.service';
+import { StoreService } from '@services/store/store.service';
 
 @Component({
   selector: 'app-schedule-store',
