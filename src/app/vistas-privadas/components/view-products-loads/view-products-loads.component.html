@@ -1,4 +1,17 @@
+
 <div>
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
+    </div>
+</div>
+<!-- <div>
     <div    class="card cursor-poniter position-relative height"
             >
 
@@ -11,8 +24,10 @@
 
             <i  class="material-icons position-absolute left-85 top-15 icon-gris" 
                 name="delete"
-                
                 title="Eliminar"
+                data-target="#exampleModalCenter"
+                data-toggle="modal"
+                (click)="Delete(index)"
                 >
                 delete
             </i>
@@ -53,4 +68,45 @@
                 </span>
             </div>
     </div>
-</div>
+</div> -->
+
+<!-- MODAL ELIMINAR PRODUCTO-->
+  
+    <div  class="modal fade" 
+        id="exampleModalCenter" 
+        tabindex="-1" 
+        role="dialog" 
+        aria-labelledby="exampleModalCenterTitle" 
+        aria-hidden="true">
+
+        <div    class="modal-dialog modal-dialog-centered" 
+                role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="family-400 black">
+                        ¿Desea eliminar este producto?
+                    </h5>
+                    <button type="button" 
+                            class="close" 
+                            data-dismiss="modal" 
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" 
+                            class="btn btn-secondary" 
+                            data-dismiss="modal">
+                            No
+                    </button>
+                    <button type="button" 
+                            class="btn btn-primary"
+                            data-dismiss="modal"
+                            >
+                            Eliminar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>

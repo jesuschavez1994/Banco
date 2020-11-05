@@ -1,12 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { UserStoreService } from '../../services/user-store/user-store.service';
+import { UserStoreService } from '@services/user-store/user-store.service';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { DataStore, Shedules } from '../../models/dataStore.model';
+import { DataStore, Shedules } from '@models/dataStore.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
 import {NgbTimepickerConfig} from '@ng-bootstrap/ng-bootstrap';
 import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
-import { StoreService } from '../../services/store/store.service';
+import { StoreService } from '@services/store/store.service';
 
 declare let $: any;
 

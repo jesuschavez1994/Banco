@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-
-import { UsuarioService } from '../../../services/usuario/usuario.service';
+import { UsuarioService } from '@services/usuario/usuario.service';
 
 @Component({
   selector: 'app-photo-user',

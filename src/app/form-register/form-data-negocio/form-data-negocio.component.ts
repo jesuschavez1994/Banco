@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { StoreService } from '../../services/store/store.service';
-import { Usuario } from 'src/app/models/usuario.model';
+import { StoreService } from '@services/store/store.service';
+import { Usuario } from '@models/usuario.model';
 
 
 @Component({

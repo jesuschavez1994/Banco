@@ -1,13 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { ProductLoadingService } from '../../services/product-loading/product-loading.service';
-import { DetalleProduct, ImgLoad } from '../../models/dataStore.model';
-import { StoreService } from '../../services/store/store.service';
-import { ProductosLoads } from 'src/app/interfaces/InterfaceProducto';
-import { DataProductDB } from '../../interfaces/InterfaceProducto';
+import { ProductLoadingService } from '@services/product-loading/product-loading.service';
+import { DetalleProduct, ImgLoad } from '@models/dataStore.model';
+import { StoreService } from '@services/store/store.service';
+import { ProductosLoads } from '@interfaces/InterfaceProducto';
+import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 
 import {ActivatedRoute, Params, Router} from '@angular/router';
-
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-loading',
@@ -54,6 +54,7 @@ export class ProductLoadingComponent implements OnInit {
   factories: any;
   recipes: any;
   subcategoria: string;
+  myFlag = false;
   // Con input //
   // tslint:disable-next-line: max-line-length
   File: any[] =
@@ -74,6 +75,7 @@ export class ProductLoadingComponent implements OnInit {
   foods = [];
   // tslint:disable-next-line: ban-types
   MyProduct: DataProductDB[] = [];
+  DescripcionProduct: DataProductDB;
   // tslint:disable-next-line: no-inferrable-types
   pagesActual: number = 1;
   // tslint:disable-next-line: variable-name
@@ -176,23 +178,28 @@ export class ProductLoadingComponent implements OnInit {
       this.File
     );
 
-    this.storeService.DetalleProduct(
+    this.storeService.createProduct(
       localStorage.getItem('id'),
       localStorage.getItem('storeId'),
-      data).subscribe( (response: any) => {
-        console.log(response);
-        this.storeService.ImagenProduct(
-          localStorage.getItem('id'),
-          localStorage.getItem('storeId'),
-          response.id,
-          images).subscribe( (resp: any) => {
-          this.imagen.push(resp[0]);
-          console.log('resp', this.imagen);
-          this.Send();
-        });
+      data).pipe( switchMap( ( response: DataProductDB ) => {
+        return this.storeService.ImagenProduct(localStorage.getItem('id'),
+        localStorage.getItem('storeId'),
+        response.id,
+        images);
+      })).subscribe( (imgProduct: Image) => {
+        this.imagen.push(imgProduct[0]);
+        console.log('RESPONSE', imgProduct);
     });
 
   }
+
+  Send(){
+    this.getData();
+  }
+
+  // addFood(){
+  //   this.MyProduct = [...this.MyProduct, this.DescripcionProduct];
+  // }
 
   onFileChange(event, index?: number) {
     const reader = new FileReader();
@@ -258,26 +265,6 @@ export class ProductLoadingComponent implements OnInit {
     console.log(this.File);
   }
 
-  Send(){
-
-  }
-
-  addFood(food) {
-    this.foods = [...this.foods, food];
-    console.log(this.foods);
-  }
-
-  Delete(i: number){
-    console.log(i);
-    this.storeService.DeleteProduct(
-      localStorage.getItem('id'),
-      localStorage.getItem('storeId'),
-      this.MyProduct[i].id).subscribe( resp => {
-      console.log(resp);
-      // this.ngOnInit();
-    });
-  }
-
   // Funcion para el cambio de paginación //
 
   // En este caso lo que hará es que “reasignará”
@@ -295,17 +282,18 @@ export class ProductLoadingComponent implements OnInit {
     this.getData(this.page);
   }
 
-  getData(page: number){
+  getData(page?: number){
 
-    this.storeService.ShowProducts(localStorage.getItem('id'), localStorage.getItem('storeId'), page)
+    this.storeService.geatAllProducts(
+      localStorage.getItem('id'),
+      localStorage.getItem('storeId'),
+      page)
       .subscribe( (resp: ProductosLoads) => {
         this.MyProduct = resp.data;
         console.log('MY PRODUCTOS', this.MyProduct);
         this.last_Page_Pagination = resp.last_page;
         this.totalProductAPI = resp.total;
-        console.log('Total de Productos API', this.totalProductAPI);
-        console.log('LAST PAGE', this.last_Page_Pagination);
-        return  this.cardShimmer = false;
+        this.cardShimmer = false;
     });
 
   }

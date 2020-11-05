@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { RegistroEmpresa } from '../../models/rut.model';
-import { StoreService } from '../../services/store/store.service';
+import { RegistroEmpresa } from '@models/rut.model';
+import { StoreService } from '@services/store/store.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
-import { Negocio } from '../../models/negocio.model';
+import { Negocio } from '@models/negocio.model';
 
 
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserStoreService } from '../../services/user-store/user-store.service';
-import { StoreService } from '../../services/store/store.service';
+import { UserStoreService } from '@services/user-store/user-store.service';
+import { StoreService } from '@services/store/store.service';
 import { Usuario } from 'src/app/models/usuario.model';
-import { UsuarioService } from '../../services/usuario/usuario.service';
+import { UsuarioService } from '@services/usuario/usuario.service';
 import { URL_SERVICIOS } from 'src/app/config/config';
 
 

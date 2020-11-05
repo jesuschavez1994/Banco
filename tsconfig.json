@@ -14,10 +14,19 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    // short import //
+    "paths": {
+      "@services/*": ["src/app/services/*"],
+      "@models/*": ["src/app/models/*"],
+      "@classes/*": ["src/app/vistas-privadas/classes/*"],
+      "@interfaces/*": ["src/app/interfaces/*"],
+    },
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
-  }
+  },
+  
+
 }
