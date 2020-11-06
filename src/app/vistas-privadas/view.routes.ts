@@ -3,7 +3,7 @@ import { AccountComponent } from './account/account.component';
 import { LoginGuardGuard } from '../services/guards/login-guard.guard';
 
 
-const VIEW_ROUTES: Routes = [
+const ROUTES_VIEW_STORE: Routes = [
 
     // {   path: 'account',
     // component: AccountComponent,
@@ -11,4 +11,4 @@ const VIEW_ROUTES: Routes = [
 
 ];
 
-export const VIEW_ROUTING = RouterModule.forRoot(VIEW_ROUTES, {useHash: true});
+export const ROUTING_VIEW_STORE = RouterModule.forRoot(ROUTES_VIEW_STORE, {useHash: true});

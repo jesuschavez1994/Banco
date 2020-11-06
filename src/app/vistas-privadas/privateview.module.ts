@@ -12,12 +12,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MapaComponent } from './components/mapa/mapa.component';
 import { MapEditarComponent } from './components/map-editar/map-editar.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
-
+import { PipesModule } from '@pipes/pipes.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // ANGULAR MATERIAL //
-import { MaterialModule } from '../Angula-Material/material.module';
+import { MaterialModule } from '@Angula-Material/material.module';
 
 // Mapa //
 import { AgmCoreModule } from '@agm/core';
@@ -29,11 +29,10 @@ import { AsideComponent } from './shared/aside/aside.component';
 import { PhotoUserEditComponent } from './components/photo-user-edit/photo-user-edit.component';
 import { PhotoUserComponent } from './components/photo-user/photo-user.component';
 
-import { CardShimmerFormConfigurationComponent } from './components/Cards-Shimmer/card-shimmer-form-configuration/card-shimmer-form-configuration.component';
-import { CardShimmerPhotoUserEditComponent } from './components/Cards-Shimmer/card-shimmer-photo-user-edit/card-shimmer-photo-user-edit.component';
-import { CardShimmerTableInformacionComponent } from './components/Cards-Shimmer/card-shimmer-table-informacion/card-shimmer-table-informacion.component';
-import { CardShimmerTitleStoreComponent } from './components/Cards-Shimmer/card-shimmer-title-store/card-shimmer-title-store.component';
-import { PipesModule } from '../pipes/pipes.module';
+import { CardShimmerFormConfigurationComponent } from '@Cards-Shimmer/card-shimmer-form-configuration/card-shimmer-form-configuration.component';
+import { CardShimmerPhotoUserEditComponent } from '@Cards-Shimmer/card-shimmer-photo-user-edit/card-shimmer-photo-user-edit.component';
+import { CardShimmerTableInformacionComponent } from '@Cards-Shimmer/card-shimmer-table-informacion/card-shimmer-table-informacion.component';
+import { CardShimmerTitleStoreComponent } from '@Cards-Shimmer/card-shimmer-title-store/card-shimmer-title-store.component';
 import { ScheduleStoreComponent } from './components/schedule-store/schedule-store.component';
 import { ComponentsComponent } from './components/components.component';
 import { SheduleStoreEditComponent } from './components/shedule-store-edit/shedule-store-edit.component';
@@ -76,6 +75,7 @@ import { MinimaLight, MinimaDark } from '@alyle/ui/themes/minima';
 import { ProductLoadComponent } from './components/product-load/product-load/product-load.component';
 import { ViewProductsLoadsComponent } from './components/view-products-loads/view-products-loads.component';
 import { AccountComponent } from './account/account.component';
+import { ROUTING_VIEW_STORE } from './view.routes';
 
 
 @NgModule({
@@ -127,6 +127,7 @@ import { AccountComponent } from './account/account.component';
       HammerModule,
       ComponentsModule,
       APP_ROUTING,
+      ROUTING_VIEW_STORE,
       NzTimePickerModule,
       FormsModule,
       ReactiveFormsModule,

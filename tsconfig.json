@@ -22,6 +22,9 @@
       "@classes/*": ["src/app/vistas-privadas/classes/*"],
       "@interfaces/*": ["src/app/interfaces/*"],
       "@utils/*": ["src/app/utils/*"],
+      "@Cards-Shimmer/*": ["src/app/vistas-privadas/components/Cards-Shimmer/*"],
+      "@Angula-Material/*": ["src/app/Angula-Material/*"],
+      "@pipes/*": ["src/app/pipes/*"],
     },
   },
   "angularCompilerOptions": {
