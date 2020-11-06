@@ -43,18 +43,18 @@
                     >
                     
                     <mat-error  *ngIf="forma.get('username').errors?.required"  
-                          class="invalid-feedback">
-                          Este campo es requerido
+                                class="invalid-feedback">
+                                Este campo es requerido
                     </mat-error>
 
                     <mat-error  *ngIf="forma.get('username').errors?.minlength"  
-                          class="invalid-feedback">
-                          Por lo menos 5 caracteres
+                                class="invalid-feedback">
+                                Por lo menos 5 caracteres
                     </mat-error>
 
                     <mat-error  *ngIf="forma.get('username').hasError('not_available')"  
-                          class="invalid-feedback">
-                          ¡Este nombre de usuario ya existe!
+                                class="invalid-feedback">
+                                ¡Este nombre de usuario ya existe!
                     </mat-error>
             
                   </div>
@@ -70,13 +70,13 @@
                     >
                     
                     <mat-error  *ngIf="forma.get('name').errors?.required"  
-                          class="invalid-feedback">
-                          Este campo es requerido
+                                class="invalid-feedback">
+                                Este campo es requerido
                     </mat-error>
 
                     <mat-error  *ngIf="forma.get('name').errors?.minlength"  
-                          class="invalid-feedback">
-                          Por lo menos 5 caracteres
+                                class="invalid-feedback">
+                                Por lo menos 5 caracteres
                     </mat-error>
             
                   </div>
@@ -92,13 +92,13 @@
                       >
                 
                       <mat-error  *ngIf="forma.get('email').errors?.required"  
-                            class="invalid-feedback">
-                            Este campo es requerido
+                                  class="invalid-feedback">
+                                  Este campo es requerido
                       </mat-error>
 
                       <mat-error  *ngIf="forma.get('email').errors?.pattern"  
-                            class="invalid-feedback">
-                            No posee la forma de un correo: example@gmail.com
+                                  class="invalid-feedback">
+                                  No posee la forma de un correo: example@gmail.com
                       </mat-error> 
 
                     </div>
@@ -114,18 +114,18 @@
                       >
                 
                       <mat-error  *ngIf="forma.get('password1').errors?.required"  
-                            class="invalid-feedback">
-                            Este campo es requerido.
+                                  class="invalid-feedback">
+                                  Este campo es requerido.
                       </mat-error>
 
                       <mat-error  *ngIf="forma.get('password1').errors?.minlength"  
-                            class="invalid-feedback">
-                            La contraseña debe tener al menos 8 caracteres
+                                  class="invalid-feedback">
+                                  La contraseña debe tener al menos 8 caracteres
                       </mat-error> 
 
                       <mat-error  *ngIf="forma.get('password1').hasError('invalid_password')"  
-                            class="invalid-feedback">
-                            La contraseña debe tener al menos 1 número
+                                  class="invalid-feedback">
+                                  La contraseña debe tener al menos 1 número
                       </mat-error> 
                 
                     </div>
@@ -143,13 +143,13 @@
                         >
                 
                       <mat-error  *ngIf="forma.get('password2').errors?.required"  
-                            class="invalid-feedback">
-                            Este campo es requerido.
+                                  class="invalid-feedback">
+                                  Este campo es requerido.
                       </mat-error>
                 
-                      <mat-error   *ngIf="((forma.get('password2').value !== forma.get('password1').value) && forma.get('password2').errors?.noiguales)"  
-                              class="invalid-feedback">
-                              ¡Las contraseñas no son iguales!
+                      <mat-error  *ngIf="((forma.get('password2').value !== forma.get('password1').value) && forma.get('password2').errors?.noiguales)"  
+                                  class="invalid-feedback">
+                                  ¡Las contraseñas no son iguales!
                       </mat-error> 
                         
                     </div>
@@ -159,9 +159,9 @@
                     <div class="col-12">
                       <div class="checkbox checkbox-primary  p-t-0">
                         <input type="checkbox" formControlName="terminos" id="checkAceptoTerminos">
-                        <label  class="family-500 pl-3 size-13" for="checkAceptoTerminos">
+                        <mat-label  class="family-500 pl-3 size-13" for="checkAceptoTerminos">
                           Acepto términos y condiciones
-                        </label>
+                        </mat-label>
                       </div>
                       <p class="family-400 size-12">
                         Haciendo click en Registrar Declarara ser una persona natural y debe ingresar 

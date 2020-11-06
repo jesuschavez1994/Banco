@@ -32,14 +32,15 @@
                              [ngClass]="{'is-invalid':  (!forma.controls['name'].valid || forma.controls['name'].errors?.minlength)&& forma.controls['name'].touched, 'is-valid': forma.controls['name'].valid }" 
                         >
                       
-                      <div  *ngIf="forma.get('name').errors?.required"  
-                            class="invalid-feedback">
-                            Este campo es requerido
-                      </div>
-                      <div  *ngIf="forma.get('name').errors?.minlength"  
-                            class="invalid-feedback">
-                            Por lo menos 5 caracteres
-                      </div>
+                      <mat-error    *ngIf="forma.get('name').errors?.required"  
+                                    class="invalid-feedback">
+                                    Este campo es requerido
+                      </mat-error>
+
+                      <mat-error    *ngIf="forma.get('name').errors?.minlength"  
+                                    class="invalid-feedback">
+                                    Por lo menos 5 caracteres
+                      </mat-error>
               
                     </div>
                 </div>
@@ -54,14 +55,15 @@
                              [ngClass]="{'is-invalid':  (!forma.controls['rut'].valid || forma.controls['rut'].errors?.minlength)&& forma.controls['rut'].touched, 'is-valid': forma.controls['rut'].valid }" 
                         >
                       
-                      <div  *ngIf="forma.get('rut').errors?.required"  
-                            class="invalid-feedback">
-                            Este campo es requerido
-                      </div>
-                      <div  *ngIf="forma.get('rut').errors?.minlength"  
-                            class="invalid-feedback">
-                            Por lo menos 5 caracteres
-                      </div>
+                      <mat-error    *ngIf="forma.get('rut').errors?.required"  
+                                    class="invalid-feedback">
+                                    Este campo es requerido
+                      </mat-error>
+
+                      <mat-error    *ngIf="forma.get('rut').errors?.minlength"  
+                                    class="invalid-feedback">
+                                    Por lo menos 5 caracteres
+                      </mat-error>
               
                     </div>
                 </div>
@@ -70,10 +72,10 @@
                 <div class="form-group row">
                     <div class="input-group col-md-12">
                         <button [disabled]="!forma.valid" 
-                              type="submit" 
-                              class="btn btn-outline-primary btn-block fredoka"
-                              >
-                              Regístrarme
+                                type="submit" 
+                                class="btn btn-outline-primary btn-block fredoka"
+                                >
+                                Regístrarme
                         </button>
                     </div>
                 </div>

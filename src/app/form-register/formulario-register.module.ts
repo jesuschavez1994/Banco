@@ -29,6 +29,9 @@ import { MaterialModule } from '../Angula-Material/material.module';
     ComponentsModule,
     SharedModule
   ],
-  exports: [FormDataUsuarioComponent, FormDataNegocioComponent, RutStoreComponent]
+  exports: [
+    FormDataUsuarioComponent,
+    FormDataNegocioComponent,
+    RutStoreComponent]
 })
 export class FormularioRegisterModule { }

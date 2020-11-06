@@ -41,14 +41,15 @@
                                 [ngClass]="{'is-invalid':  (!forma.controls['email'].valid || forma.controls['email'].errors?.minlength)&& forma.controls['email'].touched, 'is-valid': forma.controls['email'].valid }"
                         >
               
-                        <div    *ngIf="forma.get('email').errors?.required"  
+                        <mat-error    *ngIf="forma.get('email').errors?.required"  
                                 class="invalid-feedback">
                                 Este campo es requerido
-                        </div>
-                        <div    *ngIf="forma.get('email').errors?.pattern"  
+                        </mat-error>
+
+                        <mat-error    *ngIf="forma.get('email').errors?.pattern"  
                                 class="invalid-feedback">
                                 No posee la forma de un correo: example@gmail.com
-                        </div> 
+                        </mat-error> 
             
                     </div>
                 </div>
@@ -62,14 +63,15 @@
                                 [ngClass]="{'is-invalid':  (!forma.get('password').valid || forma.get('password').errors?.minlength)&& forma.get('password').touched, 'is-valid': forma.get('password').valid }"
                         >
 
-                        <div    *ngIf="forma.get('password').errors?.required"  
-                                class="invalid-feedback">
-                                Este campo es requerido
-                        </div>
-                        <div    *ngIf="forma.get('password').errors?.minlength"  
-                                class="invalid-feedback">
-                                La contraseña debe tener al menos 8 caracteres
-                        </div> 
+                        <mat-error  *ngIf="forma.get('password').errors?.required"  
+                                    class="invalid-feedback">
+                                    Este campo es requerido
+                        </mat-error>
+
+                        <mat-error  *ngIf="forma.get('password').errors?.minlength"  
+                                    class="invalid-feedback">
+                                    La contraseña debe tener al menos 8 caracteres
+                        </mat-error> 
                     </div>
                 </div>
 
@@ -84,10 +86,16 @@
                                     [(ngModel)]="isChecked"
 
                             >
-                            <label for="checkbox-signup" class="ml-2 family-500 recorder"> Recordarme </label>
+
+                            <mat-label  for="checkbox-signup"
+                                        class="ml-2 family-500 recorder">
+                                        Recordarme 
+                            </mat-label>
+
                         </div>
 
-                        <a  id="to-recover" class="pull-right family-500 recorder"> 
+                        <a  id="to-recover" 
+                            class="pull-right family-500 recorder"> 
                             Olvidé mi contraseña
                         </a> 
                     </div>
