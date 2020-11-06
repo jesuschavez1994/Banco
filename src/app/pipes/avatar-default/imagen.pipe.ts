@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { URL_SERVICIOS } from '../config/config';
-import { UsuarioService } from '../services/usuario/usuario.service';
+import { environment } from '../../../environments/environment';
+import { URL_SERVICIOS } from '../../config/config';
+import { UsuarioService } from '../../services/usuario/usuario.service';
 
 const URL = URL_SERVICIOS;
 
 @Pipe({
-  name: 'imagen'
+  name: 'avatarDefault'
 })
 export class ImagenPipe implements PipeTransform {
 

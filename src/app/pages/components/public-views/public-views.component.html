@@ -35,7 +35,7 @@
                                         *ngFor="let item of PeliculasRecientes"
                                         [routerLink]="['detalle-producto', item.id]">
         
-                                    <img [src]="item.backdrop_path | imagen" width="100%">
+                                    <img [src]="item.backdrop_path | avatarDefault" width="100%">
                                     <div class="card-body">
                                         <h5 class="card-title family-500 size-14 black">{{item.original_title}}</h5>
                                         <p class="card-text family-400 size-12 black"> 
@@ -61,7 +61,7 @@
                                         *ngFor="let productos of producto"
                                         [routerLink]="['detalle-producto', productos.id]">
         
-                                    <img [src]="productos.backdrop_path | imagen" width="100%">
+                                    <img [src]="productos.backdrop_path | avatarDefault" width="100%">
                                     <div class="card-body">
                                         <h5 class="card-title">{{productos.original_title}}</h5>
                                         <p class="card-text family-400 size-12 black"> 

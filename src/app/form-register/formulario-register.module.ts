@@ -9,6 +9,7 @@ import { ComponentsModule } from '../components/components.module';
 import { SharedModule } from '../shared/shared.module';
 import { RutStoreComponent } from './rut-store/rut-store.component';
 import { ButtomGoogleRegisterComponent } from './buttom-google-register/buttom-google-register.component';
+import { MaterialModule } from '../Angula-Material/material.module';
 
 
 
@@ -18,10 +19,11 @@ import { ButtomGoogleRegisterComponent } from './buttom-google-register/buttom-g
   declarations: [FormDataUsuarioComponent,
     FormDataNegocioComponent,
     RutStoreComponent,
-    ButtomGoogleRegisterComponent,],
+    ButtomGoogleRegisterComponent, ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    MaterialModule,
     FormsModule,
     APP_ROUTING,
     ComponentsModule,

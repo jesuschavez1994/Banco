@@ -42,14 +42,20 @@
                            [ngClass]="{'is-invalid':  (!forma.controls['username'].valid || forma.controls['username'].errors?.minlength)&& forma.controls['username'].touched, 'is-valid': forma.controls['username'].valid }" 
                     >
                     
-                    <div  *ngIf="forma.get('username').errors?.required"  
+                    <mat-error  *ngIf="forma.get('username').errors?.required"  
                           class="invalid-feedback">
                           Este campo es requerido
-                    </div>
-                    <div  *ngIf="forma.get('username').errors?.minlength"  
+                    </mat-error>
+
+                    <mat-error  *ngIf="forma.get('username').errors?.minlength"  
                           class="invalid-feedback">
                           Por lo menos 5 caracteres
-                    </div>
+                    </mat-error>
+
+                    <mat-error  *ngIf="forma.get('username').hasError('not_available')"  
+                          class="invalid-feedback">
+                          ¡Este nombre de usuario ya existe!
+                    </mat-error>
             
                   </div>
                 </div>
@@ -63,14 +69,15 @@
                            [ngClass]="{'is-invalid':  (!forma.controls['name'].valid || forma.controls['name'].errors?.minlength)&& forma.controls['name'].touched, 'is-valid': forma.controls['name'].valid }" 
                     >
                     
-                    <div  *ngIf="forma.get('name').errors?.required"  
+                    <mat-error  *ngIf="forma.get('name').errors?.required"  
                           class="invalid-feedback">
                           Este campo es requerido
-                    </div>
-                    <div  *ngIf="forma.get('name').errors?.minlength"  
+                    </mat-error>
+
+                    <mat-error  *ngIf="forma.get('name').errors?.minlength"  
                           class="invalid-feedback">
                           Por lo menos 5 caracteres
-                    </div>
+                    </mat-error>
             
                   </div>
                 </div>
@@ -84,14 +91,16 @@
                               [ngClass]="{'is-invalid':  (!forma.controls['email'].valid || forma.controls['email'].errors?.minlength)&& forma.controls['email'].touched, 'is-valid': forma.controls['email'].valid }"
                       >
                 
-                      <div  *ngIf="forma.get('email').errors?.required"  
+                      <mat-error  *ngIf="forma.get('email').errors?.required"  
                             class="invalid-feedback">
                             Este campo es requerido
-                      </div>
-                      <div  *ngIf="forma.get('email').errors?.pattern"  
+                      </mat-error>
+
+                      <mat-error  *ngIf="forma.get('email').errors?.pattern"  
                             class="invalid-feedback">
                             No posee la forma de un correo: example@gmail.com
-                      </div> 
+                      </mat-error> 
+
                     </div>
                 </div>
 
@@ -104,14 +113,20 @@
                               [ngClass]="{'is-invalid':  (!forma.get('password1').valid || forma.get('password1').errors?.minlength)&& forma.get('password1').touched, 'is-valid': forma.get('password1').valid }"
                       >
                 
-                      <div  *ngIf="forma.get('password1').errors?.required"  
+                      <mat-error  *ngIf="forma.get('password1').errors?.required"  
                             class="invalid-feedback">
-                            Este campo es requerido
-                      </div>
-                      <div  *ngIf="forma.get('password1').errors?.minlength"  
+                            Este campo es requerido.
+                      </mat-error>
+
+                      <mat-error  *ngIf="forma.get('password1').errors?.minlength"  
                             class="invalid-feedback">
                             La contraseña debe tener al menos 8 caracteres
-                      </div> 
+                      </mat-error> 
+
+                      <mat-error  *ngIf="forma.get('password1').hasError('invalid_password')"  
+                            class="invalid-feedback">
+                            La contraseña debe tener al menos 1 número
+                      </mat-error> 
                 
                     </div>
                 </div>
@@ -127,20 +142,15 @@
                                 [ngClass]="{'is-invalid':  (!forma.get('password2').valid || forma.get('password2').errors?.minlength)&& forma.get('password2').touched, 'is-valid': forma.get('password2').valid }"
                         >
                 
-                      <div  *ngIf="forma.get('password2').errors?.required"  
+                      <mat-error  *ngIf="forma.get('password2').errors?.required"  
                             class="invalid-feedback">
-                            Este campo es requerido
-                      </div>
+                            Este campo es requerido.
+                      </mat-error>
                 
-                      <div   *ngIf="forma.get('password2').errors?.minlength"  
-                              class="invalid-feedback">
-                              La contraseña debe tener al menos 8 caracteres
-                      </div> 
-                
-                      <div   *ngIf="((forma.get('password2').value !== forma.get('password1').value) && forma.get('password2').errors?.noiguales)"  
+                      <mat-error   *ngIf="((forma.get('password2').value !== forma.get('password1').value) && forma.get('password2').errors?.noiguales)"  
                               class="invalid-feedback">
                               ¡Las contraseñas no son iguales!
-                      </div> 
+                      </mat-error> 
                         
                     </div>
                 </div>

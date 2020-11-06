@@ -14,8 +14,11 @@
                 <div class="row">
 
                        
-                        <app-card-shimmer-form-configuration class="col-md-6 animated fadeIn" *ngIf="card_shimmer"></app-card-shimmer-form-configuration>
-                        <!-- <h2 class="OpenSans-700 pl-3 pb-3 h2-title">Configuración de tu cuenta</h2> -->
+                        <app-card-shimmer-form-configuration    class="col-md-6 animated 
+                                                                fadeIn" 
+                                                                *ngIf="card_shimmer">
+                        </app-card-shimmer-form-configuration>
+
                         <!-- ============================================================== -->
                         <!-- Formulario de Configuración  -->
                         <!-- ============================================================== -->
@@ -28,19 +31,27 @@
 
                             <div class="row">
 
-                                <h2 class="OpenSans-700 pl-3 pb-3 h2-title">Configuración de tu cuenta</h2>
+                                <h2 class="OpenSans-700 pl-3 pb-3 h2-title">
+                                    Configuración de tu cuenta
+                                </h2>
 
                                 <div class="col-md-12">
 
                                     <div class="form-group row mb-0 mt-4">
                                         <div class="col-12">
-                                            <h5 class="family-500 orange">Información de contacto</h5>
+                                            <h5 class="family-500 orange">
+                                                Información de contacto
+                                            </h5>
                                         </div>
                                     </div>
                 
                                     <div class="form-group row">
                                         <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
-                                            <label class="OpenSans-600 size-12">Nombre de usuario</label>
+
+                                            <label class="OpenSans-600 size-12">
+                                                Nombre de usuario
+                                            </label>
+
                                             <input  class="form-control"
                                                     type="text"
                                                     placeholder="Ingresa tú nombre de usuario"
@@ -48,20 +59,25 @@
                                                     [ngModel]="data.username"
                                                     [ngClass]="{'is-invalid':  (!forma.controls['username'].valid || forma.controls['username'].errors?.minlength)&& forma.controls['username'].touched, 'is-valid': forma.controls['username'].valid }"     
                                             >
-                                            <div    *ngIf="forma.get('username').errors?.required"  
-                                                    class="invalid-feedback">
-                                                    Ingresa un nombre de usuario para mostrar que sea valido
-                                            </div>
-                                            <div    *ngIf="forma.get('username').errors?.minlength"  
-                                                    class="invalid-feedback">
-                                                    Por lo menos 5 caracteres
-                                            </div>
+
+                                            <mat-error  *ngIf="forma.get('username').errors?.required"  
+                                                        class="invalid-feedback">
+                                                        Ingresa un nombre de usuario para mostrar que sea valido
+                                            </mat-error>
+
+                                            <mat-error  *ngIf="forma.get('username').errors?.minlength"  
+                                                        class="invalid-feedback">
+                                                        Por lo menos 5 caracteres
+                                            </mat-error>
+
                                         </div>
                                     </div>
                 
                                     <div class="form-group row">
                                         <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
-                                            <label class="OpenSans-600 size-12">Nombre y Apellido</label>
+                                            <label  class="OpenSans-600 size-12">
+                                                Nombre y Apellido
+                                            </label>
                                             <input  class="form-control"
                                                     type="text"                                  
                                                     formControlName="name"
@@ -70,21 +86,24 @@
                                                     
                                             >
 
-                                            <div    *ngIf="forma.get('name').errors?.required"  
-                                                    class="invalid-feedback">
-                                                    Ingresa un nombre para mostrar que sea valido.
-                                            </div>
-                                            <div    *ngIf="forma.get('name').errors?.minlength"  
-                                                    class="invalid-feedback">
-                                                    Por lo menos 5 caracteres.
-                                            </div>
+                                            <mat-error  *ngIf="forma.get('name').errors?.required"  
+                                                        class="invalid-feedback">
+                                                        Ingresa un nombre para mostrar que sea valido.
+                                            </mat-error>
+
+                                            <mat-error  *ngIf="forma.get('name').errors?.minlength"  
+                                                        class="invalid-feedback">
+                                                        Por lo menos 5 caracteres.
+                                            </mat-error>
                                     
                                         </div>
                                     </div>
                 
                                     <div class="form-group row">
                                         <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
-                                            <label class="OpenSans-600 size-12">Correo</label>
+                                            <label  class="OpenSans-600 size-12">
+                                                Correo
+                                            </label>
                                             <input  class="form-control email-icon"
                                                     type="email"
                                                     value = {{items.email}}
@@ -95,22 +114,25 @@
                                                     [ngClass]="{'is-invalid':  (!forma.controls['email'].valid || forma.controls['email'].errors?.minlength)&& forma.controls['email'].touched, 'is-valid': forma.controls['email'].valid }" 
                                             >
 
-                                            <div    *ngIf="forma.get('email').errors?.required"  
-                                                    class="invalid-feedback">
-                                                    Agrega una dirección de correo electrónico para poder iniciar
-                                                    sesión con tu dirección de correo electrónico.
-                                            </div>
-                                            <div    *ngIf="forma.get('email').errors?.minlength"  
-                                                    class="invalid-feedback">
-                                                    Por lo menos 5 caracteres.
-                                            </div>
+                                            <mat-error  *ngIf="forma.get('email').errors?.required"  
+                                                        class="invalid-feedback">
+                                                        Agrega una dirección de correo electrónico para poder iniciar
+                                                        sesión con tu dirección de correo electrónico.
+                                            </mat-error>
+
+                                            <mat-error  *ngIf="forma.get('email').errors?.minlength"  
+                                                        class="invalid-feedback">
+                                                        Por lo menos 5 caracteres.
+                                            </mat-error>
 
                                         </div>
                                     </div>
                 
                                     <div class="form-group row">
                                         <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
-                                            <label class="OpenSans-600 size-12">Telefono</label>
+                                            <label class="OpenSans-600 size-12">
+                                                Telefono
+                                            </label>
                                             <input  class="form-control icon-phone input"
                                                     type="text"
                                                     placeholder="Ingrese telefono"
@@ -119,24 +141,28 @@
                                                     [ngClass]="{'is-invalid':  (!forma.controls['phone'].valid || forma.controls['phone'].errors?.minlength)&& forma.controls['phone'].touched, 'is-valid': forma.controls['phone'].valid }" 
                                             >
 
-                                            <div    *ngIf="forma.get('phone').errors?.required"  
-                                                    class="invalid-feedback">
-                                                    Ingresa tu número teléfonico.
-                                            </div>
+                                            <mat-error  *ngIf="forma.get('phone').errors?.required"  
+                                                        class="invalid-feedback">
+                                                        Ingresa tu número teléfonico.
+                                            </mat-error>
 
                                         </div>
                                     </div>
                 
                                     <div class="form-group row">
                                         <div class="col-12">
-                                            <h5 class="family-500 orange">Contraseña</h5>
+                                            <h5 class="family-500 orange">
+                                                Contraseña
+                                            </h5>
                                         </div>
                                     </div>
                 
                 
                                     <div class="form-group row">
                                         <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
-                                            <label class="OpenSans-600 size-12">Nueva contraseña</label>
+                                            <label class="OpenSans-600 size-12">
+                                                Nueva contraseña
+                                            </label>
                                             <input  class="form-control"
                                                     type="password"
                                                     placeholder="Contraseña"
@@ -144,21 +170,24 @@
                                                     [ngClass]="{'is-invalid':  (!forma.get('password1').valid || forma.get('password1').errors?.minlength)&& forma.get('password1').touched, 'is-valid': forma.get('password1').valid }"
                                             >
 
-                                            <div    *ngIf="forma.get('password1').errors?.required"  
-                                                    class="invalid-feedback">
-                                                    Este campo es requerido
-                                            </div>
-                                            <div    *ngIf="forma.get('password1').errors?.minlength"  
-                                                    class="invalid-feedback">
-                                                    La contraseña debe tener al menos 8 caracteres
-                                            </div> 
+                                            <mat-error  *ngIf="forma.get('password1').errors?.required"  
+                                                        class="invalid-feedback">
+                                                        Este campo es requerido
+                                            </mat-error>
+
+                                            <mat-error  *ngIf="forma.get('password1').errors?.minlength"  
+                                                        class="invalid-feedback">
+                                                        La contraseña debe tener al menos 8 caracteres
+                                            </mat-error> 
                                 
                                         </div>
                                     </div>
                 
                                     <div class="form-group row">
                                         <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
-                                            <label class="OpenSans-600 size-12">Repita contraseña</label>
+                                            <label class="OpenSans-600 size-12">
+                                                Repita contraseña
+                                            </label>
                                             <input  class="form-control"
                                                     type="password"
                                                     placeholder="Confirma contraseña"
@@ -166,21 +195,24 @@
                                                     [ngClass]="{'is-invalid':  (!forma.get('password2').valid || forma.get('password2').errors?.minlength)&& forma.get('password2').touched, 'is-valid': forma.get('password2').valid }"
                                             >
 
-                                            <div    *ngIf="forma.get('password2').errors?.required"  
-                                                    class="invalid-feedback">
-                                                    Este campo es requerido
-                                            </div>
-                                            <div    *ngIf="forma.get('password2').errors?.minlength"  
-                                                    class="invalid-feedback">
-                                                    La contraseña debe tener al menos 8 caracteres
-                                            </div> 
+                                            <mat-error  *ngIf="forma.get('password2').errors?.required"  
+                                                        class="invalid-feedback">
+                                                        Este campo es requerido
+                                            </mat-error>
+
+                                            <mat-error  *ngIf="forma.get('password2').errors?.minlength"  
+                                                        class="invalid-feedback">
+                                                        La contraseña debe tener al menos 8 caracteres
+                                            </mat-error> 
                                 
                                         </div>
                                     </div>
                 
                                     <div class="form-group row">
                                         <div class="col-12">
-                                            <h5 class="family-500 orange">Cuentas conectadas</h5>
+                                            <h5 class="family-500 orange">
+                                                Cuentas conectadas
+                                            </h5>
                                         </div>
                                     </div>
                 
@@ -212,11 +244,11 @@
                                             </p>
 
                                         </div>
-                                            <button type="submit" 
-                                                    class="btn btn-outline-primary btn-block fredoka mt-4 col-6 button"
-                                                    >
-                                            Desactivar cuenta
-                                            </button>  
+                                        <button type="submit" 
+                                                class="btn btn-outline-primary btn-block fredoka mt-4 col-6 button"
+                                                >
+                                                Desactivar cuenta
+                                        </button>  
                                     </div>
                                 </div>
                                 
@@ -227,13 +259,13 @@
                                         (click)="Reset()"
                                         [disabled]="forma.pristine"       
                                         >
-                                    Cancelar
+                                        Cancelar
                                 </button>
                                 <button class="btn btn-outline-primary button width-30 fredoka" 
                                         type="submit"
                                         [disabled]="forma.pristine"
                                         >
-                                    Guardar cambios
+                                        Guardar cambios
                                 </button>
                             </footer>
                         </form>

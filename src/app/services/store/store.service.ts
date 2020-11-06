@@ -3,9 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { RegistroEmpresa } from '@models/rut.model';
 import { Router } from '@angular/router';
-
-
-// import swal from 'sweetalert';
+import swal from 'sweetalert';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -21,6 +19,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
 import { SetUserAction } from '../../Login/auth/auth.actions';
 import { Usuario } from 'src/app/models/usuario.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -101,23 +100,28 @@ export class StoreService {
     err => {
       console.log(err);
       if (err.error.errors.email) {
-        // swal({
-        //   text: 'El correo ya ha sido registrado',
-        //   icon: 'warning',
-        //   dangerMode: true,
-        // });
+        swal({
+          text: 'El correo ya ha sido registrado',
+          icon: 'warning',
+          dangerMode: true,
+        });
       }
 
       if (err.error.errors.register) {
-        // swal({
-        //   text: 'El nombre de usuario ya existe',
-        //   icon: 'warning',
-        //   dangerMode: true,
-        // });
+        swal({
+          text: 'El nombre de usuario ya existe',
+          icon: 'warning',
+          dangerMode: true,
+        });
       }
 
     });
 
+  }
+
+  usernameAvailability(name: string) {
+    const url = '/api/signup/availability';
+    return this.postQuery(url, name);
   }
 
   registroRut(nameStore: RegistroEmpresa){
@@ -130,11 +134,11 @@ export class StoreService {
       this.store.dispatch(new DesactivarLoadingAction() );
     }, err => {
       console.log(err);
-      // swal({
-      //     text: err.error.message,
-      //     icon: 'warning',
-      //     dangerMode: true,
-      //   });
+      swal({
+          text: err.error.message,
+          icon: 'warning',
+          dangerMode: true,
+        });
     });
 
   }

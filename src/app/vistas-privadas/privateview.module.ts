@@ -13,22 +13,22 @@ import { MapaComponent } from './components/mapa/mapa.component';
 import { MapEditarComponent } from './components/map-editar/map-editar.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// ANGULAR MATERIAL //
+import { MaterialModule } from '../Angula-Material/material.module';
+
 // Mapa //
 import { AgmCoreModule } from '@agm/core';
-import {MatButtonModule} from '@angular/material/button';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatCardModule} from '@angular/material/card';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatInputModule} from '@angular/material/input';
-import {MatGridListModule} from '@angular/material/grid-list';
+
 
 import { ContactDescriptionEditComponent } from './components/contact-description-edit/contact-description-edit.component';
 import { ContactDescriptionComponent } from './components/contact-description/contact-description.component';
 import { AsideComponent } from './shared/aside/aside.component';
 import { PhotoUserEditComponent } from './components/photo-user-edit/photo-user-edit.component';
 import { PhotoUserComponent } from './components/photo-user/photo-user.component';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 import { CardShimmerFormConfigurationComponent } from './components/Cards-Shimmer/card-shimmer-form-configuration/card-shimmer-form-configuration.component';
 import { CardShimmerPhotoUserEditComponent } from './components/Cards-Shimmer/card-shimmer-photo-user-edit/card-shimmer-photo-user-edit.component';
 import { CardShimmerTableInformacionComponent } from './components/Cards-Shimmer/card-shimmer-table-informacion/card-shimmer-table-informacion.component';
@@ -37,7 +37,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { ScheduleStoreComponent } from './components/schedule-store/schedule-store.component';
 import { ComponentsComponent } from './components/components.component';
 import { SheduleStoreEditComponent } from './components/shedule-store-edit/shedule-store-edit.component';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
@@ -47,7 +47,6 @@ import { MyStoreComponent } from './pages/my-store/my-store.component';
 // PAGINATION //
 
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
-
 
 // ALYLE //
 
@@ -76,6 +75,8 @@ import { LyImageCropperModule } from '@alyle/ui/image-cropper';
 import { MinimaLight, MinimaDark } from '@alyle/ui/themes/minima';
 import { ProductLoadComponent } from './components/product-load/product-load/product-load.component';
 import { ViewProductsLoadsComponent } from './components/view-products-loads/view-products-loads.component';
+import { AccountComponent } from './account/account.component';
+
 
 @NgModule({
     entryComponents: [
@@ -83,7 +84,9 @@ import { ViewProductsLoadsComponent } from './components/view-products-loads/vie
       ContactDescriptionEditComponent
     ],
     // tslint:disable-next-line: max-line-length
-    declarations: [DashboardComponent,
+    declarations: [
+      AccountComponent,
+      DashboardComponent,
       ProductLoadComponent,
       FormAccountComponent,
       ContactComponent,
@@ -107,18 +110,13 @@ import { ViewProductsLoadsComponent } from './components/view-products-loads/vie
       MyStoreComponent,
       ViewProductsLoadsComponent],
 
-    imports: [CommonModule,
+    imports: [
+      CommonModule,
+      MaterialModule,
       NgxPaginationModule,
       SharedModule,
-      MatSlideToggleModule,
       PipesModule,
       ImageCropperModule,
-      MatInputModule,
-      MatGridListModule,
-      MatSnackBarModule,
-      MatButtonModule,
-      MatDialogModule,
-      MatCardModule,
       BrowserAnimationsModule,
       // MODULOS Alyle //
       LyButtonModule,
@@ -130,7 +128,6 @@ import { ViewProductsLoadsComponent } from './components/view-products-loads/vie
       ComponentsModule,
       APP_ROUTING,
       NzTimePickerModule,
-      MatProgressSpinnerModule,
       FormsModule,
       ReactiveFormsModule,
       AgmCoreModule.forRoot({

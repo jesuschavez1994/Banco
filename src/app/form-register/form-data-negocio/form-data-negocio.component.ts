@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { StoreService } from '@services/store/store.service';
 import { Usuario } from '@models/usuario.model';
+import { MyValidators } from '@utils/validators';
 
 
 @Component({
@@ -20,10 +21,10 @@ export class FormDataNegocioComponent implements OnInit {
   ) {
 
     this.forma = new FormGroup({
-      username: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      username: new FormControl('', [Validators.required, Validators.minLength(5)], MyValidators.validateUserName(this.storeServices)),
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
       email: new FormControl('' , [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
-      password1: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      password1: new FormControl('', [Validators.required, Validators.minLength(8), MyValidators.validPassword]),
       password2: new FormControl(),
       terminos: new FormControl('', Validators.required),
     });

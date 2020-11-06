@@ -21,6 +21,7 @@
       "@models/*": ["src/app/models/*"],
       "@classes/*": ["src/app/vistas-privadas/classes/*"],
       "@interfaces/*": ["src/app/interfaces/*"],
+      "@utils/*": ["src/app/utils/*"],
     },
   },
   "angularCompilerOptions": {

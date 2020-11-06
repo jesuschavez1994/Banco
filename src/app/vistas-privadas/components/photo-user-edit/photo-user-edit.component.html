@@ -52,7 +52,7 @@
         <!-- <app-card-shimmer-photo-user-edit class="animated fadeIn" *ngIf="!spinner"></app-card-shimmer-photo-user-edit> -->
         <app-card-shimmer-photo-user-edit class="animated fadeIn" *ngIf="alert"></app-card-shimmer-photo-user-edit>
         <!-- <mat-spinner *ngIf="!spinner"></mat-spinner> -->
-        <img [src]="IMG_USER | imagen" class="w150" *ngIf="!mostrarAvatar">
+        <img [src]="IMG_USER | avatarDefault" class="w150" *ngIf="!mostrarAvatar">
     </section>
 
 </form>

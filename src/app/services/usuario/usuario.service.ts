@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Usuario } from 'src/app/models/usuario.model';
+import { Usuario } from '@models/usuario.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICIOS } from 'src/app/config/config';
 import { Observable, Subject } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { tokenName } from '@angular/compiler';
-// import swal from 'sweetalert';
+import swal from 'sweetalert';
 
 @Injectable({
   providedIn: 'root'
@@ -47,11 +47,11 @@ export class UsuarioService {
       this.guardarStorageGoogle(this.google, this.google.user.email, this.google.user.id, this.google.remember_token);
       window.location.href = '#/rut-store';
     }, err => {
-      // swal({
-      //   text: err.error.message,
-      //   icon: 'warning',
-      //   dangerMode: true,
-      // });
+       swal({
+        text: err.error.message,
+        icon: 'warning',
+        dangerMode: true,
+       });
     }
     );
   }

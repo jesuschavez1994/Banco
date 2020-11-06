@@ -24,7 +24,6 @@ import { StoreModule } from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { appReducers } from './app.reducer';
-import { AccountComponent } from './vistas-privadas/account/account.component';
 import { VIEW_ROUTING } from './vistas-privadas/view.routes';
 import { InterceptorService } from './services/Interceotores/interceptor.service';
 import { PrivateviewModule } from './vistas-privadas/privateview.module';
@@ -47,7 +46,6 @@ registerLocaleData(ca);
 @NgModule({
   declarations: [
     AppComponent,
-    AccountComponent
   ],
   imports: [
     BrowserModule,
