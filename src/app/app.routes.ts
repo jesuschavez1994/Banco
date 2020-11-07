@@ -48,7 +48,7 @@ const APP_ROUTES: Routes = [
             },
             {
                 path: 'product-loading',
-                component: ProductLoadingSmartComponent
+                component: ProductLoadingComponent
             },
 
             {path: '**', pathMatch: 'full', redirectTo: 'contact'},
