@@ -2,6 +2,8 @@
 import { AbstractControl } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { StoreService } from '@services/store/store.service';
+import { AvailabilityUser } from '@models/validators/availabilityUser.model';
+import { AvailabilityEmail } from '@models/validators/availabilityEmail.model';
 
 export class MyValidators {
 
@@ -22,13 +24,33 @@ export class MyValidators {
     return null;
   }
 
+  // VALIDACION PARA SABER SI EL USERNAME EXISTE //
   static validateUserName(service: StoreService) {
     return (control: AbstractControl) => {
-      const value = control.value;
+      const value = new AvailabilityUser(control.value);
       return service.usernameAvailability(value)
       .pipe(
         map((response: any) => {
-          const isAvailable = response.isAvailable;
+          const isAvailable = response.available;
+          console.log('Available', isAvailable);
+          if (!isAvailable) {
+            return {not_available: true};
+          }
+          return null;
+        })
+      );
+    };
+  }
+
+  // VALIDACION PARA SABER SI EL EMAIL EXISTE //
+  static validateUserEmail(service: StoreService) {
+    return (control: AbstractControl) => {
+      const value = new AvailabilityEmail(control.value);
+      return service.emailAvailability(value)
+      .pipe(
+        map((response: any) => {
+          const isAvailable = response.available;
+          console.log('Available', isAvailable);
           if (!isAvailable) {
             return {not_available: true};
           }

@@ -9,7 +9,8 @@ import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-
+import { AvailabilityUser } from '@models/validators/availabilityUser.model';
+import { AvailabilityEmail } from '@models/validators/availabilityEmail.model';
 
 // IMPORTACIONES PARA USAR EL PATRÓN REDUX //
 import { UserStore } from '@models/models-@ngrx/userStore.models';
@@ -119,9 +120,14 @@ export class StoreService {
 
   }
 
-  usernameAvailability(name: string) {
-    const url = '/api/signup/availability';
+  usernameAvailability(name: AvailabilityUser) {
+    const url = '/api/user_name/availability';
     return this.postQuery(url, name);
+  }
+
+  emailAvailability(email: AvailabilityEmail){
+    const url = '/api/user_email/availability';
+    return this.postQuery(url, email);
   }
 
   registroRut(nameStore: RegistroEmpresa){

@@ -15,6 +15,7 @@ import { ContactComponent } from './vistas-privadas/contact/contact.component';
 import { ContactInformationEditComponent } from './vistas-privadas/components/contact-information-edit/contact-information-edit.component';
 import { ProductLoadingComponent } from './vistas-privadas/product-loading/product-loading.component';
 import { MyStoreComponent } from './vistas-privadas/pages/my-store/my-store.component';
+import { ProductLoadingSmartComponent } from './vistas-privadas/product-loading/container/product-loading-smart/product-loading-smart.component';
 
 const APP_ROUTES: Routes = [
 
@@ -47,7 +48,7 @@ const APP_ROUTES: Routes = [
             },
             {
                 path: 'product-loading',
-                component: ProductLoadingComponent
+                component: ProductLoadingSmartComponent
             },
 
             {path: '**', pathMatch: 'full', redirectTo: 'contact'},

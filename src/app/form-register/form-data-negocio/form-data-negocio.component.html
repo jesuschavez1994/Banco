@@ -39,7 +39,7 @@
                            type="text"
                            placeholder="Nombre de usuario"
                            formControlName="username"
-                           [ngClass]="{'is-invalid':  (!forma.controls['username'].valid || forma.controls['username'].errors?.minlength)&& forma.controls['username'].touched, 'is-valid': forma.controls['username'].valid }" 
+                           [ngClass]="{'is-invalid':  (!forma.controls['username'].valid || forma.controls['username'].errors?.minlength)&& forma.controls['username'].touched || forma.get('username').hasError('not_available'), 'is-valid': forma.controls['username'].valid }" 
                     >
                     
                     <mat-error  *ngIf="forma.get('username').errors?.required"  
@@ -88,7 +88,7 @@
                               type="email"
                               placeholder="Correo electrónico"
                               formControlName="email"
-                              [ngClass]="{'is-invalid':  (!forma.controls['email'].valid || forma.controls['email'].errors?.minlength)&& forma.controls['email'].touched, 'is-valid': forma.controls['email'].valid }"
+                              [ngClass]="{'is-invalid':  (!forma.controls['email'].valid || forma.controls['email'].errors?.minlength)&& forma.controls['email'].touched || forma.get('email').hasError('not_available'), 'is-valid': forma.controls['email'].valid }"
                       >
                 
                       <mat-error  *ngIf="forma.get('email').errors?.required"  
@@ -100,6 +100,11 @@
                                   class="invalid-feedback">
                                   No posee la forma de un correo: example@gmail.com
                       </mat-error> 
+
+                      <mat-error  *ngIf="forma.get('email').hasError('not_available')"  
+                                  class="invalid-feedback">
+                                  ¡El email ya ha sido registrado!
+                    </mat-error>
 
                     </div>
                 </div>
@@ -159,9 +164,9 @@
                     <div class="col-12">
                       <div class="checkbox checkbox-primary  p-t-0">
                         <input type="checkbox" formControlName="terminos" id="checkAceptoTerminos">
-                        <mat-label  class="family-500 pl-3 size-13" for="checkAceptoTerminos">
+                        <label  class="family-500 pl-3 size-13" for="checkAceptoTerminos">
                           Acepto términos y condiciones
-                        </mat-label>
+                        </label>
                       </div>
                       <p class="family-400 size-12">
                         Haciendo click en Registrar Declarara ser una persona natural y debe ingresar 
