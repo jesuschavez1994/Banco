@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { StoreService } from '@services/store/store.service';
+import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
+import { ProductosLoads } from '@interfaces/InterfaceProducto';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  itemProductos: DataProductDB[] = [];
 
-  ngOnInit(): void {
+  constructor(public storeService: StoreService) { }
+
+  ngOnInit() {
+    this.storeService.ProductGet(
+      localStorage.getItem('id'),
+      localStorage.getItem('storeId'))
+      .subscribe( (resp: ProductosLoads) => {
+      this.itemProductos = resp.data;
+      console.log('ITEM', this.itemProductos);
+    });
   }
 
 }

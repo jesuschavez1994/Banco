@@ -190,6 +190,11 @@ export class StoreService {
     return this.execQuery(url);
   }
 
+  ProductGet(userId: string, storeId: string){
+    const url = `/api/users/${userId}/stores/${storeId}/products`;
+    return this.execQuery(url);
+  }
+
   DeleteProduct(userId: string, storeId: string, idProduct: number){
     const url = `/api/users/${userId}/stores/${storeId}/products/${idProduct}`;
     return this.DeleteQuery(url);

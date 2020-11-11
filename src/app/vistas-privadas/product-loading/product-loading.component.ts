@@ -16,35 +16,6 @@ import { switchMap } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductLoadingComponent implements OnInit {
-  // tslint:disable-next-line: variable-name
-  constructor(public _productLoadingService: ProductLoadingService,
-              // tslint:disable-next-line: variable-name
-              private _cd: ChangeDetectorRef,
-              public storeService: StoreService,
-              private route: ActivatedRoute,
-              private router: Router) {
-
-    this.forma = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      description: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      price: new FormControl('', [Validators.required, Validators.minLength(1)]),
-      mark: new FormControl('Seleccionar'),
-      factory: new FormControl('Seleccionar'),
-      category: new FormControl('Seleccionar'),
-      subcategory_id: new FormControl('Seleccionar'),
-      delivery: new FormControl('Seleccionar'),
-      aviable: new FormControl('Seleccionar'),
-      stock: new FormControl('', [Validators.required, Validators.minLength(1)]),
-      recipe: new FormControl('Seleccionar'),
-      file: new FormControl(''),
-      input0: new FormControl(''),
-      input1: new FormControl(''),
-      input2: new FormControl(''),
-      input3: new FormControl(''),
-      input4: new FormControl(''),
-    });
-
-  }
 
   forma: FormGroup;
   detalle: DetalleProduct;
@@ -75,6 +46,7 @@ export class ProductLoadingComponent implements OnInit {
   foods = [];
   // tslint:disable-next-line: ban-types
   MyProduct: DataProductDB[] = [];
+  itemProductos: DataProductDB[] = [];
   DescripcionProduct: DataProductDB;
   // tslint:disable-next-line: no-inferrable-types
   pagesActual: number = 1;
@@ -85,7 +57,44 @@ export class ProductLoadingComponent implements OnInit {
   // tslint:disable-next-line: no-inferrable-types
   page: number = 1;
 
+  // tslint:disable-next-line: variable-name
+  constructor(public _productLoadingService: ProductLoadingService,
+              // tslint:disable-next-line: variable-name
+              private _cd: ChangeDetectorRef,
+              public storeService: StoreService,
+              private route: ActivatedRoute,
+              private router: Router) {
+
+    this.forma = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      description: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      price: new FormControl('', [Validators.required, Validators.minLength(1)]),
+      mark: new FormControl('Seleccionar'),
+      factory: new FormControl('Seleccionar'),
+      category: new FormControl('Seleccionar'),
+      subcategory_id: new FormControl('Seleccionar'),
+      delivery: new FormControl('Seleccionar'),
+      aviable: new FormControl('Seleccionar'),
+      stock: new FormControl('', [Validators.required, Validators.minLength(1)]),
+      recipe: new FormControl('Seleccionar'),
+      file: new FormControl(''),
+      input0: new FormControl(''),
+      input1: new FormControl(''),
+      input2: new FormControl(''),
+      input3: new FormControl(''),
+      input4: new FormControl(''),
+    });
+  }
+
   ngOnInit() {
+
+    this.storeService.ProductGet(
+      localStorage.getItem('id'),
+      localStorage.getItem('storeId'))
+      .subscribe( (resp: ProductosLoads) => {
+      this.itemProductos = resp.data;
+      console.log('ITEM', this.itemProductos);
+    });
 
     // GET CATEGORIAS //
     this._productLoadingService.GetCategorias(
@@ -197,9 +206,6 @@ export class ProductLoadingComponent implements OnInit {
     this.getData();
   }
 
-  // addFood(){
-  //   this.MyProduct = [...this.MyProduct, this.DescripcionProduct];
-  // }
 
   onFileChange(event, index?: number) {
     const reader = new FileReader();

@@ -1,0 +1,32 @@
+
+<section class="display-flex">
+    <button class="btn btn-primary button mt-5 fredoka" 
+            type="button"      
+            >
+            + Agregar nuevo producto
+    </button>
+</section>
+
+<app-product-loading></app-product-loading>
+
+
+<section class="container col-md-12">
+    <ol class="row products list items product-items pl-0">
+        <app-view-products-loads    *ngFor="let item of MyProduct | paginate: 
+                                    { itemsPerPage: 28, currentPage: page, totalItems: totalProductAPI };
+                                    let i = index;"
+                                    [item]="item"
+                                    [MyProduct]="MyProduct"
+                                    [index]="i">
+        </app-view-products-loads>
+    </ol>
+</section>
+
+ <!-- PAGINACIÓN -->
+    <footer class="col-md-11">
+        <pagination-controls    previousLabel = "Anterior"
+                                nextLabel = "Siguiente"
+                                (pageChange)="pageChanged($event)">
+        </pagination-controls>
+    </footer> 
+   

@@ -77,6 +77,7 @@ import { ViewProductsLoadsComponent } from './components/view-products-loads/vie
 import { AccountComponent } from './account/account.component';
 import { ROUTING_VIEW_STORE } from './view.routes';
 import { ProductLoadingSmartComponent } from './product-loading/container/product-loading-smart/product-loading-smart.component';
+import { LoadProductComponent } from './LoadProduct/load-product/load-product.component';
 
 
 @NgModule({
@@ -110,7 +111,8 @@ import { ProductLoadingSmartComponent } from './product-loading/container/produc
       ProductLoadingComponent,
       MyStoreComponent,
       ViewProductsLoadsComponent,
-      ProductLoadingSmartComponent],
+      ProductLoadingSmartComponent,
+      LoadProductComponent],
 
     imports: [
       CommonModule,
