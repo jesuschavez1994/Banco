@@ -1,6 +1,6 @@
-ol{
+/* ol{
     background: rgba(170, 170, 170, .09);
-}
+} */
 
 
 .product-items {
@@ -19,8 +19,6 @@ ol{
 }
 
 .product-item-info {
-    border-radius: 15px;
-    background-color: #fff;
     height: 370px;
     width: 100%;
 }
@@ -65,5 +63,14 @@ ol{
     padding-right: 18px;
     min-height: 55px;
 }
+
+@media only screen and (min-width: 768px) {
+    .product-item {
+        width: calc(21%);
+        margin: 5px;
+        border-bottom: 2px solid #ddd;
+    }
+}
+
 
 

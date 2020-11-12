@@ -11,10 +11,11 @@
 
 
 <section class="container col-md-12">
-    <ol class="row products list items product-items pl-0">
+    <ol class="row products list items pl-0">
         <app-view-products-loads    *ngFor="let item of MyProduct | paginate: 
                                     { itemsPerPage: 28, currentPage: page, totalItems: totalProductAPI };
                                     let i = index;"
+                                    class="product-item"
                                     [item]="item"
                                     [MyProduct]="MyProduct"
                                     [index]="i">
