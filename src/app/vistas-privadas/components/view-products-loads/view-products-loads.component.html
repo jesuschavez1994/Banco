@@ -1,129 +1,54 @@
-<!-- 
-    <div    class="card cursor-poniter position-relative height"
-            >
-
-            <i  class="material-icons position-absolute left-85 top-5 icon-gris" 
-                name="create"
-                title="Editar"
-                >
-                create
-            </i>
-
-            <i  class="material-icons position-absolute left-85 top-15 icon-gris" 
-                name="delete"
-                title="Eliminar"
-                data-target="#exampleModalCenter"
-                data-toggle="modal"
-                (click)="Delete(index)"
-                >
-                delete
-            </i>
-
-            <i  class="material-icons position-absolute left-85 top-25 icon-gris" 
-                name=" loop icon"
-                title="sincronizar"
-                >
-                loop
-            </i>
-
-            <div class="display-flex justify-content-center">
-                <img    [src]="item.images[0].src_size.xl | imgProductLoad" 
-                        class="card-img-top" 
-                        alt="{{item.name}}"
-                        
-                        *ngIf="item.images.length >= 1"
-                >
-            </div>
-                
-
-            <img    src="../../../assets/img/Box/box.svg" 
-                    class="card-img-top" 
-                    alt="..." 
-                    *ngIf="item.images.length === 0"
-            >
-
-            <div class="card-body">
-                <p class="card-title family-500 size-12" title="{{item.name}} ">
-                    {{item.name | slice: 0:30}} 
-                    <span *ngIf="item.name.length > 60">...</span>
-                </p>
-                <p class="card-text family-400 size-11" title="{{item.description}}">
-                    {{item.description | slice: 0:oculto}} 
-                    <span *ngIf="item.description.length > 50">...</span>
-                </p>
-                <span class="family-500 size-16 black">
-                    {{item.price | currency: 'USD': true:'1.3-3'}} 
-                </span>
-                <span class="family-500 size-14 black" *ngIf="item.price === null">
-                    Precio a consultar
-                </span>
-            </div>
-    </div> -->
-
-    <!-- <ol class="products list items product-items">
-
-        <li class="item product product-item">
-
-            <div class="product-item-info">
-
-                <span class="product-image-container" style="width:240px;">
-
-                    <span class="product-image-wrapper">
-
-                        <img    src="../../../assets/img/Box/box.svg" 
-                                class="product-image-photo lazyload" 
-                                alt="..." 
-                                *ngIf="item.images.length === 0"
-                        >
-
-                        <img    [src]="item.images[0].src_size.xl | imgProductLoad" 
-                                class="product-image-photo lazyload" 
-                                alt="{{item.name}}"
-                                *ngIf="item.images.length >= 1"    
-                        >
-
-                    </span>
-
-                </span>
-
-            </div>
-
-        </li>
-
-    </ol> -->
 
     <li class="col-md-12 item product product-item">
-        <div class="product-item-info">
-            <span class="product-image-container" style="width:240px;">
-                <span class="product-image-wrapper">
-                    <img    src="../../../assets/img/Box/box.svg" 
-                            alt="..." 
-                            *ngIf="item.images.length === 0"                    
-                            >
-    
-                    <img    [src]="item.images[0].src_size.xl | imgProductLoad" 
-                            class="product-image-photo lazyload"   
-                            alt="{{item.name}}"
-                            style="display: block;"
-                            *ngIf="item.images.length >= 1"    
-                    >
-                </span>
-                
-            </span>
+        <div    class="product-item-info"
+                >
 
-            
-            
-                <p class="family-500 size-16 mb-4" title="{{item.name}} ">
-                    {{item.name | slice: 0:30}} 
+                <i  class="material-icons position-absolute left-85 top-5 icon-gris" 
+                    name="create"
+                    title="Editar"
+                    >
+                    create
+                </i>
+
+                <i  class="material-icons position-absolute left-85 top-15 icon-gris" 
+                    name="delete"
+                    title="Eliminar"
+                    data-target="#exampleModalCenter"
+                    data-toggle="modal"
+                    (click)="Delete(index)"
+                    >
+                    delete
+                </i>
+
+                <i  class="material-icons position-absolute left-85 top-25 icon-gris" 
+                    name=" loop icon"
+                    title="sincronizar"
+                    >
+                    loop
+                </i>
+
+                <span class="product-image-container" style="width:240px;">
+                    <span class="product-image-wrapper">
+                        <img    [src]="item.images[0].src_size.xl | imgProductLoad" 
+                                class="product-image-photo lazyload"   
+                                alt="{{item.name}}"
+                                style="display: block;"
+                                *ngIf="item.images.length >= 1"    
+                        >
+                    </span>
+                </span>
+
+                <p class="family-500 size-16 mb-4 space" title="{{item.name}} ">
+                    {{item.name | slice: 0:30 | capitalizado: true}} 
                     <span *ngIf="item.name.length > 60">...</span>
                 </p>
 
-                <p class="family-400 size-14 mb-4" title="{{item.description}}">
-                    {{item.description | slice: 0:oculto}} 
+                <p class="family-400 size-14 mb-4 space detail-name" title="{{item.description}}">
+                    {{item.description | slice: 0:oculto | capitalizado: false}} 
                     <span *ngIf="item.description.length > 50">...</span>
                 </p>
 
-                <span class="family-500 size-16 black mt-2">
+                <span class="family-500 size-16 black mt-2 space">
                     {{item.price | currency: 'USD': true:'1.3-3'}} 
                 </span>
 

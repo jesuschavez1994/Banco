@@ -102,3 +102,4 @@
 [1111/130740.093:ERROR:crash_report_database_win.cc(457)] unexpected header
 [1111/132240.094:ERROR:crash_report_database_win.cc(457)] unexpected header
 [1111/133740.097:ERROR:crash_report_database_win.cc(457)] unexpected header
+[1111/144345.627:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)

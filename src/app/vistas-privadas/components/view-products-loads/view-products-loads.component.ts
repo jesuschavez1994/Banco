@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StoreService } from '@services/store/store.service';
 import { DataProductDB } from '@interfaces/InterfaceProducto';
@@ -10,6 +10,7 @@ import { DataProductDB } from '@interfaces/InterfaceProducto';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewProductsLoadsComponent implements OnInit {
+
 
   @Input() index: number;
   @Input() item: DataProductDB;

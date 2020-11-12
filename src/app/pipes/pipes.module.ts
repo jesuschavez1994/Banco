@@ -4,6 +4,7 @@ import { ImagenPipe } from './avatar-default/imagen.pipe';
 import { ProductoPipe } from './producto.pipe';
 import { BoxDefaultPipe } from './box/box-default.pipe';
 import { ImgProductLoadPipe } from './imagenLoad/img-product-load.pipe';
+import { CapitalizadoPipe } from './capitalizado/capitalizado.pipe';
 
 
 
@@ -12,13 +13,15 @@ import { ImgProductLoadPipe } from './imagenLoad/img-product-load.pipe';
     ImagenPipe,
     ProductoPipe,
     BoxDefaultPipe,
-    ImgProductLoadPipe
+    ImgProductLoadPipe,
+    CapitalizadoPipe
   ],
   exports: [
     ImagenPipe,
     ProductoPipe,
     BoxDefaultPipe,
-    ImgProductLoadPipe
+    ImgProductLoadPipe,
+    CapitalizadoPipe
   ],
   imports: [
     CommonModule
