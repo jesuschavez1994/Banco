@@ -78,12 +78,15 @@ import { AccountComponent } from './account/account.component';
 import { ROUTING_VIEW_STORE } from './view.routes';
 import { ProductLoadingSmartComponent } from './product-loading/container/product-loading-smart/product-loading-smart.component';
 import { LoadProductComponent } from './LoadProduct/load-product/load-product.component';
+import { ModalAddCategoriasAndSubcategoriasComponent } from './product-loading/container/modals/modal-add-categorias-and-subcategorias/modal-add-categorias-and-subcategorias.component';
 
 
 @NgModule({
     entryComponents: [
       MapEditarComponent,
-      ContactDescriptionEditComponent
+      ContactDescriptionEditComponent,
+      ModalAddCategoriasAndSubcategoriasComponent
+
     ],
     // tslint:disable-next-line: max-line-length
     declarations: [
@@ -112,7 +115,8 @@ import { LoadProductComponent } from './LoadProduct/load-product/load-product.co
       MyStoreComponent,
       ViewProductsLoadsComponent,
       ProductLoadingSmartComponent,
-      LoadProductComponent],
+      LoadProductComponent,
+      ModalAddCategoriasAndSubcategoriasComponent],
 
     imports: [
       CommonModule,
@@ -144,7 +148,8 @@ import { LoadProductComponent } from './LoadProduct/load-product/load-product.co
     exports: [
       PhotoUserEditComponent,
       PhotoUserComponent,
-      CardShimmerFormConfigurationComponent
+      CardShimmerFormConfigurationComponent,
+      ModalAddCategoriasAndSubcategoriasComponent
     ],
 
     providers: [

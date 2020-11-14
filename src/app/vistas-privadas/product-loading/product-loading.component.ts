@@ -5,9 +5,16 @@ import { DetalleProduct, ImgLoad } from '@models/dataStore.model';
 import { StoreService } from '@services/store/store.service';
 import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
+import {MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {ModalAddCategoriasAndSubcategoriasComponent} from './container/modals/modal-add-categorias-and-subcategorias/modal-add-categorias-and-subcategorias.component'
 
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-product-loading',
@@ -16,6 +23,9 @@ import { switchMap } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductLoadingComponent implements OnInit {
+
+  animal: string;
+  nameCategory: string;
 
   forma: FormGroup;
   detalle: DetalleProduct;
@@ -63,7 +73,8 @@ export class ProductLoadingComponent implements OnInit {
               private _cd: ChangeDetectorRef,
               public storeService: StoreService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              public dialog: MatDialog) {
 
     this.forma = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
@@ -319,4 +330,21 @@ export class ProductLoadingComponent implements OnInit {
     this.foods = [...this.foods, food];
     console.log(this.foods);
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalAddCategoriasAndSubcategoriasComponent, {
+      width: '250px',
+      data: {
+        nameCategory: this.forma.value.category,
+        animal: this.animal
+      }
+    });
+
+     dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
+
+  }
+
 }

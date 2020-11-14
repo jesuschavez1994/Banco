@@ -41,12 +41,12 @@
                 <div class="card-body pb-0 pt-0">
 
                     <p class="family-500 size-18" title="{{item.name}} ">
-                        {{item.name | slice: 0:30 | capitalizado: true}} 
+                        {{item.name | slice: 0:35 | capitalizado: true}} 
                         <span *ngIf="item.name.length > 60">...</span>
                     </p>
 
                     <p class="family-600 size-11 mb-0 detail-name card-text line" title="{{item.description}}">
-                        {{item.description | slice: 0:oculto | capitalizado: false}} 
+                        {{item.description | LimitarTexto | capitalizado: false}} 
                         <span *ngIf="item.description.length > 50">...</span>
                     </p>
 

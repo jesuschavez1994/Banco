@@ -163,7 +163,13 @@
     
     
                             <div class="form-group col-md-4">
-                                <label for="Categoria" class="family-500 size-14">Categoria</label>
+                                <label for="Categoria" class="family-500 size-14 display-flex align-items-center">
+                                    Categoria
+                                    <i  class="material-icons add cursor-poniter plus"
+                                        title="agregar nueva categoria"
+                                        (click)="openDialog()">add
+                                    </i>
+                                </label>
                                 <select id="Categoria" 
                                         class="form-control"
                                         formControlName="category"
@@ -185,7 +191,14 @@
                         <div class="row">
 
                             <div class="form-group col-md-4">
-                                <label for="Subcategoria" class="family-500 size-14">Subcategoria</label>
+                                <label for="Subcategoria" class="family-500 size-14 display-flex align-items-center">
+                                    Subcategoria
+                                    <i class="material-icons add cursor-poniter plus"
+                                        (click)="openDialog()"
+                                        title="agregar nueva subcategoria">
+                                        add
+                                    </i>
+                                </label>
                                 <select id="Subcategoria" 
                                         class="form-control"
                                         formControlName="subcategory_id"
