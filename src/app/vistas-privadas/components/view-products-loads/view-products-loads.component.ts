@@ -2,6 +2,9 @@ import { Component, OnInit, Input, ChangeDetectionStrategy, ChangeDetectorRef, V
 import { Observable } from 'rxjs';
 import { StoreService } from '@services/store/store.service';
 import { DataProductDB } from '@interfaces/InterfaceProducto';
+import {MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ModalDeleteProductComponent } from './container/modal-delete-product/modal-delete-product.component';
+
 
 @Component({
   selector: 'app-view-products-loads',
@@ -20,8 +23,12 @@ export class ViewProductsLoadsComponent implements OnInit {
 
   // tslint:disable-next-line: ban-types
   showCards = false;
+  indexProductoDelete: any;
+  idProducto: any;
 
-  constructor(private cd: ChangeDetectorRef, public storeService: StoreService) { }
+  constructor(private cd: ChangeDetectorRef,
+              public dialog: MatDialog,
+              public storeService: StoreService) { }
 
   ngOnInit() {
   }
@@ -38,5 +45,22 @@ export class ViewProductsLoadsComponent implements OnInit {
       this.MyProduct[index].id
     ).subscribe();
   }
+
+  openDialog(index: number): void {
+    const dialogRef = this.dialog.open(ModalDeleteProductComponent, {
+      width: '250px',
+      data: {
+        indexProductoDelete: index,
+        idProducto: this.MyProduct[index].id
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
+
+  }
+
 
 }

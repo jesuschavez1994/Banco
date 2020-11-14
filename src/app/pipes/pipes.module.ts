@@ -6,6 +6,7 @@ import { BoxDefaultPipe } from './box/box-default.pipe';
 import { ImgProductLoadPipe } from './imagenLoad/img-product-load.pipe';
 import { CapitalizadoPipe } from './capitalizado/capitalizado.pipe';
 import { LimitarTextoPipe } from './limitar-texto/limitar-texto.pipe';
+import { LimitarNameProductoPipe } from './limitar-name-producto/limitar-name-producto.pipe';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { LimitarTextoPipe } from './limitar-texto/limitar-texto.pipe';
     BoxDefaultPipe,
     ImgProductLoadPipe,
     CapitalizadoPipe,
-    LimitarTextoPipe
+    LimitarTextoPipe,
+    LimitarNameProductoPipe
   ],
   exports: [
     ImagenPipe,
@@ -23,7 +25,8 @@ import { LimitarTextoPipe } from './limitar-texto/limitar-texto.pipe';
     BoxDefaultPipe,
     ImgProductLoadPipe,
     CapitalizadoPipe,
-    LimitarTextoPipe
+    LimitarTextoPipe,
+    LimitarNameProductoPipe
   ],
   imports: [
     CommonModule
