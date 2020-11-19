@@ -1,17 +1,38 @@
 
-<section class="display-flex">
-    <button class="btn btn-primary button mt-5 fredoka" 
-            type="button"
-            (click)="addNewProduct()"      
+<section class="row buscador-and-button" *ngIf="!addProductNew">
+
+    <div class="col-10 col-sm-6 col-md-4 display-flex justify-content-center">
+        <button class="btn btn-primary button mt-5 fredoka" 
+                type="button"
+                (click)="addNewProduct()"      
+                >
+                + Agregar nuevo producto
+        </button>
+    </div>
+
+    
+    <div class="col-10 col-sm-8 col-md-6">
+
+        <ul class="navbar-nav width-100 mt-5">
+    
+            <input  class="form-control width-100 icon-magnifying-glass buscador" 
+                    type="search" 
+                    placeholder="Buscar producto en está tienda..." 
+                    aria-label="Search"
             >
-            + Agregar nuevo producto
-    </button>
+        
+        </ul>
+
+    </div>
+    
+
+
 </section>
 
 <app-product-loading *ngIf="addProductNew"></app-product-loading>
 
 
-<section class="container col-md-12" *ngIf="!addProductNew">
+<section class="container col-md-12 mt-5" *ngIf="!addProductNew">
     <ol class="row products list items pl-0">
         <app-view-products-loads    *ngFor="let item of MyProduct | paginate: 
                                     { itemsPerPage: 28, currentPage: page, totalItems: totalProductAPI };
@@ -25,10 +46,10 @@
 </section>
 
  <!-- PAGINACIÓN -->
-    <footer class="col-md-11">
-        <pagination-controls    previousLabel = "Anterior"
-                                nextLabel = "Siguiente"
-                                (pageChange)="pageChanged($event)">
-        </pagination-controls>
-    </footer> 
+<footer class="col-md-11">
+    <pagination-controls    previousLabel = "Anterior"
+                            nextLabel = "Siguiente"
+                            (pageChange)="pageChanged($event)">
+    </pagination-controls>
+</footer> 
    
