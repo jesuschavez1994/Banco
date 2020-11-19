@@ -1,16 +1,17 @@
 
 <section class="display-flex">
     <button class="btn btn-primary button mt-5 fredoka" 
-            type="button"      
+            type="button"
+            (click)="addNewProduct()"      
             >
             + Agregar nuevo producto
     </button>
 </section>
 
-<app-product-loading></app-product-loading>
+<app-product-loading *ngIf="addProductNew"></app-product-loading>
 
 
-<section class="container col-md-12">
+<section class="container col-md-12" *ngIf="!addProductNew">
     <ol class="row products list items pl-0">
         <app-view-products-loads    *ngFor="let item of MyProduct | paginate: 
                                     { itemsPerPage: 28, currentPage: page, totalItems: totalProductAPI };

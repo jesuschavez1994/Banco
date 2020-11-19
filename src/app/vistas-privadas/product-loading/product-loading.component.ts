@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ProductLoadingService } from '@services/product-loading/product-loading.service';
 import { DetalleProduct, ImgLoad } from '@models/dataStore.model';
@@ -10,6 +10,7 @@ import {ModalAddCategoriasAndSubcategoriasComponent} from './container/modals/mo
 
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 export interface DialogData {
   animal: string;
@@ -74,7 +75,9 @@ export class ProductLoadingComponent implements OnInit {
               public storeService: StoreService,
               private route: ActivatedRoute,
               private router: Router,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              // tslint:disable-next-line: variable-name
+              private _snackBar: MatSnackBar) {
 
     this.forma = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
@@ -215,6 +218,10 @@ export class ProductLoadingComponent implements OnInit {
 
   Send(){
     this.getData();
+
+    this._snackBar.open('Se ha agregado un nuevo producto', 'Cerrar', {
+      duration: 2000,
+    });
   }
 
 

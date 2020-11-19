@@ -20,6 +20,8 @@ export class LoadProductComponent implements OnInit {
    // tslint:disable-next-line: no-inferrable-types
    page: number = 1;
 
+   addProductNew = false;
+
   constructor(public storeService: StoreService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -64,6 +66,10 @@ export class LoadProductComponent implements OnInit {
         this.totalProductAPI = resp.total;
     });
 
+  }
+
+  addNewProduct(){
+    this.addProductNew = true;
   }
 
 }
