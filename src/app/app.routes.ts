@@ -16,11 +16,14 @@ import { ContactInformationEditComponent } from './vistas-privadas/components/co
 import { ProductLoadingComponent } from './vistas-privadas/product-loading/product-loading.component';
 import { MyStoreComponent } from './vistas-privadas/pages/my-store/my-store.component';
 import { ProductLoadingSmartComponent } from './vistas-privadas/product-loading/container/product-loading-smart/product-loading-smart.component';
+import { ShoppingCartComponent } from './vistas-publicas/shopping-cart/shopping-cart.component';
 
 const APP_ROUTES: Routes = [
 
     {path: 'home', component: HomeComponent},
     {path: 'register', component: RegisterComponent},
+
+    {path: 'shopping-cart', component: ShoppingCartComponent},
 
     {   path: 'register-negocio',
         component: FormDataNegocioComponent,

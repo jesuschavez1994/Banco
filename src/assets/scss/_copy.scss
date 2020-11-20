@@ -1,0 +1,41 @@
+body,
+button,
+input,
+select,
+optgroup,
+textarea,
+p,
+span,
+h1, h2, h3, h4, h5, h6{
+	color: $color__text-main;
+	font-family: $font__main !important;
+  font-size: 15px;
+	line-height: $font__line-height-body;
+}
+
+p {
+  font-size: 15px;
+  margin-bottom: 0;
+}
+
+// headings
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+h2{
+  font-size: 23px;
+}
+
+h3{
+  margin: 0px;
+}
+
+h1, h2{
+  text-transform: capitalize;
+}

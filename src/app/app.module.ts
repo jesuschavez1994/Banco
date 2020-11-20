@@ -39,7 +39,6 @@ import { registerLocaleData } from '@angular/common';
 import ca from '@angular/common/locales/ca';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 registerLocaleData(ca);
 
 @NgModule({

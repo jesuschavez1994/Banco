@@ -1,0 +1,171 @@
+@import 'src/assets/scss/style.scss';
+
+main {
+
+  display: flex;
+  // flex-wrap: wrap;
+
+
+  /* Menu de configuración
+  --------------------------------------------- */
+
+  .configuration-menu {
+    min-width: 245px;
+    width: 18%;
+    padding-right: 20px;
+    // background: green;
+
+    padding-top: 65px;
+
+    h2 {
+      padding-left: 40px;
+    }
+
+    .items-menu {
+      width: 84%;
+
+      .item {
+        border-radius: 0px 4px 4px 0px;
+        cursor: pointer;
+        padding: 4px 0px;
+        transition: all .3s;
+
+        &:first-child {
+          font-weight: 600;
+        }
+
+        &:hover {
+          background: $color__background-gray--light;
+
+        }
+
+        p {
+          padding-left: 40px;
+
+          &::first-letter {
+            text-transform: uppercase;
+          }
+        }
+
+      }
+
+      .active {
+        background: $color__background-gray--light;
+      }
+
+    }
+  }
+
+
+  /* Listado de compras
+  --------------------------------------------- */
+
+  .shopping-cart {
+    width: 76%;
+    // background: blueviolet;
+    margin: 0px 30px;
+
+    padding-top: 58px;
+
+    .tab-container {
+
+      .tab-menu{
+        display: flex;
+
+        .tab-item{
+          font-size: 13.2px;
+          font-weight: bold;
+          text-transform: capitalize;
+          padding: 4px 10px;
+          cursor: pointer;
+          transition: all $time-hover;
+
+          &:hover{
+            background: $color__background-gray--light;
+          }
+
+        }
+
+        .active{
+          background: $color__background-gray--light;
+        }
+
+      }
+
+      .tab-content{
+        border-top: solid $color__background-gray--light 19px;
+        padding-bottom: 102px;
+
+        .list-item{
+          min-width: 278px;
+          width: 36.4%;
+          max-height: 58.5vh;
+
+          margin-bottom: 65px;
+          overflow: auto;
+
+          display: flex;
+          flex-direction: column;
+          // background: green;
+
+
+
+          .item{
+            cursor: pointer;
+            padding: 11px 15px;
+            transition: all $time-hover;
+
+            display: flex;
+            align-items: center;
+
+            &:hover {
+              background: $color__background-gray;
+            }
+
+            .img{
+              width: 71px;
+              height: 71px;
+
+              // background: brown;
+              border-radius: 42px;
+              margin-right: 18px;
+              overflow: hidden;
+
+              img{
+                height: 100%;
+              }
+            }
+
+            .content{
+              display: flex;
+              flex-direction: column;
+
+
+              .name{
+                text-transform: capitalize;
+                font-size: 14px;
+                font-weight: 600;
+              }
+
+              .info{
+                font-size: 11px;
+                line-height: 17px;
+
+                strong{
+                  font-weight: 600;
+                }
+              }
+
+            }
+
+          }
+
+          .active{
+            background: $color__background-gray;
+          }
+
+        }
+      }
+    }
+  }
+}

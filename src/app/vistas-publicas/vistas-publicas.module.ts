@@ -6,11 +6,14 @@ import { FormularioRegisterModule } from '../form-register/formulario-register.m
 import { SharedModule } from '../shared/shared.module';
 import { APP_ROUTING } from '../app.routes';
 import { LoginModule } from '../Login/login.module';
+import { ComponentsModule } from '../components/components.module';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     RegisterComponent,
+    ShoppingCartComponent,
   ],
   imports: [
     CommonModule,
@@ -18,6 +21,7 @@ import { LoginModule } from '../Login/login.module';
     SharedModule,
     APP_ROUTING,
     LoginModule,
+    ComponentsModule,
   ],
   exports: [
     HomeComponent,

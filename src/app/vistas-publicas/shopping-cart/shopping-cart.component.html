@@ -1,0 +1,148 @@
+<app-navbarstore [fixed]="false"></app-navbarstore>
+
+<main>
+  <!-- #Menu de configuración -->
+
+  <section class="configuration-menu">
+    <h2>configuración</h2>
+
+    <ul class="items-menu">
+      <li class="item">
+        <p>mi cuenta</p>
+      </li>
+      <li class="item active">
+        <p>carrito de compra</p>
+      </li>
+      <li class="item">
+        <p>carrito de compra</p>
+      </li>
+      <li class="item">
+        <p>carrito de compra sdasdsadsdasdsa</p>
+      </li>
+      <li class="item">
+        <p>carrito de compra</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- #Carrito de compras -->
+
+  <section class="shopping-cart">
+
+    <h1 class="text-capitalize">Carrito de compra</h1>
+
+    <div class="tab-container">
+
+      <ul class="tab-menu">
+
+        <li class="tab-item">pedidos</li>
+        <li class="tab-item active">compras</li>
+
+      </ul>
+
+      <div class="tab-content">
+
+        <div class="list-item">
+
+          <article class="item active">
+
+            <figure class="img">
+
+              <img src="./assets/img/avatar.svg" alt="Avatar por defecto"/>
+
+            </figure>
+
+            <div class="content">
+
+              <h3 class="name">farmacia santa isabel</h3>
+
+              <span class="info">Cantidad de producto <strong>(25)</strong></span>
+
+              <span class="info">Total a pagar <strong>$235.21</strong></span>
+
+            </div>
+
+          </article>
+
+
+          <ng-container *ngFor="let item of [0,0,0,0,0,0,0]">
+
+            <article class="item">
+
+              <figure class="img">
+
+                <img src="./assets/img/avatar.svg" alt="Avatar por defecto" />
+
+              </figure>
+
+              <div class="content">
+
+                <h3 class="name">farmacia santa isabel</h3>
+
+                <span class="info">Cantidad de producto <strong>(25)</strong></span>
+
+                <span class="info">Total a pagar <strong>$235.21</strong></span>
+
+              </div>
+
+            </article>
+
+          </ng-container>
+
+        </div>
+
+        <div class="invoice-container">
+
+          <div class="border-box">
+
+            <table>
+
+              <thead>
+
+                <th>Producto</th>
+                <th>Subtotal</th>
+
+              </thead>
+
+              <tbody>
+
+                <tr>
+                  <td>Comida vegana food x 4</td>
+                  <td>$45,54</td>
+                </tr>
+
+                <tr>
+                  <td>Organic vegan food x 5</td>
+                  <td>$45,54</td>
+                </tr>
+
+                <tr>
+                  <td>Subtotal</td>
+                  <td>$91,08</td>
+                </tr>
+
+                <tr>
+                  <td>Delivery</td>
+                  <td>$2,1</td>
+                </tr>
+
+              </tbody>
+
+              <tfoot>
+                <p>Impuesto (19%) $14.02</p>
+                <p>TOTAL $91,08</p>
+              </tfoot>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
