@@ -16,13 +16,13 @@ export class ProductLoadingService {
   }
 
 
-  GetCategorias(userId: string){
-    const url = `/api/admins/${userId}/categories`;
+  GetCategorias(){
+    const url = `/api/categories`;
     return this.execQuery(url);
   }
 
-  GetSubcategorias(userId: string, idCategory: number){
-    const url = `/api/admins/${userId}/categories/${idCategory}/subcategories`;
+  GetSubcategorias(idCategory: number){
+    const url = `/api/categories/${idCategory}/subcategories`;
     return this.execQuery(url);
   }
 

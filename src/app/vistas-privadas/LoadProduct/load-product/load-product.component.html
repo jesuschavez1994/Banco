@@ -4,7 +4,8 @@
     <div class="col-10 col-sm-6 col-md-4 display-flex justify-content-center">
         <button class="btn btn-primary button mt-5 fredoka" 
                 type="button"
-                (click)="addNewProduct()"      
+                (click)="addNewProduct()"
+                [routerLink]="['/my-store/load-product']"     
                 >
                 + Agregar nuevo producto
         </button>
@@ -24,13 +25,8 @@
         </ul>
 
     </div>
-    
-
 
 </section>
-
-<app-product-loading *ngIf="addProductNew"></app-product-loading>
-
 
 <section class="container col-md-12 mt-5" *ngIf="!addProductNew">
     <ol class="row products list items pl-0">

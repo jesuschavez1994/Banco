@@ -22,7 +22,9 @@ export class LoadProductComponent implements OnInit {
 
    addProductNew = false;
 
-  constructor(public storeService: StoreService, private route: ActivatedRoute, private router: Router) { }
+  constructor(public storeService: StoreService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
     this.getData(this.page);

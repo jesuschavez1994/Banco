@@ -1,7 +1,9 @@
-<section class="display-flex">
+<section class="display-flex mt-5">
 
     <div class="container-fluid">
         <div class="row">
+
+            <a class="family-400 black size-16 mb-3 pl-5" [routerLink]="['/my-store/product-catalogue']"> < Atrás </a>
 
             <form   [formGroup]="forma"
                     (ngSubmit)="addProducts()" 
@@ -115,14 +117,14 @@
                                             [ngClass]="{'is-invalid':  (!forma.controls['description'].valid || forma.controls['description'].errors?.minlength)&& forma.controls['description'].touched, 'is-valid': forma.controls['description'].valid }"     
                                             ></textarea>
     
-                                <mat-error    *ngIf="forma.get('description').errors?.required"  
-                                        class="invalid-feedback">
-                                        Debe indicar una descripción del producto
+                                <mat-error  *ngIf="forma.get('description').errors?.required"  
+                                            class="invalid-feedback">
+                                            Debe indicar una descripción del producto
                                 </mat-error>
 
-                                <mat-error    *ngIf="forma.get('description').errors?.minlength"  
-                                        class="invalid-feedback">
-                                        Por lo menos 5 caracteres
+                                <mat-error  *ngIf="forma.get('description').errors?.minlength"  
+                                            class="invalid-feedback">
+                                            Por lo menos 5 caracteres
                                 </mat-error>
 
                             </div>
@@ -135,8 +137,14 @@
                                 <select id="Marca" 
                                         class="form-control"
                                         formControlName="mark">
-                                  <option selected class="family-300">Seleccionar</option>
-                                  <option *ngFor="let item of marks">{{item.name}}</option>
+
+                                        <option class="family-300">
+                                            Seleccionar
+                                        </option>
+                                        <option [value]="item.name" *ngFor="let item of marks">
+                                            {{item.name}}
+                                        </option>
+
                                 </select>
                             </div>
     
@@ -145,8 +153,8 @@
                                 <select id="Fabricante"
                                         class="form-control"
                                         formControlName="factory">
-                                        <option selected class="family-300">Seleccionar</option>
-                                        <option *ngFor="let item of factories">
+                                        <option class="family-300">Seleccionar</option>
+                                        <option [value]="item.name" *ngFor="let item of factories">
                                                 {{item.name}}
                                         </option>
                                 </select>
@@ -166,9 +174,9 @@
                                         formControlName="category"
                                         (change)="onChange($event.target.value)"
                                         >
-                                    <option selected class="family-300">Seleccionar</option>
+                                    <option class="family-300">Seleccionar</option>
                                     <option *ngFor="let item of category; let i = index" 
-                                            title="{{ item.name }}"
+                                            [value]="item.name"
                                             >
                                             {{item.name}}
                                     </option>
@@ -194,10 +202,8 @@
                                         class="form-control"
                                         formControlName="subcategory_id"
                                         (change)="Subcategory($event.target.value)">
-                                        <option selected class="family-300">Seleccionar</option>
-                                        <option *ngFor="let item of subcategory" >
-                                        {{ item.name }}
-                                        </option>
+                                        <option class="family-300">Seleccionar</option>
+                                        <option *ngFor="let item of subcategory"[value]="item.id">{{ item.name }}</option>
                                 </select>
                             </div>
     
@@ -207,18 +213,7 @@
                                         type="number"
                                         placeholder="Precio"
                                         formControlName="price"
-                                        [ngClass]="{'is-invalid':  (!forma.controls['price'].valid || forma.controls['price'].errors?.minlength)&& forma.controls['price'].touched, 'is-valid': forma.controls['price'].valid }" 
                                 >
-                                <mat-error  *ngIf="forma.get('price').errors?.required"  
-                                            class="invalid-feedback">
-                                            Debe indicar el precio del producto.
-                                </mat-error>
-
-                                <mat-error  *ngIf="forma.get('price').errors?.minlength"  
-                                            class="invalid-feedback">
-                                            Por lo menos 5 caracteres.
-                                </mat-error>
-                                
                             </div>
     
                             <div class="form-group col-md-4">
@@ -251,9 +246,10 @@
                                 <select id="Delivery" 
                                         class="form-control"
                                         formControlName="delivery"
-                                        (change)="Delivery($event.target.value)">
-                                        <option value="Si">Si</option>
-                                        <option value="No">No</option>
+                                        >
+                                        <option selected class="family-300">Seleccionar</option>
+                                        <option [value]="true">Si</option>
+                                        <option [value]="false">No</option>
                                 </select>
                             </div>
     
@@ -262,10 +258,10 @@
                                 <select id="Disponible" 
                                         class="form-control"
                                         formControlName="aviable"
-                                        (change)="Disponibilidad($event.target.value)">
+                                        >
                                   <option selected class="family-300">Seleccionar</option>
-                                  <option>Si</option>
-                                  <option>No</option>
+                                  <option [value]="true">Si</option>
+                                  <option [value]="false">No</option>
                                 </select>
                             </div>
                         </div>
@@ -277,6 +273,7 @@
                         <button class="btn btn-primary button fredoka" 
                             type="submit"
                             (click)="Send()"
+                             [disabled]="!forma.valid"
                             >
                             Guardar Cambios
                         </button>

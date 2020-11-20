@@ -8,9 +8,11 @@ import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import {MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {ModalAddCategoriasAndSubcategoriasComponent} from './container/modals/modal-add-categorias-and-subcategorias/modal-add-categorias-and-subcategorias.component'
 
+
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { EditProductStore } from '@interfaces/interfaceEditProductStore';
 
 export interface DialogData {
   animal: string;
@@ -21,7 +23,7 @@ export interface DialogData {
   selector: 'app-product-loading',
   templateUrl: './product-loading.component.html',
   styleUrls: ['./product-loading.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductLoadingComponent implements OnInit {
 
@@ -37,6 +39,9 @@ export class ProductLoadingComponent implements OnInit {
   recipes: any;
   subcategoria: string;
   myFlag = false;
+  id: string;
+  idProduct: string;
+  categoryId: string;
   // Con input //
   // tslint:disable-next-line: max-line-length
   File: any[] =
@@ -68,6 +73,8 @@ export class ProductLoadingComponent implements OnInit {
   // tslint:disable-next-line: no-inferrable-types
   page: number = 1;
 
+  myObject = {};
+
   // tslint:disable-next-line: variable-name
   constructor(public _productLoadingService: ProductLoadingService,
               // tslint:disable-next-line: variable-name
@@ -82,15 +89,15 @@ export class ProductLoadingComponent implements OnInit {
     this.forma = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
       description: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      price: new FormControl('', [Validators.required, Validators.minLength(1)]),
+      price: new FormControl(''),
       mark: new FormControl('Seleccionar'),
       factory: new FormControl('Seleccionar'),
-      category: new FormControl('Seleccionar'),
-      subcategory_id: new FormControl('Seleccionar'),
+      category: new FormControl('Seleccionar', [Validators.required]),
+      subcategory_id: new FormControl('Seleccionar', [Validators.required]),
       delivery: new FormControl('Seleccionar'),
       aviable: new FormControl('Seleccionar'),
       stock: new FormControl('', [Validators.required, Validators.minLength(1)]),
-      recipe: new FormControl('Seleccionar'),
+      recipe: new FormControl('Seleccionar', [Validators.required]),
       file: new FormControl(''),
       input0: new FormControl(''),
       input1: new FormControl(''),
@@ -102,6 +109,14 @@ export class ProductLoadingComponent implements OnInit {
 
   ngOnInit() {
 
+    this.route.params.subscribe( (params: Params) => {
+      this.idProduct = params.id;
+      console.log(params);
+      if ( this.idProduct ){
+        this.GetIdProductEdit();
+      }
+    });
+
     this.storeService.ProductGet(
       localStorage.getItem('id'),
       localStorage.getItem('storeId'))
@@ -111,19 +126,14 @@ export class ProductLoadingComponent implements OnInit {
     });
 
     // GET CATEGORIAS //
-    this._productLoadingService.GetCategorias(
-      localStorage.getItem('id'))
+    this._productLoadingService.GetCategorias()
       .subscribe( response => {
-      return this.category = response;
+        console.log(response);
+        return this.category = response;
     });
 
     // GET MARCA //
-    this._productLoadingService.GetMark(
-      localStorage.getItem('id'))
-      .subscribe( response => {
-      this.marks = response;
-      console.log(this.marks);
-    });
+    this.getMarca();
 
     // GET FABRICANTE //
     this._productLoadingService.GetFactories(
@@ -151,6 +161,39 @@ export class ProductLoadingComponent implements OnInit {
 
   }
 
+  getMarca(){
+    this._productLoadingService.GetMark(
+      localStorage.getItem('id'))
+      .subscribe( response => {
+      this.marks = response;
+      console.log(this.marks);
+    });
+  }
+
+  private GetIdProductEdit(){
+    this.storeService.getSpecificProduct(
+      localStorage.getItem('id'),
+      localStorage.getItem('storeId'),
+      this.idProduct
+    ).subscribe( (data: EditProductStore) => {
+      console.log(data);
+      this.myObject = {
+        name: data.name,
+        description: data.description,
+        mark : data.marks[0].name,
+        factory: data.factories[0].name,
+        category: data.subcategories[0].category.name,
+        subcategory_id: data.subcategories[0].name,
+        price: data.price,
+        stock: data.stock,
+        aviable: data.aviable,
+        delivery: data.delivery.delivery,
+      };
+      console.log(this.myObject);
+      this.forma.patchValue(this.myObject);
+    });
+  }
+
   SelectCategory(index: string){
     console.log(index);
   }
@@ -159,8 +202,7 @@ export class ProductLoadingComponent implements OnInit {
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.category.length; i++){
       if ( this.category[i].name ===  centroId){
-        this._productLoadingService.GetSubcategorias(
-          localStorage.getItem('id'), i)
+        this._productLoadingService.GetSubcategorias(this.category[i].id)
           .subscribe( (response: any) => {
           console.log('sub', response);
           return this.subcategory = response;
@@ -170,18 +212,25 @@ export class ProductLoadingComponent implements OnInit {
 
   }
 
-  Subcategory(event){
+  Subcategory(event: string){
     console.log('Log', event);
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.subcategory.length; i++){
       if ( this.subcategory[i].name === event ){
         console.log(this.subcategory[i].id);
-        return this.forma.get('subcategory_id').setValue(this.subcategory[i].id);
+        // return this.forma.get('subcategory_id').setValue(this.subcategory[i].id);
       }
     }
   }
 
   addProducts(){
+
+    if ( this.forma.value.price === ''){
+      return this.forma.get('price').setValue(0);
+    }else{
+      // tslint:disable-next-line: no-unused-expression
+      this.forma.value.price;
+    }
 
     const data = new DetalleProduct(
       this.forma.value.name,
@@ -211,6 +260,10 @@ export class ProductLoadingComponent implements OnInit {
         images);
       })).subscribe( (imgProduct: Image) => {
         this.imagen.push(imgProduct[0]);
+        this.router.navigate(['/my-store/product-catalogue']);
+        this._snackBar.open('Se ha agregado un nuevo producto', 'Cerrar', {
+          duration: 2000,
+        });
         console.log('RESPONSE', imgProduct);
     });
 
@@ -218,10 +271,6 @@ export class ProductLoadingComponent implements OnInit {
 
   Send(){
     this.getData();
-
-    this._snackBar.open('Se ha agregado un nuevo producto', 'Cerrar', {
-      duration: 2000,
-    });
   }
 
 
@@ -244,24 +293,6 @@ export class ProductLoadingComponent implements OnInit {
         this.File.splice(index, 1, { image: this.forma.value.file, name: event.target.files[0].name, position: index + 1 });
         console.log(this.File);
       };
-    }
-  }
-
-  Disponibilidad(event){
-    switch (event){
-      case 'Si':
-        return this.forma.get('aviable').setValue(true);
-      case 'No':
-        return this.forma.get('aviable').setValue(false);
-    }
-  }
-
-  Delivery(event){
-    switch (event){
-      case 'Si':
-        return this.forma.get('delivery').setValue(true);
-        case 'No':
-        return this.forma.get('delivery').setValue(false);
     }
   }
 

@@ -6,6 +6,8 @@
                 <i  class="material-icons position-absolute left-85 top-5 icon-gris" 
                     name="create"
                     title="Editar"
+                    (click)="Id(index)"
+                    [routerLink]="['/my-store/edit', MyProduct[index].id]" 
                     >
                     create
                 </i>
@@ -49,8 +51,12 @@
                         <span *ngIf="item.description.length > 100">...</span>
                     </p>
 
-                    <span class="family-600 color-p size-14 black mt-2">
+                    <span *ngIf="item.price !== 0 " class="family-600 color-p size-14 black mt-2">
                         {{item.price | currency: 'USD': true:'1.3-3'}} 
+                    </span>
+
+                    <span *ngIf="item.price === 0 " class="family-600 color-p size-14 black mt-2">
+                        Precio a consultar
                     </span>
                 </div>
            

@@ -4,7 +4,7 @@ import { StoreService } from '@services/store/store.service';
 import { DataProductDB } from '@interfaces/InterfaceProducto';
 import {MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalDeleteProductComponent } from './container/modal-delete-product/modal-delete-product.component';
-
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'app-view-products-loads',
@@ -25,12 +25,21 @@ export class ViewProductsLoadsComponent implements OnInit {
   showCards = false;
   indexProductoDelete: any;
   idProducto: any;
+  id: string;
 
   constructor(private cd: ChangeDetectorRef,
               public dialog: MatDialog,
-              public storeService: StoreService) { }
+              public storeService: StoreService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
+  }
+
+  Id(index){
+    console.log(index);
+    console.log(this.MyProduct[index].id);
+    return this.id = this.MyProduct[index].id;
   }
 
   refresh(){
