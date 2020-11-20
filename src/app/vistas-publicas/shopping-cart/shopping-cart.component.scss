@@ -1,171 +1,171 @@
-@import 'src/assets/scss/style.scss';
+				@import 'src/assets/scss/style.scss';
 
-main {
+				main {
 
-  display: flex;
-  // flex-wrap: wrap;
-
-
-  /* Menu de configuración
-  --------------------------------------------- */
-
-  .configuration-menu {
-    min-width: 245px;
-    width: 18%;
-    padding-right: 20px;
-    // background: green;
-
-    padding-top: 65px;
-
-    h2 {
-      padding-left: 40px;
-    }
-
-    .items-menu {
-      width: 84%;
-
-      .item {
-        border-radius: 0px 4px 4px 0px;
-        cursor: pointer;
-        padding: 4px 0px;
-        transition: all .3s;
-
-        &:first-child {
-          font-weight: 600;
-        }
-
-        &:hover {
-          background: $color__background-gray--light;
-
-        }
-
-        p {
-          padding-left: 40px;
-
-          &::first-letter {
-            text-transform: uppercase;
-          }
-        }
-
-      }
-
-      .active {
-        background: $color__background-gray--light;
-      }
-
-    }
-  }
+					display: flex;
+					// flex-wrap: wrap;
 
 
-  /* Listado de compras
-  --------------------------------------------- */
+					/* Menu de configuración
+  				--------------------------------------------- */
 
-  .shopping-cart {
-    width: 76%;
-    // background: blueviolet;
-    margin: 0px 30px;
+					.configuration-menu {
+						min-width: 245px;
+						width: 18%;
+						padding-right: 20px;
+						// background: green;
 
-    padding-top: 58px;
+						padding-top: 65px;
 
-    .tab-container {
+						h2 {
+							padding-left: 40px;
+						}
 
-      .tab-menu{
-        display: flex;
+						.items-menu {
+							width: 84%;
 
-        .tab-item{
-          font-size: 13.2px;
-          font-weight: bold;
-          text-transform: capitalize;
-          padding: 4px 10px;
-          cursor: pointer;
-          transition: all $time-hover;
+							.item {
+								border-radius: 0px 4px 4px 0px;
+								cursor: pointer;
+								padding: 4px 0px;
+								transition: all .3s;
 
-          &:hover{
-            background: $color__background-gray--light;
-          }
+								&:first-child {
+									font-weight: 600;
+								}
 
-        }
+								&:hover {
+									background: $color__background-gray--light;
 
-        .active{
-          background: $color__background-gray--light;
-        }
+								}
 
-      }
+								p {
+									padding-left: 40px;
 
-      .tab-content{
-        border-top: solid $color__background-gray--light 19px;
-        padding-bottom: 102px;
+									&::first-letter {
+										text-transform: uppercase;
+									}
+								}
 
-        .list-item{
-          min-width: 278px;
-          width: 36.4%;
-          max-height: 58.5vh;
+							}
 
-          margin-bottom: 65px;
-          overflow: auto;
+							.active {
+								background: $color__background-gray--light;
+							}
 
-          display: flex;
-          flex-direction: column;
-          // background: green;
-
+						}
+					}
 
 
-          .item{
-            cursor: pointer;
-            padding: 11px 15px;
-            transition: all $time-hover;
+					/* Listado de compras
+  				--------------------------------------------- */
 
-            display: flex;
-            align-items: center;
+					.shopping-cart {
+						width: 76%;
+						// background: blueviolet;
+						margin: 0px 30px;
 
-            &:hover {
-              background: $color__background-gray;
-            }
+						padding-top: 58px;
 
-            .img{
-              width: 71px;
-              height: 71px;
+						.tab-container {
 
-              // background: brown;
-              border-radius: 42px;
-              margin-right: 18px;
-              overflow: hidden;
+							.tab-menu {
+								display: flex;
 
-              img{
-                height: 100%;
-              }
-            }
+								.tab-item {
+									font-size: 13.2px;
+									font-weight: bold;
+									text-transform: capitalize;
+									padding: 4px 10px;
+									cursor: pointer;
+									transition: all $time-hover;
 
-            .content{
-              display: flex;
-              flex-direction: column;
+									&:hover {
+										background: $color__background-gray--light;
+									}
+
+								}
+
+								.active {
+									background: $color__background-gray--light;
+								}
+
+							}
+
+							.tab-content {
+								border-top: solid $color__background-gray--light 19px;
+								padding-bottom: 102px;
+
+								.list-item {
+									min-width: 278px;
+									width: 36.4%;
+									max-height: 58.5vh;
+
+									margin-bottom: 65px;
+									overflow: auto;
+
+									display: flex;
+									flex-direction: column;
+									// background: green;
 
 
-              .name{
-                text-transform: capitalize;
-                font-size: 14px;
-                font-weight: 600;
-              }
 
-              .info{
-                font-size: 11px;
-                line-height: 17px;
+									.item {
+										cursor: pointer;
+										padding: 11px 15px;
+										transition: all $time-hover;
 
-                strong{
-                  font-weight: 600;
-                }
-              }
+										display: flex;
+										align-items: center;
 
-            }
+										&:hover {
+											background: $color__background-gray;
+										}
 
-          }
+										.img {
+											width: 71px;
+											height: 71px;
 
-          .active{
-            background: $color__background-gray;
-          }
+											// background: brown;
+											border-radius: 42px;
+											margin-right: 18px;
+											overflow: hidden;
 
-        }
-      }
-    }
-  }
-}
+											img {
+												height: 100%;
+											}
+										}
+
+										.content {
+											display: flex;
+											flex-direction: column;
+
+
+											.name {
+												text-transform: capitalize;
+												font-size: 14px;
+												font-weight: 600;
+											}
+
+											.info {
+												font-size: 11px;
+												line-height: 17px;
+
+												strong {
+													font-weight: 600;
+												}
+											}
+
+										}
+
+									}
+
+									.active {
+										background: $color__background-gray;
+									}
+
+								}
+							}
+						}
+					}
+				}
