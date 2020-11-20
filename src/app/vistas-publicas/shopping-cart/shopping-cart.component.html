@@ -1,28 +1,36 @@
 <app-navbarstore [fixed]="false"></app-navbarstore>
 
-<main>
+<main class="page">
 	<!-- #Menu de configuración -->
 
 	<section class="configuration-menu">
+
 		<h2>configuración</h2>
 
 		<ul class="items-menu">
+
 			<li class="item">
 				<p>mi cuenta</p>
 			</li>
+
 			<li class="item active">
 				<p>carrito de compra</p>
 			</li>
+
 			<li class="item">
 				<p>carrito de compra</p>
 			</li>
+
 			<li class="item">
 				<p>carrito de compra sdasdsadsdasdsa</p>
 			</li>
+
 			<li class="item">
 				<p>carrito de compra</p>
 			</li>
+
 		</ul>
+
 	</section>
 
 	<!-- #Carrito de compras -->
@@ -93,18 +101,23 @@
 
 				<div class="invoice-container">
 
-					<div class="border-box">
+
+					<div class="table-container">
+
+						<div class="border-box">
+
+						</div>
 
 						<table>
 
-							<thead>
+							<div class="thead">
 
 								<th>Producto</th>
 								<th>Subtotal</th>
 
-							</thead>
+							</div>
 
-							<tbody>
+							<div class="tbody">
 
 								<tr>
 									<td>Comida vegana food x 4</td>
@@ -126,16 +139,17 @@
 									<td>$2,1</td>
 								</tr>
 
-							</tbody>
+							</div>
 
-							<tfoot>
-								<p>Impuesto (19%) $14.02</p>
-								<p>TOTAL $91,08</p>
-							</tfoot>
+							<div class="tfoot">
+								<p>Impuesto (19%) <span>$14.02</span> </p>
+								<p><strong>TOTAL <span>$91,08</span> </strong></p>
+							</div>
 
 						</table>
 
 					</div>
+
 
 				</div>
 
