@@ -5,31 +5,28 @@
 
 	<section class="configuration-menu">
 
-		<h2>configuración</h2>
+		<div #menuContainerFixed>
 
-		<ul class="items-menu">
+			<i class="responsive--icon fas fa-bars"></i> <h2>configuración</h2>
 
-			<li class="item">
-				<p>mi cuenta</p>
-			</li>
+			<ul class="items-menu">
 
-			<li class="item active">
-				<p>carrito de compra</p>
-			</li>
+				<li class="item">
+					<i class="responsive--icon fas fa-user"></i> <p>mi cuenta</p>
+				</li>
 
-			<li class="item">
-				<p>carrito de compra</p>
-			</li>
+				<ng-container *ngFor="let item of [0,0,1]">
 
-			<li class="item">
-				<p>carrito de compra sdasdsadsdasdsa</p>
-			</li>
+					<li class="item" [ngClass]="{ 'active': item == 1 }">
+						<i class="responsive--icon fas fa-user"></i> <p>carrito de compra</p>
+					</li>
 
-			<li class="item">
-				<p>carrito de compra</p>
-			</li>
+				</ng-container>
 
-		</ul>
+			</ul>
+
+		</div>
+
 
 	</section>
 
@@ -111,32 +108,40 @@
 						<table>
 
 							<div class="thead">
-
-								<th>Producto</th>
-								<th>Subtotal</th>
-
+                <div class="tableElementContainer">
+								  <th>Producto</th>
+								  <th>Subtotal</th>
+                </div>
 							</div>
 
 							<div class="tbody">
 
 								<tr>
-									<td>Comida vegana food x 4</td>
-									<td>$45,54</td>
+                  <div class="tableElementContainer">
+                    <td>Comida vegana food x 4 Comida vegana food x 4 Comida vegana food x 4</td>
+                    <td>$45,54</td>
+                  </div>
 								</tr>
 
 								<tr>
-									<td>Organic vegan food x 5</td>
-									<td>$45,54</td>
+									<div class="tableElementContainer">
+                    <td>Comida vegana food x 4</td>
+                    <td>$45,54</td>
+                  </div>
 								</tr>
 
 								<tr>
-									<td>Subtotal</td>
-									<td>$91,08</td>
+                  <div class="tableElementContainer">
+                    <td>Subtotal</td>
+								  	<td>$91,08</td>
+                  </div>
 								</tr>
 
 								<tr>
-									<td>Delivery</td>
-									<td>$2,1</td>
+                  <div class="tableElementContainer">
+									  <td>Delivery</td>
+                    <td>$2,1</td>
+                  </div>
 								</tr>
 
 							</div>
