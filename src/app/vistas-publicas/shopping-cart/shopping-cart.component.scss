@@ -48,7 +48,12 @@
 			}
 
 			.active {
-				background: $color__background-gray--light;
+        background: $color__background-gray--light;
+
+        .responsive--icon{
+          color: $color__background-orange;
+
+        }
 			}
 
 		}
@@ -111,7 +116,7 @@
 				--------------------------------------------- */
 				.list-item {
 					min-width: 278px;
-					width: 36.4%;
+					// width: 36.4%;
 					max-height: 58.5vh;
 
 					margin-bottom: 65px;
@@ -173,7 +178,8 @@
 					}
 
 					.active {
-						background: $color__background-gray;
+            background: $color__background-gray;
+
 					}
 
 				}
@@ -182,7 +188,7 @@
 				--------------------------------------------- */
 
 				.invoice-container {
-					width: 63.7%;
+					// width: 63.7%;
 
 					padding-top: 22px;
 
@@ -190,7 +196,7 @@
 					justify-content: center;
 
 					.table-container{
-            min-width: 310px;
+            // min-width: 310px;
             max-width: 347px;
             width: 54.8%;
 
@@ -232,7 +238,6 @@
 
 								th{
 									font-weight: 600;
-									// padding: 16px 64px 16px 20px;
 								}
 
 							}
@@ -247,7 +252,6 @@
 									justify-content: space-between;
 
 									td{
-										// padding: 16px 64px 16px 20px;
 										text-transform: capitalize;
                   }
 
@@ -289,36 +293,126 @@
 			}
 		}
 	}
-
 }
 
 @media (max-device-width: 480px){
 
-	.page {
-		flex-direction: column;
+  .page {
+
+    .shopping-cart{
+      min-width: initial;
+
+      margin: 0px 15px;
+
+      .tab-content{
+
+        .invoice-container{
+
+          .table-container{
+            min-width: 255px;
+          }
+        }
+      }
+    }
 	}
 
 }
 
+@media (min-device-width: 481px){
+
+  .page {
+
+
+    .shopping-cart{
+      min-width: fit-content;
+
+      .tab-content{
+
+        .invoice-container{
+
+          .table-container{
+            min-width: 310px;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@media (max-device-width: 757px){
+
+	.page {
+
+    .shopping-cart{
+
+      .tab-content{
+        flex-direction: column;
+
+        .list-item{
+          width: 100%;
+        }
+
+        .invoice-container{
+          width: 100%;
+
+          .table-container{
+            table{
+
+              .tableElementContainer{
+                padding-right: 20px !important;
+              }
+
+              .tfoot{
+
+                p{
+                  padding-right: 20px !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+	}
+}
+
+@media (min-device-width: 758px){
+  .page {
+
+    .shopping-cart{
+
+      .tab-content{
+
+        .list-item{
+          width: 36.4%;
+        }
+
+        .invoice-container{
+          width: 63.7%;
+        }
+
+      }
+    }
+	}
+}
 
 @media (max-device-width: 999px){
 
 	.page {
-
-		// flex-direction: column;
 
 		.configuration-menu {
 			min-width: 47px;
 			width: 47px;
 
 			background: $color__border-gray--light;
-
+      transition: all .3s;
       padding-right: 0px;
       padding-top: 58px;
 
 
 			h2{
-				display: none;
+        display: none;
 			}
 
 			.items-menu{
@@ -327,46 +421,70 @@
 				.item{
 
 					p{
-						display: none;
+            display: none;
 					}
 
-				}
-			}
+        }
+      }
 
-			.responsive--icon{
-				display: block;
+      .responsive--icon{
+        display: block;
+        transition: all .3s;
+
+        &:hover{
+          background: $color__background-gray;
+          color: $color__background-orange;
+        }
+
+
 			}
 
 			.responsive-menu-container--fixed{
+
 				position: fixed;
 				top: 39px;
 				z-index: 3;
 
-			}
+      }
 
 		}
 
 		.shopping-cart{
-      min-width: fit-content;
       width: 87%;
     }
 
+    .configuration-menu--responsive-expanded{
+      min-width: 245px !important;
+      width: 18% !important;
+      // height: 100%;
+
+      // position: absolute;
+
+      .heading{
+        display: flex;
+        align-items: center;
+
+        h2{
+          display: block !important;
+          font-size: 18px !important;
+          margin-bottom: 0px !important;
+          padding-left: 0px !important;
+
+        }
+
+      }
+
+      .items-menu{
+        .item{
+          display: flex;
+          align-items: center;
+
+          p{
+            display: block !important;
+            padding-left: 0px !important;
+          }
+        }
+      }
+    }
 	}
-
-}
-
-@media (min-device-width: 1000px){
-
-	.page {
-
-		.configuration-menu {
-
-		}
-
-		.shopping-cart{
-
-		}
-
-	}
-
 }
