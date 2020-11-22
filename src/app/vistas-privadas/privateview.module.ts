@@ -13,7 +13,6 @@ import { MapaComponent } from './components/mapa/mapa.component';
 import { MapEditarComponent } from './components/map-editar/map-editar.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { PipesModule } from '@pipes/pipes.module';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // ANGULAR MATERIAL //
@@ -79,7 +78,10 @@ import { ROUTING_VIEW_STORE } from './view.routes';
 import { ProductLoadingSmartComponent } from './product-loading/container/product-loading-smart/product-loading-smart.component';
 import { LoadProductComponent } from './LoadProduct/load-product/load-product.component';
 import { ModalAddCategoriasAndSubcategoriasComponent } from './product-loading/container/modals/modal-add-categorias-and-subcategorias/modal-add-categorias-and-subcategorias.component';
+// tslint:disable-next-line: max-line-length
 import { ModalDeleteProductComponent } from './components/view-products-loads/container/modal-delete-product/modal-delete-product.component';
+import { NavbarSincronizacionComponent } from './shared/navbar-sincronizacion/navbar-sincronizacion.component';
+import { ExportarListaExcelComponent } from './sincronizacion/pages/exportar-lista-excel/exportar-lista-excel.component';
 
 
 @NgModule({
@@ -118,7 +120,9 @@ import { ModalDeleteProductComponent } from './components/view-products-loads/co
       ProductLoadingSmartComponent,
       LoadProductComponent,
       ModalAddCategoriasAndSubcategoriasComponent,
-      ModalDeleteProductComponent],
+      ModalDeleteProductComponent,
+      NavbarSincronizacionComponent,
+      ExportarListaExcelComponent],
 
     imports: [
       CommonModule,
@@ -151,7 +155,8 @@ import { ModalDeleteProductComponent } from './components/view-products-loads/co
       PhotoUserEditComponent,
       PhotoUserComponent,
       CardShimmerFormConfigurationComponent,
-      ModalAddCategoriasAndSubcategoriasComponent
+      ModalAddCategoriasAndSubcategoriasComponent,
+      NavbarSincronizacionComponent
     ],
 
     providers: [

@@ -18,6 +18,8 @@ import { MyStoreComponent } from './vistas-privadas/pages/my-store/my-store.comp
 import { ProductLoadingSmartComponent } from './vistas-privadas/product-loading/container/product-loading-smart/product-loading-smart.component';
 import { LoadProductComponent } from './vistas-privadas/LoadProduct/load-product/load-product.component';
 import { ViewProductsLoadsComponent } from './vistas-privadas/components/view-products-loads/view-products-loads.component';
+import { ExportarListaExcelComponent } from './vistas-privadas/sincronizacion/pages/exportar-lista-excel/exportar-lista-excel.component';
+
 
 const APP_ROUTES: Routes = [
 
@@ -60,6 +62,10 @@ const APP_ROUTES: Routes = [
             {
                 path: 'edit/:id',
                 component: ProductLoadingComponent
+            },
+            {
+                 path: 'exportar-lista-excel',
+                 component: ExportarListaExcelComponent
             },
             {path: '**', pathMatch: 'full', redirectTo: 'contact'},
         ]
