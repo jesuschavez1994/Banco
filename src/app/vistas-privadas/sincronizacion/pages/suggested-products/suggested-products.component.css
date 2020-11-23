@@ -1,16 +1,15 @@
-input[type="file"] {
-    color: transparent;
+button{
+    border: 1px solid rgb(204, 203, 203);
+    padding: 8px;
+    box-sizing: border-box;
 }
 
-.file-input{
-    position: absolute;
-    top: 0;
-    opacity: 0;
-    left: 0;
+.container-fluid{
+    border-bottom: 1px solid #dee2e6;
 }
 
-.icon-excel{
-    border-color: #b5b5b5;
+input {
+    border-color: rgb(204, 203, 203);
     background-color: #f4f4f4;
     border-style: solid;
     background-repeat: no-repeat;
@@ -21,11 +20,4 @@ input[type="file"] {
     padding-left: calc(1.5em + .75rem);
     background-position: right calc(.375em + .1875rem) center !important;
     background-size: calc(.75em + .375rem) calc(.75em + .375rem);
-}
-
-
-@media(max-width: 900px){
-    ::placeholder{
-        font-size: 12px;
-    }
 }

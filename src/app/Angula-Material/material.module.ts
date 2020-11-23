@@ -13,6 +13,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [],
@@ -27,7 +30,10 @@ import {MatSelectModule} from '@angular/material/select';
     MatGridListModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule,
+    MatBadgeModule,
+    MatIconModule,
   ],
   exports: [
     MatFormFieldModule,
@@ -39,7 +45,10 @@ import {MatSelectModule} from '@angular/material/select';
     MatGridListModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule,
+    MatBadgeModule,
+    MatIconModule
   ]
 })
 export class MaterialModule { }

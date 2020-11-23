@@ -82,6 +82,10 @@ import { ModalAddCategoriasAndSubcategoriasComponent } from './product-loading/c
 import { ModalDeleteProductComponent } from './components/view-products-loads/container/modal-delete-product/modal-delete-product.component';
 import { NavbarSincronizacionComponent } from './shared/navbar-sincronizacion/navbar-sincronizacion.component';
 import { ExportarListaExcelComponent } from './sincronizacion/pages/exportar-lista-excel/exportar-lista-excel.component';
+import { SuggestedProductsComponent } from './sincronizacion/pages/suggested-products/suggested-products.component';
+import { SincronizacionViewsComponent } from './sincronizacion/components/sincronizacion-views/sincronizacion-views.component';
+import { ItemsSuggestedProductsComponent } from './sincronizacion/pages/suggested-products/container/items-suggested-products/items-suggested-products.component';
+
 
 
 @NgModule({
@@ -122,7 +126,11 @@ import { ExportarListaExcelComponent } from './sincronizacion/pages/exportar-lis
       ModalAddCategoriasAndSubcategoriasComponent,
       ModalDeleteProductComponent,
       NavbarSincronizacionComponent,
-      ExportarListaExcelComponent],
+      ExportarListaExcelComponent,
+      SuggestedProductsComponent,
+      SincronizacionViewsComponent,
+      ItemsSuggestedProductsComponent
+      ],
 
     imports: [
       CommonModule,

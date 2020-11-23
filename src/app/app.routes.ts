@@ -19,6 +19,8 @@ import { ProductLoadingSmartComponent } from './vistas-privadas/product-loading/
 import { LoadProductComponent } from './vistas-privadas/LoadProduct/load-product/load-product.component';
 import { ViewProductsLoadsComponent } from './vistas-privadas/components/view-products-loads/view-products-loads.component';
 import { ExportarListaExcelComponent } from './vistas-privadas/sincronizacion/pages/exportar-lista-excel/exportar-lista-excel.component';
+import { SuggestedProductsComponent } from './vistas-privadas/sincronizacion/pages/suggested-products/suggested-products.component';
+import { SincronizacionViewsComponent } from './vistas-privadas/sincronizacion/components/sincronizacion-views/sincronizacion-views.component';
 
 
 const APP_ROUTES: Routes = [
@@ -64,12 +66,24 @@ const APP_ROUTES: Routes = [
                 component: ProductLoadingComponent
             },
             {
-                 path: 'exportar-lista-excel',
-                 component: ExportarListaExcelComponent
+                path: 'sincronizacion',
+                component: SincronizacionViewsComponent,
+                children: [
+                    {
+                        path: 'exportar-lista-excel',
+                        component: ExportarListaExcelComponent
+                   },
+                   {
+                    path: 'suggested-products',
+                     component: SuggestedProductsComponent
+                    },
+                ]
             },
+
             {path: '**', pathMatch: 'full', redirectTo: 'contact'},
         ]
     },
+
 
     // {   path: 'contact',
     //     component: ContactComponent,

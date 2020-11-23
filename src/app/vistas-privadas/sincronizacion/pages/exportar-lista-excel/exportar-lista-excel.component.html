@@ -1,42 +1,44 @@
+<section class="container-fluid">
+  <form   [formGroup]="forma" 
+          (ngSubmit)="SendDocumentExcel()" 
+          novalidate="novalidate"
+          class="mt-5 width-100" 
+          >
 
-<app-navbar-sincronizacion></app-navbar-sincronizacion>
+          <section class="row align-items-center">
 
-
-
-<form   [formGroup]="forma" 
-        (ngSubmit)="SendDocumentExcel()" 
-        novalidate="novalidate"
-        class="mt-5 width-100" 
-        >
-
-        <section class="row align-items-center">
-            <div class="form-group col-md-3 mb-0">
-                <input  type="file" 
-                        class="form-control fileInput"
-                        formControlName="file">
-            </div>
-
-            <a  class="family-300 col-md-3" 
-                href="../../../../../assets/DocumentoExcel/Listado de carga de productos.xlsx" 
-                download>
-                Descargar Formato de excel
-            </a>
-
-            <div class="form-group row">
-                <div class="input-group col-md-12">
-                  <button [disabled]="!forma.valid" 
-                          type="submit" 
-                          class="btn btn-primary"
-                          (click)="enviarExcel()"
-                          >
-                          Cargar Lista
-                  </button>
-                </div>
+              <div class="form-group col-sm-4 col-md-4 col-lg-3 mb-0">
+                  <input  class="form-control position-relative icon-excel" placeholder="Carga la lista de excel">
+                  <input  type="file" 
+                          class="form-control file-input"
+                          formControlName="file">
               </div>
 
-        </section>
+              <div  class="col-sm-4 col-md-4">
+                <a  class="family-300 black" 
+                    href="../../../../../assets/DocumentoExcel/Listado de carga de productos.xlsx" 
+                    download>
+                    Descargar Formato de excel
+                    <mat-icon matBadge="!" matBadgeColor="warn"></mat-icon>
+                </a>
+              </div>
 
-</form>
+              <div class="form-group row mb-0">
+                  <div class="input-group col-md-12">
+                    <button [disabled]="!forma.valid" 
+                            type="submit" 
+                            class="btn btn-primary button fredoka"
+                            (click)="enviarExcel()"
+                            >
+                            Cargar Lista
+                    </button>
+                  </div>
+                </div>
+
+          </section>
+
+  </form>
+</section>
 
     
 

@@ -1,0 +1,43 @@
+<section class="container-fluid mt-5 pb-3">
+
+    <div class="row">
+
+        <div class="col-md-12 display-flex align-items-center">
+
+            <div class="input-group-text mr-3">
+                <span class="example-list-section">
+                    <mat-checkbox class="example-margin"
+                                  [checked]="allComplete"
+                                  [indeterminate]="someComplete()"
+                                  (change)="setAll($event.checked)">
+                    </mat-checkbox>
+                </span>
+            </div>
+
+            <button type="button" class="mr-3 family-700">
+                Sincronizar
+            </button>
+    
+            <button type="button" class="mr-3 family-700">
+                Desincronizar
+            </button>
+    
+            
+            <button type="button" class="mr-3 family-700">
+                Eliminar
+            </button>
+
+            <form class="pl-5 col-md-8">
+                <input _ngcontent-ddg-c88="" type="search" placeholder="Busca en nustro banco de productos" aria-label="Search" class="form-control width-100 icon-magnifying-glass">
+            </form>
+
+
+        </div>
+
+    </div>
+
+   
+</section>
+
+<app-items-suggested-products></app-items-suggested-products>
+

@@ -1,9 +1,15 @@
-<ul class="nav nav-tabs">
+<nav class="col-md-11">
+
+  <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link family-400 active">Exportar lista de excel</a>
+      <a  routerLinkActive="active" 
+          [routerLink]="['exportar-lista-excel']"
+          class="nav-link family-400">Exportar lista de excel</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link">Productos sugeridos</a>
+      <a  routerLinkActive="active" 
+          [routerLink]="['/my-store/sincronizacion/suggested-products']"
+          class="nav-link">Productos sugeridos</a>
     </li>
     <li class="nav-item">
       <a class="nav-link">Banco de productos</a>
@@ -11,4 +17,6 @@
     <li class="nav-item">
       <a class="nav-link">Productos sincronizados</a>
     </li>
-</ul>
+  </ul>
+
+</nav>  

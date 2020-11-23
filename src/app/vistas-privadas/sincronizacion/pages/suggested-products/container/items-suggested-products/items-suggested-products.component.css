@@ -1,0 +1,40 @@
+mat-grid-tile {
+    border: 1px solid  rgb(204, 203, 203);
+    background-color: #f4f4f4;
+}
+
+section{
+    background-color: #f4f4f4;
+    padding-top: 7px;
+}
+
+ul a{
+    color: #007bff;
+}
+
+.titles{
+    background-color: #d8d8d8;
+}
+
+.prev{
+    position: absolute;
+    top: 75%;
+    left: -7px;
+}
+
+.next{
+    position: absolute;
+    top: 75%;
+    right: -15px;
+}
+
+.prev, .next {
+    cursor: pointer;
+    width: auto;
+    color: rgb(2, 2, 2);
+    font-size: 25px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+  
