@@ -7,33 +7,43 @@
 
           <section class="row align-items-center">
 
-              <div class="form-group col-sm-4 col-md-4 col-lg-3 mb-0">
-                  <input  class="form-control position-relative icon-excel" placeholder="Carga la lista de excel">
+              <form [formGroup]="forma" 
+                    (ngSubmit)="enviarExcel()" 
+                    novalidate="novalidate"
+                    class="width-100 display-flex">
+
+                <div class="form-group col-sm-4 col-md-4 col-lg-3 mb-0">
+                  <!-- <input  class="form-control position-relative icon-excel" placeholder="Carga la lista de excel"> -->
                   <input  type="file" 
-                          class="form-control file-input"
+                          (change)="onFileChange($event)"
+                          class="form-control"
+                          multiple="multiple"
                           formControlName="file">
-              </div>
-
-              <div  class="col-sm-4 col-md-4">
-                <a  class="family-300 black" 
-                    href="../../../../../assets/DocumentoExcel/Listado de carga de productos.xlsx" 
-                    download>
-                    Descargar Formato de excel
-                    <mat-icon matBadge="!" matBadgeColor="warn"></mat-icon>
-                </a>
-              </div>
-
-              <div class="form-group row mb-0">
-                  <div class="input-group col-md-12">
-                    <button [disabled]="!forma.valid" 
-                            type="submit" 
-                            class="btn btn-primary button fredoka"
-                            (click)="enviarExcel()"
-                            >
-                            Cargar Lista
-                    </button>
-                  </div>
                 </div>
+
+                <div  class="col-sm-4 col-md-4">
+                  <a  class="family-300 black" 
+                      href="../../../../../assets/DocumentoExcel/Listado de carga de productos.xlsx" 
+                      download>
+                      Descargar Formato de excel
+                      <mat-icon matBadge="!" matBadgeColor="warn"></mat-icon>
+                  </a>
+                </div>
+
+                <div class="form-group row mb-0">
+                    <div class="input-group col-md-12">
+                      <button [disabled]="!forma.valid" 
+                              type="submit" 
+                              class="btn btn-primary button fredoka"
+                              (click)="enviarExcel()"
+                              >
+                              Cargar Lista
+                      </button>
+                    </div>
+                </div>
+                
+              </form>
+              
 
           </section>
 

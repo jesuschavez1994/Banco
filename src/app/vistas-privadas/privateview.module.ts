@@ -85,6 +85,10 @@ import { ExportarListaExcelComponent } from './sincronizacion/pages/exportar-lis
 import { SuggestedProductsComponent } from './sincronizacion/pages/suggested-products/suggested-products.component';
 import { SincronizacionViewsComponent } from './sincronizacion/components/sincronizacion-views/sincronizacion-views.component';
 import { ItemsSuggestedProductsComponent } from './sincronizacion/pages/suggested-products/container/items-suggested-products/items-suggested-products.component';
+import { NoSuggestedProductsComponent } from './sincronizacion/pages/suggested-products/container/no-suggested-products/no-suggested-products.component';
+import { SynchronizedProductsComponent } from './sincronizacion/pages/synchronized-products/synchronized-products.component';
+import { NoSynchronizedProductsComponent } from './sincronizacion/pages/synchronized-products/container/no-synchronized-products/no-synchronized-products.component';
+
 
 
 
@@ -129,7 +133,10 @@ import { ItemsSuggestedProductsComponent } from './sincronizacion/pages/suggeste
       ExportarListaExcelComponent,
       SuggestedProductsComponent,
       SincronizacionViewsComponent,
-      ItemsSuggestedProductsComponent
+      ItemsSuggestedProductsComponent,
+      NoSuggestedProductsComponent,
+      SynchronizedProductsComponent,
+      NoSynchronizedProductsComponent
       ],
 
     imports: [

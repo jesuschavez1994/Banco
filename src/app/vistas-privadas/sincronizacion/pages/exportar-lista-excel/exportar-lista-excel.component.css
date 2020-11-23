@@ -5,7 +5,7 @@ input[type="file"] {
 .file-input{
     position: absolute;
     top: 0;
-    opacity: 0;
+    /* opacity: 0; */
     left: 0;
 }
 

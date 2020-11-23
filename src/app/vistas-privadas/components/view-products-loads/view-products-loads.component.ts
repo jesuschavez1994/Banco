@@ -10,7 +10,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
   selector: 'app-view-products-loads',
   templateUrl: './view-products-loads.component.html',
   styleUrls: ['./view-products-loads.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewProductsLoadsComponent implements OnInit {
 

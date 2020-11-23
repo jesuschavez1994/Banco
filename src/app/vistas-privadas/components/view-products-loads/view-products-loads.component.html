@@ -41,7 +41,11 @@
 
                 <div class="card-body pb-0 pt-0">
 
-                    <p class="family-600 size-14 color-p" title="{{item.name}} ">
+                    <p>
+                        {{item.name }} 
+                    </p>
+
+                    <!-- <p class="family-600 size-14 color-p" title="{{item.name}} ">
                         {{item.name | LimitarNameProducto | capitalizado: true}} 
                         <span *ngIf="item.name.length > 55">...</span>
                     </p>
@@ -49,7 +53,7 @@
                     <p class="family-600 size-11 mb-0 detail-name card-text line" title="{{item.description}}">
                         {{item.description | LimitarTexto | capitalizado: false}} 
                         <span *ngIf="item.description.length > 100">...</span>
-                    </p>
+                    </p> -->
 
                     <span *ngIf="item.price !== 0 " class="family-600 color-p size-14 black mt-2">
                         {{item.price | currency: 'USD': true:'1.3-3'}} 

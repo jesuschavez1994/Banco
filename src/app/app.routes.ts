@@ -21,6 +21,7 @@ import { ViewProductsLoadsComponent } from './vistas-privadas/components/view-pr
 import { ExportarListaExcelComponent } from './vistas-privadas/sincronizacion/pages/exportar-lista-excel/exportar-lista-excel.component';
 import { SuggestedProductsComponent } from './vistas-privadas/sincronizacion/pages/suggested-products/suggested-products.component';
 import { SincronizacionViewsComponent } from './vistas-privadas/sincronizacion/components/sincronizacion-views/sincronizacion-views.component';
+import { SynchronizedProductsComponent } from './vistas-privadas/sincronizacion/pages/synchronized-products/synchronized-products.component';
 
 
 const APP_ROUTES: Routes = [
@@ -75,8 +76,12 @@ const APP_ROUTES: Routes = [
                    },
                    {
                     path: 'suggested-products',
-                     component: SuggestedProductsComponent
+                    component: SuggestedProductsComponent
                     },
+                    {
+                        path: 'synchronized-products',
+                        component: SynchronizedProductsComponent
+                    }
                 ]
             },
 
