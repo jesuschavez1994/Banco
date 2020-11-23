@@ -18,14 +18,6 @@ export class ShoppingCartComponent implements OnInit {
 
   }
 
-  ngAfterViewInit(): void {
-
-    console.warn('<!-- Component Code --!>');
-
-    console.warn('<!-- End Component Code --!>');
-
-  }
-
   @HostListener('window:scroll', ['$event'])
   public activateMenu( $event: Event){
 
