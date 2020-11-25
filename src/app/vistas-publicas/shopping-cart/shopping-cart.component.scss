@@ -33,12 +33,13 @@
 				}
 
 				&:hover {
-					background: $color__background-gray--light;
+					background: $color__background-gray;
 
 				}
 
 				p {
-					padding-left: 40px;
+          padding-left: 40px;
+          word-break: break-word;
 
 					&::first-letter {
 						text-transform: uppercase;
@@ -48,7 +49,7 @@
 			}
 
 			.active {
-        background: $color__background-gray--light;
+        background: $color__background-gray;
 
         .responsive--icon{
           color: $color__background-orange;
@@ -86,27 +87,36 @@
 				display: flex;
 
 				.tab-item {
-					font-size: 13.2px;
-					font-weight: bold;
+          border: 1px solid transparent; //
+          border-top-right-radius: 5px; //
+          border-top-left-radius: 5px; //
+          // font-size: 13.2px;
+          font-size: 15.2px;
+          // font-weight: bold;
+          font-weight: 500;
 					text-transform: capitalize;
-					padding: 4px 10px;
+          // padding: 4px 10px;
+          padding: 11px 17px;
 					cursor: pointer;
 					transition: all $time-hover;
 
 					&:hover {
-						background: $color__background-gray--light;
+            // background: $color__background-gray;
+            border-color: #dee2e6 #dee2e6 #fff;
 					}
 
 				}
 
 				.active {
-					background: $color__background-gray--light;
+          // background: $color__background-gray;
+          border-color: #dee2e6 #dee2e6 #fff;
 				}
 
 			}
 
 			.tab-content {
-				border-top: solid $color__border-gray--light 19px;
+        // border-top: solid $color__border-gray 19px;
+        border-top: solid $color__border-gray 1px;
 				padding-bottom: 102px;
 
 				display: flex;
@@ -231,7 +241,7 @@
               }
 
 							.thead{
-								background: $color__background-gray--light;
+								background: $color__background-gray;
 
 								display: flex;
 								justify-content: space-between;
