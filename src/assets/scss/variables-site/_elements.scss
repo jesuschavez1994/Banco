@@ -1,1 +1,22 @@
 $time-hover: .3s;
+
+input[class="checkbox-default"]{
+  position: initial;
+  left: initial;
+  opacity: initial;
+}
+
+input[class="checkbox-default"]+label{
+  height: auto;
+  padding-left: 0px;
+  font-size: inherit;
+
+}
+
+input[class="checkbox-default"]+label:before{
+  display: none;
+}
+
+label{
+  margin-bottom: 0px;
+}
