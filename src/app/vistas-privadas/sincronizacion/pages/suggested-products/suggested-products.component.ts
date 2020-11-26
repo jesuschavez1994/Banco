@@ -48,6 +48,7 @@ task: Task = {
 
   setAll(completed: boolean) {
     this.allComplete = completed;
+    console.log(this.allComplete);
     if (this.task.subtasks == null) {
       return;
     }

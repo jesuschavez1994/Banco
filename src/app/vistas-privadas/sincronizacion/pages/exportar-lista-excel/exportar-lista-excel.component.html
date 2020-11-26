@@ -1,24 +1,24 @@
 <section class="container-fluid">
-  <form   [formGroup]="forma" 
-          (ngSubmit)="SendDocumentExcel()" 
-          novalidate="novalidate"
-          class="mt-5 width-100" 
-          >
+  
+    <form [formGroup]="forma"
+          (ngSubmit)="enviarExcel()" >
+
+  
 
           <section class="row align-items-center">
 
-              <form [formGroup]="forma" 
-                    (ngSubmit)="enviarExcel()" 
-                    novalidate="novalidate"
-                    class="width-100 display-flex">
 
                 <div class="form-group col-sm-4 col-md-4 col-lg-3 mb-0">
                   <!-- <input  class="form-control position-relative icon-excel" placeholder="Carga la lista de excel"> -->
-                  <input  type="file" 
-                          (change)="onFileChange($event)"
+                  <input  type="file"
+                          id='fileUpload'
+                          multiple='multiple'
+                          accept='xlsx/*' 
+                          (change)='onFileChange($event)'
                           class="form-control"
+                          formControlName="file"
                           multiple="multiple"
-                          formControlName="file">
+                          >
                 </div>
 
                 <div  class="col-sm-4 col-md-4">
@@ -32,7 +32,7 @@
 
                 <div class="form-group row mb-0">
                     <div class="input-group col-md-12">
-                      <button [disabled]="!forma.valid" 
+                      <button 
                               type="submit" 
                               class="btn btn-primary button fredoka"
                               (click)="enviarExcel()"
@@ -42,12 +42,14 @@
                     </div>
                 </div>
                 
-              </form>
+             
               
 
           </section>
 
-  </form>
+   </form>
+
+
 </section>
 
     

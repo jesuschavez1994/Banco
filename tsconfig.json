@@ -25,12 +25,15 @@
       "@Cards-Shimmer/*": ["src/app/vistas-privadas/components/Cards-Shimmer/*"],
       "@Angula-Material/*": ["src/app/Angula-Material/*"],
       "@pipes/*": ["src/app/pipes/*"],
+      
+
     },
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   },
+  
   
 
 }

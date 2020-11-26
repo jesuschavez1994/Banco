@@ -4,3 +4,10 @@ export class DocumentExcel {
         public file: any,
     ) { }
 }
+
+export class SincronizarElProducto {
+    constructor(
+        // tslint:disable-next-line: variable-name
+        public banck_id: any,
+    ) { }
+}

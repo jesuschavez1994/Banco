@@ -88,9 +88,7 @@ import { ItemsSuggestedProductsComponent } from './sincronizacion/pages/suggeste
 import { NoSuggestedProductsComponent } from './sincronizacion/pages/suggested-products/container/no-suggested-products/no-suggested-products.component';
 import { SynchronizedProductsComponent } from './sincronizacion/pages/synchronized-products/synchronized-products.component';
 import { NoSynchronizedProductsComponent } from './sincronizacion/pages/synchronized-products/container/no-synchronized-products/no-synchronized-products.component';
-
-
-
+import { SpreadSheetsModule } from '@grapecity/spread-sheets-angular';
 
 @NgModule({
     entryComponents: [
@@ -141,6 +139,7 @@ import { NoSynchronizedProductsComponent } from './sincronizacion/pages/synchron
 
     imports: [
       CommonModule,
+      SpreadSheetsModule,
       MaterialModule,
       NgxPaginationModule,
       SharedModule,
