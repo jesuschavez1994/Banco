@@ -9,14 +9,10 @@
 
     <ul class="items-menu">
 
-      <li class="item">
-        <i class="responsive--icon fas fa-user" title="mi cuenta"></i> <p>mi cuenta</p>
-      </li>
+      <ng-container *ngFor="let item of menuOptions">
 
-      <ng-container *ngFor="let item of [0,0,1]">
-
-        <li class="item" [ngClass]="{ 'active': item == 1 }">
-          <i class="responsive--icon fas fa-user" title="carrito de compra"></i> <p>carrito de compra</p>
+        <li class="item" [ngClass]="{ 'active': item.isActive }">
+          <i class="responsive--icon {{item.iconClass}}" title="{{item.label}}"></i> <p>{{item.label}}</p>
         </li>
 
       </ng-container>

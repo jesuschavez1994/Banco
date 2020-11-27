@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SidebarMenuOptions } from '@interfaces/componentsOptions/sidebar-menu.interface';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -7,8 +8,40 @@ import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular
 })
 export class ShoppingCartComponent implements OnInit {
 
-  // @ViewChild('menuContainerFixed') menuContainerFixed: ElementRef;
-  // @ViewChild('configurationMenu') configurationMenu: ElementRef;
+
+  menuOptions: SidebarMenuOptions[] = [
+    {
+      label: 'mi cuenta',
+      iconClass: 'fas fa-user',
+      routerLink: '#',
+      isActive: false,
+    },
+    {
+      label: 'carrito de comprus',
+      iconClass: 'fas fa-user',
+      routerLink: '#',
+      isActive: false,
+    },
+    {
+      label: 'carrito de compras',
+      iconClass: 'fas fa-user',
+      routerLink: '#',
+      isActive: false,
+    },
+    {
+      label: 'carrito de compras',
+      iconClass: 'fas fa-user',
+      routerLink: '#',
+      isActive: true,
+    },
+    {
+      label: 'carrito de compras',
+      iconClass: 'fas fa-user',
+      routerLink: '#',
+      isActive: false,
+    }
+  ];
+
 
   constructor() {
 
@@ -18,23 +51,6 @@ export class ShoppingCartComponent implements OnInit {
 
   }
 
-  // @HostListener('window:scroll', ['$event'])
-  // public activateMenu( $event: Event){
 
-  //   const menuContainerFixed = this.menuContainerFixed.nativeElement;
-  //   const pxTopElement = menuContainerFixed.offsetTop;
-  //   const pxTopDocument = document.documentElement.scrollTop;
-
-  //   if ( pxTopDocument > pxTopElement ) {
-  //     menuContainerFixed.classList.add( 'responsive-menu-container--fixed' );
-  //   } else {
-  //     menuContainerFixed.classList.remove( 'responsive-menu-container--fixed' );
-  //   }
-
-  // }
-
-  // public toggleMenu(){
-  //   this.configurationMenu.nativeElement.classList.toggle( 'configuration-menu--responsive-expanded' );
-  // }
 
 }

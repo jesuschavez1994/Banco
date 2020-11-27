@@ -1,4 +1,5 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { SidebarMenuOptions } from '@interfaces/componentsOptions/sidebar-menu.interface';
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -10,7 +11,11 @@ export class SidebarMenuComponent implements OnInit {
   @ViewChild('menuContainerFixed') menuContainerFixed: ElementRef;
   @ViewChild('configurationMenu') configurationMenu: ElementRef;
 
-  constructor() { }
+  @Input() menuOptions: SidebarMenuOptions[];
+
+  constructor() {
+
+  }
 
   ngOnInit(): void {
   }
