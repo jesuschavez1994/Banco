@@ -7,8 +7,8 @@ import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular
 })
 export class ShoppingCartComponent implements OnInit {
 
-  @ViewChild('menuContainerFixed') menuContainerFixed: ElementRef;
-  @ViewChild('configurationMenu') configurationMenu: ElementRef;
+  // @ViewChild('menuContainerFixed') menuContainerFixed: ElementRef;
+  // @ViewChild('configurationMenu') configurationMenu: ElementRef;
 
   constructor() {
 
@@ -18,23 +18,23 @@ export class ShoppingCartComponent implements OnInit {
 
   }
 
-  @HostListener('window:scroll', ['$event'])
-  public activateMenu( $event: Event){
+  // @HostListener('window:scroll', ['$event'])
+  // public activateMenu( $event: Event){
 
-    const menuContainerFixed = this.menuContainerFixed.nativeElement;
-    const pxTopElement = menuContainerFixed.offsetTop;
-    const pxTopDocument = document.documentElement.scrollTop;
+  //   const menuContainerFixed = this.menuContainerFixed.nativeElement;
+  //   const pxTopElement = menuContainerFixed.offsetTop;
+  //   const pxTopDocument = document.documentElement.scrollTop;
 
-    if ( pxTopDocument > pxTopElement ) {
-      menuContainerFixed.classList.add( 'responsive-menu-container--fixed' );
-    } else {
-      menuContainerFixed.classList.remove( 'responsive-menu-container--fixed' );
-    }
+  //   if ( pxTopDocument > pxTopElement ) {
+  //     menuContainerFixed.classList.add( 'responsive-menu-container--fixed' );
+  //   } else {
+  //     menuContainerFixed.classList.remove( 'responsive-menu-container--fixed' );
+  //   }
 
-  }
+  // }
 
-  public toggleMenu(){
-    this.configurationMenu.nativeElement.classList.toggle( 'configuration-menu--responsive-expanded' );
-  }
+  // public toggleMenu(){
+  //   this.configurationMenu.nativeElement.classList.toggle( 'configuration-menu--responsive-expanded' );
+  // }
 
 }

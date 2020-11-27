@@ -19,7 +19,7 @@ import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
         SidebarMenuComponent
     ],
     imports: [ APP_ROUTING, PipesModule, CommonModule],
-    exports: [ NavbarComponent,  SidebarComponent, NavbarToHomeComponent, CategoriasComponent, NavbarstoreComponent]
+    exports: [ NavbarComponent,  SidebarComponent, NavbarToHomeComponent, CategoriasComponent, NavbarstoreComponent, SidebarMenuComponent]
 })
 
 export class SharedModule { }
