@@ -8,6 +8,34 @@ import { SidebarMenuOptions } from '@interfaces/componentsOptions/sidebar-menu.i
 })
 export class ShoppingCartComponent implements OnInit {
 
+  orders = [
+    {
+      id: 1,
+      business: {
+        name: 'farmacia santa isabel',
+        img: './assets/img/avatar.svg',
+      },
+      products: [''],
+      hasPaid: false,
+      countProduct: 25,
+      totalToPay: 235.21,
+    },
+    {
+      id: 1,
+      business: {
+        name: 'farmacia santa isabel',
+        img: './assets/img/avatar.svg',
+      },
+      products: [''],
+      hasPaid: true,
+      countProduct: 25,
+      totalToPay: 235.21,
+    }
+  ];
+
+  tabSelected: 1 | 2 = 1;
+
+  orderSelected = this.orders[0];
 
   menuOptions: SidebarMenuOptions[] = [
     {
@@ -51,6 +79,12 @@ export class ShoppingCartComponent implements OnInit {
 
   }
 
+  public filterByTab(tabNumber){
+    this.tabSelected = tabNumber;
+  }
 
+  public selectOrder(order){
+    this.orderSelected = order;
+  }
 
 }
