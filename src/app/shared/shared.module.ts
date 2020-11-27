@@ -7,6 +7,7 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { NavbarstoreComponent } from './header/navbarstore.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { CommonModule } from '@angular/common';
+import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 
 @NgModule({
     declarations: [
@@ -14,7 +15,8 @@ import { CommonModule } from '@angular/common';
         SidebarComponent,
         NavbarToHomeComponent,
         CategoriasComponent,
-        NavbarstoreComponent
+        NavbarstoreComponent,
+        SidebarMenuComponent
     ],
     imports: [ APP_ROUTING, PipesModule, CommonModule],
     exports: [ NavbarComponent,  SidebarComponent, NavbarToHomeComponent, CategoriasComponent, NavbarstoreComponent]
