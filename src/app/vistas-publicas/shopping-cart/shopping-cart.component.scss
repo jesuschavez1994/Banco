@@ -4,72 +4,6 @@
 
   display: flex;
 
-
-  /* Menu de configuración
-  --------------------------------------------- */
-
-  // .configuration-menu {
-  //   min-width: 245px;
-  //   width: 18%;
-  //   padding-right: 20px;
-
-  //   padding-top: 65px;
-
-  //   h2 {
-  //     padding-left: 40px;
-  //   }
-
-  //   .items-menu {
-  //     width: 84%;
-
-  //     .item {
-  //       border-radius: 0px 4px 4px 0px;
-  //       cursor: pointer;
-  //       padding: 4px 0px;
-  //       transition: all .3s;
-
-  //       &:first-child {
-  //         font-weight: 600;
-  //       }
-
-  //       &:hover {
-  //         background: $color__background-gray;
-
-  //       }
-
-  //       p {
-  //         padding-left: 40px;
-  //         padding-right: 10px;
-  //         word-break: break-word;
-
-  //         &::first-letter {
-  //           text-transform: uppercase;
-  //         }
-  //       }
-
-  //     }
-
-  //     .active {
-  //       background: $color__background-gray;
-
-  //       .responsive--icon {
-  //         color: $color__background-orange;
-
-  //       }
-  //     }
-
-  //   }
-
-  //   .responsive--icon {
-  //     cursor: pointer;
-  //     font-size: 24px;
-  //     padding: 8px 13px;
-  //     display: none;
-
-  //   }
-  // }
-
-
   /* Listado de compras
   --------------------------------------------- */
 
@@ -111,6 +45,7 @@
         .active {
           // background: $color__background-gray;
           border-color: #dee2e6 #dee2e6 #fff;
+          color: $color__text-orange;
         }
 
       }
@@ -489,7 +424,7 @@
 }
 
 
-@media (max-device-width: 480px) {
+@media screen and (max-width: 480px) {
 
   .page {
 
@@ -512,7 +447,7 @@
 
 }
 
-@media (min-device-width: 481px) {
+@media screen and (min-width: 481px) {
   // globales para evitar el !important
 
   .page {
@@ -535,7 +470,7 @@
 
 }
 
-@media (max-device-width: 757px) {
+@media screen and (max-width: 757px) {
 
   .page {
 
@@ -578,7 +513,7 @@
   }
 }
 
-@media (min-device-width: 758px) {
+@media screen and (min-width: 758px) {
 
   // globales para evitar el !important
   .page {
@@ -604,94 +539,13 @@
   }
 }
 
-@media (max-device-width: 999px) {
+@media screen and (max-width: 999px) {
 
   .page {
-
-    // .configuration-menu {
-    //   min-width: 47px;
-    //   width: 47px;
-
-    //   background: $color__background-gray;
-    //   transition: all .3s;
-    //   padding-right: 0px;
-    //   padding-top: 58px;
-
-
-    //   h2 {
-    //     display: none;
-    //   }
-
-    //   .items-menu {
-    //     width: fit-content;
-
-    //     .item {
-
-    //       p {
-    //         display: none;
-    //       }
-
-    //     }
-    //   }
-
-    //   .responsive--icon {
-    //     display: block;
-    //     transition: all .3s;
-
-    //     &:hover {
-    //       background: $color__background-gray;
-    //       color: $color__background-orange;
-    //     }
-
-
-    //   }
-
-    //   .responsive-menu-container--fixed {
-
-    //     position: fixed;
-    //     top: 39px;
-    //     z-index: 3;
-
-    //   }
-
-    // }
 
     .shopping-cart {
       width: 87%;
     }
 
-    // .configuration-menu--responsive-expanded {
-    //   min-width: 245px !important;
-    //   width: 18% !important;
-    //   // height: 100%;
-
-    //   // position: absolute;
-
-    //   .heading {
-    //     display: flex;
-    //     align-items: center;
-
-    //     h2 {
-    //       display: block !important;
-    //       font-size: 18px !important;
-    //       margin-bottom: 0px !important;
-    //       padding-left: 0px !important;
-
-    //     }
-
-    //   }
-
-    //   .items-menu {
-    //     .item {
-    //       display: flex;
-    //       align-items: center;
-
-    //       p {
-    //         display: block !important;
-    //         padding-left: 0px !important;
-    //       }
-    //     }
-    //   }
-    // }
   }
 }
