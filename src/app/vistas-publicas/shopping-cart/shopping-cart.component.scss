@@ -38,7 +38,8 @@
 								}
 
 								p {
-									padding-left: 40px;
+                  padding-left: 40px;
+                  padding-right: 10px;
 									word-break: break-word;
 
 									&::first-letter {
@@ -310,6 +311,7 @@
 									input[type="checkbox"] {
                     width: 9px;
                     margin-right: 10px;
+                    border: solid $color__border-gray 2px;
 
 									}
 
@@ -460,14 +462,13 @@
 
 									.order-item {
                     display: flex;
-                    // grid-template-columns: min-content 11% 28.7% min-content 12.8% 17.8%;
-										// align-items: center;
-										// justify-content: space-between;//
+                    margin-bottom: 35px;
 
                     .content{
                       display: grid;
                       grid-template-columns: 11% 28.7% min-content 12.8% 17.8%;
                       align-items: center;
+                      justify-content: center;
 
 
                       .img-principal {
@@ -500,7 +501,8 @@
                       .quantity {
                         display: flex;
                         align-items: center;
-                        justify-content: space-between;
+                        // justify-content: space-between;
+                        justify-content: center;
 
                         label{
                           font-size: 13px;
@@ -545,6 +547,11 @@
 
 									}
 
+                    .price {
+                      font-size: 12px;
+                      padding: 6px 10px; //25px
+                      word-break: keep-all;
+                    }
 
 
                 }
