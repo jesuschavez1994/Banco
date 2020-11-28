@@ -22,12 +22,24 @@
                 </div>
 
                 <div  class="col-sm-4 col-md-4">
-                  <a  class="family-300 black" 
+
+                  <a  *ngIf="dowloadExcel === false"
+                      class="family-300 black" 
                       href="../../../../../assets/DocumentoExcel/Listado de carga de productos.xlsx" 
                       download>
                       Descargar Formato de excel
                       <mat-icon matBadge="!" matBadgeColor="warn"></mat-icon>
                   </a>
+
+                  <a  *ngIf="dowloadExcel === true"
+                      class="family-300 black" 
+                      href="{{ this.path }}" 
+                      download>
+                      Descargar Formato de excel
+                      <mat-icon matBadge="!" matBadgeColor="warn"></mat-icon>
+                  </a>
+
+
                 </div>
 
                 <div class="form-group row mb-0">

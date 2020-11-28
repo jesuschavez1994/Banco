@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { MyValidators } from '@utils/validators';
 import { DocumentExcel } from '@models/sincronizacion/documentExcel.model';
@@ -7,22 +7,25 @@ import { FileUploadModel } from '../../../../interfaces/UploadFiles';
 import { HttpErrorResponse, HttpEventType, HttpRequest } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../../../config/config';
 
+
+const URL = URL_SERVICIOS;
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, last, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 class Contact {
-  name: string = '';
-  email: string = '';
-  phone: string = '';
-  address: string = '';
+  cantidad = '';
+  Nombre = '';
+  Descripcion = '';
+  Marca = '';
 }
 
 
 @Component({
   selector: 'app-exportar-lista-excel',
   templateUrl: './exportar-lista-excel.component.html',
-  styleUrls: ['./exportar-lista-excel.component.css']
+  styleUrls: ['./exportar-lista-excel.component.css'],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExportarListaExcelComponent implements OnInit {
 
@@ -34,6 +37,10 @@ export class ExportarListaExcelComponent implements OnInit {
 
   importContacts: Contact[] = [];
   exportContacts: Contact[] = [];
+  dowloadExcel: boolean;
+  path: any;
+  userId: string;
+  storeId: string;
 
 
   constructor(private sincronizacion: SincronizacionService,
@@ -50,51 +57,107 @@ export class ExportarListaExcelComponent implements OnInit {
 
    private files: Array<FileUploadModel> = [];
 
-  ngOnInit(): void {
+  ngOnInit() {
+
+    this.userId = localStorage.getItem('id'),
+    this.storeId = localStorage.getItem('storeId');
+    this.path = URL_SERVICIOS + `/api/users/${this.userId }/stores/${this.storeId}/dowload_productcsv`;
+    console.log(this.path);
+
+    this.sincronizacion.DowloadFileExcelListProduct(
+      localStorage.getItem('id'),
+      localStorage.getItem('storeId')
+    ).subscribe(
+      (response: any) => {
+        console.log(response);
+        if ( response.size > 1){
+          this.dowloadExcel = true;
+          console.log(this.dowloadExcel);
+        }else{
+          return this.dowloadExcel = false;
+        }
+      }
+    );
+
   }
 
   SendDocumentExcel(){}
 
   onFileChange(evt: any){
-    console.log(evt);
-    const target: DataTransfer = (evt.target) as DataTransfer;
-    const reader: FileReader = new FileReader();
-    reader.onload = (e: any) => {
-
-      let base64data = reader.result;
-      console.log(base64data);
-
-      const bstr: string = e.target.result;
-      this.archivo = bstr;
-      console.log('EXCEL', bstr);
-      const data = this.sincronizacion.importFromFile(bstr) as any[];
-      console.log('Data', data);
-      const header: string[] = Object.getOwnPropertyNames(new Contact());
-      const importedData = data.slice(1, -1);
+    // console.log(evt);
+      const target: DataTransfer = (evt.target) as DataTransfer;
+    // const reader: FileReader = new FileReader();
+    // reader.onload = (e: any) => {
 
 
-      this.importContacts = importedData.map(arr => {
-        const obj = {};
-        for (let i = 0; i < header.length; i++) {
-          const k = header[i];
-          obj[k] = arr[i];
-        }
-        return obj as Contact;
-      });
+    //   const bstr: string = e.target.result;
+    //   console.log('EXCEL', bstr);
+    //   const data = this.sincronizacion.importFromFile(bstr) as any[];
+    //   console.log('Data', data);
+    //   const header: string[] = Object.getOwnPropertyNames(new Contact());
+    //   const importedData = data.slice(1, -1);
 
-    };
 
-    reader.readAsBinaryString(target.files[0]);
+    //   this.importContacts = importedData.map(arr => {
+    //     const obj = {};
+    //     for (let i = 0; i < header.length; i++) {
+    //       const k = header[i];
+    //       obj[k] = arr[i];
+    //     }
+    //     return obj as Contact;
+    //   });
 
-    console.log('BINARIO', reader.readAsBinaryString(target.files[0]));
+    // };
+
+    // reader.readAsBinaryString(target.files[0]);
+
+    // console.log('BINARIO', reader.readAsBinaryString(target.files[0]));
     // console.log(fileInput);
     // this.filesToUpload = (fileInput.target.files as Array<File>);
     // console.log(this.filesToUpload);
 
+      const reader = new FileReader();
+      console.log(evt);
+      if (evt.target.files && evt.target.files.length) {
+        const [file] = evt.target.files;
+        reader.readAsDataURL(file);
+
+        reader.onload = (e: any) => {
+
+          const bstr: string = e.target.result;
+          console.log('EXCEL', bstr);
+          const data = this.sincronizacion.importFromFile(bstr) as any[];
+          const header: string[] = Object.getOwnPropertyNames(new Contact());
+          console.log('Data', data);
+          const importedData = data.slice(1, -1);
+          console.log(header);
+
+          this.importContacts = importedData.map(arr => {
+            const obj = {};
+            for (let i = 0; i < header.length; i++) {
+              const k = header[i];
+              obj[k] = arr[i];
+            }
+            console.log('obj', obj);
+            return obj as Contact;
+          });
+
+          this.archivo = reader.result;
+          console.log('FILESSS', this.archivo);
+          // console.log('file', this.forma.value.file);
+          this._cd.markForCheck();
+        };
+
+        // reader.readAsBinaryString(evt.target.files[0]);
+
+        // console.log(reader.readAsBinaryString(target.files[0]));
+
+      }
+
   }
 
   exportData(tableId: string) {
-    this.sincronizacion.exportToFile("contacts", tableId);
+    this.sincronizacion.exportToFile('contacts', tableId);
   }
 
   enviarExcel(){

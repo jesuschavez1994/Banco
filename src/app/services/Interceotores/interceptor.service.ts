@@ -14,7 +14,7 @@ export class InterceptorService implements HttpInterceptor {
 
 
     const headers = new HttpHeaders({
-      'Content-Type': 'multipart/form-data',
+      'Content-Type': 'application/json',
       Authorization: 'Bearer ' + localStorage.getItem('token'),
       Accept: 'application/json'
     });

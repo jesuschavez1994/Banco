@@ -17,8 +17,14 @@ export class SincronizacionService {
   constructor(public http: HttpClient) { }
 
   private postQuery<T>(query: string, data: any){
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+
     query = URL_SERVICIOS + query;
-    return this.http.post<T>( query, data );
+    return this.http.post<T>( query, data, {headers} );
   }
 
   private execQuery<T>( query: string ) {
@@ -45,10 +51,15 @@ export class SincronizacionService {
     return this.postQuery(url, post);
   }
 
+  DowloadFileExcelListProduct(userId: string, storeId: string){
+    const url = URL_SERVICIOS + `/api/users/${userId}/stores/${storeId}/dowload_productcsv`;
+    return this.http.get(url, {responseType: 'blob'});
+  }
+
 
   public importFromFile(bstr: string): XLSX.AOA2SheetOpts {
     /* read workbook */
-    const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+    const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'base64' });
 
     /* grab first sheet */
     const wsname: string = wb.SheetNames[0];
