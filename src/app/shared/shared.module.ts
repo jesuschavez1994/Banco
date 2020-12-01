@@ -8,6 +8,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { CommonModule } from '@angular/common';
 import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 import { SidebarListComponent } from './sidebar-list/sidebar-list.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
     declarations: [
@@ -16,13 +17,15 @@ import { SidebarListComponent } from './sidebar-list/sidebar-list.component';
         CategoriasComponent,
         NavbarstoreComponent,
         SidebarMenuComponent,
-        SidebarListComponent
+        SidebarListComponent,
+        BreadcrumbComponent
     ],
     imports: [ APP_ROUTING, PipesModule, CommonModule],
     exports: [
       NavbarComponent, NavbarToHomeComponent,
       CategoriasComponent, NavbarstoreComponent,
-      SidebarMenuComponent, SidebarListComponent
+      SidebarMenuComponent, SidebarListComponent,
+      BreadcrumbComponent
     ]
 })
 

@@ -1,0 +1,35 @@
+@import 'src/assets/scss/style.scss';
+
+.breadcrumb{
+  background: none;
+  padding: 0px;
+
+  ul{
+    display: flex;
+
+    li{
+      padding: 22px 0px;
+
+      a{
+        font-size: 13px;
+        font-weight: 500;
+        text-transform: capitalize;
+      }
+
+      &::before{
+        content: '<';
+        margin: 0px 8px 0px 8px;
+      }
+
+      &:first-child::before{
+        display: none;
+      }
+
+      &:last-child{
+        a{
+          font-weight: initial;
+        }
+      }
+    }
+  }
+}

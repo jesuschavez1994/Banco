@@ -3,36 +3,6 @@
 <main class="page">
 	<!-- #Menu de configuración -->
 
-	<!-- <section class="configuration-menu" #configurationMenu>
-
-		<div #menuContainerFixed>
-
-      <div class="heading">
-        <i class="responsive--icon fas fa-bars" title="Menú" (click)="toggleMenu()"></i> <h2>configuración</h2>
-      </div>
-
-
-			<ul class="items-menu">
-
-				<li class="item">
-					<i class="responsive--icon fas fa-user" title="mi cuenta"></i> <p>mi cuenta</p>
-				</li>
-
-				<ng-container *ngFor="let item of [0,0,1]">
-
-					<li class="item" [ngClass]="{ 'active': item == 1 }">
-						<i class="responsive--icon fas fa-user" title="carrito de compra"></i> <p>carrito de compra</p>
-					</li>
-
-				</ng-container>
-
-			</ul>
-
-		</div>
-
-
-	</section> -->
-
   <app-sidebar-menu [menuOptions]="menuOptions"></app-sidebar-menu>
 
 	<!-- # Carrito de compras -->
@@ -53,27 +23,6 @@
 			<div class="tab-content">
 
 				<div class="list-item">
-
-					<!-- <article class="item active">
-
-						<figure class="img">
-
-							<img src="./assets/img/avatar.svg" alt="Avatar por defecto" />
-
-						</figure>
-
-						<div class="content">
-
-							<h3 class="name">farmacia santa isabel</h3>
-
-							<span class="info">Cantidad de producto <strong>(25)</strong></span>
-
-							<span class="info">Total a pagar <strong>$235.21</strong></span>
-
-						</div>
-
-					</article> -->
-
 
 					<ng-container *ngFor="let order of orders">
 
