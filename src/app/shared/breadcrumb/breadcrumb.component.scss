@@ -3,12 +3,14 @@
 .breadcrumb{
   background: none;
   padding: 0px;
+  padding: 20px 0px;
 
   ul{
     display: flex;
+    flex-wrap: wrap;
 
     li{
-      padding: 22px 0px;
+      padding: 3px 0px;
 
       a{
         font-size: 13px;
