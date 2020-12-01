@@ -1,11 +1,15 @@
 @import 'src/assets/scss/style.scss';
 
 .button-toggle-sidebar{
-  width: 234px;
-  padding-left: 40px;
+
+  background: $color__background-white;
   padding-top: 20px;
+  padding-left: 40px;
+  padding-right: 16px;
 
   display: none;
+
+  position: relative;
 
   input{
     display: block;
@@ -83,12 +87,13 @@
 
 .aside{
   width: 264px;
+  background: $color__background-white;
   padding-top: 22px;
+  padding-right: 16px;
 
   .business-info{
     min-height: 308px; // when isn't responsive
     margin-bottom: 30px; // when responsive
-    // margin-bottom: 200px;
 
     .business-perfil{
       margin-bottom: 11px;
