@@ -1,16 +1,21 @@
 // # COLORS
 
 // ## BACKGROUND
+$color__background-black: #1D1D1B;
 $color__background-white: #ffffff;
-$color__background-gray: #F8F7F7; // #E9E9EB
+$color__background-gray: #F8F7F7;
 $color__background-gray--medium: #D0D0D0;
-$color__background-gray--light: #EEEEEE; //#EEEEEE
+$color__background-gray--dark: #949597;
 $color__background-orange: #F09207;
 
 // ## BORDER
-$color__border-gray--light: #F8F7F7;
+$color__border-black: #1D1D1B;
+// $color__border-gray--light: #F8F7F7;
 $color__border-gray: #F8F7F7;
 
 // ## TEXT
 $color__text-main: #1D1D1B;
+$color__text-gray: #F8F7F7;
+$color__text-gray--medium: #D0D0D0;
+$color__text-gray--dark: #949597;
 $color__text-orange: #F09207;

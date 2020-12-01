@@ -8,12 +8,14 @@ import { APP_ROUTING } from '../app.routes';
 import { LoginModule } from '../Login/login.module';
 import { ComponentsModule } from '../components/components.module';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { BusinessDetailComponent } from './business-detail/business-detail.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     RegisterComponent,
     ShoppingCartComponent,
+    BusinessDetailComponent,
   ],
   imports: [
     CommonModule,

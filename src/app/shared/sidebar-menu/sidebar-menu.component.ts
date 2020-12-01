@@ -39,4 +39,9 @@ export class SidebarMenuComponent implements OnInit {
     this.configurationMenu.nativeElement.classList.toggle( 'configuration-menu--responsive-expanded' );
   }
 
+  // public activeOptionMenu( option ){
+
+  //   option.classList.add( 'active' );
+  // }
+
 }

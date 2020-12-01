@@ -17,13 +17,19 @@ import { ProductLoadingComponent } from './vistas-privadas/product-loading/produ
 import { MyStoreComponent } from './vistas-privadas/pages/my-store/my-store.component';
 import { ProductLoadingSmartComponent } from './vistas-privadas/product-loading/container/product-loading-smart/product-loading-smart.component';
 import { ShoppingCartComponent } from './vistas-publicas/shopping-cart/shopping-cart.component';
+import { BusinessDetailComponent } from './vistas-publicas/business-detail/business-detail.component';
+
 
 const APP_ROUTES: Routes = [
 
     {path: 'home', component: HomeComponent},
     {path: 'register', component: RegisterComponent},
 
+    // Christopher Views
     {path: 'shopping-cart', component: ShoppingCartComponent},
+    {path: 'business-detail', component: BusinessDetailComponent},
+
+    // Christopher Views //
 
     {   path: 'register-negocio',
         component: FormDataNegocioComponent,

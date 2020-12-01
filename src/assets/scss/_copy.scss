@@ -1,3 +1,7 @@
+*{
+  font-family: $font__main;
+}
+
 body,
 button,
 input,
@@ -22,6 +26,7 @@ p {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
+  margin: 0px;
 }
 
 h1 {
@@ -33,13 +38,13 @@ h2{
 }
 
 h3{
-  margin: 0px;
-  text-transform: capitalize;
   font-size: 14px;
   font-weight: 600;
 }
 
-h1, h2{
+
+
+h1, h2, h3{
   text-transform: capitalize;
 }
 
