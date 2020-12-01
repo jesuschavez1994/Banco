@@ -33,6 +33,12 @@
           color: $color__text-gray--dark;
         }
       }
+
+      &:hover{
+        a{
+          color: $color__text-gray--dark;
+        }
+      }
     }
   }
 }
