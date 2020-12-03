@@ -86,13 +86,15 @@
 
 
 .aside{
-  width: 264px;
+  width: 266px;
   background: $color__background-white;
-  padding-top: 22px;
+  // padding-top: 22px;
+  padding-top: 66px;
   padding-right: 16px;
 
   .business-info{
-    min-height: 308px; // when isn't responsive
+    min-height: 247px;
+    // min-height: 308px; // when isn't responsive
     margin-bottom: 30px; // when responsive
 
     .business-perfil{
@@ -176,7 +178,6 @@
     padding-right: 15px;
 
     .list{
-
       line-height: 35px;
       margin-bottom: 30px;
 
