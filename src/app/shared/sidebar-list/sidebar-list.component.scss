@@ -192,14 +192,17 @@
 
 @media screen and (max-width: 999px){
   .aside{
+    height: 100vh;
+    overflow: auto;
     padding-top: 20px;
+
+    transform-origin: 0% 0%;
+    transform: translate(-120%, 0);
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+
     position: absolute;
     left: 0px;
     z-index: 10;
-    transform-origin: 0% 0%;
-    transform: translate(-120%, 0);
-
-    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
 
     .business-info{
       min-height: initial;
