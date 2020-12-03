@@ -42,6 +42,10 @@
         display: flex;
         align-items: center;
 
+        .btn-toogle-sidebar-list{
+          margin-right: 20px;
+        }
+
         .searcher{
           width: 80%;
           display: flex;
@@ -187,6 +191,21 @@
 
     }
 
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .page{
+    .products-infomation{
+      .search-engine{
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .filter{
+          margin-top: 10px;
+        }
+      }
+    }
   }
 }
 
