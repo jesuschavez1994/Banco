@@ -190,6 +190,43 @@
 }
 
 
+/* Estilos barra (thumb) de scroll */
+
+/* Tamaño del scroll */
+.aside::-webkit-scrollbar {
+	width: 0.4em;
+  height: 0.8em;
+
+}
+
+.aside::-webkit-scrollbar-thumb {
+	background: #ccc;
+	border-radius: 1em;
+}
+
+.aside::-webkit-scrollbar-thumb:active {
+	background-color: #999999;
+}
+
+.aside::-webkit-scrollbar-thumb:hover {
+	background: #b3b3b3;
+	box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos track de scroll */
+.aside::-webkit-scrollbar-track {
+	background: #e1e1e1;
+	border-radius: 4px;
+	display: none;
+}
+
+.aside::-webkit-scrollbar-track:hover,
+.aside::-webkit-scrollbar-track:active {
+	background: #d4d4d4;
+}
+
+/* // */
+
 @media screen and (max-width: 999px){
   .aside{
     height: 100vh;
@@ -211,5 +248,10 @@
 
   .aside--expanded {
     transform: none;
+  }
+
+  .aside--fixed{
+    position: fixed;
+    top: 0;
   }
 }

@@ -21,7 +21,7 @@ export class SidebarMenuComponent implements OnInit {
   }
 
   @HostListener('window:scroll', ['$event'])
-  public activateMenu( $event: Event){
+  public fixedMenu( $event: Event){
 
     const menuContainerFixed = this.menuContainerFixed.nativeElement;
     const pxTopElement = menuContainerFixed.offsetTop;
@@ -38,10 +38,5 @@ export class SidebarMenuComponent implements OnInit {
   public toggleMenu(){
     this.configurationMenu.nativeElement.classList.toggle( 'configuration-menu--responsive-expanded' );
   }
-
-  // public activeOptionMenu( option ){
-
-  //   option.classList.add( 'active' );
-  // }
 
 }
