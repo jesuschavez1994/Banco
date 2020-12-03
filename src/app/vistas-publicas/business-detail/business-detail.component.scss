@@ -40,6 +40,7 @@
       .search-engine{
         margin-bottom: 80px;
         display: flex;
+        align-items: center;
 
         .searcher{
           width: 80%;
@@ -186,6 +187,13 @@
 
     }
 
+  }
+}
+
+@media screen and (max-width: 999px) {
+  .page{
+    padding-right: 27px;
+    padding-left: 27px;
   }
 }
 

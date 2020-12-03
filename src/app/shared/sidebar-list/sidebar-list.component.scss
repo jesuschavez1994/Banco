@@ -1,100 +1,19 @@
 @import 'src/assets/scss/style.scss';
 
-.button-toggle-sidebar{
-
-  background: $color__background-white;
-  padding-top: 20px;
-  padding-left: 40px;
-  padding-right: 16px;
-
-  display: none;
-
-  position: relative;
-
-  input{
-    display: block;
-    width: 40px;
-    height: 32px;
-    position: absolute;
-    // top: -7px;
-    // left: -5px;
-    top: 16px;
-    left: 35px;
-
-    cursor: pointer;
-
-    opacity: 0; /* hide this */
-    z-index: 2; /* and place it over the hamburger */
-
-    -webkit-touch-callout: none;
-  }
-
-  input:checked ~ span{
-    opacity: 1;
-    // transform: rotate(-43deg) translate(-9px, 7px);
-    background: #232323;
-  }
-
-  input:checked ~ span:nth-last-child(1) {
-    transform: rotate(-43deg) translate(-2px, -3px);
-  }
-
-  input:checked ~ span:nth-last-child(2) {
-    opacity: 0;
-    transform: rotate(0deg) scale(0.2, 0.2);
-  }
-
-  input:checked ~ span:nth-last-child(3) {
-    transform: rotate(44deg) translate(0px, 0px);
-
-
-  }
-
-  input:checked ~ .aside {
-    transform: none !important;
-  }
-
-  //  lines
-  span{
-    display: block;
-    width: 33px;
-    height: 4px;
-    margin-bottom: 5px;
-    position: relative;
-
-    background: #cdcdcd;
-    border-radius: 3px;
-
-    z-index: 1;
-
-    transform-origin: 4px 0px;
-
-    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-    background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-    opacity 0.55s ease;
-
-  }
-
-  span:first-child{
-    transform-origin: 0% 0%;
-  }
-
-  span:nth-last-child(2){
-    transform-origin: 0% 100%;
-  }
-}
-
 
 .aside{
   width: 266px;
   background: $color__background-white;
-  // padding-top: 22px;
   padding-top: 66px;
   padding-right: 16px;
 
+  .btn-toogle{
+    padding-left: 40px;
+    padding-bottom: 30px;
+  }
+
   .business-info{
-    min-height: 247px;
-    // min-height: 308px; // when isn't responsive
+    min-height: 247px; // when isn't responsive
     margin-bottom: 30px; // when responsive
 
     .business-perfil{
@@ -175,7 +94,7 @@
 
   .menu{
     padding-left: 40px;
-    padding-right: 15px;
+    // padding-right: 15px;
 
     .list{
       line-height: 35px;
@@ -272,15 +191,13 @@
 
 
 @media screen and (max-width: 999px){
-  .button-toggle-sidebar{
-    display: block;
-  }
-
   .aside{
     padding-top: 20px;
     position: absolute;
+    left: 0px;
+    z-index: 10;
     transform-origin: 0% 0%;
-    transform: translate(-100%, 0);
+    transform: translate(-120%, 0);
 
     transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
 

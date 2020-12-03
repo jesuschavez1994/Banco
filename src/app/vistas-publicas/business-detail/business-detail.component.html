@@ -2,7 +2,7 @@
 
 <main class="page">
 
-  <app-sidebar-list></app-sidebar-list>
+  <app-sidebar-list [isExpanded]="expandSidebarlist" (sidebarExpand)="toggleSidebarList($event)"></app-sidebar-list>
 
   <div class="column">
 
@@ -30,6 +30,8 @@
       <h1 class="profile-name">farmacia medical background</h1>
 
       <div class="search-engine">
+
+        <app-sidebar-list-button [isExpanded]="expandSidebarlist" (sidebarExpand)="toggleSidebarList($event)"></app-sidebar-list-button>
 
         <div class="searcher">
           <i><img src="assets/img/icons/loupe.svg"></i>

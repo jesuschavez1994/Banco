@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BusinessDetailComponent implements OnInit {
 
+  expandSidebarlist = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public toggleSidebarList(event){
+    this.expandSidebarlist = event;
   }
 
 }
