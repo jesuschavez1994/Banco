@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SidebarListControler } from '@models/models-components-options/sidebar-list.model';
 
 @Component({
   selector: 'app-business-detail',
@@ -7,15 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BusinessDetailComponent implements OnInit {
 
-  expandSidebarlist = false;
 
-  constructor() { }
+  sidebarListCtr = new SidebarListControler();
 
-  ngOnInit(): void {
+  constructor() {
+    this.sidebarListCtr.expandSidebarlist = true;
   }
 
-  public toggleSidebarList(event){
-    this.expandSidebarlist = event;
+  ngOnInit(): void {
   }
 
 }

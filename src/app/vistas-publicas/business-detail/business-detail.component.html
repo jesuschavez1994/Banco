@@ -2,7 +2,10 @@
 
 <main class="page">
 
-  <app-sidebar-list [isExpanded]="expandSidebarlist" (sidebarExpand)="toggleSidebarList($event)"></app-sidebar-list>
+  <app-sidebar-list
+    [isExpanded]="this.sidebarListCtr.expandSidebarlist"
+    (sidebarExpand)="this.sidebarListCtr.toggleSidebarList($event)">
+  </app-sidebar-list>
 
   <div class="column">
 
@@ -21,7 +24,10 @@
       <div class="search-engine">
 
         <div class="btn-toogle-sidebar-list">
-          <app-sidebar-list-button [isExpanded]="expandSidebarlist" (sidebarExpand)="toggleSidebarList($event)"></app-sidebar-list-button>
+          <app-sidebar-list-button
+            [isExpanded]="this.sidebarListCtr.expandSidebarlist"
+            (sidebarExpand)="this.sidebarListCtr.toggleSidebarList($event)">
+          </app-sidebar-list-button>
         </div>
 
 
