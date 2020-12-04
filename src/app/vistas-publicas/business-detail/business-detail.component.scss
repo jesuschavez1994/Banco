@@ -5,30 +5,7 @@
   padding-right: 27px;
 
   .column{
-
     width: 100%;
-
-    .introduction-page{
-
-      .banner{
-        width: 100%;
-        min-height: 155px;
-        height: 14.6vw;
-        background: red;
-        border-radius: 10px;
-
-        img{
-          height: 100%;
-        }
-
-        &.banner--small{
-          height: 10vw;
-          display: none;
-        }
-
-      }
-
-    }
 
     .products-infomation{
 
@@ -98,7 +75,6 @@
 
           }
         }
-
 
       }
 
@@ -194,6 +170,7 @@
   }
 }
 
+
 @media screen and (max-width: 620px) {
   .page{
     .products-infomation{
@@ -218,7 +195,6 @@
 
 @media screen and (max-width: 1185px){
   .products-infomation{
-
 
     .products-container{
       display: flex !important;

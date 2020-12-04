@@ -10,6 +10,7 @@ import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 import { SidebarListComponent } from './sidebar-list/sidebar-list.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { SidebarListButtonComponent } from './sidebar-list-button/sidebar-list-button.component';
+import { BannerComponent } from './banner/banner.component';
 
 @NgModule({
     declarations: [
@@ -20,14 +21,16 @@ import { SidebarListButtonComponent } from './sidebar-list-button/sidebar-list-b
         SidebarMenuComponent,
         SidebarListComponent,
         BreadcrumbComponent,
-        SidebarListButtonComponent
+        SidebarListButtonComponent,
+        BannerComponent
     ],
     imports: [ APP_ROUTING, PipesModule, CommonModule],
     exports: [
       NavbarComponent, NavbarToHomeComponent,
       CategoriasComponent, NavbarstoreComponent,
       SidebarMenuComponent, SidebarListComponent,
-      BreadcrumbComponent, SidebarListButtonComponent
+      BreadcrumbComponent, SidebarListButtonComponent,
+      BannerComponent
     ]
 })
 
