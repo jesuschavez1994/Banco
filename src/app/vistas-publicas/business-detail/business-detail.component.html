@@ -21,64 +21,9 @@
 
       <h1 class="profile-name">farmacia medical background</h1>
 
-      <div class="search-engine">
+      <app-search-bar></app-search-bar>
 
-        <div class="btn-toogle-sidebar-list">
-          <app-sidebar-list-button
-            [isExpanded]="this.sidebarListCtr.expandSidebarlist"
-            (sidebarExpand)="this.sidebarListCtr.toggleSidebarList($event)">
-          </app-sidebar-list-button>
-        </div>
-
-
-        <div class="searcher">
-          <i><img src="assets/img/icons/loupe.svg"></i>
-          <input type="search" placeholder="Busca un producto en esta tienda">
-        </div>
-
-        <div class="filter">
-
-          <select>
-            <option value="0">filtrar por</option>
-            <option value="0">Empresa</option>
-            <option value="0">Producto</option>
-          </select>
-
-        </div>
-
-      </div>
-
-      <div class="products-container">
-
-        <ng-container *ngFor="let item of [0,0,0,0,0,0]">
-
-          <article class="product">
-
-            <div class="img">
-
-              <img src="assets/img/test-img/magazine_vegan_food.jpg">
-
-              <i class="fa-heart"
-                [ngClass]="{'fas': true,'far': false}">
-              </i>
-
-            </div>
-
-
-            <h3 class="name">
-              Syndol Solución Inyectable 30
-              mg/ ml x 5 Ampollas, Opko
-              Aciclovir Crema Tópica 5% x 15 gr
-            </h3>
-
-            <p class="cost">$34.15</p>
-
-          </article>
-
-        </ng-container>
-
-
-      </div>
+      <app-products-cards></app-products-cards>
 
     </section>
 
