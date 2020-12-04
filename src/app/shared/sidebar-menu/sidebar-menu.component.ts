@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
-import { SidebarMenuOptions } from '@interfaces/componentsOptions/sidebar-menu.interface';
+import { SidebarMenuOptions } from '@interfaces/components-options/sidebar-menu.interface';
 
 @Component({
   selector: 'app-sidebar-menu',
