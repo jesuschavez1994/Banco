@@ -1,12 +1,15 @@
-<div class="search-engine">
+<div class="search-engine" [ngClass]="{'search-engine--wrap': buttonSidebarList}">
 
-  <!-- <div class="btn-toogle-sidebar-list">
-    <app-sidebar-list-button
-      [isExpanded]="this.sidebarListCtr.expandSidebarlist"
-      (sidebarExpand)="this.sidebarListCtr.toggleSidebarList($event)">
-    </app-sidebar-list-button>
-  </div> -->
+  <ng-container *ngIf="buttonSidebarList">
 
+    <div class="btn-toogle-sidebar-list">
+      <app-sidebar-list-button
+        [isExpanded]="isExpanded"
+        (sidebarExpand)="toggleSidebarList($event)">
+      </app-sidebar-list-button>
+    </div>
+
+  </ng-container>
 
   <div class="searcher">
     <i><img src="assets/img/icons/loupe.svg"></i>

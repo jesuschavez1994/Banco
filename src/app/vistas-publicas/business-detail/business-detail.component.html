@@ -21,7 +21,11 @@
 
       <h1 class="profile-name">farmacia medical background</h1>
 
-      <app-search-bar></app-search-bar>
+      <app-search-bar
+
+        [isExpanded]="this.sidebarListCtr.expandSidebarlist"
+        (sidebarExpand)="this.sidebarListCtr.toggleSidebarList($event)">
+      </app-search-bar>
 
       <app-products-cards></app-products-cards>
 

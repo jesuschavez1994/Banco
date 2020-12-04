@@ -67,12 +67,18 @@
 @media screen and (max-width: 620px) {
 
   .search-engine{
-    flex-wrap: wrap;
     justify-content: center;
+
+
+  }
+
+  .search-engine--with-button{
+    flex-wrap: wrap;
 
     .filter{
       margin-top: 10px;
     }
+
   }
 
 }
