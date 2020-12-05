@@ -8,16 +8,14 @@ import { bannerOptions } from '@interfaces/components-options/banner.interface';
 })
 export class BannerComponent implements OnInit {
 
-  @Input() imgs: bannerOptions = {
-    m: '',
+  @Input() imgs: bannerOptions;
 
-  };
-
-  currentImg = this.imgs.m;
+  currentImg: string;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.currentImg = this.imgs.m;
   }
 
   @HostListener('window:resize', ['$event'])
