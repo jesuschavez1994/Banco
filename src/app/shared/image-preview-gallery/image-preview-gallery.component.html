@@ -1,0 +1,19 @@
+<div class="imgs">
+
+  <div class="img-option">
+
+    <ng-container *ngFor="let img of imgs">
+
+      <div class="option" (click)="selectImg(img)">
+        <img [src]="img">
+      </div>
+
+    </ng-container>
+
+  </div>
+
+  <div class="img-selected">
+    <img [src]="currentImg">
+  </div>
+
+</div>

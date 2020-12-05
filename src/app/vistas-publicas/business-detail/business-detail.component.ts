@@ -13,6 +13,14 @@ export class BusinessDetailComponent implements OnInit {
     m: 'assets/img/test-img/banner.png'
   };
 
+  productSelected = {
+    imgs: [
+      'assets/img/test-img/organic_protein.jpg',
+      'assets/img/test-img/magazine_vegan_food.jpg',
+      'assets/img/test-img/banner.png'
+    ]
+  };
+
   sidebarListCtr = new SidebarListControler();
 
   constructor() {

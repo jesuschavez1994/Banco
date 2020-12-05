@@ -1,0 +1,52 @@
+@import 'src/assets/scss/style.scss';
+
+.imgs{
+  width: min-content;
+  margin-right: 15px;
+
+  display: flex;
+
+  .img-option{
+    width: min-content;
+
+    .option{
+      min-width: 29px;
+      min-height: 36px;
+      width: 4.8%;
+      height: 2.6vw;
+      border: 1px solid $color__border-gray--medium;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all .3s;
+      display: flex;
+      align-items: center;
+
+      img{
+        height: 100%;
+
+      }
+
+      &:hover{
+        filter: brightness(0.9);
+      }
+    }
+  }
+
+  .img-selected{
+    min-width: 402px;
+    // 317px
+    min-height: 403px;
+    width: 40.2%;
+    height: 29.6vw;
+
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    img{
+      height: 100%;
+      object-fit: contain;
+      object-position: top;
+    }
+  }
+}

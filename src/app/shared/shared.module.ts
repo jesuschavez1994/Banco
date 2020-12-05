@@ -13,6 +13,7 @@ import { SidebarListButtonComponent } from './sidebar-list-button/sidebar-list-b
 import { BannerComponent } from './banner/banner.component';
 import { ProductsCardsComponent } from './products-cards/products-cards.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { ImagePreviewGalleryComponent } from './image-preview-gallery/image-preview-gallery.component';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
         BannerComponent,
         ProductsCardsComponent,
         SearchBarComponent,
+        ImagePreviewGalleryComponent,
 
     ],
     imports: [ APP_ROUTING, PipesModule, CommonModule],
@@ -36,7 +38,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
       SidebarMenuComponent, SidebarListComponent,
       BreadcrumbComponent, SidebarListButtonComponent,
       BannerComponent, ProductsCardsComponent,
-      SearchBarComponent
+      SearchBarComponent, ImagePreviewGalleryComponent
     ]
 })
 
