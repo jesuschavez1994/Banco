@@ -5,7 +5,9 @@
     <ng-container *ngFor="let img of imgs">
 
       <div class="option" (click)="selectImg(img)">
+
         <img [src]="img">
+
       </div>
 
     </ng-container>
@@ -13,7 +15,20 @@
   </div>
 
   <div class="img-selected">
-    <img [src]="currentImg">
+
+    <!-- <img [src]="currentImg"> -->
+    <lib-ngx-image-zoom
+      [thumbImage]="currentImg"
+      [magnification]="1"
+      [enableScrollZoom]="true"
+      [enableLens]="true"
+      [lensWidth]="200"
+      [lensHeight]="200"
+      [circularLens]="true"
+      [thumbWidth]="0"
+      [thumbHeight]="0"
+    ></lib-ngx-image-zoom>
+
   </div>
 
 </div>
