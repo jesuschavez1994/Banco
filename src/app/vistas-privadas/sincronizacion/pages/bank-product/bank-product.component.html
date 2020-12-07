@@ -1,0 +1,17 @@
+<!-- <section class="container col-md-12 mt-5">
+    <ol class="row products list items pl-0">
+        <app-item-list-product class="product-item"></app-item-list-product>
+    </ol>
+</section> -->
+
+<section class="container col-md-12 mt-5">
+    <ol class="row products list items pl-0">
+        <app-item-list-product      *ngFor="let item of itemProduct;
+                                    let i = index;"
+                                    class="product-item"
+                                    [item]="item"
+                                    [MyProduct]="itemProduct"
+                                    [index]="i">
+        </app-item-list-product>
+    </ol>
+</section>

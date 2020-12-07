@@ -16,6 +16,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatIconModule} from '@angular/material/icon';
+import {CdkTableModule} from '@angular/cdk/table';
+
 
 
 @NgModule({
@@ -35,6 +37,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatCheckboxModule,
     MatBadgeModule,
     MatIconModule,
+    CdkTableModule,
+
   ],
   exports: [
     MatFormFieldModule,
@@ -49,7 +53,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatSelectModule,
     MatCheckboxModule,
     MatBadgeModule,
-    MatIconModule
+    MatIconModule,
+    CdkTableModule,
+
   ]
 })
 export class MaterialModule { }

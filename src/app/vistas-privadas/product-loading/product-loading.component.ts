@@ -176,21 +176,21 @@ export class ProductLoadingComponent implements OnInit {
       localStorage.getItem('storeId'),
       this.idProduct
     ).subscribe( (data: EditProductStore) => {
-      console.log(data);
-      this.myObject = {
-        name: data.name,
-        description: data.description,
-        mark : data.marks[0].name,
-        factory: data.factories[0].name,
-        category: data.subcategories[0].category.name,
-        subcategory_id: data.subcategories[0].name,
-        price: data.price,
-        stock: data.stock,
-        aviable: data.aviable,
-        delivery: data.delivery.delivery,
-      };
-      console.log(this.myObject);
-      this.forma.patchValue(this.myObject);
+      // console.log('Datas', data);
+      // this.myObject = {
+      //   name: data.name,
+      //   description: data.description,
+      //   mark : data.marks[0].name,
+      //   // factory: data.factories[0].name,
+      //   // category: data.subcategories[0].category.name,
+      //   // subcategory_id: data.subcategories[0].name,
+      //   // price: data.price,
+      //   // stock: data.stock,
+      //   // aviable: data.aviable,
+      //   // delivery: data.delivery.delivery,
+      // };
+      // console.log(this.myObject);
+      this.forma.patchValue(data);
     });
   }
 
@@ -371,7 +371,7 @@ export class ProductLoadingComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalAddCategoriasAndSubcategoriasComponent, {
-      width: '250px',
+      width: '300px',
       data: {
         nameCategory: this.forma.value.category,
         animal: this.animal

@@ -1,0 +1,12 @@
+.product-item {
+    width: calc(25%);
+    margin: 5px;
+}
+
+@media only screen and (min-width: 768px) {
+    .product-item {
+        width: calc(23%);
+        margin: 5px;
+        border-bottom: 2px solid #ddd;
+    }
+}

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ThemePalette} from '@angular/material/core';
+import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service';
+import { Sugerir } from '@models/sincronizacion/sugerir';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
 export interface Task {
   name: string;
@@ -16,7 +19,17 @@ export interface Task {
 })
 export class SuggestedProductsComponent implements OnInit {
 
-  constructor() { }
+
+  forma: FormGroup;
+
+  constructor(public sincronizacion: SincronizacionService) {
+
+
+    this.forma = new FormGroup({
+      id: new FormControl(''),
+    });
+
+  }
 
 // tslint:disable-next-line: member-ordering
 task: Task = {
@@ -33,6 +46,20 @@ task: Task = {
   allComplete = false;
 
   ngOnInit(): void {
+  }
+
+  solicitarSugerencias(){
+
+    const id = new Sugerir(
+      localStorage.getItem('storeId'),
+    );
+
+    this.sincronizacion.Sugerir(localStorage.getItem('storeId'), id).subscribe( resp => {
+      console.log(resp);
+    });
+  }
+
+  sugerir(){
   }
 
   updateAllComplete() {

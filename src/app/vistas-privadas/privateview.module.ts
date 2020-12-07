@@ -89,6 +89,17 @@ import { NoSuggestedProductsComponent } from './sincronizacion/pages/suggested-p
 import { SynchronizedProductsComponent } from './sincronizacion/pages/synchronized-products/synchronized-products.component';
 import { NoSynchronizedProductsComponent } from './sincronizacion/pages/synchronized-products/container/no-synchronized-products/no-synchronized-products.component';
 import { SpreadSheetsModule } from '@grapecity/spread-sheets-angular';
+import { TableComponent } from './sincronizacion/pages/exportar-lista-excel/container/table/table.component';
+import { SynchronizedProductsTableComponent } from './sincronizacion/pages/synchronized-products/container/synchronized-products-table/synchronized-products-table.component';
+import { DialogSynchronizedComponent } from './sincronizacion/pages/synchronized-products/container/dialog-synchronized/dialog-synchronized.component';
+import { TableroDeSincronizacionComponent } from './sincronizacion/pages/synchronized-products/container/tablero-de-sincronizacion/tablero-de-sincronizacion.component';
+import { BankProductComponent } from './sincronizacion/pages/bank-product/bank-product.component';
+import { ItemListProductComponent } from './sincronizacion/pages/bank-product/container/item-list-product/item-list-product.component';
+
+
+// CARRUSEL //
+import { CarouselModule } from 'ngx-owl-carousel-o';
+
 
 @NgModule({
     entryComponents: [
@@ -134,7 +145,13 @@ import { SpreadSheetsModule } from '@grapecity/spread-sheets-angular';
       ItemsSuggestedProductsComponent,
       NoSuggestedProductsComponent,
       SynchronizedProductsComponent,
-      NoSynchronizedProductsComponent
+      NoSynchronizedProductsComponent,
+      TableComponent,
+      SynchronizedProductsTableComponent,
+      DialogSynchronizedComponent,
+      TableroDeSincronizacionComponent,
+      BankProductComponent,
+      ItemListProductComponent,
       ],
 
     imports: [
@@ -162,7 +179,8 @@ import { SpreadSheetsModule } from '@grapecity/spread-sheets-angular';
       AgmCoreModule.forRoot({
         apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'
       }),
-      NgbModule
+      NgbModule,
+      CarouselModule
       ],
 
     exports: [
@@ -170,7 +188,10 @@ import { SpreadSheetsModule } from '@grapecity/spread-sheets-angular';
       PhotoUserComponent,
       CardShimmerFormConfigurationComponent,
       ModalAddCategoriasAndSubcategoriasComponent,
-      NavbarSincronizacionComponent
+      NavbarSincronizacionComponent,
+      TableComponent,
+      SynchronizedProductsTableComponent,
+      TableroDeSincronizacionComponent
     ],
 
     providers: [

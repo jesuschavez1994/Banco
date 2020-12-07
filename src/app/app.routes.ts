@@ -21,7 +21,10 @@ import { ViewProductsLoadsComponent } from './vistas-privadas/components/view-pr
 import { ExportarListaExcelComponent } from './vistas-privadas/sincronizacion/pages/exportar-lista-excel/exportar-lista-excel.component';
 import { SuggestedProductsComponent } from './vistas-privadas/sincronizacion/pages/suggested-products/suggested-products.component';
 import { SincronizacionViewsComponent } from './vistas-privadas/sincronizacion/components/sincronizacion-views/sincronizacion-views.component';
+// tslint:disable-next-line: max-line-length
 import { SynchronizedProductsComponent } from './vistas-privadas/sincronizacion/pages/synchronized-products/synchronized-products.component';
+import { BankProductComponent } from './vistas-privadas/sincronizacion/pages/bank-product/bank-product.component';
+
 
 
 const APP_ROUTES: Routes = [
@@ -81,6 +84,10 @@ const APP_ROUTES: Routes = [
                     {
                         path: 'synchronized-products',
                         component: SynchronizedProductsComponent
+                    },
+                    {
+                        path: 'bank-product',
+                        component: BankProductComponent
                     }
                 ]
             },

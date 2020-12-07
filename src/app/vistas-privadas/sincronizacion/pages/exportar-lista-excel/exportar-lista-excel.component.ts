@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { MyValidators } from '@utils/validators';
 import { DocumentExcel } from '@models/sincronizacion/documentExcel.model';
@@ -12,13 +12,19 @@ const URL = URL_SERVICIOS;
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, last, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { utf8Encode } from '@angular/compiler/src/util';
+
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 class Contact {
   cantidad = '';
   Nombre = '';
   Descripcion = '';
+  Precio = '';
   Marca = '';
 }
+
+
 
 
 @Component({
@@ -29,23 +35,33 @@ class Contact {
 })
 export class ExportarListaExcelComponent implements OnInit {
 
+
   forma: FormGroup;
   public filesToUpload: Array<File>;
-  param: string = 'file';
-
+  param = 'file';
+  Data = [];
   archivo: any;
 
-  importContacts: Contact[] = [];
+  importContacts: any[] = [];
   exportContacts: Contact[] = [];
   dowloadExcel: boolean;
+  ShowLista: any[];
   path: any;
   userId: string;
   storeId: string;
+
+  // VARIABLES PAGINADOR //
+  data = [];
+  pagesActual = 1;
+  total = 0;
+  perPage = 10;
 
 
   constructor(private sincronizacion: SincronizacionService,
               // tslint:disable-next-line: variable-name
               private _cd: ChangeDetectorRef,
+              private route: ActivatedRoute,
+              private router: Router
               // tslint:disable-next-line: variable-name
               ) {
 
@@ -84,53 +100,54 @@ export class ExportarListaExcelComponent implements OnInit {
   SendDocumentExcel(){}
 
   onFileChange(evt: any){
-    // console.log(evt);
+
+      // Aqui desciframos lo que contiene la tabla excel
       const target: DataTransfer = (evt.target) as DataTransfer;
-    // const reader: FileReader = new FileReader();
-    // reader.onload = (e: any) => {
+      const reader: FileReader = new FileReader();
+      reader.onload = (e: any) => {
+
+        const bstr: string = e.target.result;
+        const data =  this.sincronizacion.ShowTableExcell(bstr) as any[];
+        // console.log('ARRAY', data.length);
+        const header: string[] = Object.getOwnPropertyNames(new Contact());
+        // console.log('HEADERS', header);
+        const importedData = data.slice(1, -1);
+        // console.log('slice', importedData);
+        this.importContacts = importedData.map(arr => {
+          // console.log(arr);
+          // debugger;
+          const obj = {};
+          for (let i = 0; i < header.length; i++) {
+            const k = header[i];
+            obj[k] = arr[i];
+            // debugger;
+          }
+          console.log('obj', obj);
+          console.log('Data', this.Data);
+          return  this.Data.push(obj as Contact);
+        });
 
 
-    //   const bstr: string = e.target.result;
-    //   console.log('EXCEL', bstr);
-    //   const data = this.sincronizacion.importFromFile(bstr) as any[];
-    //   console.log('Data', data);
-    //   const header: string[] = Object.getOwnPropertyNames(new Contact());
-    //   const importedData = data.slice(1, -1);
+      };
+      reader.readAsBinaryString(target.files[0]);
 
 
-    //   this.importContacts = importedData.map(arr => {
-    //     const obj = {};
-    //     for (let i = 0; i < header.length; i++) {
-    //       const k = header[i];
-    //       obj[k] = arr[i];
-    //     }
-    //     return obj as Contact;
-    //   });
-
-    // };
-
-    // reader.readAsBinaryString(target.files[0]);
-
-    // console.log('BINARIO', reader.readAsBinaryString(target.files[0]));
-    // console.log(fileInput);
-    // this.filesToUpload = (fileInput.target.files as Array<File>);
-    // console.log(this.filesToUpload);
-
-      const reader = new FileReader();
-      console.log(evt);
+      // Aquí Envio el Documento Excel en base64
+      const readerImport = new FileReader();
+      // console.log(evt);
       if (evt.target.files && evt.target.files.length) {
         const [file] = evt.target.files;
-        reader.readAsDataURL(file);
+        readerImport.readAsDataURL(file);
 
-        reader.onload = (e: any) => {
+        readerImport.onload = (e: any) => {
 
           const bstr: string = e.target.result;
           console.log('EXCEL', bstr);
-          const data = this.sincronizacion.importFromFile(bstr) as any[];
+          const data = this.sincronizacion.importFromFile(bstr) as any;
           const header: string[] = Object.getOwnPropertyNames(new Contact());
-          console.log('Data', data);
+          // console.log('Data', data);
           const importedData = data.slice(1, -1);
-          console.log(header);
+          // console.log(header);
 
           this.importContacts = importedData.map(arr => {
             const obj = {};
@@ -138,20 +155,14 @@ export class ExportarListaExcelComponent implements OnInit {
               const k = header[i];
               obj[k] = arr[i];
             }
-            console.log('obj', obj);
             return obj as Contact;
           });
 
-          this.archivo = reader.result;
-          console.log('FILESSS', this.archivo);
+          this.archivo = readerImport.result;
+          // console.log('FILESSS', this.archivo);
           // console.log('file', this.forma.value.file);
           this._cd.markForCheck();
         };
-
-        // reader.readAsBinaryString(evt.target.files[0]);
-
-        // console.log(reader.readAsBinaryString(target.files[0]));
-
       }
 
   }

@@ -1,0 +1,73 @@
+<app-tablero-de-sincronizacion [index]="this.index"></app-tablero-de-sincronizacion>
+
+
+<section class="row">
+    <table class="table table-bordered mt-5">
+      <thead>
+        <tr>
+          <th scope="col" class="family-500">.</th>
+          <th scope="col" class="family-500">Cantidad</th>
+          <th scope="col" class="family-500">Nombre del producto</th>
+          <th scope="col" class="family-500">Marca</th>
+          <th scope="col" class="family-500">Precio</th>
+          <th scope="col" class="family-500">Estatus</th>
+          <th scope="col" class="family-500">Ver</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of itemProductos | paginate: { itemsPerPage: 28, currentPage: pagesActual };
+              let i = index;
+              let par = even;
+              let impar = odd">
+        <tr [ngClass]="{'is-impar':  par, 'is-par': impar }" 
+            *ngIf="item.sincronice === 'sincronizado' || item.sincronice === 'no sincronizado'">
+          <td style="background: white; border: none;">
+            <mat-checkbox   color="primary"
+                            (change)="SynchronizedThis($event, i)"></mat-checkbox>
+          </td>
+          <td class="family-500">
+              {{item.stock}}
+          </td>
+          <td>
+            <div [ngSwitch]="item.sincronice">
+              <div *ngSwitchCase="'sincronizado'">
+                <span class="family-500">
+                  {{item.sync_bank[0].name}}
+                </span>
+              </div>
+              <div *ngSwitchCase="'no sincronizado'">
+                <span>
+                  {{item.name}}
+                </span>
+              </div>
+            </div>
+          </td>
+          <td>
+            {{item.marks}}
+          </td>
+          <td class="family-500">
+            {{item.price}}
+          </td>
+          <td>
+            <div [ngSwitch]="item.sincronice">
+              <div *ngSwitchCase="'sincronizado'">
+                <span class="family-700 synchronized">{{item.sincronice}}</span>
+              </div>
+              <div *ngSwitchCase="'no sincronizado'">
+                <span class="family-700 NoSynchronized">NO SINCRONIZADO</span>
+              </div>
+            </div>
+          </td>
+          <td class="family-500">
+            Ver
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</section>
+
+
+<footer>
+  <pagination-controls (pageChange)="pagesActual = $event"></pagination-controls>
+</footer>
+  
+  

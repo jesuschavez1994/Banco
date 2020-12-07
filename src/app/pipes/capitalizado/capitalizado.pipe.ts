@@ -12,7 +12,7 @@ export class CapitalizadoPipe implements PipeTransform {
 
     if ( todas ){
         // tslint:disable-next-line: forin
-        for ( let i in descripcion){
+        for ( const i in descripcion){
             descripcion[i] = descripcion[i][0].toUpperCase() + descripcion[i].substr(1);
         }
     }else{

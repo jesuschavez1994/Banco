@@ -1,0 +1,12 @@
+
+.is-impar{background-color: rgba(0,0,0,.05) !important;}
+.is-par{background-color: white !important;}
+.synchronized{color: rgb(30, 206, 74); text-transform: uppercase;}
+.NoSynchronized{color: rgba(184, 17, 17, 0.795);}
+td, th{
+    text-align: center;
+}
+.Marcacador{
+    border-bottom: none;
+    border-top: none;
+}

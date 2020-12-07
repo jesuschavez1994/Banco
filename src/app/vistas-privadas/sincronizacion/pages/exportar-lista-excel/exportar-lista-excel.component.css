@@ -1,5 +1,20 @@
 input[type="file"] {
-    color: transparent;
+  color: transparent;
+  display: none;
+} 
+
+
+label[for="fileUpload"] {
+  font-size: 13px;
+  color: rgb(138, 138, 138);
+  transition: all .5s;
+  cursor: pointer;
+  text-align: left;
+  padding: 10px;
+}
+
+a{
+  border-bottom: 1px solid #dadada;
 }
 
 .file-input{
@@ -20,12 +35,69 @@ input[type="file"] {
     padding-right: calc(1.5em + .75rem);
     padding-left: calc(1.5em + .75rem);
     background-position: right calc(.375em + .1875rem) center !important;
-    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+    background-size: calc(.8em + .375rem) calc(.8em + .375rem);
 }
 
+.is-impar{background-color: rgba(0,0,0,.05) !important;}
+.is-par{background-color: white !important;}
 
 @media(max-width: 900px){
     ::placeholder{
         font-size: 12px;
     }
+}
+
+table {
+    width: 100%;
+}
+
+
+table td:first-child {
+    width: 3%;
+}
+table td:nth-child(2) {
+    width: 20%;
+}
+table td:nth-child(3) {
+    width: 45%;
+}
+table td:nth-child(4) {
+  width: 5%;
+}
+table td:last-child {
+  width: 15%;
+}
+footer {
+  height: 4rem;
+}
+
+.wrapper {
+  min-height: 80vh;
+}
+
+
+@media(max-width:801px){
+  a{
+    font-size: 12px;
+  }
+  label[for="fileUpload"] {
+    font-size: 11px !important;
+  }
+  button{
+    font-size: 14px !important;
+  }
+}
+
+@media(max-width:574px){
+  a{
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  label[for="fileUpload"] {
+    font-size: 14px !important;
+  }
+  button{
+    font-size: 14px !important;
+    margin-top: 10px;
+  }
 }

@@ -16,6 +16,7 @@ mat-grid-tile span{
     text-align: center;
 }
 
+.mySlides {display: none}
 
 .ir-arriba {
     display: flex;
@@ -39,20 +40,28 @@ mat-grid-tile span{
 
 .prev{
     position: absolute;
-    top: 75%;
-    left: -7px;
+    top: 48%;
+    left: -10px;
+    height: 37%;
+    border: none;
+    color: white;
+    background: #f3bd6b;
 }
 
 .next{
     position: absolute;
-    top: 75%;
-    right: -15px;
+    top: 60%;
+    right: -18px;
+    top: 48%;
+    height: 37%;
+    border: none;
+    color: white;
+    background: #f3bd6b;
 }
 
 .prev, .next {
     cursor: pointer;
     width: auto;
-    color: rgb(2, 2, 2);
     font-size: 25px;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;

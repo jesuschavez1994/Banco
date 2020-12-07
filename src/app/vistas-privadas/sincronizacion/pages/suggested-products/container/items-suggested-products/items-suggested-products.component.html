@@ -3,86 +3,107 @@
 
 <div layout=”row” layout-wrap="wrap">
     
-        <section    class="mt-5 mb-5 col-md-12 display-flex pb-1 position-relative" 
-                    *ngFor="let item of MyProduct | paginate: { itemsPerPage: 28, currentPage: page, totalItems: totalProductAPI };
-                    let i = index;"
-                    id="{{i}}">
-                   
-                <form   (ngSubmit)="formSincronizacion()" 
-                        class="width-100">
-                        <div *ngIf="item.suggestion !== null" class="width-100">
-                            <div class="pt-2">
-                                <mat-checkbox id="checkboxList{{i}}" color="primary" (change)="SelectCheckBox($event, i)"></mat-checkbox>
-                            </div>
+    <section    class="mt-5 mb-5 col-md-12 display-flex pb-1 position-relative" 
+                *ngFor="let item of MyProduct | paginate: { itemsPerPage: 28, currentPage: page, totalItems: totalProductAPI };
+                let i = index;"
+                id="{{i}}">
+                
+                <div class="width-100">
+                    <div class="pt-2">
+                        <mat-checkbox   [(ngModel)]="SetAllCheckbox"
+                                        name = checkbox{{i}}
+                                        id="checkboxList{{i}}" 
+                                        color="primary" 
+                                        (change)="SelectCheckBox($event, i)">
+                        </mat-checkbox>
+                    </div>
 
-                            <div class="col-md-11 pl-4">
+                    <div class="col-md-11 pl-4">
 
-                                <mat-grid-list cols="5" rowHeight="5:1">
-                                    <mat-grid-tile class="titles"><span class="family-600">Imagen</span></mat-grid-tile>
-                                    <mat-grid-tile class="titles"><span class="family-600">Nombre del producto</span></mat-grid-tile>
-                                    <mat-grid-tile class="titles"><span class="family-600">Marca</span></mat-grid-tile>
-                                    <mat-grid-tile class="titles"><span class="family-600">Cantidad</span></mat-grid-tile>
-                                    <mat-grid-tile class="titles"><span class="family-600">Precio</span></mat-grid-tile>
-                                </mat-grid-list>
+                        <mat-grid-list cols="5" rowHeight="5:1">
+                            <mat-grid-tile class="titles"><span class="family-600">Imagen</span></mat-grid-tile>
+                            <mat-grid-tile class="titles"><span class="family-600">Nombre del producto</span></mat-grid-tile>
+                            <mat-grid-tile class="titles"><span class="family-600">Marca</span></mat-grid-tile>
+                            <mat-grid-tile class="titles"><span class="family-600">Cantidad</span></mat-grid-tile>
+                            <mat-grid-tile class="titles"><span class="family-600">Precio</span></mat-grid-tile>
+                        </mat-grid-list>
 
-                                <mat-grid-list class="item-grid" cols="5" rowHeight="2:1.5">
-                                    <mat-grid-tile>
-                                        <img    [src]="item.images[0].src_size.m | imgProductLoad" 
-                                                class="product-image-photo lazyload width-80"   
-                                                alt="{{item.name}}"
-                                                style="display: block;"
-                                                *ngIf="item.images.length >= 1"    
-                                        >
+                        <mat-grid-list class="item-grid" cols="5" rowHeight="2:1.5">
+                            <mat-grid-tile>
+                                <img    [src]="item.images[0].src_size.m | imgProductLoad" 
+                                        class="product-image-photo lazyload width-80"   
+                                        alt="{{item.name}}"
+                                        style="display: block;"
+                                        *ngIf="item.images.length >= 1"    
+                                >
 
-                                        <img    src="../../../../../../../assets/img/sincronizacion/Icono de sin imagen.svg" 
-                                                class="card-img-top width-60" 
-                                                alt="..." 
-                                                *ngIf="item.images.length === 0"
-                                        >
+                                <img    src="../../../../../../../assets/img/sincronizacion/Icono de sin imagen.svg" 
+                                        class="card-img-top width-60" 
+                                        alt="..." 
+                                        *ngIf="item.images.length === 0"
+                                >
 
-                                    </mat-grid-tile>
+                                </mat-grid-tile>
                                     <mat-grid-tile> 
                                         <span class="family-500">
                                             {{ item.name }}
                                         </span>
                                     </mat-grid-tile>
-                                    <mat-grid-tile >
+                                <mat-grid-tile >
 
-                                        <span class="family-500" *ngIf="item.marks.length !== 0">
-                                            {{ item.marks[0].name }}
-                                        </span>
+                                <span class="family-500" *ngIf="item.marks.length !== 0">
+                                    {{ item.marks[0].name }}
+                                </span>
 
-                                        <span class="family-500" *ngIf="item.marks.legth === 0">
-                                            No se ha definido la marca
-                                        </span>
+                                <span class="family-500" *ngIf="item.marks.legth === 0">
+                                    No se ha definido la marca
+                                </span>
                                         
-                                    </mat-grid-tile>
-                                    <mat-grid-tile>
-                                        <span class="family-500">
-                                            {{ item.stock }}
-                                        </span>
-                                    </mat-grid-tile>
-                                    <mat-grid-tile>
-                                        <span class="family-500">
-                                            {{ item.price }}
-                                        </span>
-                                    </mat-grid-tile>
-                                </mat-grid-list>
+                            </mat-grid-tile>
 
-                                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                            <mat-grid-tile>
+                                <span class="family-500">
+                                    {{ item.stock }}
+                                </span>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <span class="family-500">
+                                    {{ item.price }}
+                                </span>
+                            </mat-grid-tile>
+                        </mat-grid-list>
 
-                                <mat-grid-list class="item-grid" cols="5" rowHeight="2:1.5">
+                        <!-- [ngClass]="{'is-invalid':  (!forma.controls['username'].valid || forma.controls['username'].errors?.minlength)&& forma.controls['username'].touched || forma.get('username').hasError('not_available'), 'is-valid': forma.controls['username'].valid }"  -->
+
+                        <div    *ngFor="let suggestion of item.suggestion.data;
+                                let iterador = index;
+                                let impar = odd;
+                                let par = even;"
+                                >
+
+                                <button class="prev" (click)="next = next - 1">&#10094;</button>
+
+                                <mat-grid-list  class="item-grid" 
+                                                cols="5" rowHeight="2:1.5" 
+                                                [ngClass]="{'mySlides': iterador - next }"
+                                                >
+
                                     <mat-grid-tile>
-                                        <img    [src]="item.suggestion.data[0].images[0].src_size.m | imgProductLoad" 
-                                                class="product-image-photo lazyload width-80"   
-                                                alt="{{item.name}}"
-                                                style="display: block;"
-                                                *ngIf="item.suggestion.data[0].images.length > 0"    
-                                        >
+                                        <article    *ngIf="suggestion.images.length > 0">
+
+                                            <img    [src]="suggestion.images[0].src_size.m | imgProductLoad" 
+                                                    alt="{{item.name}}"
+                                                    style="display: block;"
+                                                    *ngIf="suggestion.images.length > 0"    
+                                            >
+
+                                        </article>
                                     </mat-grid-tile>
+
                                     <mat-grid-tile>
-                                        <span class="family-500">
-                                            {{ item.suggestion.data[0].name}}
+                                        <span   class="family-500" 
+                                                *ngIf=" item.suggestion !== null">
+                                                {{ suggestion.name}}
                                         </span>
                                     </mat-grid-tile>
                                     <mat-grid-tile>3</mat-grid-tile>
@@ -90,26 +111,24 @@
                                     <mat-grid-tile></mat-grid-tile>
                                 </mat-grid-list>
 
-                                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                                <button class="next" (click)="next = next + 1">&#10095;</button>
 
-                                <ul class="width-100 display-flex justify-content-center pt-1 pb-1 mb-0">
-                                    <a class="family-500">
-                                        <!-- Este producto tiene {{ item.suggestion.data.length }} sugerencias -->
-                                    </a>
-                                </ul>
-
-                                <div class="input-group col-md-12 display-flex justify-content-flex-end pr-0 mt-3">
-                                    <button type="submit" 
-                                            class="btn btn-primary button fredoka"
-                                            (click)="sincronizar(i)"
-                                            >
-                                            sincronizar
-                                    </button>
-                                </div>
-                            </div>
                         </div>
-                </form>  
-        </section>
+
+                        <ul class="width-100 display-flex justify-content-center pt-1 pb-1 mb-0">
+                            <a class="family-500">
+                                        
+                            </a>
+                        </ul>
+
+                        <div class="input-group col-md-12 display-flex justify-content-flex-end pr-0 mt-3">
+                            <button type="submit" class="btn btn-primary button fredoka" (click)="sincronizar(i)">
+                                Sincronizar
+                            </button>
+                        </div>
+                    </div>
+                </div>                
+    </section>
 
     <span class="ir-arriba icon-arrow-up2" (click)="IrPaginacion()">
         <i  class="figure material-icons" 
@@ -117,9 +136,6 @@
             keyboard_arrow_down
         </i>
     </span>
-
-    
-   
 
 </div>
 
