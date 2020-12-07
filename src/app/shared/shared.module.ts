@@ -14,7 +14,7 @@ import { BannerComponent } from './banner/banner.component';
 import { ProductsCardsComponent } from './products-cards/products-cards.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { ImagePreviewGalleryComponent } from './image-preview-gallery/image-preview-gallery.component';
-import { NgxImgZoomModule } from 'ngx-img-zoom';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @NgModule({
     declarations: [
@@ -30,11 +30,12 @@ import { NgxImgZoomModule } from 'ngx-img-zoom';
         ProductsCardsComponent,
         SearchBarComponent,
         ImagePreviewGalleryComponent,
+        ProductDetailComponent,
 
     ],
     imports: [
       APP_ROUTING, PipesModule,
-      CommonModule, NgxImgZoomModule
+      CommonModule
     ],
     exports: [
       NavbarComponent, NavbarToHomeComponent,
@@ -42,7 +43,8 @@ import { NgxImgZoomModule } from 'ngx-img-zoom';
       SidebarMenuComponent, SidebarListComponent,
       BreadcrumbComponent, SidebarListButtonComponent,
       BannerComponent, ProductsCardsComponent,
-      SearchBarComponent, ImagePreviewGalleryComponent
+      SearchBarComponent, ImagePreviewGalleryComponent,
+      ProductDetailComponent,
     ]
 })
 

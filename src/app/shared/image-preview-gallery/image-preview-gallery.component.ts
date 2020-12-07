@@ -28,6 +28,7 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
 
   public selectImg( imgSelected ) {
     this.currentImg = imgSelected;
+    this.imageZoom();
   }
 
   public imageZoom() {
@@ -39,41 +40,29 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
     // const zoom = document.querySelectorAll('.zoom')[0];
     // const zoomImage = document.querySelectorAll('.zoom-image')[0];
 
-    console.log('cosas');
-    console.log(this.imageContainer);
-    console.log(this.zoomContainer);
-    console.log(this.zoomImage);
-    console.log('cosas///');
-
     const image = this.imageContainer.nativeElement;
     const zoom = this.zoomContainer.nativeElement;
     const zoomImage = this.zoomImage.nativeElement;
-
-    // console.log('cosas');
-    // console.log(image);
-    // console.log(zoom);
-    // console.log(zoomImage);
-    // console.log('cosas///');
 
     let clearSrc;
     let zoomLevel = 2;
 
     const images = [
       {
-        thumb: 'assets/img/test-img/organic_protein.jpg',
-        hires: 'assets/img/test-img/organic_protein.jpg'
+        thumb: this.currentImg,
+        hires: this.currentImg
       }, {
-        thumb: 'assets/img/test-img/organic_protein.jpg',
-        hires: 'assets/img/test-img/organic_protein.jpg'
+        thumb: this.currentImg,
+        hires: this.currentImg
       }, {
-        thumb: 'assets/img/test-img/organic_protein.jpg',
-        hires: 'assets/img/test-img/organic_protein.jpg'
+        thumb: this.currentImg,
+        hires: this.currentImg
       }, {
-        thumb: 'assets/img/test-img/organic_protein.jpg',
-        hires: 'assets/img/test-img/organic_protein.jpg'
+        thumb: this.currentImg,
+        hires: this.currentImg
       }, {
-        thumb: 'assets/img/test-img/organic_protein.jpg',
-        hires: 'assets/img/test-img/organic_protein.jpg'
+        thumb: this.currentImg,
+        hires: this.currentImg
       },
     ];
 
@@ -173,12 +162,12 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
       console.log(zoom.style.top);
       console.log(`${posX - zoom.offsetWidth / 1}px`);
 
-      let percX = (posX - this.offsetLeft) / this.offsetWidth,
-      percY = (posY - this.offsetTop) / this.offsetHeight;
+      const percX = (posX - this.offsetLeft) / this.offsetWidth;
+      const percY = (posY - this.offsetTop) / this.offsetHeight;
 
       // Original
-      let zoomLeft = -percX * zoomImage.offsetWidth + (zoom.offsetWidth / 2),
-      zoomTop = -percY * zoomImage.offsetHeight + (zoom.offsetHeight / 2);
+      const zoomLeft = -percX * zoomImage.offsetWidth + (zoom.offsetWidth / 2);
+      const zoomTop = -percY * zoomImage.offsetHeight + (zoom.offsetHeight / 2);
 
       // let zoomLeft = -percX * zoomImage.offsetWidth + (zoom.offsetWidth / 2),
       // zoomTop = -percY * zoomImage.offsetHeight + (zoom.offsetHeight / 14);
@@ -207,8 +196,8 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
       e.preventDefault();
       e.deltaY > 0 ? zoomLevel-- : zoomLevel++;
 
-      if (zoomLevel < 1) zoomLevel = 1;
-      if (zoomLevel > 5) zoomLevel = 5;
+      if (zoomLevel < 1) { zoomLevel = 1; }
+      if (zoomLevel > 5) { zoomLevel = 5; }
 
       console.log(`zoom level: ${zoomLevel}`);
       zoom.style.transform = `scale(${zoomLevel})`;

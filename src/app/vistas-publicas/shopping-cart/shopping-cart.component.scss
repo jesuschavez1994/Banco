@@ -390,6 +390,26 @@
                       font-weight: bold;
                       margin-left: 5px;
                       margin-right: 5px;
+
+                      position: relative;
+
+                      .segment{
+                        min-width: 11px;
+                        min-height: 2px;
+                        background: $color__text-orange;
+
+                        &.horizontal{
+
+                        }
+
+                        &.vertical{
+                          transform: rotate(90deg);
+
+                          position: absolute;
+                          top: 0;
+                        }
+
+                      }
                     }
 
                     .number {
