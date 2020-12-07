@@ -70,7 +70,8 @@ registerLocaleData(ca);
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'
     }),
-    NgbModule
+    NgbModule,
+
   ],
   providers: [
   { provide: NZ_I18N, useValue: ca_ES }],

@@ -14,7 +14,7 @@ import { BannerComponent } from './banner/banner.component';
 import { ProductsCardsComponent } from './products-cards/products-cards.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { ImagePreviewGalleryComponent } from './image-preview-gallery/image-preview-gallery.component';
-import { NgxImageZoomModule } from 'ngx-image-zoom';
+import { NgxImgZoomModule } from 'ngx-img-zoom';
 
 @NgModule({
     declarations: [
@@ -34,7 +34,7 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
     ],
     imports: [
       APP_ROUTING, PipesModule,
-      CommonModule, NgxImageZoomModule
+      CommonModule, NgxImgZoomModule
     ],
     exports: [
       NavbarComponent, NavbarToHomeComponent,
