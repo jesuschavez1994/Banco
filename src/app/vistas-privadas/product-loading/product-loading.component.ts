@@ -74,6 +74,7 @@ export class ProductLoadingComponent implements OnInit {
   totalProductAPI: number = 0;
   // tslint:disable-next-line: no-inferrable-types
   page: number = 1;
+  IMG: string;
 
   myObject = {};
 
