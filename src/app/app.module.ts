@@ -39,7 +39,6 @@ import { registerLocaleData } from '@angular/common';
 import ca from '@angular/common/locales/ca';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 registerLocaleData(ca);
 
 @NgModule({
@@ -72,7 +71,8 @@ registerLocaleData(ca);
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'
     }),
-    NgbModule
+    NgbModule,
+
   ],
   providers: [
   { provide: NZ_I18N, useValue: ca_ES }],

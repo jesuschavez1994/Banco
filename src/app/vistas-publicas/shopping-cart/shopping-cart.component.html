@@ -1,0 +1,284 @@
+<app-navbarstore [fixed]="false"></app-navbarstore>
+
+<main class="page">
+	<!-- #Menu de configuración -->
+
+  <app-sidebar-menu [menuOptions]="menuOptions"></app-sidebar-menu>
+
+	<!-- # Carrito de compras -->
+
+	<section class="shopping-cart">
+
+		<h1 class="text-capitalize">Carrito de compra</h1>
+
+		<div class="tab-container">
+
+			<ul class="tab-menu">
+
+				<li class="tab-item" [ngClass]="{'active': tabSelected === 1}" (click)="filterByTab(1)">pedidos</li>
+        <li class="tab-item" [ngClass]="{'active': tabSelected === 2}" (click)="filterByTab(2)">compras</li>
+
+			</ul>
+
+			<div class="tab-content">
+
+				<div class="list-item">
+
+					<ng-container *ngFor="let order of orders">
+
+						<article class="item" (click)="selectOrder(order)" [ngClass]="{'active': order === orderSelected}">
+
+							<figure class="img">
+
+								<img src="{{order.business.img}}" alt="Avatar por defecto" />
+
+							</figure>
+
+							<div class="content">
+
+								<h3 class="name">{{order.business.name}}</h3>
+
+								<span class="info">Cantidad de producto <strong>({{order.countProduct}})</strong></span>
+
+								<span class="info">Total a pagar <strong>${{order.totalToPay}}</strong></span>
+
+							</div>
+
+						</article>
+
+					</ng-container>
+
+				</div>
+
+        <ng-container *ngIf="tabSelected === 1 else invoice">
+
+          <div class="order-container">
+
+            <div class="order-head">
+              <h3 class="business">Farmacia Santa Isabel</h3>
+              <div class="order-number">Orden #100245</div>
+            </div>
+
+            <form action="#">
+
+              <div class="batch-actions">
+
+                <input type="checkbox" name="select-all" class="checkbox-default">
+                <label  class="option label-reset">Eliminar</label>
+                <label  class="option label-reset">Sin delivery</label>
+
+              </div>
+
+              <div class="order-list-container">
+
+                <ul class="tab-menu">
+
+                  <li class="tab-item">con delivery</li>
+                  <li class="tab-item active">sin delivery</li>
+
+                </ul>
+
+                <div class="order-list">
+
+                  <div class="colum-label">
+                    <label>Unitario</label>
+                    <label>Total</label>
+                  </div>
+
+                  <article class="order-item">
+
+                    <div class="checkbox">
+                      <input type="checkbox" name="select-all" class="checkbox-default">
+                    </div>
+
+
+                    <div class="content-flex">
+
+                      <div class="info-product">
+
+                        <figure class="img-principal">
+                          <img src="./assets/img/test-img/magazine_vegan_food.jpg" alt="magazine vegan food">
+                        </figure>
+
+
+                        <div class="title_quantity-container">
+
+                          <div class="title-container">
+                            <h4 class="title">vegan food</h4>
+                          </div>
+
+                          <div class="quantity">
+
+                            <label>Cantidad</label>
+
+                            <div class="counter">
+
+                              <span class="control">
+                                <div class="segment horizontal"></div>
+                              </span>
+
+                              <input type="number" class="number browser-default" name="counterInvetory" value="1">
+
+                              <span class="control">
+                                <div class="segment horizontal"></div>
+                                <div class="segment vertical"></div>
+                              </span>
+
+                            </div>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                      <div class="price">
+                        $15,20
+                      </div>
+
+                      <div class="price">
+                        $45,54
+                      </div>
+
+
+                    </div>
+
+                  </article>
+
+                  <article class="order-item">
+
+                    <div class="checkbox">
+                      <input type="checkbox" name="select-all" class="checkbox-default">
+                    </div>
+
+
+                    <div class="content-flex">
+
+                      <div class="info-product">
+
+                        <figure class="img-principal">
+                          <img src="./assets/img/test-img/magazine_vegan_food.jpg" alt="magazine vegan food">
+                        </figure>
+
+
+                        <div class="title_quantity-container">
+
+                          <div class="title-container">
+                            <h4 class="title">vegan food</h4>
+                          </div>
+
+                          <div class="quantity">
+
+                            <label>Cantidad</label>
+
+                            <div class="counter">
+
+                              <span class="control">-</span>
+                                <input type="number" class="number browser-default" name="counterInvetory">
+                              <span class="control">+</span>
+
+                            </div>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                      <div class="price">
+                        $15,20
+                      </div>
+
+                      <div class="price">
+                        $45,54
+                      </div>
+
+
+                    </div>
+
+                  </article>
+
+                </div>
+
+              </div>
+
+            </form>
+
+          </div>
+
+        </ng-container>
+
+        <ng-template #invoice>
+
+
+          <div class="invoice-container">
+
+
+            <div class="table-container">
+
+              <div class="border-box">
+
+              </div>
+
+              <table>
+
+                <div class="thead">
+                  <div class="tableElementContainer">
+                    <th>Producto</th>
+                    <th>Subtotal</th>
+                  </div>
+                </div>
+
+                <div class="tbody">
+
+                  <tr>
+                    <div class="tableElementContainer">
+                      <td>Comida vegana food x 4 Comida vegana food x 4 Comida vegana food x 4</td>
+                      <td>$45,54</td>
+                    </div>
+                  </tr>
+
+                  <tr>
+                    <div class="tableElementContainer">
+                      <td>Comida vegana food x 4</td>
+                      <td>$45,54</td>
+                    </div>
+                  </tr>
+
+                  <tr>
+                    <div class="tableElementContainer">
+                      <td>Subtotal</td>
+                      <td>$91,08</td>
+                    </div>
+                  </tr>
+
+                  <tr>
+                    <div class="tableElementContainer">
+                      <td>Delivery</td>
+                      <td>$2,1</td>
+                    </div>
+                  </tr>
+
+                </div>
+
+                <div class="tfoot">
+                  <p>Impuesto (19%) <span>$14.02</span> </p>
+                  <p><strong>TOTAL <span>$91,08</span> </strong></p>
+                </div>
+
+              </table>
+
+            </div>
+
+
+          </div>
+
+        </ng-template>
+
+			</div>
+
+		</div>
+
+	</section>
+
+</main>

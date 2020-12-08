@@ -1,0 +1,39 @@
+<app-navbarstore [fixed]="false"></app-navbarstore>
+
+<main class="page">
+
+  <app-sidebar-list
+    [isExpanded]="this.sidebarListCtr.expandSidebarlist"
+    (sidebarExpand)="this.sidebarListCtr.toggleSidebarList($event)">
+  </app-sidebar-list>
+
+  <div class="column">
+
+    <section class="introduction-page">
+
+      <app-breadcrumb></app-breadcrumb>
+
+      <app-banner [imgs]="imgsBanners"></app-banner>
+
+    </section>
+
+    <section class="products-infomation">
+
+      <h1 class="profile-name">farmacia medical background</h1>
+
+      <app-product-detail></app-product-detail>
+
+      <app-search-bar
+        [buttonSidebarList]="true"
+        [isExpanded]="this.sidebarListCtr.expandSidebarlist"
+        (sidebarExpand)="this.sidebarListCtr.toggleSidebarList($event)">
+      </app-search-bar>
+
+      <app-products-cards></app-products-cards>
+
+    </section>
+
+  </div>
+
+
+</main>

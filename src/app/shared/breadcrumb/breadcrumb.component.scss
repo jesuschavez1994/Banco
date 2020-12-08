@@ -1,0 +1,44 @@
+@import 'src/assets/scss/style.scss';
+
+.breadcrumb{
+  background: none;
+  margin: 0px;
+  padding: 0px;
+  padding: 20px 0px;
+
+  ul{
+    display: flex;
+    flex-wrap: wrap;
+
+    li{
+      padding: 3px 0px;
+
+      a{
+        font-size: 13px;
+        font-weight: 500;
+        text-transform: capitalize;
+      }
+
+      &::before{
+        content: '<';
+        margin: 0px 8px 0px 8px;
+      }
+
+      &:first-child::before{
+        display: none;
+      }
+
+      &:last-child{
+        a{
+          color: $color__text-gray--dark;
+        }
+      }
+
+      &:hover{
+        a{
+          color: $color__text-gray--dark;
+        }
+      }
+    }
+  }
+}

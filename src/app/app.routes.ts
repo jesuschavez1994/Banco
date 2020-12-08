@@ -25,12 +25,19 @@ import { SincronizacionViewsComponent } from './vistas-privadas/sincronizacion/c
 import { SynchronizedProductsComponent } from './vistas-privadas/sincronizacion/pages/synchronized-products/synchronized-products.component';
 import { BankProductComponent } from './vistas-privadas/sincronizacion/pages/bank-product/bank-product.component';
 
-
+import { ShoppingCartComponent } from './vistas-publicas/shopping-cart/shopping-cart.component';
+import { BusinessDetailComponent } from './vistas-publicas/business-detail/business-detail.component';
 
 const APP_ROUTES: Routes = [
 
     {path: 'home', component: HomeComponent},
     {path: 'register', component: RegisterComponent},
+
+    // Christopher Views
+    {path: 'shopping-cart', component: ShoppingCartComponent},
+    {path: 'business-detail', component: BusinessDetailComponent},
+
+    // Christopher Views //
 
     {   path: 'register-negocio',
         component: FormDataNegocioComponent,
