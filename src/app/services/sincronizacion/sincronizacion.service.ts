@@ -61,6 +61,11 @@ export class SincronizacionService {
     return this.execQuery(url);
   }
 
+  GetBankProductSpecific(idBankSync: string){
+    const url = `/api/banks/${idBankSync}`;
+    return this.execQuery(url);
+  }
+
   Sugerir(storeId: string, id: any){
     const url = `/stores/${storeId}/suggests`;
     return this.postQuery(url, id);

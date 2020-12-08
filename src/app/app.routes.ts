@@ -66,7 +66,11 @@ const APP_ROUTES: Routes = [
                 component: ProductLoadingComponent
             },
             {
-                path: 'edit/:id',
+                path: 'sync-this-product/:id/:product',
+                component: ProductLoadingComponent
+            },
+            {
+                path: 'edit/:id/:product',
                 component: ProductLoadingComponent
             },
             {

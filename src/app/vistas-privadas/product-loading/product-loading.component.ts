@@ -13,6 +13,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { EditProductStore } from '@interfaces/interfaceEditProductStore';
+import { SincronizacionService } from '../../services/sincronizacion/sincronizacion.service';
 
 export interface DialogData {
   animal: string;
@@ -41,6 +42,7 @@ export class ProductLoadingComponent implements OnInit {
   myFlag = false;
   id: string;
   idProduct: string;
+  sync: string;
   categoryId: string;
   // Con input //
   // tslint:disable-next-line: max-line-length
@@ -84,7 +86,8 @@ export class ProductLoadingComponent implements OnInit {
               private router: Router,
               public dialog: MatDialog,
               // tslint:disable-next-line: variable-name
-              private _snackBar: MatSnackBar) {
+              private _snackBar: MatSnackBar,
+              private sincronizacion: SincronizacionService) {
 
     this.forma = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
@@ -111,10 +114,28 @@ export class ProductLoadingComponent implements OnInit {
 
     this.route.params.subscribe( (params: Params) => {
       this.idProduct = params.id;
+      this.sync = params.product;
+
       console.log(params);
-      if ( this.idProduct ){
+
+      // PETICIÓN DE SERVICIOS PARA EDITAR
+      if ( this.idProduct && params.product === 'edit-product'){
         this.GetIdProductEdit();
       }
+
+      // PETICIÓN DE SERVICIOS PARA SINCRONIZAR
+      if ( this.idProduct && params.product === 'sync'){
+        this.sincronizacion.GetBankProductSpecific(this.idProduct).subscribe( (data: ProductosLoads) => {
+          console.log('Banck Product', data);
+          this.forma.patchValue(data);
+
+          // BLOQUEAMOS LOS CAMPOS RESPECTIVOS YA QUE NO LOS DEBE EDITAR //
+          this.forma.get('name').disable();
+          this.forma.get('description').disable();
+          this.forma.get('mark').disable();
+        });
+      }
+
     });
 
     this.storeService.ProductGet(
