@@ -28,6 +28,16 @@ export interface DialogData {
 })
 export class ProductLoadingComponent implements OnInit {
 
+  productSelected = {
+    imgs: [
+      'assets/img/test-img/organic_protein.jpg',
+      'assets/img/test-img/magazine_vegan_food.jpg',
+      'assets/img/test-img/banner.png'
+    ]
+  };
+
+
+
   animal: string;
   nameCategory: string;
 
@@ -74,7 +84,7 @@ export class ProductLoadingComponent implements OnInit {
   totalProductAPI: number = 0;
   // tslint:disable-next-line: no-inferrable-types
   page: number = 1;
-  IMG: string;
+  IMG: any[] =[];
 
   myObject = {};
 
@@ -126,8 +136,11 @@ export class ProductLoadingComponent implements OnInit {
 
       // PETICIÓN DE SERVICIOS PARA SINCRONIZAR
       if ( this.idProduct && params.product === 'sync'){
-        this.sincronizacion.GetBankProductSpecific(this.idProduct).subscribe( (data: ProductosLoads) => {
+        this.sincronizacion.GetBankProductSpecific(this.idProduct).subscribe( (data: any) => {
           console.log('Banck Product', data);
+          console.log('IMAGES', data.images[0].src_size.xl);
+          this.IMG.push(data.images[0].src_size.xl);
+          console.log(this.IMG);
           this.forma.patchValue(data);
 
           // BLOQUEAMOS LOS CAMPOS RESPECTIVOS YA QUE NO LOS DEBE EDITAR //

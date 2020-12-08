@@ -8,6 +8,7 @@ import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit } from '
 export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
 
   @Input() imgs: string[];
+  @Input() sync: string[]
   currentImg: string;
 
   @ViewChild('image') imageContainer: ElementRef;
@@ -18,6 +19,7 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.currentImg = this.imgs[0];
+    console.log('CURRENTIMG', this.currentImg)
 
   }
 
@@ -34,7 +36,7 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
   public imageZoom() {
     // use your mousewheel to zoom in 🔍
 
-    console.clear();
+    // console.clear();
 
     // const image = document.querySelectorAll('.image')[0];
     // const zoom = document.querySelectorAll('.zoom')[0];
