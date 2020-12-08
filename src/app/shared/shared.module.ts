@@ -15,6 +15,7 @@ import { ProductsCardsComponent } from './products-cards/products-cards.componen
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { ImagePreviewGalleryComponent } from './image-preview-gallery/image-preview-gallery.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { QuantityCounterComponent } from './quantity-counter/quantity-counter.component';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
         SearchBarComponent,
         ImagePreviewGalleryComponent,
         ProductDetailComponent,
+        QuantityCounterComponent,
 
     ],
     imports: [
@@ -44,7 +46,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
       BreadcrumbComponent, SidebarListButtonComponent,
       BannerComponent, ProductsCardsComponent,
       SearchBarComponent, ImagePreviewGalleryComponent,
-      ProductDetailComponent,
+      ProductDetailComponent, QuantityCounterComponent
     ]
 })
 
