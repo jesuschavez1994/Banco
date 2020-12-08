@@ -8,6 +8,23 @@
   align-items: center;
   justify-content: space-between;
 
+  &.strong{
+    margin-bottom: 0px;
+
+    label {
+      font-weight: initial;
+    }
+
+    .counter{
+      .number {
+        max-width: 30px;
+        height: initial;
+
+        border: $color__background-gray--medium 2px solid;
+      }
+    }
+  }
+
   label {
     font-size: $font__size--small + 1;
     font-weight: bold;
@@ -33,10 +50,6 @@
         min-width: 11px;
         min-height: 2px;
         background: $color__text-orange;
-
-        &.horizontal{
-
-        }
 
         &.vertical{
           transform: rotate(90deg);

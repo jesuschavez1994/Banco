@@ -9,6 +9,7 @@ import { QuantityCounterOptions } from '@interfaces/components-options/quantity-
 export class QuantityCounterComponent implements OnInit {
 
   @ViewChild('inputQuantityCounter') inputQuantityCounter: ElementRef;
+  @Input() isStrong = true;
   @Input() counter: QuantityCounterOptions = {
     maxValue: 1,
     initValue: 1,

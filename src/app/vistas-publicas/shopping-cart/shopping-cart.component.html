@@ -85,118 +85,50 @@
                     <label>Total</label>
                   </div>
 
-                  <article class="order-item">
+                  <ng-container *ngFor="let item of [0,0,0,0]">
 
-                    <div class="checkbox">
-                      <input type="checkbox" name="select-all" class="checkbox-default">
-                    </div>
+                    <article class="order-item">
 
-
-                    <div class="content-flex">
-
-                      <div class="info-product">
-
-                        <figure class="img-principal">
-                          <img src="./assets/img/test-img/magazine_vegan_food.jpg" alt="magazine vegan food">
-                        </figure>
+                      <div class="checkbox">
+                        <input type="checkbox" name="select-all" class="checkbox-default">
+                      </div>
 
 
-                        <div class="title_quantity-container">
+                      <div class="content-flex">
 
-                          <div class="title-container">
-                            <h4 class="title">vegan food</h4>
-                          </div>
+                        <div class="info-product">
 
-                          <div class="quantity">
+                          <figure class="img-principal">
+                            <img src="./assets/img/test-img/magazine_vegan_food.jpg" alt="magazine vegan food">
+                          </figure>
 
-                            <label>Cantidad</label>
 
-                            <div class="counter">
+                          <div class="title_quantity-container">
 
-                              <span class="control">
-                                <div class="segment horizontal"></div>
-                              </span>
-
-                              <input type="number" class="number browser-default" name="counterInvetory" value="1">
-
-                              <span class="control">
-                                <div class="segment horizontal"></div>
-                                <div class="segment vertical"></div>
-                              </span>
-
+                            <div class="title-container">
+                              <h4 class="title">vegan food</h4>
                             </div>
+
+                            <app-quantity-counter [isStrong]="false"></app-quantity-counter>
 
                           </div>
 
                         </div>
 
-                      </div>
-
-                      <div class="price">
-                        $15,20
-                      </div>
-
-                      <div class="price">
-                        $45,54
-                      </div>
-
-
-                    </div>
-
-                  </article>
-
-                  <article class="order-item">
-
-                    <div class="checkbox">
-                      <input type="checkbox" name="select-all" class="checkbox-default">
-                    </div>
-
-
-                    <div class="content-flex">
-
-                      <div class="info-product">
-
-                        <figure class="img-principal">
-                          <img src="./assets/img/test-img/magazine_vegan_food.jpg" alt="magazine vegan food">
-                        </figure>
-
-
-                        <div class="title_quantity-container">
-
-                          <div class="title-container">
-                            <h4 class="title">vegan food</h4>
-                          </div>
-
-                          <div class="quantity">
-
-                            <label>Cantidad</label>
-
-                            <div class="counter">
-
-                              <span class="control">-</span>
-                                <input type="number" class="number browser-default" name="counterInvetory">
-                              <span class="control">+</span>
-
-                            </div>
-
-                          </div>
-
+                        <div class="price">
+                          $15,20
                         </div>
 
+                        <div class="price">
+                          $45,54
+                        </div>
+
+
                       </div>
 
-                      <div class="price">
-                        $15,20
-                      </div>
+                    </article>
 
-                      <div class="price">
-                        $45,54
-                      </div>
-
-
-                    </div>
-
-                  </article>
+                  </ng-container>
 
                 </div>
 
