@@ -37,6 +37,8 @@
     align-items: center;
 
     .control {
+      min-height: 33px;
+
       color: $color__text-orange;
       cursor: pointer;
       font-size: $font__size--medium;
@@ -45,6 +47,9 @@
       margin-right: 5px;
 
       position: relative;
+
+      display: flex;
+      align-items: center;
 
       .segment{
         min-width: 11px;
@@ -55,7 +60,7 @@
           transform: rotate(90deg);
 
           position: absolute;
-          top: 0;
+
         }
 
       }
