@@ -10,12 +10,17 @@ export class QuantityCounterComponent implements OnInit {
 
   @ViewChild('inputQuantityCounter') inputQuantityCounter: ElementRef;
   @Input() isStrong = true;
-  @Input() counter: QuantityCounterOptions = {
-    maxValue: 1,
-    initValue: 1,
-    changeValue: 1,
-    minValue: 1,
-  };
+  @Input() maxValue = 1;
+  @Input() initValue = 1;
+  @Input() changeValue = 1;
+  @Input() minValue = 1;
+
+  // @Input() counter: QuantityCounterOptions = {
+  //   maxValue: this.maxValue,
+  //   initValue: this.initValue,
+  //   changeValue: this.changeValue,
+  //   minValue: this.minValue,
+  // };
 
   constructor(private renderer: Renderer2 ) { }
 
@@ -27,11 +32,11 @@ export class QuantityCounterComponent implements OnInit {
     const inputNumber = this.inputQuantityCounter.nativeElement;
     let inputValue = parseInt( inputNumber.value );
 
-    if ( !isDecrease && (inputValue < this.counter.maxValue) ) {
-      inputValue += this.counter.changeValue;
+    if ( !isDecrease && (inputValue < this.maxValue) ) {
+      inputValue += this.changeValue;
 
-    }else if ( isDecrease && (inputValue > this.counter.minValue) ) {
-      inputValue -= this.counter.changeValue;
+    }else if ( isDecrease && (inputValue > this.minValue) ) {
+      inputValue -= this.changeValue;
 
     }
 
@@ -45,13 +50,13 @@ export class QuantityCounterComponent implements OnInit {
     const inputValue = parseInt(inputNumber.value);
 
     if ( isNaN(inputValue) ){
-      this.renderer.setProperty(inputNumber, 'value', this.counter.minValue);
+      this.renderer.setProperty(inputNumber, 'value', this.minValue);
 
-    }else if ( inputValue <= this.counter.minValue ){
-      this.renderer.setProperty(inputNumber, 'value', this.counter.minValue);
+    }else if ( inputValue <= this.minValue ){
+      this.renderer.setProperty(inputNumber, 'value', this.minValue);
 
-    }else if ( inputValue > this.counter.maxValue){
-      this.renderer.setProperty(inputNumber, 'value', this.counter.maxValue);
+    }else if ( inputValue > this.maxValue){
+      this.renderer.setProperty(inputNumber, 'value', this.maxValue);
 
     }
 

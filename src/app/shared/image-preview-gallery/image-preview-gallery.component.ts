@@ -47,15 +47,10 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
     let clearSrc;
     let zoomLevel = 2;
 
-    const images = [
-      {
+    let img = {
         thumb: this.currentImg,
         hires: this.currentImg
-      }
-    ];
-
-    // set to random image
-    let img = images[Math.floor(Math.random() * images.length)];
+    };
 
     image.getElementsByTagName('a')[0].setAttribute('href', img.hires);
     image.getElementsByTagName('img')[0].setAttribute('src', img.thumb);

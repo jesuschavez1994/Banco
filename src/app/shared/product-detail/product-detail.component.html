@@ -1,42 +1,44 @@
 <ng-container *ngIf="selectedProduct">
 
-  <div class="product-detail">
+    <div class="product-detail">
 
-    <div class="main-img">
+        <div class="main-img">
 
-      <app-image-preview-gallery
-        [imgs]="selectedProduct.imgs"
-        [currentImg]="selectedProduct.imgs[0]">
-      </app-image-preview-gallery>
+        <app-image-preview-gallery
+            [imgs]="selectedProduct.imgs"
+            [currentImg]="selectedProduct.imgs[0]">
+        </app-image-preview-gallery>
 
-    </div>
-
-    <div class="content">
-
-      <h2 class="name">
-        {{selectedProduct.name}}
-      </h2>
-
-      <p class="description">
-        {{selectedProduct.description}}
-      </p>
-
-      <div class="shopping-cart">
-
-        <div class="cost">
-          ${{selectedProduct.cost}}
         </div>
 
-        <app-quantity-counter [counter]="counter"></app-quantity-counter>
+        <div class="content">
 
-        <button class="btn-add-to-cart">
-          Añadir al carrito
-        </button>
+        <h2 class="name">
+            {{selectedProduct.name}}
+        </h2>
 
-      </div>
+        <p class="description">
+            {{selectedProduct.description}}
+        </p>
+
+        <div class="shopping-cart">
+
+            <div class="cost">
+            ${{selectedProduct.cost}}
+            </div>
+
+            <app-quantity-counter
+              [maxValue]="selectedProduct.inventary">
+            </app-quantity-counter>
+
+            <button class="btn-add-to-cart">
+            Añadir al carrito
+            </button>
+
+        </div>
+
+        </div>
 
     </div>
-
-  </div>
 
 </ng-container>

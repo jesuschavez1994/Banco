@@ -20,6 +20,7 @@
       "@services/*": ["src/app/services/*"],
       "@models/*": ["src/app/models/*"],
       "@classes/*": ["src/app/vistas-privadas/classes/*"],
+      "@shared/*": ["src/app/shared/*"],
       "@interfaces/*": ["src/app/interfaces/*"],
       "@utils/*": ["src/app/utils/*"],
       "@Cards-Shimmer/*": ["src/app/vistas-privadas/components/Cards-Shimmer/*"],
@@ -31,6 +32,6 @@
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   },
-  
+
 
 }
