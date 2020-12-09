@@ -84,7 +84,7 @@ export class ProductLoadingComponent implements OnInit {
   totalProductAPI: number = 0;
   // tslint:disable-next-line: no-inferrable-types
   page: number = 1;
-  IMG: any[] =[];
+  IMG: any[] = [];
 
   myObject = {};
 
@@ -103,7 +103,7 @@ export class ProductLoadingComponent implements OnInit {
     this.forma = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
       description: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      price: new FormControl(''),
+      price: new FormControl('', [Validators.required]),
       mark: new FormControl('Seleccionar'),
       factory: new FormControl('Seleccionar'),
       category: new FormControl('Seleccionar', [Validators.required]),
@@ -138,15 +138,23 @@ export class ProductLoadingComponent implements OnInit {
       if ( this.idProduct && params.product === 'sync'){
         this.sincronizacion.GetBankProductSpecific(this.idProduct).subscribe( (data: any) => {
           console.log('Banck Product', data);
+
+          if (data.images.length > 0){
+            this.IMG.push(data.images[0].src_size.l, data.images[0].src_size.s, data.images[0].src_size.m, data.images[0].src_size.xl);
+          }
+
           console.log('IMAGES', data.images[0].src_size.xl);
-          this.IMG.push(data.images[0].src_size.xl);
+          this.myFlag = true;
           console.log(this.IMG);
           this.forma.patchValue(data);
 
           // BLOQUEAMOS LOS CAMPOS RESPECTIVOS YA QUE NO LOS DEBE EDITAR //
           this.forma.get('name').disable();
           this.forma.get('description').disable();
-          this.forma.get('mark').disable();
+          // this.forma.get('mark').disable();
+          // SETEAMOS LA CANTIDAD DEL PRODUCTO POR DEFAUL YA QUE DEBE SER DE 1 al menos //
+          this.forma.get('stock').setValue('1');
+
         });
       }
 

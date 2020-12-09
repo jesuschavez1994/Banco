@@ -1,17 +1,19 @@
-<section class="display-flex mt-5">
+<section class="display-flex">
 
     <div class="container-fluid">
         <div class="row">
 
             <div [ngSwitch]="sync">
 
-                <div *ngSwitchCase="'sync'">
+                <!-- <div *ngSwitchCase="'sync'">
                     <a class="family-400 black size-16 mb-3 pl-5" [routerLink]="['/my-store/sincronizacion/bank-product']"> < Atrás </a>
                 </div>
 
                 <div *ngSwitchCase="'edit-product'">
                     <a class="family-400 black size-16 mb-3 pl-5" [routerLink]="['/my-store/product-catalogue']"> < Atrás </a>
-                </div>
+                </div> -->
+
+                <app-breadcrumb></app-breadcrumb>
 
             </div>
                 
@@ -29,7 +31,10 @@
 
                             <div *ngSwitchCase="'sync'">
 
-                                <app-image-preview-gallery [imgs]="productSelected.imgs"></app-image-preview-gallery>
+                                <app-image-preview-gallery  *ngIf="myFlag" 
+                                                            [imgs]="this.IMG" 
+                                                            [sync]="this.sync">
+                                </app-image-preview-gallery>
 
                             </div>
 
@@ -227,6 +232,12 @@
                                         placeholder="Precio"
                                         formControlName="price"
                                 >
+
+                                <mat-error  *ngIf="forma.get('price').errors?.required"  
+                                            class="invalid-feedback">
+                                            Debe indicar precio del producto.
+                                </mat-error>
+
                             </div>
     
                             <div class="form-group col-md-4">

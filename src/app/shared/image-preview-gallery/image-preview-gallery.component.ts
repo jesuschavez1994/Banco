@@ -1,4 +1,7 @@
 import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { URL_SERVICIOS } from '../../config/config';
+
+const URL = URL_SERVICIOS;
 
 @Component({
   selector: 'app-image-preview-gallery',
@@ -8,7 +11,7 @@ import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit } from '
 export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
 
   @Input() imgs: string[];
-  @Input() sync: string[]
+  @Input() sync: any;
   currentImg: string;
 
   @ViewChild('image') imageContainer: ElementRef;
@@ -18,6 +21,7 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
   constructor() {}
 
   ngOnInit(): void {
+    console.log('FFFFF', this.imgs)
     this.currentImg = this.imgs[0];
     console.log('CURRENTIMG', this.currentImg)
 
@@ -71,8 +75,18 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
     // set to random image
     let img = images[Math.floor(Math.random() * images.length)];
 
-    image.getElementsByTagName('a')[0].setAttribute('href', img.hires);
-    image.getElementsByTagName('img')[0].setAttribute('src', img.thumb);
+    switch(this.sync){
+      case "sync":
+      image.getElementsByTagName('a')[0].setAttribute('href', `${URL}/${img.hires}`);
+      image.getElementsByTagName('img')[0].setAttribute('src', `${URL}/${img.thumb}`);
+      break;
+      default:
+      image.getElementsByTagName('a')[0].setAttribute('href', img.hires);
+      image.getElementsByTagName('img')[0].setAttribute('src', img.thumb);
+    }
+
+    // image.getElementsByTagName('a')[0].setAttribute('href', img.hires);
+    // image.getElementsByTagName('img')[0].setAttribute('src', img.thumb);
 
     const preloadImage = url => {
       let img = new Image();
