@@ -1,5 +1,6 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, Input, OnInit, } from '@angular/core';
 import { QuantityCounterOptions } from '@interfaces/components-options/quantity-counter.interface';
+import { Product } from '@interfaces/product.interface';
 
 @Component({
   selector: 'app-product-detail',
@@ -8,17 +9,11 @@ import { QuantityCounterOptions } from '@interfaces/components-options/quantity-
 })
 export class ProductDetailComponent implements OnInit {
 
-  productSelected = {
-    imgs: [
-      'assets/img/test-img/organic_protein.jpg',
-      'assets/img/test-img/magazine_vegan_food.jpg',
-      'assets/img/test-img/banner.png'
-    ]
-  };
+  @Input() selectedProduct: Product;
 
   counter: QuantityCounterOptions = {
     maxValue: 5,
-    initValue: 3,
+    initValue: 1,
     changeValue: 1,
     minValue: 1,
   };

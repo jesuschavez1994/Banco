@@ -8,7 +8,7 @@ import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit } from '
 export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
 
   @Input() imgs: string[];
-  currentImg: string;
+  @Input() currentImg: string;
 
   @ViewChild('image') imageContainer: ElementRef;
   @ViewChild('zoom') zoomContainer: ElementRef;
@@ -51,19 +51,7 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
       {
         thumb: this.currentImg,
         hires: this.currentImg
-      }, {
-        thumb: this.currentImg,
-        hires: this.currentImg
-      }, {
-        thumb: this.currentImg,
-        hires: this.currentImg
-      }, {
-        thumb: this.currentImg,
-        hires: this.currentImg
-      }, {
-        thumb: this.currentImg,
-        hires: this.currentImg
-      },
+      }
     ];
 
     // set to random image

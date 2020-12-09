@@ -2,35 +2,27 @@
 
   <div class="main-img">
 
-    <app-image-preview-gallery [imgs]="productSelected.imgs" ></app-image-preview-gallery>
+    <app-image-preview-gallery
+      [imgs]="selectedProduct.imgs"
+      [currentImg]="selectedProduct.imgs[0]">
+    </app-image-preview-gallery>
 
   </div>
 
   <div class="content">
 
     <h2 class="name">
-      Orgain Polvo de proteína orgánica a base de plantas,
-      Fudge de chocolate cremoso - Vegano, Carbohidratos
-      bajos en la red, No lácteos, Sin gluten, Sin lactosa, Sin
-      azúcar añadido, Sin soja, Kosher, Sin OMG, 2.03 libras
+      {{selectedProduct.name}}
     </h2>
 
     <p class="description">
-      Incluye 1 (2.03 libras) de polvo de proteína cremosa de chocolate con base de
-      plantas orgánicas Orgain 21 gramos de proteína orgánica a base de plantas
-      (guisante, arroz integral, semillas de chía), 6 gramos de fibra dietética orgánica,
-      3 gramos de carbohidratos netos, 0 gramos de azúcar, 150 calorías por porción.
-      Mezcle con agua, leche o su receta favorita de batido de proteínas para un
-      desayuno rápido o una merienda. Úselo cuando bakin gramos para darle a sus
-      pasteles, magdalenas, brownies o galletas un impulso de proteínas y energía.
-      <br><br>
-      Ideal para una nutrición saludable y en movimiento para hombres, mujeres y niños.
+      {{selectedProduct.description}}
     </p>
 
     <div class="shopping-cart">
 
       <div class="cost">
-        $25,01
+        ${{selectedProduct.cost}}
       </div>
 
       <app-quantity-counter [counter]="counter"></app-quantity-counter>

@@ -1,27 +1,25 @@
 <div class="products-container">
 
-  <ng-container *ngFor="let item of [0,0,0,0,0,0]">
+  <ng-container *ngFor="let product of products">
 
-    <article class="product">
+    <article class="product" (click)="selectProduct(product)">
 
       <div class="img">
 
-        <img src="assets/img/test-img/magazine_vegan_food.jpg">
+        <img [src]="product.imgs[0]">
 
         <i class="fa-heart"
-          [ngClass]="{'fas': true,'far': false}">
+          [ngClass]="{'fas': product.isFavorite,'far': !product.isFavorite}">
         </i>
 
       </div>
 
 
       <h3 class="name">
-        Syndol Solución Inyectable 30
-        mg/ ml x 5 Ampollas, Opko
-        Aciclovir Crema Tópica 5% x 15 gr
+        {{product.name}}
       </h3>
 
-      <p class="cost">$34.15</p>
+      <p class="cost">${{product.cost}}</p>
 
     </article>
 

@@ -21,7 +21,7 @@
 
       <h1 class="profile-name">farmacia medical background</h1>
 
-      <app-product-detail></app-product-detail>
+      <app-product-detail [selectedProduct]="selectedProduct"></app-product-detail>
 
       <app-search-bar
         [buttonSidebarList]="true"
@@ -29,7 +29,7 @@
         (sidebarExpand)="this.sidebarListCtr.toggleSidebarList($event)">
       </app-search-bar>
 
-      <app-products-cards></app-products-cards>
+      <app-products-cards [products]="products" (selected)="selectProduct($event)"></app-products-cards>
 
     </section>
 
