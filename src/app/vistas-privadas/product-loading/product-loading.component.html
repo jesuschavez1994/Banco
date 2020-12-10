@@ -6,13 +6,15 @@
 
             <div [ngSwitch]="sync">
 
-                <div *ngSwitchCase="'sync'">
+                <!-- <div *ngSwitchCase="'sync'">
                     <a class="family-400 black size-16 mb-3 pl-5" [routerLink]="['/my-store/sincronizacion/bank-product']"> < Atrás </a>
                 </div>
 
                 <div *ngSwitchCase="'edit-product'">
                     <a class="family-400 black size-16 mb-3 pl-5" [routerLink]="['/my-store/product-catalogue']"> < Atrás </a>
-                </div>
+                </div> -->
+
+                <app-breadcrumb></app-breadcrumb>
 
             </div>
                 
@@ -228,6 +230,12 @@
                                         placeholder="Precio"
                                         formControlName="price"
                                 >
+
+                                <mat-error  *ngIf="forma.get('price').errors?.required"  
+                                            class="invalid-feedback">
+                                            Debe indicar precio del producto.
+                                </mat-error>
+
                             </div>
     
                             <div class="form-group col-md-4">

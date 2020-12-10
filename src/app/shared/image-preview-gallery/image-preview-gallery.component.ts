@@ -11,7 +11,7 @@ const URL = URL_SERVICIOS;
 export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
 
   @Input() imgs: string[];
-  @Input() sync: string;
+  @Input() sync: any;
   currentImg: string;
 
   @ViewChild('image') imageContainer: ElementRef;
@@ -73,19 +73,18 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
     // set to random image
     let img = images[Math.floor(Math.random() * images.length)];
 
-    switch (this.sync){
-      case 'sync':
-      image.getElementsByTagName('img')[0].setAttribute('src', `${URL}/${img.thumb}`);
+    switch(this.sync){
+      case "sync":
       image.getElementsByTagName('a')[0].setAttribute('href', `${URL}/${img.hires}`);
+      image.getElementsByTagName('img')[0].setAttribute('src', `${URL}/${img.thumb}`);
       break;
       default:
-      image.getElementsByTagName('img')[0].setAttribute('src', img.thumb);
       image.getElementsByTagName('a')[0].setAttribute('href', img.hires);
+      image.getElementsByTagName('img')[0].setAttribute('src', img.thumb);
     }
 
-
     // image.getElementsByTagName('a')[0].setAttribute('href', img.hires);
-    // image.getElementsByTagName('img')[0].setAttribute('src', img.hires);
+    // image.getElementsByTagName('img')[0].setAttribute('src', img.thumb);
 
     const preloadImage = url => {
       let img = new Image();

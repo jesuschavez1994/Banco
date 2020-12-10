@@ -85,7 +85,6 @@ export class ProductLoadingComponent implements OnInit {
   page: number = 1;
   IMG: any[] = [];
 
-
   myObject = {};
 
   // tslint:disable-next-line: variable-name
@@ -103,7 +102,7 @@ export class ProductLoadingComponent implements OnInit {
     this.forma = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
       description: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      price: new FormControl(''),
+      price: new FormControl('', [Validators.required]),
       mark: new FormControl('Seleccionar'),
       factory: new FormControl('Seleccionar'),
       category: new FormControl('Seleccionar', [Validators.required]),
@@ -149,7 +148,10 @@ export class ProductLoadingComponent implements OnInit {
           // BLOQUEAMOS LOS CAMPOS RESPECTIVOS YA QUE NO LOS DEBE EDITAR //
           this.forma.get('name').disable();
           this.forma.get('description').disable();
-          this.forma.get('mark').disable();
+          // this.forma.get('mark').disable();
+          // SETEAMOS LA CANTIDAD DEL PRODUCTO POR DEFAUL YA QUE DEBE SER DE 1 al menos //
+          this.forma.get('stock').setValue('1');
+
         });
       }
 

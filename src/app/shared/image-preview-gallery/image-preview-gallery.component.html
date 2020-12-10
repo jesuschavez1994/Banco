@@ -3,25 +3,16 @@
   <div class="img-option">
 
     <ng-container *ngFor="let img of imgs">
-
       <div class="option" (click)="selectImg(img)">
-
         <div [ngSwitch]="sync">
-
           <div *ngSwitchCase="'sync'">
-            <img [src]="img | imgBankProduct">
+            <img [src]="img | PreviewGallery">
           </div>
-
           <div *ngSwitchDefault>
             <img [src]="img">
           </div>
-
         </div>
-
-        
-
       </div>
-
     </ng-container>
 
   </div>
