@@ -140,9 +140,10 @@ export class ProductLoadingComponent implements OnInit {
           console.log('Banck Product', data);
           this.productSelected.imgs.push(data.images[0].src_size.xl);
           this.IMG.push(data.images[0].src_size.l);
-          this.IMG.push(data.images[0].src_size.m);
+          this.IMG.push(data.images[1].src_size.l);
+          this.IMG.push(data.images[2].src_size.l);
           this.myFlag = true;
-          console.log(this.IMG);
+          console.log('IMGPUSH', this.IMG);
           this.forma.patchValue(data);
 
           // BLOQUEAMOS LOS CAMPOS RESPECTIVOS YA QUE NO LOS DEBE EDITAR //

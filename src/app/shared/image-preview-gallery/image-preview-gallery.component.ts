@@ -21,15 +21,13 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.imgs);
+    console.log('INPUT', this.imgs);
     this.currentImg = this.imgs[0];
     console.log(this.currentImg);
-
   }
 
   ngAfterViewInit(): void {
     this.imageZoom();
-
   }
 
   public selectImg( imgSelected ) {
@@ -75,19 +73,19 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
     // set to random image
     let img = images[Math.floor(Math.random() * images.length)];
 
-    // switch (this.sync){
-    //   case 'sync':
-    //   image.getElementsByTagName('img')[0].setAttribute('src', `${URL}/${img.thumb}`);
-    //   image.getElementsByTagName('a')[0].setAttribute('href', `${URL}/${img.hires}`);
-    //   break;
-    //   default:
-    //   image.getElementsByTagName('img')[0].setAttribute('src', img.thumb);
-    //   image.getElementsByTagName('a')[0].setAttribute('href', img.hires);
-    // }
+    switch (this.sync){
+      case 'sync':
+      image.getElementsByTagName('img')[0].setAttribute('src', `${URL}/${img.thumb}`);
+      image.getElementsByTagName('a')[0].setAttribute('href', `${URL}/${img.hires}`);
+      break;
+      default:
+      image.getElementsByTagName('img')[0].setAttribute('src', img.thumb);
+      image.getElementsByTagName('a')[0].setAttribute('href', img.hires);
+    }
 
 
-    image.getElementsByTagName('a')[0].setAttribute('href', img.hires);
-    image.getElementsByTagName('img')[0].setAttribute('src', img.hires);
+    // image.getElementsByTagName('a')[0].setAttribute('href', img.hires);
+    // image.getElementsByTagName('img')[0].setAttribute('src', img.hires);
 
     const preloadImage = url => {
       let img = new Image();

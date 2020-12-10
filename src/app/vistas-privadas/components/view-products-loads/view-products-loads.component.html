@@ -34,13 +34,13 @@
                                         class="product-image-photo lazyload"   
                                         alt="{{item.name}}"
                                         style="display: block;"
-                                        *ngIf="item.sync_bank[0].images.length  >= 1"    
+                                        *ngIf="item.sync_bank.length > 0"    
                                 >
 
                                 <img    src="../../../assets/img/Box/box.svg" 
                                         class="card-img-top" 
                                         alt="..." 
-                                        *ngIf="item.sync_bank[0].images.length === 0"
+                                        *ngIf="item.sync_bank.length === 0"
                                 >
 
                             </div>
@@ -68,12 +68,12 @@
 
                         <div *ngSwitchCase="'sincronizado'">
 
-                            <p class="family-600 size-14 color-p" title="{{item.name}} ">
+                            <p class="family-600 size-14 color-p" title="{{item.name}} " *ngIf="item.sync_bank.length > 0"  >
                                 {{item.sync_bank[0].name | LimitarNameProducto }} 
                                 <span *ngIf="item.name.length > 55">...</span>
                             </p>
         
-                            <p class="family-600 size-11 mb-0 detail-name card-text line" title="{{item.description}}">
+                            <p class="family-600 size-11 mb-0 detail-name card-text line" title="{{item.description}}" *ngIf="item.sync_bank.length > 0"  >
                                 {{item.sync_bank[0].description | LimitarTexto }} 
                                 <span *ngIf="item.description.length > 100">...</span>
                             </p>

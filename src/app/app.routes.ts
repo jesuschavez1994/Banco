@@ -27,11 +27,15 @@ import { BankProductComponent } from './vistas-privadas/sincronizacion/pages/ban
 
 import { ShoppingCartComponent } from './vistas-publicas/shopping-cart/shopping-cart.component';
 import { BusinessDetailComponent } from './vistas-publicas/business-detail/business-detail.component';
+import { LoadBanckProductComponent } from './vistas-privadas/Admin/pages/load-banck-product/load-banck-product.component';
+
+
 
 const APP_ROUTES: Routes = [
 
     {path: 'home', component: HomeComponent},
     {path: 'register', component: RegisterComponent},
+    {path: 'admin', component: LoadBanckProductComponent},
 
     // Christopher Views
     {path: 'shopping-cart', component: ShoppingCartComponent},

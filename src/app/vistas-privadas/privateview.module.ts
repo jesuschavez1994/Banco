@@ -99,6 +99,9 @@ import { ItemListProductComponent } from './sincronizacion/pages/bank-product/co
 
 // CARRUSEL //
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { LoadBanckProductComponent } from './Admin/pages/load-banck-product/load-banck-product.component';
+import { FormBanckProductAdminComponent } from './Admin/pages/load-banck-product/container/form-banck-product-admin/form-banck-product-admin.component';
+
 
 
 @NgModule({
@@ -152,6 +155,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
       TableroDeSincronizacionComponent,
       BankProductComponent,
       ItemListProductComponent,
+      LoadBanckProductComponent,
+      FormBanckProductAdminComponent,
       ],
 
     imports: [

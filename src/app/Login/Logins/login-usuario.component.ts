@@ -78,7 +78,20 @@ export class LoginUsuarioComponent implements OnInit, OnDestroy {
       console.log('FFFF', resp);
       this.guardarStorage(resp.remember_token, resp.user.id);
       console.log(resp);
-      this.router.navigate(['/account']);
+
+      switch(resp.user.role){
+        case 'admin':
+        return this.router.navigate(['admin']);
+        case 'store':
+          this.router.navigate(['/account']);
+      }
+
+      // if (resp.user.role === 'admin')
+      // {
+      //   this.router.navigate(['view-admin']);
+      //   return;
+      // }
+
       this.store.dispatch( new DesactivarLoadingAction() );
     });
 
