@@ -1,3 +1,4 @@
+
 <section class="display-flex mt-5">
 
     <div class="container-fluid">
@@ -29,7 +30,7 @@
 
                             <div *ngSwitchCase="'sync'">
 
-                                <app-image-preview-gallery></app-image-preview-gallery>
+                                <app-image-preview-gallery *ngIf="myFlag" [imgs]="this.productSelected.imgs" [sync]="this.sync"></app-image-preview-gallery>
 
                             </div>
 

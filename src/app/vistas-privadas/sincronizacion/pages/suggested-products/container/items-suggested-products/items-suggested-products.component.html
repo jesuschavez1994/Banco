@@ -8,7 +8,7 @@
                 let i = index;"
                 id="{{i}}">
                 
-                <div class="width-100">
+                <div class="width-100" *ngIf="item.suggestion.data.length > 0 && item.suggestion !== null">
                     <div class="pt-2">
                         <mat-checkbox   [(ngModel)]="SetAllCheckbox"
                                         name = checkbox{{i}}
@@ -72,8 +72,6 @@
                                 </span>
                             </mat-grid-tile>
                         </mat-grid-list>
-
-                        <!-- [ngClass]="{'is-invalid':  (!forma.controls['username'].valid || forma.controls['username'].errors?.minlength)&& forma.controls['username'].touched || forma.get('username').hasError('not_available'), 'is-valid': forma.controls['username'].valid }"  -->
 
                         <div    *ngFor="let suggestion of item.suggestion.data;
                                 let iterador = index;

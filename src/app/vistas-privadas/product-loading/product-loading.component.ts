@@ -14,6 +14,7 @@ import { switchMap } from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { EditProductStore } from '@interfaces/interfaceEditProductStore';
 import { SincronizacionService } from '../../services/sincronizacion/sincronizacion.service';
+import { bannerOptions } from '../../interfaces/components-options/banner.interface';
 
 export interface DialogData {
   animal: string;
@@ -27,6 +28,14 @@ export interface DialogData {
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductLoadingComponent implements OnInit {
+
+  imgsBanners: bannerOptions = {
+    m: 'assets/img/test-img/banner.png'
+  };
+
+  productSelected = {
+    imgs: []
+  };
 
   animal: string;
   nameCategory: string;
@@ -74,7 +83,8 @@ export class ProductLoadingComponent implements OnInit {
   totalProductAPI: number = 0;
   // tslint:disable-next-line: no-inferrable-types
   page: number = 1;
-  IMG: string;
+  IMG: any[] = [];
+
 
   myObject = {};
 
@@ -126,8 +136,13 @@ export class ProductLoadingComponent implements OnInit {
 
       // PETICIÓN DE SERVICIOS PARA SINCRONIZAR
       if ( this.idProduct && params.product === 'sync'){
-        this.sincronizacion.GetBankProductSpecific(this.idProduct).subscribe( (data: ProductosLoads) => {
+        this.sincronizacion.GetBankProductSpecific(this.idProduct).subscribe( (data: any) => {
           console.log('Banck Product', data);
+          this.productSelected.imgs.push(data.images[0].src_size.xl);
+          this.IMG.push(data.images[0].src_size.l);
+          this.IMG.push(data.images[0].src_size.m);
+          this.myFlag = true;
+          console.log(this.IMG);
           this.forma.patchValue(data);
 
           // BLOQUEAMOS LOS CAMPOS RESPECTIVOS YA QUE NO LOS DEBE EDITAR //

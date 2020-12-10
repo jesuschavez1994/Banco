@@ -20,7 +20,7 @@ export class ItemsSuggestedProductsComponent implements OnInit {
   pagesActual = 1;
   forma: FormGroup;
   slideIndex = 1;
-  next = 1;
+  next = 0;
 
   @Input() SetAllCheckbox: boolean;
 

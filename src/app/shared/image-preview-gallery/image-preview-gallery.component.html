@@ -6,7 +6,19 @@
 
       <div class="option" (click)="selectImg(img)">
 
-        <img [src]="img">
+        <div [ngSwitch]="sync">
+
+          <div *ngSwitchCase="'sync'">
+            <img [src]="img | imgBankProduct">
+          </div>
+
+          <div *ngSwitchDefault>
+            <img [src]="img">
+          </div>
+
+        </div>
+
+        
 
       </div>
 
@@ -18,11 +30,27 @@
 
     <!-- <img [src]="currentImg"> -->
 
-    <div class="image" #image>
-      <a href="" target="_blank">
-        <img src="" alt="">
-      </a>
+    <div [ngSwitch]="sync">
+
+      <div *ngSwitchCase="'sync'">
+        <div class="image" #image>
+          <a href="" target="_blank">
+            <img src="" alt="">
+          </a>
+        </div>
+      </div>
+
+      <div *ngSwitchDefault>
+        <div class="image" #image>
+          <a href="" target="_blank">
+            <img src="" alt="">
+          </a>
+        </div>
+      </div>
+
     </div>
+
+    
 
     <div class="zoom" #zoom>
       <img class="zoom-image" #zoomImage src="" alt="">

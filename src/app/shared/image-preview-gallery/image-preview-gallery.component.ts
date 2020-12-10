@@ -1,4 +1,7 @@
 import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { URL_SERVICIOS } from '../../config/config';
+
+const URL = URL_SERVICIOS;
 
 @Component({
   selector: 'app-image-preview-gallery',
@@ -8,6 +11,7 @@ import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit } from '
 export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
 
   @Input() imgs: string[];
+  @Input() sync: string;
   currentImg: string;
 
   @ViewChild('image') imageContainer: ElementRef;
@@ -17,7 +21,9 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
   constructor() {}
 
   ngOnInit(): void {
+    console.log(this.imgs);
     this.currentImg = this.imgs[0];
+    console.log(this.currentImg);
 
   }
 
@@ -34,7 +40,7 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
   public imageZoom() {
     // use your mousewheel to zoom in 🔍
 
-    console.clear();
+    // console.clear();
 
     // const image = document.querySelectorAll('.image')[0];
     // const zoom = document.querySelectorAll('.zoom')[0];
@@ -69,13 +75,26 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
     // set to random image
     let img = images[Math.floor(Math.random() * images.length)];
 
+    // switch (this.sync){
+    //   case 'sync':
+    //   image.getElementsByTagName('img')[0].setAttribute('src', `${URL}/${img.thumb}`);
+    //   image.getElementsByTagName('a')[0].setAttribute('href', `${URL}/${img.hires}`);
+    //   break;
+    //   default:
+    //   image.getElementsByTagName('img')[0].setAttribute('src', img.thumb);
+    //   image.getElementsByTagName('a')[0].setAttribute('href', img.hires);
+    // }
+
+
     image.getElementsByTagName('a')[0].setAttribute('href', img.hires);
-    image.getElementsByTagName('img')[0].setAttribute('src', img.thumb);
+    image.getElementsByTagName('img')[0].setAttribute('src', img.hires);
 
     const preloadImage = url => {
       let img = new Image();
+      // `${URL}/${img}`;
       img.src = url;
     };
+
 
     preloadImage(img.hires);
 
