@@ -12,6 +12,7 @@ const apiKey = environment.apiKey;
 })
 export class ServicioService {
 
+  // Esto
   private ejecutarQuery<T>(query: string){
     query = URL + query;
     query += `&api_key=${apiKey}&language=es&include_image_language=es`;
@@ -20,6 +21,7 @@ export class ServicioService {
 
   constructor(private http: HttpClient) { }
 
+  // Esto no se si esta de más
   getFeatures(){
     return this.ejecutarQuery('/discover/movie?primary_release_date.gte=2019-01-01&primary_release_date.lte=2020-07-30');
   }

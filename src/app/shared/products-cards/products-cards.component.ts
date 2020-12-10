@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
-import { Product } from '@interfaces/product.interface';
+import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.options.interface';
 
 @Component({
   selector: 'app-products-cards',
@@ -8,8 +8,8 @@ import { Product } from '@interfaces/product.interface';
 })
 export class ProductsCardsComponent implements OnInit {
 
-  @Input() products: Product[];
-  @Output() selected = new EventEmitter<Product>();
+  @Input() products: ProductsCardsOptions[];
+  @Output() selected = new EventEmitter<ProductsCardsOptions>();
 
   constructor() { }
 

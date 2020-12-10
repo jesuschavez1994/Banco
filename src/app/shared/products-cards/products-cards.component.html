@@ -6,7 +6,7 @@
 
       <div class="img">
 
-        <img [src]="product.imgs[0]">
+        <img [src]="product.images[0]">
 
         <i class="fa-heart"
           [ngClass]="{'fas': product.isFavorite,'far': !product.isFavorite}">
@@ -19,7 +19,7 @@
         {{product.name}}
       </h3>
 
-      <p class="cost">${{product.cost}}</p>
+      <p class="cost">${{product.price}}</p>
 
     </article>
 

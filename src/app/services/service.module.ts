@@ -8,6 +8,7 @@ import { UserStoreService } from './user-store/user-store.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './Interceotores/interceptor.service';
 import { ProductLoadingComponent } from '../vistas-privadas/product-loading/product-loading.component';
+import { ProductService } from './product/product.service';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ProductLoadingComponent } from '../vistas-privadas/product-loading/prod
     UserStoreService,
     InterceptorService,
     ProductLoadingComponent,
+    ProductService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

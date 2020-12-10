@@ -34,7 +34,7 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
   public imageZoom() {
     // use your mousewheel to zoom in 🔍
 
-    console.clear();
+    // console.clear();
 
     // const image = document.querySelectorAll('.image')[0];
     // const zoom = document.querySelectorAll('.zoom')[0];
