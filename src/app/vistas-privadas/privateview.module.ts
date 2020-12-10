@@ -101,6 +101,7 @@ import { ItemListProductComponent } from './sincronizacion/pages/bank-product/co
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { LoadBanckProductComponent } from './Admin/pages/load-banck-product/load-banck-product.component';
 import { FormBanckProductAdminComponent } from './Admin/pages/load-banck-product/container/form-banck-product-admin/form-banck-product-admin.component';
+import { FormBanckProductSyncComponent } from './sincronizacion/components/form-banck-product-sync/form-banck-product-sync.component';
 
 
 
@@ -157,6 +158,7 @@ import { FormBanckProductAdminComponent } from './Admin/pages/load-banck-product
       ItemListProductComponent,
       LoadBanckProductComponent,
       FormBanckProductAdminComponent,
+      FormBanckProductSyncComponent,
       ],
 
     imports: [

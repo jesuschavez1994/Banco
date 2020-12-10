@@ -28,6 +28,7 @@ import { BankProductComponent } from './vistas-privadas/sincronizacion/pages/ban
 import { ShoppingCartComponent } from './vistas-publicas/shopping-cart/shopping-cart.component';
 import { BusinessDetailComponent } from './vistas-publicas/business-detail/business-detail.component';
 import { LoadBanckProductComponent } from './vistas-privadas/Admin/pages/load-banck-product/load-banck-product.component';
+import { FormBanckProductSyncComponent } from './vistas-privadas/sincronizacion/components/form-banck-product-sync/form-banck-product-sync.component';
 
 
 
@@ -77,8 +78,8 @@ const APP_ROUTES: Routes = [
                 component: ProductLoadingComponent
             },
             {
-                path: 'sync-this-product/:id/:product',
-                component: ProductLoadingComponent
+                path: 'sync-this-product/:id',
+                component: FormBanckProductSyncComponent
             },
             {
                 path: 'edit/:id/:product',
