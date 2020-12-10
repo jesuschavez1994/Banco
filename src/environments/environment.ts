@@ -1,6 +1,7 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+// foundussapp1234
 
 // export const environment = {
 //   production: true,
@@ -12,7 +13,7 @@
 export const environment = {
   production: false,
   url: 'https://laravelbank.dev/api/',
-  apiKey: '',
+  apiKey: 'aac1706fe8a46b5700714aead65c5e39',
   imgPath: ''
 };
 
