@@ -144,11 +144,15 @@ export class ProductLoadingComponent implements OnInit {
           this.myFlag = true;
           console.log('IMGPUSH', this.IMG);
           this.forma.patchValue(data);
-
+          this.forma.controls.mark.setValue(data.marks[0].name);
+          this.forma.controls.mark.setValue(data.factories[0].name);
+          this.forma.controls.mark.setValue(data.subcategories[0].name);
           // BLOQUEAMOS LOS CAMPOS RESPECTIVOS YA QUE NO LOS DEBE EDITAR //
           this.forma.get('name').disable();
           this.forma.get('description').disable();
-          // this.forma.get('mark').disable();
+          this.forma.get('mark').disable();
+          this.forma.get('factory').disable();
+          this.forma.get('subcategory_id').disable();
           // SETEAMOS LA CANTIDAD DEL PRODUCTO POR DEFAUL YA QUE DEBE SER DE 1 al menos //
           this.forma.get('stock').setValue('1');
 
