@@ -92,6 +92,64 @@
                                 <!-- ===================================-->
                             </div>
 
+                            <div *ngSwitchDefault>
+
+                                <div class="display-flex justify-content-center">
+                                    <div  *ngFor="let item of [0, 1, 2, 3]; let i = index">
+                                        <figure class="img-box{{i}} ml-1 mr-1" 
+                                                (mouseover)="hover = true" 
+                                                (mouseleave)="hover = false"
+                                                >
+            
+                                                <i  class="figure__icon material-icons" 
+                                                    name="camera"
+                                                    *ngIf="hover"
+                                                    >
+                                                    camera_alt
+                                                </i>
+            
+                                                <input  type="file"
+                                                        formControlName="input{{i}}"
+                                                        (change)="onFileChange($event, i)"
+                                                        class="figure__input cursor-poniter"
+                                                />
+            
+                                                <img    [src]="this.File[i].image | boxDefault " 
+                                                        style="width: 80px; height: 80px" 
+                                                />
+                                        </figure>
+                                    </div>
+                                </div>
+            
+                                <figure (mouseover)="icon = true" 
+                                        (mouseleave)="icon = false">
+            
+                                        <i  class="figure material-icons" 
+                                            name="camera"
+                                            *ngIf="icon">
+                                            camera_alt
+                                        </i>
+                                        <input  type="file" 
+                                                (change)="onFileChange($event)"
+                                                formControlName="input4"
+                                                class="figure__input cursor-poniter" 
+                                                    
+                                        />
+                                        <img    class="width-95" 
+                                                src="../../../../../assets/img/Box/box.svg"
+                                                *ngIf="this.forma.value.file.length <= 1"
+                                                    
+                                        >
+                                        <img    class="width-100"
+                                                [src]="this.forma.value.file"
+                                                *ngIf="this.forma.value.file.length > 1"
+                                        >
+                                </figure>
+                                <!-- ====== END SUBIDA DE PRODUCTO =====-->
+                                <!-- ===================================-->
+
+                            </div>
+
 
                         </div>
                         
@@ -313,6 +371,17 @@
                                 Guardar Cambios
                                 </button>
                             </div>
+
+                            <div *ngSwitchDefault>
+                                <button class="btn btn-primary button fredoka" 
+                                        type="submit"
+                                        (click)="Send()"
+                                        [disabled]="!forma.valid"
+                                >
+                                Guardar Cambios
+                                </button>
+                            </div>
+                            
                         </div>
                     </div>
             </form>
