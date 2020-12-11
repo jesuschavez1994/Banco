@@ -18,13 +18,13 @@
         </h2>
 
         <p class="description">
-            {{selectedProduct.description}}
+          {{selectedProduct.description | excerpt: 985}}
         </p>
 
         <div class="shopping-cart">
 
             <div class="cost">
-            ${{selectedProduct.price}}
+            {{selectedProduct.price | currency }}
             </div>
 
             <app-quantity-counter

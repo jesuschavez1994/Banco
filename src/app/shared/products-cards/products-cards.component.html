@@ -6,7 +6,10 @@
 
       <div class="img">
 
-        <img [src]="product.images[0]">
+        <img
+          [src]="product.images[0] | imgFallback: 'box'"
+          [alt]="product.name"
+        >
 
         <i class="fa-heart"
           [ngClass]="{'fas': product.isFavorite,'far': !product.isFavorite}">
@@ -16,10 +19,10 @@
 
 
       <h3 class="name">
-        {{product.name}}
+        {{ product.name | excerpt: 66}}
       </h3>
 
-      <p class="cost">${{product.price}}</p>
+      <p class="cost">{{ product.price | currency }}</p>
 
     </article>
 
