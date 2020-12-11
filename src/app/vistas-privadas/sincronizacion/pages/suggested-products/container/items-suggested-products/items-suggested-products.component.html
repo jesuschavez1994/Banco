@@ -8,8 +8,8 @@
                 let i = index;"
                 id="{{i}}">
                 
-                <div class="width-100" *ngIf="item.suggestion.data.length > 0 && item.suggestion !== null">
-                    <div class="pt-2">
+                <div class="width-100" *ngIf="item.suggestion !== null">
+                    <div class="pt-2" *ngIf="item.suggestion.data.length > 0">
                         <mat-checkbox   [(ngModel)]="SetAllCheckbox"
                                         name = checkbox{{i}}
                                         id="checkboxList{{i}}" 
@@ -18,7 +18,7 @@
                         </mat-checkbox>
                     </div>
 
-                    <div class="col-md-11 pl-4">
+                    <div class="col-md-11 pl-4" *ngIf="item.suggestion.data.length > 0">
 
                         <mat-grid-list cols="5" rowHeight="5:1">
                             <mat-grid-tile class="titles"><span class="family-600">Imagen</span></mat-grid-tile>

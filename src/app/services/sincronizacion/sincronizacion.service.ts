@@ -66,6 +66,17 @@ export class SincronizacionService {
     return this.execQuery(url);
   }
 
+  SincronizarDesdeBancoPrdoducto(userId: string, storeId: string, data){
+    const url = `/api/users/${userId}/stores/${storeId}/sync_create`;
+    return this.postQuery(url, data);
+  }
+
+  ListProductSincronizadosYNosincronizados(userId: string, storeId: string, page?: any){
+    const url = `/api/users/${userId}/stores/${storeId}/products_syncs` + '?page=' + page;
+    return this.execQuery(url);
+  }
+
+
   Sugerir(storeId: string, id: any){
     const url = `/stores/${storeId}/suggests`;
     return this.postQuery(url, id);

@@ -14,7 +14,7 @@
           <th scope="col" class="family-500">Ver</th>
         </tr>
       </thead>
-      <tbody *ngFor="let item of itemProductos | paginate: { itemsPerPage: 28, currentPage: pagesActual };
+      <tbody *ngFor="let item of itemProductos | paginate: { itemsPerPage: 28, currentPage: page, totalItems: totalPage };
               let i = index;
               let par = even;
               let impar = odd">
@@ -30,7 +30,7 @@
           <td>
             <div [ngSwitch]="item.sincronice">
               <div *ngSwitchCase="'sincronizado'">
-                <span class="family-500">
+                <span class="family-500" *ngIf="item.sync_bank.length > 0">
                   {{item.sync_bank[0].name}}
                 </span>
               </div>
@@ -42,7 +42,16 @@
             </div>
           </td>
           <td>
-            {{item.marks}}
+            <div [ngSwitch]="item.sincronice">
+              <div *ngSwitchCase="'sincronizado'">
+                {{item.marks[0].name}}
+              </div>
+              <div *ngSwitchCase="'no sincronizado'">
+                <span>
+                  Consultar
+                </span>
+              </div>
+            </div>
           </td>
           <td class="family-500">
             {{item.price}}
@@ -67,7 +76,7 @@
 
 
 <footer>
-  <pagination-controls (pageChange)="pagesActual = $event"></pagination-controls>
+  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
 </footer>
   
   

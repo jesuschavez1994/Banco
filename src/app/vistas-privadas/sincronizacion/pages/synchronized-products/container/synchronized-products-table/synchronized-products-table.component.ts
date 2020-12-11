@@ -1,7 +1,9 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { StoreService } from '../../../../../../services/store/store.service';
 import { ProductosLoads, DataProductDB } from '../../../../../../interfaces/InterfaceProducto';
-
+import { SincronizacionService } from '../../../../../../services/sincronizacion/sincronizacion.service';
+import { ListProductSyncAnNoSync, DataListProductSyncAnNoSync } from '../../../../../../interfaces/table-product-sync-and-no-sync/ListProductSyncAndNosync';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 
 @Component({
@@ -11,22 +13,27 @@ import { ProductosLoads, DataProductDB } from '../../../../../../interfaces/Inte
 })
 export class SynchronizedProductsTableComponent implements OnInit {
 
-  itemProductos: DataProductDB[] = [];
+  itemProductos: DataListProductSyncAnNoSync[] = [];
   index = [];
-  pagesActual = 1;
+  page = 1;
   total = 0;
   perPage = 10;
+  totalPage: number = 0;
 
-  constructor( public storeService: StoreService) { }
+  constructor(  public storeService: StoreService,
+                private sincronizacion: SincronizacionService,
+                private route: ActivatedRoute,
+                private router: Router) { }
 
   ngOnInit(): void {
-    this.storeService.ProductGet(
-      localStorage.getItem('id'),
-      localStorage.getItem('storeId'))
-      .subscribe( (resp: ProductosLoads) => {
-      this.itemProductos = resp.data;
-      console.log('ITEM', this.itemProductos);
+
+    this.getData(this.page);
+
+    this.route.queryParams.subscribe(params => {
+      this.page = parseInt(params.page, 10) || 1;
+      this.getData(this.page);
     });
+
   }
 
   SynchronizedThis(evt: any, i: number){
@@ -39,6 +46,35 @@ export class SynchronizedProductsTableComponent implements OnInit {
     if (evt.checked === false) {
       return this.index.splice(i, 1);
     }
+  }
+
+  // En este caso lo que hará es que “reasignará”
+  // la URL y obtendrá la información usando la nueva página
+  pageChanged(page: number) {
+    this.page = page;
+    const queryParams: Params = {page};
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams
+      }
+    );
+    this.getData(this.page);
+  }
+
+  getData(page?: number){
+
+    this.sincronizacion.ListProductSincronizadosYNosincronizados(
+      localStorage.getItem('id'),
+      localStorage.getItem('storeId'),
+      page
+    ).subscribe((resp: ListProductSyncAnNoSync) => {
+      console.log('DataList', resp.data);
+      this.itemProductos = resp.data;
+      this.totalPage = resp.total;
+    })
+
   }
 
 

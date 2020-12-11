@@ -21,6 +21,11 @@ export class ProductLoadingService {
     return this.execQuery(url);
   }
 
+  GetCategoriasBancoProduct(idCategory){
+    const url = `/api/categories/${idCategory}`;
+    return this.execQuery(url);
+  }
+
   GetSubcategorias(idCategory: number){
     const url = `/api/categories/${idCategory}/subcategories`;
     return this.execQuery(url);

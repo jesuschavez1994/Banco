@@ -48,7 +48,7 @@ export class ProductLoadingComponent implements OnInit {
   factories: any;
   recipes: any;
   subcategoria: string;
-  myFlag = false;
+ 
   id: string;
   idProduct: string;
   sync: string;
@@ -83,9 +83,10 @@ export class ProductLoadingComponent implements OnInit {
   totalProductAPI: number = 0;
   // tslint:disable-next-line: no-inferrable-types
   page: number = 1;
-  IMG: any[] = [];
+
 
   myObject = {};
+
 
   // tslint:disable-next-line: variable-name
   constructor(public _productLoadingService: ProductLoadingService,
@@ -122,41 +123,7 @@ export class ProductLoadingComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.params.subscribe( (params: Params) => {
-      this.idProduct = params.id;
-      this.sync = params.product;
-
-      console.log(params);
-
-      // PETICIÓN DE SERVICIOS PARA EDITAR
-      if ( this.idProduct && params.product === 'edit-product'){
-        this.GetIdProductEdit();
-      }
-
-      // PETICIÓN DE SERVICIOS PARA SINCRONIZAR
-      if ( this.idProduct && params.product === 'sync'){
-        this.sincronizacion.GetBankProductSpecific(this.idProduct).subscribe( (data: any) => {
-          console.log('Banck Product', data);
-          this.productSelected.imgs.push(data.images[0].src_size.xl);
-          this.IMG.push(data.images[0].src_size.l);
-          this.IMG.push(data.images[1].src_size.l);
-          this.IMG.push(data.images[2].src_size.l);
-          this.myFlag = true;
-          console.log('IMGPUSH', this.IMG);
-          this.forma.patchValue(data);
-
-          // BLOQUEAMOS LOS CAMPOS RESPECTIVOS YA QUE NO LOS DEBE EDITAR //
-          this.forma.get('name').disable();
-          this.forma.get('description').disable();
-          // this.forma.get('mark').disable();
-          // SETEAMOS LA CANTIDAD DEL PRODUCTO POR DEFAUL YA QUE DEBE SER DE 1 al menos //
-          this.forma.get('stock').setValue('1');
-
-        });
-      }
-
-    });
-
+   
     this.storeService.ProductGet(
       localStorage.getItem('id'),
       localStorage.getItem('storeId'))
@@ -210,29 +177,7 @@ export class ProductLoadingComponent implements OnInit {
     });
   }
 
-  private GetIdProductEdit(){
-    this.storeService.getSpecificProduct(
-      localStorage.getItem('id'),
-      localStorage.getItem('storeId'),
-      this.idProduct
-    ).subscribe( (data: EditProductStore) => {
-      // console.log('Datas', data);
-      // this.myObject = {
-      //   name: data.name,
-      //   description: data.description,
-      //   mark : data.marks[0].name,
-      //   // factory: data.factories[0].name,
-      //   // category: data.subcategories[0].category.name,
-      //   // subcategory_id: data.subcategories[0].name,
-      //   // price: data.price,
-      //   // stock: data.stock,
-      //   // aviable: data.aviable,
-      //   // delivery: data.delivery.delivery,
-      // };
-      // console.log(this.myObject);
-      this.forma.patchValue(data);
-    });
-  }
+  
 
   SelectCategory(index: string){
     console.log(index);
