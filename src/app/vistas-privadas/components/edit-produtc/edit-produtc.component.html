@@ -34,7 +34,7 @@
                                                 class="figure__input cursor-poniter"
                                         />
                 
-                                        <img    [src]="this.File[i].image | boxDefault " 
+                                        <img    [src]="this.File[i].image | imgProductLoad " 
                                                 style="width: 80px; height: 80px" 
                                         />
                                 </figure>
@@ -42,7 +42,8 @@
                         </div>
                 
                         <figure (mouseover)="icon = true" 
-                                (mouseleave)="icon = false">
+                                (mouseleave)="icon = false"
+                                *ngIf="exitLoadImg">
                 
                                 <i  class="figure material-icons" 
                                     name="camera"
@@ -64,7 +65,7 @@
                                 >
 
                                 <img    class="width-100"
-                                        [src]="this.ImgEdit | imgProductLoad"
+                                        [src]="this.File[0].image | imgProductLoad"
                                         *ngIf="this.LengtImgEdit.length > 1"
                                 >
                         </figure>
@@ -195,11 +196,9 @@
                                 <select id="Subcategoria" 
                                         class="form-control"
                                         formControlName="subcategory_id"
-                                        [ngModel]="subCategoriaBanco"
-                                        name="subcategory_id"
                                         (change)="Subcategory($event.target.value)">
                                         <option class="family-300">Seleccionar</option>
-                                        <option *ngFor="let item of subcategory"[value]="item.id">{{ item.name }}</option>
+                                        <option *ngFor="let item of subcategory" [value]="item.id">{{ item.name }}</option>
                                 </select>
                             </div>
     

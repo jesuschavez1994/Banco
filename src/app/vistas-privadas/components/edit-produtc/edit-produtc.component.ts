@@ -35,6 +35,7 @@ export class EditProdutcComponent implements OnInit {
 
   LengtImgEdit: any;
   ImgEdit: any;
+  exitLoadImg = false;
 
   // VARIABLE DEL PARAMS //
 
@@ -88,6 +89,7 @@ export class EditProdutcComponent implements OnInit {
 
                     this.valorForm = data;
                     this.subCategoriaBanco = data.subcategories[0].name;
+                    console.log('SUBCATEGORIA DEFAULT', this.subCategoriaBanco );
 
                     // SET DE CATEGORIA
                     this._productLoadingService.GetCategoriasBancoProduct(this.valorForm.subcategories[0].category_id).subscribe( (resp: any) =>{
@@ -95,10 +97,20 @@ export class EditProdutcComponent implements OnInit {
                       this.categoriaBanco = resp.name;
                       
                     });
+ 
+                    if( this.LengtImgEdit.length > 1){
 
-                    if( this.LengtImgEdit.length > 1 ){
-                      this.ImgEdit = data.images[0].src_size.l;
-                      console.log('IMAGES EDIT', data.images[0].src_size.l);
+                      for( let i = 0; i < data.images.length; i++){
+                        this.File.splice(i, 1, { image: data.images[i].src_size.l, name: data.images[i].name, position: i + 1 });
+                        this.exitLoadImg = true;
+                        console.log('File', this.File);
+                      }
+
+                      // this.ImgEdit = data.images[0].src_size.l;
+                      // console.log('IMAGES EDIT', data.images[0].src_size.l);
+                      // this.File.splice(0, 1, { image: data.images[0].src_size.l, name: data.images[0].name, position: 0 });
+                      // console.log('File', this.File);
+                      // this.exitLoadImg = true;
                     }
 
                     // SET DE FORMULARIO //
@@ -141,7 +153,7 @@ export class EditProdutcComponent implements OnInit {
                   mark: new FormControl(''),
                   factory: new FormControl('Seleccionar'),
                   category: new FormControl(this.categoriaBanco, [Validators.required]),
-                  subcategory_id: new FormControl(this.subCategoriaBanco, [Validators.required]),
+                  subcategory_id: new FormControl('', [Validators.required]),
                   delivery: new FormControl(''),
                   aviable: new FormControl(''),
                   stock: new FormControl('', [Validators.required, Validators.minLength(1)]),
