@@ -7,6 +7,21 @@ import { StoreService } from '@services/store/store.service';
 import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import { EditProductStore } from '@interfaces/interfaceEditProductStore';
+import { URL_SERVICIOS } from '../../../config/config';
+
+const URL = URL_SERVICIOS;
+
+export class ImgEdit {
+
+  constructor(
+      public image: string,
+      public name: string,
+      public position: string,
+  ) { }
+
+}
+
+
 @Component({
   selector: 'app-edit-produtc',
   templateUrl: './edit-produtc.component.html',
@@ -20,29 +35,33 @@ export class EditProdutcComponent implements OnInit {
   // ARRAY PARA GUARDAR LAS IMAGENES //
   File: any[] =
   [
-    {image: null, name: null, position: null},
-    {image: null, name: null, position: null},
-    {image: null, name: null, position: null},
-    {image: null, name: null, position: null}
+    {image: null, name: null, position: null, id: null},
+    {image: null, name: null, position: null, id: null},
+    {image: null, name: null, position: null, id: null},
+    {image: null, name: null, position: null, id: null}
+  ];
+
+  ImgEditToLoad: any[] =
+  [
+    {image: null, name: null, position: null, id: null},
+    {image: null, name: null, position: null, id: null},
+    {image: null, name: null, position: null, id: null},
+    {image: null, name: null, position: null, id: null}
   ];
 
   // ICONOS //
   hover = false;
   icon = false;
 
-
   // VARIABLES USADAS PARA LA EDICION //
-
   LengtImgEdit: any;
   ImgEdit: any;
   exitLoadImg = false;
 
   // VARIABLE DEL PARAMS //
-
   idProduct: string;
 
   // VARIABLES DE LOS SELECT //
-
   category: any;
   subcategory: any;
   marks: any;
@@ -51,22 +70,38 @@ export class EditProdutcComponent implements OnInit {
   subcategoria: string;
   categoriaBanco: any;
   subCategoriaBanco: any;
+  
+  delivery: any;
 
-  delivery = [
+  // ESTADO DE DELIVERY //
+  delivery_estado = [
     {
-      delivery: 'Si'
+      delivery_nombre: 'Si',
+      delivery: 'true'
     },
     {
-      delivery: 'No'
+      delivery_nombre: 'No',
+      delivery: 'false'
     }
   ];
 
-  disponibilidad = [
+  // ESTADO DE DISPONIBILIDAD //
+  disponibilidad_estado = [
     {
-      disponibilidad: 'Si'
+      disponibilidad_nombre: 'Si',
+      disponibilidad: 'true'
     },
     {
-      disponibilidad: 'No'
+      disponibilidad_nombre: 'No',
+      disponibilidad: 'false'
+    }
+  ]
+
+  // ESTADO DE SUBCATEGORIA //
+  subcategory_estado: any[] = [
+    {
+      subcategoria_nombre: null,
+      subcategoria: null
     }
   ]
 
@@ -85,6 +120,7 @@ export class EditProdutcComponent implements OnInit {
                   console.log(params);
                   this.storeService.getSpecificProduct(localStorage.getItem('id'), localStorage.getItem('storeId'),this.idProduct).subscribe( (data: EditProductStore) => {
                     console.log('Datas', data);
+                    this.delivery = data.delivery;
                     this.LengtImgEdit = data.images;
 
                     this.valorForm = data;
@@ -95,22 +131,28 @@ export class EditProdutcComponent implements OnInit {
                     this._productLoadingService.GetCategoriasBancoProduct(this.valorForm.subcategories[0].category_id).subscribe( (resp: any) =>{
                       console.log('categorias', resp);
                       this.categoriaBanco = resp.name;
-                      
+
+                      // PETICIÓN SUBCATEGORIAS //
+                      this._productLoadingService.GetSubcategorias(resp.id)
+                        .subscribe( (response: any) => {
+                        console.log('sub', response);
+                        this.subcategory_estado.splice(0, 1, { subcategoria_nombre: response[0].name, subcategoria: response[0].id} );
+                        console.log(this.subcategory_estado);
+                      });
+
                     });
  
                     if( this.LengtImgEdit.length > 1){
-
                       for( let i = 0; i < data.images.length; i++){
-                        this.File.splice(i, 1, { image: data.images[i].src_size.l, name: data.images[i].name, position: i + 1 });
-                        this.exitLoadImg = true;
-                        console.log('File', this.File);
+                        if(data.images[i].name !== "_"){
+                          this.File.splice(i, 1, { image: `${URL}/${data.images[i].src_size.l}`, name: data.images[i].name, position: i + 1, id: data.images[i].pivot.image_id });
+                          this.forma.patchValue({
+                            file: this.File[i].image
+                          });
+                          this.exitLoadImg = true;
+                          console.log('File', this.File);
+                        }
                       }
-
-                      // this.ImgEdit = data.images[0].src_size.l;
-                      // console.log('IMAGES EDIT', data.images[0].src_size.l);
-                      // this.File.splice(0, 1, { image: data.images[0].src_size.l, name: data.images[0].name, position: 0 });
-                      // console.log('File', this.File);
-                      // this.exitLoadImg = true;
                     }
 
                     // SET DE FORMULARIO //
@@ -121,25 +163,23 @@ export class EditProdutcComponent implements OnInit {
                     this.forma.controls['price'].setValue(this.valorForm.price);
                     this.forma.controls['stock'].setValue(this.valorForm.stock);
                     this.forma.controls['recipe'].setValue(this.valorForm.recipes[0].name);
-                    this.forma.controls['subcategory_id'].setValue(this.subCategoriaBanco);
-                    this.forma.controls['category'].setValue(this.categoriaBanco);
+                    this.forma.controls['subcategory_id'].setValue(this.subcategory_estado[0].subcategoria);
+                    // END SET DE FORMULARIO //
 
                     // EVALUAMOS LOS CAMPOS SELECT //
                     if( this.valorForm.delivery.delivery === 'true' ){
-                      this.forma.controls['delivery'].setValue(this.delivery[0].delivery);
+                      this.forma.controls['delivery'].setValue(this.delivery_estado[0].delivery);
                       console.log('Delivery', this.valorForm.delivery.delivery);
                     }else{
-                      this.forma.controls['delivery'].setValue(this.delivery[1].delivery);
+                      this.forma.controls['delivery'].setValue(this.delivery_estado[1].delivery);
                     }
 
                     if( this.valorForm.aviable === 'true' ){
-                      this.forma.controls['aviable'].setValue(this.disponibilidad[0].disponibilidad);
+                      this.forma.controls['aviable'].setValue(this.disponibilidad_estado[0].disponibilidad);
                       console.log('Disponibilidad', this.valorForm.aviable);
                     }else{
-                      this.forma.controls['aviable'].setValue(this.disponibilidad[1].disponibilidad);
+                      this.forma.controls['aviable'].setValue(this.disponibilidad_estado[1].disponibilidad);
                     }
-
-                    
 
                   });
                 });
@@ -152,7 +192,7 @@ export class EditProdutcComponent implements OnInit {
                   price: new FormControl('', [Validators.required, Validators.minLength(1)]),
                   mark: new FormControl(''),
                   factory: new FormControl('Seleccionar'),
-                  category: new FormControl(this.categoriaBanco, [Validators.required]),
+                  category: new FormControl('', [Validators.required]),
                   subcategory_id: new FormControl('', [Validators.required]),
                   delivery: new FormControl(''),
                   aviable: new FormControl(''),
@@ -172,35 +212,35 @@ export class EditProdutcComponent implements OnInit {
 
   ngOnInit(): void {
 
-       // GET CATEGORIAS //
-       this._productLoadingService.GetCategorias()
-       .subscribe( response => {
-         console.log(response);
-         return this.category = response;
-     });
+    // GET CATEGORIAS //
+    this._productLoadingService.GetCategorias()
+      .subscribe( response => {
+      console.log(response);
+      return this.category = response;
+    });
  
-     // GET MARCA //
-     this._productLoadingService.GetMark(
+    // GET MARCA //
+    this._productLoadingService.GetMark(
       localStorage.getItem('id'))
       .subscribe( response => {
       this.marks = response;
       console.log(this.marks);
     });
  
-     // GET FABRICANTE //
-     this._productLoadingService.GetFactories(
-       localStorage.getItem('id'))
-       .subscribe( response => {
-       console.log('factories', response);
-       this.factories = response;
-     });
+    // GET FABRICANTE //
+    this._productLoadingService.GetFactories(
+      localStorage.getItem('id'))
+      .subscribe( response => {
+      console.log('factories', response);
+      this.factories = response;
+    });
  
-     // RECETA MEDICA //
-     this._productLoadingService.GetRecetaMedica(
-       localStorage.getItem('id'))
-       .subscribe( response => {
-       this.recipes = response;
-     });
+    // RECETA MEDICA //
+    this._productLoadingService.GetRecetaMedica(
+      localStorage.getItem('id'))
+      .subscribe( response => {
+      this.recipes = response;
+    });
 
   }
 
@@ -218,7 +258,6 @@ export class EditProdutcComponent implements OnInit {
         this.forma.patchValue({
           file: reader.result
         });
-
         console.log('imagen', this.forma.value.file);
         // need to run CD since file load runs outside of zone
         this._cd.markForCheck();
@@ -259,6 +298,67 @@ export class EditProdutcComponent implements OnInit {
 
   Send(){
 
-  }
+    const data = new DetalleProduct(
+      this.forma.value.name,
+      this.forma.value.description,
+      this.forma.value.price,
+      this.forma.value.mark,
+      this.forma.value.factory,
+      this.forma.value.category,
+      this.forma.value.subcategory_id,
+      this.forma.value.delivery,
+      this.forma.value.aviable,
+      this.forma.value.stock,
+      this.forma.value.recipe,
+    );
+
+
+    this._productLoadingService.EditProduct(
+      localStorage.getItem('id'),
+      localStorage.getItem('storeId'),
+      this.idProduct, 
+      data).subscribe( resp => {
+
+        console.log(resp);
+        for (let i = 0; i < this.File.length; i++ ){
+          console.log(i);
+          console.log(this.File[i].name);
+          console.log(this.LengtImgEdit[i].name);
+          // debugger
+          if(this.File[i].name !== this.LengtImgEdit[i].name){
+            // console.log(this.File[i].name);
+            // console.log(this.LengtImgEdit[i].id);
+
+            const imgEdit = new ImgEdit(
+              this.File[i].image,
+              this.File[i].name,
+              this.File[i].position,
+            )
+
+            // const images = new ImgLoad(
+            // this.File[i]
+            // );
+
+
+
+            console.log('Array', imgEdit);
+       
+            console.log(this.idProduct);
+         
+            this._productLoadingService.ImagenProductEdit(
+              localStorage.getItem('id'),
+              localStorage.getItem('storeId'),
+              this.idProduct,
+              this.LengtImgEdit[i].id,
+              imgEdit
+            ).subscribe( resp => {
+              console.log(resp);
+            })
+          }
+        }
+        
+      })
+
+    } 
 
 }

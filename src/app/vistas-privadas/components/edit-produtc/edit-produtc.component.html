@@ -1,9 +1,8 @@
-<section class="display-flex mt-5">
+<app-breadcrumb class="pl-5"></app-breadcrumb>
+
+<section class="display-flex mb-5">
     <div class="container-fluid">
         <div class="row">
-
-            <app-breadcrumb></app-breadcrumb>
-
 
             <form   [formGroup]="forma"
                     (ngSubmit)="addProducts()" 
@@ -34,7 +33,7 @@
                                                 class="figure__input cursor-poniter"
                                         />
                 
-                                        <img    [src]="this.File[i].image | imgProductLoad " 
+                                        <img    [src]="this.File[i].image | editProduct " 
                                                 style="width: 80px; height: 80px" 
                                         />
                                 </figure>
@@ -64,8 +63,8 @@
                                                         
                                 >
 
-                                <img    class="width-100"
-                                        [src]="this.File[0].image | imgProductLoad"
+                                <img    class="width-100 img_create"
+                                        [src]="this.forma.value.file | editProduct"
                                         *ngIf="this.LengtImgEdit.length > 1"
                                 >
                         </figure>
@@ -130,14 +129,12 @@
                                 <select id="Marca" 
                                         class="form-control"
                                         formControlName="mark">
-
                                         <option class="family-300">
                                             Seleccionar
                                         </option>
                                         <option [value]="item.name" *ngFor="let item of marks">
                                             {{item.name}}
                                         </option>
-
                                 </select>
                             </div>
     
@@ -177,9 +174,6 @@
                                     </option>
                                 </select>
                             </div>
-    
-                            
-    
                         </div>
     
                         <div class="row">
@@ -196,9 +190,13 @@
                                 <select id="Subcategoria" 
                                         class="form-control"
                                         formControlName="subcategory_id"
+                                        [ngModel]="subcategory_estado[0].subcategoria"
                                         (change)="Subcategory($event.target.value)">
-                                        <option class="family-300">Seleccionar</option>
-                                        <option *ngFor="let item of subcategory" [value]="item.id">{{ item.name }}</option>
+                                        <option selected class="family-300">Seleccionar</option>
+                                        <option selected *ngFor="let item of subcategory_estado" 
+                                                [value]="item.subcategoria">
+                                                {{ item.subcategoria_nombre }}
+                                        </option>
                                 </select>
                             </div>
     
@@ -250,7 +248,7 @@
                                         formControlName="delivery"
                                         >
                                         <option selected class="family-300">Seleccionar</option>
-                                        <option *ngFor="let item of delivery" [value]="item.delivery">{{item.delivery}}</option>
+                                        <option *ngFor="let item of delivery_estado" selected [value]="item.delivery">{{item.delivery_nombre}}</option>
                                 </select>
                             </div>
     
@@ -261,7 +259,7 @@
                                         formControlName="aviable"
                                         >
                                   <option selected class="family-300">Seleccionar</option>
-                                  <option *ngFor="let item of disponibilidad" [value]="item.disponibilidad">{{item.disponibilidad}}</option>
+                                  <option *ngFor="let item of disponibilidad_estado" [value]="item.disponibilidad">{{item.disponibilidad_nombre}}</option>
                                 </select>
                             </div>
                         </div>

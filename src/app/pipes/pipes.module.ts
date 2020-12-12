@@ -8,7 +8,7 @@ import { CapitalizadoPipe } from './capitalizado/capitalizado.pipe';
 import { LimitarTextoPipe } from './limitar-texto/limitar-texto.pipe';
 import { LimitarNameProductoPipe } from './limitar-name-producto/limitar-name-producto.pipe';
 import { PreviewGalleryPipe } from './preview-gallery/preview-gallery.pipe';
-
+import {EditProductPipe} from './edir-product/edit-produt.pipe';
 @NgModule({
   declarations: [
     ImagenPipe,
@@ -18,7 +18,8 @@ import { PreviewGalleryPipe } from './preview-gallery/preview-gallery.pipe';
     CapitalizadoPipe,
     LimitarTextoPipe,
     LimitarNameProductoPipe,
-    PreviewGalleryPipe
+    PreviewGalleryPipe,
+    EditProductPipe
   ],
   exports: [
     ImagenPipe,
@@ -28,7 +29,8 @@ import { PreviewGalleryPipe } from './preview-gallery/preview-gallery.pipe';
     CapitalizadoPipe,
     LimitarTextoPipe,
     LimitarNameProductoPipe,
-    PreviewGalleryPipe
+    PreviewGalleryPipe,
+    EditProductPipe
   ],
   imports: [
     CommonModule

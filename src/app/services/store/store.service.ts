@@ -59,6 +59,11 @@ export class StoreService {
     return this.http.delete<T>( query );
   }
 
+  private putQuery<T>(query: string, data: any){
+    query = URL_SERVICIOS + query;
+    return this.http.put<T>( query, data );
+  }
+
   cargarStorage() {
 
     if ( localStorage.getItem('token')) {

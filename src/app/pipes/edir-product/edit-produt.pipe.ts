@@ -4,9 +4,9 @@ import { URL_SERVICIOS } from '../../config/config';
 const URL = URL_SERVICIOS;
 
 @Pipe({
-  name: 'imgProductLoad'
+  name: 'editProduct'
 })
-export class ImgProductLoadPipe implements PipeTransform {
+export class EditProductPipe implements PipeTransform {
 
   transform(img: string): string {
 
@@ -14,7 +14,7 @@ export class ImgProductLoadPipe implements PipeTransform {
       return '../../assets/img/Box/box.svg';
     }
 
-    const imgUrl = `${URL}/${img}`;
+    const imgUrl = `${img}`;
     return imgUrl;
   }
 
