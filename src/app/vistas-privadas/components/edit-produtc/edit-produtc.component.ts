@@ -326,34 +326,33 @@ export class EditProdutcComponent implements OnInit {
           console.log(this.LengtImgEdit[i].name);
           // debugger
           if(this.File[i].name !== this.LengtImgEdit[i].name){
-            // console.log(this.File[i].name);
-            // console.log(this.LengtImgEdit[i].id);
-
+           
             const imgEdit = new ImgEdit(
               this.File[i].image,
               this.File[i].name,
               this.File[i].position,
             )
 
-            // const images = new ImgLoad(
-            // this.File[i]
-            // );
-
-
+            console.log(this.LengtImgEdit[i].id);
 
             console.log('Array', imgEdit);
        
             console.log(this.idProduct);
+
+            if( imgEdit.image !== null ){
+
+              this._productLoadingService.ImagenProductEdit(
+                localStorage.getItem('id'),
+                localStorage.getItem('storeId'),
+                this.idProduct,
+                this.LengtImgEdit[i].id,
+                imgEdit
+              ).subscribe( resp => {
+                console.log(resp);
+              })
+
+            }
          
-            this._productLoadingService.ImagenProductEdit(
-              localStorage.getItem('id'),
-              localStorage.getItem('storeId'),
-              this.idProduct,
-              this.LengtImgEdit[i].id,
-              imgEdit
-            ).subscribe( resp => {
-              console.log(resp);
-            })
           }
         }
         

@@ -1,15 +1,30 @@
 
     <li class="col-md-12 item product product-item" id="{{index}}">
-        <div    class="product-item-info card"
-                >
-                <i  class="material-icons position-absolute left-85 top-5 icon-gris" 
-                    name="create"
-                    title="Editar"
-                    (click)="Id(index)"
-                    [routerLink]="['/my-store/edit', MyProduct[index].id]" 
-                    >
-                    create
-                </i>
+        <div    class="product-item-info card">
+
+                <div [ngSwitch]="item.sincronice">
+                    <div *ngSwitchCase="'sincronizado'">
+                        <i  class="material-icons position-absolute left-85 top-5 icon-gris" 
+                            name="create"
+                            title="Editar"
+                            (click)="Id(index)"
+                            [routerLink]="['/my-store/edit-product-sync', MyProduct[index].id]" 
+                        >
+                        create
+                        </i>
+                    </div>
+                    <div *ngSwitchDefault>
+                        <i  class="material-icons position-absolute left-85 top-5 icon-gris" 
+                            name="create"
+                            title="Editar"
+                            (click)="Id(index)"
+                            [routerLink]="['/my-store/edit', MyProduct[index].id]" 
+                            >
+                            create
+                        </i>
+                    </div>
+                </div>
+
                 <i  class="material-icons position-absolute left-85 top-15 icon-gris" 
                     name="delete"
                     title="Eliminar"
@@ -18,12 +33,14 @@
                     >
                     delete
                 </i>
+
                 <i  class="material-icons position-absolute left-85 top-25 icon-gris" 
                     name=" loop icon"
                     title="sincronizar"
                     >
                     loop
                 </i>
+
                 <span class="product-image-container" style="width:240px;">
                     <span class="product-image-wrapper">
                         
@@ -91,6 +108,8 @@
                                 {{item.sync_bank[0].description | LimitarTexto }} 
                                 <span *ngIf="item.description.length > 100">...</span>
                             </p>
+
+                            <span class="badge badge-primary puntero">Sincronizado</span>
         
                             
                         </div>
@@ -114,6 +133,8 @@
                             <span *ngIf="item.price === 0 " class="family-600 color-p size-14 black mt-2">
                                 Precio a consultar
                             </span>
+
+                           
 
                         </div>
 

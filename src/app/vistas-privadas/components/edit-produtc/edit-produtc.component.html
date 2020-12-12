@@ -13,6 +13,7 @@
                     <!-- ======  SUBIDA DE PRODUCTO =====-->
                     <!-- ===================================-->
                     <section class="col-12 col-sm-12 col-md-4">
+                        
                         <div class="display-flex justify-content-center">
                             <div  *ngFor="let item of [0, 1, 2, 3]; let i = index">
                                 <figure class="img-box{{i}} ml-1 mr-1" 
@@ -36,6 +37,7 @@
                                         <img    [src]="this.File[i].image | editProduct " 
                                                 style="width: 80px; height: 80px" 
                                         />
+                                        
                                 </figure>
                             </div>
                         </div>
@@ -67,7 +69,9 @@
                                         [src]="this.forma.value.file | editProduct"
                                         *ngIf="this.LengtImgEdit.length > 1"
                                 >
+
                         </figure>
+
                     </section>
                     <!-- ====== END SUBIDA DE PRODUCTO =====-->
                     <!-- ===================================-->
@@ -90,9 +94,9 @@
                                             Ingresa un nombre del producto
                                 </mat-error>
 
-                                <mat-error    *ngIf="forma.get('name').errors?.minlength"  
-                                        class="invalid-feedback">
-                                        Por lo menos 5 caracteres
+                                <mat-error  *ngIf="forma.get('name').errors?.minlength"  
+                                            class="invalid-feedback">
+                                            Por lo menos 5 caracteres
                                 </mat-error>
 
                             </div>
