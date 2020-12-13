@@ -14,7 +14,7 @@ class Sincronizacion {
       public bank_id?: string,
       public store_id?: string,
       public price?: string,
-      public stok?: string,
+      public stock?: string,
       public aviable?: string,
       public delivery?: string,
       public subcategory_id?: string,

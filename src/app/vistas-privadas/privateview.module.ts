@@ -104,6 +104,7 @@ import { FormBanckProductAdminComponent } from './Admin/pages/load-banck-product
 import { FormBanckProductSyncComponent } from './sincronizacion/components/form-banck-product-sync/form-banck-product-sync.component';
 import { EditProdutcComponent } from './components/edit-produtc/edit-produtc.component';
 import { EditSincronizacionComponent } from './sincronizacion/components/edit-sincronizacion/edit-sincronizacion.component';
+import { EditProductNoDisponibleComponent } from './components/edit-product-no-disponible/edit-product-no-disponible.component';
 
 
 
@@ -163,6 +164,7 @@ import { EditSincronizacionComponent } from './sincronizacion/components/edit-si
       FormBanckProductSyncComponent,
       EditProdutcComponent,
       EditSincronizacionComponent,
+      EditProductNoDisponibleComponent,
       ],
 
     imports: [

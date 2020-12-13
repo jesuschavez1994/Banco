@@ -13,6 +13,16 @@
                         create
                         </i>
                     </div>
+                    <div *ngSwitchCase="'no disponible'">
+                        <i  class="material-icons position-absolute left-85 top-5 icon-gris" 
+                            name="create"
+                            title="Editar"
+                            (click)="Id(index)"
+                            [routerLink]="['/my-store/edit-product', MyProduct[index].id]" 
+                        >
+                        create
+                        </i>
+                    </div>
                     <div *ngSwitchDefault>
                         <i  class="material-icons position-absolute left-85 top-5 icon-gris" 
                             name="create"
@@ -106,10 +116,14 @@
         
                             <p class="family-600 size-11 mb-0 detail-name card-text line" title="{{item.description}}" *ngIf="item.sync_bank.length > 0"  >
                                 {{item.sync_bank[0].description | LimitarTexto }} 
-                                <span *ngIf="item.description.length > 100">...</span>
+                                <!-- <span *ngIf="item.description.length > 100">...</span> -->
                             </p>
 
-                            <span class="badge badge-primary puntero">Sincronizado</span>
+                            <p *ngIf="item.price !== 0 " class="family-600 color-p size-14 black mt-0 mb-0">
+                                {{item.price | currency: 'USD': true:'1.3-3'}} 
+                            </p>
+
+                            <span class="badge badge-primary puntero pt-1">Sincronizado</span>
         
                             
                         </div>
@@ -118,12 +132,12 @@
 
                             <p class="family-600 size-14 color-p" title="{{item.name}} ">
                                 {{item.name | LimitarNameProducto }} 
-                                <span *ngIf="item.name.length > 55">...</span>
+                                <!-- <span *ngIf="item.name.length > 55">...</span> -->
                             </p>
         
                             <p class="family-600 size-11 mb-0 detail-name card-text line" title="{{item.description}}">
                                 {{item.description | LimitarTexto }} 
-                                <span *ngIf="item.description.length > 100">...</span>
+                                <!-- <span *ngIf="item.description.length > 100">...</span> -->
                             </p>
         
                             <span *ngIf="item.price !== 0 " class="family-600 color-p size-14 black mt-2">
@@ -142,12 +156,12 @@
 
                             <p class="family-600 size-14 color-p" title="{{item.name}} ">
                                 {{item.name | LimitarNameProducto }} 
-                                <span *ngIf="item.name.length > 55">...</span>
+                                <!-- <span *ngIf="item.name.length > 55">...</span> -->
                             </p>
         
                             <p class="family-600 size-11 mb-0 detail-name card-text line" title="{{item.description}}">
                                 {{item.description | LimitarTexto }} 
-                                <span *ngIf="item.description.length > 100">...</span>
+                                <!-- <span *ngIf="item.description.length > 100">...</span> -->
                             </p>
         
                             <span *ngIf="item.price !== 0 " class="family-600 color-p size-14 black mt-2">
