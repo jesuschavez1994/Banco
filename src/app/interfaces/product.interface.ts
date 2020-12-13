@@ -1,4 +1,4 @@
-export interface ProducstResponse {
+export interface ProductsResponse {
   current_page: number;
   data: Product[];
   first_page_url: string;

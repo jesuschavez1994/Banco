@@ -41,7 +41,7 @@ export class BusinessDetailComponent implements OnInit {
 
   public showProductsCards(){
 
-    this.productService.getProductByStore(1).subscribe( resp => {
+    this.productService.getProductsByStore(1).subscribe( resp => {
 
       const products = resp.data;
 
