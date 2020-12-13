@@ -10,6 +10,7 @@ export class ProductsCardsController {
     public price?: number,
     public stock?: number,
     public images?: string[],
+    public id: number =  -1,
     public isFavorite: boolean = false,
   ){
     // this.isFavorite = isFavorite;
@@ -28,7 +29,8 @@ export class ProductsCardsController {
           price: product[`${atributtesNames[2]}`],
           stock: product[`${atributtesNames[3]}`],
           images: product[`${atributtesNames[4]}`],
-          isFavorite: false
+          id: product[`${atributtesNames[5]}`] ? product[`${atributtesNames[5]}`] : -1,
+          isFavorite: product[`${atributtesNames[6]}`] ? true : this.isFavorite,
         }
       );
 

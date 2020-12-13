@@ -9,6 +9,9 @@ export interface ProductsCardsOptions {
   price: number;
   stock: number;
   images: string[];
+  id?: number;
   isFavorite?: boolean;
 
 }
+
+

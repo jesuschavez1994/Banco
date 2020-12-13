@@ -2,7 +2,11 @@
 
   <ng-container *ngFor="let product of products">
 
-    <article class="product" (click)="selectProduct(product)">
+    <article class="product"
+      (click)="selectProduct(product)">
+
+      <!-- [routerLink]="['.']"
+      [queryParams]="{store: 1}" -->
 
       <div class="img">
 

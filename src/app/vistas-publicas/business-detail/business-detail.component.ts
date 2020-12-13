@@ -47,7 +47,7 @@ export class BusinessDetailComponent implements OnInit {
 
       this.productsCards = this.productsCardsCtr.formatProductResponse(
         products,
-        ['name', 'description', 'price', 'stock', 'images']
+        ['name', 'description', 'price', 'stock', 'images', 'id']
       );
 
     });
