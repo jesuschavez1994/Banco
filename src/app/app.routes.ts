@@ -26,8 +26,23 @@ const APP_ROUTES: Routes = [
     {path: 'register', component: RegisterComponent},
 
     // Christopher Views
-    {path: 'shopping-cart', component: ShoppingCartComponent},
-    {path: 'business-detail', component: BusinessDetailComponent},
+    {
+      path: 'shopping-cart',
+      component: ShoppingCartComponent
+    },
+
+    {
+      path: 'business-detail/:idStore', // Se obtiene el id de la tienda para mostrar su listo productos
+      component: BusinessDetailComponent
+    },
+    {
+      path: 'business-detail/:idStore/products', // Se obtiene el id de la tienda para mostrar su listo productos
+      component: BusinessDetailComponent,
+    },
+    {
+      path: 'business-detail/:idStore/products/:idProduct', // Se obtiene el id de la tienda para mostrar su listo productos
+      component: BusinessDetailComponent,
+    },
 
     // Christopher Views //
 

@@ -4,6 +4,7 @@ import { bannerOptions } from '@interfaces/components-options/banner.interface';
 import { ProductService } from '@services/product/product.service';
 import { ProductsCardsController } from '@models/models-components-options/products-cards.model';
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.options.interface';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-business-detail',
@@ -12,45 +13,81 @@ import { ProductsCardsOptions } from '@interfaces/components-options/products-ca
 })
 export class BusinessDetailComponent implements OnInit {
 
-  imgsBanners: bannerOptions = {
-    m: 'assets/img/test-img/banner.png'
-  };
+  showProducts = false;
 
   // Components Controllers
   sidebarListCtr = new SidebarListControler();
   productsCardsCtr = new ProductsCardsController();
 
   // Components Inputs
+  imgsBanners: bannerOptions = {
+    m: 'assets/img/test-img/banner.png'
+  };
+
   productsCards: ProductsCardsOptions[] = [];
   selectedProduct: ProductsCardsOptions;
 
-  constructor( private productService: ProductService ) {
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute,
+    // private router: Router
+    ) {
     this.sidebarListCtr.expandSidebarlist = true;
 
   }
 
   ngOnInit(): void {
-    this.showProductsCards();
+
+    this.setProductsCards();
+    this.showProductsContainer();
 
   }
 
-  public selectProduct(event){
+  public selectProduct(event) {
     this.selectedProduct = event;
 
   }
 
-  public showProductsCards(){
+  public setProductsCards() {
 
-    this.productService.getProductsByStore(1).subscribe( resp => {
+    this.route.paramMap.subscribe(params => {
 
-      const products = resp.data;
+      if (params.has('idStore')) {
 
-      this.productsCards = this.productsCardsCtr.formatProductResponse(
-        products,
-        ['name', 'description', 'price', 'stock', 'images', 'id']
-      );
+        // tslint:disable-next-line: radix
+        const idStore = parseInt( params.get('idStore') );
+
+        this.productService.getProductsByStore(idStore).subscribe( resp => {
+
+          const products = resp.data;
+
+          this.productsCards = this.productsCardsCtr.formatProductResponse(
+            products,
+            ['name', 'description', 'price', 'stock', 'images', 'id']
+          );
+
+        });
+
+      }
 
     });
+
+  }
+
+
+  /**
+   * @description Controla el valor ngIf para desplegar la sección de contacto o productos
+   * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christpherdallar1234@matiz.com.ve
+   * @date 13/12/2020
+   * @memberof BusinessDetailComponent
+   */
+  public showProductsContainer(){
+
+    const routes = this.route.snapshot.url.map( url => url.path );
+    const idxRouteMatched = routes.indexOf('products');
+
+    this.showProducts = idxRouteMatched !== -1 ? true : false;
+    console.log(routes);
 
   }
 

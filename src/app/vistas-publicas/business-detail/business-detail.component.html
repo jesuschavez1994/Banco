@@ -17,25 +17,32 @@
 
     </section>
 
-    <section class="products-infomation">
+    <ng-container *ngIf="showProducts">
 
-      <h1 class="profile-name">farmacia medical background</h1>
+      <section class="products-infomation">
 
-      <app-product-detail [selectedProduct]="selectedProduct"></app-product-detail>
+        <h1 class="profile-name">farmacia medical background</h1>
 
-      <app-search-bar
-        [buttonSidebarList]="true"
-        [isExpanded]="this.sidebarListCtr.expandSidebarlist"
-        (sidebarExpand)="this.sidebarListCtr.toggleSidebarList($event)">
-      </app-search-bar>
+        <app-product-detail [selectedProduct]="selectedProduct"></app-product-detail>
 
-      <app-products-cards
-        [products]="productsCards"
-        [routerLink]="['/business-detail']"
-        (selected)="selectProduct($event)">
-      </app-products-cards>
+        <app-search-bar
+          [buttonSidebarList]="true"
+          [isExpanded]="this.sidebarListCtr.expandSidebarlist"
+          (sidebarExpand)="this.sidebarListCtr.toggleSidebarList($event)">
+        </app-search-bar>
 
-    </section>
+        <app-products-cards
+          [products]="productsCards"
+          (selected)="selectProduct($event)">
+        </app-products-cards>
+
+      </section>
+
+    </ng-container>
+
+    <ng-container *ngIf="!showProducts">
+      <p>contact detail</p>
+    </ng-container>
 
   </div>
 

@@ -23,7 +23,7 @@ export class ProductsCardsComponent  {
 
       this.router.navigate(
 
-        [this.routerLink],
+        this.routerLink,
         {
           queryParams: { product: product.id },
           queryParamsHandling: 'merge'
