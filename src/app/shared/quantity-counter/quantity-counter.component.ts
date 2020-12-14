@@ -1,12 +1,12 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewChild, Input } from '@angular/core';
-import { QuantityCounterOptions } from '@interfaces/components-options/quantity-counter.option.interface';
+import { Component, OnInit, ElementRef, Renderer2, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
+// import { QuantityCounterOptions } from '@interfaces/components-options/quantity-counter.option.interface';
 
 @Component({
   selector: 'app-quantity-counter',
   templateUrl: './quantity-counter.component.html',
   styleUrls: ['./quantity-counter.component.scss']
 })
-export class QuantityCounterComponent implements OnInit {
+export class QuantityCounterComponent implements OnInit, OnChanges {
 
   @ViewChild('inputQuantityCounter') inputQuantityCounter: ElementRef;
   @Input() isStrong = true;
@@ -15,16 +15,14 @@ export class QuantityCounterComponent implements OnInit {
   @Input() changeValue = 1;
   @Input() minValue = 1;
 
-  // @Input() counter: QuantityCounterOptions = {
-  //   maxValue: this.maxValue,
-  //   initValue: this.initValue,
-  //   changeValue: this.changeValue,
-  //   minValue: this.minValue,
-  // };
-
   constructor(private renderer: Renderer2 ) { }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const inputNumber = this.inputQuantityCounter.nativeElement;
+    this.renderer.setProperty(inputNumber, 'value', this.initValue);
   }
 
   public changeCounterValue( isDecrease: boolean = false){
