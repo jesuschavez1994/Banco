@@ -9,6 +9,7 @@ import { LimitarTextoPipe } from './limitar-texto/limitar-texto.pipe';
 import { LimitarNameProductoPipe } from './limitar-name-producto/limitar-name-producto.pipe';
 import { PreviewGalleryPipe } from './preview-gallery/preview-gallery.pipe';
 import {EditProductPipe} from './edir-product/edit-produt.pipe';
+import { SeacrhPipe } from './search/seacrh.pipe';
 @NgModule({
   declarations: [
     ImagenPipe,
@@ -19,7 +20,8 @@ import {EditProductPipe} from './edir-product/edit-produt.pipe';
     LimitarTextoPipe,
     LimitarNameProductoPipe,
     PreviewGalleryPipe,
-    EditProductPipe
+    EditProductPipe,
+    SeacrhPipe
   ],
   exports: [
     ImagenPipe,
@@ -30,7 +32,8 @@ import {EditProductPipe} from './edir-product/edit-produt.pipe';
     LimitarTextoPipe,
     LimitarNameProductoPipe,
     PreviewGalleryPipe,
-    EditProductPipe
+    EditProductPipe,
+    SeacrhPipe
   ],
   imports: [
     CommonModule

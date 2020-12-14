@@ -7,6 +7,9 @@ import {  SincronizacionService } from '../../../../../../services/sincronizacio
 import {  SincronizarElProducto } from '@models/sincronizacion/documentExcel.model';
 import {  FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Sugerir } from '../../../../../../models/sincronizacion/sugerir';
+import { ProductosLoads } from '@interfaces/InterfaceProducto';
+import {BehaviorSubject} from 'rxjs';
+import { Termino } from '../../../../../../models/buscador.model';
 
 @Component({
   selector: 'app-items-suggested-products',
@@ -21,8 +24,11 @@ export class ItemsSuggestedProductsComponent implements OnInit {
   forma: FormGroup;
   slideIndex = 1;
   next = 0;
+  palabra: any
 
   @Input() SetAllCheckbox: boolean;
+  @Input() PalabraBuscador: ProductosLoads;
+  
 
   // tslint:disable-next-line: variable-name
   last_Page_Pagination: number;
@@ -31,6 +37,8 @@ export class ItemsSuggestedProductsComponent implements OnInit {
   Sugerenccias: any[];
   // tslint:disable-next-line: no-inferrable-types
   page: number = 1;
+  filtro_valor: string = '';
+  busqueda = false;
 
 
   MyProduct: Descripcion[] = [];
@@ -55,14 +63,6 @@ export class ItemsSuggestedProductsComponent implements OnInit {
 
   ngOnInit() {
 
-    // if ( this.SetAllCheckbox ){
-    //   for ( let index = 0; index < this.MyProduct.length; index++){
-    //     document.getElementById(i).style.filter = 'grayscale(5%) brightness(90%) opacity(100%)';
-    //     document.getElementById(i).style.filter = '-webkit-filter: grayscale(5%) brightness(90%) opacity(100%)';
-    //     document.getElementById(i).style.filter = '-moz-filter: grayscale(5%) brightness(90%) opacity(100%)';
-    //     document.getElementById(i).style.background = '#f4f4f4';
-    //   }
-    // }
 
     this.getData(this.page);
     // sistema que nos permita leer el parámetro de la página una vez que cambiamos entre estas usando la función
@@ -112,16 +112,6 @@ export class ItemsSuggestedProductsComponent implements OnInit {
         this.MyProduct = resp.data;
         // this.dataObject = resp.data.suggestion.data.JSON.parse();
         console.log('MY PRODUCTOS', this.MyProduct);
-
-        // tslint:disable-next-line: prefer-for-of
-        // for ( let i = 0; i < this.MyProduct.length; i++){
-        //   console.log('SUGERENCIAS', this.MyProduct[i].suggestion.data);
-        //   this.Sugerenccias.splice(i, 1, this.MyProduct[i].suggestion.data);
-        // }
-
-        // let slides = document.getElementsByClassName('mySlides');
-        // console.log(slides);
-        // console.log(slides.length);
         this.last_Page_Pagination = resp.last_page;
         this.totalProductAPI = resp.total;
     });
@@ -164,6 +154,25 @@ export class ItemsSuggestedProductsComponent implements OnInit {
     window.scrollTo({
       top: 10000000,
     });
+  }
+
+  
+
+  public handleSearch(value: string): void {
+    console.log(value);
+    this.filtro_valor = value;
+
+    let comparacion = new Termino( value  );
+
+      this.sincronizacion.BuscadorSugerencias(
+        comparacion,
+        localStorage.getItem('id'),
+        localStorage.getItem('storeId')).subscribe( (resp: Total) => {
+        console.log(resp.data);
+        return  this.MyProduct = resp.data;
+      });
+
+
   }
 
 

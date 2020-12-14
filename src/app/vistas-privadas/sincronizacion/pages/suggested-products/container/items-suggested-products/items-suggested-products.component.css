@@ -16,6 +16,15 @@ mat-grid-tile span{
     text-align: center;
 }
 
+button{
+    border: 1px solid rgb(204, 203, 203);
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.no-aviable{
+    display: none;
+}
 .mySlides {display: none}
 
 .ir-arriba {
@@ -66,5 +75,5 @@ mat-grid-tile span{
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
-  }
+}
   

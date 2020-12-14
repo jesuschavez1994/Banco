@@ -105,6 +105,7 @@ import { FormBanckProductSyncComponent } from './sincronizacion/components/form-
 import { EditProdutcComponent } from './components/edit-produtc/edit-produtc.component';
 import { EditSincronizacionComponent } from './sincronizacion/components/edit-sincronizacion/edit-sincronizacion.component';
 import { EditProductNoDisponibleComponent } from './components/edit-product-no-disponible/edit-product-no-disponible.component';
+import { SearchComponent } from './sincronizacion/components/search/search.component';
 
 
 
@@ -165,6 +166,7 @@ import { EditProductNoDisponibleComponent } from './components/edit-product-no-d
       EditProdutcComponent,
       EditSincronizacionComponent,
       EditProductNoDisponibleComponent,
+      SearchComponent,
       ],
 
     imports: [
@@ -198,6 +200,7 @@ import { EditProductNoDisponibleComponent } from './components/edit-product-no-d
 
     exports: [
       PhotoUserEditComponent,
+      SearchComponent,
       PhotoUserComponent,
       CardShimmerFormConfigurationComponent,
       ModalAddCategoriasAndSubcategoriasComponent,

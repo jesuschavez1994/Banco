@@ -1,10 +1,26 @@
 
 <app-no-suggested-products *ngIf="MyProduct.length === undefined"></app-no-suggested-products>
 
+<section class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-12 display-flex justify-content-space-between">
+            <button 
+                    type="button" 
+                    class="mr-3 family-700">
+                Sincronizar
+            </button>
+            <app-search (searchEmitter)="handleSearch($event)" class="width-70"></app-search>
+        </div>
+    </div>
+</section>
+
+
+
 <div layout=”row” layout-wrap="wrap">
     
     <section    class="mt-5 mb-5 col-md-12 display-flex pb-1 position-relative" 
-                *ngFor="let item of MyProduct | paginate: { itemsPerPage: 28, currentPage: page, totalItems: totalProductAPI };
+                [ngClass]="{'no-aviable': item.suggestion === null}"
+                *ngFor="let item of MyProduct  | paginate: { itemsPerPage: 28, currentPage: page, totalItems: totalProductAPI  };
                 let i = index;"
                 id="{{i}}">
                 

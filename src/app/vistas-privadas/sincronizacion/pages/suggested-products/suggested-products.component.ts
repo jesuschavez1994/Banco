@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter,  Output} from '@angular/core';
 import {ThemePalette} from '@angular/material/core';
 import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service';
 import { Sugerir } from '@models/sincronizacion/sugerir';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-
+import { ProductosLoads } from '@interfaces/InterfaceProducto';
+import { Total } from '@interfaces/sincronizacion';
+import {debounceTime} from 'rxjs/operators';
 export interface Task {
   name: string;
   completed: boolean;
@@ -11,6 +13,11 @@ export interface Task {
   subtasks?: Task[];
 }
 
+export class Termino {
+  constructor(
+      public name: string,
+  ) { }
+}
 
 @Component({
   selector: 'app-suggested-products',
@@ -19,19 +26,7 @@ export interface Task {
 })
 export class SuggestedProductsComponent implements OnInit {
 
-
-  forma: FormGroup;
-
-  constructor(public sincronizacion: SincronizacionService) {
-
-
-    this.forma = new FormGroup({
-      id: new FormControl(''),
-    });
-
-  }
-
-// tslint:disable-next-line: member-ordering
+  // tslint:disable-next-line: member-ordering
 task: Task = {
   name: 'Indeterminate',
   completed: false,
@@ -43,9 +38,17 @@ task: Task = {
   ]
 };
 
+
+  @Output() public searchEmitter = new EventEmitter<string>();
+
+  forma: FormGroup;
+  palabra: Total;
+
+  constructor(public sincronizacion: SincronizacionService) {}
+
   allComplete = false;
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   solicitarSugerencias(){
@@ -80,6 +83,16 @@ task: Task = {
       return;
     }
     this.task.subtasks.forEach(t => t.completed = completed);
+  }
+
+  buscar(termino: string){
+    console.log(termino);
+
+    const palabra = new Termino(
+      termino
+    );
+
+   
   }
 
 }

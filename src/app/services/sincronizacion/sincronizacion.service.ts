@@ -82,6 +82,16 @@ export class SincronizacionService {
     return this.postQuery(url, id);
   }
 
+  BuscadorSugerencias(termino: any, userId: string, storeId: string){
+    const url = `/api/users/${userId}/stores/${storeId}/products_suggested_search`;
+    return this.postQuery(url, termino);
+  }
+
+  BuscadorBancoDeProductos(termino: any, userId: string, storeId: string){
+    const url = `/api/users/${userId}/stores/${storeId}/banks_search`;
+    return this.postQuery(url, termino);
+  }
+
   public ShowTableExcell(bstr: string): XLSX.AOA2SheetOpts {
     /* read workbook */
     const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });

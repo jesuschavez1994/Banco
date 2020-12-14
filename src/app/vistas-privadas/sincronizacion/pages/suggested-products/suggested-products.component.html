@@ -1,4 +1,4 @@
-<section class="container-fluid mt-5 pb-3">
+<!-- <section class="container-fluid mt-5 pb-3">
     <div class="row">
         <div class="col-md-12 display-flex align-items-center">
             <div class="input-group-text mr-3">
@@ -19,11 +19,12 @@
                 <input  type="search" 
                         placeholder="Busca en nustro banco de productos" 
                         aria-label="Search" 
-                        class="form-control width-100 icon-magnifying-glass">
+                        class="form-control width-100 icon-magnifying-glass"
+                        [formControl]="search">
             </form>
         </div>
     </div>
-</section>
+</section> -->
 
-<app-items-suggested-products [SetAllCheckbox]="this.task"></app-items-suggested-products>
+<app-items-suggested-products [SetAllCheckbox]="this.task" [PalabraBuscador]="this.palabra"></app-items-suggested-products>
 
