@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarListControler } from '@models/models-components-options/sidebar-list.model';
-import { bannerOptions } from '@interfaces/components-options/banner.interface';
+import { bannerOptions } from '@interfaces/components-options/banner.option.interface';
 import { ProductService } from '@services/product/product.service';
 import { ProductsCardsController } from '@models/models-components-options/products-cards.model';
-import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.options.interface';
+import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

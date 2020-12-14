@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, Renderer2, ViewChild, Input } from '@angular/core';
-import { QuantityCounterOptions } from '@interfaces/components-options/quantity-counter.interface';
+import { QuantityCounterOptions } from '@interfaces/components-options/quantity-counter.option.interface';
 
 @Component({
   selector: 'app-quantity-counter',

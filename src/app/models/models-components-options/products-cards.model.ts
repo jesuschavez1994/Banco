@@ -1,5 +1,5 @@
 // import { Injectable } from '@angular/core';
-import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.options.interface';
+import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface';
 import { Product } from '@interfaces/product.interface';
 
 // @Injectable({

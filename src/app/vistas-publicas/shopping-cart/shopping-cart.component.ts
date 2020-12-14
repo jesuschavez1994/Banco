@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SidebarMenuOptions } from '@interfaces/components-options/sidebar-menu.interface';
+import { SidebarMenuOptions } from '@interfaces/components-options/sidebar-menu.option.interface';
 
 @Component({
   selector: 'app-shopping-cart',

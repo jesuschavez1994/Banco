@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { bannerOptions } from '@interfaces/components-options/banner.interface';
+import { bannerOptions } from '@interfaces/components-options/banner.option.interface';
 
 @Component({
   selector: 'app-banner',
