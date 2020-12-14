@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.options.interface';
 
 @Component({
@@ -10,11 +10,14 @@ export class ProductDetailComponent implements OnInit {
 
   @Input() selectedProduct: ProductsCardsOptions;
 
-  constructor( ) {
+  constructor(
+  ) {
 
   }
 
   ngOnInit(): void {
+
   }
+
 
 }

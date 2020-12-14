@@ -1,17 +1,17 @@
 <ng-container *ngIf="selectedProduct">
 
-    <div class="product-detail">
+  <div class="product-detail">
 
-        <div class="main-img">
+      <div class="main-img">
 
-        <app-image-preview-gallery
-            [imgs]="selectedProduct.images"
-            [currentImg]="selectedProduct.images[0]">
-        </app-image-preview-gallery>
+      <app-image-preview-gallery
+          [imgs]="selectedProduct.images"
+          [currentImg]="selectedProduct.images[0]">
+      </app-image-preview-gallery>
 
-        </div>
+      </div>
 
-        <div class="content">
+      <div class="content">
 
         <h2 class="name">
             {{selectedProduct.name}}
@@ -37,8 +37,8 @@
 
         </div>
 
-        </div>
+      </div>
 
-    </div>
+  </div>
 
 </ng-container>

@@ -31,9 +31,10 @@
           (sidebarExpand)="this.sidebarListCtr.toggleSidebarList($event)">
         </app-search-bar>
 
+        <!-- (selected)="selectProduct($event)" -->
         <app-products-cards
-          [products]="productsCards"
-          (selected)="selectProduct($event)">
+          (selected)="selectProduct($event)"
+          [products]="productsCards">
         </app-products-cards>
 
       </section>
