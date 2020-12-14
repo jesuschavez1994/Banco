@@ -19,17 +19,9 @@ export class ProductsCardsComponent  {
 
     this.selected.emit(product);
 
-    if (this.routerLink && product.id > -1){
+    if (product.id > -1 && product.idStore > -1){
+      this.router.navigate( ['/business-detail', product.idStore, 'products', product.id] );
 
-      this.router.navigate(
-
-        this.routerLink,
-        {
-          queryParams: { product: product.id },
-          queryParamsHandling: 'merge'
-        }
-
-      );
     }
 
   }

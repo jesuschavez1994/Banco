@@ -65,6 +65,7 @@
     }
 
     .options {
+
       li{
         border-radius: 0px 4px 4px 0px;
         cursor: pointer;
@@ -75,6 +76,7 @@
         a{
           font-size: 18px;
           word-break: break-word;
+          text-transform: capitalize;
         }
 
         &:hover{
@@ -85,7 +87,6 @@
           background: $color__background-gray;
           font-weight: bold;
         }
-
 
       }
     }

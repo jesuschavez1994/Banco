@@ -22,7 +22,8 @@ export class ImgFallbackPipe implements PipeTransform {
 
         case 'avatar':
           return 'assets/img/no-avatar.jpg';
-
+        default:
+          return 'assets/img/no-image-banner.jpg';
 
       }
 

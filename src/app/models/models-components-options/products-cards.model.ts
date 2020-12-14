@@ -1,5 +1,4 @@
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.options.interface';
-
 export class ProductsCardsController {
 
   private productsDataFormated: ProductsCardsOptions[] = [];
@@ -11,6 +10,7 @@ export class ProductsCardsController {
     public stock?: number,
     public images?: string[],
     public id: number =  -1,
+    public idStore: number = -1,
     public isFavorite: boolean = false,
   ){
     // this.isFavorite = isFavorite;
@@ -30,7 +30,8 @@ export class ProductsCardsController {
           stock: product[`${atributtesNames[3]}`],
           images: product[`${atributtesNames[4]}`],
           id: product[`${atributtesNames[5]}`] ? product[`${atributtesNames[5]}`] : -1,
-          isFavorite: product[`${atributtesNames[6]}`] ? true : this.isFavorite,
+          idStore: product[`${atributtesNames[6]}`] ? product[`${atributtesNames[6]}`] : -1,
+          isFavorite: product[`${atributtesNames[7]}`] ? true : this.isFavorite,
         }
       );
 

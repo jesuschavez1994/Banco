@@ -35,12 +35,12 @@
 
     <ul class="options">
 
-      <li>
-          <a>Productos</a>
+      <li [routerLink]="anclaOptions.productosLink" #productsOptionMenu>
+        <a>productos</a>
       </li>
 
-      <li class="active">
-          <a>Contacto</a>
+      <li [routerLink]="anclaOptions.contactoLink" #contactoOptionMenu>
+        <a>contacto</a>
       </li>
 
     </ul>

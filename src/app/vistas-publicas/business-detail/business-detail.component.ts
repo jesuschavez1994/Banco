@@ -4,7 +4,7 @@ import { bannerOptions } from '@interfaces/components-options/banner.interface';
 import { ProductService } from '@services/product/product.service';
 import { ProductsCardsController } from '@models/models-components-options/products-cards.model';
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.options.interface';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-business-detail',
@@ -30,7 +30,6 @@ export class BusinessDetailComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
-    // private router: Router
     ) {
     this.sidebarListCtr.expandSidebarlist = true;
 
@@ -50,6 +49,7 @@ export class BusinessDetailComponent implements OnInit {
 
   public setProductsCards() {
 
+    // Agregar swichtmap
     this.route.paramMap.subscribe(params => {
 
       if (params.has('idStore')) {
@@ -63,7 +63,7 @@ export class BusinessDetailComponent implements OnInit {
 
           this.productsCards = this.productsCardsCtr.formatProductResponse(
             products,
-            ['name', 'description', 'price', 'stock', 'images', 'id']
+            ['name', 'description', 'price', 'stock', 'images', 'id', 'store_id']
           );
 
         });
@@ -87,7 +87,6 @@ export class BusinessDetailComponent implements OnInit {
     const idxRouteMatched = routes.indexOf('products');
 
     this.showProducts = idxRouteMatched !== -1 ? true : false;
-    console.log(routes);
 
   }
 

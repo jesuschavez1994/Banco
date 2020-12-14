@@ -10,8 +10,8 @@ export interface ProductsCardsOptions {
   stock: number;
   images: string[];
   id?: number;
+  idStore?: number;
   isFavorite?: boolean;
 
 }
-
 
