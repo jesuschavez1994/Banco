@@ -34,7 +34,7 @@ export interface Descripcion {
 export interface Suggestion {
   id: number;
   product_id: number;
-  data: Datum;
+  data: Datum[];
   created_at: string;
   updated_at: string;
 }

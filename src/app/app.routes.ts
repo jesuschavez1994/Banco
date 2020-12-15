@@ -108,6 +108,10 @@ const APP_ROUTES: Routes = [
                     path: 'suggested-products',
                     component: SuggestedProductsComponent
                     },
+                   {
+                    path: 'suggested-products-list/:id/:list',
+                    component: SuggestedProductsComponent
+                    },
                     {
                         path: 'synchronized-products',
                         component: SynchronizedProductsComponent

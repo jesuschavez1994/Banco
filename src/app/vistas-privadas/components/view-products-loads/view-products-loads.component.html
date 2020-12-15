@@ -115,7 +115,7 @@
                             </p>
         
                             <p class="family-600 size-11 mb-0 detail-name card-text line" title="{{item.description}}" *ngIf="item.sync_bank.length > 0"  >
-                                {{item.sync_bank[0].description | LimitarTexto }} 
+                                {{item.sync_bank[0].description | LimitarTexto:105 }} 
                                 <!-- <span *ngIf="item.description.length > 100">...</span> -->
                             </p>
 
@@ -136,7 +136,7 @@
                             </p>
         
                             <p class="family-600 size-11 mb-0 detail-name card-text line" title="{{item.description}}">
-                                {{item.description | LimitarTexto }} 
+                                {{item.description | LimitarTexto:105 }} 
                                 <!-- <span *ngIf="item.description.length > 100">...</span> -->
                             </p>
         
@@ -160,7 +160,7 @@
                             </p>
         
                             <p class="family-600 size-11 mb-0 detail-name card-text line" title="{{item.description}}">
-                                {{item.description | LimitarTexto }} 
+                                {{item.description | LimitarTexto:105 }} 
                                 <!-- <span *ngIf="item.description.length > 100">...</span> -->
                             </p>
         

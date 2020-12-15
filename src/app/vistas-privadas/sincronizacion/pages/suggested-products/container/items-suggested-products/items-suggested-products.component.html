@@ -9,7 +9,7 @@
                     class="mr-3 family-700">
                 Sincronizar
             </button>
-            <app-search (searchEmitter)="handleSearch($event)" class="width-70"></app-search>
+            <app-search (searchEmitter)="handleSearch($event)" class="width-70" [BuscarText]="this.textBuscador"></app-search>
         </div>
     </div>
 </section>
@@ -97,9 +97,11 @@
 
                                 <button class="prev" (click)="next = next - 1">&#10094;</button>
 
-                                <mat-grid-list  class="item-grid" 
+                                <mat-grid-list  class="item-grid mySlides"
+                                                id="carrusel{{iterador}}" 
                                                 cols="5" rowHeight="2:1.5" 
-                                                [ngClass]="{'mySlides': iterador - next }"
+                                                [ngClass]="{'mySlides': iterador}"
+                                                
                                                 >
 
                                     <mat-grid-tile>
@@ -125,7 +127,9 @@
                                     <mat-grid-tile></mat-grid-tile>
                                 </mat-grid-list>
 
-                                <button class="next" (click)="next = next + 1">&#10095;</button>
+                                <!-- <button class="next" (click)="next = next + 1">&#10095;</button> -->
+
+                                <button class="next" (click)="ToNextItem(i, item.suggestion.data, iterador)">&#10095;</button>
 
                         </div>
 

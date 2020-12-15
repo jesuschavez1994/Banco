@@ -1,4 +1,15 @@
-<app-tablero-de-sincronizacion [index]="this.index"></app-tablero-de-sincronizacion>
+<section class="container-fluid mt-5">
+  <div class="row">
+      <div class="col-md-12 display-flex justify-content-space-between">
+          <button 
+                  type="button" 
+                  class="mr-3 family-700">
+                  Desincronizar
+          </button>
+          <app-search (searchEmitter)="handleSearch($event)" class="width-70"></app-search>
+      </div>
+  </div>
+</section>
 
 
 <section class="row">
@@ -64,10 +75,25 @@
               <div *ngSwitchCase="'no sincronizado'">
                 <span class="family-700 NoSynchronized">NO SINCRONIZADO</span>
               </div>
+              <!-- <div *ngSwitchDefault>
+                <span class="family-700 NoSynchronized">NO SINCRONIZADO</span>
+              </div> -->
             </div>
           </td>
           <td class="family-500">
-            Ver
+            <div [ngSwitch]="item.sincronice">
+              <div *ngSwitchCase="'sincronizado'">
+                <a  [routerLink]="['/my-store/edit-product-sync', itemProductos[i].id]" >
+                    ver
+                </a>
+              </div>
+              <div *ngSwitchCase="'no sincronizado'">
+                <a  [routerLink]="['/my-store/sincronizacion/suggested-products-list', itemProductos[i].name, 'list']" >
+                  ver
+                </a>
+              </div>
+            </div>
+            
           </td>
         </tr>
       </tbody>

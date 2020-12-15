@@ -1,4 +1,4 @@
-import {  Component, Input, OnInit } from '@angular/core';
+import {  Component, Input, OnInit} from '@angular/core';
 import {  StoreService } from '../../../../../../services/store/store.service';
 import {  ActivatedRoute, Params, Router} from '@angular/router';
 import {  Descripcion } from '@interfaces/sincronizacion';
@@ -16,7 +16,7 @@ import { Termino } from '../../../../../../models/buscador.model';
   templateUrl: './items-suggested-products.component.html',
   styleUrls: ['./items-suggested-products.component.css']
 })
-export class ItemsSuggestedProductsComponent implements OnInit {
+export class ItemsSuggestedProductsComponent implements OnInit{
 
   images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
 
@@ -25,6 +25,8 @@ export class ItemsSuggestedProductsComponent implements OnInit {
   slideIndex = 1;
   next = 0;
   palabra: any
+  suggestedShow = false;
+
 
   @Input() SetAllCheckbox: boolean;
   @Input() PalabraBuscador: ProductosLoads;
@@ -39,7 +41,7 @@ export class ItemsSuggestedProductsComponent implements OnInit {
   page: number = 1;
   filtro_valor: string = '';
   busqueda = false;
-
+  textBuscador: any;
 
   MyProduct: Descripcion[] = [];
   itemProductos: Descripcion[] = [];
@@ -49,8 +51,13 @@ export class ItemsSuggestedProductsComponent implements OnInit {
               public sincronizacion: SincronizacionService,
               private route: ActivatedRoute,
               private router: Router)
-  {
 
+  {
+              this.route.params.subscribe(params => {
+                console.log('query', params);
+                this.textBuscador = params.id;
+              })
+              
               this.forma = new FormGroup(
                 {
                   banck_id: new FormControl(''),
@@ -63,6 +70,7 @@ export class ItemsSuggestedProductsComponent implements OnInit {
 
   ngOnInit() {
 
+    
 
     this.getData(this.page);
     // sistema que nos permita leer el parámetro de la página una vez que cambiamos entre estas usando la función
@@ -73,6 +81,9 @@ export class ItemsSuggestedProductsComponent implements OnInit {
 
 
   }
+
+
+
   SelectCheckBox(e: any, i: string){
     console.log(e.checked);
 
@@ -110,8 +121,9 @@ export class ItemsSuggestedProductsComponent implements OnInit {
       page)
       .subscribe( (resp: Total) => {
         this.MyProduct = resp.data;
+        this.suggestedShow = true;
         // this.dataObject = resp.data.suggestion.data.JSON.parse();
-        console.log('MY PRODUCTOS', this.MyProduct);
+        console.log('MY PRODUCTOSSSS', this.MyProduct);
         this.last_Page_Pagination = resp.last_page;
         this.totalProductAPI = resp.total;
     });
@@ -119,16 +131,12 @@ export class ItemsSuggestedProductsComponent implements OnInit {
   }
 
 
-  ToNextItem(event: number, iterador: any){
-    console.log(event);
-    console.log(iterador);
+  ToNextItem(indice: any, item: any, iterador: any){
 
-    if (event === 0){
-    }
-    switch (event){
-      case 0:
-        return this.next = this.next + 1;
-    }
+    console.log(indice);
+    console.log(item);
+    console.log(iterador = iterador  + 1);
+
   }
 
 
@@ -158,19 +166,19 @@ export class ItemsSuggestedProductsComponent implements OnInit {
 
   
 
-  public handleSearch(value: string): void {
+  handleSearch(value: string): void {
     console.log(value);
     this.filtro_valor = value;
 
     let comparacion = new Termino( value  );
 
-      this.sincronizacion.BuscadorSugerencias(
-        comparacion,
-        localStorage.getItem('id'),
-        localStorage.getItem('storeId')).subscribe( (resp: Total) => {
-        console.log(resp.data);
-        return  this.MyProduct = resp.data;
-      });
+    this.sincronizacion.BuscadorSugerencias(
+      comparacion,
+      localStorage.getItem('id'),
+      localStorage.getItem('storeId')).subscribe( (resp: Total) => {
+      console.log(resp.data);
+      return  this.MyProduct = resp.data;
+    });
 
 
   }

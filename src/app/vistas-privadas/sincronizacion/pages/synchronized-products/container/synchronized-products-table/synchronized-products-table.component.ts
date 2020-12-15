@@ -77,5 +77,9 @@ export class SynchronizedProductsTableComponent implements OnInit {
 
   }
 
+  handleSearch($event){
+    
+  }
+
 
 }

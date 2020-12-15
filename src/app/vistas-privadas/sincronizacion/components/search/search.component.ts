@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter,  Output } from '@angular/core';
+import { Component, OnInit, EventEmitter,  Output, Input } from '@angular/core';
 import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service';
 import { Sugerir } from '@models/sincronizacion/sugerir';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
@@ -14,7 +14,8 @@ import {debounceTime} from 'rxjs/operators';
 export class SearchComponent implements OnInit {
 
   @Output() public searchEmitter = new EventEmitter<string>();
-
+  @Input() BuscarText: any ;
+  
   constructor() { }
 
   ngOnInit(): void {

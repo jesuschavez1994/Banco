@@ -25,6 +25,7 @@ button{
 .no-aviable{
     display: none;
 }
+/* .aviable{display: block} */
 .mySlides {display: none}
 
 .ir-arriba {

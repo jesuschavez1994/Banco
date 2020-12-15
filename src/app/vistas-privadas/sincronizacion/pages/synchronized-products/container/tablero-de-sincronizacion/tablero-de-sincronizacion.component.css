@@ -8,6 +8,10 @@ button{
     border-bottom: 1px solid #dee2e6;
 }
 
+section{
+    padding-top: 7px;
+}
+
 input {
     border-color: rgb(204, 203, 203);
     background-color: #f4f4f4;

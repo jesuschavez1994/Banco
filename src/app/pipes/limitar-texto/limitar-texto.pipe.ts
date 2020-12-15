@@ -8,19 +8,12 @@ const URL = URL_SERVICIOS;
 })
 export class LimitarTextoPipe implements PipeTransform {
 
-  transform(text: string): string {
+  transform(text: string, maxLength: number): string {
 
-    const logitud = 100;
-    const dato = text;
-    let datoAMostrar = '';
+    const textLength = text.length;
 
-    for (let i = 0; i < logitud && i < dato.length; i++) {
-        datoAMostrar = datoAMostrar + dato[i];
-    }
+    return textLength > maxLength ? text.substr(0, maxLength) + '...' : text;
 
-    datoAMostrar = datoAMostrar;
-
-    return datoAMostrar;
   }
 
 }

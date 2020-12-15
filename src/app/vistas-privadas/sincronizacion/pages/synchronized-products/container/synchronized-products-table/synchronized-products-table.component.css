@@ -10,3 +10,13 @@ td, th{
     border-bottom: none;
     border-top: none;
 }
+
+button{
+    border: 1px solid rgb(204, 203, 203);
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+section{
+    padding-top: 7px;
+}
