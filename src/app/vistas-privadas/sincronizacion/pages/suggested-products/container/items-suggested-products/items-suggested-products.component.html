@@ -19,7 +19,7 @@
 <div layout=”row” layout-wrap="wrap">
     
     <section    class="mt-5 mb-5 col-md-12 display-flex pb-1 position-relative" 
-                [ngClass]="{'no-aviable': item.suggestion === null}"
+                [ngClass]="{'no-aviable': item.suggestion === null || item.suggestion.data.length === 0}"
                 *ngFor="let item of MyProduct  | paginate: { itemsPerPage: 28, currentPage: page, totalItems: totalProductAPI  };
                 let i = index;"
                 id="{{i}}">
