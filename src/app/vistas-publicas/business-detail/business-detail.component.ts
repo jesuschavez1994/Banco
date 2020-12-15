@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SidebarListControler } from '@models/models-components-options/sidebar-list.model';
 import { bannerOptions } from '@interfaces/components-options/banner.option.interface';
 import { ProductService } from '@services/product/product.service';
 import { ProductsCardsController } from '@models/models-components-options/products-cards.model';
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProductsCardsComponent } from '@shared/products-cards/products-cards.component';
+import { ProductDetailComponent } from '@shared/product-detail/product-detail.component';
 
 @Component({
   selector: 'app-business-detail',
@@ -17,15 +19,14 @@ export class BusinessDetailComponent implements OnInit {
 
   // Components Controllers
   sidebarListCtr = new SidebarListControler();
-  productsCardsCtr = new ProductsCardsController();
+  @ViewChild('productCards') productCards: ProductsCardsComponent;
+  @ViewChild('productDetail') productDetail: ProductDetailComponent;
 
   // Components Inputs
   imgsBanners: bannerOptions = {
     m: 'assets/img/test-img/banner.png'
   };
 
-  productsCards: ProductsCardsOptions[] = [];
-  selectedProduct: ProductsCardsOptions;
 
   constructor(
     private productService: ProductService,
@@ -40,6 +41,22 @@ export class BusinessDetailComponent implements OnInit {
     this.setSelectedProduct();
     this.setProductsCards();
     this.showProductsContainer();
+
+  }
+
+
+  /**
+   * @description Controla el valor ngIf para desplegar la sección de contacto o productos
+   * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christpherdallar1234@matiz.com.ve
+   * @date 13/12/2020
+   * @memberof BusinessDetailComponent
+   */
+  public showProductsContainer(){
+
+    const routes = this.route.snapshot.url.map( url => url.path );
+    const idxRouteMatched = routes.indexOf('products');
+
+    this.showProducts = idxRouteMatched !== -1 ? true : false;
 
   }
 
@@ -77,15 +94,13 @@ export class BusinessDetailComponent implements OnInit {
 
       if (idxRouteMatched > -1 && params.has('idStore') && params.has('idProduct') ) {
 
-
         const idStore = parseInt( params.get('idStore') );
         const idProduct = parseInt( params.get('idProduct') );
 
         this.productService.getProductByStore(idStore, idProduct).subscribe(
           product => {
 
-            // console.log(product);
-            this.selectedProduct = this.productsCardsCtr.formatProductResponse(
+            this.productDetail.selectedProduct = this.productDetail.formatProductResponse(
               product,
               ['name', 'description', 'price', 'stock', 'images', 'id', 'store_id']
             );
@@ -93,7 +108,7 @@ export class BusinessDetailComponent implements OnInit {
           }, error => {
 
             console.log('Error loading products', error);
-            this.selectedProduct  = null;
+            this.productDetail.selectedProduct = null;
 
           }, () => {
             // console.log('products loaded');
@@ -119,7 +134,7 @@ export class BusinessDetailComponent implements OnInit {
 
           const products = resp.data;
 
-          this.productsCards = this.productsCardsCtr.formatProductsResponse(
+          this.productCards.products = this.productCards.formatProductsResponse(
             products,
             ['name', 'description', 'price', 'stock', 'images', 'id', 'store_id']
           );
@@ -129,22 +144,6 @@ export class BusinessDetailComponent implements OnInit {
       }
 
     });
-
-  }
-
-
-  /**
-   * @description Controla el valor ngIf para desplegar la sección de contacto o productos
-   * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christpherdallar1234@matiz.com.ve
-   * @date 13/12/2020
-   * @memberof BusinessDetailComponent
-   */
-  public showProductsContainer(){
-
-    const routes = this.route.snapshot.url.map( url => url.path );
-    const idxRouteMatched = routes.indexOf('products');
-
-    this.showProducts = idxRouteMatched !== -1 ? true : false;
 
   }
 

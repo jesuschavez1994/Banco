@@ -23,7 +23,8 @@
 
         <h1 class="profile-name">farmacia medical background</h1>
 
-        <app-product-detail [selectedProduct]="selectedProduct"></app-product-detail>
+        <app-product-detail #productDetail>
+        </app-product-detail>
 
         <app-search-bar
           [buttonSidebarList]="true"
@@ -32,8 +33,8 @@
         </app-search-bar>
 
         <app-products-cards
-          (selected)="selectProduct($event)"
-          [products]="productsCards">
+          #productCards
+          (selected)="selectProduct($event)">
         </app-products-cards>
 
       </section>
