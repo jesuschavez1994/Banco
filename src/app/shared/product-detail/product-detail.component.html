@@ -23,17 +23,18 @@
 
         <div class="shopping-cart">
 
-            <div class="cost">
-            {{selectedProduct.price | currency }}
-            </div>
+          <div class="cost">
+          {{selectedProduct.price | currency }}
+          </div>
 
-            <app-quantity-counter
-              [maxValue]="selectedProduct.stock">
-            </app-quantity-counter>
+          <app-quantity-counter
+            (currentValue)="setCurrentValueCounter($event)"
+            [maxValue]="selectedProduct.stock">
+          </app-quantity-counter>
 
-            <button class="btn-add-to-cart">
+          <button class="btn-add-to-cart" (click)="addToCart()">
             Añadir al carrito
-            </button>
+          </button>
 
         </div>
 

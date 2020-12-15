@@ -9,15 +9,26 @@ import { ProductsCardsOptions } from '@interfaces/components-options/products-ca
 export class ProductDetailComponent implements OnInit {
 
   @Input() selectedProduct: ProductsCardsOptions;
+  currentValueCounter: number;
 
-  constructor(
-  ) {
+  constructor() { }
+
+  ngOnInit(): void { }
+
+  public setCurrentValueCounter(event) {
+    this.currentValueCounter = event;
 
   }
 
-  ngOnInit(): void {
+  public addToCart() {
+    const currentValueCounter = this.currentValueCounter;
 
+    if ( isNaN((currentValueCounter)) ) {
+      this.currentValueCounter = 1;
+
+    }
+
+    // Luego el codigo para agregar al carrito
   }
-
 
 }
