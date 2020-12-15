@@ -28,7 +28,7 @@
           </div>
 
           <app-quantity-counter
-            (currentValue)="setCurrentValueCounter($event)"
+            #quantityCounter
             [maxValue]="selectedProduct.stock">
           </app-quantity-counter>
 

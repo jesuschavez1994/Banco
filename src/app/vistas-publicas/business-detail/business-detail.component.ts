@@ -84,7 +84,7 @@ export class BusinessDetailComponent implements OnInit {
         this.productService.getProductByStore(idStore, idProduct).subscribe(
           product => {
 
-            console.log(product);
+            // console.log(product);
             this.selectedProduct = this.productsCardsCtr.formatProductResponse(
               product,
               ['name', 'description', 'price', 'stock', 'images', 'id', 'store_id']
@@ -96,7 +96,7 @@ export class BusinessDetailComponent implements OnInit {
             this.selectedProduct  = null;
 
           }, () => {
-            console.log('products loaded');
+            // console.log('products loaded');
           }
         );
 

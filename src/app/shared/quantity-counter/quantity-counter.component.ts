@@ -1,6 +1,6 @@
 import {
   Component, OnInit, ElementRef, Renderer2, ViewChild,
-  Input, OnChanges, SimpleChanges, AfterViewInit, EventEmitter,
+  Input, AfterViewInit, EventEmitter,
   Output
 } from '@angular/core';
 
@@ -9,7 +9,7 @@ import {
   templateUrl: './quantity-counter.component.html',
   styleUrls: ['./quantity-counter.component.scss']
 })
-export class QuantityCounterComponent implements OnInit, OnChanges, AfterViewInit {
+export class QuantityCounterComponent implements OnInit, AfterViewInit {
 
   @ViewChild('inputQuantityCounter', {static: true}) inputQuantityCounter: ElementRef;
   @ViewChild('increaseControl') increaseControl: ElementRef;
@@ -18,7 +18,6 @@ export class QuantityCounterComponent implements OnInit, OnChanges, AfterViewIni
 
   @Input() isStrong = true;
   @Input() initValue = 1;
-  @Input() value = 1;
   @Input() maxValue = 1;
   @Input() changeValue = 1;
   @Input() minValue = 1;
@@ -26,18 +25,13 @@ export class QuantityCounterComponent implements OnInit, OnChanges, AfterViewIni
 
   constructor(private renderer: Renderer2 ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   ngAfterViewInit(): void {
     this.setEventsControls( this.increaseControl );
     this.setEventsControls( this.decreaseControl, true );
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    const inputNumber = this.inputQuantityCounter.nativeElement;
-    this.renderer.setProperty(inputNumber, 'value', this.initValue);
-    this.currentValue.emit(parseInt(inputNumber.value));
-
+    this.initInputValue();
   }
 
   public setEventsControls( controlRef, isDecrease: boolean = false ){
@@ -102,16 +96,48 @@ export class QuantityCounterComponent implements OnInit, OnChanges, AfterViewIni
     const inputNumber = this.inputQuantityCounter.nativeElement;
     const inputValue = parseInt(inputNumber.value);
 
-    if ( inputValue <= this.minValue ){
+
+    if ( inputValue < this.minValue ){
       this.renderer.setProperty(inputNumber, 'value', this.minValue);
 
-    }else if ( inputValue > this.maxValue){
+    }else if ( inputValue > this.maxValue ){
       this.renderer.setProperty(inputNumber, 'value', this.maxValue);
 
     }
 
     this.currentValue.emit(inputValue);
 
+  }
+
+  // **
+  public valid() {
+    const inputNumber = this.inputQuantityCounter.nativeElement;
+    const inputValue = parseInt(inputNumber.value);
+
+
+    if ( inputValue < this.minValue || isNaN(inputValue)){
+      this.renderer.setProperty(inputNumber, 'value', this.minValue);
+
+    }else if ( inputValue > this.maxValue ){
+      this.renderer.setProperty(inputNumber, 'value', this.maxValue);
+
+    }
+
+    this.currentValue.emit(inputValue);
+  }
+
+  public setInputValue(value) {
+    const inputNumber = this.inputQuantityCounter.nativeElement;
+    this.renderer.setProperty(inputNumber, 'value', value);
+  }
+
+  public getInputValue(): number {
+    const inputNumber = this.inputQuantityCounter.nativeElement;
+    return parseInt(inputNumber.value);
+  }
+
+  public initInputValue(){
+    this.setInputValue(this.minValue);
   }
 
 }

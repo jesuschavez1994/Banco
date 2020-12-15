@@ -1,32 +1,33 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ViewChild, AfterViewInit } from '@angular/core';
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface';
+import { QuantityCounterComponent } from '../quantity-counter/quantity-counter.component';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss']
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit, OnChanges {
 
+  @ViewChild('quantityCounter') quantityCounter: QuantityCounterComponent;
   @Input() selectedProduct: ProductsCardsOptions;
-  currentValueCounter: number;
 
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
-  public setCurrentValueCounter(event) {
-    this.currentValueCounter = event;
+  ngOnChanges(): void {
+
+    if (this.quantityCounter) {
+      this.quantityCounter.initInputValue();
+    }
 
   }
 
   public addToCart() {
-    const currentValueCounter = this.currentValueCounter;
 
-    if ( isNaN((currentValueCounter)) ) {
-      this.currentValueCounter = 1;
-
-    }
+    this.quantityCounter.valid();
 
     // Luego el codigo para agregar al carrito
   }
