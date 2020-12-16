@@ -4,7 +4,9 @@
 
   <app-sidebar-list
     #sidebarList
+    [anchorsMenu]="anchorsMenu"
     [sidebarTarget]="this.sidebarList"
+    (selectedCategory)="selectedCategory($event)"
   >
   </app-sidebar-list>
 

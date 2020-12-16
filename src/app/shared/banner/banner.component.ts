@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { bannerOptions } from '@interfaces/components-options/banner.option.interface';
+import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
 
 @Component({
   selector: 'app-banner',
@@ -8,7 +8,7 @@ import { bannerOptions } from '@interfaces/components-options/banner.option.inte
 })
 export class BannerComponent implements OnInit {
 
-  @Input() imgs: bannerOptions;
+  @Input() imgs: BannerOptions;
 
   currentImg: string;
 

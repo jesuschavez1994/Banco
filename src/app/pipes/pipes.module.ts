@@ -6,6 +6,7 @@ import { BoxDefaultPipe } from './box/box-default.pipe';
 import { ImgProductLoadPipe } from './imagenLoad/img-product-load.pipe';
 import { ExcerptPipe } from './excerpt/excerpt.pipe';
 import { ImgFallbackPipe } from './img-fallback/img-fallback.pipe';
+import { StrReplacePipe } from './strReplace/str-replace.pipe';
 
 
 
@@ -16,7 +17,8 @@ import { ImgFallbackPipe } from './img-fallback/img-fallback.pipe';
     BoxDefaultPipe,
     ImgProductLoadPipe,
     ExcerptPipe,
-    ImgFallbackPipe
+    ImgFallbackPipe,
+    StrReplacePipe
   ],
   exports: [
     ImagenPipe,
@@ -24,7 +26,8 @@ import { ImgFallbackPipe } from './img-fallback/img-fallback.pipe';
     BoxDefaultPipe,
     ImgProductLoadPipe,
     ExcerptPipe,
-    ImgFallbackPipe
+    ImgFallbackPipe,
+    StrReplacePipe
   ],
   imports: [
     CommonModule

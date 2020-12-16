@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { bannerOptions } from '@interfaces/components-options/banner.option.interface';
+import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
 import { ProductService } from '@services/product/product.service';
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,10 +23,15 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('sidebarList') sidebarList: SidebarListComponent;
 
   // Components Inputs
-  imgsBanners: bannerOptions = {
+  imgsBanners: BannerOptions = {
       m: 'assets/img/test-img/banner.png'
   };
 
+  anchorsMenu = {
+    productLink: '/business-detail/1/products',
+    contactLink: '/business-detail/1',
+    wordToMatch: 'products'
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +51,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-      this.sidebarList.isExpanded = true;
+    this.sidebarList.isExpanded = true;
 
   }
 
@@ -157,6 +162,10 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     this.storeService.getStoreById(1).subscribe(resp => {
       console.log(resp);
     });
+  }
+
+  public selectedCategory(event){
+    console.log(event);
   }
 
 
