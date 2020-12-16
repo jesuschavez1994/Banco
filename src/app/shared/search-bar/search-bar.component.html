@@ -3,9 +3,7 @@
   <ng-container *ngIf="buttonSidebarList">
 
     <div class="btn-toogle-sidebar-list">
-      <app-sidebar-list-button
-        [isExpanded]="isExpanded"
-        (sidebarExpand)="toggleSidebarList($event)">
+      <app-sidebar-list-button [sidebarTarget]="sidebarTarget">
       </app-sidebar-list-button>
     </div>
 

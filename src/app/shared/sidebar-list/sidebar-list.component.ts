@@ -17,6 +17,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       contactoLink: '/business-detail/1'
   };
 
+  @Input() sidebarTarget: SidebarListComponent;
   @Input() isExpanded = false;
   @Output() sidebarExpand = new EventEmitter<boolean>();
   @ViewChild('sidebarList') sidebarList: ElementRef;

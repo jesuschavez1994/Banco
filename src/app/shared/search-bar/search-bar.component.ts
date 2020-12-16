@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component';
 
 @Component({
   selector: 'app-search-bar',
@@ -8,18 +9,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class SearchBarComponent implements OnInit {
 
   @Input() buttonSidebarList = false;
-  @Input() isExpanded = false;
-  @Output() sidebarExpand = new EventEmitter<boolean>();
+  @Input() sidebarTarget: SidebarListComponent;
 
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  public toggleSidebarList(event){
-    this.isExpanded = event;
-    this.sidebarExpand.emit( this.isExpanded );
-
   }
 
 }

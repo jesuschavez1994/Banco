@@ -3,8 +3,9 @@
 <main class="page">
 
   <app-sidebar-list
-    [isExpanded]="this.sidebarListCtr.expandSidebarlist"
-    (sidebarExpand)="this.sidebarListCtr.toggleSidebarList($event)">
+    #sidebarList
+    [sidebarTarget]="this.sidebarList"
+  >
   </app-sidebar-list>
 
   <div class="column">
@@ -27,9 +28,8 @@
         </app-product-detail>
 
         <app-search-bar
-          [buttonSidebarList]="true"
-          [isExpanded]="this.sidebarListCtr.expandSidebarlist"
-          (sidebarExpand)="this.sidebarListCtr.toggleSidebarList($event)">
+          [sidebarTarget]="this.sidebarList"
+          [buttonSidebarList]="true">
         </app-search-bar>
 
         <app-products-cards

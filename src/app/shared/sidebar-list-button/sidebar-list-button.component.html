@@ -1,6 +1,7 @@
-<div class="button-toggle-sidebar" [ngClass]="{'active': isExpanded}" (click)="toggleSideBar()">
+<div class="button-toggle-sidebar" 
+    [ngClass]="{'active': this.sidebarTarget.isExpanded}" 
+    (click)="toggleSideBar()">
 
-  <!-- <input type="checkbox"> -->
   <span></span>
   <span></span>
   <span></span>
