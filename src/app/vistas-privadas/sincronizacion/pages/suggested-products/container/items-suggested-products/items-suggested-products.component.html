@@ -91,7 +91,9 @@
 
                         <div>
                             <!-- ========= AGREGAMOS EL CARRUSEL DE LAS SUGERENCIAS =============-->
-                            <app-carousel-suggested [item]="item.suggestion.data"></app-carousel-suggested>
+                            <app-carousel-suggested [item]="item.suggestion" 
+                                                    (idSugerencia)="sincronizar($event)">
+                            </app-carousel-suggested>
                             <!--=================================================================-->
                         </div>
 
@@ -101,11 +103,11 @@
                             </a>
                         </ul>
 
-                        <div class="input-group col-md-12 display-flex justify-content-flex-end pr-0 mt-3">
+                        <!-- <div class="input-group col-md-12 display-flex justify-content-flex-end pr-0 mt-3">
                             <button type="submit" class="btn btn-primary button fredoka" (click)="sincronizar(i)">
                                 Sincronizar
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>                
     </section>

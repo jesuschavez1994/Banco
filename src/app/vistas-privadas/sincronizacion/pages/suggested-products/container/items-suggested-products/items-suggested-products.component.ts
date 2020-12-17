@@ -22,6 +22,11 @@ export interface ICarouselItem {
   marginLeft?: number;
 }
 
+interface EventID{
+  idsuggested: string,
+  idproducto: string
+}
+
 
 @Component({
   selector: 'app-items-suggested-products',
@@ -38,8 +43,6 @@ export class ItemsSuggestedProductsComponent implements OnInit{
 
   @Input() SetAllCheckbox: boolean;
   @Input() PalabraBuscador: ProductosLoads;
-  @Input() items: ICarouselItem[] = [];
-  @ViewChild("grid") grid: ElementRef;
 
   images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
 
@@ -49,6 +52,7 @@ export class ItemsSuggestedProductsComponent implements OnInit{
   next = 0;
   palabra: any
   suggestedShow = false;
+  idProductoToSync: any;
 
   // tslint:disable-next-line: variable-name
   last_Page_Pagination: number;
@@ -150,56 +154,32 @@ export class ItemsSuggestedProductsComponent implements OnInit{
   }
 
 
-  setCurrentPosition(position: number, item: ICarouselItem[], iterador: any) {
-    console.log('position', position);
-    console.log('item', item);
-    this.currentPosition = position;
-    // this.items.find(i => i.id === 0).marginLeft = -100 * position;
-    item.find(element => element.bank_id === 0 ).marginLeft = -100 * position;
-  }
-
- 
-  ToNextItem(indice: any, item: ICarouselItem[], iterador: any){
-    console.log(indice);
-    console.log('item', item);
-    console.log('iterador', iterador);
-
-
-    this.finalPercentage = 0;
-
-    
-    let nextPosition = this.currentPosition + 1;
-    console.log('nextPosition', nextPosition);
-    if (nextPosition <= item.length - 1) {
-      this.finalPercentage = -100 * nextPosition;
-      console.log('finalPercentage', this.finalPercentage);
-    } else {
-      nextPosition = 0;
-      console.log('nextPosition', nextPosition);
-    }
-    // this.items.find(i => i.bank_id === 0).marginLeft = finalPercentage;
-    console.log('finalPercentage', this.finalPercentage);
-    this.currentPosition = nextPosition;
-  }
-
-
-
   formSincronizacion(){
   }
 
   // SINCRONIZACION //
-  sincronizar(index?: string){
-    const id = new Sugerir(
-      this.MyProduct[index].suggestion.data[index].bank_id
-    );
+  sincronizar(value: EventID){
+    
+    // this.idProductoToSync = this.MyProduct[index].id
+    // console.log('to', this.idProductoToSync);
 
-    this.sincronizacion.productSyncrhonized(localStorage.getItem('id'),
-    localStorage.getItem('storeId'),
-    this.MyProduct[index].id, id).subscribe( resp => {
+    console.log('id', value);
+
+    const BankId = new Sugerir(
+      value.idsuggested
+    )
+
+    this.sincronizacion.productSyncrhonized(
+      localStorage.getItem('id'),
+      localStorage.getItem('storeId'),
+      value.idproducto,
+      BankId
+    ).subscribe( resp => {
       console.log(resp);
-    });
-  }
+    })
 
+
+  }
 
   IrPaginacion(){
     window.scrollTo({
@@ -209,6 +189,7 @@ export class ItemsSuggestedProductsComponent implements OnInit{
 
   
 
+  // BUSCADOR //
   handleSearch(value: string): void {
     console.log(value);
     this.filtro_valor = value;
@@ -222,8 +203,6 @@ export class ItemsSuggestedProductsComponent implements OnInit{
       console.log(resp.data);
       return  this.MyProduct = resp.data;
     });
-
-
   }
 
 
