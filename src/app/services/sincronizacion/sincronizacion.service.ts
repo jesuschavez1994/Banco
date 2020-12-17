@@ -92,6 +92,11 @@ export class SincronizacionService {
     return this.postQuery(url, termino);
   }
 
+  Desincronizar(userId: string, storeId: string, productId: string, idSync: string){
+    const url = `/api/users/${userId}/stores/${storeId}/products/${productId}/syncs/${idSync}`;
+    return this.DeleteQuery(url);
+  }
+
   public ShowTableExcell(bstr: string): XLSX.AOA2SheetOpts {
     /* read workbook */
     const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });

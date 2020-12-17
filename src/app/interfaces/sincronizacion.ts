@@ -40,9 +40,11 @@ export interface Suggestion {
 }
 
 export interface Datum {
+  [x: string]: any;
   bank_id: number;
   name: string;
   description: string;
+  marginLeft?: number;
 }
 
 export interface Image {

@@ -1,0 +1,185 @@
+
+<aside class="aside"
+#sidebarList
+[ngClass]="{'aside--expanded': isExpanded}">
+
+<div class="btn-toogle">
+
+  <app-sidebar-list-button
+  [isExpanded]="isExpanded"
+  (sidebarExpand)="toggleSidebarList($event)"
+  class="btn-toogle"></app-sidebar-list-button>
+
+</div>
+
+
+<div class="business-info">
+
+  <div class="business-perfil">
+
+    <div class="profile-img">
+      <img src="assets/img/no-image-banner.jpg" alt="medicalback">
+    </div>
+
+    <div class="profile-data">
+
+      <h2 class="name"> medicalback <span class="simbol-verifiqued">
+        <img src="assets/img/no-image-banner.jpg" alt="#"></span>
+      </h2>
+
+      <div class="instagram">@medicalbackground</div>
+
+    </div>
+
+  </div>
+
+  <ul class="options">
+
+    <li routerLinkActive="active">
+        <a [routerLink]="['contact']">
+            Contacto
+        </a>
+    </li>
+
+    <li routerLinkActive="active">
+        <a [routerLink]="['product-catalogue']">
+            Productos
+        </a>
+    </li>
+
+    <li routerLinkActive="active">
+        <a  routerLinkActive="active" 
+            [routerLink]="['sincronizacion/exportar-lista-excel']">
+            Sincronización
+        </a>
+    </li>
+    
+    <li>
+        <a>Ventas</a>
+    </li>
+
+  </ul>
+
+</div>
+
+<nav class="menu">
+
+    <ul class="list">
+
+        <h4 class="title">
+            Categorías
+        </h4>
+        <li>
+            <a>Medicamentos</a>
+        </li>
+        <li>
+            <a>Belleza & Higiene</a>
+        </li>
+        <li>
+            <a>Dieta & Fitness</a>
+        </li>
+        <li>
+            <a>Salud y vitaminas</a>
+        </li>
+        <li>
+            <a>Vida sexual</a>
+        </li>
+        <li>
+            <a>Ortopedia</a>
+        </li>
+        <li class="active">
+            <a>Homeopatia & natural</a>
+        </li>
+        <li>
+            <a>Mascotas & veterinaria</a>
+        </li>
+
+    </ul>
+
+    <ul class="list">
+        <h4 class="title">
+            Subcategorías
+        </h4>
+
+        <li>
+            <input type="checkbox" id="dolor" name="dolor">
+            <label for="dolor">
+                <a>Dolor & inflamación</a>
+            </label>
+        </li>
+
+        <li>
+            <input type="checkbox" id="huesos" name="huesos">
+            <label for="huesos">
+                <a>Huesos & articulaciones</a>
+            </label>
+        </li>
+
+        <li>
+            <input type="checkbox" id="corazon" name="corazon">
+            <label for="corazon">
+                <a>Corazón</a>
+            </label>
+        </li>
+
+        <li>
+            <input type="checkbox" id="defensas" name="defensas">
+            <label for="defensas">
+                <a>Defensas</a>
+            </label>
+        </li>
+
+        <li>
+            <input type="checkbox" id="vegano" name="vegano">
+            <label for="vegano">
+                <a>Vegano</a>
+            </label>
+        </li>
+
+    </ul>
+
+    <ul class="list">
+        <h4 class="title">
+            Precios
+        </h4>
+
+        <li>
+            <input type="radio" id="rango-1" name="rango-1">
+            <label for="rango-1">
+                <a>$0 - $10.000</a>
+            </label>
+        </li>
+
+        <li>
+            <input type="radio" id="rango-2" name="rango-1">
+            <label for="rango-2">
+                <a>$10.000 - $20.000</a>
+            </label>
+        </li>
+
+        <li>
+            <input type="radio" id="rango-3" name="rango-1">
+            <label for="rango-3">
+                <a>$20.000 - $30.000</a>
+            </label>
+        </li>
+
+        <li>
+            <input type="radio" id="rango-4" name="rango-1">
+            <label for="rango-4">
+                <a>$30.000 - $40.000</a>
+            </label>
+        </li>
+
+        <li>
+            <input type="radio" id="rango-5" name="rango-1">
+            <label for="rango-5">
+                <a>$50.000 - $60.000</a>
+            </label>
+        </li>
+
+    </ul>
+
+</nav>
+
+</aside>

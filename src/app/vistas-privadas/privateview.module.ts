@@ -98,7 +98,7 @@ import { ItemListProductComponent } from './sincronizacion/pages/bank-product/co
 
 
 // CARRUSEL //
-import { CarouselModule } from 'ngx-owl-carousel-o';
+
 import { LoadBanckProductComponent } from './Admin/pages/load-banck-product/load-banck-product.component';
 import { FormBanckProductAdminComponent } from './Admin/pages/load-banck-product/container/form-banck-product-admin/form-banck-product-admin.component';
 import { FormBanckProductSyncComponent } from './sincronizacion/components/form-banck-product-sync/form-banck-product-sync.component';
@@ -106,6 +106,9 @@ import { EditProdutcComponent } from './components/edit-produtc/edit-produtc.com
 import { EditSincronizacionComponent } from './sincronizacion/components/edit-sincronizacion/edit-sincronizacion.component';
 import { EditProductNoDisponibleComponent } from './components/edit-product-no-disponible/edit-product-no-disponible.component';
 import { SearchComponent } from './sincronizacion/components/search/search.component';
+import { DesincronizarComponent } from './sincronizacion/components/desincronizar/desincronizar.component';
+import { AsideFiltrosComponent } from './shared/aside-filtros/aside-filtros.component';
+import { CarouselSuggestedComponent } from './sincronizacion/pages/suggested-products/container/carousel-suggested/carousel-suggested.component';
 
 
 
@@ -167,6 +170,9 @@ import { SearchComponent } from './sincronizacion/components/search/search.compo
       EditSincronizacionComponent,
       EditProductNoDisponibleComponent,
       SearchComponent,
+      DesincronizarComponent,
+      AsideFiltrosComponent,
+      CarouselSuggestedComponent
       ],
 
     imports: [
@@ -195,7 +201,8 @@ import { SearchComponent } from './sincronizacion/components/search/search.compo
         apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'
       }),
       NgbModule,
-      CarouselModule
+   
+    
       ],
 
     exports: [

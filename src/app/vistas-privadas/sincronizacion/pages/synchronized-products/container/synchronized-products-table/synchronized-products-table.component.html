@@ -83,7 +83,7 @@
           <td class="family-500">
             <div [ngSwitch]="item.sincronice">
               <div *ngSwitchCase="'sincronizado'">
-                <a  [routerLink]="['/my-store/edit-product-sync', itemProductos[i].id]" >
+                <a  [routerLink]="['/my-store/desincronizar', itemProductos[i].id]" >
                     ver
                 </a>
               </div>

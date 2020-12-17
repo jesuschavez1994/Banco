@@ -26,7 +26,7 @@
                 
                 <div class="width-100" *ngIf="item.suggestion !== null">
                     <div class="pt-2" *ngIf="item.suggestion.data.length > 0">
-                        <mat-checkbox   [(ngModel)]="SetAllCheckbox"
+                        <mat-checkbox   
                                         name = checkbox{{i}}
                                         id="checkboxList{{i}}" 
                                         color="primary" 
@@ -46,8 +46,8 @@
 
                         <mat-grid-list class="item-grid" cols="5" rowHeight="2:1.5">
                             <mat-grid-tile>
-                                <img    [src]="item.images[0].src_size.m | imgProductLoad" 
-                                        class="product-image-photo lazyload width-80"   
+                                <img    [src]="item.images[0].src_size.s | imgProductLoad" 
+                                        class="product-image-photo lazyload"   
                                         alt="{{item.name}}"
                                         style="display: block;"
                                         *ngIf="item.images.length >= 1"    
@@ -89,48 +89,10 @@
                             </mat-grid-tile>
                         </mat-grid-list>
 
-                        <div    *ngFor="let suggestion of item.suggestion.data;
-                                let iterador = index;
-                                let impar = odd;
-                                let par = even;"
-                                >
-
-                                <button class="prev" (click)="next = next - 1">&#10094;</button>
-
-                                <mat-grid-list  class="item-grid mySlides"
-                                                id="carrusel{{iterador}}" 
-                                                cols="5" rowHeight="2:1.5" 
-                                                [ngClass]="{'mySlides': iterador}"
-                                                
-                                                >
-
-                                    <mat-grid-tile>
-                                        <article    *ngIf="suggestion.images.length > 0">
-
-                                            <img    [src]="suggestion.images[0].src_size.m | imgProductLoad" 
-                                                    alt="{{item.name}}"
-                                                    style="display: block;"
-                                                    *ngIf="suggestion.images.length > 0"    
-                                            >
-
-                                        </article>
-                                    </mat-grid-tile>
-
-                                    <mat-grid-tile>
-                                        <span   class="family-500" 
-                                                *ngIf=" item.suggestion !== null">
-                                                {{ suggestion.name}}
-                                        </span>
-                                    </mat-grid-tile>
-                                    <mat-grid-tile>3</mat-grid-tile>
-                                    <mat-grid-tile></mat-grid-tile>
-                                    <mat-grid-tile></mat-grid-tile>
-                                </mat-grid-list>
-
-                                <!-- <button class="next" (click)="next = next + 1">&#10095;</button> -->
-
-                                <button class="next" (click)="ToNextItem(i, item.suggestion.data, iterador)">&#10095;</button>
-
+                        <div>
+                            <!-- ========= AGREGAMOS EL CARRUSEL DE LAS SUGERENCIAS =============-->
+                            <app-carousel-suggested [item]="item.suggestion.data"></app-carousel-suggested>
+                            <!--=================================================================-->
                         </div>
 
                         <ul class="width-100 display-flex justify-content-center pt-1 pb-1 mb-0">

@@ -1,4 +1,4 @@
-import {  Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit, Renderer2, ElementRef, ViewChild,  ViewChildren, QueryList } from '@angular/core';
 import {  StoreService } from '../../../../../../services/store/store.service';
 import {  ActivatedRoute, Params, Router} from '@angular/router';
 import {  Descripcion } from '@interfaces/sincronizacion';
@@ -10,27 +10,45 @@ import { Sugerir } from '../../../../../../models/sincronizacion/sugerir';
 import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import {BehaviorSubject} from 'rxjs';
 import { Termino } from '../../../../../../models/buscador.model';
+import { bannerOptions } from '@interfaces/components-options/banner.interface';
+
+
+export interface ICarouselItem {
+  bank_id: number;
+  description:string;
+  id: number
+  images: []
+  name: string;
+  marginLeft?: number;
+}
+
 
 @Component({
   selector: 'app-items-suggested-products',
   templateUrl: './items-suggested-products.component.html',
   styleUrls: ['./items-suggested-products.component.css']
 })
+
+
 export class ItemsSuggestedProductsComponent implements OnInit{
+
+  imgsBanners: bannerOptions = {
+    m: 'assets/img/test-img/banner.png'
+  };
+
+  @Input() SetAllCheckbox: boolean;
+  @Input() PalabraBuscador: ProductosLoads;
+  @Input() items: ICarouselItem[] = [];
+  @ViewChild("grid") grid: ElementRef;
 
   images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
 
-  pagesActual = 1;
+  // pagesActual = 69;
   forma: FormGroup;
   slideIndex = 1;
   next = 0;
   palabra: any
   suggestedShow = false;
-
-
-  @Input() SetAllCheckbox: boolean;
-  @Input() PalabraBuscador: ProductosLoads;
-  
 
   // tslint:disable-next-line: variable-name
   last_Page_Pagination: number;
@@ -46,11 +64,18 @@ export class ItemsSuggestedProductsComponent implements OnInit{
   MyProduct: Descripcion[] = [];
   itemProductos: Descripcion[] = [];
   DescripcionProduct: Descripcion;
+  Iterador: any[] = [];
+  finalPercentage: any;
+
+  public currentPosition = 0;
 
   constructor(public storeService: StoreService,
               public sincronizacion: SincronizacionService,
               private route: ActivatedRoute,
-              private router: Router)
+              private router: Router,
+              private renderer: Renderer2,
+              private el: ElementRef
+             )
 
   {
               this.route.params.subscribe(params => {
@@ -66,20 +91,14 @@ export class ItemsSuggestedProductsComponent implements OnInit{
 
   }
 
-  Iterador: any[] = [];
 
   ngOnInit() {
-
-    
-
     this.getData(this.page);
     // sistema que nos permita leer el parámetro de la página una vez que cambiamos entre estas usando la función
     this.route.queryParams.subscribe(params => {
       this.page = parseInt(params.page, 10) || 1;
       this.getData(this.page);
     });
-
-
   }
 
 
@@ -131,12 +150,36 @@ export class ItemsSuggestedProductsComponent implements OnInit{
   }
 
 
-  ToNextItem(indice: any, item: any, iterador: any){
+  setCurrentPosition(position: number, item: ICarouselItem[], iterador: any) {
+    console.log('position', position);
+    console.log('item', item);
+    this.currentPosition = position;
+    // this.items.find(i => i.id === 0).marginLeft = -100 * position;
+    item.find(element => element.bank_id === 0 ).marginLeft = -100 * position;
+  }
 
+ 
+  ToNextItem(indice: any, item: ICarouselItem[], iterador: any){
     console.log(indice);
-    console.log(item);
-    console.log(iterador = iterador  + 1);
+    console.log('item', item);
+    console.log('iterador', iterador);
 
+
+    this.finalPercentage = 0;
+
+    
+    let nextPosition = this.currentPosition + 1;
+    console.log('nextPosition', nextPosition);
+    if (nextPosition <= item.length - 1) {
+      this.finalPercentage = -100 * nextPosition;
+      console.log('finalPercentage', this.finalPercentage);
+    } else {
+      nextPosition = 0;
+      console.log('nextPosition', nextPosition);
+    }
+    // this.items.find(i => i.bank_id === 0).marginLeft = finalPercentage;
+    console.log('finalPercentage', this.finalPercentage);
+    this.currentPosition = nextPosition;
   }
 
 

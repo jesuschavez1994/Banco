@@ -1,7 +1,10 @@
 
 img {width:11%}
 .founduss-logo:focus{outline-style: none;}
-
+.img-registro{width:73%}
+.myP{
+    text-align: center;
+}
 @media(min-width:300px) and (max-width:991px){
     .width-30{
         width: 100% !important;
@@ -18,4 +21,11 @@ img {width:11%}
         width:150px
     }
     
+}
+
+@media (min-width: 576px){
+    .modal-dialog {
+        max-width: 365px;
+        margin: 1.75rem auto;
+    }
 }

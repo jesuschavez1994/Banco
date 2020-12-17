@@ -25,7 +25,12 @@ button{
 }
 
 .scrolling-wrapper{
-	overflow-x: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.mySlides{
+    display: none;
 }
 
 body{
@@ -43,6 +48,7 @@ h1{
 	font-size: 1.25em;
 	opacity: 0.65;
 }
+
 
 .card-1{
 	background-color: #4158D0;
@@ -91,7 +97,7 @@ background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
 
 .card-10{
 	background-color: #FF3CAC;
-background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+    background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
 
 }
 
@@ -125,9 +131,9 @@ background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%)
 
 .prev{
     position: absolute;
-    top: 5%;
+    top: 44%;
     left: -10px;
-    height: 37%;
+    height: 35%;
     border: none;
     color: white;
     background: #f3bd6b;
@@ -137,8 +143,8 @@ background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%)
     position: absolute;
     top: 5%;
     right: -18px;
-    top: 5%;
-    height: 37%;
+    top: 44%;
+    height: 35%;
     border: none;
     color: white;
     background: #f3bd6b;

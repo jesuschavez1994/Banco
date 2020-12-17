@@ -32,9 +32,8 @@
               "src/_animations.scss",
               "src/assets/font-awesome/css/font-awesome.min.css",
               "src/assets/bootstrap4/css/bootstrap.min.css",
-              "node_modules/@grapecity/spread-sheets/styles/gc.spread.sheets.excel2013white.css",
-              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
-              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css"
+              "node_modules/@grapecity/spread-sheets/styles/gc.spread.sheets.excel2013white.css"
+              
             ],
             "scripts": [
               "src/assets/jquery/jquery.min.js",
@@ -49,6 +48,8 @@
               "src/assets/bootstrap4/js/bootstrap.min.js",
               "src/assets/bootstrap4/js/popper.min.js",
               "node_modules/@grapecity/spread-sheets/dist/gc.spread.sheets.all.min.js"
+              
+              
             ]
           },
           "configurations": {

@@ -23,6 +23,16 @@
                         create
                         </i>
                     </div>
+                    <div *ngSwitchCase="'no sincronizado'">
+                        <i  class="material-icons position-absolute left-85 top-5 icon-gris" 
+                            name="create"
+                            title="Editar"
+                            (click)="Id(index)"
+                            [routerLink]="['/my-store/edit-product', MyProduct[index].id]" 
+                        >
+                        create
+                        </i>
+                    </div>
                     <div *ngSwitchDefault>
                         <i  class="material-icons position-absolute left-85 top-5 icon-gris" 
                             name="create"

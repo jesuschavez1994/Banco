@@ -32,6 +32,7 @@ import { FormBanckProductSyncComponent } from './vistas-privadas/sincronizacion/
 import { EditProdutcComponent } from './vistas-privadas/components/edit-produtc/edit-produtc.component';
 import { EditSincronizacionComponent } from './vistas-privadas/sincronizacion/components/edit-sincronizacion/edit-sincronizacion.component';
 import { EditProductNoDisponibleComponent } from './vistas-privadas/components/edit-product-no-disponible/edit-product-no-disponible.component';
+import { DesincronizarComponent } from './vistas-privadas/sincronizacion/components/desincronizar/desincronizar.component';
 
 
 
@@ -87,6 +88,10 @@ const APP_ROUTES: Routes = [
             {
                 path: 'edit-product-sync/:id',
                 component: EditSincronizacionComponent
+            },
+            {
+                path: 'desincronizar/:id',
+                component: DesincronizarComponent
             },
             {
                 path: 'edit/:id',

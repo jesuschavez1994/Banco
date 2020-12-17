@@ -3,12 +3,17 @@ import { StoreService } from '@services/store/store.service';
 import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import { bannerOptions } from '@interfaces/components-options/banner.interface';
 @Component({
   selector: 'app-load-product',
   templateUrl: './load-product.component.html',
   styleUrls: ['./load-product.component.css']
 })
 export class LoadProductComponent implements OnInit {
+
+  imgsBanners: bannerOptions = {
+    m: 'assets/img/test-img/banner.png'
+  };
 
   MyProduct: DataProductDB[] = [];
    // tslint:disable-next-line: no-inferrable-types
