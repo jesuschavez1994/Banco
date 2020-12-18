@@ -160,14 +160,17 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     this.productsOptionMenu.nativeElement.classList.remove('active');
     this.contactoOptionMenu.nativeElement.classList.remove('active');
 
-    const routes = this.route.snapshot.url.map( url => url.path );
-    const idxRouteMatched = routes.indexOf(this.anchorsMenu.wordToMatch);
+    this.route.paramMap.subscribe( params => {
 
-    if ( idxRouteMatched !== -1) {
-      this.productsOptionMenu.nativeElement.classList.add('active');
-    }else{
-      this.contactoOptionMenu.nativeElement.classList.add('active');
-    }
+      if ( (params.has('show') && params.get('show') === this.anchorsMenu.wordToMatch) ) {
+        this.productsOptionMenu.nativeElement.classList.add('active');
+
+      }else{
+        this.contactoOptionMenu.nativeElement.classList.add('active');
+
+      }
+
+    });
 
   }
 

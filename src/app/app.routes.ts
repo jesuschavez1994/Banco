@@ -36,19 +36,19 @@ const APP_ROUTES: Routes = [
       component: BusinessDetailComponent
     },
     {
-      path: 'business-detail/:idStore/products', // Se obtiene el id de la tienda para mostrar su listo productos
+      path: 'business-detail/:idStore/:show', // Se obtiene el id de la tienda para mostrar su listo productos
       component: BusinessDetailComponent,
     },
     {
-      path: 'business-detail/:idStore/products/:idProduct', // Se obtiene el id de la tienda para mostrar su listo productos
+      path: 'business-detail/:idStore/:show/:idProduct', // Se obtiene el id de la tienda para mostrar su listo productos
       component: BusinessDetailComponent,
     },
     {
-      path: 'business-detail/:idStore/products/:idProduct/:idCategory',
+      path: 'business-detail/:idStore/:show/:idProduct/:idCategory',
       component: BusinessDetailComponent,
     },
     {
-      path: 'business-detail/:idStore/products/:idProduct/:idCategory/:idSubcategory',
+      path: 'business-detail/:idStore/:show/:idProduct/:idCategory/:idSubcategory',
       component: BusinessDetailComponent,
     },
 

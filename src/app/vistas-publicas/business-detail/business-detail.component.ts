@@ -64,10 +64,17 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
    */
   public showProductsContainer(){
 
-    const routes = this.route.snapshot.url.map( url => url.path );
-    const idxRouteMatched = routes.indexOf('products');
+    this.route.paramMap.subscribe( params => {
 
-    this.showProducts = idxRouteMatched !== -1 ? true : false;
+      if ( params.has('show') && params.get('show') === 'products' ){
+        this.showProducts = true;
+
+      }else {
+        this.showProducts = false;
+
+      }
+
+    });
 
   }
 
@@ -80,7 +87,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
    * @memberof BusinessDetailComponent
    */
   public selectProduct(product: ProductsCardsOptions) {
-    // this.selectedProduct = event; // manera anterior, reactiva y sin petición pero con url oculta
+
     if (product.id > -1 && product.idStore > -1){
       this.router.navigate( ['/business-detail', product.idStore, 'products', product.id] );
 
@@ -100,30 +107,32 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
     this.route.paramMap.subscribe( params => {
 
-      const routes = this.route.snapshot.url.map( url => url.path );
-      const idxRouteMatched = routes.indexOf('products');
-
-      if (idxRouteMatched > -1 && params.has('idStore') && params.has('idProduct') ) {
+      if (
+        (params.has('show') && params.get('show') === 'products')
+        && params.has('idStore')
+        && params.has('idProduct')
+      ) {
 
         const idStore = parseInt( params.get('idStore') );
         const idProduct = parseInt( params.get('idProduct') );
 
         this.productService.getProductByStore(idStore, idProduct).subscribe(
-        product => {
+          product => {
 
-          this.productDetail.selectedProduct = this.productDetail.formatProductResponse(
-          product,
-          ['name', 'description', 'price', 'stock', 'images', 'id', 'store_id']
-          );
+            this.productDetail.selectedProduct = this.productDetail.formatProductResponse(
+              product,
+              ['name', 'description', 'price', 'stock', 'images', 'id', 'store_id']
+            );
 
-        }, error => {
+          }, error => {
 
-          console.log('Error loading products', error);
-          this.productDetail.selectedProduct = null;
+            console.log('Error loading products', error);
+            this.productDetail.selectedProduct = null;
 
-        }, () => {
-          // console.log('products loaded');
-        });
+          }, () => {
+            // console.log('products loaded');
+          }
+        );
 
       }
 
