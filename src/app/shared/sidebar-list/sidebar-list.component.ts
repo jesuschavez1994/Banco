@@ -24,7 +24,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   @Input() isExpanded = false;
   @Input() sidebarTarget: SidebarListComponent;
   @Input() anchorsMenu: AnchorsMenu;
-  // @Input() sidebarOptions: SidebarListOptions;
+  @Input() sidebarOptions: SidebarListOptions;
 
   // Outputs
   @Output() sidebarExpand = new EventEmitter<boolean>();
@@ -41,6 +41,11 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   constructor( private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
+    if (this.sidebarOptions){
+      this.anchorsMenu = this.sidebarOptions.anchorsMenu;
+      this.profile = this.sidebarOptions.profile;
+      this.categories = this.sidebarOptions.categories;
+    }
     this.currentCategory = this.categories[0];
 
   }

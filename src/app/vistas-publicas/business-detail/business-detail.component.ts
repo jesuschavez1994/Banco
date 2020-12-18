@@ -30,6 +30,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   anchorsMenu: AnchorsMenu;
 
+  sidebarOptions: SidebarListOptions;
+
   sidebarProfile: any;
 
   sidebarCategories: any;
@@ -218,6 +220,105 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         productLink: `/business-detail/${idStore}/products`,
         contactLink: `/business-detail/${idStore}`,
         wordToMatch: `products`
+      };
+
+      // this.storeService.getStoreById(1).subscribe(resp => {
+      //   console.log(resp);
+
+      // });
+      this.sidebarOptions = {
+        anchorsMenu: {
+          productLink: `/business-detail/${idStore}/products`,
+          contactLink: `/business-detail/${idStore}`,
+          wordToMatch: `products`
+        },
+        profile: {
+          name: 'medicalback',
+          instagram: {
+            url: '',
+            name: '@medicalbackground'
+          },
+          img: 'assets/img/no-image-banner.jpg',
+          isVerified: true
+        },
+        categories: [
+          {
+            name: 'Medicamentos',
+            routerLink: '',
+            subcategories: [
+              {
+                name: 'Dolor & inflamación',
+                routerLink: '',
+              },
+              {
+                name: 'Belleza & Higiene',
+                routerLink: '',
+              },
+              {
+                name: 'Dieta & Fitness',
+                routerLink: '',
+              },
+              {
+                name: 'Salud y vitaminas',
+                routerLink: '',
+              },
+              {
+                name: 'Vida sexual',
+                routerLink: '',
+              },
+              {
+                name: 'Ortopedia',
+                routerLink: '',
+              },
+              {
+                name: 'Homeopatia & natural',
+                routerLink: '',
+              },
+              {
+                name: 'Mascotas & veterinaria',
+                routerLink: '',
+              }
+            ]
+          },
+          {
+            name: 'Medicamentos2',
+            routerLink: '',
+            subcategories: [
+              {
+                name: 'Dolor & inflamación2',
+                routerLink: '',
+              },
+              {
+                name: 'Belleza & Higiene2',
+                routerLink: '',
+              },
+              {
+                name: 'Dieta & Fitness2',
+                routerLink: '',
+              },
+              {
+                name: 'Salud y vitaminas2',
+                routerLink: '',
+              },
+              {
+                name: 'Vida sexual2',
+                routerLink: '',
+              },
+              {
+                name: 'Ortopedia2',
+                routerLink: '',
+              },
+              {
+                name: 'Homeopatia & natural2',
+                routerLink: '',
+              },
+              {
+                name: 'Mascotas & veterinaria2',
+                routerLink: '',
+              }
+            ]
+          },
+        ]
       };
 
       this.sidebarProfile = {

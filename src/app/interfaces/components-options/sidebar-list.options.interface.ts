@@ -22,6 +22,7 @@
  *
  */
 export interface SidebarListOptions {
+  anchorsMenu: AnchorsMenu;
   profile: Profile;
   categories: Category[];
 }
