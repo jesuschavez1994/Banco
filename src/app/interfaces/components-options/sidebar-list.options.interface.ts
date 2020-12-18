@@ -28,14 +28,14 @@ export interface SidebarListOptions {
 }
 
 export interface Category {
+  id: number;
   name: string;
-  routerLink: string;
   subcategories: Subcategory[];
 }
 
 export interface Subcategory {
+  id: number;
   name: string;
-  routerLink: string;
 }
 
 export interface Profile {

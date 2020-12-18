@@ -2,13 +2,36 @@
 
 <main class="page">
 
-  <app-sidebar-list
-    #sidebarList
-    [sidebarOptions]="sidebarOptions"
-    [sidebarTarget]="this.sidebarList"
-    (selected)="selectedCategory($event)"
-  >
-  </app-sidebar-list>
+  <!--
+    La directiva *ngIf, no solo funciona para hacer desplegar
+    una sección de la página cuando se cumpla una condición, solo
+    por motivos de mejorar la apariencia.
+
+    En este caso, es utilizado, porque el sidebar-list,
+    depende de datos obtenidos desde el servidor para porder
+    renderizarce sin errores, es decir que al quitar este
+    ngIf, los datos que solicita el sidar arrojaran error
+    undefined porque, el componente se renderiza más rapido
+    de lo que los datos son recibidos, luego de renderizarse
+    no actualiza los datos de forma reactiva como uno podría pensar.
+
+    En resumen, condicionamos que no se renderice el componente
+    haste recibir los datos necesarios, así evitamos errores undefined
+    -->
+  <ng-container *ngIf="anchorsMenu && profile && categories">
+
+    <app-sidebar-list
+      #sidebarList
+      [isExpanded]="expandSidebar"
+      (sidebarExpand)="toogleSidebar($event)"
+      [anchorsMenu]="anchorsMenu"
+      [profile]="profile"
+      [categories]="categories"
+      (selected)="selectedCategory($event)"
+    >
+    </app-sidebar-list>
+  </ng-container>
+
 
   <div class="column">
 
@@ -24,19 +47,23 @@
 
       <section class="products-infomation">
 
-        <h1 class="profile-name">farmacia medical background</h1>
+        <h1 class="profile-name">
+          <span routerLink="/business-detail/1/products">farmacia</span>
+          <span routerLink="/business-detail/2/products">medical</span>farmacia medical background</h1>
 
         <app-product-detail #productDetail>
         </app-product-detail>
 
+        <!-- [sidebarTarget]="this.sidebarList" -->
         <app-search-bar
-          [sidebarTarget]="this.sidebarList"
+          [isExpanded]="expandSidebar"
+          (sidebarExpand)="toogleSidebar($event)"
           [buttonSidebarList]="true">
         </app-search-bar>
 
         <app-products-cards
           #productCards
-          (selected)="selectProduct($event)">
+          (selected)="detailProduct($event)">
         </app-products-cards>
 
       </section>

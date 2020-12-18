@@ -6,7 +6,8 @@
   <div class="btn-toogle">
 
     <app-sidebar-list-button
-      [sidebarTarget]="sidebarTarget"
+      [expand]="isExpanded"
+      (isExpanded)="toggleSidebarList($event)"
       class="btn-toogle"
     >
     </app-sidebar-list-button>

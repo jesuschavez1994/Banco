@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { SidebarListComponent } from '../sidebar-list/sidebar-list.component';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
+
 
 @Component({
   selector: 'app-sidebar-list-button',
@@ -8,16 +8,18 @@ import { SidebarListComponent } from '../sidebar-list/sidebar-list.component';
 })
 export class SidebarListButtonComponent implements OnInit {
 
-  @Input() sidebarTarget: SidebarListComponent;
+  @Input() expand = false;
+  @Output() isExpanded = new EventEmitter<boolean>();
 
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
   public toggleSideBar() {
-    this.sidebarTarget.isExpanded = this.sidebarTarget.isExpanded ? false : true ;
-
+    this.expand = this.expand ? false : true;
+    this.isExpanded.emit(this.expand);
   }
 
 }
