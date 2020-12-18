@@ -27,9 +27,10 @@
       [anchorsMenu]="anchorsMenu"
       [profile]="profile"
       [categories]="categories"
-      (selected)="selectedCategory($event)"
+      (selected)="goToProductsByCategories($event)"
     >
     </app-sidebar-list>
+
   </ng-container>
 
 
@@ -47,9 +48,7 @@
 
       <section class="products-infomation">
 
-        <h1 class="profile-name">
-          <span routerLink="/business-detail/1/products">farmacia</span>
-          <span routerLink="/business-detail/2/products">medical</span>farmacia medical background</h1>
+        <h1 class="profile-name">farmacia medical background</h1>
 
         <app-product-detail #productDetail>
         </app-product-detail>
@@ -63,7 +62,7 @@
 
         <app-products-cards
           #productCards
-          (selected)="detailProduct($event)">
+          (selected)="goTodetailProduct($event)">
         </app-products-cards>
 
       </section>

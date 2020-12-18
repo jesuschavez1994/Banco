@@ -7,7 +7,7 @@ import { ProductsCardsComponent } from '@shared/products-cards/products-cards.co
 import { ProductDetailComponent } from '@shared/product-detail/product-detail.component';
 import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component';
 import { StoreService } from '@services/store/store.service';
-import { AnchorsMenu, Profile, Category } from '@interfaces/components-options/sidebar-list.options.interface';
+import { SelectedEmitter, AnchorsMenu, Profile, Category } from '@interfaces/components-options/sidebar-list.options.interface';
 
 @Component({
   selector: 'app-business-detail',
@@ -42,7 +42,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   ){}
 
   ngOnInit(): void {
-    this.setDataByParams();
+    this.loadDataByParams();
 
   }
 
@@ -51,7 +51,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
 
-  public setDataByParams(){
+  public loadDataByParams(){
 
     this.route.paramMap.subscribe( params => {
 
@@ -63,7 +63,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
       }
 
-      this.setSidebarOptions(params);
+      this.loadDataStore(params);
 
       this.loadProductDetail(params);
 
@@ -83,7 +83,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
    * @param {ProductsCardsOptions} product
    * @memberof BusinessDetailComponent
    */
-  public detailProduct(product: ProductsCardsOptions) {
+  public goTodetailProduct(product: ProductsCardsOptions) {
 
     if (product.id > -1 && product.idStore > -1){
       this.router.navigate( ['/business-detail', product.idStore, 'products', product.id] );
@@ -156,127 +156,17 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   }
 
-  // Sidebar-list
-  public setSidebarOptions(params){
+  // Store
+  public loadDataStore(params){
 
     if ( params.has('idStore') ) {
+
       const idStore =  parseInt(params.get('idStore'));
 
       this.storeService.getStoreById(idStore).subscribe( storeResp => {
         console.log(storeResp);
 
-        this.anchorsMenu = {
-          productLink: `/business-detail/${idStore}/products`,
-          contactLink: `/business-detail/${idStore}`,
-          wordToMatch: `products`
-        };
-
-        this.profile = {
-          name: storeResp.name,
-          instagram: { // la base de datos no tiene el dato
-            url: '',
-            name: '@medicalbackground'
-          },
-          img: 'assets/img/no-image-banner.jpg', // la base de datos no tiene el dato
-          isVerified: storeResp.certification == 'true' ? true : false
-        };
-
-        this.categories = [
-          {
-            id: 1,
-            name: 'Medicamentos',
-
-            subcategories: [
-              {
-                id: 1,
-                name: 'Dolor & inflamación',
-
-              },
-              {
-                id: 1,
-                name: 'Belleza & Higiene',
-
-              },
-              {
-                id: 1,
-                name: 'Dieta & Fitness',
-
-              },
-              {
-                id: 1,
-                name: 'Salud y vitaminas',
-
-              },
-              {
-                id: 1,
-                name: 'Vida sexual',
-
-              },
-              {
-                id: 1,
-                name: 'Ortopedia',
-
-              },
-              {
-                id: 1,
-                name: 'Homeopatia & natural',
-
-              },
-              {
-                id: 1,
-                name: 'Mascotas & veterinaria',
-
-              }
-            ]
-          },
-          {
-            id: 1,
-            name: 'Medicamentos2',
-
-            subcategories: [
-              {
-                id: 1,
-                name: 'Dolor & inflamación2',
-
-              },
-              {
-                id: 1,
-                name: 'Belleza & Higiene2',
-
-              },
-              {
-                id: 1,
-                name: 'Dieta & Fitness2',
-
-              },
-              {
-                id: 1,
-                name: 'Salud y vitaminas2',
-
-              },
-              {
-                id: 1,
-                name: 'Vida sexual2',
-
-              },
-              {
-                id: 1,
-                name: 'Ortopedia2',
-
-              },
-              {
-                id: 1,
-                name: 'Homeopatia & natural2',
-
-              },
-              {
-                id: 1,
-                name: 'Mascotas & veterinaria2',
-
-              }
-            ]
-          },
-        ];
+        this.setSidebarOptions(idStore, storeResp);
 
       });
 
@@ -284,12 +174,131 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   }
 
+  // Sidebar-list
+  public setSidebarOptions(idStore, storeResp){
+
+    this.anchorsMenu = {
+      productLink: `/business-detail/${idStore}/products`,
+      contactLink: `/business-detail/${idStore}`,
+      wordToMatch: `products`
+    };
+
+    this.profile = {
+      name: storeResp.name,
+      instagram: { // la base de datos no tiene el dato
+        url: '',
+        name: '@medicalbackground'
+      },
+      img: 'assets/img/no-image-banner.jpg', // la base de datos no tiene el dato
+      isVerified: storeResp.certification == 'true' ? true : false
+    };
+
+    this.categories = [
+      {
+        id: 1,
+        name: 'Medicamentos',
+
+        subcategories: [
+          {
+            id: 1,
+            name: 'Dolor & inflamación',
+
+          },
+          {
+            id: 2,
+            name: 'Belleza & Higiene',
+
+          },
+          {
+            id: 3,
+            name: 'Dieta & Fitness',
+
+          },
+          {
+            id: 4,
+            name: 'Salud y vitaminas',
+
+          },
+          {
+            id: 5,
+            name: 'Vida sexual',
+
+          },
+          {
+            id: 6,
+            name: 'Ortopedia',
+
+          },
+          {
+            id: 7,
+            name: 'Homeopatia & natural',
+
+          },
+          {
+            id: 8,
+            name: 'Mascotas & veterinaria',
+
+          }
+        ]
+      },
+      {
+        id: 2,
+        name: 'Medicamentos2',
+
+        subcategories: [
+          {
+            id: 1,
+            name: 'Dolor & inflamación2',
+
+          },
+          {
+            id: 2,
+            name: 'Belleza & Higiene2',
+
+          },
+          {
+            id: 3,
+            name: 'Dieta & Fitness2',
+
+          },
+          {
+            id: 4,
+            name: 'Salud y vitaminas2',
+
+          },
+          {
+            id: 5,
+            name: 'Vida sexual2',
+
+          },
+          {
+            id: 6,
+            name: 'Ortopedia2',
+
+          },
+          {
+            id: 7,
+            name: 'Homeopatia & natural2',
+
+          },
+          {
+            id: 8,
+            name: 'Mascotas & veterinaria2',
+
+          }
+        ]
+      },
+    ];
+
+  }
+
+  // Expand or contract sidebar-list on responsive mode
   public toogleSidebar(event) {
     this.expandSidebar = event;
   }
 
-  public selectedCategory(event){
-    console.log(event);
+  public goToProductsByCategories(event: SelectedEmitter){
+    console.log('event', event);
 
     this.route.paramMap.subscribe( params => {
 
@@ -297,10 +306,44 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         const idStore = params.get('idStore');
 
+        let queryParams;
+
+        if (event.isSelectedCategory) {
+
+          queryParams = {
+            category: event.currentCategory.id
+          };
+
+          if (event.SelectedSubCategories){
+
+            if (event.SelectedSubCategories.length !== 0){
+
+              const idSubCategories = event.SelectedSubCategories.map( subCategory => {
+                return subCategory.id;
+              });
+
+              queryParams.subcategories = idSubCategories.join();
+
+            }
+
+          }
+
+          console.log('queryParams', queryParams);
+
+          this.router.navigate(
+            ['/business-detail', idStore, 'products'],
+            { queryParams}
+          );
+
+        } else{
+          queryParams = {};
+        }
+
         this.router.navigate(
           ['/business-detail', idStore, 'products'],
-          { queryParams: { category: 1 } }
+          { queryParams}
         );
+
 
       }
 
