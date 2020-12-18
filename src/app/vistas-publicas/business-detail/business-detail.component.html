@@ -4,6 +4,8 @@
 
   <app-sidebar-list
     #sidebarList
+    [profile]="sidebarProfile"
+    [categories]="sidebarCategories"
     [anchorsMenu]="anchorsMenu"
     [sidebarTarget]="this.sidebarList"
     (selected)="selectedCategory($event)"

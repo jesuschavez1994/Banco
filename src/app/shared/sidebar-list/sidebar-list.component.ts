@@ -24,114 +24,30 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   @Input() isExpanded = false;
   @Input() sidebarTarget: SidebarListComponent;
   @Input() anchorsMenu: AnchorsMenu;
-  @Input() sidebarOptions: SidebarListOptions = {
-    profile: {
-      name: 'medicalback',
-      instagram: {
-        url: '',
-        name: '@medicalbackground'
-      },
-      img: 'assets/img/no-image-banner.jpg',
-      isVerified: true
-    },
-    categories: [
-      {
-        name: 'Medicamentos',
-        routerLink: '',
-        subcategories: [
-          {
-            name: 'Dolor & inflamación',
-            routerLink: '',
-          },
-          {
-            name: 'Belleza & Higiene',
-            routerLink: '',
-          },
-          {
-            name: 'Dieta & Fitness',
-            routerLink: '',
-          },
-          {
-            name: 'Salud y vitaminas',
-            routerLink: '',
-          },
-          {
-            name: 'Vida sexual',
-            routerLink: '',
-          },
-          {
-            name: 'Ortopedia',
-            routerLink: '',
-          },
-          {
-            name: 'Homeopatia & natural',
-            routerLink: '',
-          },
-          {
-            name: 'Mascotas & veterinaria',
-            routerLink: '',
-          }
-        ]
-      },
-      {
-        name: 'Medicamentos2',
-        routerLink: '',
-        subcategories: [
-          {
-            name: 'Dolor & inflamación2',
-            routerLink: '',
-          },
-          {
-            name: 'Belleza & Higiene2',
-            routerLink: '',
-          },
-          {
-            name: 'Dieta & Fitness2',
-            routerLink: '',
-          },
-          {
-            name: 'Salud y vitaminas2',
-            routerLink: '',
-          },
-          {
-            name: 'Vida sexual2',
-            routerLink: '',
-          },
-          {
-            name: 'Ortopedia2',
-            routerLink: '',
-          },
-          {
-            name: 'Homeopatia & natural2',
-            routerLink: '',
-          },
-          {
-            name: 'Mascotas & veterinaria2',
-            routerLink: '',
-          }
-        ]
-      },
-    ]
-  };
+  // @Input() sidebarOptions: SidebarListOptions;
 
   // Outputs
   @Output() sidebarExpand = new EventEmitter<boolean>();
   @Output() selected = new EventEmitter<SelectedEmitter>();
 
-  profile: Profile = this.sidebarOptions.profile;
-  categories: Category[]  = this.sidebarOptions.categories;
+  @Input() profile: Profile;
+  @Input() categories: Category[] = [];
 
-  currentCategory: Category = this.categories[0];
+  currentCategory: Category;
   isSelectedCategory = false;
 
   currentSubcategories: Subcategory[] = [];
 
   constructor( private route: ActivatedRoute ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.currentCategory = this.categories[0];
+
+  }
 
   ngAfterViewInit(): void {
     this.routerLinkActive();
+
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -218,4 +134,11 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   }
 
+  public setProfile(profile: Profile){
+    this.profile = profile;
+  }
+
+  public setCategories(categories: Category[]){
+    this.categories = categories;
+  }
 }

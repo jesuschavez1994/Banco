@@ -43,14 +43,6 @@ const APP_ROUTES: Routes = [
       path: 'business-detail/:idStore/:show/:idProduct', // Se obtiene el id de la tienda para mostrar su listo productos
       component: BusinessDetailComponent,
     },
-    {
-      path: 'business-detail/:idStore/:show/:idProduct/:idCategory',
-      component: BusinessDetailComponent,
-    },
-    {
-      path: 'business-detail/:idStore/:show/:idProduct/:idCategory/:idSubcategory',
-      component: BusinessDetailComponent,
-    },
 
     // Christopher Views //
 
