@@ -28,13 +28,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       m: 'assets/img/test-img/banner.png'
   };
 
-  anchorsMenu: AnchorsMenu;
-
   sidebarOptions: SidebarListOptions;
-
-  sidebarProfile: any;
-
-  sidebarCategories: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -206,21 +200,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     if ( params.has('idStore') ) {
       const idStore = params.get('idStore');
 
-      /**
-       * En el init obtenemos los datos, en el after init,
-       * ya el componente sabe que tiene un componente hijo y podremos
-       * asignar datos a este, siempre y cuando el orden de los datos
-       * no afecte el renderizado se puede aplicarl la siguiente acción:
-       * this.sidebarList.anchorsMenu. En resumen, solo podemos utilizar
-       * los metodos y manipular las variables de un componente hijo, despues
-       * de que el componente padre termine de renderizar.
-       */
-
-      this.anchorsMenu = {
-        productLink: `/business-detail/${idStore}/products`,
-        contactLink: `/business-detail/${idStore}`,
-        wordToMatch: `products`
-      };
 
       // this.storeService.getStoreById(1).subscribe(resp => {
       //   console.log(resp);
@@ -321,96 +300,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         ]
       };
 
-      this.sidebarProfile = {
-        name: 'medicalback',
-        instagram: {
-          url: '',
-          name: '@medicalbackground'
-        },
-        img: 'assets/img/no-image-banner.jpg',
-        isVerified: true
-      };
 
-      this.sidebarCategories = [
-        {
-          name: 'Medicamentos',
-          routerLink: '',
-          subcategories: [
-            {
-              name: 'Dolor & inflamación',
-              routerLink: '',
-            },
-            {
-              name: 'Belleza & Higiene',
-              routerLink: '',
-            },
-            {
-              name: 'Dieta & Fitness',
-              routerLink: '',
-            },
-            {
-              name: 'Salud y vitaminas',
-              routerLink: '',
-            },
-            {
-              name: 'Vida sexual',
-              routerLink: '',
-            },
-            {
-              name: 'Ortopedia',
-              routerLink: '',
-            },
-            {
-              name: 'Homeopatia & natural',
-              routerLink: '',
-            },
-            {
-              name: 'Mascotas & veterinaria',
-              routerLink: '',
-            }
-          ]
-        },
-        {
-          name: 'Medicamentos2',
-          routerLink: '',
-          subcategories: [
-            {
-              name: 'Dolor & inflamación2',
-              routerLink: '',
-            },
-            {
-              name: 'Belleza & Higiene2',
-              routerLink: '',
-            },
-            {
-              name: 'Dieta & Fitness2',
-              routerLink: '',
-            },
-            {
-              name: 'Salud y vitaminas2',
-              routerLink: '',
-            },
-            {
-              name: 'Vida sexual2',
-              routerLink: '',
-            },
-            {
-              name: 'Ortopedia2',
-              routerLink: '',
-            },
-            {
-              name: 'Homeopatia & natural2',
-              routerLink: '',
-            },
-            {
-              name: 'Mascotas & veterinaria2',
-              routerLink: '',
-            }
-          ]
-        },
-      ];
-
-      // console.log(this.sidebarProfile);
 
     }
 
