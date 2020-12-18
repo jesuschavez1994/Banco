@@ -166,6 +166,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   public selectedCategory(event){
     console.log(event);
+    // console.log(event);
   }
 
 

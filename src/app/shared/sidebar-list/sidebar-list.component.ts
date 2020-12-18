@@ -2,9 +2,11 @@ import {
   Component, OnInit, Input, Output, EventEmitter, ElementRef,
   ViewChild, HostListener, AfterViewInit
 } from '@angular/core';
+import {
+  Category, Subcategory, Profile, SidebarListOptions, AnchorsMenu,
+  SelectedEmitter
+} from '@interfaces/components-options/sidebar-list.options.interface';
 import { ActivatedRoute } from '@angular/router';
-import { Category, Subcategory, Profile, SidebarListOptions, AnchorsMenu  } from '@interfaces/components-options/sidebar-list.options.interface';
-
 
 @Component({
   selector: 'app-sidebar-list',
@@ -114,7 +116,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   // Outputs
   @Output() sidebarExpand = new EventEmitter<boolean>();
-  @Output() selectedCategory = new EventEmitter<any>();
+  @Output() selected = new EventEmitter<SelectedEmitter>();
 
   profile: Profile = this.sidebarOptions.profile;
   categories: Category[]  = this.sidebarOptions.categories;
@@ -181,7 +183,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     this.currentCategory = category;
     this.currentSubcategories = [];
 
-    this.selectedCategory.emit({
+    this.selected.emit({
       currentCategory: this.currentCategory,
       isSelectedCategory: this.isSelectedCategory
     });
@@ -205,7 +207,11 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       this.isSelectedCategory = true;
     }
 
-    console.log('despues', this.currentSubcategories);
+    this.selected.emit({
+      currentCategory: this.currentCategory,
+      isSelectedCategory: this.isSelectedCategory,
+      SelectedSubCategories: this.currentSubcategories
+    });
 
   }
 

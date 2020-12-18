@@ -54,3 +54,9 @@ export interface AnchorsMenu {
   contactLink: string;
   wordToMatch: string;
 }
+
+export interface SelectedEmitter {
+  currentCategory: Category;
+  isSelectedCategory: boolean;
+  SelectedSubCategories?: Subcategory[];
+}

@@ -102,8 +102,12 @@
             [name]="subcategory.name | strReplace"
           >
 
-          <label [for]="subcategory.name | strReplace" (click)="selectSubCategories(subcategory)">
-              <a>{{subcategory.name}}</a>
+          <label
+            [for]="subcategory.name | strReplace"
+            (click)="selectSubCategories(subcategory)">
+
+            <a>{{subcategory.name}}</a>
+
           </label>
 
         </li>
