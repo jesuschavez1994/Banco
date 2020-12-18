@@ -3,8 +3,7 @@ import {
   ViewChild, HostListener, AfterViewInit
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Category, Profile, SidebarListOptions, AnchorsMenu  } from '@interfaces/components-options/sidebar-list.options.interface';
-
+import { Category, Subcategory, Profile, SidebarListOptions, AnchorsMenu  } from '@interfaces/components-options/sidebar-list.options.interface';
 
 
 @Component({
@@ -115,13 +114,15 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   // Outputs
   @Output() sidebarExpand = new EventEmitter<boolean>();
-  @Output() selectedCategory = new EventEmitter<Category | any>();
+  @Output() selectedCategory = new EventEmitter<any>();
 
   profile: Profile = this.sidebarOptions.profile;
   categories: Category[]  = this.sidebarOptions.categories;
 
   currentCategory: Category = this.categories[0];
   isSelectedCategory = false;
+
+  currentSubcategories: Subcategory[] = [];
 
   constructor( private route: ActivatedRoute ) { }
 
@@ -170,19 +171,42 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   public selectCategory(category: Category) {
 
-    if (category === this.currentCategory){
+    if (category === this.currentCategory) {
       this.isSelectedCategory = this.isSelectedCategory ? false : true;
 
-    }else{
+    }else {
       this.isSelectedCategory = true;
     }
 
     this.currentCategory = category;
+    this.currentSubcategories = [];
 
     this.selectedCategory.emit({
       currentCategory: this.currentCategory,
       isSelectedCategory: this.isSelectedCategory
     });
+  }
+
+  public selectSubCategories(subcategory: Subcategory) {
+
+    const inxSubcategory = this.currentSubcategories.findIndex(
+      (item) => item === subcategory
+    );
+
+    if ( inxSubcategory !== -1 ) {
+      this.currentSubcategories.splice(inxSubcategory, 1);
+
+    }else {
+      this.currentSubcategories.push(subcategory);
+
+    }
+
+    if (this.currentSubcategories.length > 0 && this.isSelectedCategory === false){
+      this.isSelectedCategory = true;
+    }
+
+    console.log('despues', this.currentSubcategories);
+
   }
 
 }

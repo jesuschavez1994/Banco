@@ -159,9 +159,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   public store() {
     // getStoreById(1)
-    this.storeService.getStoreById(1).subscribe(resp => {
-      console.log(resp);
-    });
+    // this.storeService.getStoreById(1).subscribe(resp => {
+    //   console.log(resp);
+    // });
   }
 
   public selectedCategory(event){

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SidebarListComponent } from '../sidebar-list/sidebar-list.component';
 
 @Component({

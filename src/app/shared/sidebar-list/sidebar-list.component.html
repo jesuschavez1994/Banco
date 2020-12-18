@@ -75,9 +75,9 @@
       <h4 class="title">
         Categorías
       </h4>
-
+      <!-- [routerLink]="[1]" -->
       <ng-container *ngFor="let category of categories">
-        <li 
+        <li
           (click)="selectCategory(category)"
           [ngClass]="{'active': isSelectedCategory && category === currentCategory }"
         >
@@ -102,7 +102,7 @@
             [name]="subcategory.name | strReplace"
           >
 
-          <label [for]="subcategory.name | strReplace">
+          <label [for]="subcategory.name | strReplace" (click)="selectSubCategories(subcategory)">
               <a>{{subcategory.name}}</a>
           </label>
 
