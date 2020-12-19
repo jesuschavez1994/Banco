@@ -75,7 +75,7 @@
       <h4 class="title">
         Categorías
       </h4>
-      <!-- [routerLink]="[1]" -->
+
       <ng-container *ngFor="let category of categories">
         <li
           (click)="selectCategory(category)"
@@ -95,9 +95,10 @@
 
       <ng-container *ngFor="let subcategory of currentCategory.subcategories">
 
-        <li>
+        <li class="subCategory">
 
           <input type="checkbox"
+            class="subCategory-input"
             [id]="subcategory.name | strReplace"
             [name]="subcategory.name | strReplace"
           >

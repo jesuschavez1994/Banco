@@ -100,6 +100,16 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     if (category === this.currentCategory) {
       this.isSelectedCategory = this.isSelectedCategory ? false : true;
 
+      if (this.isSelectedCategory === false){
+        let subcategoryInput;
+
+        subcategoryInput = document.querySelectorAll('.menu .list li.subCategory .subCategory-input');
+
+        subcategoryInput.forEach( input => {
+          input.checked = false;
+        });
+      }
+
     }else {
       this.isSelectedCategory = true;
     }
