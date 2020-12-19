@@ -33,6 +33,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   profile: Profile;
   categories: Category[];
 
+  textToSearch = '';
+
   // Variables
   expandSidebar = true;
   showProducts = false;
@@ -176,7 +178,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         this.StoreName = storeResp.name;
 
         // this.imgsBanners = {
-        //   m: storeResp.banner_image
+        //   m: storeResp.banner_image[0]
         // }
 
         this.setSidebarOptions(idStore, storeResp);
@@ -383,5 +385,12 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       routerLink: [`/business-detail/${idStore}`]
     };
   }
+
+  // Search-bar
+
+  public search(text: string){
+    console.log(text);
+  }
+
 
 }

@@ -39,8 +39,9 @@
 
         <app-search-bar
           [isExpanded]="expandSidebar"
+          [buttonSidebarList]="true"
           (sidebarExpand)="toogleSidebar($event)"
-          [buttonSidebarList]="true">
+          (search)="search($event)">
         </app-search-bar>
 
         <app-products-cards
