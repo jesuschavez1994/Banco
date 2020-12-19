@@ -101,7 +101,7 @@ export class ItemsSuggestedProductsComponent implements OnInit{
 
   ngOnInit() {
 
-    window.addEventListener('scroll', this.scrolling, true)
+    // window.addEventListener('scroll', this.scrolling, true)
 
     this.getData(this.page);
 
@@ -164,7 +164,7 @@ export class ItemsSuggestedProductsComponent implements OnInit{
         this.showFooterPaginations = true;
         this.spinnerService.hide();
         
-        this.scrollTop();
+        // this.scrollTop();
     });
 
   }
@@ -198,27 +198,27 @@ export class ItemsSuggestedProductsComponent implements OnInit{
   }
 
 
-  scrolling=(s)=>{
-    let sc = s.target.scrollingElement.scrollTop;
-    console.log(sc);
-    if(sc >=10602){this.scroll=true}
-    else{
-      this.scroll=false
-    }
-  }
+  // scrolling=(s)=>{
+  //   let sc = s.target.scrollingElement.scrollTop;
+  //   console.log(sc);
+  //   if(sc >=10602){this.scroll=true}
+  //   else{
+  //     this.scroll=false
+  //   }
+  // }
 
-  scrollDown(){
-    window.scrollTo({
-      top: 10000000,
-    });
-  }
+  // scrollDown(){
+  //   window.scrollTo({
+  //     top: 10000000,
+  //   });
+  // }
   
 
-  scrollTop(){
-    window.scrollTo({
-      top:0,
-    });
-  }
+  // scrollTop(){
+  //   window.scrollTo({
+  //     top:0,
+  //   });
+  // }
   
 
   // BUSCADOR //
