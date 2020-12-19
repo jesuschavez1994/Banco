@@ -22,10 +22,12 @@
 
   <div class="filter">
 
-    <select>
-      <option value="0">filtrar por</option>
-      <option value="0">Empresa</option>
-      <option value="0">Producto</option>
+    <select #selectFilter >
+
+      <ng-container *ngFor="let option of filterOptions">
+        <option [value]="option.value">{{option.label}}</option>
+      </ng-container>
+
     </select>
 
   </div>

@@ -10,6 +10,7 @@ import { StoreService } from '@services/store/store.service';
 import { SelectedEmitter, AnchorsMenu, Profile, Category } from '@interfaces/components-options/sidebar-list.options.interface';
 import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
 import { StoreResponse } from '@interfaces/store.interface';
+import { FilterOption } from '@interfaces/components-options/search-bar.options.interface';
 
 @Component({
   selector: 'app-business-detail',
@@ -32,8 +33,11 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   anchorsMenu: AnchorsMenu;
   profile: Profile;
   categories: Category[];
-
-  textToSearch = '';
+  filterOptions: FilterOption[] = [
+    {label: 'filtrar por', value: 0},
+    {label: 'producto', value: 1},
+    {label: 'Empresa', value: 'hola'},
+  ];
 
   // Variables
   expandSidebar = true;
@@ -388,7 +392,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   // Search-bar
 
-  public search(text: string){
+  public search(text){
     console.log(text);
   }
 
