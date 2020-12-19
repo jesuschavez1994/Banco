@@ -2,22 +2,6 @@
 
 <main class="page">
 
-  <!--
-    La directiva *ngIf, no solo funciona para hacer desplegar
-    una sección de la página cuando se cumpla una condición, solo
-    por motivos de mejorar la apariencia.
-
-    En este caso, es utilizado, porque el sidebar-list,
-    depende de datos obtenidos desde el servidor para porder
-    renderizarce sin errores, es decir que al quitar este
-    ngIf, los datos que solicita el sidar arrojaran error
-    undefined porque, el componente se renderiza más rapido
-    de lo que los datos son recibidos, luego de renderizarse
-    no actualiza los datos de forma reactiva como uno podría pensar.
-
-    En resumen, condicionamos que no se renderice el componente
-    haste recibir los datos necesarios, así evitamos errores undefined
-    -->
   <ng-container *ngIf="anchorsMenu && profile && categories">
 
     <app-sidebar-list
@@ -38,7 +22,7 @@
 
     <section class="introduction-page">
 
-      <app-breadcrumb></app-breadcrumb>
+      <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
 
       <app-banner [imgs]="imgsBanners"></app-banner>
 
@@ -48,12 +32,11 @@
 
       <section class="products-infomation">
 
-        <h1 class="profile-name">farmacia medical background</h1>
+        <h1 class="profile-name">{{StoreName}}</h1>
 
         <app-product-detail #productDetail>
         </app-product-detail>
 
-        <!-- [sidebarTarget]="this.sidebarList" -->
         <app-search-bar
           [isExpanded]="expandSidebar"
           (sidebarExpand)="toogleSidebar($event)"

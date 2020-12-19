@@ -8,6 +8,8 @@ import { ProductDetailComponent } from '@shared/product-detail/product-detail.co
 import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component';
 import { StoreService } from '@services/store/store.service';
 import { SelectedEmitter, AnchorsMenu, Profile, Category } from '@interfaces/components-options/sidebar-list.options.interface';
+import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
+import { StoreResponse } from '@interfaces/store.interface';
 
 @Component({
   selector: 'app-business-detail',
@@ -16,15 +18,13 @@ import { SelectedEmitter, AnchorsMenu, Profile, Category } from '@interfaces/com
 })
 export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
-  expandSidebar = true;
-  showProducts = false;
-
   // Components Controllers
   @ViewChild('productCards') productCards: ProductsCardsComponent;
   @ViewChild('productDetail') productDetail: ProductDetailComponent;
   @ViewChild('sidebarList') sidebarList: SidebarListComponent;
 
   // Components Inputs
+  breadcrumb: BreadcrumbOptions[] = [];
   imgsBanners: BannerOptions = {
       m: 'assets/img/test-img/banner.png'
   };
@@ -32,6 +32,14 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   anchorsMenu: AnchorsMenu;
   profile: Profile;
   categories: Category[];
+
+  // Variables
+  expandSidebar = true;
+  showProducts = false;
+  StoreName = '';
+
+
+
 
   constructor(
     private route: ActivatedRoute,
@@ -164,9 +172,15 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       const idStore =  parseInt(params.get('idStore'));
 
       this.storeService.getStoreById(idStore).subscribe( storeResp => {
-        console.log(storeResp);
+
+        this.StoreName = storeResp.name;
+
+        // this.imgsBanners = {
+        //   m: storeResp.banner_image
+        // }
 
         this.setSidebarOptions(idStore, storeResp);
+        this.setBreadcrumbOptions(idStore, storeResp);
 
       });
 
@@ -175,7 +189,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   // Sidebar-list
-  public setSidebarOptions(idStore, storeResp){
+  public setSidebarOptions(idStore: number, storeResp: StoreResponse){
 
     this.anchorsMenu = {
       productLink: `/business-detail/${idStore}/products`,
@@ -349,6 +363,25 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
     } );
 
+  }
+
+  public setBreadcrumbOptions(idStore: number, storeResp: StoreResponse){
+    this.breadcrumb = [
+      {
+        title: 'inicio',
+        routerLink: ['/']
+      },
+      {
+        title: 'farmacias',
+        routerLink: [`/farmacias`]
+      },
+
+    ];
+
+    this.breadcrumb[2] = {
+      title: `${storeResp.name}`,
+      routerLink: [`/business-detail/${idStore}`]
+    };
   }
 
 }

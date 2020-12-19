@@ -1,9 +1,10 @@
 <div class="breadcrumb">
 
   <ul>
-    <li><a>inicio</a></li>
-    <li><a>farmacias</a></li>
-    <li><a>farmacia valverde</a></li>
+    <ng-container *ngFor="let crumb of breadcrumb">
+      <li [routerLink]="crumb.routerLink"><a>{{crumb.title}}</a></li>
+    </ng-container>
+
   </ul>
 
 </div>
