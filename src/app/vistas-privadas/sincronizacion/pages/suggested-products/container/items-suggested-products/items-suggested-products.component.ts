@@ -11,7 +11,7 @@ import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import {BehaviorSubject} from 'rxjs';
 import { Termino } from '../../../../../../models/buscador.model';
 import { bannerOptions } from '@interfaces/components-options/banner.interface';
-
+import { NgxSpinnerService } from "ngx-spinner";
 
 export interface ICarouselItem {
   bank_id: number;
@@ -38,7 +38,7 @@ interface EventID{
 export class ItemsSuggestedProductsComponent implements OnInit{
 
   imgsBanners: bannerOptions = {
-    m: 'assets/img/test-img/banner.png'
+    m: '../../../../assets/img/Banner/Banner1.svg'
   };
 
   @Input() SetAllCheckbox: boolean;
@@ -53,6 +53,7 @@ export class ItemsSuggestedProductsComponent implements OnInit{
   palabra: any
   suggestedShow = false;
   idProductoToSync: any;
+  scroll:boolean=false;
 
   // tslint:disable-next-line: variable-name
   last_Page_Pagination: number;
@@ -70,6 +71,7 @@ export class ItemsSuggestedProductsComponent implements OnInit{
   DescripcionProduct: Descripcion;
   Iterador: any[] = [];
   finalPercentage: any;
+  showFooterPaginations = false;
 
   public currentPosition = 0;
 
@@ -78,7 +80,8 @@ export class ItemsSuggestedProductsComponent implements OnInit{
               private route: ActivatedRoute,
               private router: Router,
               private renderer: Renderer2,
-              private el: ElementRef
+              private el: ElementRef,
+              private spinnerService: NgxSpinnerService
              )
 
   {
@@ -97,12 +100,21 @@ export class ItemsSuggestedProductsComponent implements OnInit{
 
 
   ngOnInit() {
+
+    window.addEventListener('scroll', this.scrolling, true)
+
     this.getData(this.page);
+
+    this.spinner();
     // sistema que nos permita leer el parámetro de la página una vez que cambiamos entre estas usando la función
     this.route.queryParams.subscribe(params => {
       this.page = parseInt(params.page, 10) || 1;
       this.getData(this.page);
     });
+  }
+
+  spinner(): void{
+    this.spinnerService.show();
   }
 
 
@@ -149,6 +161,10 @@ export class ItemsSuggestedProductsComponent implements OnInit{
         console.log('MY PRODUCTOSSSS', this.MyProduct);
         this.last_Page_Pagination = resp.last_page;
         this.totalProductAPI = resp.total;
+        this.showFooterPaginations = true;
+        this.spinnerService.hide();
+        
+        this.scrollTop();
     });
 
   }
@@ -181,12 +197,28 @@ export class ItemsSuggestedProductsComponent implements OnInit{
 
   }
 
-  IrPaginacion(){
+
+  scrolling=(s)=>{
+    let sc = s.target.scrollingElement.scrollTop;
+    console.log(sc);
+    if(sc >=10602){this.scroll=true}
+    else{
+      this.scroll=false
+    }
+  }
+
+  scrollDown(){
     window.scrollTo({
       top: 10000000,
     });
   }
+  
 
+  scrollTop(){
+    window.scrollTo({
+      top:0,
+    });
+  }
   
 
   // BUSCADOR //

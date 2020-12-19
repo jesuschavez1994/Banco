@@ -1,3 +1,8 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, .45)">
+  <p style="font-size: 20px; color: white">Cargando...</p>
+</ngx-spinner>
+
 
 <app-no-suggested-products *ngIf="MyProduct.length === undefined"></app-no-suggested-products>
 
@@ -112,17 +117,24 @@
                 </div>                
     </section>
 
-    <span class="ir-arriba icon-arrow-up2" (click)="IrPaginacion()">
+    <span class="ir-arriba icon-arrow-up2" (click)="scrollDown()" *ngIf="!scroll">
         <i  class="figure material-icons" 
             name="camera">
             keyboard_arrow_down
         </i>
     </span>
 
+    <span class="ir-arriba icon-arrow-up2" (click)="scrollTop()" *ngIf="scroll">
+        <i  class="figure material-icons" 
+            name="camera">
+            keyboard_arrow_up
+        </i>
+    </span>
+
 </div>
 
 <!-- PAGINACIÓN -->
-<footer class="col-md-11">
+<footer class="col-md-11" *ngIf="showFooterPaginations">
     <pagination-controls    previousLabel = "Anterior"
                             nextLabel = "Siguiente"
                             (pageChange)="pageChanged($event)">

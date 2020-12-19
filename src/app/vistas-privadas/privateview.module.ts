@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
@@ -109,7 +109,7 @@ import { SearchComponent } from './sincronizacion/components/search/search.compo
 import { DesincronizarComponent } from './sincronizacion/components/desincronizar/desincronizar.component';
 import { AsideFiltrosComponent } from './shared/aside-filtros/aside-filtros.component';
 import { CarouselSuggestedComponent } from './sincronizacion/pages/suggested-products/container/carousel-suggested/carousel-suggested.component';
-
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -201,9 +201,10 @@ import { CarouselSuggestedComponent } from './sincronizacion/pages/suggested-pro
         apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'
       }),
       NgbModule,
+      NgxSpinnerModule
    
     
-      ],
+    ],
 
     exports: [
       PhotoUserEditComponent,

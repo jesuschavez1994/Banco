@@ -8,7 +8,7 @@ import { bannerOptions } from '@interfaces/components-options/banner.interface';
 export class SincronizacionViewsComponent implements OnInit {
 
   imgsBanners: bannerOptions = {
-    m: 'assets/img/test-img/banner.png'
+    m: '../../../../assets/img/Banner/Banner1.svg'
   };
 
   constructor() { }

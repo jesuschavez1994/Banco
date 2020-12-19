@@ -7,6 +7,22 @@ section{
     padding-top: 7px;
 }
 
+.ir-arriba {
+    display: flex;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+	padding:20px;
+    background:#2db0c7;
+    z-index: 20;
+	font-size:20px;
+	color:#fff;
+	cursor:pointer;
+	position: fixed;
+	bottom:20px;
+	right:20px;
+}
+
 @media only screen and (min-width: 768px) {
     .product-item {
         width: calc(23%);

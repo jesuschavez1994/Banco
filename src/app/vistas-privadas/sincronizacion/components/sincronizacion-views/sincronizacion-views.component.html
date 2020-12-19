@@ -1,12 +1,16 @@
-<div class="row">
-    <app-banner [imgs]="imgsBanners" class="pt-5"></app-banner>
-</div>
+<section class="display-flex">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <app-banner [imgs]="imgsBanners"></app-banner>
+                <app-navbar-sincronizacion></app-navbar-sincronizacion>
 
-<app-navbar-sincronizacion></app-navbar-sincronizacion>
-
-<div class="row">
-    <div class="col-12 col-sm-12 col-md-11">
-        <router-outlet></router-outlet>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-11">
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+            </div>      
+        </div> 
     </div>
-</div>
-
+</section>   

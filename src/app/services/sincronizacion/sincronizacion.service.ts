@@ -56,8 +56,8 @@ export class SincronizacionService {
     return this.http.get(url, {responseType: 'blob'});
   }
 
-  GetBankProduct(){
-    const url = `/api/banks`;
+  GetBankProduct(page?: number){
+    const url = `/api/banks` + '?page=' + page;;
     return this.execQuery(url);
   }
 

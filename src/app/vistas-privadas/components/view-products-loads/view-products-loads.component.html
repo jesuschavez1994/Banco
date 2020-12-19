@@ -66,18 +66,18 @@
                         
                         <div [ngSwitch]="item.sincronice">
                             <div *ngSwitchCase="'sincronizado'">
-
-                                <img    [src]="item.sync_bank[0].images[0].src_size.xl | imgProductLoad" 
-                                        class="product-image-photo lazyload"   
-                                        alt="{{item.name}}"
-                                        style="display: block;"
-                                        *ngIf="item.sync_bank.length > 0"    
-                                >
-
+                                <div *ngIf="item.sync_bank[0].images.length > 0">
+                                    <img    [src]="item.sync_bank[0].images[0].src_size.xl | imgProductLoad" 
+                                            class="product-image-photo lazyload"   
+                                            alt="{{item.name}}"
+                                            style="display: block;"
+                                            *ngIf="item.sync_bank.length > 0"    
+                                    >
+                                </div>
                                 <img    src="../../../assets/img/Box/box.svg" 
                                         class="card-img-top" 
                                         alt="..." 
-                                        *ngIf="item.sync_bank.length === 0"
+                                        *ngIf="item.sync_bank.length === 0 || item.sync_bank[0].images.length === 0"
                                 >
 
                             </div>

@@ -43,6 +43,7 @@
     "ngx-owl-carousel-o": "^4.0.0",
     "ngx-pagination": "^5.0.0",
     "ngx-slick-carousel": "^0.5.1",
+    "ngx-spinner": "^10.0.1",
     "rxjs": "~6.5.4",
     "rxjs-compat": "^6.6.2",
     "sweetalert": "^2.1.2",

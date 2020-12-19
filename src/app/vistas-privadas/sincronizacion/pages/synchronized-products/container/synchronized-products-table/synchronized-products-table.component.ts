@@ -4,7 +4,7 @@ import { ProductosLoads, DataProductDB } from '../../../../../../interfaces/Inte
 import { SincronizacionService } from '../../../../../../services/sincronizacion/sincronizacion.service';
 import { ListProductSyncAnNoSync, DataListProductSyncAnNoSync } from '../../../../../../interfaces/table-product-sync-and-no-sync/ListProductSyncAndNosync';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-synchronized-products-table',
@@ -19,21 +19,32 @@ export class SynchronizedProductsTableComponent implements OnInit {
   total = 0;
   perPage = 10;
   totalPage: number = 0;
+  showFooterPaginations = false;
+  scroll:boolean=false;
 
   constructor(  public storeService: StoreService,
                 private sincronizacion: SincronizacionService,
                 private route: ActivatedRoute,
-                private router: Router) { }
+                private router: Router,
+                private spinnerService: NgxSpinnerService) { }
 
   ngOnInit(): void {
 
     this.getData(this.page);
+
+    window.addEventListener('scroll', this.scrolling, true)
+
+    this.spinner()
 
     this.route.queryParams.subscribe(params => {
       this.page = parseInt(params.page, 10) || 1;
       this.getData(this.page);
     });
 
+  }
+
+  spinner(): void{
+    this.spinnerService.show();
   }
 
   SynchronizedThis(evt: any, i: number){
@@ -73,12 +84,38 @@ export class SynchronizedProductsTableComponent implements OnInit {
       console.log('DataList', resp.data);
       this.itemProductos = resp.data;
       this.totalPage = resp.total;
+      this.showFooterPaginations = true;
+      this.spinnerService.hide();
+
+      this.scrollTop();
     })
 
   }
 
   handleSearch($event){
     
+  }
+
+  scrolling=(s)=>{
+    let sc = s.target.scrollingElement.scrollTop;
+    console.log(sc);
+    if(sc >=1027){this.scroll=true}
+    else{
+      this.scroll=false
+    }
+  }
+
+  scrollDown(){
+    window.scrollTo({
+      top: 10000000,
+    });
+  }
+  
+
+  scrollTop(){
+    window.scrollTo({
+      top:0,
+    });
   }
 
 

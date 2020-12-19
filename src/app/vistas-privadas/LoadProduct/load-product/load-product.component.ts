@@ -4,6 +4,7 @@ import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import { bannerOptions } from '@interfaces/components-options/banner.interface';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-load-product',
   templateUrl: './load-product.component.html',
@@ -12,7 +13,7 @@ import { bannerOptions } from '@interfaces/components-options/banner.interface';
 export class LoadProductComponent implements OnInit {
 
   imgsBanners: bannerOptions = {
-    m: 'assets/img/test-img/banner.png'
+    m: '../../../../assets/img/Banner/Banner1.svg'
   };
 
   MyProduct: DataProductDB[] = [];
@@ -24,22 +25,32 @@ export class LoadProductComponent implements OnInit {
    totalProductAPI: number = 0;
    // tslint:disable-next-line: no-inferrable-types
    page: number = 1;
+   scroll:boolean=false;
+
 
    addProductNew = false;
 
+   showFooterPaginations = false;
+
   constructor(public storeService: StoreService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private spinnerService: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getData(this.page);
-
+    this.spinner();
+    window.addEventListener('scroll', this.scrolling, true)
     // sistema que nos permita leer el parámetro de la página una vez que cambiamos entre estas usando la función
     this.route.queryParams.subscribe(params => {
       this.page = parseInt(params.page, 10) || 1;
       this.getData(this.page);
     });
 
+  }
+
+  spinner(): void{
+    this.spinnerService.show();
   }
 
   // Funcion para el cambio de paginación //
@@ -71,12 +82,37 @@ export class LoadProductComponent implements OnInit {
         console.log('MY PRODUCTOS', this.MyProduct);
         this.last_Page_Pagination = resp.last_page;
         this.totalProductAPI = resp.total;
+        this.showFooterPaginations = true;
+        this.spinnerService.hide();
     });
 
   }
 
   addNewProduct(){
     this.addProductNew = true;
+  }
+
+
+  scrolling=(s)=>{
+    let sc = s.target.scrollingElement.scrollTop;
+    console.log(sc);
+    if(sc >=2733){this.scroll=true}
+    else{
+      this.scroll=false
+    }
+  }
+
+  scrollDown(){
+    window.scrollTo({
+      top: 10000000,
+    });
+  }
+  
+
+  scrollTop(){
+    window.scrollTo({
+      top:0,
+    });
   }
 
 }

@@ -7,6 +7,10 @@
     padding-top: 4px;
 }
 
+.container-fluid{
+    padding-top: 90px !important;
+}
+
 .product-items {
     font-size: 0;
     letter-spacing: -1px;
@@ -76,6 +80,22 @@
     padding-left: calc(1.5em + .75rem);
     background-position: right calc(.375em + .1875rem) center !important;
     background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+.ir-arriba {
+    display: flex;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+	padding:20px;
+    background:#2db0c7;
+    z-index: 20;
+	font-size:20px;
+	color:#fff;
+	cursor:pointer;
+	position: fixed;
+	bottom:20px;
+	right:20px;
 }
 
 @media only screen and (min-width: 768px) {
