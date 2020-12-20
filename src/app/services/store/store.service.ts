@@ -154,6 +154,8 @@ export class StoreService {
 
   }
 
+  
+
   estaLogueado(){
     return (this.token.length > 6 ) ? true : false;
   }
@@ -209,6 +211,7 @@ export class StoreService {
     const url = `/api/users/${userId}/stores/${storeId}/products/${idProduct}`;
     return this.DeleteQuery(url);
   }
+
 
 
 }

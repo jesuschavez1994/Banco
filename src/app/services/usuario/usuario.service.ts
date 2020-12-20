@@ -112,4 +112,6 @@ export class UsuarioService {
     return this.execQuery(query);
   }
 
+
+
 }

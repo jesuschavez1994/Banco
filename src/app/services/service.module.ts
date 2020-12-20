@@ -22,11 +22,11 @@ import { SincronizacionService } from './sincronizacion/sincronizacion.service';
     InterceptorService,
     ProductLoadingComponent,
     SincronizacionService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: InterceptorService,
-      multi: true
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: InterceptorService,
+    //   multi: true
+    // },
   ],
   imports: [CommonModule],
   exports: [],

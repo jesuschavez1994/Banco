@@ -15,13 +15,13 @@ export class HomeComponent implements OnInit {
   constructor(public storeService: StoreService) { }
 
   ngOnInit() {
-    this.storeService.ProductGet(
-      localStorage.getItem('id'),
-      localStorage.getItem('storeId'))
-      .subscribe( (resp: ProductosLoads) => {
-      this.itemProductos = resp.data;
-      console.log('ITEM', this.itemProductos);
-    });
+    // this.storeService.ProductGet(
+    //   localStorage.getItem('id'),
+    //   localStorage.getItem('storeId'))
+    //   .subscribe( (resp: ProductosLoads) => {
+    //   this.itemProductos = resp.data;
+    //   console.log('ITEM', this.itemProductos);
+    // });
   }
 
 }

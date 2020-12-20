@@ -33,6 +33,7 @@ import { EditProdutcComponent } from './vistas-privadas/components/edit-produtc/
 import { EditSincronizacionComponent } from './vistas-privadas/sincronizacion/components/edit-sincronizacion/edit-sincronizacion.component';
 import { EditProductNoDisponibleComponent } from './vistas-privadas/components/edit-product-no-disponible/edit-product-no-disponible.component';
 import { DesincronizarComponent } from './vistas-privadas/sincronizacion/components/desincronizar/desincronizar.component';
+import { LoginComponent } from './vistas-publicas/login/login/login.component';
 
 
 
@@ -41,6 +42,7 @@ const APP_ROUTES: Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'admin', component: LoadBanckProductComponent},
+    {path: 'login', component: LoginComponent},
 
     // Christopher Views
     {path: 'shopping-cart', component: ShoppingCartComponent},
@@ -133,7 +135,7 @@ const APP_ROUTES: Routes = [
     },
 
 
-    {path: 'login-usuario', component: LoginUsuarioComponent},
+    
     {path: 'dashboard', component: DashboardComponent},
     {path: 'terminos-ycondiciones', component: TerminosYCondicionesComponent},
     {

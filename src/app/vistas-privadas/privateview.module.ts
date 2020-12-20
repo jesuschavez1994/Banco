@@ -74,7 +74,6 @@ import { MinimaLight, MinimaDark } from '@alyle/ui/themes/minima';
 import { ProductLoadComponent } from './components/product-load/product-load/product-load.component';
 import { ViewProductsLoadsComponent } from './components/view-products-loads/view-products-loads.component';
 import { AccountComponent } from './account/account.component';
-import { ROUTING_VIEW_PRIVATE_STORE } from './private-views.routes';
 import { ProductLoadingSmartComponent } from './product-loading/container/product-loading-smart/product-loading-smart.component';
 import { LoadProductComponent } from './LoadProduct/load-product/load-product.component';
 import { ModalAddCategoriasAndSubcategoriasComponent } from './product-loading/container/modals/modal-add-categorias-and-subcategorias/modal-add-categorias-and-subcategorias.component';
@@ -110,6 +109,7 @@ import { DesincronizarComponent } from './sincronizacion/components/desincroniza
 import { AsideFiltrosComponent } from './shared/aside-filtros/aside-filtros.component';
 import { CarouselSuggestedComponent } from './sincronizacion/pages/suggested-products/container/carousel-suggested/carousel-suggested.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { AppRoutingModule } from '../app-routing.module';
 
 
 @NgModule({
@@ -177,6 +177,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 
     imports: [
       CommonModule,
+      AppRoutingModule,
       SpreadSheetsModule,
       MaterialModule,
       NgxPaginationModule,
@@ -192,7 +193,6 @@ import { NgxSpinnerModule } from "ngx-spinner";
       // END MODULOS Alyle //
       HammerModule,
       ComponentsModule,
-      ROUTING_VIEW_PRIVATE_STORE,
       NzTimePickerModule,
       FormsModule,
       ReactiveFormsModule,
@@ -229,4 +229,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ],
 
   })
+
+
+  
   export class PrivateviewModule { }

@@ -5,7 +5,8 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 // Servicios //
-import { HttpClientModule  } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
+
 // Rutas //
 import { APP_ROUTING } from './app.routes';
 
@@ -77,7 +78,12 @@ registerLocaleData(ca);
 
   ],
   providers: [
-  { provide: NZ_I18N, useValue: ca_ES }],
+  { provide: NZ_I18N, useValue: ca_ES },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorService,
+    multi: true
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

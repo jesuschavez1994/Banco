@@ -1,3 +1,4 @@
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountComponent } from './account/account.component';
 import { LoginGuardGuard } from '../services/guards/login-guard.guard';
@@ -16,9 +17,6 @@ import { ExportarListaExcelComponent } from './sincronizacion/pages/exportar-lis
 import { SuggestedProductsComponent } from './sincronizacion/pages/suggested-products/suggested-products.component';
 import { SynchronizedProductsComponent } from './sincronizacion/pages/synchronized-products/synchronized-products.component';
 import { BankProductComponent } from './sincronizacion/pages/bank-product/bank-product.component';
-
-
-
 
 
 const ROUTES_VIEW_STORE: Routes = [
@@ -97,4 +95,5 @@ const ROUTES_VIEW_STORE: Routes = [
 
 ];
 
-export const ROUTING_VIEW_PRIVATE_STORE = RouterModule.forRoot(ROUTES_VIEW_STORE);
+
+export const ROUTING_VIEW_PRIVATE_STORE = RouterModule.forChild(ROUTES_VIEW_STORE);
