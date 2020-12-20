@@ -191,12 +191,12 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   public paginationProducts(page: number){
-    console.log(page);
     this.router.navigate(
       [],
       {
         relativeTo: this.route,
-        queryParams: {page}
+        queryParams: {page},
+        queryParamsHandling: 'merge',
       }
     );
   }
@@ -349,7 +349,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   public goToProductsByCategories(event: SelectedEmitter){
-    console.log('event', event);
+    // console.log('goToProductsByCategories', event);
 
     this.route.paramMap.subscribe( params => {
 
@@ -378,8 +378,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             }
 
           }
-
-          console.log('queryParams', queryParams);
 
           this.router.navigate(
             ['/business-detail', idStore, 'products'],

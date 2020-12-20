@@ -77,9 +77,11 @@
       </h4>
 
       <ng-container *ngFor="let category of categories">
+
         <li
+          class="category"
           (click)="selectCategory(category)"
-          [ngClass]="{'active': isSelectedCategory && category === currentCategory }"
+          [ngClass]="{'active': category.id == idCategorySelected}"
         >
           <a>{{category.name}}</a>
         </li>
@@ -99,12 +101,12 @@
 
           <input type="checkbox"
             class="subCategory-input"
-            [id]="subcategory.name | strReplace"
-            [name]="subcategory.name | strReplace"
+            [id]="subcategory.id"
+            [name]="subcategory.id"
           >
 
           <label
-            [for]="subcategory.name | strReplace"
+            [for]="subcategory.id"
             (click)="selectSubCategories(subcategory)">
 
             <a>{{subcategory.name}}</a>

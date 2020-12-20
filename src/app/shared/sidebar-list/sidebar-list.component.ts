@@ -38,6 +38,8 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   currentSubcategories: Subcategory[] = [];
 
+  idCategorySelected: number;
+
   constructor( private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.routerLinkActive();
+    this.activeClassCategories();
 
   }
 
@@ -100,15 +103,15 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     if (category === this.currentCategory) {
       this.isSelectedCategory = this.isSelectedCategory ? false : true;
 
-      if (this.isSelectedCategory === false){
-        let subcategoryInput;
+      // if (this.isSelectedCategory === false){
+      //   let subcategoryInput;
 
-        subcategoryInput = document.querySelectorAll('.menu .list li.subCategory .subCategory-input');
+      //   subcategoryInput = document.querySelectorAll('.menu .list li.subCategory .subCategory-input');
 
-        subcategoryInput.forEach( input => {
-          input.checked = false;
-        });
-      }
+      //   subcategoryInput.forEach( input => {
+      //     input.checked = false;
+      //   });
+      // }
 
     }else {
       this.isSelectedCategory = true;
@@ -156,4 +159,57 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   public setCategories(categories: Category[]){
     this.categories = categories;
   }
+
+  public activeClassCategories(){
+
+    this.route.queryParamMap.subscribe( params => {
+
+      let subcategoryInput;
+
+      if (params.has('category')){
+
+        let idCategories;
+        this.idCategorySelected = parseInt(params.get('category'));
+
+        idCategories = this.categories.map(cat => {
+          return cat.id;
+        } );
+
+        const inxCategorySelected = idCategories.indexOf(this.idCategorySelected);
+
+        if (inxCategorySelected !== -1){
+          this.currentCategory = this.categories[inxCategorySelected];
+        }
+
+        subcategoryInput = document.querySelectorAll('.menu .list li.subCategory .subCategory-input');
+
+        if (params.has('subcategories')) {
+
+          const subCategories = params.get('subcategories').split(',').map(subCat => {
+            return parseInt(subCat);
+          } );
+
+          subcategoryInput.forEach( input => {
+            input.checked = subCategories.indexOf(input.id) > -1 ? true : false;
+
+          });
+
+          console.log(subCategories, subcategoryInput);
+        }
+
+      }else{
+        subcategoryInput = document.querySelectorAll('.menu .list li.subCategory .subCategory-input');
+
+        this.idCategorySelected = -1;
+
+        subcategoryInput.forEach( input => {
+          input.checked = true;
+        });
+
+      }
+
+    } );
+
+  }
+
 }
