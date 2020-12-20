@@ -74,7 +74,7 @@ import { MinimaLight, MinimaDark } from '@alyle/ui/themes/minima';
 import { ProductLoadComponent } from './components/product-load/product-load/product-load.component';
 import { ViewProductsLoadsComponent } from './components/view-products-loads/view-products-loads.component';
 import { AccountComponent } from './account/account.component';
-import { ROUTING_VIEW_STORE } from './view.routes';
+import { ROUTING_VIEW_PRIVATE_STORE } from './private-views.routes';
 import { ProductLoadingSmartComponent } from './product-loading/container/product-loading-smart/product-loading-smart.component';
 import { LoadProductComponent } from './LoadProduct/load-product/load-product.component';
 import { ModalAddCategoriasAndSubcategoriasComponent } from './product-loading/container/modals/modal-add-categorias-and-subcategorias/modal-add-categorias-and-subcategorias.component';
@@ -192,8 +192,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
       // END MODULOS Alyle //
       HammerModule,
       ComponentsModule,
-      APP_ROUTING,
-      ROUTING_VIEW_STORE,
+      ROUTING_VIEW_PRIVATE_STORE,
       NzTimePickerModule,
       FormsModule,
       ReactiveFormsModule,

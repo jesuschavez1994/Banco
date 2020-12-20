@@ -8,7 +8,7 @@ import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import { EditProductStore } from '@interfaces/interfaceEditProductStore';
 import { URL_SERVICIOS } from '../../../config/config';
-
+import { NgxSpinnerService } from "ngx-spinner";
 const URL = URL_SERVICIOS;
 
 export class ImgEdit {
@@ -111,7 +111,8 @@ export class EditProdutcComponent implements OnInit {
               public storeService: StoreService,
               private route: ActivatedRoute,
               private router: Router,
-              public _productLoadingService: ProductLoadingService) {
+              public _productLoadingService: ProductLoadingService,
+              private spinnerService: NgxSpinnerService) {
 
               
                 this.route.params.subscribe( (params: Params) => {
@@ -122,6 +123,7 @@ export class EditProdutcComponent implements OnInit {
                     console.log('Datas', data);
                     this.delivery = data.delivery;
                     this.LengtImgEdit = data.images;
+                    this.spinnerService.hide();
 
                     this.valorForm = data;
                     this.subCategoriaBanco = data.subcategories[0].name;
@@ -212,6 +214,8 @@ export class EditProdutcComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.spinner();
+
     // GET CATEGORIAS //
     this._productLoadingService.GetCategorias()
       .subscribe( response => {
@@ -242,6 +246,12 @@ export class EditProdutcComponent implements OnInit {
       this.recipes = response;
     });
 
+   
+
+  }
+
+  spinner(): void{
+    this.spinnerService.show();
   }
 
   addProducts(){}

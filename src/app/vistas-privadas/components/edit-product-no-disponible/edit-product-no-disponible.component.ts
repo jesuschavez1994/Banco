@@ -10,7 +10,7 @@ import { SincronizacionService } from '../../../services/sincronizacion/sincroni
 import { EditProductStore } from '@interfaces/interfaceEditProductStore';
 import { switchMap } from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
-
+import { NgxSpinnerService } from "ngx-spinner";
 import { URL_SERVICIOS } from '../../../config/config';
 
 const URL = URL_SERVICIOS;
@@ -113,7 +113,8 @@ export class EditProductNoDisponibleComponent implements OnInit {
               private route: ActivatedRoute,
               private sincronizacion: SincronizacionService,
               public storeService: StoreService,
-              private _snackBar: MatSnackBar) {
+              private _snackBar: MatSnackBar,
+              private spinnerService: NgxSpinnerService) {
 
               this.route.params.subscribe( params => {
                 console.log(params);
@@ -128,6 +129,7 @@ export class EditProductNoDisponibleComponent implements OnInit {
                     this.valorForm = data;
                     this.showImages = true;
                     this.showForm = true;
+                    this.spinnerService.hide();
 
                     if( this.valorForm.subcategories.length !== 0){
                       this.subCategoriaBanco = data.subcategories[0].name;
@@ -271,6 +273,12 @@ export class EditProductNoDisponibleComponent implements OnInit {
       this.recipes = response;
     });
 
+    this.spinner();
+
+  }
+
+  spinner(): void{
+    this.spinnerService.show();
   }
 
   addProducts(){

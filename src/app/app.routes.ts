@@ -133,14 +133,6 @@ const APP_ROUTES: Routes = [
     },
 
 
-    // {   path: 'contact',
-    //     component: ContactComponent,
-    //     canActivate: [ LoginGuardGuard ],
-    //     children: [
-    //         { path: 'contact-information-edit', component: ContactInformationEditComponent},
-    //     ]
-    // },
-
     {path: 'login-usuario', component: LoginUsuarioComponent},
     {path: 'dashboard', component: DashboardComponent},
     {path: 'terminos-ycondiciones', component: TerminosYCondicionesComponent},
