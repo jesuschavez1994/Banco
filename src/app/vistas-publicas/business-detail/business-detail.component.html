@@ -47,7 +47,10 @@
 
         <app-products-cards
           #productCards
-          (selected)="goTodetailProduct($event)">
+          (selected)="goTodetailProduct($event)"
+          (pagination)="paginationProducts($event)"
+          [totalItems]="totalProducts"
+          [itemsPerPage]="16">
         </app-products-cards>
 
       </section>
@@ -57,6 +60,8 @@
     <ng-container *ngIf="!showProducts">
       <p>contact detail</p>
     </ng-container>
+
+
 
   </div>
 

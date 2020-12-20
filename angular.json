@@ -24,9 +24,9 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css",
               "src/assets/Fonstastic/styles.css",
               "src/_animations.scss",
@@ -107,8 +107,8 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []

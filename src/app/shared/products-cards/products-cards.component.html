@@ -1,6 +1,6 @@
 <div class="products-container">
 
-  <ng-container *ngFor="let product of products">
+  <ng-container *ngFor="let product of products | paginate: { id:'pagination', itemsPerPage: itemsPerPage, currentPage: p, totalItems: totalItems}">
 
     <article class="product" (click)="selectedProduct(product)">
 
@@ -30,3 +30,13 @@
 
 
 </div>
+
+<pagination-controls
+  class="my-pagination"
+  id="pagination"
+  #paginationControls
+  previousLabel = "Anterior"
+  nextLabel = "Siguiente"
+  (pageChange)="pageChanged($event)"
+>
+</pagination-controls>

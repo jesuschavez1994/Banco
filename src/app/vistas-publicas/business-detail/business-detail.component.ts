@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Pipe } from '@angular/core';
 import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
 import { ProductService } from '@services/product/product.service';
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ProductsCardsComponent } from '@shared/products-cards/products-cards.component';
 import { ProductDetailComponent } from '@shared/product-detail/product-detail.component';
 import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component';
@@ -11,6 +11,9 @@ import { SelectedEmitter, AnchorsMenu, Profile, Category } from '@interfaces/com
 import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
 import { StoreResponse } from '@interfaces/store.interface';
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface';
+import { forkJoin, merge } from 'rxjs';
+import { combineLatest } from 'rxjs';
+import { mergeMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-business-detail',
@@ -25,7 +28,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('sidebarList') sidebarList: SidebarListComponent;
 
   // Components Inputs
-  breadcrumb: BreadcrumbOptions[] = [];
+  breadcrumb: BreadcrumbOptions[];
   imgsBanners: BannerOptions = {
       m: 'assets/img/test-img/banner.png'
   };
@@ -40,11 +43,10 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   ];
 
   // Variables
+  totalProducts: number;
   expandSidebar = true;
   showProducts = false;
   StoreName = '';
-
-
 
 
   constructor(
@@ -53,10 +55,12 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     private productService: ProductService,
     private storeService: StoreService,
 
-  ){}
-
-  ngOnInit(): void {
+  ){
     this.loadDataByParams();
+  }
+
+  ngOnInit() {
+
 
   }
 
@@ -67,7 +71,20 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   public loadDataByParams(){
 
-    this.route.paramMap.subscribe( params => {
+    combineLatest([this.route.paramMap, this.route.queryParamMap])
+    .pipe(
+      map(([params, queryParam]) => {
+
+        return {
+          params,
+          queryParam
+        };
+
+      })
+    )
+    .subscribe(data => {
+      const params = data.params;
+      const queryParam = data.queryParam;
 
       if ( params.has('show') && params.get('show') === 'products' ){
         this.showProducts = true;
@@ -81,7 +98,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
       this.loadProductDetail(params);
 
-      this.loadProductsCards(params);
+      this.loadProductsCards(params, queryParam);
 
     });
 
@@ -148,16 +165,19 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   }
 
-  public loadProductsCards(params) {
+  public loadProductsCards(params: ParamMap, queryParams: ParamMap) {
 
     if (params.has('idStore')) {
 
       // tslint:disable-next-line: radix
       const idStore = parseInt( params.get('idStore') );
+      // tslint:disable-next-line: radix
+      const page = queryParams.has('page') ? parseInt( queryParams.get('page') ) : 1;
 
-      this.productService.getProductsByStore(idStore).subscribe( resp => {
+      this.productService.getProductsByStore(idStore, page).subscribe( resp => {
 
         const products = resp.data;
+        this.totalProducts = resp.total;
 
         this.productCards.products = this.productCards.formatProductsResponse(
           products,
@@ -168,6 +188,17 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
     }
 
+  }
+
+  public paginationProducts(page: number){
+    console.log(page);
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: {page}
+      }
+    );
   }
 
   // Store

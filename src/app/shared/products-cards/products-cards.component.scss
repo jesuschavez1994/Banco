@@ -83,6 +83,9 @@
     }
   }
 
+  .my-pagination .ngx-pagination .current::root {
+    background: $color__background-orange;
+  }
 }
 
 
