@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import { Total } from '@interfaces/sincronizacion';
 import {debounceTime} from 'rxjs/operators';
+import { NgxSpinnerService } from "ngx-spinner";
 export interface Task {
   name: string;
   completed: boolean;
@@ -44,11 +45,17 @@ task: Task = {
   forma: FormGroup;
   palabra: Total;
 
-  constructor(public sincronizacion: SincronizacionService) {}
+  constructor(public sincronizacion: SincronizacionService,
+              private spinnerService: NgxSpinnerService) {}
 
   allComplete = false;
 
   ngOnInit() {
+    this.spinner()
+  }
+
+  spinner(): void{
+    this.spinnerService.show();
   }
 
   solicitarSugerencias(){
@@ -59,6 +66,7 @@ task: Task = {
 
     this.sincronizacion.Sugerir(localStorage.getItem('storeId'), id).subscribe( resp => {
       console.log(resp);
+      this.spinnerService.hide()
     });
   }
 

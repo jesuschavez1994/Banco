@@ -76,6 +76,8 @@ export class SynchronizedProductsTableComponent implements OnInit {
 
   getData(page?: number){
 
+    this.spinner();
+
     this.sincronizacion.ListProductSincronizadosYNosincronizados(
       localStorage.getItem('id'),
       localStorage.getItem('storeId'),

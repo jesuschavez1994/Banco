@@ -73,6 +73,8 @@ export class LoadProductComponent implements OnInit {
 
   getData(page?: number){
 
+    this.spinner();
+
     this.storeService.geatAllProducts(
       localStorage.getItem('id'),
       localStorage.getItem('storeId'),

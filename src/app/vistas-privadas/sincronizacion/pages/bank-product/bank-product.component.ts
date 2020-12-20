@@ -73,6 +73,7 @@ export class BankProductComponent implements OnInit {
   }
 
   getData(page?: number){
+    this.spinner();
     this.sincronizacion.GetBankProduct(page).subscribe( (resp: ProductosLoads) => {
       this.itemProduct = resp.data;
         console.log('RESPUESTA', resp);
@@ -104,7 +105,7 @@ export class BankProductComponent implements OnInit {
 
   scrollTop(){
     window.scrollTo({
-      top:0,
+      top:300,
     });
   }
 

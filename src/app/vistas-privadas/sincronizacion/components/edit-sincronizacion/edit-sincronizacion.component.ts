@@ -8,7 +8,7 @@ import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import { EditProductStore } from '@interfaces/interfaceEditProductStore';
 import { SincronizacionService } from '../../../../services/sincronizacion/sincronizacion.service';
-
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-edit-sincronizacion',
@@ -82,7 +82,8 @@ export class EditSincronizacionComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               public _productLoadingService: ProductLoadingService,
-              private sincronizacion: SincronizacionService) {
+              private sincronizacion: SincronizacionService,
+              private spinnerService: NgxSpinnerService) {
 
 
                 this.route.params.subscribe( (params: Params) => {
@@ -216,6 +217,8 @@ export class EditSincronizacionComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.spinner();
+
     // GET CATEGORIAS //
     this._productLoadingService.GetCategorias()
       .subscribe( response => {
@@ -246,6 +249,10 @@ export class EditSincronizacionComponent implements OnInit {
       this.recipes = response;
     });
 
+  }
+
+  spinner(): void{
+    this.spinnerService.show();
   }
 
   onChange(centroId) {
@@ -298,6 +305,7 @@ export class EditSincronizacionComponent implements OnInit {
       localStorage.getItem('storeId'),
       this.idProduct, 
       data).subscribe( resp => {
+        this.spinnerService.hide()
         console.log(resp);
       })
 

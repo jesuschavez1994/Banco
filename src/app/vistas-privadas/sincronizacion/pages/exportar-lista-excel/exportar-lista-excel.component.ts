@@ -6,6 +6,7 @@ import { SincronizacionService } from '../../../../services/sincronizacion/sincr
 import { FileUploadModel } from '../../../../interfaces/UploadFiles';
 import { HttpErrorResponse, HttpEventType, HttpRequest } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../../../config/config';
+import { NgxSpinnerService } from "ngx-spinner";
 
 
 const URL = URL_SERVICIOS;
@@ -61,7 +62,8 @@ export class ExportarListaExcelComponent implements OnInit {
               // tslint:disable-next-line: variable-name
               private _cd: ChangeDetectorRef,
               private route: ActivatedRoute,
-              private router: Router
+              private router: Router,
+              private spinnerService: NgxSpinnerService
               // tslint:disable-next-line: variable-name
               ) {
 
@@ -75,6 +77,8 @@ export class ExportarListaExcelComponent implements OnInit {
 
   ngOnInit() {
 
+    this.spinner();
+
     this.userId = localStorage.getItem('id'),
     this.storeId = localStorage.getItem('storeId');
     this.path = URL_SERVICIOS + `/api/users/${this.userId }/stores/${this.storeId}/dowload_productcsv`;
@@ -85,6 +89,7 @@ export class ExportarListaExcelComponent implements OnInit {
       localStorage.getItem('storeId')
     ).subscribe(
       (response: any) => {
+        this.spinnerService.hide()
         console.log(response);
         if ( response.size > 1){
           this.dowloadExcel = true;
@@ -95,6 +100,10 @@ export class ExportarListaExcelComponent implements OnInit {
       }
     );
 
+  }
+
+  spinner(): void{
+    this.spinnerService.show();
   }
 
   SendDocumentExcel(){}
@@ -173,97 +182,24 @@ export class ExportarListaExcelComponent implements OnInit {
 
   enviarExcel(){
 
+    this.spinner();
+
     const file = new DocumentExcel(
       this.archivo
     );
 
     console.log('Archivo', file);
-    // console.log('FILESSS', this.filesToUpload[0]);
 
     this.sincronizacion.PostListadoProductosExcel(
       localStorage.getItem('id'),
       localStorage.getItem('storeId'),
       file).subscribe( response => {
       console.log(response);
+      this.spinnerService.hide()
     });
 
-    // const fileUpload = document.getElementById('fileUpload') as HTMLInputElement;
-
-    // fileUpload.onchange = () => {
-    //   // tslint:disable-next-line: prefer-for-of
-    //   for ( let index = 0; index < fileUpload.files.length; index++){
-    //     const file = fileUpload.files[index];
-    //     this.files.push({
-    //       data: file,
-    //       state: 'in',
-    //       inProgress: false,
-    //       progresss: 0,
-    //       canRetry: false,
-    //       canCancel: true
-    //     });
-    //   }
-
-    //   console.log(this.files);
-
-    //   this.uploadFiles();
-
-    // };
-
-    // fileUpload.click();
+    
   }
 
-  // private uploadFiles(){
-  //   const fileUpload = document.getElementById('fileUpload') as HTMLInputElement;
-  //   fileUpload.value = '';
-
-  //   this.files.forEach(file => {
-  //     this.uploadFile(file);
-  //   });
-  // }
-
-  // private uploadFile(archivo: FileUploadModel){
-  //   const file = new FormData();
-  //   file.append(this.param, archivo.data);
-
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'multipart/form-data',
-  //   });
-
-  //   console.log(file);
-
-  //   const req = new HttpRequest('POST',
-  //                                URL_SERVICIOS + `/api/users/${localStorage.getItem('id')}/stores/${localStorage.getItem('storeId')}/productcsv`,
-  //                               file, {
-  //                                 headers,
-  //                                 reportProgress: true
-  //   });
-
-  //   archivo.inProgress = true;
-
-  //   archivo.sub = this._http.request(req).pipe(
-  //     map( event => {
-  //         switch (event.type){
-  //           case HttpEventType.UploadProgress:
-  //               archivo.progresss = Math.round(event.loaded * 100 / event.total);
-  //               break;
-  //           case HttpEventType.Response:
-  //             return event;
-  //         }
-  //     }), tap(message => {}),
-  //     last(),
-  //     catchError((error: HttpErrorResponse) => {
-  //       archivo.inProgress = false;
-  //       archivo.canRetry = true;
-  //       return of( `${archivo.data.name} upload failed.`);
-  //     })
-  //   ).subscribe(
-  //     (event: any ) => {
-  //       console.log(event);
-  //       if (typeof (event) === 'object'){
-  //         console.log(event);
-  //       }
-  //     }
-  //   );
-  // }
 
 }

@@ -8,6 +8,7 @@ import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import { EditProductStore } from '@interfaces/interfaceEditProductStore';
 import { SincronizacionService } from '../../../../services/sincronizacion/sincronizacion.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-desincronizar',
@@ -83,7 +84,8 @@ export class DesincronizarComponent implements OnInit {
             private route: ActivatedRoute,
             private router: Router,
             public _productLoadingService: ProductLoadingService,
-            private sincronizacion: SincronizacionService) 
+            private sincronizacion: SincronizacionService,
+            private spinnerService: NgxSpinnerService) 
 
         {
 
@@ -100,6 +102,8 @@ export class DesincronizarComponent implements OnInit {
               this.valorForm = data;
               this.subCategoriaBanco = data.subcategories[0].name;
               console.log('SUBCATEGORIA DEFAULT', this.subCategoriaBanco );
+
+              this.spinnerService.hide();
 
               // SET DE CATEGORIA
               this._productLoadingService.GetCategoriasBancoProduct(this.valorForm.subcategories[0].category_id).subscribe( (resp: any) =>{
@@ -253,6 +257,12 @@ export class DesincronizarComponent implements OnInit {
       this.recipes = response;
     });
 
+    this.spinner();
+
+  }
+
+  spinner(): void{
+    this.spinnerService.show();
   }
 
   addProducts(){}
