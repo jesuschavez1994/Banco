@@ -32,13 +32,9 @@
                                 + Agregar nuevo producto
                         </button>
                     </div>
-                    <div class="col-10 col-sm-8 col-md-6">
+                    <div class="col-10 col-sm-8 col-md-7">
                         <ul class="navbar-nav width-100 mt-5">
-                            <input  class="form-control width-100 icon-magnifying-glass buscador" 
-                                    type="search" 
-                                    placeholder="Buscar producto en está tienda..." 
-                                    aria-label="Search"
-                            >
+                            <app-search class="width-100" (searchEmitter)="handleSearch($event)"></app-search>
                         </ul>
                     </div>
                 </div>

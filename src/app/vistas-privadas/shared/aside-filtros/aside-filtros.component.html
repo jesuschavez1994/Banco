@@ -66,77 +66,24 @@
 <nav class="menu">
 
     <ul class="list">
-
         <h4 class="title">
             Categorías
         </h4>
-        <li>
-            <a>Medicamentos</a>
+        <li *ngFor="let item of category">
+            <a (click)="CategorySelect(item.name)">{{item.name}}</a>
         </li>
-        <li>
-            <a>Belleza & Higiene</a>
-        </li>
-        <li>
-            <a>Dieta & Fitness</a>
-        </li>
-        <li>
-            <a>Salud y vitaminas</a>
-        </li>
-        <li>
-            <a>Vida sexual</a>
-        </li>
-        <li>
-            <a>Ortopedia</a>
-        </li>
-        <li class="active">
-            <a>Homeopatia & natural</a>
-        </li>
-        <li>
-            <a>Mascotas & veterinaria</a>
-        </li>
-
     </ul>
 
     <ul class="list">
         <h4 class="title">
             Subcategorías
         </h4>
-
-        <li>
-            <input type="checkbox" id="dolor" name="dolor">
-            <label for="dolor">
-                <a>Dolor & inflamación</a>
+        <li *ngFor="let item of subcategoria; let i = index"> 
+            <input type="checkbox" id="id_subcategoria{{i}}" name="{{item.name}}">
+            <label for="id_subcategoria{{i}}">
+                <a>{{item.name}}</a>
             </label>
         </li>
-
-        <li>
-            <input type="checkbox" id="huesos" name="huesos">
-            <label for="huesos">
-                <a>Huesos & articulaciones</a>
-            </label>
-        </li>
-
-        <li>
-            <input type="checkbox" id="corazon" name="corazon">
-            <label for="corazon">
-                <a>Corazón</a>
-            </label>
-        </li>
-
-        <li>
-            <input type="checkbox" id="defensas" name="defensas">
-            <label for="defensas">
-                <a>Defensas</a>
-            </label>
-        </li>
-
-        <li>
-            <input type="checkbox" id="vegano" name="vegano">
-            <label for="vegano">
-                <a>Vegano</a>
-            </label>
-        </li>
-
     </ul>
 
     <ul class="list">

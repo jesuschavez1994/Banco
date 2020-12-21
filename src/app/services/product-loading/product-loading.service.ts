@@ -31,7 +31,7 @@ export class ProductLoadingService {
     return this.execQuery(url);
   }
 
-  GetSubcategorias(idCategory: number){
+  GetSubcategorias(idCategory?: number){
     const url = `/api/categories/${idCategory}/subcategories`;
     return this.execQuery(url);
   }

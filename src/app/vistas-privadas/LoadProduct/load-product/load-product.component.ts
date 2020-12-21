@@ -5,6 +5,9 @@ import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import { bannerOptions } from '@interfaces/components-options/banner.interface';
 import { NgxSpinnerService } from "ngx-spinner";
+import { FilstroStoreService } from '../../../services/FiltroStore/filstro-store.service';
+import { FiltroStore } from '../../../models/filtro/filtro-store.model';
+
 @Component({
   selector: 'app-load-product',
   templateUrl: './load-product.component.html',
@@ -26,16 +29,22 @@ export class LoadProductComponent implements OnInit {
    // tslint:disable-next-line: no-inferrable-types
    page: number = 1;
    scroll:boolean=false;
-
-
    addProductNew = false;
-
    showFooterPaginations = false;
+
+   marks         = [];
+   subcategories = [];
+   categories    = [];
+   factories     = [];
+   price         = [];
+   delivery      = '';
+   recipes       = [];
 
   constructor(public storeService: StoreService,
               private route: ActivatedRoute,
               private router: Router,
-              private spinnerService: NgxSpinnerService) { }
+              private spinnerService: NgxSpinnerService,
+              private filtroService: FilstroStoreService) { }
 
   ngOnInit() {
     this.getData(this.page);
@@ -88,6 +97,32 @@ export class LoadProductComponent implements OnInit {
         this.spinnerService.hide();
     });
 
+  }
+
+  public handleSearch(value: string): void {
+
+    
+
+    console.log('value', value);
+    if(value !== undefined){
+      let comparacion = new FiltroStore( 
+        value,
+        this.marks,
+        this.subcategories,
+        this.categories,
+        this.factories,
+        this.price,
+        this.delivery,
+        this.recipes,
+          
+      );
+      this.filtroService.PostProductSearchFiltro(
+        localStorage.getItem('id'),
+        localStorage.getItem('storeId'),
+        comparacion).subscribe( (resp: ProductosLoads) => {
+          this.MyProduct = resp.data;
+      })
+    }
   }
 
   addNewProduct(){

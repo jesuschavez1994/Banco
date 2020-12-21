@@ -1,7 +1,7 @@
-import {
-  Component, OnInit, Input, Output, EventEmitter, ElementRef,
-  ViewChild, HostListener
-} from '@angular/core';
+import { ProductLoadingService } from '../../../services/product-loading/product-loading.service';
+import { FilstroStoreService } from '../../../services/FiltroStore/filstro-store.service';
+
+import {Component, OnInit, Input, Output, EventEmitter, ElementRef,ViewChild, HostListener} from '@angular/core';
 
 
 @Component({
@@ -11,13 +11,38 @@ import {
 })
 export class AsideFiltrosComponent implements OnInit {
 
+  // **** Input **** //
   @Input() isExpanded = false;
+
+  // **** Output **** //
   @Output() sidebarExpand = new EventEmitter<boolean>();
+  @Output() categiriaSelected = new EventEmitter<string>();
+  @Output() subcategiriaSelected = new EventEmitter<string>();
+
+  // **** Viewchild **** //
   @ViewChild('sidebarList') sidebarList: ElementRef;
 
-  constructor() { }
+
+
+
+  // VARIABLES LOCALES //
+  category: any;
+  subcategoria: any;
+
+  constructor(public _productLoadingService: ProductLoadingService,
+              public filtroService: FilstroStoreService) { 
+              
+              this.categiriaSelected = new EventEmitter();
+                
+              }
 
   ngOnInit(): void {
+
+    // *** GET CATEGORIAS ***//
+    this.GetCategoriasFiltro();
+
+    // *** SUBCATEGORIAS ***// 
+    this.GetSubcategorias();
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -39,6 +64,29 @@ export class AsideFiltrosComponent implements OnInit {
     this.isExpanded = event;
     this.sidebarExpand.emit( this.isExpanded );
 
+  }
+
+  public GetCategoriasFiltro(){
+    this.filtroService.GetCategoriaStoreFiltro(
+      localStorage.getItem('storeId'))
+      .subscribe( response => {
+      console.log('CATEGORIAS', response);
+      return this.category = response;
+    });
+  }
+
+  public GetSubcategorias(){
+    this.filtroService.GetSubcategoriaStoreFiltro(
+      localStorage.getItem('storeId'))
+      .subscribe( resp => {
+      console.log('SUBCATEGORIAS', resp);
+      this.subcategoria = resp;
+    })
+  }
+
+  public CategorySelect(value: string){
+    console.log(value);
+    this.categiriaSelected.emit(value);
   }
 
 }
