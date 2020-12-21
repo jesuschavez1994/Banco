@@ -6,7 +6,7 @@ export class FiltroStore {
         public categories?: string[],
         public factories?: string[],
         public price?: string[],
-        public delivery?: null,
+        public delivery?: any,
         public recipes?: string[]
     ) { }
 }

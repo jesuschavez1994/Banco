@@ -11,7 +11,7 @@ export class PreviewGalleryPipe implements PipeTransform {
   transform(img: string): string {
 
     if (!img){
-      return '../../assets/img/Box/box.svg';
+      return 'assets/img/Box/box.svg';
     }
 
 

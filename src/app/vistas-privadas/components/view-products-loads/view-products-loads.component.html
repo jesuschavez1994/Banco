@@ -74,7 +74,7 @@
                                             *ngIf="item.sync_bank.length > 0"    
                                     >
                                 </div>
-                                <img    src="../../../assets/img/Box/box.svg" 
+                                <img    src="assets/img/Box/box.svg" 
                                         class="card-img-top" 
                                         alt="..." 
                                         *ngIf="item.sync_bank.length === 0 || item.sync_bank[0].images.length === 0"
@@ -89,7 +89,7 @@
                                         *ngIf="item.images.length >= 1"    
                                 >
 
-                                <img    src="../../../assets/img/Box/box.svg" 
+                                <img    src="assets/img/Box/box.svg" 
                                         class="card-img-top" 
                                         alt="..." 
                                         *ngIf="item.images.length === 0"
@@ -103,7 +103,7 @@
                                         *ngIf="item.images.length >= 1"    
                                 >
 
-                                <img    src="../../../assets/img/Box/box.svg" 
+                                <img    src="assets/img/Box/box.svg" 
                                         class="card-img-top" 
                                         alt="..." 
                                         *ngIf="item.images.length === 0"
@@ -112,13 +112,9 @@
                         </div>
                     </span>
                 </span>
-
                 <div class="card-body pb-0 pt-0">
-
                     <div [ngSwitch]="item.sincronice">
-
                         <div *ngSwitchCase="'sincronizado'">
-
                             <p class="family-600 size-14 color-p" title="{{item.name}} " *ngIf="item.sync_bank.length > 0"  >
                                 {{item.sync_bank[0].name | LimitarNameProducto }} 
                                 <span *ngIf="item.name.length > 55">...</span>
@@ -134,8 +130,6 @@
                             </p>
 
                             <span class="badge badge-primary puntero pt-1">Sincronizado</span>
-        
-                            
                         </div>
 
                         <div *ngSwitchCase="'no sincronizado'">
@@ -185,8 +179,6 @@
                         </div>
 
                     </div>
-
-                    
                 </div>
            
         </div>
