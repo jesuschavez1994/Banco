@@ -38,6 +38,8 @@
         </app-product-detail>
 
         <app-search-bar
+          [preloadedValue]="preloadedValueSearch"
+          [debounce]="1000"
           [isExpanded]="expandSidebar"
           [buttonSidebarList]="true"
           (sidebarExpand)="toogleSidebar($event)"

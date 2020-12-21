@@ -11,6 +11,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   @ViewChild('searchInput') searchInput: ElementRef;
   @ViewChild('selectFilter') selectFilter: ElementRef;
 
+  @Input() preloadedValue = '';
   @Input() isExpanded = false;
   @Input() buttonSidebarList = false;
   @Input() debounce = 3000;

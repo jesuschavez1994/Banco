@@ -46,6 +46,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   totalProducts: number;
   itemsPerPage = 16;
 
+  // SearchBar:
+  preloadedValueSearch = '';
+
   // Variables
   expandSidebar = true;
   showProducts = false;
@@ -102,6 +105,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
       this.loadProductsCards(params, queryParam);
 
+      this.preloadValueSearch(queryParam);
     });
 
   }
@@ -534,6 +538,10 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       }
     );
 
+  }
+
+  public preloadValueSearch(queryParams: ParamMap){
+    this.preloadedValueSearch = queryParams.has('name') ? queryParams.get('name') : '';
   }
 
 
