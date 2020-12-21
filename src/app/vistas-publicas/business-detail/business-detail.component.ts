@@ -162,11 +162,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             isFavorite: product.isFavorite ? product.isFavorite : false,
           };
 
-          // this.productDetail.formatProductResponse(
-          //   product,
-          //   ['name', 'description', 'price', 'stock', 'images', 'id', 'store_id']
-          // );
-
         }, error => {
 
           console.log('Error loading products', error);
@@ -280,12 +275,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             isFavorite: product.isFavorite ? product.isFavorite : false,
           };
         } );
-
-        // this.productCards.products = this.productCards.formatProductsResponse(
-        //   products,
-        //   ['name', 'description', 'price', 'stock', 'images', 'id', 'store_id']
-        // );
-
 
         console.log('products loaded: ', this.productCards.products);
 
@@ -534,9 +523,17 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   // Search-bar
+  public search(ToSearch){
+    console.log(ToSearch.value);
 
-  public search(text){
-    console.log(text);
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: ToSearch.value !== '' ? { name: ToSearch.value } : {},
+      }
+    );
+
   }
 
 
