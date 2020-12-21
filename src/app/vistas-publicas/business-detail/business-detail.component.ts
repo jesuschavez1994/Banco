@@ -42,12 +42,14 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     {label: 'Empresa', value: 'hola'},
   ];
 
-  // Variables
+  // Products-cards
   totalProducts: number;
+  itemsPerPage = 16;
+
+  // Variables
   expandSidebar = true;
   showProducts = false;
   StoreName = '';
-
 
   constructor(
     private route: ActivatedRoute,
@@ -145,10 +147,25 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       this.productService.getProductByStore(idStore, idProduct).subscribe(
         product => {
 
-          this.productDetail.selectedProduct = this.productDetail.formatProductResponse(
-            product,
-            ['name', 'description', 'price', 'stock', 'images', 'id', 'store_id']
-          );
+          const images = product.images.map(image => {
+            return image.src;
+          });
+
+          this.productDetail.selectedProduct =  {
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            stock: product.stock,
+            images, // product.images
+            id: product.id ? product.id : -1,
+            idStore: product.store_id ? product.store_id : -1,
+            isFavorite: product.isFavorite ? product.isFavorite : false,
+          };
+
+          // this.productDetail.formatProductResponse(
+          //   product,
+          //   ['name', 'description', 'price', 'stock', 'images', 'id', 'store_id']
+          // );
 
         }, error => {
 
@@ -174,15 +191,47 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       // tslint:disable-next-line: radix
       const page = queryParams.has('page') ? parseInt( queryParams.get('page') ) : 1;
 
-      this.productService.getProductsByStore(idStore, page).subscribe( resp => {
+      const filter = {
+        name: 'l',
+        marks: ['generica', 'ALBENZA', 'XANAX', 'gillete'],
+        subcategories: ['Cutis', 'Analgesicos'],
+        categories: ['Cosmeticos', 'infantil'],
+        factories: ['gerber', 'polar'],
+        price: [1, 284],
+        delivery: true,
+        recipes: ['morado', 'polar']
+      };
+
+      this.productService.getProductsByStore(idStore, page, filter).subscribe( resp => {
 
         const products = resp.data;
         this.totalProducts = resp.total;
+        this.itemsPerPage = resp.per_page;
 
-        this.productCards.products = this.productCards.formatProductsResponse(
-          products,
-          ['name', 'description', 'price', 'stock', 'images', 'id', 'store_id']
-        );
+        this.productCards.products = products.map( product => {
+          const images = product.images.map(image => {
+            return image.src;
+          });
+
+          return {
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            stock: product.stock,
+            images, // product.images
+            id: product.id ? product.id : -1,
+            idStore: product.store_id ? product.store_id : -1,
+            isFavorite: product.isFavorite ? product.isFavorite : false,
+          };
+        } );
+
+        // this.productCards.products = this.productCards.formatProductsResponse(
+        //   products,
+        //   ['name', 'description', 'price', 'stock', 'images', 'id', 'store_id']
+        // );
+
+
+        console.log(this.productCards.products);
 
       });
 

@@ -6,7 +6,10 @@
 
       <div class="option" (click)="selectImg(img)">
 
-        <img [src]="img">
+        <img
+          [src]="img"
+          onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
+        >
 
       </div>
 
@@ -20,12 +23,19 @@
 
     <div class="image" #image>
       <a [href]="currentImg" target="_blank">
-        <img [src]="currentImg" alt="">
+        <img
+          [src]="currentImg"
+          alt=""
+          onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
+        >
       </a>
     </div>
 
     <div class="zoom" #zoom>
-      <img class="zoom-image" #zoomImage src="" alt="">
+      <img
+        class="zoom-image" #zoomImage src="" alt=""
+        onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
+      >
     </div>
 
   </div>

@@ -8,26 +8,41 @@ const URL = environment.url;
 })
 export class ImgFallbackPipe implements PipeTransform {
 
-  transform(img: string, target: string = 'default' ): string {
+  transform(img: string, target: string = 'default', element? ): string {
+
+    let imgDefault;
+
+    switch (target) {
+
+      case 'default':
+        imgDefault = 'assets/img/no-image-banner.jpg';
+        break;
+      case 'box':
+        imgDefault = 'assets/img/Box/box.svg';
+        break;
+      case 'avatar':
+        imgDefault = 'assets/img/no-avatar.jpg';
+        break;
+      default:
+        imgDefault = 'assets/img/no-image-banner.jpg';
+        break;
+
+    }
 
     if (!img){
 
-      switch (target) {
-
-        case 'default':
-          return 'assets/img/no-image-banner.jpg';
-
-        case 'box':
-          return 'assets/img/Box/box.svg';
-
-        case 'avatar':
-          return 'assets/img/no-avatar.jpg';
-        default:
-          return 'assets/img/no-image-banner.jpg';
-
-      }
+      return imgDefault;
 
     }
+
+    // element.onerror = () => {
+
+    //   if (element.src !== imgDefault) {
+    //     element.src = imgDefault;
+    //   }
+    // };
+
+    // console.log('element', element);
 
     return `${URL}/${img}`;
 

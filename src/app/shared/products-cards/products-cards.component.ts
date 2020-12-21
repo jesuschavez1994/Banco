@@ -29,7 +29,7 @@ export class ProductsCardsComponent implements OnInit {
   }
 
   /**
-   * @description
+   * @description Debes utlizar la palabra producto como referencia a un elemento del array de respuesta de la api
    * Permite que a pesar de que el array de objetos proveniente del la respuesta del backend contenga nombres de atributo
    * diferentes a los que utiliza el component products-cards, estos sean reasignados bajo los nombres correctos
    * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christpherdallar1234@matiz.com.ve
@@ -41,7 +41,8 @@ export class ProductsCardsComponent implements OnInit {
    */
   public formatProductsResponse( productsResp: Product[], atributtesNames: string[] ) {
 
-    let  products = [];
+    let  products;
+    products = [];
 
     productsResp.forEach( product => {
 

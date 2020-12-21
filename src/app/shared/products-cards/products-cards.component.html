@@ -9,6 +9,7 @@
         <img
           [src]="product.images[0] | imgFallback: 'box'"
           [alt]="product.name"
+          onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
         >
 
         <i class="fa-heart"
