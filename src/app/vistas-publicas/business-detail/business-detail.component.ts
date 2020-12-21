@@ -13,7 +13,7 @@ import { StoreResponse } from '@interfaces/store.interface';
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface';
 import { forkJoin, merge } from 'rxjs';
 import { combineLatest } from 'rxjs';
-import { mergeMap, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-business-detail',
@@ -191,16 +191,72 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       // tslint:disable-next-line: radix
       const page = queryParams.has('page') ? parseInt( queryParams.get('page') ) : 1;
 
-      const filter = {
-        name: 'l',
-        marks: ['generica', 'ALBENZA', 'XANAX', 'gillete'],
-        subcategories: ['Cutis', 'Analgesicos'],
-        categories: ['Cosmeticos', 'infantil'],
-        factories: ['gerber', 'polar'],
-        price: [1, 284],
-        delivery: true,
-        recipes: ['morado', 'polar']
-      };
+      let filter;
+      filter = {};
+
+      console.log('queryParams Key: ', queryParams.keys);
+
+      const keysQueryParams = queryParams.keys;
+
+      if (keysQueryParams.length > 0){
+
+        let queryParamsAllowed;
+        queryParamsAllowed = {};
+
+        keysQueryParams.forEach(key => {
+
+          switch (key) {
+            case 'name':
+              queryParamsAllowed.name = queryParams.get('name');
+              // name: 'l',
+              break;
+
+            case 'marks':
+              queryParamsAllowed.marks = this.stringToArray(queryParams.get('marks'));
+              // marks: ['generica', 'ALBENZA', 'XANAX', 'gillete'],
+              break;
+
+            case 'category':
+              queryParamsAllowed.categories = this.stringToArray(queryParams.get('category'));
+              // categories: ['Cosmeticos', 'infantil'],
+              break;
+
+            case 'subcategories':
+              queryParamsAllowed.subcategories = this.stringToArray(queryParams.get('subcategories'));
+              // subcategories: ['Cutis', 'Analgesicos'],
+
+              break;
+
+            case 'factories':
+              queryParamsAllowed.factories = this.stringToArray(queryParams.get('factories'));
+              // factories: ['gerber', 'polar'],
+              break;
+
+            case 'price':
+              queryParamsAllowed.price = this.stringToArray(queryParams.get('price'), true);
+              // queryParams.get('price').split(',');
+              // price: [1, 284],
+              break;
+
+            case 'delivery':
+              queryParamsAllowed.delivery = queryParams.get('delivery') === 'true' ? true : false;
+              // delivery: true,
+              break;
+
+            case 'recipes':
+              queryParamsAllowed.recipes = this.stringToArray(queryParams.get('recipes'));
+              // recipes: ['morado', 'polar']
+              break;
+          }
+
+        });
+
+        filter = queryParamsAllowed;
+
+        console.log('queryParamsAllowed: ', queryParamsAllowed);
+      }
+
+
 
       this.productService.getProductsByStore(idStore, page, filter).subscribe( resp => {
 
@@ -231,11 +287,20 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         // );
 
 
-        console.log(this.productCards.products);
+        console.log('products loaded: ', this.productCards.products);
 
       });
 
     }
+
+  }
+
+  public stringToArray(paramString: string, isNumbers: boolean = false, separador: string = ','){
+    const arrayString = paramString.split(separador);
+
+    return isNumbers === false ? arrayString: arrayString.map( stringToConvert => {
+      return parseInt(stringToConvert);
+    });
 
   }
 

@@ -18,7 +18,7 @@ export class ProductService extends Service{
 
   public getProductsByStore( idStore: number, page: number = 1, filter?: FilterProductResp ): Observable<ProductsResponse> {
 
-    if (filter){
+    if (filter && Object.keys(filter).length > 0){
       return this.postQuery<ProductsResponse>(`stores/${idStore}/products_search?page=${page}`, filter);
     }
 
