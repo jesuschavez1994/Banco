@@ -135,7 +135,7 @@ export class EditProductNoDisponibleComponent implements OnInit {
                       this.subCategoriaBanco = data.subcategories[0].name;
 
                       // SET DE CATEGORIA
-                    this._productLoadingService.GetCategoriasBancoProduct(this.valorForm.subcategories[0].category_id).subscribe( (resp: any) =>{
+                      this._productLoadingService.GetCategoriasBancoProduct(this.valorForm.subcategories[0].category_id).subscribe( (resp: any) =>{
                       console.log('categorias', resp);
                       this.categoriaBanco = resp.name;
 

@@ -110,6 +110,8 @@ import { AsideFiltrosComponent } from './shared/aside-filtros/aside-filtros.comp
 import { CarouselSuggestedComponent } from './sincronizacion/pages/suggested-products/container/carousel-suggested/carousel-suggested.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AppRoutingModule } from '../app-routing.module';
+import { CatalogoBankProductComponent } from './Admin/pages/container/catalogo-bank-product/catalogo-bank-product.component';
+import { EditProductBankComponent } from './Admin/pages/container/edit-product-bank/edit-product-bank.component';
 
 
 @NgModule({
@@ -172,7 +174,9 @@ import { AppRoutingModule } from '../app-routing.module';
       SearchComponent,
       DesincronizarComponent,
       AsideFiltrosComponent,
-      CarouselSuggestedComponent
+      CarouselSuggestedComponent,
+      CatalogoBankProductComponent,
+      EditProductBankComponent
       ],
 
     imports: [

@@ -30,4 +30,26 @@ export class BankProductService {
     return this.postQuery( url, data);
   }
 
+  GetBankProduct(page?: number){
+    const url = `/api/banks` + '?page=' + page;;
+    return this.execQuery(url);
+  }
+
+
+  getSpecificProductBank(idProduct: string){
+    const url = `/api/banks/${idProduct}`;
+    return this.execQuery(url);
+  }
+
+
+  GetSubcategoria(IdCategirias: number){
+    const url = `/api/categories/${IdCategirias}/subcategories`;
+    return this.execQuery(url);
+  }
+
+  GetCategoria(storeId: number){
+    const url = `/api/categories`;
+    return this.execQuery(url);
+  }
+
 }

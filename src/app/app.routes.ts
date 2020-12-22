@@ -34,6 +34,7 @@ import { EditSincronizacionComponent } from './vistas-privadas/sincronizacion/co
 import { EditProductNoDisponibleComponent } from './vistas-privadas/components/edit-product-no-disponible/edit-product-no-disponible.component';
 import { DesincronizarComponent } from './vistas-privadas/sincronizacion/components/desincronizar/desincronizar.component';
 import { LoginComponent } from './vistas-publicas/login/login/login.component';
+import { EditProductBankComponent } from './vistas-privadas/Admin/pages/container/edit-product-bank/edit-product-bank.component';
 
 
 
@@ -41,7 +42,15 @@ const APP_ROUTES: Routes = [
 
     {path: 'home', component: HomeComponent},
     {path: 'register', component: RegisterComponent},
-    {path: 'admin', component: LoadBanckProductComponent},
+    {   path: 'admin',
+        component: LoadBanckProductComponent,
+        children: [
+            {
+                path: 'edit-bank-admin/:id',
+                component: EditProductBankComponent
+            },
+        ]
+    },
     {path: 'login', component: LoginComponent},
 
     // Christopher Views
