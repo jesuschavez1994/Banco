@@ -193,7 +193,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       let filter;
       filter = {};
 
-      console.log('queryParams Key: ', queryParams.keys);
+      // console.log('queryParams Key: ', queryParams.keys);
 
       const keysQueryParams = queryParams.keys;
 
@@ -252,7 +252,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         filter = queryParamsAllowed;
 
-        console.log('queryParamsAllowed: ', queryParamsAllowed);
+        // console.log('queryParamsAllowed: ', queryParamsAllowed);
       }
 
 
@@ -288,6 +288,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   }
 
+  // Volver un Utils
   public stringToArray(paramString: string, isNumbers: boolean = false, separador: string = ','){
     const arrayString = paramString.split(separador);
 
@@ -297,6 +298,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   }
 
+  // Esto se puede declarar en el componente e invocar aquí a través del ViewChild
   public paginationProducts(page: number){
     this.router.navigate(
       [],
@@ -306,6 +308,24 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         queryParamsHandling: 'merge',
       }
     );
+  }
+
+  // Search-bar
+  public search(ToSearch){
+    console.log(ToSearch.value);
+
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: ToSearch.value !== '' ? { name: ToSearch.value } : {},
+      }
+    );
+
+  }
+
+  public preloadValueSearch(queryParams: ParamMap){
+    this.preloadedValueSearch = queryParams.has('name') ? queryParams.get('name') : '';
   }
 
   // Store
@@ -359,12 +379,12 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         subcategories: [
           {
             id: 1,
-            name: 'Dolor & inflamación',
+            name: 'Dolor inflamación',
 
           },
           {
             id: 2,
-            name: 'Belleza & Higiene',
+            name: 'Belleza Higiene',
 
           },
           {
@@ -456,54 +476,54 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   public goToProductsByCategories(event: SelectedEmitter){
-    // console.log('goToProductsByCategories', event);
+    console.log('goToProductsByCategories', event);
 
-    this.route.paramMap.subscribe( params => {
+    // this.route.paramMap.subscribe( params => {
 
-      if (params.has('idStore')){
+    //   if (params.has('idStore')){
 
-        const idStore = params.get('idStore');
+    //     const idStore = params.get('idStore');
 
-        let queryParams;
+    //     let queryParams;
 
-        if (event.isSelectedCategory) {
+    //     if (event.isSelectedCategory) {
 
-          queryParams = {
-            category: event.currentCategory.id
-          };
+    //       queryParams = {
+    //         category: event.currentCategory.id
+    //       };
 
-          if (event.SelectedSubCategories){
+    //       if (event.SelectedSubCategories){
 
-            if (event.SelectedSubCategories.length !== 0){
+    //         if (event.SelectedSubCategories.length !== 0){
 
-              const idSubCategories = event.SelectedSubCategories.map( subCategory => {
-                return subCategory.id;
-              });
+    //           const idSubCategories = event.SelectedSubCategories.map( subCategory => {
+    //             return subCategory.id;
+    //           });
 
-              queryParams.subcategories = idSubCategories.join();
+    //           queryParams.subcategories = idSubCategories.join();
 
-            }
+    //         }
 
-          }
+    //       }
 
-          this.router.navigate(
-            ['/business-detail', idStore, 'products'],
-            { queryParams}
-          );
+    //       this.router.navigate(
+    //         ['/business-detail', idStore, 'products'],
+    //         { queryParams}
+    //       );
 
-        } else{
-          queryParams = {};
-        }
+    //     } else{
+    //       queryParams = {};
+    //     }
 
-        this.router.navigate(
-          ['/business-detail', idStore, 'products'],
-          { queryParams}
-        );
+    //     this.router.navigate(
+    //       ['/business-detail', idStore, 'products'],
+    //       { queryParams}
+    //     );
 
 
-      }
+    //   }
 
-    } );
+    // } );
 
   }
 
@@ -524,24 +544,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       title: `${storeResp.name}`,
       routerLink: [`/business-detail/${idStore}`]
     };
-  }
-
-  // Search-bar
-  public search(ToSearch){
-    console.log(ToSearch.value);
-
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this.route,
-        queryParams: ToSearch.value !== '' ? { name: ToSearch.value } : {},
-      }
-    );
-
-  }
-
-  public preloadValueSearch(queryParams: ParamMap){
-    this.preloadedValueSearch = queryParams.has('name') ? queryParams.get('name') : '';
   }
 
 

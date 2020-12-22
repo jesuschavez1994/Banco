@@ -79,9 +79,10 @@
       <ng-container *ngFor="let category of categories">
 
         <li
+
           class="category"
           (click)="selectCategory(category)"
-          [ngClass]="{'active': category.id == idCategorySelected}"
+          [ngClass]="{'active': category.name == categorySelected.name}"
         >
           <a>{{category.name}}</a>
         </li>
@@ -97,12 +98,14 @@
 
       <ng-container *ngFor="let subcategory of currentCategory.subcategories">
 
+        <!-- [ngClass]="{'active': subcategory.name == subCategorySelected.name}" -->
         <li class="subCategory">
 
           <input type="checkbox"
             class="subCategory-input"
             [id]="subcategory.id"
             [name]="subcategory.id"
+            [checked]="subCategoriesSelected.indexOf(subcategory.name)  !== -1"
           >
 
           <label
