@@ -6,7 +6,7 @@ import {
   Category, Subcategory, Profile, SidebarListOptions, AnchorsMenu,
   SelectedEmitter
 } from '@interfaces/components-options/sidebar-list.options.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar-list',
@@ -42,7 +42,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   subCategoriesSelected = [];
 
-  constructor( private route: ActivatedRoute ) { }
+  constructor( private route: ActivatedRoute, private router: Router ) { }
 
   ngOnInit(): void {
     if (this.sidebarOptions){
@@ -175,9 +175,9 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       }
 
       this.selected.emit({
-      currentCategory: this.categorySelected,
-      // SelectedSubCategories: this.currentSubcategories
-    });
+        selectedCategory: this.categorySelected,
+        selectedSubCategories: this.subCategoriesSelected
+      });
 
       // console.log('this.categories', this.categories);
 
@@ -185,11 +185,53 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   }
 
   public selectCategory(category){
-
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: {category: category.name},
+        // queryParamsHandling: 'merge',
+      }
+    );
   }
 
   public selectSubCategories(subcategory) {
 
+    const inxSubCatSelected = this.subCategoriesSelected.indexOf(subcategory.name);
+    let navigationOptions;
+
+    this.categorySelected = {
+      id: this.currentCategory.id,
+      name: this.currentCategory.name,
+    };
+
+    if (inxSubCatSelected === -1){
+      this.subCategoriesSelected.push(subcategory.name);
+
+    }else{
+      this.subCategoriesSelected.splice(inxSubCatSelected, 1);
+
+    }
+
+    navigationOptions = {
+      relativeTo: this.route,
+      queryParams: {
+        category: this.categorySelected.name,
+      }
+    };
+
+    if (this.subCategoriesSelected.length > 0) {
+
+      const subCatToqueryParams = this.subCategoriesSelected.join();
+
+      navigationOptions.queryParams.subcategories = subCatToqueryParams;
+
+    }
+
+    this.router.navigate(
+      [],
+      navigationOptions
+    );
   }
 
   // Volver un utils
@@ -206,7 +248,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     this.profile = profile;
   }
 
-  public setCategories(categories: Category[]){
+  public setCategories(categories: Category[]) {
     this.categories = categories;
   }
 

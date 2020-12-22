@@ -476,7 +476,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   public goToProductsByCategories(event: SelectedEmitter){
-    console.log('goToProductsByCategories', event);
+    // console.log('goToProductsByCategories', event);
 
     // this.route.paramMap.subscribe( params => {
 
