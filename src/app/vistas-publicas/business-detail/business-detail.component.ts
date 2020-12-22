@@ -30,7 +30,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   // Components Inputs
   breadcrumb: BreadcrumbOptions[];
   imgsBanners: BannerOptions = {
-      m: 'assets/img/test-img/banner.png'
+    m: 'assets/img/test-img/banner.png'
   };
 
   anchorsMenu: AnchorsMenu;
@@ -374,7 +374,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     this.categories = [
       {
         id: 1,
-        name: 'Medicamentos',
+        name: 'Cosmeticos',
 
         subcategories: [
           {

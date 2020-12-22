@@ -19,8 +19,11 @@
     <div class="business-perfil">
 
       <div class="profile-img">
-        <img [src]="profile.img | imgFallback"
-        alt="medicalback">
+        <img
+          [src]="profile.img | imgFallback"
+          onerror="if (this.src != 'assets/img/no-image-banner.jpg') this.src = 'assets/img/no-image-banner.jpg';"
+          alt="medicalback"
+        >
       </div>
 
       <div class="profile-data">
@@ -31,8 +34,11 @@
 
           <ng-container *ngIf="profile.isVerified">
             <span class="simbol-verifiqued">
-              <img src="assets/img/no-image-banner.jpg"
-              alt="cuenta verificada">
+              <img
+                [src]="'assets/img/no-image-banner.jpg' | imgFallback"
+                alt="cuenta verificada"
+                onerror="if (this.src != 'assets/img/no-image-banner.jpg') this.src = 'assets/img/no-image-banner.jpg';"
+              >
             </span>
           </ng-container>
 

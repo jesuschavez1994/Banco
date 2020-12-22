@@ -1,5 +1,14 @@
 <div class="banner">
 
-  <img [src]="currentImg" alt="banner">
+  <!--
+    Puedo hacer un componente llamado img que solo contenga un elemento img con el src, alt, el pipe y la funcion onerror
+    de esta manerá utilizo el componente img para manejar correctamente el onerror o  pasar por parametro al pipe el
+    elemento y asignar al elemento la funcionon error, necesaria (esta es mejor).
+  -->
+  <img
+    #imgBanner
+    [src]="currentImg  | imgFallback: 'banner'" alt="banner"
+    onerror="if (this.src != 'assets/img/no-image-banner.jpg') this.src = 'assets/img/no-image-banner.jpg';"
+  >
 
 </div>

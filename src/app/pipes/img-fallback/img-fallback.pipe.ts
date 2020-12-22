@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform, ElementRef } from '@angular/core';
 import { environment } from '@environments/environment';
 
 const URL = environment.url;
@@ -8,7 +8,7 @@ const URL = environment.url;
 })
 export class ImgFallbackPipe implements PipeTransform {
 
-  transform(img: string, target: string = 'default', element? ): string {
+  transform(img: string, target: string = 'default', element?: ElementRef ): string {
 
     let imgDefault;
 
@@ -29,20 +29,24 @@ export class ImgFallbackPipe implements PipeTransform {
 
     }
 
+    // if (element){
+
+    //   element.nativeElement.onerror = () => {
+
+    //     if (element.nativeElement.src !== imgDefault) {
+    //       // element.nativeElement.src = imgDefault;
+    //       console.log(element.nativeElement.src, imgDefault);
+    //     }
+    //   };
+
+    //   console.log('element', element);
+    // }
+
     if (!img){
 
       return imgDefault;
 
     }
-
-    // element.onerror = () => {
-
-    //   if (element.src !== imgDefault) {
-    //     element.src = imgDefault;
-    //   }
-    // };
-
-    // console.log('element', element);
 
     return `${URL}/${img}`;
 
