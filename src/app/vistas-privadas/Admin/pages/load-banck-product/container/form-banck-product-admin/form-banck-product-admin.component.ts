@@ -107,12 +107,27 @@ export class FormBanckProductAdminComponent implements OnInit {
           file: reader.result
         });
 
-        console.log('imagen', this.forma.value.file);
+        console.log('imagen', event.target.files[0].name.split(' '));
+
+        let longitud = event.target.files[0].name.length;
+        console.log('longitud', longitud);
+
+        let  name = event.target.files[0].name.split(' ');
+
         // need to run CD since file load runs outside of zone
         this._cd.markForCheck();
-        this.File.splice(index, 1, { image: this.forma.value.file, name: event.target.files[0].name, position: index + 1 });
+        this.File.splice(index, 1, 
+        { image: this.forma.value.file,
+          name: this.modificarname(name, longitud),
+          position: index + 1 });
         console.log(this.File);
       };
+    }
+  }
+
+  modificarname(name: any, longitud){
+    for ( const i in name){
+      return   name[i] = name[i][0].toUpperCase() + name[i].substr(1, longitud-5);
     }
   }
 

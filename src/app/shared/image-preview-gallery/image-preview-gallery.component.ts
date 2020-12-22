@@ -89,7 +89,8 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
     const preloadImage = url => {
       let img = new Image();
       // `${URL}/${img}`;
-      img.src = url;
+      // img.src = url;
+      img.src = `${URL}/${url}`;
     };
 
 

@@ -69,8 +69,27 @@
         <h4 class="title">
             Categorías
         </h4>
-        <li *ngFor="let item of category">
+        <!-- <li *ngFor="let item of category">
             <a (click)="CategorySelect(item.name)">{{item.name}}</a>
+        </li> -->
+        <li>
+            <a>Meidcamentos</a>
+        </li>
+        <li>
+            <a>Veterinaria</a>
+        </li>
+        <li>
+            <a>Salud sexual</a>
+        </li>
+        <li>
+            <a>
+                Higiene y estética
+            </a>
+        </li>
+        <li>
+            <a>
+                Dieta
+            </a>
         </li>
     </ul>
 
@@ -78,11 +97,31 @@
         <h4 class="title">
             Subcategorías
         </h4>
-        <li *ngFor="let item of subcategoria; let i = index"> 
+        <!-- <li *ngFor="let item of subcategoria; let i = index"> 
             <input type="checkbox" id="id_subcategoria{{i}}" name="{{item.name}}">
             <label for="id_subcategoria{{i}}">
                 <a>{{item.name}}</a>
             </label>
+        </li> -->
+        <li>
+            <a>
+                Antibioticos
+            </a>
+        </li>
+        <li>
+            <a>
+                Antibirales
+            </a>
+        </li>
+        <li>
+            <a>
+                Anéstesico
+            </a>
+        </li>
+        <li>
+            <a>
+                Oncológico
+            </a>
         </li>
     </ul>
 

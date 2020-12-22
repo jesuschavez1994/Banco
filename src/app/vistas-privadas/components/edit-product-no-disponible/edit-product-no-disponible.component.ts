@@ -127,6 +127,7 @@ export class EditProductNoDisponibleComponent implements OnInit {
                     console.log(data);
 
                     this.valorForm = data;
+                    console.log('this.valorForm', this.valorForm);
                     this.showImages = true;
                     this.showForm = true;
                     this.spinnerService.hide();
@@ -153,7 +154,6 @@ export class EditProductNoDisponibleComponent implements OnInit {
 
                     if( this.valorForm.images.length !== 0 ){
                       this.LengtImgEdit = data.images;
-
                       /// CARGAMOS LAS IMAGENES PARA MOSTRARLAS CUANDO EL PRODUCTO YA HA SIDO EDITADO ANTERIORMENTE //
                       if( this.LengtImgEdit.length > 1){
                         for( let i = 0; i < data.images.length; i++){
@@ -337,6 +337,8 @@ export class EditProductNoDisponibleComponent implements OnInit {
 
   Send(){
 
+    console.log('File', this.File.length);
+
     const data = new DetalleProduct(
       this.forma.value.name,
       this.forma.value.description,
@@ -382,8 +384,8 @@ export class EditProductNoDisponibleComponent implements OnInit {
           console.log(resp);
           for (let i = 0; i < this.File.length; i++ ){
             console.log(i);
-            console.log(this.File[i].name);
-            console.log(this.LengtImgEdit[i].name);
+            // console.log(this.File[i].name);
+            // console.log(this.LengtImgEdit[i].name);
             // debugger
             if(this.File[i].name !== this.LengtImgEdit[i].name){
              
@@ -409,6 +411,10 @@ export class EditProductNoDisponibleComponent implements OnInit {
                   imgEdit
                 ).subscribe( resp => {
                   console.log(resp);
+                  this._snackBar.open('Se ha editado el producto', 'Cerrar', {
+                    duration: 2000,
+                  });
+                  this.router.navigate(['/my-store/product-catalogue']);
                 })
   
               }

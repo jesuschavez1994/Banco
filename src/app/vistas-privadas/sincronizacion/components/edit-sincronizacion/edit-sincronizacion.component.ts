@@ -9,6 +9,7 @@ import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import { EditProductStore } from '@interfaces/interfaceEditProductStore';
 import { SincronizacionService } from '../../../../services/sincronizacion/sincronizacion.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-sincronizacion',
@@ -83,7 +84,8 @@ export class EditSincronizacionComponent implements OnInit {
               private router: Router,
               public _productLoadingService: ProductLoadingService,
               private sincronizacion: SincronizacionService,
-              private spinnerService: NgxSpinnerService) {
+              private spinnerService: NgxSpinnerService,
+              private _snackBar: MatSnackBar) {
 
 
                 this.route.params.subscribe( (params: Params) => {
@@ -96,6 +98,7 @@ export class EditSincronizacionComponent implements OnInit {
                     this.myFlag = true;
                     this.sync = 'sync'
                     this.valorForm = data;
+                    this.spinnerService.hide()
                     this.subCategoriaBanco = data.subcategories[0].name;
                     console.log('SUBCATEGORIA DEFAULT', this.subCategoriaBanco );
 
@@ -305,7 +308,10 @@ export class EditSincronizacionComponent implements OnInit {
       localStorage.getItem('storeId'),
       this.idProduct, 
       data).subscribe( resp => {
-        this.spinnerService.hide()
+        this._snackBar.open('Se ha editado el producto', 'Cerrar', {
+          duration: 2000,
+        });
+        this.router.navigate(['/my-store/product-catalogue']);
         console.log(resp);
       })
 
