@@ -185,14 +185,25 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   }
 
   public selectCategory(category){
+    let queryParams;
+
+    if (category.name === this.categorySelected.name) {
+      queryParams = {};
+
+    } else {
+      queryParams = {category: category.name};
+
+    }
+
     this.router.navigate(
       [],
       {
         relativeTo: this.route,
-        queryParams: {category: category.name},
-        // queryParamsHandling: 'merge',
+        queryParams,
+
       }
     );
+
   }
 
   public selectSubCategories(subcategory) {
