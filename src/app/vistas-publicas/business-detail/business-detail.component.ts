@@ -468,63 +468,13 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       },
     ];
 
+    console.log(storeResp);
+
   }
 
   // Expand or contract sidebar-list on responsive mode
   public toogleSidebar(event) {
     this.expandSidebar = event;
-  }
-
-  public goToProductsByCategories(event: SelectedEmitter){
-    // console.log('goToProductsByCategories', event);
-
-    // this.route.paramMap.subscribe( params => {
-
-    //   if (params.has('idStore')){
-
-    //     const idStore = params.get('idStore');
-
-    //     let queryParams;
-
-    //     if (event.isSelectedCategory) {
-
-    //       queryParams = {
-    //         category: event.currentCategory.id
-    //       };
-
-    //       if (event.SelectedSubCategories){
-
-    //         if (event.SelectedSubCategories.length !== 0){
-
-    //           const idSubCategories = event.SelectedSubCategories.map( subCategory => {
-    //             return subCategory.id;
-    //           });
-
-    //           queryParams.subcategories = idSubCategories.join();
-
-    //         }
-
-    //       }
-
-    //       this.router.navigate(
-    //         ['/business-detail', idStore, 'products'],
-    //         { queryParams}
-    //       );
-
-    //     } else{
-    //       queryParams = {};
-    //     }
-
-    //     this.router.navigate(
-    //       ['/business-detail', idStore, 'products'],
-    //       { queryParams}
-    //     );
-
-
-    //   }
-
-    // } );
-
   }
 
   public setBreadcrumbOptions(idStore: number, storeResp: StoreResponse){
