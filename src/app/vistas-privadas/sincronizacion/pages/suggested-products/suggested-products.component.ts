@@ -7,6 +7,8 @@ import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import { Total } from '@interfaces/sincronizacion';
 import {debounceTime} from 'rxjs/operators';
 import { NgxSpinnerService } from "ngx-spinner";
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 export interface Task {
   name: string;
   completed: boolean;
@@ -46,7 +48,9 @@ task: Task = {
   palabra: Total;
 
   constructor(public sincronizacion: SincronizacionService,
-              private spinnerService: NgxSpinnerService) {}
+              private spinnerService: NgxSpinnerService,
+              public snackBar: MatSnackBar,
+              ) {}
 
   allComplete = false;
 

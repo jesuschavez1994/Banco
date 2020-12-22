@@ -12,6 +12,8 @@ import {BehaviorSubject} from 'rxjs';
 import { Termino } from '../../../../../../models/buscador.model';
 import { bannerOptions } from '@interfaces/components-options/banner.interface';
 import { NgxSpinnerService } from "ngx-spinner";
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 export interface ICarouselItem {
   bank_id: number;
@@ -81,7 +83,8 @@ export class ItemsSuggestedProductsComponent implements OnInit{
               private router: Router,
               private renderer: Renderer2,
               private el: ElementRef,
-              private spinnerService: NgxSpinnerService
+              private spinnerService: NgxSpinnerService,
+              public snackBar: MatSnackBar
              )
 
   {
@@ -174,16 +177,11 @@ export class ItemsSuggestedProductsComponent implements OnInit{
 
   // SINCRONIZACION //
   sincronizar(value: EventID){
-    
-    // this.idProductoToSync = this.MyProduct[index].id
-    // console.log('to', this.idProductoToSync);
-
     console.log('id', value);
 
     const BankId = new Sugerir(
       value.idsuggested
     )
-
     this.sincronizacion.productSyncrhonized(
       localStorage.getItem('id'),
       localStorage.getItem('storeId'),
@@ -191,9 +189,8 @@ export class ItemsSuggestedProductsComponent implements OnInit{
       BankId
     ).subscribe( resp => {
       console.log(resp);
+      this.snackBar.open('¡Su producto ha sido sincronizado exitosamente!', 'cerrar', { duration: 4000 });
     })
-
-
   }
 
 

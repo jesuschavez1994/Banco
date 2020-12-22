@@ -7,6 +7,7 @@ import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import { SincronizacionService } from '../../../../services/sincronizacion/sincronizacion.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 class Sincronizacion {
 
@@ -64,7 +65,8 @@ export class FormBanckProductSyncComponent implements OnInit {
               private _cd: ChangeDetectorRef,
               private router: Router,
               private route: ActivatedRoute,
-              private sincronizacion: SincronizacionService) { 
+              private sincronizacion: SincronizacionService,
+              public snackBar: MatSnackBar) { 
 
                 this.route.params.subscribe( (params: Params) => {
                   console.log(params);
@@ -231,6 +233,8 @@ export class FormBanckProductSyncComponent implements OnInit {
 
     this.sincronizacion.SincronizarDesdeBancoPrdoducto(localStorage.getItem('id'), localStorage.getItem('storeId'), data).subscribe( resp => {
       console.log('sincronizo', resp);
+      this.snackBar.open('¡Su producto ha sido sincronizado exitosamente!', 'cerrar', { duration: 4000 });
+      this.router.navigate(['/my-store/product-catalogue']);
     })
 
   }
