@@ -9,7 +9,7 @@ const URL = URL_SERVICIOS;
 export class ImgBankProductPipe implements PipeTransform {
   transform(img: string): string {
     if (!img){
-      return 'assets/img/Box/box.svg';
+      return 'assets/img/box.svg';
     }
     const imgUrl = `${URL}/${img}`;
     return imgUrl;

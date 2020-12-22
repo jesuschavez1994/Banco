@@ -11,7 +11,7 @@ export class ImgProductLoadPipe implements PipeTransform {
   transform(img: string): string {
 
     if (!img){
-      return 'assets/img/Box/box.svg';
+      return 'assets/img/box.svg';
     }
 
     const imgUrl = `${URL}/${img}`;
