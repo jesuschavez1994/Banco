@@ -24,6 +24,11 @@ button{
     box-sizing: border-box;
 }
 
+.description{
+    overflow-y: auto;
+    text-align: center;
+}
+
 .scrolling-wrapper{
     overflow-x: auto;
     overflow-y: hidden;

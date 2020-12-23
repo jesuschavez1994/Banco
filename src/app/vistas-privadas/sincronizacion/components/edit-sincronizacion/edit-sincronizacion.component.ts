@@ -76,7 +76,7 @@ export class EditSincronizacionComponent implements OnInit {
     }
   ]
 
-  valorForm: EditProductStore;
+  valorForm: any;
 
   constructor(private _cd: ChangeDetectorRef,
               public storeService: StoreService,
@@ -124,16 +124,20 @@ export class EditSincronizacionComponent implements OnInit {
                     this.forma.controls['description'].setValue(this.valorForm.description);
                     this.forma.controls['mark'].setValue(this.valorForm.marks[0].name);
                     this.forma.controls['factory'].setValue(this.valorForm.factories[0].name);
+
+                    
                     this.forma.controls['price'].setValue(this.valorForm.price);
                     this.forma.controls['stock'].setValue(this.valorForm.stock);
-                    this.forma.controls['recipe'].setValue(this.valorForm.recipes[0].name);
+                    if(this.valorForm.recipes.length > 0){
+                      this.forma.controls['recipe'].setValue(this.valorForm.recipes[0].name);
+                    }
                     this.forma.controls['subcategory_id'].setValue(this.subcategory_estado[0].subcategoria);
                     // END SET DE FORMULARIO //
 
                     // EVALUAMOS LOS CAMPOS SELECT //
-                    if( this.valorForm.delivery.delivery === 'true' ){
+                    if( this.valorForm.delivery === 'true' ){
                       this.forma.controls['delivery'].setValue(this.delivery_estado[0].delivery);
-                      console.log('Delivery', this.valorForm.delivery.delivery);
+                      console.log('Delivery', this.valorForm.delivery);
                     }else{
                       this.forma.controls['delivery'].setValue(this.delivery_estado[1].delivery);
                     }

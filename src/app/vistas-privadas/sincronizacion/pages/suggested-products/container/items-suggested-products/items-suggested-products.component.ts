@@ -3,7 +3,7 @@ import {  StoreService } from '../../../../../../services/store/store.service';
 import {  ActivatedRoute, Params, Router} from '@angular/router';
 import {  Descripcion } from '@interfaces/sincronizacion';
 import {  Total, Suggestion, Datum } from '@interfaces/sincronizacion';
-import {  SincronizacionService } from '../../../../../../services/sincronizacion/sincronizacion.service';
+import { SincronizacionService } from '../../../../../../services/sincronizacion/sincronizacion.service';
 import {  SincronizarElProducto } from '@models/sincronizacion/documentExcel.model';
 import {  FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Sugerir } from '../../../../../../models/sincronizacion/sugerir';
@@ -84,7 +84,8 @@ export class ItemsSuggestedProductsComponent implements OnInit{
               private renderer: Renderer2,
               private el: ElementRef,
               private spinnerService: NgxSpinnerService,
-              public snackBar: MatSnackBar
+              public snackBar: MatSnackBar,
+              
              )
 
   {
@@ -153,7 +154,7 @@ export class ItemsSuggestedProductsComponent implements OnInit{
 
   getData(page?: number){
     this.spinner();
-    this.storeService.geatAllProducts(
+    this.sincronizacion.GetAllProductSuggested(
       localStorage.getItem('id'),
       localStorage.getItem('storeId'),
       page)
@@ -202,7 +203,7 @@ export class ItemsSuggestedProductsComponent implements OnInit{
       else{
       this.scroll=false
       }
-    },300)
+    },600)
   }
 
   scrollDown(){
@@ -214,7 +215,7 @@ export class ItemsSuggestedProductsComponent implements OnInit{
 
   scrollTop(){
     window.scrollTo({
-      top:300,
+      top:600,
     });
   }
   
@@ -223,16 +224,18 @@ export class ItemsSuggestedProductsComponent implements OnInit{
   handleSearch(value: string): void {
     console.log(value);
     this.filtro_valor = value;
+    if(value !== undefined){
+      let comparacion = new Termino( value  );
 
-    let comparacion = new Termino( value  );
-
-    this.sincronizacion.BuscadorSugerencias(
-      comparacion,
-      localStorage.getItem('id'),
-      localStorage.getItem('storeId')).subscribe( (resp: Total) => {
-      console.log(resp.data);
-      return  this.MyProduct = resp.data;
-    });
+      this.sincronizacion.BuscadorSugerencias(
+        comparacion,
+        localStorage.getItem('id'),
+        localStorage.getItem('storeId')).subscribe( (resp: Total) => {
+        console.log(resp.data);
+        return  this.MyProduct = resp.data;
+      });
+    }
+    
   }
 
 

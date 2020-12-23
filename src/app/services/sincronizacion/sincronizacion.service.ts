@@ -37,6 +37,11 @@ export class SincronizacionService {
     return this.http.delete<T>( query );
   }
 
+  GetAllProductSuggested(userId: string, storeId: string, page?: number){
+    const url = `/api/users/${userId}/stores/${storeId}/product_suggesteds`  + '?page=' + page;
+    return this.execQuery(url);
+  }
+
   // /api/users/2/stores/1/productcsv
 
   PostListadoProductosExcel(userId: string, storeId: string, file: any){

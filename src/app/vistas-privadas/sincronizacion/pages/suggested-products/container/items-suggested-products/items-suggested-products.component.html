@@ -45,8 +45,8 @@
                             <mat-grid-tile class="titles"><span class="family-600">Imagen</span></mat-grid-tile>
                             <mat-grid-tile class="titles"><span class="family-600">Nombre del producto</span></mat-grid-tile>
                             <mat-grid-tile class="titles"><span class="family-600">Marca</span></mat-grid-tile>
-                            <mat-grid-tile class="titles"><span class="family-600">Cantidad</span></mat-grid-tile>
-                            <mat-grid-tile class="titles"><span class="family-600">Precio</span></mat-grid-tile>
+                            <mat-grid-tile class="titles"><span class="family-600">Descripción</span></mat-grid-tile>
+                            <mat-grid-tile class="titles"><span class="family-600">Fabricante</span></mat-grid-tile>
                         </mat-grid-list>
 
                         <mat-grid-list class="item-grid" cols="5" rowHeight="2:1.5">
@@ -82,14 +82,17 @@
                                         
                             </mat-grid-tile>
 
-                            <mat-grid-tile>
-                                <span class="family-500">
-                                    {{ item.stock }}
+                            <mat-grid-tile class="description">
+                                <span class="family-500" title="{{item.description}}">
+                                    {{ item.description | LimitarTexto: 100}}
                                 </span>
                             </mat-grid-tile>
                             <mat-grid-tile>
-                                <span class="family-500">
-                                    {{ item.price }}
+                                <span class="family-500" *ngIf="item.factories.length > 0">
+                                    {{ item.factories[0].name }}
+                                </span>
+                                <span *ngIf="item.factories === 0">
+                                    No se ha definido el fabricante
                                 </span>
                             </mat-grid-tile>
                         </mat-grid-list>

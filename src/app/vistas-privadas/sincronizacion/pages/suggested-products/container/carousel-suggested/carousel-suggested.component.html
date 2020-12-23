@@ -28,9 +28,26 @@
                                         {{ suggestion.name}}
                                 </span>
                             </mat-grid-tile>
-                            <mat-grid-tile>3</mat-grid-tile>
-                            <mat-grid-tile></mat-grid-tile>
-                            <mat-grid-tile></mat-grid-tile>
+                            <mat-grid-tile>
+                                <span *ngIf="suggestion.marks.length > 0">
+                                    {{suggestion.marks[0].name}}
+                                </span>
+                                <span *ngIf="suggestion.marks.length === 0">
+                                    No se ha definido la marca
+                                </span>
+                            </mat-grid-tile>
+                            <mat-grid-tile class="description family-500" title="{{suggestion.description}}">
+                                {{suggestion.description | LimitarTexto: 100}}
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <span *ngIf="suggestion.factories.length > 0">
+                                    {{suggestion.factories[0].name}}
+                                </span>
+                                <span *ngIf="suggestion.factories === 0">
+                                    No se ha definido el fabricante
+                                </span>
+                                
+                            </mat-grid-tile>
                 </mat-grid-list>
     </div>
 </div>

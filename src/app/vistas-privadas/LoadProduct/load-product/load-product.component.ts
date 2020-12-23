@@ -95,6 +95,7 @@ export class LoadProductComponent implements OnInit {
         this.totalProductAPI = resp.total;
         this.showFooterPaginations = true;
         this.spinnerService.hide();
+        this.scrollTop();
     });
 
   }
