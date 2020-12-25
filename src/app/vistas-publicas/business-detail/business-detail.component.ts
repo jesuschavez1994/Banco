@@ -14,6 +14,8 @@ import { FilterOption } from '@interfaces/components-options/search-bar.options.
 import { forkJoin, merge } from 'rxjs';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Utils } from '../../utils/utils';
+import { PriceRange } from '../../interfaces/components-options/sidebar-list.options.interface';
 
 @Component({
   selector: 'app-business-detail',
@@ -33,9 +35,18 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     m: 'assets/img/test-img/banner.png'
   };
 
+  // sidebar-list
+  expandSidebar = true;
   anchorsMenu: AnchorsMenu;
   profile: Profile;
   categories: Category[];
+  priceRanges: PriceRange[] = [
+    { min: 0, max: 10000, totalFounds: 559 },
+    { min: 10000, max: 20000, totalFounds: 58 },
+    { min: 20000, max: 30000, totalFounds: 9 },
+    { min: 30000, max: 40000, totalFounds: 1 },
+    { min: 50000, max: 60000, totalFounds: 1 },
+  ];
   filterOptions: FilterOption[] = [
     {label: 'filtrar por', value: 0},
     {label: 'producto', value: 1},
@@ -43,6 +54,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   ];
 
   // Products-cards
+  showProducts = false;
   totalProducts: number;
   itemsPerPage = 16;
 
@@ -50,8 +62,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   preloadedValueSearch = '';
 
   // Variables
-  expandSidebar = true;
-  showProducts = false;
   StoreName = '';
 
   constructor(
@@ -59,6 +69,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     private router: Router,
     private productService: ProductService,
     private storeService: StoreService,
+    private utils: Utils
 
   ){
     this.loadDataByParams();
@@ -211,28 +222,28 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
               break;
 
             case 'marks':
-              queryParamsAllowed.marks = this.stringToArray(queryParams.get('marks'));
+              queryParamsAllowed.marks = this.utils.stringToArray(queryParams.get('marks'));
               // marks: ['generica', 'ALBENZA', 'XANAX', 'gillete'],
               break;
 
             case 'category':
-              queryParamsAllowed.categories = this.stringToArray(queryParams.get('category'));
+              queryParamsAllowed.categories = this.utils.stringToArray(queryParams.get('category'));
               // categories: ['Cosmeticos', 'infantil'],
               break;
 
             case 'subcategories':
-              queryParamsAllowed.subcategories = this.stringToArray(queryParams.get('subcategories'));
+              queryParamsAllowed.subcategories = this.utils.stringToArray(queryParams.get('subcategories'));
               // subcategories: ['Cutis', 'Analgesicos'],
 
               break;
 
             case 'factories':
-              queryParamsAllowed.factories = this.stringToArray(queryParams.get('factories'));
+              queryParamsAllowed.factories = this.utils.stringToArray(queryParams.get('factories'));
               // factories: ['gerber', 'polar'],
               break;
 
             case 'price':
-              queryParamsAllowed.price = this.stringToArray(queryParams.get('price'), true);
+              queryParamsAllowed.price = this.utils.stringToArray(queryParams.get('price'), true);
               // queryParams.get('price').split(',');
               // price: [1, 284],
               break;
@@ -243,7 +254,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
               break;
 
             case 'recipes':
-              queryParamsAllowed.recipes = this.stringToArray(queryParams.get('recipes'));
+              queryParamsAllowed.recipes = this.utils.stringToArray(queryParams.get('recipes'));
               // recipes: ['morado', 'polar']
               break;
           }
@@ -285,16 +296,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       });
 
     }
-
-  }
-
-  // Volver un Utils
-  public stringToArray(paramString: string, isNumbers: boolean = false, separador: string = ','){
-    const arrayString = paramString.split(separador);
-
-    return isNumbers === false ? arrayString: arrayString.map( stringToConvert => {
-      return parseInt(stringToConvert);
-    });
 
   }
 
@@ -468,7 +469,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       },
     ];
 
-    console.log(storeResp);
+    // console.log(storeResp);
 
   }
 

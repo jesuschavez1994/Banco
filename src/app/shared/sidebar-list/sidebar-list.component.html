@@ -104,7 +104,6 @@
 
       <ng-container *ngFor="let subcategory of currentCategory.subcategories">
 
-        <!-- [ngClass]="{'active': subcategory.name == subCategorySelected.name}" -->
         <li class="subCategory">
 
           <input type="checkbox"
@@ -128,49 +127,32 @@
 
     </ul>
 
-    <!--
-      Envio al endpoint un rango cualquiera desde estos rangos
-      que los rangos no sean definidos por defecto por el servidor
-    -->
     <ul class="list">
-        <h4 class="title">
-            Precios
-        </h4>
+      <h4 class="title">
+          Precios
+      </h4>
+
+      <ng-container *ngFor="let range of priceRanges; index as inx">
 
         <li>
-            <input type="radio" id="rango-1" name="rango-1">
-            <label for="rango-1">
-                <a>$0 - $10.000</a>
-            </label>
+
+          <input type="radio"
+            class="input--rango"
+            id="rango-{{inx}}"
+            name="rangos"
+            [checked]="range.id === priceRangesSelected.id"
+          >
+
+          <label for="rango-{{inx}}" (click)="selectPriceRange(range, $event)">
+              <a>
+                {{range.min | currency: 'USD' : 'symbol' : '1.0-0'}} -
+                {{range.max | currency: 'USD' : 'symbol' : '1.0-0'}} ({{range.totalFounds}})
+              </a>
+          </label>
+
         </li>
 
-        <li>
-            <input type="radio" id="rango-2" name="rango-1">
-            <label for="rango-2">
-                <a>$10.000 - $20.000</a>
-            </label>
-        </li>
-
-        <li>
-            <input type="radio" id="rango-3" name="rango-1">
-            <label for="rango-3">
-                <a>$20.000 - $30.000</a>
-            </label>
-        </li>
-
-        <li>
-            <input type="radio" id="rango-4" name="rango-1">
-            <label for="rango-4">
-                <a>$30.000 - $40.000</a>
-            </label>
-        </li>
-
-        <li>
-            <input type="radio" id="rango-5" name="rango-1">
-            <label for="rango-5">
-                <a>$50.000 - $60.000</a>
-            </label>
-        </li>
+      </ng-container>
 
     </ul>
 

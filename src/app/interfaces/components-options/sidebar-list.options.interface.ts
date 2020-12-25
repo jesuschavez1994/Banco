@@ -56,6 +56,17 @@ export interface AnchorsMenu {
   wordToMatch: string;
 }
 
+// Filters
+
+export interface PriceRange {
+  id?:number;
+  min: number | string;
+  max: number | string;
+  totalFounds: number | string;
+}
+
+// Others
+
 export interface SelectedEmitter {
   currentCategory: Category;
   isSelectedCategory: boolean;

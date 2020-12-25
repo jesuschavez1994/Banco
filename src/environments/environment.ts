@@ -13,7 +13,7 @@
 export const environment = {
   production: false,
   url: 'http://localhost:4200',
-  apiUrl: 'https://laravelbank.dev/api/',
+  apiUrl: 'http://31.220.108.209/api/',
   apiKey: 'aac1706fe8a46b5700714aead65c5e39',
   imgPath: ''
 };
