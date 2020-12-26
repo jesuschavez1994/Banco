@@ -141,7 +141,7 @@
 
       <ng-container *ngFor="let range of priceRanges; index as inx">
 
-        <div (click)="selectPriceRange(range, $event)">
+        <div (click)="selectPriceRange(range)">
           <li>
 
             <input type="radio"
@@ -174,7 +174,7 @@
 
       <ng-container *ngFor="let factory of factories; index as inx">
 
-        <div (click)="selectOptionsFilter($event, factory.name, { selected: 'factoriesSelected' })">
+        <div (click)="selectOptionsFilter(factory.name, 'factoriesSelected')">
 
           <li>
 

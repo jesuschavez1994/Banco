@@ -353,28 +353,17 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   }
 
 
-  public selectPriceRange(range, event){
+  public selectPriceRange(range){
     let queryParams;
 
     queryParams = {};
-
-    // const input = event.srcElement.parentNode.previousSibling;
-    // const li = event.srcElement.parentNode;
 
     if (range !== this.priceRangesSelected) {
 
       queryParams.price = `${range.min},${range.max}`;
 
-      // li.classList.remove('offActive');
-
-    } else {
-
-      // li.classList.add('offActive');
-      // input.checked = false;
 
     }
-
-    // console.log('selectPriceRange: ', li);
 
     this.router.navigate(
       [],
@@ -439,47 +428,26 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   }
 
-  public selectOptionsFilter(event, optionValue, atributtesName: {
-    selected: string, // El atributo donde se guardaran los seleccionados
-    //  el atributo con el cual se comparara el valor recibido desde la url con los calores permitidos de filtrado
-    // toMatch: string
-    }
-  ){
+  public selectOptionsFilter(optionValue, selectedAtributteName: string){
 
     let queryParams;
-    const optionsSelected = this[atributtesName.selected];
+    const optionsSelected = this[selectedAtributteName];
     const inxWasSelected = optionsSelected.indexOf(optionValue);
-
-    const li = event.srcElement.parentNode.parentNode;
-    const input = event.srcElement.parentNode.previousSibling;
-
-    // const classActive = input.type === 'radio' ? 'input-active' : 'input-active--checkbox'; // --checkbox
-    // const classOffActive = input.type === 'radio' ? 'input-offActive' : 'input-offActive--checkbox'; // --checkbox
 
     if (inxWasSelected === -1) {
       optionsSelected.push(optionValue);
-
-      // li.classList.remove(classOffActive);
-      // li.classList.add(classActive);
       console.log('push');
-
-      // input.checked = true;
 
     } else {
       optionsSelected.splice(inxWasSelected, 1);
       console.log('splice');
 
-      // li.classList.add(classOffActive);
-      // li.classList.remove(classActive);
-      // input.checked = false;
 
     }
 
-    console.log('li', li, ' input: ', input);
-
     console.log('selectOptionsFilter: ', inxWasSelected, ' --- optionValue: ', optionValue);
     console.log('optionsSelected: ', optionsSelected);
-    console.log('this[atributtesName.selected]: ', this[atributtesName.selected]);
+    console.log('this[selectedAtributteName]: ', this[selectedAtributteName]);
 
     queryParams = {};
 
