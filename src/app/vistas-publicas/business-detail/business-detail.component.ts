@@ -7,15 +7,14 @@ import { ProductsCardsComponent } from '@shared/products-cards/products-cards.co
 import { ProductDetailComponent } from '@shared/product-detail/product-detail.component';
 import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component';
 import { StoreService } from '@services/store/store.service';
-import { SelectedEmitter, AnchorsMenu, Profile, Category } from '@interfaces/components-options/sidebar-list.options.interface';
+import { AnchorsMenu, Profile, Category } from '@interfaces/components-options/sidebar-list.options.interface';
 import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
 import { StoreResponse } from '@interfaces/store.interface';
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface';
-import { forkJoin, merge } from 'rxjs';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Utils } from '../../utils/utils';
-import { PriceRange } from '../../interfaces/components-options/sidebar-list.options.interface';
+import { PriceRange, Filter } from '@interfaces/components-options/sidebar-list.options.interface';
 
 @Component({
   selector: 'app-business-detail',
@@ -51,6 +50,13 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     {label: 'filtrar por', value: 0},
     {label: 'producto', value: 1},
     {label: 'Empresa', value: 'hola'},
+  ];
+  factories: Filter[] = [
+    {name: 'abbot', totalFounds: 1},
+    {name: 'anc', totalFounds: 36},
+    {name: 'andrómaatico', totalFounds: 1},
+    {name: 'aura vitalis', totalFounds: 38},
+    {name: 'bach', totalFounds: 7},
   ];
 
   // Products-cards
@@ -237,8 +243,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
               break;
 
-            case 'factories':
-              queryParamsAllowed.factories = this.utils.stringToArray(queryParams.get('factories'));
+            case 'fabricantes':
+              queryParamsAllowed.factories = this.utils.stringToArray(queryParams.get('fabricantes'));
               // factories: ['gerber', 'polar'],
               break;
 
@@ -263,7 +269,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         filter = queryParamsAllowed;
 
-        // console.log('queryParamsAllowed: ', queryParamsAllowed);
+        console.log('queryParamsAllowed: ', queryParamsAllowed);
       }
 
 

@@ -36,13 +36,15 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   // filters
   @Input() categories: Category[] = [];
   @Input() priceRanges: PriceRange[] = [];
-  @Input() factories: Filter[] = [
-    {name: 'abbot', totalFounds: 1},
-    {name: 'anc', totalFounds: 36},
-    {name: 'andrómaatico', totalFounds: 1},
-    {name: 'aura vitalis', totalFounds: 38},
-    {name: 'bach', totalFounds: 7},
-  ];
+  @Input() factories: Filter[];
+
+  // = [
+  //   {name: 'abbot', totalFounds: 1},
+  //   {name: 'anc', totalFounds: 36},
+  //   {name: 'andrómaatico', totalFounds: 1},
+  //   {name: 'aura vitalis', totalFounds: 38},
+  //   {name: 'bach', totalFounds: 7},
+  // ];
 
   // Selected Filters
 
@@ -428,7 +430,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   }
 
-  public selectOptionsFilter(optionValue, selectedAtributteName: string){
+  public selectOptionsFilter(optionValue, selectedAtributteName: string, paramName: string){
 
     let queryParams;
     const optionsSelected = this[selectedAtributteName];
@@ -436,18 +438,14 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     if (inxWasSelected === -1) {
       optionsSelected.push(optionValue);
-      console.log('push');
+      // console.log('push');
 
     } else {
       optionsSelected.splice(inxWasSelected, 1);
-      console.log('splice');
+      // console.log('splice');
 
 
     }
-
-    console.log('selectOptionsFilter: ', inxWasSelected, ' --- optionValue: ', optionValue);
-    console.log('optionsSelected: ', optionsSelected);
-    console.log('this[selectedAtributteName]: ', this[selectedAtributteName]);
 
     queryParams = {};
 
@@ -455,7 +453,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
       const optionsSToqueryP = optionsSelected.join();
 
-      queryParams.fabricantes = optionsSToqueryP;
+      queryParams[paramName] = optionsSToqueryP;
 
     }
 
