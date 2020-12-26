@@ -57,9 +57,13 @@ export interface AnchorsMenu {
 }
 
 // Filters
-
+export interface Filter {
+  id?: number;
+  name: string;
+  totalFounds?: number | string;
+}
 export interface PriceRange {
-  id?:number;
+  id?: number;
   min: number | string;
   max: number | string;
   totalFounds: number | string;

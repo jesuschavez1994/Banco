@@ -76,6 +76,7 @@
 
   <nav class="menu">
 
+    <!-- Categorias -->
     <ul class="list">
 
       <h4 class="title">
@@ -96,6 +97,7 @@
 
     </ul>
 
+    <!-- SubCategorias -->
     <ul class="list">
 
       <h4 class="title">
@@ -104,29 +106,34 @@
 
       <ng-container *ngFor="let subcategory of currentCategory.subcategories">
 
-        <li class="subCategory">
+        <div (click)="selectSubCategories(subcategory)">
 
-          <input type="checkbox"
-            class="subCategory-input"
-            [id]="subcategory.id"
-            [name]="subcategory.id"
-            [checked]="subCategoriesSelected.indexOf(subcategory.name)  !== -1"
-          >
+          <li class="subCategory">
 
-          <label
-            [for]="subcategory.id"
-            (click)="selectSubCategories(subcategory)">
+            <input type="checkbox"
+              class="subCategory-input"
+              [id]="subcategory.id"
+              [name]="subcategory.id"
+              [checked]="subCategoriesSelected.indexOf(subcategory.name)  !== -1"
+            >
 
-            <a>{{subcategory.name}}</a>
+            <label
+              [for]="subcategory.id"
+              >
 
-          </label>
+              <a>{{subcategory.name}}</a>
 
-        </li>
+            </label>
+
+          </li>
+
+        </div>
 
       </ng-container>
 
     </ul>
 
+    <!-- precios -->
     <ul class="list">
       <h4 class="title">
           Precios
@@ -134,27 +141,63 @@
 
       <ng-container *ngFor="let range of priceRanges; index as inx">
 
-        <li>
+        <div (click)="selectPriceRange(range, $event)">
+          <li>
 
-          <input type="radio"
-            class="input--rango"
-            id="rango-{{inx}}"
-            name="rangos"
-            [checked]="range.id === priceRangesSelected.id"
-          >
+            <input type="radio"
+              class="input--rango"
+              id="rango-{{inx}}"
+              name="rangos"
+              [checked]="range.id === priceRangesSelected.id"
+            >
 
-          <label for="rango-{{inx}}" (click)="selectPriceRange(range, $event)">
-              <a>
-                {{range.min | currency: 'USD' : 'symbol' : '1.0-0'}} -
-                {{range.max | currency: 'USD' : 'symbol' : '1.0-0'}} ({{range.totalFounds}})
-              </a>
-          </label>
+            <label for="rango-{{inx}}">
+                <a>
+                  {{range.min | currency: 'USD' : 'symbol' : '1.0-0'}} -
+                  {{range.max | currency: 'USD' : 'symbol' : '1.0-0'}} ({{range.totalFounds}})
+                </a>
+            </label>
 
-        </li>
+          </li>
+
+        </div>
 
       </ng-container>
 
     </ul>
+
+    <!-- fabricantes -->
+    <ul class="list">
+      <h4 class="title">
+        fabricantes
+      </h4>
+
+      <ng-container *ngFor="let factory of factories; index as inx">
+
+        <div (click)="selectOptionsFilter($event, factory.name, { selected: 'factoriesSelected' })">
+
+          <li>
+
+            <input type="checkbox"
+              id="factory-{{inx}}"
+              name="factory-{{inx}}"
+              [checked]="factoriesSelected.indexOf(factory.name)  !== -1"
+            >
+
+            <label for="factory-{{inx}}">
+              <a>
+                {{factory.name}} ({{factory.totalFounds}})
+              </a>
+            </label>
+
+          </li>
+
+        </div>
+
+      </ng-container>
+
+    </ul>
+
 
   </nav>
 
