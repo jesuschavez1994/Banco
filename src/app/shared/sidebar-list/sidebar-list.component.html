@@ -198,6 +198,38 @@
 
     </ul>
 
+    <!-- Bioequivalent -->
+    <ul class="list">
+      <h4 class="title">
+        bioequivalente
+      </h4>
+
+      <ng-container *ngFor="let bio of bioequivalent; index as inx">
+
+        <div (click)="selectOptionsFilter(bio.name, 'bioequivalentSelected', 'bioequivalente')">
+
+          <li>
+
+            <input type="checkbox"
+              id="bio-{{inx}}"
+              name="bio-{{inx}}"
+              [checked]="bioequivalentSelected.indexOf(bio.name)  !== -1"
+            >
+
+            <label for="bio-{{inx}}">
+              <a>
+                {{bio.name}} ({{bio.totalFounds}})
+              </a>
+            </label>
+
+          </li>
+
+        </div>
+
+      </ng-container>
+
+    </ul>
+
 
   </nav>
 
