@@ -207,96 +207,96 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   // // Category and subCategories
   public loadCategoryByUrl(queryParamMap) {
 
-  if (queryParamMap.has('category')) {
+    if (queryParamMap.has('category')) {
 
-    // Category
-    const category = queryParamMap.get('category');
-
-    this.categories.forEach(cat => {
-
-      if (cat.name === category) {
-
-        this.categorySelected = {
-          id: cat.id,
-          name: cat.name,
-        };
-
-        this.currentCategory = cat;
-
-      }
-
-    });
-
-    // Category //
-
-    // SubCategory
-
-    this.subCategoriesSelected = [];
-
-    if (queryParamMap.has('subcategories')) {
-
-      const subCategoryParam = this.utils.stringToArray(queryParamMap.get('subcategories'));
+      // Category
+      const category = queryParamMap.get('category');
 
       this.categories.forEach(cat => {
 
-        cat.subcategories.forEach(subcat => {
+        if (cat.name === category) {
 
-          subCategoryParam.forEach(subcatParam => {
+          this.categorySelected = {
+            id: cat.id,
+            name: cat.name,
+          };
 
-            if (subcat.name === subcatParam) {
-              const inxFindSubCarselected = this.subCategoriesSelected.indexOf(subcatParam);
+          this.currentCategory = cat;
 
-              if (inxFindSubCarselected === -1) {
+        }
 
-                this.subCategoriesSelected.push(subcat.name);
+      });
+
+      // Category //
+
+      // SubCategory
+
+      this.subCategoriesSelected = [];
+
+      if (queryParamMap.has('subcategories')) {
+
+        const subCategoryParam = this.utils.stringToArray(queryParamMap.get('subcategories'));
+
+        this.categories.forEach(cat => {
+
+          cat.subcategories.forEach(subcat => {
+
+            subCategoryParam.forEach(subcatParam => {
+
+              if (subcat.name === subcatParam) {
+                const inxFindSubCarselected = this.subCategoriesSelected.indexOf(subcatParam);
+
+                if (inxFindSubCarselected === -1) {
+
+                  this.subCategoriesSelected.push(subcat.name);
+
+                }
 
               }
+            });
 
-            }
           });
 
         });
 
-      });
+      }
 
+      // else {
+      //   this.subCategoriesSelected = [];
+
+      // }
+
+      // SubCategory //
+
+    } else {
+      this.categorySelected = {
+        id: -1,
+        name: '',
+      };
+
+      this.subCategoriesSelected = [];
     }
-
-    // else {
-    //   this.subCategoriesSelected = [];
-
-    // }
-
-    // SubCategory //
-
-  } else {
-    this.categorySelected = {
-      id: -1,
-      name: '',
-    };
-
-    this.subCategoriesSelected = [];
-  }
 
   }
 
   public selectCategory(category) {
-  let queryParams;
+    let queryParams;
 
-  if (category.name === this.categorySelected.name) {
-    queryParams = {};
+    if (category.name === this.categorySelected.name) {
+      queryParams = {};
 
-  } else {
-    queryParams = { category: category.name };
-
-  }
-
-  this.router.navigate(
-    [],
-    {
-      relativeTo: this.route,
-      queryParams,
+    } else {
+      queryParams = { category: category.name };
 
     }
+
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams,
+
+      }
     );
 
   }
