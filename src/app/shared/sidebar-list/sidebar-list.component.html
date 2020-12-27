@@ -77,158 +77,213 @@
   <nav class="menu">
 
     <!-- Categorias -->
-    <ul class="list">
+    <ng-container *ngIf="categories">
 
-      <h4 class="title">
-        Categorías
-      </h4>
+      <ul class="list">
 
-      <ng-container *ngFor="let category of categories">
+        <h4 class="title">
+          Categorías
+        </h4>
 
-        <li
+        <ng-container *ngFor="let category of categories">
 
-          class="category"
-          (click)="selectCategory(category)"
-          [ngClass]="{'active': category.name == categorySelected.name}"
-        >
-          <a>{{category.name}}</a>
-        </li>
-      </ng-container>
+          <li
 
-    </ul>
+            class="category"
+            (click)="selectCategory(category)"
+            [ngClass]="{'active': category.name == categorySelected.name}"
+          >
+            <a>{{category.name}}</a>
+          </li>
+        </ng-container>
+
+      </ul>
+
+    </ng-container>
 
     <!-- SubCategorias -->
-    <ul class="list">
+    <ng-container *ngIf="currentCategory.subcategories">
 
-      <h4 class="title">
-          Subcategorías
-      </h4>
+      <ul class="list">
 
-      <ng-container *ngFor="let subcategory of currentCategory.subcategories">
+        <h4 class="title">
+            Subcategorías
+        </h4>
 
-        <div (click)="selectSubCategories(subcategory)">
+        <ng-container *ngFor="let subcategory of currentCategory.subcategories">
 
-          <li class="subCategory">
+          <div (click)="selectSubCategories(subcategory)">
 
-            <input type="checkbox"
-              class="subCategory-input"
-              [id]="subcategory.id"
-              [name]="subcategory.id"
-              [checked]="subCategoriesSelected.indexOf(subcategory.name)  !== -1"
-            >
+            <li class="subCategory">
 
-            <label
-              [for]="subcategory.id"
+              <input type="checkbox"
+                class="subCategory-input"
+                [id]="subcategory.id"
+                [name]="subcategory.id"
+                [checked]="subCategoriesSelected.indexOf(subcategory.name)  !== -1"
               >
 
-              <a>{{subcategory.name}}</a>
+              <label
+                [for]="subcategory.id"
+                >
 
-            </label>
+                <a>{{subcategory.name}}</a>
 
-          </li>
+              </label>
 
-        </div>
+            </li>
 
-      </ng-container>
+          </div>
 
-    </ul>
+        </ng-container>
+
+      </ul>
+
+    </ng-container>
+
 
     <!-- precios -->
-    <ul class="list">
-      <h4 class="title">
-          Precios
-      </h4>
+    <ng-container *ngIf="priceRanges">
 
-      <ng-container *ngFor="let range of priceRanges; index as inx">
+      <ul class="list">
+        <h4 class="title">
+            Precios
+        </h4>
 
-        <div (click)="selectPriceRange(range)">
-          <li>
+        <ng-container *ngFor="let range of priceRanges; index as inx">
 
-            <input type="radio"
-              class="input--rango"
-              id="rango-{{inx}}"
-              name="rangos"
-              [checked]="range.id === priceRangesSelected.id"
-            >
+          <div (click)="selectPriceRange(range)">
+            <li>
 
-            <label for="rango-{{inx}}">
-                <a>
-                  {{range.min | currency: 'USD' : 'symbol' : '1.0-0'}} -
-                  {{range.max | currency: 'USD' : 'symbol' : '1.0-0'}} ({{range.totalFounds}})
-                </a>
-            </label>
+              <input type="radio"
+                class="input--rango"
+                id="rango-{{inx}}"
+                name="rangos"
+                [checked]="range.id === priceRangesSelected.id"
+              >
 
-          </li>
+              <label for="rango-{{inx}}">
+                  <a>
+                    {{range.min | currency: 'USD' : 'symbol' : '1.0-0'}} -
+                    {{range.max | currency: 'USD' : 'symbol' : '1.0-0'}} ({{range.totalFounds}})
+                  </a>
+              </label>
 
-        </div>
+            </li>
 
-      </ng-container>
+          </div>
 
-    </ul>
+        </ng-container>
+
+      </ul>
+
+    </ng-container>
 
     <!-- fabricantes -->
-    <ul class="list">
-      <h4 class="title">
-        fabricantes
-      </h4>
+    <ng-container *ngIf="factories">
+      <ul class="list">
+        <h4 class="title">
+          fabricantes
+        </h4>
 
-      <ng-container *ngFor="let factory of factories; index as inx">
+        <ng-container *ngFor="let factory of factories; index as inx">
 
-        <div (click)="selectOptionsFilter(factory.name, 'factoriesSelected', 'fabricantes')">
+          <div (click)="selectOptionsFilter(factory.name, 'factoriesSelected', 'fabricantes')">
 
-          <li>
+            <li>
 
-            <input type="checkbox"
-              id="factory-{{inx}}"
-              name="factory-{{inx}}"
-              [checked]="factoriesSelected.indexOf(factory.name)  !== -1"
-            >
+              <input type="checkbox"
+                id="factory-{{inx}}"
+                name="factory-{{inx}}"
+                [checked]="factoriesSelected.indexOf(factory.name)  !== -1"
+              >
 
-            <label for="factory-{{inx}}">
-              <a>
-                {{factory.name}} ({{factory.totalFounds}})
-              </a>
-            </label>
+              <label for="factory-{{inx}}">
+                <a>
+                  {{factory.name}} ({{factory.totalFounds}})
+                </a>
+              </label>
 
-          </li>
+            </li>
 
-        </div>
+          </div>
 
-      </ng-container>
+        </ng-container>
 
-    </ul>
+      </ul>
+    </ng-container>
 
-    <!-- Bioequivalent -->
-    <ul class="list">
-      <h4 class="title">
-        bioequivalente
-      </h4>
+    <!-- Delivery -->
+    <ng-container *ngIf="delivery">
 
-      <ng-container *ngFor="let bio of bioequivalent; index as inx">
+      <ul class="list">
 
-        <div (click)="selectOptionsFilter(bio.name, 'bioequivalentSelected', 'bioequivalente')">
+        <h4 class="title">
+          delivery
+        </h4>
 
-          <li>
+        <ng-container *ngFor="let delivery of delivery; index as inx">
 
-            <input type="checkbox"
-              id="bio-{{inx}}"
-              name="bio-{{inx}}"
-              [checked]="bioequivalentSelected.indexOf(bio.name)  !== -1"
-            >
+          <div (click)="selectOptionsFilter(delivery.name, 'deliverySelected', 'delivery', true)">
 
-            <label for="bio-{{inx}}">
-              <a>
-                {{bio.name}} ({{bio.totalFounds}})
-              </a>
-            </label>
+            <li>
 
-          </li>
+              <input type="radio"
+                id="delivery-{{inx}}"
+                name="delivery-option"
+                [checked]="deliverySelected.indexOf(delivery.name)  !== -1"
+              >
 
-        </div>
+              <label for="delivery-{{inx}}">
+                <a>
+                  {{delivery.name}} ({{deliverySelected.indexOf(delivery.name)  !== -1}})
+                </a>
+              </label>
 
-      </ng-container>
+            </li>
 
-    </ul>
+          </div>
+
+        </ng-container>
+
+      </ul>
+    </ng-container>
+
+    <!-- marcas -->
+    <ng-container *ngIf="marks">
+      <ul class="list">
+        <h4 class="title">
+          marca
+        </h4>
+
+        <ng-container *ngFor="let mark of marks; index as inx">
+
+          <div (click)="selectOptionsFilter(mark.name, 'marksSelected', 'marcas')">
+
+            <li>
+
+              <input type="checkbox"
+                id="mark-{{inx}}"
+                name="mark-{{inx}}"
+                [checked]="marksSelected.indexOf(mark.name)  !== -1"
+              >
+
+              <label for="mark-{{inx}}">
+                <a>
+                  {{mark.name}} ({{mark.totalFounds}})
+                </a>
+              </label>
+
+            </li>
+
+          </div>
+
+        </ng-container>
+
+      </ul>
+    </ng-container>
+
+
 
 
   </nav>

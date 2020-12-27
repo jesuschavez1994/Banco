@@ -58,6 +58,17 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     {name: 'aura vitalis', totalFounds: 38},
     {name: 'bach', totalFounds: 7},
   ];
+  delivery: Filter[] = [
+    { name: 'si', totalFounds: 579 },
+    { name: 'no', totalFounds: 274 },
+  ];
+  marks: Filter[] = [
+    { name: 'albaderm', totalFounds: 16 },
+    { name: 'Aquasolar', totalFounds: 3 },
+    { name: 'Arama', totalFounds: 8 },
+    { name: 'Bosque miel', totalFounds: 2 },
+    { name: 'Brota', totalFounds: 5 },
+  ];
 
   // Products-cards
   showProducts = false;
@@ -255,7 +266,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
               break;
 
             case 'delivery':
-              queryParamsAllowed.delivery = queryParams.get('delivery') === 'true' ? true : false;
+              queryParamsAllowed.delivery = queryParams.get('delivery') == 'si' ? true : false;
               // delivery: true,
               break;
 
