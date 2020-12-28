@@ -1,65 +1,45 @@
-<div class="product-detail">
+<ng-container *ngIf="selectedProduct">
 
-  <div class="main-img">
+  <div class="product-detail">
 
-    <app-image-preview-gallery [imgs]="productSelected.imgs" ></app-image-preview-gallery>
+      <div class="main-img">
 
-  </div>
+      <app-image-preview-gallery
+          [imgs]="selectedProduct.images"
+          [currentImg]="selectedProduct.images[0]">
+      </app-image-preview-gallery>
 
-  <div class="content">
-
-    <h2 class="name">
-      Orgain Polvo de proteína orgánica a base de plantas,
-      Fudge de chocolate cremoso - Vegano, Carbohidratos
-      bajos en la red, No lácteos, Sin gluten, Sin lactosa, Sin
-      azúcar añadido, Sin soja, Kosher, Sin OMG, 2.03 libras
-    </h2>
-
-    <p class="description">
-      Incluye 1 (2.03 libras) de polvo de proteína cremosa de chocolate con base de
-      plantas orgánicas Orgain 21 gramos de proteína orgánica a base de plantas
-      (guisante, arroz integral, semillas de chía), 6 gramos de fibra dietética orgánica,
-      3 gramos de carbohidratos netos, 0 gramos de azúcar, 150 calorías por porción.
-      Mezcle con agua, leche o su receta favorita de batido de proteínas para un
-      desayuno rápido o una merienda. Úselo cuando bakin gramos para darle a sus
-      pasteles, magdalenas, brownies o galletas un impulso de proteínas y energía.
-      <br><br>
-      Ideal para una nutrición saludable y en movimiento para hombres, mujeres y niños.
-    </p>
-
-    <div class="shopping-cart">
-
-      <div class="cost">
-        $25,01
       </div>
 
-      <div class="quantity">
+      <div class="content">
 
-        <label>Cantidad</label>
+        <h2 class="name">
+            {{selectedProduct.name}}
+        </h2>
 
-        <div class="counter">
+        <p class="description">
+          {{selectedProduct.description | excerpt: 985}}
+        </p>
 
-          <span class="control">
-            <div class="segment horizontal"></div>
-          </span>
+        <div class="shopping-cart">
 
-            <input type="number" class="number browser-default" name="counterInvetory" value="1">
+          <div class="cost">
+          {{selectedProduct.price | currency }}
+          </div>
 
-          <span class="control">
-            <div class="segment horizontal"></div>
-            <div class="segment vertical"></div>
-          </span>
+          <app-quantity-counter
+            #quantityCounter
+            [maxValue]="selectedProduct.stock">
+          </app-quantity-counter>
+
+          <button class="btn-add-to-cart" (click)="addToCart()">
+            Añadir al carrito
+          </button>
 
         </div>
 
       </div>
 
-      <button class="btn-add-to-cart">
-        Añadir al carrito
-      </button>
-
-    </div>
-
   </div>
 
-</div>
+</ng-container>

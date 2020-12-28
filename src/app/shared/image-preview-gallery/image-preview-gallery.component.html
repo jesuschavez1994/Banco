@@ -4,12 +4,12 @@
 
     <ng-container *ngFor="let img of imgs">
       <div class="option" (click)="selectImg(img)">
-        
-       
-            <img [src]="img | PreviewGallery">
-      
-          
-   
+
+        <img
+          [src]="img | imgFallback: 'box'"
+          onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
+        >
+
       </div>
     </ng-container>
 
@@ -17,32 +17,23 @@
 
   <div class="img-selected">
 
-    <!-- <img [src]="currentImg"> -->
-
-    <div [ngSwitch]="sync">
-
-      <div *ngSwitchCase="'sync'">
-        <div class="image" #image>
-          <a href="" target="_blank">
-            <img src="" alt="">
-          </a>
-        </div>
-      </div>
-
-      <div *ngSwitchDefault>
-        <div class="image" #image>
-          <a href="" target="_blank">
-            <img src="" alt="">
-          </a>
-        </div>
-      </div>
-
+    <div class="image" #image>
+      <a [href]="currentImg" target="_blank">
+        <img
+          [src]="currentImg | imgFallback: 'box'"
+          alt=""
+          onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
+        >
+      </a>
     </div>
 
     
 
     <div class="zoom" #zoom>
-      <img class="zoom-image" #zoomImage src="" alt="">
+      <img
+        class="zoom-image" #zoomImage src="" alt=""
+        onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
+      >
     </div>
 
   </div>

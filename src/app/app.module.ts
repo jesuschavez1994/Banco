@@ -39,6 +39,7 @@ import { ca_ES } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import ca from '@angular/common/locales/ca';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -52,11 +53,12 @@ registerLocaleData(ca);
     CommonModule,
     BrowserModule,
     ImageCropperModule,
-    AppRoutingModule,
+    // AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     PipesModule,
     APP_ROUTING,
+    RouterModule,
     PagesModule,
     SharedModule,
     ServiceModule,

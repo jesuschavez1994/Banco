@@ -54,8 +54,24 @@ const APP_ROUTES: Routes = [
     {path: 'login', component: LoginComponent},
 
     // Christopher Views
-    {path: 'shopping-cart', component: ShoppingCartComponent},
-    {path: 'business-detail', component: BusinessDetailComponent},
+    {
+      path: 'shopping-cart',
+      // component: ShoppingCartComponent,
+      loadChildren: () => import('./vistas-publicas/shopping-cart/shopping-cart.module').then( m => m.ShoppingCartModule)
+    },
+
+    {
+      path: 'business-detail/:idStore', // Se obtiene el id de la tienda para mostrar su listo productos
+      component: BusinessDetailComponent
+    },
+    {
+      path: 'business-detail/:idStore/:show', // Se obtiene el id de la tienda para mostrar su listo productos
+      component: BusinessDetailComponent,
+    },
+    {
+      path: 'business-detail/:idStore/:show/:idProduct', // Se obtiene el id de la tienda para mostrar su listo productos
+      component: BusinessDetailComponent,
+    },
 
     // Christopher Views //
 

@@ -11,8 +11,8 @@ const URL = URL_SERVICIOS;
 export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
 
   @Input() imgs: string[];
+  @Input() currentImg: string;
   @Input() sync: any;
-  currentImg: string;
 
   @ViewChild('image') imageContainer: ElementRef;
   @ViewChild('zoom') zoomContainer: ElementRef;
@@ -51,27 +51,10 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
     let clearSrc;
     let zoomLevel = 2;
 
-    const images = [
-      {
+    let img = {
         thumb: this.currentImg,
         hires: this.currentImg
-      }, {
-        thumb: this.currentImg,
-        hires: this.currentImg
-      }, {
-        thumb: this.currentImg,
-        hires: this.currentImg
-      }, {
-        thumb: this.currentImg,
-        hires: this.currentImg
-      }, {
-        thumb: this.currentImg,
-        hires: this.currentImg
-      },
-    ];
-
-    // set to random image
-    let img = images[Math.floor(Math.random() * images.length)];
+    };
 
     switch(this.sync){
       case "sync":
@@ -129,7 +112,7 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
 
       // remove the loading class
       zoomImage.onload = function() {
-        console.log('hires image loaded!');
+        // console.log('hires image loaded!');
         setTimeout(() => {
           zoom.classList.remove('loading');
         }, 500);
@@ -175,9 +158,9 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
         : zoom.style.top = `${posY - zoom.offsetHeight + 400}px`;
       zoom.style.left = `${posX - zoom.offsetWidth / 2}px`;
 
-      console.log('Zoom zoomLeft and top');
-      console.log(zoom.style.top);
-      console.log(`${posX - zoom.offsetWidth / 1}px`);
+      // console.log('Zoom zoomLeft and top');
+      // console.log(zoom.style.top);
+      // console.log(`${posX - zoom.offsetWidth / 1}px`);
 
       const percX = (posX - this.offsetLeft) / this.offsetWidth;
       const percY = (posY - this.offsetTop) / this.offsetHeight;
@@ -192,9 +175,9 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
       zoomImage.style.left = `${zoomLeft}px`;
       zoomImage.style.top = `${zoomTop - 150}px`;
 
-      console.log('ZoomImage zoomLeft and top');
-      console.log(zoomImage.style.left);
-      console.log( zoomImage.style.top);
+      // console.log('ZoomImage zoomLeft and top');
+      // console.log(zoomImage.style.left);
+      // console.log( zoomImage.style.top);
     };
 
 
@@ -216,7 +199,7 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
       if (zoomLevel < 1) { zoomLevel = 1; }
       if (zoomLevel > 5) { zoomLevel = 5; }
 
-      console.log(`zoom level: ${zoomLevel}`);
+      // console.log(`zoom level: ${zoomLevel}`);
       zoom.style.transform = `scale(${zoomLevel})`;
     });
   }

@@ -2,38 +2,70 @@
 
 <main class="page">
 
-  <app-sidebar-list
-    [isExpanded]="this.sidebarListCtr.expandSidebarlist"
-    (sidebarExpand)="this.sidebarListCtr.toggleSidebarList($event)">
-  </app-sidebar-list>
+  <ng-container *ngIf="anchorsMenu && profile && categories">
+
+    <app-sidebar-list
+      #sidebarList
+      [isExpanded]="expandSidebar"
+      (sidebarExpand)="toogleSidebar($event)"
+      [anchorsMenu]="anchorsMenu"
+      [profile]="profile"
+      [categories]="categories"
+      [priceRanges]="priceRanges"
+      [factories]="factories"
+      [marks]="marks"
+      [delivery]="delivery"
+    >
+    </app-sidebar-list>
+
+  </ng-container>
+
 
   <div class="column">
 
     <section class="introduction-page">
 
-      <app-breadcrumb></app-breadcrumb>
+      <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
 
       <app-banner [imgs]="imgsBanners"></app-banner>
 
     </section>
 
-    <section class="products-infomation">
+    <ng-container *ngIf="showProducts">
 
-      <h1 class="profile-name">farmacia medical background</h1>
+      <section class="products-infomation">
 
-      <app-product-detail></app-product-detail>
+        <h1 class="profile-name">{{StoreName}}</h1>
 
-      <app-search-bar
-        [buttonSidebarList]="true"
-        [isExpanded]="this.sidebarListCtr.expandSidebarlist"
-        (sidebarExpand)="this.sidebarListCtr.toggleSidebarList($event)">
-      </app-search-bar>
+        <app-product-detail #productDetail>
+        </app-product-detail>
 
-      <app-products-cards></app-products-cards>
+        <app-search-bar
+          [preloadedValue]="preloadedValueSearch"
+          [debounce]="1000"
+          [isExpanded]="expandSidebar"
+          [buttonSidebarList]="true"
+          (sidebarExpand)="toogleSidebar($event)"
+          (search)="search($event)"
+          [filterOptions]="filterOptions">
+        </app-search-bar>
 
-    </section>
+        <app-products-cards
+          #productCards
+          (selected)="goTodetailProduct($event)"
+          (pagination)="paginationProducts($event)"
+          [totalItems]="totalProducts"
+          [itemsPerPage]="itemsPerPage">
+        </app-products-cards>
+
+      </section>
+
+    </ng-container>
+
+    <ng-container *ngIf="!showProducts">
+      <p>contact detail</p>
+    </ng-container>
 
   </div>
-
 
 </main>

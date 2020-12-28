@@ -8,8 +8,8 @@ import { UserStoreService } from './user-store/user-store.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './Interceotores/interceptor.service';
 import { ProductLoadingComponent } from '../vistas-privadas/product-loading/product-loading.component';
+import { ProductService } from './product/product.service';
 import { SincronizacionService } from './sincronizacion/sincronizacion.service';
-
 
 @NgModule({
   declarations: [],
@@ -22,11 +22,12 @@ import { SincronizacionService } from './sincronizacion/sincronizacion.service';
     InterceptorService,
     ProductLoadingComponent,
     SincronizacionService,
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: InterceptorService,
-    //   multi: true
-    // },
+    ProductService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    },
   ],
   imports: [CommonModule],
   exports: [],

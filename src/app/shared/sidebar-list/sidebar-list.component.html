@@ -6,28 +6,49 @@
   <div class="btn-toogle">
 
     <app-sidebar-list-button
-    [isExpanded]="isExpanded"
-    (sidebarExpand)="toggleSidebarList($event)"
-    class="btn-toogle"></app-sidebar-list-button>
+      [expand]="isExpanded"
+      (isExpanded)="toggleSidebarList($event)"
+      class="btn-toogle"
+    >
+    </app-sidebar-list-button>
 
   </div>
-
 
   <div class="business-info">
 
     <div class="business-perfil">
 
       <div class="profile-img">
-        <img src="assets/img/no-image-banner.jpg" alt="medicalback">
+        <img
+          [src]="profile.img | imgFallback"
+          onerror="if (this.src != 'assets/img/no-image-banner.jpg') this.src = 'assets/img/no-image-banner.jpg';"
+          alt="medicalback"
+        >
       </div>
 
       <div class="profile-data">
 
-        <h2 class="name"> medicalback <span class="simbol-verifiqued">
-          <img src="assets/img/no-image-banner.jpg" alt="#"></span>
+        <h2 class="name">
+
+          {{profile.name}}
+
+          <ng-container *ngIf="profile.isVerified">
+            <span class="simbol-verifiqued">
+              <img
+                [src]="'assets/img/no-image-banner.jpg' | imgFallback"
+                alt="cuenta verificada"
+                onerror="if (this.src != 'assets/img/no-image-banner.jpg') this.src = 'assets/img/no-image-banner.jpg';"
+              >
+            </span>
+          </ng-container>
+
         </h2>
 
-        <div class="instagram">@medicalbackground</div>
+        <div class="instagram">
+          <!-- <a [href]="profile.instagram.url"> -->
+            {{profile.instagram.name}}
+          <!-- </a> -->
+        </div>
 
       </div>
 
@@ -35,12 +56,18 @@
 
     <ul class="options">
 
-      <li>
-          <a>Productos</a>
+      <li
+        [routerLink]="anchorsMenu.productLink"
+        #productsOptionMenu
+      >
+        <a>productos</a>
       </li>
 
-      <li class="active">
-          <a>Contacto</a>
+      <li
+        [routerLink]="anchorsMenu.contactLink"
+        #contactoOptionMenu
+      >
+        <a>contacto</a>
       </li>
 
     </ul>
@@ -49,122 +76,217 @@
 
   <nav class="menu">
 
+    <!-- Categorias -->
+    <ng-container *ngIf="categories">
+
       <ul class="list">
 
-          <h4 class="title">
-              Categorías
-          </h4>
-          <li>
-              <a>Medicamentos</a>
+        <h4 class="title">
+          Categorías
+        </h4>
+
+        <ng-container *ngFor="let category of categories">
+
+          <li
+
+            class="category"
+            (click)="selectCategory(category)"
+            [ngClass]="{'active': category.name == categorySelected.name}"
+          >
+            <a>{{category.name}}</a>
           </li>
-          <li>
-              <a>Belleza & Higiene</a>
-          </li>
-          <li>
-              <a>Dieta & Fitness</a>
-          </li>
-          <li>
-              <a>Salud y vitaminas</a>
-          </li>
-          <li>
-              <a>Vida sexual</a>
-          </li>
-          <li>
-              <a>Ortopedia</a>
-          </li>
-          <li class="active">
-              <a>Homeopatia & natural</a>
-          </li>
-          <li>
-              <a>Mascotas & veterinaria</a>
-          </li>
+        </ng-container>
 
       </ul>
 
+    </ng-container>
+
+    <!-- SubCategorias -->
+    <ng-container *ngIf="currentCategory.subcategories">
+
       <ul class="list">
-          <h4 class="title">
-              Subcategorías
-          </h4>
 
-          <li>
-              <input type="checkbox" id="dolor" name="dolor">
-              <label for="dolor">
-                  <a>Dolor & inflamación</a>
-              </label>
-          </li>
+        <h4 class="title">
+            Subcategorías
+        </h4>
 
-          <li>
-              <input type="checkbox" id="huesos" name="huesos">
-              <label for="huesos">
-                  <a>Huesos & articulaciones</a>
-              </label>
-          </li>
+        <ng-container *ngFor="let subcategory of currentCategory.subcategories">
 
-          <li>
-              <input type="checkbox" id="corazon" name="corazon">
-              <label for="corazon">
-                  <a>Corazón</a>
-              </label>
-          </li>
+          <div (click)="selectSubCategories(subcategory)">
 
-          <li>
-              <input type="checkbox" id="defensas" name="defensas">
-              <label for="defensas">
-                  <a>Defensas</a>
-              </label>
-          </li>
+            <li class="subCategory">
 
-          <li>
-              <input type="checkbox" id="vegano" name="vegano">
-              <label for="vegano">
-                  <a>Vegano</a>
+              <input type="checkbox"
+                class="subCategory-input"
+                [id]="subcategory.id"
+                [name]="subcategory.id"
+                [checked]="subCategoriesSelected.indexOf(subcategory.name)  !== -1"
+              >
+
+              <label
+                [for]="subcategory.id"
+                >
+
+                <a>{{subcategory.name}}</a>
+
               </label>
-          </li>
+
+            </li>
+
+          </div>
+
+        </ng-container>
 
       </ul>
 
+    </ng-container>
+
+
+    <!-- precios -->
+    <ng-container *ngIf="priceRanges">
+
       <ul class="list">
-          <h4 class="title">
-              Precios
-          </h4>
+        <h4 class="title">
+            Precios
+        </h4>
 
-          <li>
-              <input type="radio" id="rango-1" name="rango-1">
-              <label for="rango-1">
-                  <a>$0 - $10.000</a>
-              </label>
-          </li>
+        <ng-container *ngFor="let range of priceRanges; index as inx">
 
-          <li>
-              <input type="radio" id="rango-2" name="rango-1">
-              <label for="rango-2">
-                  <a>$10.000 - $20.000</a>
-              </label>
-          </li>
+          <div (click)="selectPriceRange(range)">
+            <li>
 
-          <li>
-              <input type="radio" id="rango-3" name="rango-1">
-              <label for="rango-3">
-                  <a>$20.000 - $30.000</a>
-              </label>
-          </li>
+              <input type="radio"
+                class="input--rango"
+                id="rango-{{inx}}"
+                name="rangos"
+                [checked]="range.id === priceRangesSelected.id"
+              >
 
-          <li>
-              <input type="radio" id="rango-4" name="rango-1">
-              <label for="rango-4">
-                  <a>$30.000 - $40.000</a>
+              <label for="rango-{{inx}}">
+                  <a>
+                    {{range.min | currency: 'USD' : 'symbol' : '1.0-0'}} -
+                    {{range.max | currency: 'USD' : 'symbol' : '1.0-0'}} ({{range.totalFounds}})
+                  </a>
               </label>
-          </li>
 
-          <li>
-              <input type="radio" id="rango-5" name="rango-1">
-              <label for="rango-5">
-                  <a>$50.000 - $60.000</a>
-              </label>
-          </li>
+            </li>
+
+          </div>
+
+        </ng-container>
 
       </ul>
+
+    </ng-container>
+
+    <!-- fabricantes -->
+    <ng-container *ngIf="factories">
+      <ul class="list">
+        <h4 class="title">
+          fabricantes
+        </h4>
+
+        <ng-container *ngFor="let factory of factories; index as inx">
+
+          <div (click)="selectOptionsFilter(factory.name, 'factoriesSelected', 'fabricantes')">
+
+            <li>
+
+              <input type="checkbox"
+                id="factory-{{inx}}"
+                name="factory-{{inx}}"
+                [checked]="factoriesSelected.indexOf(factory.name)  !== -1"
+              >
+
+              <label for="factory-{{inx}}">
+                <a>
+                  {{factory.name}} ({{factory.totalFounds}})
+                </a>
+              </label>
+
+            </li>
+
+          </div>
+
+        </ng-container>
+
+      </ul>
+    </ng-container>
+
+    <!-- Delivery -->
+    <ng-container *ngIf="delivery">
+
+      <ul class="list">
+
+        <h4 class="title">
+          delivery
+        </h4>
+
+        <ng-container *ngFor="let delivery of delivery; index as inx">
+
+          <div (click)="selectOptionsFilter(delivery.name, 'deliverySelected', 'delivery', true)">
+
+            <li>
+
+              <input type="radio"
+                id="delivery-{{inx}}"
+                name="delivery-option"
+                [checked]="deliverySelected.indexOf(delivery.name)  !== -1"
+              >
+
+              <label for="delivery-{{inx}}">
+                <a>
+                  {{delivery.name}} ({{deliverySelected.indexOf(delivery.name)  !== -1}})
+                </a>
+              </label>
+
+            </li>
+
+          </div>
+
+        </ng-container>
+
+      </ul>
+    </ng-container>
+
+    <!-- marcas -->
+    <ng-container *ngIf="marks">
+      <ul class="list">
+        <h4 class="title">
+          marca
+        </h4>
+
+        <ng-container *ngFor="let mark of marks; index as inx">
+
+          <div (click)="selectOptionsFilter(mark.name, 'marksSelected', 'marcas')">
+
+            <li>
+
+              <input type="checkbox"
+                id="mark-{{inx}}"
+                name="mark-{{inx}}"
+                [checked]="marksSelected.indexOf(mark.name)  !== -1"
+              >
+
+              <label for="mark-{{inx}}">
+                <a>
+                  {{mark.name}} ({{mark.totalFounds}})
+                </a>
+              </label>
+
+            </li>
+
+          </div>
+
+        </ng-container>
+
+      </ul>
+    </ng-container>
+
+
+
 
   </nav>
+
 
 </aside>

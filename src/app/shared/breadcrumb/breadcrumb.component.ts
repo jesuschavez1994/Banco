@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -7,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BreadcrumbComponent implements OnInit {
 
+  @Input() breadcrumb: BreadcrumbOptions[];
   @Input() sync: string;
 
   constructor() { }

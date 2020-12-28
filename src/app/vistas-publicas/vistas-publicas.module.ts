@@ -6,37 +6,45 @@ import { FormularioRegisterModule } from '../form-register/formulario-register.m
 import { SharedModule } from '../shared/shared.module';
 import { LoginModule } from '../Login/login.module';
 import { ComponentsModule } from '../components/components.module';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+
+// import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { BusinessDetailComponent } from './business-detail/business-detail.component';
+import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
+import { RouterModule } from '@angular/router';
+
 import { LoginComponent } from './login/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../Angula-Material/material.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { PrivateviewModule } from '../vistas-privadas/privateview.module';
+import { APP_ROUTING } from '../app.routes';
 
 @NgModule({
   declarations: [
     HomeComponent,
     RegisterComponent,
-    ShoppingCartComponent,
+    // ShoppingCartComponent,
     BusinessDetailComponent,
     LoginComponent,
   ],
   imports: [
     CommonModule,
+    MaterialModule,
+    AppRoutingModule,
     FormularioRegisterModule,
+    PrivateviewModule,
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
+    APP_ROUTING,
+    RouterModule,
     LoginModule,
     ComponentsModule,
-    MaterialModule,
-    AppRoutingModule,
-    PrivateviewModule
+    ShoppingCartModule
   ],
   exports: [
     HomeComponent,
-    RegisterComponent,
+    RegisterComponent
   ]
 })
 export class VistasPublicasModule { }

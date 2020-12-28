@@ -15,27 +15,34 @@ import { ProductsCardsComponent } from './products-cards/products-cards.componen
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { ImagePreviewGalleryComponent } from './image-preview-gallery/image-preview-gallery.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { QuantityCounterComponent } from './quantity-counter/quantity-counter.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
-        NavbarComponent,
-        NavbarToHomeComponent,
-        CategoriasComponent,
-        NavbarstoreComponent,
-        SidebarMenuComponent,
-        SidebarListComponent,
-        BreadcrumbComponent,
-        SidebarListButtonComponent,
-        BannerComponent,
-        ProductsCardsComponent,
-        SearchBarComponent,
-        ImagePreviewGalleryComponent,
-        ProductDetailComponent,
+      NavbarComponent,
+      NavbarToHomeComponent,
+      CategoriasComponent,
+      NavbarstoreComponent,
+      SidebarMenuComponent,
+      SidebarListComponent,
+      BreadcrumbComponent,
+      SidebarListButtonComponent,
+      BannerComponent,
+      ProductsCardsComponent,
+      SearchBarComponent,
+      ImagePreviewGalleryComponent,
+      ProductDetailComponent,
+      QuantityCounterComponent,
 
     ],
     imports: [
-      APP_ROUTING, PipesModule,
-      CommonModule
+      // APP_ROUTING,
+      RouterModule,
+      PipesModule,
+      CommonModule,
+      NgxPaginationModule,
     ],
     exports: [
       NavbarComponent, NavbarToHomeComponent,
@@ -44,7 +51,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
       BreadcrumbComponent, SidebarListButtonComponent,
       BannerComponent, ProductsCardsComponent,
       SearchBarComponent, ImagePreviewGalleryComponent,
-      ProductDetailComponent,
+      ProductDetailComponent, QuantityCounterComponent,
     ]
 })
 

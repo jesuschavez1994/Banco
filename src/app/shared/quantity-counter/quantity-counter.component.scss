@@ -1,0 +1,84 @@
+@import 'src/assets/scss/style.scss';
+
+.quantity {
+  padding: 0px 0px;
+  margin-bottom: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &.strong{
+    margin-bottom: 0px;
+
+    label {
+      font-weight: initial;
+    }
+
+    .counter{
+      .number {
+        max-width: 30px;
+        height: initial;
+
+        border: $color__background-gray--medium 2px solid;
+      }
+    }
+  }
+
+  label {
+    font-size: $font__size--small + 1;
+    font-weight: bold;
+  }
+
+  .counter {
+    margin-left: 10px;
+
+    display: flex;
+    align-items: center;
+
+    .control {
+      min-height: 33px;
+
+      color: $color__text-orange;
+      cursor: pointer;
+      font-size: $font__size--medium;
+      font-weight: bold;
+      margin-left: 5px;
+      margin-right: 5px;
+
+      position: relative;
+
+      display: flex;
+      align-items: center;
+
+      .segment{
+        min-width: 11px;
+        min-height: 2px;
+        background: $color__text-orange;
+
+        &.vertical{
+          transform: rotate(90deg);
+
+          position: absolute;
+
+        }
+
+      }
+
+    }
+
+    .number {
+      max-width: 35px;
+      height: 33px;
+      border: $color__background-gray--dark 1px solid;
+      text-align: center;
+    }
+
+    [type=number]::-webkit-inner-spin-button,
+    [type=number]::-webkit-outer-spin-butto {
+      display: none;
+    }
+
+  }
+
+}

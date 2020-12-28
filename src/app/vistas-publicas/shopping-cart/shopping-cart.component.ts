@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SidebarMenuOptions } from '@interfaces/components-options/sidebar-menu.interface';
+import { SidebarMenuOptions } from '@interfaces/components-options/sidebar-menu.option.interface';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -41,35 +41,16 @@ export class ShoppingCartComponent implements OnInit {
     {
       label: 'mi cuenta',
       iconClass: 'fas fa-user',
-      routerLink: '#',
-      isActive: false,
+      routerLink: ['#'],
+      // isActive: false,
     },
     {
       label: 'carrito de comprus',
       iconClass: 'fas fa-user',
-      routerLink: '#',
-      isActive: false,
+      routerLink: ['#'],
+      // isActive: false,
     },
-    {
-      label: 'carrito de compras',
-      iconClass: 'fas fa-user',
-      routerLink: '#',
-      isActive: false,
-    },
-    {
-      label: 'carrito de compras',
-      iconClass: 'fas fa-user',
-      routerLink: '#',
-      isActive: true,
-    },
-    {
-      label: 'carrito de compras',
-      iconClass: 'fas fa-user',
-      routerLink: '#',
-      isActive: false,
-    }
   ];
-
 
   constructor() {
 

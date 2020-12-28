@@ -25,8 +25,7 @@
       "@Cards-Shimmer/*": ["src/app/vistas-privadas/components/Cards-Shimmer/*"],
       "@Angula-Material/*": ["src/app/Angula-Material/*"],
       "@pipes/*": ["src/app/pipes/*"],
-      
-
+      "@environments/*": ["src/environments/*"],
     },
   },
   "angularCompilerOptions": {
@@ -34,6 +33,4 @@
     "strictInjectionParameters": true
   },
   
-  
-
 }
