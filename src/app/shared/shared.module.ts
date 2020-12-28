@@ -17,6 +17,7 @@ import { ImagePreviewGalleryComponent } from './image-preview-gallery/image-prev
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { QuantityCounterComponent } from './quantity-counter/quantity-counter.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -37,7 +38,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
     ],
     imports: [
-      APP_ROUTING, PipesModule,
+      // APP_ROUTING,
+      RouterModule,
+      PipesModule,
       CommonModule,
       NgxPaginationModule,
     ],

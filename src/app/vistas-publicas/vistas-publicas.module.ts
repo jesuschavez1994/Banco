@@ -7,14 +7,16 @@ import { SharedModule } from '../shared/shared.module';
 import { APP_ROUTING } from '../app.routes';
 import { LoginModule } from '../Login/login.module';
 import { ComponentsModule } from '../components/components.module';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+// import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { BusinessDetailComponent } from './business-detail/business-detail.component';
+import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     HomeComponent,
     RegisterComponent,
-    ShoppingCartComponent,
+    // ShoppingCartComponent,
     BusinessDetailComponent,
   ],
   imports: [
@@ -22,12 +24,14 @@ import { BusinessDetailComponent } from './business-detail/business-detail.compo
     FormularioRegisterModule,
     SharedModule,
     APP_ROUTING,
+    RouterModule,
     LoginModule,
     ComponentsModule,
+    ShoppingCartModule
   ],
   exports: [
     HomeComponent,
-    RegisterComponent,
+    RegisterComponent
   ]
 })
 export class VistasPublicasModule { }

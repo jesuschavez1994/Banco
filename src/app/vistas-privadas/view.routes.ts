@@ -11,4 +11,4 @@ const ROUTES_VIEW_STORE: Routes = [
 
 ];
 
-export const ROUTING_VIEW_STORE = RouterModule.forRoot(ROUTES_VIEW_STORE, {useHash: true});
+export const ROUTING_VIEW_STORE = RouterModule.forChild(ROUTES_VIEW_STORE);

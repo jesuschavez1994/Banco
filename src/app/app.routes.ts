@@ -28,7 +28,8 @@ const APP_ROUTES: Routes = [
     // Christopher Views
     {
       path: 'shopping-cart',
-      component: ShoppingCartComponent
+      // component: ShoppingCartComponent,
+      loadChildren: () => import('./vistas-publicas/shopping-cart/shopping-cart.module').then( m => m.ShoppingCartModule)
     },
 
     {
