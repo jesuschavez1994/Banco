@@ -16,7 +16,6 @@ import { ContactInformationEditComponent } from './vistas-privadas/components/co
 import { ProductLoadingComponent } from './vistas-privadas/product-loading/product-loading.component';
 import { MyStoreComponent } from './vistas-privadas/pages/my-store/my-store.component';
 import { ProductLoadingSmartComponent } from './vistas-privadas/product-loading/container/product-loading-smart/product-loading-smart.component';
-import { ShoppingCartComponent } from './vistas-publicas/shopping-cart/shopping-cart.component';
 import { BusinessDetailComponent } from './vistas-publicas/business-detail/business-detail.component';
 
 
@@ -27,11 +26,9 @@ const APP_ROUTES: Routes = [
 
     // Christopher Views
     {
-      path: 'shopping-cart',
-      // component: ShoppingCartComponent,
-      loadChildren: () => import('./vistas-publicas/shopping-cart/shopping-cart.module').then( m => m.ShoppingCartModule)
+      path: 'panel',
+      loadChildren: () => import('./vistas-publicas/panel/panel.module').then( m => m.PanelModule)
     },
-
     {
       path: 'business-detail/:idStore', // Se obtiene el id de la tienda para mostrar su listo productos
       component: BusinessDetailComponent

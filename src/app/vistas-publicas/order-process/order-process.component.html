@@ -1,51 +1,47 @@
-<app-navbarstore [fixed]="false"></app-navbarstore>
-
 <main class="page">
 
-  <app-sidebar-menu [menuOptions]="menuOptions"></app-sidebar-menu>
+  <section class="shopping-cart">
 
-	<section class="shopping-cart">
+    <h1 class="text-capitalize">Carrito de compra</h1>
 
-		<h1 class="text-capitalize">Carrito de compra</h1>
+    <div class="tab-container">
 
-		<div class="tab-container">
+      <ul class="tab-menu">
 
-			<ul class="tab-menu">
-
-				<li class="tab-item" [ngClass]="{'active': tabSelected === 1}" (click)="filterByTab(1)">pedidos</li>
+        <li class="tab-item" [ngClass]="{'active': tabSelected === 1}" (click)="filterByTab(1)">pedidos</li>
         <li class="tab-item" [ngClass]="{'active': tabSelected === 2}" (click)="filterByTab(2)">compras</li>
 
-			</ul>
+      </ul>
 
-			<div class="tab-content">
+      <div class="tab-content">
 
-				<div class="list-item">
+        <div class="list-item">
 
-					<ng-container *ngFor="let order of orders">
+          <ng-container *ngFor="let order of orders">
 
-						<article class="item" (click)="selectOrder(order)" [ngClass]="{'active': order === orderSelected}">
+            <article class="item" (click)="selectOrder(order)" [ngClass]="{'active': order === orderSelected}">
 
-							<figure class="img">
+              <figure class="img">
 
-								<img src="{{order.business.img}}" alt="Avatar por defecto" />
+                <img src="{{order.business.img}}" alt="Avatar por defecto" />
 
-							</figure>
+              </figure>
 
-							<div class="content">
+              <div class="content">
 
-								<h3 class="name">{{order.business.name}}</h3>
+                <h3 class="name">{{order.business.name}}</h3>
 
-								<span class="info">Cantidad de producto <strong>({{order.countProduct}})</strong></span>
+                <span class="info">Cantidad de producto <strong>({{order.countProduct}})</strong></span>
 
-								<span class="info">Total a pagar <strong>${{order.totalToPay}}</strong></span>
+                <span class="info">Total a pagar <strong>${{order.totalToPay}}</strong></span>
 
-							</div>
+              </div>
 
-						</article>
+            </article>
 
-					</ng-container>
+          </ng-container>
 
-				</div>
+        </div>
 
         <ng-container *ngIf="tabSelected === 1 else invoice">
 
@@ -204,15 +200,12 @@
 
         </ng-template>
 
-			</div>
+      </div>
 
-		</div>
+    </div>
 
-	</section>
+  </section>
 
 </main>
 
 
-<!-- <p>wokrs shopping cart</p> -->
-
-<!-- <router-outlet></router-outlet> -->

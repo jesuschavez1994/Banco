@@ -8,11 +8,13 @@
 
 
     <ul class="items-menu">
-
+      <!-- [ngClass]="{ 'active': item.isActive }" -->
       <ng-container *ngFor="let item of menuOptions">
 
-        <li class="item" [ngClass]="{ 'active': item.isActive }" RouterLinkActive="active" [routerLink]="item.routerLink">
+        <li class="item" [routerLink]="item.routerLink" routerLinkActive="active">
+
           <i class="responsive--icon {{item.iconClass}}" title="{{item.label}}"></i> <p>{{item.label}}</p>
+
         </li>
 
       </ng-container>

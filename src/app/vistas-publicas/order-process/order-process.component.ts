@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { SidebarMenuOptions } from '@interfaces/components-options/sidebar-menu.option.interface';
 
 @Component({
-  selector: 'app-shopping-cart',
-  templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.scss']
+  selector: 'app-order-process',
+  templateUrl: './order-process.component.html',
+  styleUrls: ['./order-process.component.scss']
 })
-export class ShoppingCartComponent implements OnInit {
+export class OrderProcessComponent implements OnInit {
+
 
   orders = [
     {
@@ -37,27 +37,9 @@ export class ShoppingCartComponent implements OnInit {
 
   orderSelected = this.orders[0];
 
-  menuOptions: SidebarMenuOptions[] = [
-    {
-      label: 'mi cuenta',
-      iconClass: 'fas fa-user',
-      routerLink: ['#'],
-      // isActive: false,
-    },
-    {
-      label: 'carrito de comprus',
-      iconClass: 'fas fa-user',
-      routerLink: ['#'],
-      // isActive: false,
-    },
-  ];
-
-  constructor() {
-
-  }
+  constructor() { }
 
   ngOnInit(): void {
-
   }
 
   public filterByTab(tabNumber){
