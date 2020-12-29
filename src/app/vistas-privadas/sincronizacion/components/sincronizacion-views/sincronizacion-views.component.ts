@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { bannerOptions } from '@interfaces/components-options/banner.interface';
+import { BannerOptions }  from '@interfaces/components-options/banner.options.interface';
 @Component({
   selector: 'app-sincronizacion-views',
   templateUrl: './sincronizacion-views.component.html',
@@ -7,8 +7,8 @@ import { bannerOptions } from '@interfaces/components-options/banner.interface';
 })
 export class SincronizacionViewsComponent implements OnInit {
 
-  imgsBanners: bannerOptions = {
-    m: '../../../../assets/img/Banner/Banner1.svg'
+  imgsBanners: BannerOptions = {
+    m: 'assets/img/Banner/Banner1.svg'
   };
 
   constructor() { }

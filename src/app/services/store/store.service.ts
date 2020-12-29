@@ -59,11 +59,6 @@ export class StoreService extends Service{
   //   return this.http.delete<T>( query );
   // }
 
-  private putQuery<T>(query: string, data: any){
-    query = URL_SERVICIOS + query;
-    return this.http.put<T>( query, data );
-  }
-
   cargarStorage() {
 
     if ( localStorage.getItem('token')) {
@@ -154,8 +149,6 @@ export class StoreService extends Service{
 
   }
 
-  
-
   estaLogueado(){
     return (this.token.length > 6 ) ? true : false;
   }
@@ -192,11 +185,6 @@ export class StoreService extends Service{
     return this.postQuery(url, data);
   }
 
-  geatAllProducts(userId: string, storeId: string, page?: number){
-    const url = `users/${userId}/stores/${storeId}/products`  + '?page=' + page;
-    return this.execQuery(url);
-  }
-
   getSpecificProduct(userId: string, storeId: string, idProduct: string){
     const url = `/api/users/${userId}/stores/${storeId}/products/${idProduct}`;
     return this.execQuery(url);
@@ -204,6 +192,11 @@ export class StoreService extends Service{
 
   ProductGet(userId: string, storeId: string){
     const url = `/api/users/${userId}/stores/${storeId}/products`;
+    return this.execQuery(url);
+  }
+
+  geatAllProducts(userId: string, storeId: string, page?: number){
+    const url = `users/${userId}/stores/${storeId}/products`  + '?page=' + page;
     return this.execQuery(url);
   }
 
@@ -217,6 +210,5 @@ export class StoreService extends Service{
     return this.execQuery<StoreResponse>(`stores/${idStore}`);
 
   }
-
 
 }

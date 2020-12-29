@@ -7,7 +7,7 @@ import { NgForm } from '@angular/forms';
 import {NgbTimepickerConfig} from '@ng-bootstrap/ng-bootstrap';
 import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import { StoreService } from '@services/store/store.service';
-import { bannerOptions } from '@interfaces/components-options/banner.interface';
+import { BannerOptions }  from '@interfaces/components-options/banner.options.interface';
 
 declare let $: any;
 
@@ -40,8 +40,8 @@ export class ContactComponent implements OnInit {
 
   @ViewChild('sheduleform') formulario: HTMLFormElement;
 
-  imgsBanners: bannerOptions = {
-    m: '../../../../assets/img/Banner/Banner1.svg'
+  imgsBanners: BannerOptions = {
+    m: 'assets/img/Banner/Banner1.svg'
   };
 
   // ========== PARAMETROS PARA EL USO DEL HORARIO ============/////

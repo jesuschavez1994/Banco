@@ -179,6 +179,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       this.productService.getProductByStore(idStore, idProduct).subscribe(
         product => {
 
+          console.log('response', product)
+
           const images = product.images.map(image => {
             return image.src;
           });
@@ -292,20 +294,43 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         this.itemsPerPage = resp.per_page;
 
         this.productCards.products = products.map( product => {
-          const images = product.images.map(image => {
-            return image.src;
-          });
 
-          return {
-            name: product.name,
-            description: product.description,
-            price: product.price,
-            stock: product.stock,
-            images, // product.images
-            id: product.id ? product.id : -1,
-            idStore: product.store_id ? product.store_id : -1,
-            isFavorite: product.isFavorite ? product.isFavorite : false,
-          };
+          console.log('products', product)
+
+          if( ( product.images.length > 0 || product.images.length === 0) && product.sync_bank.length === 0 ){
+            const images = product.images.map(image => {
+              return image.src;
+            });
+  
+            return {
+              name: product.name,
+              description: product.description,
+              price: product.price,
+              stock: product.stock,
+              images, // product.images
+              id: product.id ? product.id : -1,
+              idStore: product.store_id ? product.store_id : -1,
+              isFavorite: product.isFavorite ? product.isFavorite : false,
+            };
+          }
+
+          if(product.sync_bank.length > 0){
+            const images = product.sync_bank.map(image => {
+              return image.images[0].src_size.xl;
+            });
+  
+            return {
+              name: product.name,
+              description: product.description,
+              price: product.price,
+              stock: product.stock,
+              images, // product.images
+              id: product.id ? product.id : -1,
+              idStore: product.store_id ? product.store_id : -1,
+              isFavorite: product.isFavorite ? product.isFavorite : false,
+            };
+          }
+         
         } );
 
         console.log('products loaded: ', this.productCards.products);

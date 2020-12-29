@@ -112,6 +112,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { AppRoutingModule } from '../app-routing.module';
 import { CatalogoBankProductComponent } from './Admin/pages/container/catalogo-bank-product/catalogo-bank-product.component';
 import { EditProductBankComponent } from './Admin/pages/container/edit-product-bank/edit-product-bank.component';
+import { ProductsCardsStoreComponent } from './shared/products-cards-store/products-cards-store/products-cards-store.component';
 
 
 @NgModule({
@@ -176,7 +177,8 @@ import { EditProductBankComponent } from './Admin/pages/container/edit-product-b
       AsideFiltrosComponent,
       CarouselSuggestedComponent,
       CatalogoBankProductComponent,
-      EditProductBankComponent
+      EditProductBankComponent,
+      ProductsCardsStoreComponent
       ],
 
     imports: [

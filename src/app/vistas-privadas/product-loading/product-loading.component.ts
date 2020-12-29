@@ -14,7 +14,7 @@ import { switchMap } from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { EditProductStore } from '@interfaces/interfaceEditProductStore';
 import { SincronizacionService } from '../../services/sincronizacion/sincronizacion.service';
-import { bannerOptions } from '../../interfaces/components-options/banner.interface';
+import { BannerOptions }  from '@interfaces/components-options/banner.options.interface';
 
 export interface DialogData {
   animal: string;
@@ -29,8 +29,8 @@ export interface DialogData {
 })
 export class ProductLoadingComponent implements OnInit {
 
-  imgsBanners: bannerOptions = {
-    m: '../../../../assets/img/Banner/Banner1.svg'
+  imgsBanners: BannerOptions = {
+    m: 'assets/img/Banner/Banner1.svg'
   };
 
   productSelected = {

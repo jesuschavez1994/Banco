@@ -3,7 +3,7 @@ import { StoreService } from '@services/store/store.service';
 import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import { bannerOptions } from '@interfaces/components-options/banner.interface';
+import { BannerOptions }  from '@interfaces/components-options/banner.options.interface';
 import { NgxSpinnerService } from "ngx-spinner";
 import { FilstroStoreService } from '../../../services/FiltroStore/filstro-store.service';
 import { FiltroStore } from '../../../models/filtro/filtro-store.model';
@@ -15,8 +15,8 @@ import { FiltroStore } from '../../../models/filtro/filtro-store.model';
 })
 export class LoadProductComponent implements OnInit {
 
-  imgsBanners: bannerOptions = {
-    m: '../../../../assets/img/Banner/Banner1.svg'
+  imgsBanners: BannerOptions = {
+    m: 'assets/img/Banner/Banner1.svg'
   };
 
   MyProduct: DataProductDB[] = [];

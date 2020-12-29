@@ -10,7 +10,7 @@ import { Sugerir } from '../../../../../../models/sincronizacion/sugerir';
 import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import {BehaviorSubject} from 'rxjs';
 import { Termino } from '../../../../../../models/buscador.model';
-import { bannerOptions } from '@interfaces/components-options/banner.interface';
+import { BannerOptions }  from '@interfaces/components-options/banner.options.interface';
 import { NgxSpinnerService } from "ngx-spinner";
 import {MatSnackBar} from '@angular/material/snack-bar';
 
@@ -39,8 +39,8 @@ interface EventID{
 
 export class ItemsSuggestedProductsComponent implements OnInit{
 
-  imgsBanners: bannerOptions = {
-    m: '../../../../assets/img/Banner/Banner1.svg'
+  imgsBanners: BannerOptions = {
+    m: '.assets/img/Banner/Banner1.svg'
   };
 
   @Input() SetAllCheckbox: boolean;
