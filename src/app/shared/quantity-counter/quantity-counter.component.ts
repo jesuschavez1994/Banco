@@ -1,7 +1,6 @@
 import {
   Component, OnInit, ElementRef, Renderer2, ViewChild,
-  Input, AfterViewInit, EventEmitter,
-  Output
+  Input, AfterViewInit, EventEmitter, Output
 } from '@angular/core';
 
 @Component({
@@ -17,7 +16,7 @@ export class QuantityCounterComponent implements OnInit, AfterViewInit {
 
 
   @Input() isStrong = true;
-  @Input() initValue = 1;
+  @Input() initValue: number;
   @Input() maxValue = 1;
   @Input() changeValue = 1;
   @Input() minValue = 1;
@@ -61,6 +60,7 @@ export class QuantityCounterComponent implements OnInit, AfterViewInit {
     };
 
     document.onmouseup = () => {
+
       clearInterval(intervalChangeValue);
 
     };
@@ -87,7 +87,7 @@ export class QuantityCounterComponent implements OnInit, AfterViewInit {
 
     this.renderer.setProperty(inputNumber, 'value', inputValue);
 
-    this.currentValue.emit(inputValue);
+    this.currentValueEmitter(inputValue);
 
   }
 
@@ -105,7 +105,7 @@ export class QuantityCounterComponent implements OnInit, AfterViewInit {
 
     }
 
-    this.currentValue.emit(inputValue);
+    this.currentValueEmitter(inputValue);
 
   }
 
@@ -123,12 +123,16 @@ export class QuantityCounterComponent implements OnInit, AfterViewInit {
 
     }
 
-    this.currentValue.emit(inputValue);
+    this.currentValueEmitter(inputValue);
   }
 
   public setInputValue(value) {
     const inputNumber = this.inputQuantityCounter.nativeElement;
+
     this.renderer.setProperty(inputNumber, 'value', value);
+
+    this.currentValueEmitter(inputNumber.value);
+
   }
 
   public getInputValue(): number {
@@ -137,7 +141,32 @@ export class QuantityCounterComponent implements OnInit, AfterViewInit {
   }
 
   public initInputValue(){
-    this.setInputValue(this.minValue);
+    if (this.initValue){
+
+      if (this.initValue >= this.minValue && this.initValue <= this.maxValue) {
+        this.setInputValue(this.initValue);
+
+      }else {
+        this.setInputValue(this.minValue);
+
+      }
+
+    }else{
+      this.setInputValue(this.minValue);
+    }
+
+  }
+
+  public currentValueEmitter(value: number) {
+
+    if (isNaN(value) || value < this.minValue) {
+      value = this.minValue;
+
+    }else if (value > this.maxValue) {
+      value = this.maxValue;
+    }
+
+    this.currentValue.emit(value);
   }
 
 }

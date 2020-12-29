@@ -31,7 +31,7 @@
           <label>Total</label>
         </div>
 
-        <ng-container *ngFor="let item of [0,0,0,0]">
+        <ng-container *ngFor="let order of orders; index as inx">
 
           <article class="order-item">
 
@@ -45,28 +45,33 @@
               <div class="info-product">
 
                 <figure class="img-principal">
-                  <img src="./assets/img/test-img/magazine_vegan_food.jpg" alt="magazine vegan food">
+                  <img [src]="order.images[0] | imgFallback: 'box'" [alt]="order.name">
                 </figure>
 
 
                 <div class="title_quantity-container">
 
                   <div class="title-container">
-                    <h4 class="title">vegan food</h4>
+                    <h4 class="title">{{order.name}}</h4>
                   </div>
 
-                  <app-quantity-counter [isStrong]="false"></app-quantity-counter>
+                  <app-quantity-counter
+                    (currentValue)="currentValue($event, inx)"
+                    [isStrong]="false"
+                    [initValue]="order.quantity"
+                    [maxValue]="order.stock">
+                  </app-quantity-counter>
 
                 </div>
 
               </div>
 
               <div class="price">
-                $15,20
+                {{order.price | currency}}
               </div>
 
               <div class="price">
-                $45,54
+                {{(order.price * order.quantity)| currency}}
               </div>
 
 
