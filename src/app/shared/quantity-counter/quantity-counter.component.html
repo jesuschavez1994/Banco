@@ -8,16 +8,14 @@
       <div class="segment horizontal"></div>
     </span>
 
-      <form action="">
-        <input type="number"
-          class="number browser-default"
-          name="counterInvetory"
-          #inputQuantityCounter
-          (keyup)="validInputNumber()"
-          (blur)="valid()">
-      </form>
-
-      <!-- (keypress)="validInputNumber($event)" -->
+    <form action="">
+      <input type="number"
+        class="number browser-default"
+        name="counterInvetory"
+        #inputQuantityCounter
+        (keyup)="validInputNumber()"
+        (blur)="valid()">
+    </form>
 
     <span class="control" #increaseControl>
 
