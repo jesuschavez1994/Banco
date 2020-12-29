@@ -9,9 +9,26 @@
 
     <div class="batch-actions">
 
-      <input type="checkbox" name="select-all" class="checkbox-default">
-      <label  class="option label-reset">Eliminar</label>
-      <label  class="option label-reset">Sin delivery</label>
+      <input
+        type="checkbox"
+        name="select-all"
+        class="checkbox-default"
+        (click)="selectAllOrder()"
+      >
+
+      <label
+        class="option label-reset"
+        (click)="deleteOrdersSelected()"
+      >
+        Eliminar
+      </label>
+
+      <label
+        class="option label-reset"
+        (click)="setHasDeliveryToOrders(false)"
+      >
+        Sin delivery
+      </label>
 
     </div>
 
@@ -46,7 +63,13 @@
           <article class="order-item">
 
             <div class="checkbox">
-              <input type="checkbox" name="select-all" class="checkbox-default">
+              <input
+                type="checkbox"
+                name="select-all"
+                class="checkbox-default"
+                (click)="selectOrder(order)"
+                [checked]="isChecked(order)"
+              >
             </div>
 
 

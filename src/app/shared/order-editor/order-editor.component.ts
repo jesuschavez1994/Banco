@@ -8,8 +8,6 @@ import { Order } from '@interfaces/components-options/order.options.interface';
 })
 export class OrderEditorComponent implements OnInit{
 
-  hasDelivery = false;
-
   @Input() orders: Order[] = [
     {
       name: 'Vegan Food',
@@ -29,7 +27,7 @@ export class OrderEditorComponent implements OnInit{
       stock: 20,
       quantity: 10,
       images: [],
-      id: 1,
+      id: 2,
       idStore: 1,
       hasDelivery: false,
     },
@@ -40,15 +38,20 @@ export class OrderEditorComponent implements OnInit{
       stock: 30,
       quantity: 15,
       images: [],
-      id: 1,
+      id: 3,
       idStore: 1,
       hasDelivery: false,
     },
   ];
 
+  hasDelivery = false;
+  orderSelected: Order[] = [];
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.orders[0]);
+    this.orderSelected.push(this.orders[0]);
   }
 
 
@@ -59,7 +62,93 @@ export class OrderEditorComponent implements OnInit{
 
   public setHasDelivery(value: boolean) {
     this.hasDelivery = value;
+    this.orderSelected = [];
   }
 
-  // initInputValue
+  public deleteOrdersSelected(){
+
+    this.orderSelected.forEach( orderSelected => {
+
+      this.orders.forEach((order, index = 0) => {
+
+        if (orderSelected === order) {
+          console.log('deleteOrdersSelected: ', orderSelected);
+          this.orders.splice(index, 1);
+        }
+
+      });
+
+    });
+
+    this.orderSelected = [];
+  }
+
+  public setHasDeliveryToOrders(hasDelivery: boolean){
+
+    this.orderSelected.forEach( orderSelected => {
+
+      this.orders.forEach((order, index = 0) => {
+
+        if (order === orderSelected) {
+          console.log(`deleteOrdersSelected - ${index}: `, orderSelected);
+          this.orders[index].hasDelivery = hasDelivery;
+        }
+
+      });
+
+    });
+
+    this.orderSelected = [];
+  }
+
+  public selectOrder(order: Order){
+    const inxIsOrderSelected = this.orderSelected.findIndex(orders => {
+      return orders === order;
+    });
+
+    if (inxIsOrderSelected === -1){
+      this.orderSelected.push(order);
+
+    }else {
+      this.orderSelected.splice(inxIsOrderSelected, 1);
+
+    }
+
+    console.log('inxIsOrderSelected: ', inxIsOrderSelected);
+
+    console.log('order: ', order);
+
+  }
+
+  public selectAllOrder(){
+
+    const ordersFiltered = this.orders.filter( order => {
+
+      return order.hasDelivery === this.hasDelivery;
+
+    });
+
+    if (this.orderSelected.length === ordersFiltered.length){
+      this.orderSelected = [];
+
+    } else {
+
+      this.orderSelected = ordersFiltered;
+
+      console.log('ordersFiltered: ', ordersFiltered);
+    }
+
+    console.log('this.orderSelected: ', this.orderSelected);
+
+  }
+
+  public isChecked(order: Order){
+    const inxOrderSelected = this.orderSelected.findIndex(orderSelected => {
+      return orderSelected.id === order.id && orderSelected.idStore === order.idStore;
+    });
+
+    return inxOrderSelected > -1;
+  }
+
+
 }
