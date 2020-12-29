@@ -18,6 +18,9 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { QuantityCounterComponent } from './quantity-counter/quantity-counter.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RouterModule } from '@angular/router';
+import { OrderListComponent } from './order-list/order-list.component';
+import { OrderEditorComponent } from './order-editor/order-editor.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 @NgModule({
     declarations: [
@@ -35,6 +38,9 @@ import { RouterModule } from '@angular/router';
       ImagePreviewGalleryComponent,
       ProductDetailComponent,
       QuantityCounterComponent,
+      OrderListComponent,
+      OrderEditorComponent,
+      InvoiceComponent,
 
     ],
     imports: [
@@ -52,6 +58,8 @@ import { RouterModule } from '@angular/router';
       BannerComponent, ProductsCardsComponent,
       SearchBarComponent, ImagePreviewGalleryComponent,
       ProductDetailComponent, QuantityCounterComponent,
+      OrderListComponent, OrderEditorComponent,
+      InvoiceComponent,
     ]
 })
 
