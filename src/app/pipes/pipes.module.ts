@@ -7,8 +7,7 @@ import { ImgProductLoadPipe } from './imagenLoad/img-product-load.pipe';
 import { ExcerptPipe } from './excerpt/excerpt.pipe';
 import { ImgFallbackPipe } from './img-fallback/img-fallback.pipe';
 import { StrReplacePipe } from './strReplace/str-replace.pipe';
-
-
+import { FilterPipe } from './filter/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,8 @@ import { StrReplacePipe } from './strReplace/str-replace.pipe';
     ImgProductLoadPipe,
     ExcerptPipe,
     ImgFallbackPipe,
-    StrReplacePipe
+    StrReplacePipe,
+    FilterPipe
   ],
   exports: [
     ImagenPipe,
@@ -27,7 +27,8 @@ import { StrReplacePipe } from './strReplace/str-replace.pipe';
     ImgProductLoadPipe,
     ExcerptPipe,
     ImgFallbackPipe,
-    StrReplacePipe
+    StrReplacePipe,
+    FilterPipe
   ],
   imports: [
     CommonModule

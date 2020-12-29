@@ -31,7 +31,7 @@
           <label>Total</label>
         </div>
 
-        <ng-container *ngFor="let order of orders; index as inx">
+        <ng-container *ngFor="let order of orders | filter: hasDelivery : 'hasDelivery'; index as inx">
 
           <article class="order-item">
 
@@ -56,7 +56,7 @@
                   </div>
 
                   <app-quantity-counter
-                    (currentValue)="currentValue($event, inx)"
+                    (currentValue)="currentValue($event, inx, order)"
                     [isStrong]="false"
                     [initValue]="order.quantity"
                     [maxValue]="order.stock">

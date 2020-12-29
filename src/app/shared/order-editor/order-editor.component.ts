@@ -8,6 +8,8 @@ import { Order } from '@interfaces/components-options/order.options.interface';
 })
 export class OrderEditorComponent implements OnInit{
 
+  hasDelivery = false;
+
   @Input() orders: Order[] = [
     {
       name: 'Vegan Food',
@@ -18,19 +20,30 @@ export class OrderEditorComponent implements OnInit{
       images: [],
       id: 1,
       idStore: 1,
-      isFavorite: false,
+      hasDelivery: true,
     },
     {
       name: 'Vegan Food 2',
       description: '',
       price: 10,
-      stock: 10,
-      quantity: 8,
+      stock: 20,
+      quantity: 10,
       images: [],
       id: 1,
       idStore: 1,
-      isFavorite: false,
-    }
+      hasDelivery: false,
+    },
+    {
+      name: 'Vegan Food 3',
+      description: '',
+      price: 10,
+      stock: 30,
+      quantity: 15,
+      images: [],
+      id: 1,
+      idStore: 1,
+      hasDelivery: false,
+    },
   ];
 
   constructor() { }
@@ -39,8 +52,9 @@ export class OrderEditorComponent implements OnInit{
   }
 
 
-  public currentValue($event, inx: number) {
-    console.log('currentValue '+inx+': ', $event);
+  public currentValue($event, inx: number, order: Order) {
+    order.quantity = $event;
+
   }
 
   // initInputValue

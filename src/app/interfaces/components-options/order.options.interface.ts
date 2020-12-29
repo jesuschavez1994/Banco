@@ -7,6 +7,6 @@ export interface Order {
   images: string[];
   id?: number;
   idStore?: number;
-  isFavorite?: boolean;
+  hasDelivery?: boolean;
 
 }
