@@ -19,8 +19,18 @@
 
       <ul class="tab-menu">
 
-        <li class="tab-item">con delivery</li>
-        <li class="tab-item active">sin delivery</li>
+        <li class="tab-item"
+          [ngClass]="{'active': hasDelivery}"
+          (click)="setHasDelivery(true)"
+        >
+          con delivery
+        </li>
+        <li class="tab-item"
+          [ngClass]="{'active': !hasDelivery}"
+          (click)="setHasDelivery(false)"
+        >
+          sin delivery
+        </li>
 
       </ul>
 

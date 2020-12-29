@@ -57,5 +57,9 @@ export class OrderEditorComponent implements OnInit{
 
   }
 
+  public setHasDelivery(value: boolean) {
+    this.hasDelivery = value;
+  }
+
   // initInputValue
 }

@@ -29,11 +29,19 @@
 
     .option {
       background: $color__background-gray;
+      border: 2px solid $color__background-gray;
+      cursor: pointer;
       font-size: $font__size--small;
       margin-bottom: 9px;
       margin-right: 9px;
-      padding: 3px 19px;
+      padding: 3px 18px;
+      transition: all .3s;
 
+      &:hover {
+        background: none;
+        color: $color__text-orange;
+
+      }
 
     }
 

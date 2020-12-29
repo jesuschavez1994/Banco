@@ -26,8 +26,6 @@ export class FilterPipe implements PipeTransform {
 
       default:
 
-
-        console.log(arreglo);
         arreglo = arreglo.filter( items => {
           // includes = Si el valueToMatch incluye ese valueToMatch retorna  el arreglo
           return items[columna] === valueToMatch;
