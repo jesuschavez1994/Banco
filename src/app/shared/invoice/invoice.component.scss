@@ -1,0 +1,145 @@
+@import 'src/assets/scss/style.scss';
+
+.invoice-container {
+  padding-top: 22px;
+
+  display: flex;
+  justify-content: center;
+
+  .table-container {
+    // min-width: 310px;
+    max-width: 347px;
+    width: 54.8%;
+
+    position: relative;
+
+    .border-box {
+      max-width: 377px;
+      width: 109.5%;
+      height: 85.7%;
+      border: $color__border-gray 2px solid;
+
+      position: absolute;
+      top: -15px;
+      right: -15px;
+
+    }
+
+    table {
+      width: 100%;
+      background: $color__background-white;
+      font-size: $font__size--small;
+
+      position: relative;
+      z-index: 1;
+
+      .tableElementContainer {
+        width: 100%;
+        padding: 16px 64px 16px 20px;
+
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .thead {
+        background: $color__background-gray;
+
+        display: flex;
+        justify-content: space-between;
+
+        th {
+          font-weight: 600;
+        }
+
+      }
+
+      .tbody {
+
+        tr {
+          border: 1px solid $color__border-gray;
+          border-top: 0px;
+
+          display: flex;
+          justify-content: space-between;
+
+          td {
+            text-transform: capitalize;
+          }
+
+          td:first-child {
+            max-width: 66%;
+            word-break: break-word;
+          }
+
+          td:last-child {
+            width: 28%;
+            text-align: end;
+          }
+
+
+        }
+      }
+
+      .tfoot {
+
+        border: 1px solid $color__border-gray;
+        border-top: 0px;
+        text-align: end;
+        padding-bottom: 85px;
+
+        p {
+          font-size: $font__size--small;
+          line-height: 28px;
+          padding-right: 64px;
+
+          span {
+            font-size: $font__size--small;
+            padding-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .invoice-container {
+
+    .table-container {
+      min-width: 255px;
+    }
+  }
+}
+
+@media screen and (min-width: 481px) {
+  .invoice-container {
+
+    .table-container {
+      min-width: 310px;
+    }
+  }
+}
+
+@media screen and (max-width: 757px) {
+
+  .invoice-container {
+    width: 100%;
+
+    .table-container {
+      table {
+
+        .tableElementContainer {
+          padding-right: 20px !important;
+        }
+
+        .tfoot {
+
+          p {
+            padding-right: 20px !important;
+          }
+        }
+      }
+    }
+  }
+
+}

@@ -1,0 +1,27 @@
+<div class="list-item">
+
+  <ng-container *ngFor="let order of orders">
+
+    <article class="item" (click)="selectOrder(order)" [ngClass]="{'active': order === orderSelected}">
+
+      <figure class="img">
+
+        <img src="{{order.business.img}}" alt="Avatar por defecto" />
+
+      </figure>
+
+      <div class="content">
+
+        <h3 class="name">{{order.business.name}}</h3>
+
+        <span class="info">Cantidad de producto <strong>({{order.countProduct}})</strong></span>
+
+        <span class="info">Total a pagar <strong>${{order.totalToPay}}</strong></span>
+
+      </div>
+
+    </article>
+
+  </ng-container>
+
+</div>

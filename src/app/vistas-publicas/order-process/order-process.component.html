@@ -15,190 +15,29 @@
 
       <div class="tab-content">
 
-        <div class="list-item">
+        <!-- Order list by business -->
+        <div class="order-list">
+          <app-order-list [orders]="orders"></app-order-list>
+        </div>
 
-          <ng-container *ngFor="let order of orders">
 
-            <article class="item" (click)="selectOrder(order)" [ngClass]="{'active': order === orderSelected}">
+        <div class="detail-content">
 
-              <figure class="img">
+          <!-- Order editor -->
+          <ng-container *ngIf="tabSelected === 1">
 
-                <img src="{{order.business.img}}" alt="Avatar por defecto" />
+            <app-order-editor></app-order-editor>
 
-              </figure>
+          </ng-container>
 
-              <div class="content">
+          <!-- invoice -->
+          <ng-container *ngIf="tabSelected === 2">
 
-                <h3 class="name">{{order.business.name}}</h3>
-
-                <span class="info">Cantidad de producto <strong>({{order.countProduct}})</strong></span>
-
-                <span class="info">Total a pagar <strong>${{order.totalToPay}}</strong></span>
-
-              </div>
-
-            </article>
+            <app-invoice></app-invoice>
 
           </ng-container>
 
         </div>
-
-        <ng-container *ngIf="tabSelected === 1 else invoice">
-
-          <div class="order-container">
-
-            <div class="order-head">
-              <h3 class="business">Farmacia Santa Isabel</h3>
-              <div class="order-number">Orden #100245</div>
-            </div>
-
-            <form action="#">
-
-              <div class="batch-actions">
-
-                <input type="checkbox" name="select-all" class="checkbox-default">
-                <label  class="option label-reset">Eliminar</label>
-                <label  class="option label-reset">Sin delivery</label>
-
-              </div>
-
-              <div class="order-list-container">
-
-                <ul class="tab-menu">
-
-                  <li class="tab-item">con delivery</li>
-                  <li class="tab-item active">sin delivery</li>
-
-                </ul>
-
-                <div class="order-list">
-
-                  <div class="colum-label">
-                    <label>Unitario</label>
-                    <label>Total</label>
-                  </div>
-
-                  <ng-container *ngFor="let item of [0,0,0,0]">
-
-                    <article class="order-item">
-
-                      <div class="checkbox">
-                        <input type="checkbox" name="select-all" class="checkbox-default">
-                      </div>
-
-
-                      <div class="content-flex">
-
-                        <div class="info-product">
-
-                          <figure class="img-principal">
-                            <img src="./assets/img/test-img/magazine_vegan_food.jpg" alt="magazine vegan food">
-                          </figure>
-
-
-                          <div class="title_quantity-container">
-
-                            <div class="title-container">
-                              <h4 class="title">vegan food</h4>
-                            </div>
-
-                            <app-quantity-counter [isStrong]="false"></app-quantity-counter>
-
-                          </div>
-
-                        </div>
-
-                        <div class="price">
-                          $15,20
-                        </div>
-
-                        <div class="price">
-                          $45,54
-                        </div>
-
-
-                      </div>
-
-                    </article>
-
-                  </ng-container>
-
-                </div>
-
-              </div>
-
-            </form>
-
-          </div>
-
-        </ng-container>
-
-        <ng-template #invoice>
-
-
-          <div class="invoice-container">
-
-
-            <div class="table-container">
-
-              <div class="border-box">
-
-              </div>
-
-              <table>
-
-                <div class="thead">
-                  <div class="tableElementContainer">
-                    <th>Producto</th>
-                    <th>Subtotal</th>
-                  </div>
-                </div>
-
-                <div class="tbody">
-
-                  <tr>
-                    <div class="tableElementContainer">
-                      <td>Comida vegana food x 4 Comida vegana food x 4 Comida vegana food x 4</td>
-                      <td>$45,54</td>
-                    </div>
-                  </tr>
-
-                  <tr>
-                    <div class="tableElementContainer">
-                      <td>Comida vegana food x 4</td>
-                      <td>$45,54</td>
-                    </div>
-                  </tr>
-
-                  <tr>
-                    <div class="tableElementContainer">
-                      <td>Subtotal</td>
-                      <td>$91,08</td>
-                    </div>
-                  </tr>
-
-                  <tr>
-                    <div class="tableElementContainer">
-                      <td>Delivery</td>
-                      <td>$2,1</td>
-                    </div>
-                  </tr>
-
-                </div>
-
-                <div class="tfoot">
-                  <p>Impuesto (19%) <span>$14.02</span> </p>
-                  <p><strong>TOTAL <span>$91,08</span> </strong></p>
-                </div>
-
-              </table>
-
-            </div>
-
-
-          </div>
-
-        </ng-template>
 
       </div>
 

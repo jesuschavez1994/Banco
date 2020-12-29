@@ -23,7 +23,7 @@ export class OrderProcessComponent implements OnInit {
     {
       id: 1,
       business: {
-        name: 'farmacia santa isabel',
+        name: 'farmacia santa isabel 2',
         img: './assets/img/avatar.svg',
       },
       products: [''],
@@ -35,8 +35,6 @@ export class OrderProcessComponent implements OnInit {
 
   tabSelected: 1 | 2 = 1;
 
-  orderSelected = this.orders[0];
-
   constructor() { }
 
   ngOnInit(): void {
@@ -46,8 +44,5 @@ export class OrderProcessComponent implements OnInit {
     this.tabSelected = tabNumber;
   }
 
-  public selectOrder(order){
-    this.orderSelected = order;
-  }
 
 }

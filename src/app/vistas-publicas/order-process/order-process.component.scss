@@ -4,11 +4,8 @@
 
   display: flex;
 
-  /* Listado de compras
-  --------------------------------------------- */
-
   .shopping-cart {
-    width: 76%;
+    width: 100%;
     margin: 0px 30px;
 
     padding-top: 58px;
@@ -18,9 +15,6 @@
     }
 
     .tab-container {
-
-      /* Menu
-      --------------------------------------------- */
 
       .tab-menu {
         display: flex;
@@ -55,389 +49,12 @@
       }
 
       .tab-content {
-        // border-top: solid $color__border-gray 19px;
         border-top: solid $color__border-gray 1px;
         padding-bottom: 102px;
 
         display: flex;
 
 
-        /* Lista de pedidos agrupados por empresas
---------------------------------------------- */
-        .list-item {
-          min-width: 278px;
-          // width: 36.4%;
-          max-height: 58.5vh;
-
-          margin-bottom: 65px;
-          overflow: auto;
-
-          display: flex;
-          flex-direction: column;
-
-
-          .item {
-            cursor: pointer;
-            padding: 11px 15px;
-            transition: all $time-hover;
-
-            display: flex;
-            align-items: center;
-
-            &:hover {
-              background: $color__background-gray;
-            }
-
-            .img {
-              min-width: 71px;
-              width: 71px;
-              height: 71px;
-
-              border-radius: 42px;
-              margin-right: 18px;
-              overflow: hidden;
-
-              img {
-                height: 100%;
-              }
-            }
-
-            .content {
-              display: flex;
-              flex-direction: column;
-
-
-              .name {
-                text-transform: capitalize;
-                font-size: $font__size--medium;
-                font-weight: 600;
-                word-break: break-word;
-              }
-
-              .info {
-                font-size: 11px;
-                line-height: 17px;
-
-                strong {
-                  font-weight: 600;
-                }
-              }
-
-            }
-
-          }
-
-          .active {
-            background: $color__background-gray;
-
-          }
-
-        }
-
-        /* Factura
---------------------------------------------- */
-
-        .invoice-container {
-          // width: 63.7%;
-
-          padding-top: 22px;
-
-          display: flex;
-          justify-content: center;
-
-          .table-container {
-            // min-width: 310px;
-            max-width: 347px;
-            width: 54.8%;
-
-            position: relative;
-
-            .border-box {
-              max-width: 377px;
-              width: 109.5%;
-              height: 85.7%;
-              border: $color__border-gray 2px solid;
-
-              position: absolute;
-              top: -15px;
-              right: -15px;
-
-            }
-
-            table {
-              width: 100%;
-              background: $color__background-white;
-              font-size: $font__size--small;
-
-              position: relative;
-              z-index: 1;
-
-              .tableElementContainer {
-                width: 100%;
-                padding: 16px 64px 16px 20px;
-
-                display: flex;
-                justify-content: space-between;
-              }
-
-              .thead {
-                background: $color__background-gray;
-
-                display: flex;
-                justify-content: space-between;
-
-                th {
-                  font-weight: 600;
-                }
-
-              }
-
-              .tbody {
-
-                tr {
-                  border: 1px solid $color__border-gray;
-                  border-top: 0px;
-
-                  display: flex;
-                  justify-content: space-between;
-
-                  td {
-                    text-transform: capitalize;
-                  }
-
-                  td:first-child {
-                    max-width: 66%;
-                    word-break: break-word;
-                  }
-
-                  td:last-child {
-                    width: 28%;
-                    text-align: end;
-                  }
-
-
-                }
-              }
-
-              .tfoot {
-
-                border: 1px solid $color__border-gray;
-                border-top: 0px;
-                text-align: end;
-                padding-bottom: 85px;
-
-                p {
-                  font-size: $font__size--small;
-                  line-height: 28px;
-                  padding-right: 64px;
-
-                  span {
-                    font-size: $font__size--small;
-                    padding-left: 10px;
-                  }
-                }
-              }
-            }
-          }
-        }
-
-        .order-container {
-          // width: 63.7%;
-          padding-top: 30px;
-          padding-right: 30px;
-          padding-left: 30px;
-
-          input[type="checkbox"] {
-            width: 9px;
-            margin-right: 10px;
-            border: solid $color__border-gray 2px;
-
-          }
-
-          .order-head {
-            width: 100%;
-            margin-bottom: 30px;
-
-            display: flex;
-            justify-content: space-between;
-
-            .order-number {
-              font-size: $font__size--medium;
-              font-weight: 500;
-            }
-          }
-
-          .batch-actions {
-
-            .option {
-              background: $color__background-gray;
-              font-size: $font__size--small;
-              margin-bottom: 9px;
-              margin-right: 9px;
-              padding: 3px 19px;
-
-
-            }
-
-            .option:last-child {
-              margin-right: 0px;
-            }
-          }
-
-        }
-
-        .tab-menu {
-          border-bottom: 2px solid $color__border-gray;
-
-          .tab-item {
-            font-size: $font__size--small;
-
-          }
-        }
-
-        .order-list {
-
-          .colum-label {
-
-            display: flex;
-            justify-content: flex-end;
-
-            label {
-              font-size: $font__size--small + 1;
-              padding: 10px 10px;
-            }
-          }
-
-          .order-item {
-            display: flex;
-            margin-bottom: 35px;
-
-            .content-flex {
-              width: 100%;
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-            }
-
-            .content-flex--wrap {
-              flex-wrap: wrap;
-            }
-
-            .info-product {
-              display: flex;
-              flex-wrap: wrap;
-              align-items: center;
-              justify-content: center;
-
-
-              .img-principal {
-                min-width: 58px;
-                min-height: 74px;
-                width: 11%;
-                height: 5.8vw;
-                margin-right: 21px;
-
-                img {
-                  height: 100%;
-                  object-fit: contain;
-                }
-              }
-
-              .title_quantity-container {
-                width: 76%;
-                display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-                // justify-content: space-between;
-                justify-content: center;
-
-                .title-container {
-                  min-width: 130px;
-                  width: 50.5%;
-                  padding: 14px 0px;
-
-                  .title {
-                    font-size: $font__size--small + 1;
-                    font-weight: 500;
-                    margin-bottom: 0px;
-                    text-transform: capitalize;
-                    word-wrap: break-word;
-
-                  }
-                }
-
-                .quantity {
-                  padding: 0px 0px;
-
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-
-                  label {
-                    font-size: $font__size--small + 1;
-                  }
-
-                  .counter {
-                    margin-left: 10px;
-
-                    display: flex;
-                    align-items: center;
-
-                    .control {
-                      color: $color__text-orange;
-                      cursor: pointer;
-                      font-size: $font__size--medium;
-                      font-weight: bold;
-                      margin-left: 5px;
-                      margin-right: 5px;
-
-                      position: relative;
-
-                      .segment{
-                        min-width: 11px;
-                        min-height: 2px;
-                        background: $color__text-orange;
-
-                        &.vertical{
-                          transform: rotate(90deg);
-
-                          position: absolute;
-                          top: 0;
-                        }
-
-                      }
-                    }
-
-                    .number {
-                      max-width: 30px;
-                      border: $color__background-gray--medium 2px solid;
-                      text-align: center;
-                    }
-
-                    [type=number]::-webkit-inner-spin-button,
-                    [type=number]::-webkit-outer-spin-butto {
-                      display: none;
-                    }
-
-                  }
-
-                }
-
-              }
-
-            }
-
-
-            .price {
-              font-size: $font__size--small;
-              padding: 6px 10px; //25px
-              word-break: keep-all;
-            }
-
-
-          }
-
-        }
       }
     }
   }
@@ -453,38 +70,6 @@
 
       margin: 0px 15px;
 
-      .tab-content {
-
-        .invoice-container {
-
-          .table-container {
-            min-width: 255px;
-          }
-        }
-      }
-    }
-  }
-
-}
-
-@media screen and (min-width: 481px) {
-  // globales para evitar el !important
-
-  .page {
-
-
-    .shopping-cart {
-      // min-width: fit-content; //
-
-      .tab-content {
-
-        .invoice-container {
-
-          .table-container {
-            min-width: 310px;
-          }
-        }
-      }
     }
   }
 
@@ -503,31 +88,6 @@
           width: 100%;
         }
 
-        .invoice-container {
-          width: 100%;
-
-          .table-container {
-            table {
-
-              .tableElementContainer {
-                padding-right: 20px !important;
-              }
-
-              .tfoot {
-
-                p {
-                  padding-right: 20px !important;
-                }
-              }
-            }
-          }
-        }
-
-
-        .order-container {
-          width: 100%;
-        }
-
       }
     }
   }
@@ -541,17 +101,16 @@
     .shopping-cart {
 
       .tab-content {
+        justify-content: space-between;
 
-        .list-item {
-          width: 36.4%;
+        .order-list {
+          width: 35.4%;
         }
 
-        .invoice-container {
+        .detail-content {
           width: 63.7%;
-        }
-
-        .order-container {
-          width: 63.7%;
+          display: flex;
+          justify-content: center;
         }
 
       }
@@ -559,13 +118,13 @@
   }
 }
 
-@media screen and (max-width: 999px) {
+// @media screen and (max-width: 999px) {
 
-  .page {
+//   .page {
 
-    .shopping-cart {
-      width: 87%;
-    }
+//     .shopping-cart {
+//       width: 87%;
+//     }
 
-  }
-}
+//   }
+// }
