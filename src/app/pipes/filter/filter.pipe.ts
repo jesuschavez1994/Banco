@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'filter'
+  name: 'filter',
+  pure: false, // Al agregar este atributo, el filtro detectara cambios en los valores recibidos de forma reactiva
 })
 export class FilterPipe implements PipeTransform {
 
@@ -37,7 +38,9 @@ export class FilterPipe implements PipeTransform {
 
     if (arreglo.length === 0) {
 
-      return [{title: alertNotFound}];
+      if (alertNotFound !== ''){
+        return [{title: alertNotFound}];
+      }
 
     }else{
 

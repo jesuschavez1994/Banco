@@ -50,12 +50,10 @@ export class OrderEditorComponent implements OnInit{
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.orders[0]);
-    this.orderSelected.push(this.orders[0]);
   }
 
 
-  public currentValue($event, inx: number, order: Order) {
+  public currentValue($event, order: Order) {
     order.quantity = $event;
 
   }
@@ -72,8 +70,8 @@ export class OrderEditorComponent implements OnInit{
       this.orders.forEach((order, index = 0) => {
 
         if (orderSelected === order) {
-          console.log('deleteOrdersSelected: ', orderSelected);
           this.orders.splice(index, 1);
+
         }
 
       });
@@ -83,15 +81,15 @@ export class OrderEditorComponent implements OnInit{
     this.orderSelected = [];
   }
 
-  public setHasDeliveryToOrders(hasDelivery: boolean){
+  public setHasDeliveryToOrders(hasDelivery: boolean = true){
 
     this.orderSelected.forEach( orderSelected => {
 
       this.orders.forEach((order, index = 0) => {
 
         if (order === orderSelected) {
-          console.log(`deleteOrdersSelected - ${index}: `, orderSelected);
           this.orders[index].hasDelivery = hasDelivery;
+
         }
 
       });
@@ -99,6 +97,7 @@ export class OrderEditorComponent implements OnInit{
     });
 
     this.orderSelected = [];
+
   }
 
   public selectOrder(order: Order){
@@ -113,10 +112,6 @@ export class OrderEditorComponent implements OnInit{
       this.orderSelected.splice(inxIsOrderSelected, 1);
 
     }
-
-    console.log('inxIsOrderSelected: ', inxIsOrderSelected);
-
-    console.log('order: ', order);
 
   }
 
@@ -135,10 +130,7 @@ export class OrderEditorComponent implements OnInit{
 
       this.orderSelected = ordersFiltered;
 
-      console.log('ordersFiltered: ', ordersFiltered);
     }
-
-    console.log('this.orderSelected: ', this.orderSelected);
 
   }
 
@@ -150,5 +142,15 @@ export class OrderEditorComponent implements OnInit{
     return inxOrderSelected > -1;
   }
 
+  public isAllChecked(){
+
+    const ordersFiltered = this.orders.filter( order => {
+
+      return order.hasDelivery === this.hasDelivery;
+
+    });
+
+    return this.orderSelected.length === ordersFiltered.length;
+  }
 
 }

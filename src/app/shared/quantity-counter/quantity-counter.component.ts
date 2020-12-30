@@ -15,7 +15,8 @@ export class QuantityCounterComponent implements OnInit, AfterViewInit {
   @ViewChild('decreaseControl') decreaseControl: ElementRef;
 
 
-  @Input() isStrong = true;
+  @Input() isStrong = false;
+  @Input() isSmall = false;
   @Input() initValue: number;
   @Input() maxValue = 1;
   @Input() changeValue = 1;

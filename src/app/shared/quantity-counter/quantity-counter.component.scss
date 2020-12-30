@@ -25,6 +25,23 @@
     }
   }
 
+  &.small{
+    margin-bottom: 0px;
+
+    label {
+      font-weight: initial;
+    }
+
+    .counter{
+      .number {
+        max-width: 30px;
+        height: initial;
+
+      }
+    }
+  }
+
+
   label {
     font-size: $font__size--small + 1;
     font-weight: bold;
