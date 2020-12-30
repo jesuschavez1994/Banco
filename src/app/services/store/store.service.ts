@@ -186,7 +186,7 @@ export class StoreService extends Service{
   }
 
   getSpecificProduct(userId: string, storeId: string, idProduct: string){
-    const url = `/api/users/${userId}/stores/${storeId}/products/${idProduct}`;
+    const url = `users/${userId}/stores/${storeId}/products/${idProduct}`;
     return this.execQuery(url);
   }
 

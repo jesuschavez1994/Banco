@@ -52,19 +52,22 @@
                 </section> -->
 
                 <app-products-cards-store
-                
-                
+                    #productCardsStore
+                    [MyProduct]="this.MyProduct"
+                    (pagination)="pageChanged($event)"
+                    [totalItems]="totalProductAPI"
+                    [itemsPerPage]="itemsPerPage"
                 >
 
                 </app-products-cards-store>
 
                 <!-- PAGINACIÓN -->
-                <footer class="col-md-11" *ngIf="showFooterPaginations">
+                <!-- <footer class="col-md-11" *ngIf="showFooterPaginations">
                     <pagination-controls    previousLabel = "Anterior"
                                             nextLabel = "Siguiente"
                                             (pageChange)="pageChanged($event)">
                     </pagination-controls>
-                </footer>
+                </footer> -->
             </div>      
         </section>
     </div>   

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { StoreService } from '@services/store/store.service';
 import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import { ProductosLoads } from '@interfaces/InterfaceProducto';
@@ -7,13 +7,16 @@ import { BannerOptions }  from '@interfaces/components-options/banner.options.in
 import { NgxSpinnerService } from "ngx-spinner";
 import { FilstroStoreService } from '../../../services/FiltroStore/filstro-store.service';
 import { FiltroStore } from '../../../models/filtro/filtro-store.model';
-
+import { ProductsCardsStoreComponent } from '../../shared/products-cards-store/products-cards-store/products-cards-store.component';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-load-product',
   templateUrl: './load-product.component.html',
   styleUrls: ['./load-product.component.css']
 })
 export class LoadProductComponent implements OnInit {
+
+  @ViewChild('productCardsStore') productCardsStore: ProductsCardsStoreComponent;
 
   imgsBanners: BannerOptions = {
     m: 'assets/img/Banner/Banner1.svg'
@@ -31,6 +34,8 @@ export class LoadProductComponent implements OnInit {
    scroll:boolean=false;
    addProductNew = false;
    showFooterPaginations = false;
+   itemsPerPage = 16;
+   
 
    marks         = [];
    subcategories = [];
@@ -88,14 +93,64 @@ export class LoadProductComponent implements OnInit {
       localStorage.getItem('id'),
       localStorage.getItem('storeId'),
       page)
-      .subscribe( (resp: ProductosLoads) => {
+      .subscribe( (resp: any) => {
+
+        const products = resp.data
+
         this.MyProduct = resp.data;
         console.log('MY PRODUCTOS', this.MyProduct);
         this.last_Page_Pagination = resp.last_page;
         this.totalProductAPI = resp.total;
+        this.itemsPerPage = resp.per_page;
         this.showFooterPaginations = true;
         this.spinnerService.hide();
         this.scrollTop();
+
+        this.productCardsStore.products = products.map( product => {
+          console.log('MAP', product);
+
+
+          if( ( product.images.length > 0 || product.images.length === 0) && product.sync_bank.length === 0 ){
+            const images = product.images.map(image => {
+              return image.src;
+            });
+  
+            return {
+              name: product.name,
+              description: product.description,
+              price: product.price,
+              stock: product.stock,
+              images, // product.images
+              id: product.id ? product.id : -1,
+              idStore: product.store_id ? product.store_id : -1,
+              isFavorite: product.isFavorite ? product.isFavorite : false,
+              sinchronized: product.sincronice
+            };
+          }
+
+          if(product.sync_bank.length > 0){
+            const images = product.sync_bank.map(image => {
+              return image.images[0].src_size.xl;
+            });
+  
+            return {
+              name: product.name,
+              description: product.description,
+              price: product.price,
+              stock: product.stock,
+              images, // product.images
+              id: product.id ? product.id : -1,
+              idStore: product.store_id ? product.store_id : -1,
+              isFavorite: product.isFavorite ? product.isFavorite : false,
+              sinchronized: product.sincronice
+            };
+          }
+
+        });
+
+        console.log('products loaded: ', this.productCardsStore.products);
+
+
     });
 
   }
@@ -152,5 +207,9 @@ export class LoadProductComponent implements OnInit {
       top:0,
     });
   }
+
+
+
+  // ****** ///
 
 }

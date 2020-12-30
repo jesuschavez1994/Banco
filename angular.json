@@ -28,9 +28,8 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.css",
-              "src/assets/Fonstastic/styles.css",
               "src/_animations.scss",
-              "src/assets/font-awesome/css/font-awesome.min.css",
+              
               "src/assets/bootstrap4/css/bootstrap.min.css",
               "node_modules/@grapecity/spread-sheets/styles/gc.spread.sheets.excel2013white.css"
               
