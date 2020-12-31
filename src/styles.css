@@ -523,10 +523,10 @@
 }
 
 .button {
-  background-color: #F09207 !important;
-  border: none !important;
+  background-color: #F09207;
+  border: none;
   cursor: pointer;
-  color: white !important;
+  color: white;
 }
 
 

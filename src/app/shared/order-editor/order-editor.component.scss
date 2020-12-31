@@ -68,14 +68,12 @@
       transition: all $time-hover;
 
       &:hover {
-        // background: $color__background-gray;
         border-color: #dee2e6 #dee2e6 #fff;
       }
 
     }
 
     .active {
-      // background: $color__background-gray;
       border-color: #dee2e6 #dee2e6 #fff;
       color: $color__text-orange;
     }
@@ -178,15 +176,52 @@
 
   }
 
+  .resume {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    table{
+      tr{
+        td{
+          font-size: 14px;
+          padding-bottom: 12px;
+        }
+
+        td:first-child{
+          text-align: end;
+          padding-right: 26px;
+        }
+      }
+    }
+
+    label[for="termsAndConditions"]{
+      margin-top: 20px;
+      font-weight: 500;
+    }
+
+    .actions {
+      margin-top: 19px;
+
+      display: flex;
+
+      .button{
+        margin-top: 6px;
+
+        &:first-child {
+          margin-right: 10px;
+
+        }
+
+      }
+    }
+  }
+
+
 }
 
 @media screen and (max-width: 757px) {
   .order-container {
     width: 100%;
-  }
-}
-@media screen and (min-width: 758px) {
-  .order-container {
-    // width: 63.7%;
   }
 }

@@ -94,9 +94,7 @@ export class OrderProcessComponent implements OnInit {
           hasDelivery: false,
         },
       ],
-      hasPaid: true,
-      countProduct: 25,
-      totalToPay: 235.21,
+      hasPaid: true
     }
   ];
 

@@ -34,3 +34,31 @@ button:focus {
   outline: 0px auto -webkit-focus-ring-color;
 }
 
+.button {
+  min-width: 110px;
+  width: fit-content;
+  background: $color__background-orange;
+  color: $color__text-white;
+  font-size: 13px;
+  padding: 2px 14px;
+  text-align: center;
+  text-transform: capitalize;
+  transition: .3s all;
+
+
+  &:hover {
+    background: $color__background-orange--hover;
+
+  }
+
+  &.gray{
+    background: $color__background-gray--medium-1;
+
+    &:hover {
+      background: $color__background-gray--hover;
+
+    }
+  }
+
+}
+
