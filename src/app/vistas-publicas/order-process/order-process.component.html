@@ -17,7 +17,10 @@
 
         <!-- Order list by business -->
         <div class="order-list">
-          <app-order-list [orders]="orders"></app-order-list>
+          <app-order-list
+            (selected)="selectedOrderList($event)"
+            [orders]="ordersLists">
+          </app-order-list>
         </div>
 
 
@@ -26,7 +29,7 @@
           <!-- Order editor -->
           <ng-container *ngIf="tabSelected === 1">
 
-            <app-order-editor></app-order-editor>
+            <app-order-editor [orders]="ordersListSelected.orders"></app-order-editor>
 
           </ng-container>
 

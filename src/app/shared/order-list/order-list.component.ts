@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { OrderListOptions } from '@interfaces/components-options/order.options.interface';
 
 @Component({
   selector: 'app-order-list',
@@ -7,14 +8,16 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class OrderListComponent implements OnInit {
 
-  @Input() orders = [];
-  orderSelected;
+  @Input() orders: OrderListOptions[] = [];
+  @Output() selected = new EventEmitter<OrderListOptions>();
+  orderSelected: OrderListOptions;
 
   constructor() { }
 
   ngOnInit(): void {
     if (this.orders.length) {
       this.orderSelected = this.orders[0];
+      this.selected.emit(this.orderSelected);
 
     }
   }
@@ -22,6 +25,7 @@ export class OrderListComponent implements OnInit {
 
   public selectOrder(order){
     this.orderSelected = order;
+    this.selected.emit(this.orderSelected);
   }
 
 }

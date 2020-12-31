@@ -6,43 +6,9 @@ import { Order } from '@interfaces/components-options/order.options.interface';
   templateUrl: './order-editor.component.html',
   styleUrls: ['./order-editor.component.scss']
 })
-export class OrderEditorComponent implements OnInit{
+export class OrderEditorComponent implements OnInit {
 
-  @Input() orders: Order[] = [
-    {
-      name: 'Vegan Food',
-      description: '',
-      price: 10,
-      stock: 10,
-      quantity: 5,
-      images: [],
-      id: 1,
-      idStore: 1,
-      hasDelivery: true,
-    },
-    {
-      name: 'Vegan Food 2',
-      description: '',
-      price: 10,
-      stock: 20,
-      quantity: 10,
-      images: [],
-      id: 2,
-      idStore: 1,
-      hasDelivery: false,
-    },
-    {
-      name: 'Vegan Food 3',
-      description: '',
-      price: 10,
-      stock: 30,
-      quantity: 15,
-      images: [],
-      id: 3,
-      idStore: 1,
-      hasDelivery: false,
-    },
-  ];
+  @Input() orders: Order[] = [];
 
   hasDelivery = false;
   orderSelected: Order[] = [];

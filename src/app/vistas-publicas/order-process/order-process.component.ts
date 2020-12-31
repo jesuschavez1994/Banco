@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderListOptions } from '@interfaces/components-options/order.options.interface';
 
 @Component({
   selector: 'app-order-process',
@@ -8,17 +9,49 @@ import { Component, OnInit } from '@angular/core';
 export class OrderProcessComponent implements OnInit {
 
 
-  orders = [
+  ordersLists: OrderListOptions[] = [
     {
       id: 1,
       business: {
         name: 'farmacia santa isabel',
         img: './assets/img/avatar.svg',
       },
-      products: [''],
+      orders: [
+        {
+          name: 'Vegan Food',
+          description: '',
+          price: 10,
+          stock: 10,
+          quantity: 5,
+          images: [],
+          id: 1,
+          idStore: 1,
+          hasDelivery: true,
+        },
+        {
+          name: 'Vegan Food 2',
+          description: '',
+          price: 10,
+          stock: 20,
+          quantity: 10,
+          images: [],
+          id: 2,
+          idStore: 1,
+          hasDelivery: false,
+        },
+        {
+          name: 'Vegan Food 3',
+          description: '',
+          price: 10,
+          stock: 30,
+          quantity: 15,
+          images: [],
+          id: 3,
+          idStore: 1,
+          hasDelivery: false,
+        },
+      ],
       hasPaid: false,
-      countProduct: 25,
-      totalToPay: 235.21,
     },
     {
       id: 1,
@@ -26,22 +59,65 @@ export class OrderProcessComponent implements OnInit {
         name: 'farmacia santa isabel 2',
         img: './assets/img/avatar.svg',
       },
-      products: [''],
+      orders: [
+        {
+          name: 'Vegan Food 4',
+          description: '',
+          price: 10,
+          stock: 10,
+          quantity: 5,
+          images: [''],
+          id: 1,
+          idStore: 1,
+          hasDelivery: true,
+        },
+        {
+          name: 'Vegan Food 5',
+          description: '',
+          price: 10,
+          stock: 20,
+          quantity: 10,
+          images: [''],
+          id: 2,
+          idStore: 1,
+          hasDelivery: false,
+        },
+        {
+          name: 'Vegan Food 6',
+          description: '',
+          price: 10,
+          stock: 30,
+          quantity: 15,
+          images: [''],
+          id: 3,
+          idStore: 1,
+          hasDelivery: false,
+        },
+      ],
       hasPaid: true,
       countProduct: 25,
       totalToPay: 235.21,
     }
   ];
 
+  ordersListSelected: OrderListOptions;
+
+
   tabSelected: 1 | 2 = 1;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.ordersListSelected = this.ordersLists[0];
+
   }
 
   public filterByTab(tabNumber){
     this.tabSelected = tabNumber;
+  }
+
+  public selectedOrderList(ordersList: OrderListOptions) {
+    this.ordersListSelected = ordersList;
   }
 
 
