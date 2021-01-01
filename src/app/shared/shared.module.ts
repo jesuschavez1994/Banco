@@ -18,6 +18,16 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { QuantityCounterComponent } from './quantity-counter/quantity-counter.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RouterModule } from '@angular/router';
+import { PublicNavbarComponent } from './public-navbar/public-navbar.component';
+import { NavBrandComponent } from './public-navbar/nav-brand/nav-brand.component';
+import { CategoryLinkComponent } from './public-navbar/category-link/category-link.component';
+import { ButtonShopComponent } from './public-navbar/button-shop/button-shop.component';
+import { ButtonUserSettingsComponent } from './public-navbar/button-user-settings/button-user-settings.component';
+import { ButtonSignInComponent } from './public-navbar/button-sign-in/button-sign-in.component';
+import { ButtonLoginComponent } from './public-navbar/button-login/button-login.component';
+import { AvatarComponent } from './public-navbar/avatar/avatar.component';
+import { NavOptionsComponent } from './public-navbar/nav-options/nav-options.component';
+import { SearchComponent } from './public-navbar/search/search.component';
 
 @NgModule({
     declarations: [
@@ -35,6 +45,16 @@ import { RouterModule } from '@angular/router';
       ImagePreviewGalleryComponent,
       ProductDetailComponent,
       QuantityCounterComponent,
+      PublicNavbarComponent,
+      NavBrandComponent,
+      CategoryLinkComponent,
+      ButtonShopComponent,
+      ButtonUserSettingsComponent,
+      ButtonSignInComponent,
+      ButtonLoginComponent,
+      AvatarComponent,
+      NavOptionsComponent,
+      SearchComponent,
 
     ],
     imports: [
@@ -52,6 +72,9 @@ import { RouterModule } from '@angular/router';
       BannerComponent, ProductsCardsComponent,
       SearchBarComponent, ImagePreviewGalleryComponent,
       ProductDetailComponent, QuantityCounterComponent,
+      PublicNavbarComponent, NavBrandComponent,
+      CategoryLinkComponent, SearchComponent,
+      ButtonShopComponent, NavOptionsComponent,
     ]
 })
 

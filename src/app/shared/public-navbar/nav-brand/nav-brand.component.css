@@ -1,0 +1,10 @@
+
+picture{
+    padding-bottom: 1rem;
+}
+svg{
+    max-height: 45px;
+}
+svg * {
+    cursor: pointer;
+}

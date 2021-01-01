@@ -16,7 +16,6 @@ import { ProductosLoads } from '@interfaces/InterfaceProducto';
   banner{
     slider jpg´s
   }
-  
 */
 @Component({
   selector: 'app-home',
