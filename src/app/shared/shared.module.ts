@@ -21,6 +21,7 @@ import { RouterModule } from '@angular/router';
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrderEditorComponent } from './order-editor/order-editor.component';
 import { InvoiceComponent } from './invoice/invoice.component';
+import { OrderProcessComponent } from './order-process/order-process.component';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,7 @@ import { InvoiceComponent } from './invoice/invoice.component';
       OrderListComponent,
       OrderEditorComponent,
       InvoiceComponent,
-
+      OrderProcessComponent,
     ],
     imports: [
       // APP_ROUTING,
@@ -59,7 +60,7 @@ import { InvoiceComponent } from './invoice/invoice.component';
       SearchBarComponent, ImagePreviewGalleryComponent,
       ProductDetailComponent, QuantityCounterComponent,
       OrderListComponent, OrderEditorComponent,
-      InvoiceComponent,
+      InvoiceComponent, OrderProcessComponent,
     ]
 })
 

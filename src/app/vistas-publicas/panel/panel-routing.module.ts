@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PanelComponent } from './panel.component';
-import { OrderProcessComponent } from '../order-process/order-process.component';
 import { MyAccountComponent } from '../my-account/my-account.component';
+import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'proceso-compra',
+    redirectTo: 'carrito-compras',
     pathMatch: 'full'
   },
   {
@@ -16,14 +16,14 @@ const routes: Routes = [
     component: PanelComponent,
     children: [
       {
-        path: 'proceso-compra',
-        component: OrderProcessComponent,
+        path: 'carrito-compras',
+        component: ShoppingCartComponent,
       },
       {
         path: 'cuenta',
         component: MyAccountComponent,
       },
-      {path: '**', pathMatch: 'full', redirectTo: 'proceso-compra'},
+      {path: '**', pathMatch: 'full', redirectTo: 'carrito-compras'},
     ]
   }
 ];

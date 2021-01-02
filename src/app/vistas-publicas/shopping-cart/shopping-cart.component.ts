@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { OrderListOptions } from '@interfaces/components-options/order.options.interface';
 
 @Component({
-  selector: 'app-order-process',
-  templateUrl: './order-process.component.html',
-  styleUrls: ['./order-process.component.scss']
+  selector: 'app-shopping-cart',
+  templateUrl: './shopping-cart.component.html',
+  styleUrls: ['./shopping-cart.component.scss']
 })
-export class OrderProcessComponent implements OnInit {
-
+export class ShoppingCartComponent implements OnInit {
   taxPorcentage = 10;
   deliveryCost = 5;
 
@@ -131,6 +130,5 @@ export class OrderProcessComponent implements OnInit {
   public selectedOrderList(ordersList: OrderListOptions) {
     this.ordersListSelected = ordersList;
   }
-
 
 }

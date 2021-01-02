@@ -18,7 +18,7 @@ export class PanelComponent implements OnInit {
     {
       label: 'carrito de compras',
       iconClass: 'fas fa-user',
-      routerLink: ['proceso-compra'],
+      routerLink: ['carrito-compras'],
       // isActive: false,
     },
   ];

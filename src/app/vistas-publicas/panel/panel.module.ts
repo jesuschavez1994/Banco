@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { PanelRoutingModule } from './panel-routing.module';
 import { MyAccountComponent } from '../my-account/my-account.component';
-import { OrderProcessComponent } from '../order-process/order-process.component';
 import { PipesModule } from '../../pipes/pipes.module';
 import { SharedModule } from '../../shared/shared.module';
 import { PanelComponent } from './panel.component';
+import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
 
 
 @NgModule({
   declarations: [
     PanelComponent,
     MyAccountComponent,
-    OrderProcessComponent
+    ShoppingCartComponent,
   ],
   imports: [
     CommonModule,
