@@ -26,16 +26,16 @@
 
       <label
         class="option label-reset"
-        (click)="setHasDeliveryToOrders(false)"
+        (click)="setHasDeliveryToOrders()"
       >
-        Sin delivery
+        Con delivery
       </label>
 
       <label
         class="option label-reset"
-        (click)="setHasDeliveryToOrders()"
+        (click)="setHasDeliveryToOrders(false)"
       >
-        Con delivery
+        Retiro en tienda
       </label>
 
     </div>
@@ -54,7 +54,7 @@
           [ngClass]="{'active': !hasDelivery}"
           (click)="setHasDelivery(false)"
         >
-          sin delivery
+          Retiro en tienda
         </li>
 
       </ul>
@@ -66,59 +66,113 @@
           <label>Total</label>
         </div>
 
-        <ng-container *ngFor="let order of orders | filter: hasDelivery : 'hasDelivery'; index as inx">
+        <ng-container *ngFor="let order of orders | filter: hasDelivery : 'hasDelivery' : 'No hay productos agregados'; index as inx">
 
-          <article class="order-item">
+          <ng-container *ngIf="!(order.error) else noProducts">
 
-            <div class="checkbox">
-              <input
-                type="checkbox"
-                name="select-all"
-                class="checkbox-default"
-                (click)="selectOrder(order)"
-                [checked]="isChecked(order)"
-              >
-            </div>
+            <article class="order-item fadeIn animated ">
+
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  name="select-all"
+                  class="checkbox-default"
+                  (click)="selectOrder(order)"
+                  [checked]="isChecked(order)"
+                >
+              </div>
+
+              <div class="content-flex">
+
+                <div class="info-product">
+
+                  <figure class="img-principal">
+                    <img [src]="order.images[0] | imgFallback: 'box'" [alt]="order.name">
+                  </figure>
 
 
-            <div class="content-flex">
+                  <div class="title_quantity-container">
 
-              <div class="info-product">
+                    <div class="title-container">
+                      <h4 class="title">{{order.name}}</h4>
+                    </div>
 
-                <figure class="img-principal">
-                  <img [src]="order.images[0] | imgFallback: 'box'" [alt]="order.name">
-                </figure>
+                    <app-quantity-counter
+                      (currentValue)="currentValue($event, order)"
+                      [isSmall]="true"
+                      [initValue]="order.quantity"
+                      [maxValue]="order.stock">
+                    </app-quantity-counter>
 
-
-                <div class="title_quantity-container">
-
-                  <div class="title-container">
-                    <h4 class="title">{{order.name}}</h4>
                   </div>
 
-                  <app-quantity-counter
-                    (currentValue)="currentValue($event, order)"
-                    [isSmall]="true"
-                    [initValue]="order.quantity"
-                    [maxValue]="order.stock">
-                  </app-quantity-counter>
+                </div>
 
+                <div class="price">
+                  {{order.price | currency}}
+                </div>
+
+                <div class="price">
+                  {{(order.price * order.quantity)| currency}}
+                </div>
+
+
+              </div>
+
+            </article>
+
+          </ng-container>
+
+          <ng-template #noProducts>
+
+            <article class="order-item">
+              <p>{{order.error}}</p>
+            </article>
+
+            <article class="order-item">
+
+              <div class="checkbox">
+                <div class="fill--gray"></div>
+              </div>
+
+              <div class="content-flex">
+
+                <div class="info-product">
+
+                  <figure class="img-principal">
+                    <div class="fill--gray"></div>
+                  </figure>
+
+
+                  <div class="title_quantity-container">
+
+                    <div class="title-container">
+                      <h4 class="title">
+                        <div class="fill--gray"></div>
+                      </h4>
+                    </div>
+
+                    <div class="quantity-fill--gray">
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="price">
+                  <div class="fill--gray"></div>
+                </div>
+
+                <div class="price">
+                  <div class="fill--gray"></div>
                 </div>
 
               </div>
 
-              <div class="price">
-                {{order.price | currency}}
-              </div>
+            </article>
 
-              <div class="price">
-                {{(order.price * order.quantity)| currency}}
-              </div>
-
-
-            </div>
-
-          </article>
+          </ng-template>
 
         </ng-container>
 
@@ -162,8 +216,6 @@
       </div>
 
     </div>
-
-
 
   </form>
 

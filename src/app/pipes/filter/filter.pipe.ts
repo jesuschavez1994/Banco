@@ -39,7 +39,7 @@ export class FilterPipe implements PipeTransform {
     if (arreglo.length === 0) {
 
       if (alertNotFound !== ''){
-        return [{title: alertNotFound}];
+        return [{error: alertNotFound}];
       }
 
     }else{
