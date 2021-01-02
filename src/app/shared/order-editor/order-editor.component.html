@@ -132,17 +132,17 @@
 
         <tr>
           <td>Impuesto (19%)</td>
-          <td>$56,01</td>
+          <td>{{totalsCounts('tax') | currency}}</td>
         </tr>
 
         <tr>
           <td>Delivery</td>
-          <td>$2,1</td>
+          <td>{{totalsCounts('delivery') | currency}}</td>
         </tr>
 
         <tr>
           <td><strong>Total a pagar</strong></td>
-          <td><strong>$154,11</strong></td>
+          <td><strong>{{totalsCounts() | currency}}</strong></td>
         </tr>
 
       </table>

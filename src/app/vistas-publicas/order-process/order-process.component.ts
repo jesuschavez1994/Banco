@@ -8,6 +8,8 @@ import { OrderListOptions } from '@interfaces/components-options/order.options.i
 })
 export class OrderProcessComponent implements OnInit {
 
+  taxPorcentage = 10;
+  deliveryCost = 5;
 
   ordersLists: OrderListOptions[] = [
     {
@@ -26,7 +28,9 @@ export class OrderProcessComponent implements OnInit {
           images: [],
           id: 1,
           idStore: 1,
+          // taxPorcentageByProduct: this.taxPorcentage,
           hasDelivery: true,
+          deliveryCost: this.deliveryCost,
         },
         {
           name: 'Vegan Food 2',
@@ -37,7 +41,9 @@ export class OrderProcessComponent implements OnInit {
           images: [],
           id: 2,
           idStore: 1,
+          // taxPorcentageByProduct: this.taxPorcentage,
           hasDelivery: false,
+          deliveryCost: this.deliveryCost,
         },
         {
           name: 'Vegan Food 3',
@@ -48,7 +54,9 @@ export class OrderProcessComponent implements OnInit {
           images: [],
           id: 3,
           idStore: 1,
+          // taxPorcentageByProduct: this.taxPorcentage,
           hasDelivery: false,
+          deliveryCost: this.deliveryCost,
         },
       ],
       hasPaid: false,
@@ -69,7 +77,9 @@ export class OrderProcessComponent implements OnInit {
           images: [''],
           id: 1,
           idStore: 1,
+          // taxPorcentageByProduct: this.taxPorcentage,
           hasDelivery: true,
+          deliveryCost: this.deliveryCost,
         },
         {
           name: 'Vegan Food 5',
@@ -80,7 +90,9 @@ export class OrderProcessComponent implements OnInit {
           images: [''],
           id: 2,
           idStore: 1,
+          // taxPorcentageByProduct: this.taxPorcentage,
           hasDelivery: false,
+          deliveryCost: this.deliveryCost,
         },
         {
           name: 'Vegan Food 6',
@@ -91,7 +103,9 @@ export class OrderProcessComponent implements OnInit {
           images: [''],
           id: 3,
           idStore: 1,
+          // taxPorcentageByProduct: this.taxPorcentage,
           hasDelivery: false,
+          deliveryCost: this.deliveryCost,
         },
       ],
       hasPaid: true

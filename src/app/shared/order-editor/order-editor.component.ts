@@ -9,7 +9,7 @@ import { Order } from '@interfaces/components-options/order.options.interface';
 export class OrderEditorComponent implements OnInit {
 
   @Input() orders: Order[] = [];
-
+  @Input() defaulTaxPercent = 19;
   hasDelivery = false;
   orderSelected: Order[] = [];
 
@@ -117,6 +117,62 @@ export class OrderEditorComponent implements OnInit {
     });
 
     return this.orderSelected.length === ordersFiltered.length;
+  }
+
+  public totalsCounts(nameValueToGet: string = ''){
+    let subTotal = 0;
+    let subTotalDelivery = 0;
+    let tax = 0;
+    let total = 0;
+    let taxTotalByProduct = 0;
+
+    this.orders.forEach(order => {
+      subTotal += (order.price * order.quantity);
+
+      if (order.hasDelivery === true){
+        subTotalDelivery += order.deliveryCost * order.quantity;
+      }
+
+      if (order.taxPorcentageByProduct) {
+        taxTotalByProduct +=  (order.price * order.quantity) * (order.taxPorcentageByProduct / 100);
+      }else{
+        taxTotalByProduct +=  (order.price * order.quantity) * (this.defaulTaxPercent / 100);
+      }
+
+    });
+
+    subTotal += subTotalDelivery;
+    tax = taxTotalByProduct + (subTotalDelivery * (this.defaulTaxPercent / 100));
+    total = tax + subTotal;
+
+    console.log('orders');
+    console.log(this.orders);
+
+    console.log('totalsCounts');
+
+    console.log({
+      subTotalDelivery,
+      subTotal,
+      tax,
+      total,
+      taxTotalByProduct
+    });
+
+    switch (nameValueToGet) {
+      case 'tax':
+
+        return tax;
+
+      case 'delivery':
+
+        return subTotalDelivery;
+
+      default:
+
+        return total;
+
+    }
+
   }
 
 }
