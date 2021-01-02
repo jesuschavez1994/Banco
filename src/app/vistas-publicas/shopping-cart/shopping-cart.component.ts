@@ -10,6 +10,7 @@ export class ShoppingCartComponent implements OnInit {
   taxPorcentage = 10;
   deliveryCost = 5;
 
+  tabSelected: 1 | 2 | 3 = 1;
   ordersLists: OrderListOptions[] = [
     {
       id: 1,
@@ -114,7 +115,6 @@ export class ShoppingCartComponent implements OnInit {
   ordersListSelected: OrderListOptions;
 
 
-  tabSelected: 1 | 2 = 1;
 
   constructor() { }
 
@@ -129,6 +129,11 @@ export class ShoppingCartComponent implements OnInit {
 
   public selectedOrderList(ordersList: OrderListOptions) {
     this.ordersListSelected = ordersList;
+  }
+
+  public purchaseAction(event) {
+    console.log(event);
+    this.tabSelected = 3;
   }
 
 }

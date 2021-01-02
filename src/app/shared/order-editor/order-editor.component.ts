@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Order } from '@interfaces/components-options/order.options.interface';
 
 @Component({
@@ -10,6 +10,7 @@ export class OrderEditorComponent implements OnInit {
 
   @Input() orders: Order[] = [];
   @Input() defaulTaxPercent = 19;
+  @Output() purchaseAction = new EventEmitter();
   hasDelivery = false;
   orderSelected: Order[] = [];
 
@@ -145,19 +146,6 @@ export class OrderEditorComponent implements OnInit {
     tax = taxTotalByProduct + (subTotalDelivery * (this.defaulTaxPercent / 100));
     total = tax + subTotal;
 
-    console.log('orders');
-    console.log(this.orders);
-
-    console.log('totalsCounts');
-
-    console.log({
-      subTotalDelivery,
-      subTotal,
-      tax,
-      total,
-      taxTotalByProduct
-    });
-
     switch (nameValueToGet) {
       case 'tax':
 
@@ -173,6 +161,16 @@ export class OrderEditorComponent implements OnInit {
 
     }
 
+  }
+
+  public processPayment() {
+    console.log('processPayment');
+    this.purchaseAction.emit(this.orders);
+  }
+
+  public cancelOrder() {
+    console.log('cancelOrder');
+    this.purchaseAction.emit(this.orders);
   }
 
 }

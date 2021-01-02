@@ -8,39 +8,65 @@
 
       <ul class="tab-menu">
 
-        <li class="tab-item" [ngClass]="{'active': tabSelected === 1}" (click)="filterByTab(1)">pedidos</li>
-        <li class="tab-item" [ngClass]="{'active': tabSelected === 2}" (click)="filterByTab(2)">compras</li>
+        <li
+          class="tab-item"
+          [ngClass]="{'active': tabSelected === 1 || tabSelected === 3}"
+          (click)="filterByTab(1)"
+        >
+          pedidos
+        </li>
+
+        <li
+          class="tab-item"
+          [ngClass]="{'active': tabSelected === 2}"
+          (click)="filterByTab(2)"
+        >
+          compras
+        </li>
 
       </ul>
 
       <div class="tab-content">
 
-        <!-- Order list by business -->
-        <div class="order-list">
-          <app-order-list
-            (selected)="selectedOrderList($event)"
-            [orders]="ordersLists">
-          </app-order-list>
-        </div>
+        <!-- Order -> list, editor, e invoice -->
+        <ng-container *ngIf="tabSelected === 1 || tabSelected === 2">
 
+          <!-- Order list by business -->
+          <div class="order-list">
+            <app-order-list
+              (selected)="selectedOrderList($event)"
+              [orders]="ordersLists">
+            </app-order-list>
+          </div>
 
-        <div class="detail-content">
+          <div class="detail-content">
 
-          <!-- Order editor -->
-          <ng-container *ngIf="tabSelected === 1">
+            <!-- Order editor -->
+            <ng-container *ngIf="tabSelected === 1">
 
-            <app-order-editor [orders]="ordersListSelected.orders"></app-order-editor>
+              <app-order-editor
+                [orders]="ordersListSelected.orders"
+                (purchaseAction)="purchaseAction($event)">
+              </app-order-editor>
 
-          </ng-container>
+            </ng-container>
 
-          <!-- invoice -->
-          <ng-container *ngIf="tabSelected === 2">
+            <!-- invoice -->
+            <ng-container *ngIf="tabSelected === 2">
 
-            <app-invoice></app-invoice>
+              <app-invoice></app-invoice>
 
-          </ng-container>
+            </ng-container>
 
-        </div>
+          </div>
+
+        </ng-container>
+
+        <ng-container *ngIf="tabSelected === 3">
+          <button mat-button (click)="tabSelected = 1">atras</button>
+          paso 1
+        </ng-container>
+
 
       </div>
 

@@ -207,10 +207,10 @@
       </label>
 
       <div class="actions">
-        <div class="button gray">
+        <div class="button gray" (click)="cancelOrder()">
           cancelar orden
         </div>
-        <div class="button">
+        <div class="button" (click)="processPayment()">
           pagar
         </div>
       </div>
