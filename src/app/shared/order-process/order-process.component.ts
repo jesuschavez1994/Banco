@@ -11,7 +11,6 @@ export class OrderProcessComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.ordersListSelected = this.ordersLists[0];
 
   }
 

@@ -22,6 +22,7 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { OrderEditorComponent } from './order-editor/order-editor.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { OrderProcessComponent } from './order-process/order-process.component';
+import { OrderPaymentFormsComponent } from './order-payment-forms/order-payment-forms.component';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import { OrderProcessComponent } from './order-process/order-process.component';
       OrderEditorComponent,
       InvoiceComponent,
       OrderProcessComponent,
+      OrderPaymentFormsComponent,
     ],
     imports: [
       // APP_ROUTING,
@@ -61,6 +63,7 @@ import { OrderProcessComponent } from './order-process/order-process.component';
       ProductDetailComponent, QuantityCounterComponent,
       OrderListComponent, OrderEditorComponent,
       InvoiceComponent, OrderProcessComponent,
+      OrderPaymentFormsComponent,
     ]
 })
 

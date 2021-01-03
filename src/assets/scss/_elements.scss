@@ -45,6 +45,9 @@ button:focus {
   text-transform: capitalize;
   transition: .3s all;
 
+  &.button--full-width {
+    width: 100%;
+  }
 
   &:hover {
     background: $color__background-orange--hover;
@@ -62,3 +65,42 @@ button:focus {
 
 }
 
+.form {
+
+  p {
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-transform: lowercase;
+  }
+
+  p::first-letter {
+    text-transform: capitalize;
+  }
+
+  .capitalize {
+    text-transform: capitalize;
+  }
+
+  .uppercase {
+    text-transform: uppercase;
+  }
+
+  select,
+  input{
+    width: 100%;
+    border: 1px solid $color__border-gray--medium;
+    border-radius: 5px;
+    font-size: 13px;
+    margin-bottom: 15px;
+    padding: 12px 9px;
+    text-transform: capitalize;
+
+  }
+
+  .button{
+    border-radius: 5px;
+    font-size: 13px;
+    padding: 12px 9px;
+    text-transform: uppercase;
+  }
+}

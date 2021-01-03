@@ -26,7 +26,7 @@
 
       </ul>
 
-      <div class="tab-content">
+      <div class="tab-content" [ngClass]="{'justify--init': tabSelected === 3 }">
 
         <!-- Order -> list, editor, e invoice -->
         <ng-container *ngIf="tabSelected === 1 || tabSelected === 2">
@@ -63,10 +63,12 @@
         </ng-container>
 
         <ng-container *ngIf="tabSelected === 3">
-          <button mat-button (click)="tabSelected = 1">atras</button>
-          paso 1
-        </ng-container>
 
+          <div class="order-payment-forms">
+            <app-order-payment-forms></app-order-payment-forms>
+          </div>
+
+        </ng-container>
 
       </div>
 

@@ -10,7 +10,7 @@ export class ShoppingCartComponent implements OnInit {
   taxPorcentage = 10;
   deliveryCost = 5;
 
-  tabSelected: 1 | 2 | 3 = 1;
+  tabSelected: 1 | 2 | 3 = 3;
   ordersLists: OrderListOptions[] = [
     {
       id: 1,
