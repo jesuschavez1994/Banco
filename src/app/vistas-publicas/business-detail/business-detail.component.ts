@@ -287,39 +287,35 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
       this.productService.getProductsByStore(idStore, page, filter).subscribe( resp => {
 
-        // Esto es solo para testing
-        // const products = [
-        //   {
-        //     name: 'ss',
-        //     description: 'ddd',
-        //     price: 0,
-        //     stock: 0,
-        //     images: [], // product.images
-        //     id: 1,
-        //     idStore: 1,
-        //     isFavorite: false,
-        //   },
-        //   {
-        //     name: 'ss2',
-        //     description: 'ddd',
-        //     price: 0,
-        //     stock: 0,
-        //     images: [], // product.images
-        //     id: 1,
-        //     idStore: 1,
-        //     isFavorite: false,
-        //   },
-        // ];
-
         const products = resp.data;
         this.totalProducts = resp.total;
         this.itemsPerPage = resp.per_page;
 
         this.productCards.products = products.map( product => {
 
-          const images = product.images.map(image => {
-            return image.src;
-          });
+          console.log(product);
+
+          let images = [];
+
+          if (product.sync_bank) {
+
+            if (product.sync_bank.length === 0) {
+
+              images = product.images.map(image => {
+                return image.src;
+              });
+
+            }else {
+              images = product.sync_bank.map(syncBank => {
+                return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
+              });
+            }
+
+          }else {
+            images = product.images.map(image => {
+              return image.src;
+            });
+          }
 
           return {
             name: product.name,
@@ -330,7 +326,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             id: product.id ? product.id : -1,
             idStore: product.store_id ? product.store_id : -1,
             isFavorite: product.isFavorite ? product.isFavorite : false,
-          };
+            };
+
         } );
 
         console.log('products loaded: ', this.productCards.products);
