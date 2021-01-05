@@ -8,6 +8,7 @@ import { ExcerptPipe } from './excerpt/excerpt.pipe';
 import { ImgFallbackPipe } from './img-fallback/img-fallback.pipe';
 import { StrReplacePipe } from './strReplace/str-replace.pipe';
 import { FilterPipe } from './filter/filter.pipe';
+import { ExcludeMacthesPipe } from './excludeMacthes/exclude-macthes.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FilterPipe } from './filter/filter.pipe';
     ExcerptPipe,
     ImgFallbackPipe,
     StrReplacePipe,
-    FilterPipe
+    FilterPipe,
+    ExcludeMacthesPipe,
   ],
   exports: [
     ImagenPipe,
@@ -28,7 +30,8 @@ import { FilterPipe } from './filter/filter.pipe';
     ExcerptPipe,
     ImgFallbackPipe,
     StrReplacePipe,
-    FilterPipe
+    FilterPipe,
+    ExcludeMacthesPipe,
   ],
   imports: [
     CommonModule

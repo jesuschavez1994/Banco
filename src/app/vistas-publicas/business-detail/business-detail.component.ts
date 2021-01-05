@@ -287,11 +287,36 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
       this.productService.getProductsByStore(idStore, page, filter).subscribe( resp => {
 
+        // Esto es solo para testing
+        // const products = [
+        //   {
+        //     name: 'ss',
+        //     description: 'ddd',
+        //     price: 0,
+        //     stock: 0,
+        //     images: [], // product.images
+        //     id: 1,
+        //     idStore: 1,
+        //     isFavorite: false,
+        //   },
+        //   {
+        //     name: 'ss2',
+        //     description: 'ddd',
+        //     price: 0,
+        //     stock: 0,
+        //     images: [], // product.images
+        //     id: 1,
+        //     idStore: 1,
+        //     isFavorite: false,
+        //   },
+        // ];
+
         const products = resp.data;
         this.totalProducts = resp.total;
         this.itemsPerPage = resp.per_page;
 
         this.productCards.products = products.map( product => {
+
           const images = product.images.map(image => {
             return image.src;
           });

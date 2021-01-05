@@ -1,6 +1,6 @@
 <div class="products-container">
 
-  <ng-container *ngFor="let product of products | paginate: { id:'pagination', itemsPerPage: itemsPerPage, currentPage: p, totalItems: totalItems}">
+  <ng-container *ngFor="let product of (products | excludeMacthes: 0 : 'stock') | paginate: { id:'pagination', itemsPerPage: itemsPerPage, currentPage: p, totalItems: totalItems}">
 
     <article class="product" (click)="selectedProduct(product)">
 
@@ -18,12 +18,17 @@
 
       </div>
 
-
       <h3 class="name">
         {{ product.name | excerpt: 66}}
       </h3>
 
-      <p class="cost">{{ product.price | currency }}</p>
+      <ng-container *ngIf="product.price > 0 else priceToConsult">
+        <p class="cost">{{ product.price | currency }}</p>
+      </ng-container>
+
+      <ng-template #priceToConsult>
+        <p><strong>Precio a consultar</strong></p>
+      </ng-template>
 
     </article>
 
