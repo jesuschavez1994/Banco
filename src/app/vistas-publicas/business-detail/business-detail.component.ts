@@ -179,9 +179,32 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       this.productService.getProductByStore(idStore, idProduct).subscribe(
         product => {
 
-          const images = product.images.map(image => {
-            return image.src;
-          });
+          let images = [];
+
+          if (product.sync_bank) {
+
+            if (product.sync_bank.length === 0) {
+
+              images = product.images.map(image => {
+                return image.src;
+              });
+
+            }else {
+              images = product.sync_bank.map(syncBank => {
+                return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
+              });
+            }
+
+          }else {
+            images = product.images.map(image => {
+              return image.src;
+            });
+          }
+
+          // Antes
+          // const images = product.images.map(image => {
+          //   return image.src;
+          // });
 
           this.productDetail.selectedProduct =  {
             name: product.name,
@@ -292,8 +315,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         this.itemsPerPage = resp.per_page;
 
         this.productCards.products = products.map( product => {
-
-          console.log(product);
 
           let images = [];
 

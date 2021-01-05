@@ -1,11 +1,14 @@
-import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit, OnChanges } from '@angular/core';
+import { environment } from 'src/environments/environment';
+
+const URL = environment.url;
 
 @Component({
   selector: 'app-image-preview-gallery',
   templateUrl: './image-preview-gallery.component.html',
   styleUrls: ['./image-preview-gallery.component.scss']
 })
-export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
+export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() imgs: string[];
   @Input() currentImg: string;
@@ -18,6 +21,7 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.currentImg = this.imgs[0];
+    this.currentImg = `${URL}${this.currentImg}`;
 
   }
 
@@ -26,19 +30,18 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
 
   }
 
+  ngOnChanges(): void {
+    this.currentImg = `${URL}${this.currentImg}`;
+  }
+
   public selectImg( imgSelected ) {
-    this.currentImg = imgSelected;
+    this.currentImg = `${URL}${imgSelected}`;
     this.imageZoom();
   }
 
   public imageZoom() {
-    // use your mousewheel to zoom in 🔍
 
-    // console.clear();
-
-    // const image = document.querySelectorAll('.image')[0];
-    // const zoom = document.querySelectorAll('.zoom')[0];
-    // const zoomImage = document.querySelectorAll('.zoom-image')[0];
+    // this.currentImg = `${URL}${this.currentImg}`;
 
     const image = this.imageContainer.nativeElement;
     const zoom = this.zoomContainer.nativeElement;
@@ -48,8 +51,8 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit {
     let zoomLevel = 2;
 
     let img = {
-        thumb: this.currentImg,
-        hires: this.currentImg
+      thumb: this.currentImg,
+      hires: this.currentImg
     };
 
     image.getElementsByTagName('a')[0].setAttribute('href', img.hires);

@@ -7,8 +7,6 @@ export class ExcludeMacthesPipe implements PipeTransform {
 
   transform(arreglo: any[], valueToMatch: any, columna: string ): any[] {
 
-    console.log('excludeMacthes');
-
     switch (typeof valueToMatch) {
 
       case 'string':
@@ -37,7 +35,6 @@ export class ExcludeMacthesPipe implements PipeTransform {
 
     }
 
-    console.log(arreglo);
     return arreglo;
 
   }

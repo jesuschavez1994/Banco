@@ -22,10 +22,11 @@
     <div class="image" #image>
       <a [href]="currentImg" target="_blank">
         <img
-          [src]="currentImg | imgFallback: 'box'"
+          [src]="currentImg"
           alt=""
           onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
         >
+
       </a>
     </div>
 
@@ -34,6 +35,7 @@
         class="zoom-image" #zoomImage src="" alt=""
         onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
       >
+
     </div>
 
   </div>
