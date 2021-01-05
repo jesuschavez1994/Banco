@@ -1,44 +1,52 @@
-<ng-container *ngIf="selectedProduct">
+<ng-container *ngIf="selectedProduct && selectedProduct.stock > 0">
 
   <div class="product-detail">
 
-      <div class="main-img">
+    <div class="main-img">
 
       <app-image-preview-gallery
           [imgs]="selectedProduct.images"
           [currentImg]="selectedProduct.images[0]">
       </app-image-preview-gallery>
 
-      </div>
+    </div>
 
-      <div class="content">
+    <div class="content">
 
-        <h2 class="name">
-            {{selectedProduct.name}}
-        </h2>
+      <h2 class="name">
+          {{selectedProduct.name}}
+      </h2>
 
-        <p class="description">
-          {{selectedProduct.description | excerpt: 985}}
-        </p>
+      <p class="description">
+        {{selectedProduct.description | excerpt: 985}}
+      </p>
 
-        <div class="shopping-cart">
+      <div class="shopping-cart">
 
+        <ng-container *ngIf="selectedProduct.price > 0 else priceToConsult">
           <div class="cost">
-          {{selectedProduct.price | currency }}
+            {{selectedProduct.price | currency }}
           </div>
+        </ng-container>
 
-          <app-quantity-counter
-            #quantityCounter
-            [maxValue]="selectedProduct.stock">
-          </app-quantity-counter>
+        <ng-template #priceToConsult>
+          <div class="cost">
+            <p><strong>Precio a consultar</strong></p>
+          </div>
+        </ng-template>
 
-          <button class="btn-add-to-cart" (click)="addToCart()">
-            Añadir al carrito
-          </button>
+        <app-quantity-counter
+          #quantityCounter
+          [maxValue]="selectedProduct.stock">
+        </app-quantity-counter>
 
-        </div>
+        <button class="btn-add-to-cart" (click)="addToCart()">
+          Añadir al carrito
+        </button>
 
       </div>
+
+    </div>
 
   </div>
 
