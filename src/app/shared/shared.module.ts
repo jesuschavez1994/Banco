@@ -23,6 +23,7 @@ import { OrderEditorComponent } from './order-editor/order-editor.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { OrderProcessComponent } from './order-process/order-process.component';
 import { OrderPaymentFormsComponent } from './order-payment-forms/order-payment-forms.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -51,6 +52,8 @@ import { OrderPaymentFormsComponent } from './order-payment-forms/order-payment-
       RouterModule,
       PipesModule,
       CommonModule,
+      FormsModule,
+      ReactiveFormsModule,
       NgxPaginationModule,
     ],
     exports: [

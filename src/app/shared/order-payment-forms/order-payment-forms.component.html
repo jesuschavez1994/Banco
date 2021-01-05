@@ -1,13 +1,42 @@
 <ng-container *ngIf="step === 1">
+
   <p (click)="step = 1" class="back-process">
     <span><</span>Atrás
   </p>
 
   <p class="instruction">para concretar la compra, complete los siguientes pasos:</p>
 
+  <div class="breadcrumb-steps-container">
+
+    <div class="breadcrumb-steps">
+
+      <div class="step active">
+
+        <p>paso 1</p>
+        <div class="circle"></div>
+
+      </div>
+
+      <div class="step">
+
+        <p>paso 2</p>
+        <div class="circle"></div>
+
+      </div>
+
+    </div>
+
+    <div class="line"></div>
+
+  </div>
+
   <div>
 
-    <form action="" class="form">
+    <form action=""
+      class="form"
+      [formGroup]="form"
+      (ngSubmit)="processDataPay()"
+      novalidate="novalidate">
 
       <div class="inputs-container">
 
@@ -35,7 +64,23 @@
 
           <p>dirección*</p>
 
-          <input type="text" name="" id="" placeholder="Seleccione Dirección">
+          <input
+            formControlName="location"
+            type="text"
+            name=""
+            id=""
+            placeholder="Seleccione Dirección"
+          >
+
+          <ng-container
+            *ngIf="form.get('location').errors"
+          >
+            <div class="errors">
+              <ul>
+                <li></li>
+              </ul>
+            </div>
+          </ng-container>
 
         </div>
 
@@ -93,11 +138,36 @@
 </ng-container>
 
 <ng-container *ngIf="step === 2">
+
   <p (click)="step = 1" class="back-process">
     <span><</span>Atrás
   </p>
 
   <p class="instruction">para concretar la compra, complete los siguientes pasos:</p>
+
+  <div class="breadcrumb-steps-container">
+
+    <div class="breadcrumb-steps">
+
+      <div class="step active">
+
+        <p>paso 1</p>
+        <div class="circle"></div>
+
+      </div>
+
+      <div class="step">
+
+        <p>paso 2</p>
+        <div class="circle"></div>
+
+      </div>
+
+    </div>
+
+    <div class="line"></div>
+
+  </div>
 
   <div>
 
