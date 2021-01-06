@@ -7760,3 +7760,9 @@ table.dataTable thead .sorting:after {
 		overflow: hidden;
 	}
 }
+
+/* Christopher */
+
+.icons-navbar {
+  min-width: fit-content !important;
+}

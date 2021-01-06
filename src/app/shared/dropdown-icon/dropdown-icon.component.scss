@@ -1,0 +1,74 @@
+@import 'src/assets/scss/style.scss';
+
+.dropdown--custom{
+  display: inline-block;
+  position: relative;
+
+
+  .dd-button {
+    display: inline-block;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+
+    i {
+      font-size: 21px;
+    }
+  }
+
+
+  .dd-input {
+    display: none;
+  }
+
+  .dd-menu {
+    position: absolute;
+    top: 100%;
+    border-radius: 4px;
+    padding: 0;
+    margin: 2px 0 0 0;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+    background-color: $color__background-white;
+    list-style-type: none;
+
+    &.left{
+      right: 0%;
+    }
+
+  }
+
+  .dd-input + .dd-menu {
+    display: none;
+  }
+
+  .dd-input:checked + .dd-menu {
+    display: block;
+  }
+
+  .dd-menu li {
+    padding: 10px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-transform: capitalize;
+  }
+
+  .dd-menu li:hover {
+    background-color: $color__background-gray;
+    border-radius: 4px;
+  }
+
+  .dd-menu li a {
+    color: $color__text-main;
+    display: block;
+    margin: -10px -20px;
+    padding: 10px 20px;
+    text-transform: capitalize;
+  }
+
+  .dd-menu li.divider{
+    padding: 0;
+    border-bottom: 1px solid $color__background-gray--medium;
+  }
+
+
+}

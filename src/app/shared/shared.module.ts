@@ -24,6 +24,8 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { OrderProcessComponent } from './order-process/order-process.component';
 import { OrderPaymentFormsComponent } from './order-payment-forms/order-payment-forms.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DropdownButtonComponent } from './dropdown-button/dropdown-button.component';
+import { DropdownIconComponent } from './dropdown-icon/dropdown-icon.component';
 
 @NgModule({
     declarations: [
@@ -46,6 +48,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       InvoiceComponent,
       OrderProcessComponent,
       OrderPaymentFormsComponent,
+      DropdownButtonComponent,
+      DropdownIconComponent,
     ],
     imports: [
       // APP_ROUTING,
@@ -55,6 +59,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       FormsModule,
       ReactiveFormsModule,
       NgxPaginationModule,
+
     ],
     exports: [
       NavbarComponent, NavbarToHomeComponent,
@@ -66,7 +71,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       ProductDetailComponent, QuantityCounterComponent,
       OrderListComponent, OrderEditorComponent,
       InvoiceComponent, OrderProcessComponent,
-      OrderPaymentFormsComponent,
+      OrderPaymentFormsComponent, DropdownButtonComponent,
+      DropdownIconComponent,
     ]
 })
 

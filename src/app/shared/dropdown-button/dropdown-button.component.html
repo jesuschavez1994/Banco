@@ -1,0 +1,61 @@
+<label class="dropdown--custom" #dropdownCustom>
+
+  <div class="dd-button"  [style.color]="titleButton.color">
+    {{titleButton.title}}
+  </div>
+
+  <input type="checkbox" class="dd-input" id="test" #inputCheck>
+
+  <ul class="dd-menu" [ngClass]="{'left': displayDropdown === 'left'}">
+
+    <ng-container *ngFor="let option of menuOptions">
+
+      <ng-container [ngSwitch]="option.typeEvent">
+
+        <ng-container *ngIf="option.divider">
+          <li class="divider"></li>
+        </ng-container>
+
+        <li
+          *ngSwitchCase="'routerLink'"
+          (click)="selectOption(option)"
+          [routerLink]="option.eventValue"
+          [style.color]="option.color"
+
+        >
+
+          {{option.title}}
+
+        </li>
+
+        <li
+          *ngSwitchCase="'aHref'"
+          (click)="selectOption(option)"
+        >
+
+          <a
+            [style.color]="option.color"
+            [href]="option.eventValue">
+            {{option.title}}
+          </a>
+
+        </li>
+
+        <li
+          *ngSwitchDefault
+          (click)="selectOption(option)"
+          [style.color]="option.color"
+        >
+
+          {{option.title}}
+
+        </li>
+
+      </ng-container>
+
+    </ng-container>
+
+  </ul>
+
+</label>
+
