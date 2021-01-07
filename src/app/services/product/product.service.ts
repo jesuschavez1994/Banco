@@ -16,6 +16,7 @@ export class ProductService extends Service{
     super(http);
   }
 
+  // Products By Store
   public getProductsByStore( idStore: number, page: number = 1, filter?: FilterProductResp ): Observable<ProductsResponse> {
 
     if (filter && Object.keys(filter).length > 0){
@@ -28,6 +29,20 @@ export class ProductService extends Service{
 
   public getProductByStore( idStore: number, idProduct: number ): Observable<Product> {
     return this.execQuery<Product>(`stores/${idStore}/products/${idProduct}`);
+  }
+
+  // Favorite oF the user - Need to be log in
+  public addProductToFavorite(idUser: number, idProduct: number) {
+    return this.postQuery(`consumers/${idUser}/products/${idProduct}/favorites`, {});
+  }
+
+  public removeProductFromFavorite(idUser: number, idProduct: number){
+    return this.DeleteQuery(`consumers/${idUser}/products/${idProduct}/favorites`);
+  }
+
+  public getFavoriteProducts( idUser: number ) {
+    console.log('getFavoriteProducts - idUser: ', idUser);
+    return this.execQuery(`consumers/${idUser}/favorites`);
   }
 
 }

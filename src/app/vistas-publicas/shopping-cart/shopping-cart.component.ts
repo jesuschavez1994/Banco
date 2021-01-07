@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderListOptions } from '@interfaces/components-options/order.options.interface';
+import { PaymentProcessService } from '@services/payment-process/payment-process.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -116,10 +117,39 @@ export class ShoppingCartComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor( private paymentService: PaymentProcessService) { }
 
   ngOnInit(): void {
     this.ordersListSelected = this.ordersLists[0];
+
+    console.log('ShoppingCartComponent');
+
+    this.paymentService.getCartResume().subscribe(resp => {
+      console.log('getCartResume');
+      console.log(resp);
+    });
+
+    // this.paymentService.getProductsFromCart().subscribe(resp => {
+    //   console.log('getProductsFromCart');
+    //   console.log(resp);
+    // });
+
+    // this.paymentService.addProductToCart(129, 2).subscribe(resp => {
+    //   console.log('addProductToCart');
+    //   console.log(resp);
+    // });
+
+    // console.log('deleteProsductFromCart');
+    // this.paymentService.deleteProsductFromCart(129).subscribe(resp => {
+    //   console.log(resp);
+    // });
+
+    // console.log('emptyCart');
+    // this.paymentService.emptyCart().subscribe(resp => {
+    //   console.log(resp);
+    // });
+
+    console.log('ShoppingCartComponent///');
 
   }
 
