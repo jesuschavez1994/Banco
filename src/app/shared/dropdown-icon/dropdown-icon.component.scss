@@ -6,10 +6,16 @@
 
 
   .dd-button {
+    min-height: 70px;
     display: inline-block;
     border-radius: 4px;
     cursor: pointer;
     white-space: nowrap;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    display: flex;
+    align-items: center;
 
     i {
       font-size: 21px;
@@ -22,6 +28,8 @@
   }
 
   .dd-menu {
+    max-width: 310px; //
+    min-width: 225px; //
     position: absolute;
     top: 100%;
     border-radius: 4px;
@@ -46,9 +54,10 @@
   }
 
   .dd-menu li {
+    width: 100%;
     padding: 10px 20px;
     cursor: pointer;
-    white-space: nowrap;
+    // white-space: nowrap;
     text-transform: capitalize;
   }
 

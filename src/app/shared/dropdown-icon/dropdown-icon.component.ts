@@ -16,25 +16,7 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
     color: '#F09207',
   };
   @Input() displayDropdown = 'left';
-  @Input() menuOptions: DropdownMenu[] = [
-    {
-      title: 'titulo',
-      color: '',
-      divider: false,
-      typeEvent: 'aHref',
-      eventValue: 'href',
-
-    },
-    {
-      title: 'titulo2',
-      typeEvent: 'routerLink',
-      eventValue: ['routerlink']
-    },
-    {
-      title: 'titulo3',
-      typeEvent: 'none'
-    },
-  ];
+  @Input() menuOptions: DropdownMenu[];
 
   @Output() selected = new EventEmitter();
 

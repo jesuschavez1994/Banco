@@ -1,4 +1,8 @@
-<app-navbarstore [fixed]="false"></app-navbarstore>
+<app-navbarstore
+  [menuOptions]="menuOptions"
+  [fixed]="false"
+>
+</app-navbarstore>
 
 <main class="page">
 
@@ -37,7 +41,10 @@
 
         <h1 class="profile-name">{{StoreName}}</h1>
 
-        <app-product-detail #productDetail>
+        <app-product-detail
+          #productDetail
+          (clickButtonCart)="addProductToCart($event)"
+        >
         </app-product-detail>
 
         <app-search-bar

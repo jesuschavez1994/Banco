@@ -39,12 +39,18 @@ import { registerLocaleData } from '@angular/common';
 import ca from '@angular/common/locales/ca';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { SuccessComponent } from './modals/success/success.component';
 
 registerLocaleData(ca);
 
 @NgModule({
   declarations: [
     AppComponent,
+    SuccessComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +79,11 @@ registerLocaleData(ca);
       apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'
     }),
     NgbModule,
+
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
 
   ],
   providers: [

@@ -1,6 +1,6 @@
 <label class="dropdown--custom" #dropdownCustom>
 
-  <div class="dd-button">
+  <div class="dd-button waves-effect waves-dark">
     <i [class]="classIcon.class" [style.color]="classIcon.color"></i>
   </div>
 
@@ -23,6 +23,7 @@
           (click)="selectOption(option)"
           [routerLink]="option.eventValue"
           [style.color]="option.color"
+          class="waves-effect waves-dark"
 
         >
 
@@ -33,11 +34,13 @@
         <li
           *ngSwitchCase="'aHref'"
           (click)="selectOption(option)"
+          class="waves-effect waves-dark"
         >
 
           <a
             [style.color]="option.color"
-            [href]="option.eventValue">
+            [href]="option.eventValue"
+          >
             {{option.title}}
           </a>
 
@@ -47,6 +50,7 @@
           *ngSwitchDefault
           (click)="selectOption(option)"
           [style.color]="option.color"
+          class="waves-effect waves-dark"
         >
 
           {{option.title}}

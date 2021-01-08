@@ -15,6 +15,10 @@ import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Utils } from '../../utils/utils';
 import { PriceRange, Filter } from '@interfaces/components-options/sidebar-list.options.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { SuccessComponent } from '../../modals/success/success.component';
+import { PaymentProcessService } from '@services/payment-process/payment-process.service';
+import { DropdownMenu } from '@interfaces/components-options/dropdown.options.interface';
 
 @Component({
   selector: 'app-business-detail',
@@ -78,6 +82,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   // SearchBar:
   preloadedValueSearch = '';
 
+  // navbar
+  menuOptions: DropdownMenu[] = [];
+
   // Variables
   StoreName = '';
 
@@ -86,7 +93,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     private router: Router,
     private productService: ProductService,
     private storeService: StoreService,
-    private utils: Utils
+    private paymentProcessService: PaymentProcessService,
+    private utils: Utils,
+    public dialog: MatDialog
 
   ){
     this.loadDataByParams();
@@ -98,27 +107,27 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.productService.getFavoriteProducts(1).subscribe(
-      resp => {
-        console.log('getFavoriteProducts');
-        console.log(resp);
-      },
-      error => {
-        console.log('error');
-        console.log(error);
-      }
-    );
+    // this.productService.getFavoriteProducts(1).subscribe(
+    //   resp => {
+    //     console.log('getFavoriteProducts');
+    //     console.log(resp);
+    //   },
+    //   error => {
+    //     console.log('error');
+    //     console.log(error);
+    //   }
+    // );
 
-    this.productService.addProductToFavorite(1, 134).subscribe(
-      resp => {
-        console.log('addProductToFavorite');
-        console.log(resp);
-      },
-      error => {
-        console.log('error');
-        console.log(error);
-      }
-    );
+    // this.productService.addProductToFavorite(1, 134).subscribe(
+    //   resp => {
+    //     console.log('addProductToFavorite');
+    //     console.log(resp);
+    //   },
+    //   error => {
+    //     console.log('error');
+    //     console.log(error);
+    //   }
+    // );
 
     // this.productService.removeProductFromFavorite(1, 134).subscribe(
     //   resp => {
@@ -130,6 +139,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     //     console.log(error);
     //   }
     // );
+
   }
 
 
@@ -390,6 +400,47 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   }
 
+  public addProductToCart( event ) {
+
+    const idProduct = event.product.id;
+    const quantity = event.quantity;
+
+    this.paymentProcessService.addProductToCart(idProduct, quantity).subscribe( resp => {
+
+      if (resp.success) {
+
+        this.dialog.open(SuccessComponent, {
+          width: '250px',
+          data: { title: 'Producto agregado al carrito', message: resp.message}
+        });
+
+        this.menuOptions = [];
+        resp.data.forEach( product => {
+
+          let option;
+
+          option = {
+            title: product.name,
+            typeEvent: 'routerLink',
+            eventValue: ['/panel/carrito-compras']
+          };
+
+          this.menuOptions.push(option);
+        });
+
+      }else{
+
+        this.dialog.open(SuccessComponent, {
+          width: '250px',
+          data: { title: 'Producto no agregado al carrito', message: resp.message }
+        });
+
+      }
+
+    } );
+
+  }
+
   // Esto se puede declarar en el componente e invocar aquí a través del ViewChild
   public paginationProducts(page: number){
     this.router.navigate(
@@ -587,6 +638,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       routerLink: [`/business-detail/${idStore}`]
     };
   }
+
 
 
 }

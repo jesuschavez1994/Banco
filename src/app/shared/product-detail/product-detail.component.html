@@ -37,7 +37,9 @@
 
         <app-quantity-counter
           #quantityCounter
-          [maxValue]="selectedProduct.stock">
+          [maxValue]="selectedProduct.stock"
+          (currentValue)="quantityProduct = $event"
+        >
         </app-quantity-counter>
 
         <button class="btn-add-to-cart" (click)="addToCart()">
