@@ -17,7 +17,8 @@ export class ProductDetailComponent implements OnInit, OnChanges {
   buttonTitle = 'Añadir al carrito';
   quantityProduct = 0;
 
-  constructor() { }
+  constructor(
+  ) { }
 
   ngOnInit(): void {
   }
@@ -31,6 +32,7 @@ export class ProductDetailComponent implements OnInit, OnChanges {
   }
 
   public addToCart() {
+    console.log('addToCart');
 
     this.quantityCounter.valid();
 

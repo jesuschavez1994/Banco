@@ -86,7 +86,7 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
 
         option = {
           title: product.name,
-          typeEvent: 'none',
+          typeEvent: 'routerLink',
           eventValue: ['/panel/carrito-compras'],
           data: product
         };
