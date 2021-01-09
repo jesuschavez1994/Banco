@@ -26,7 +26,7 @@
 
   <ul class="dd-menu" [ngClass]="{'left': displayDropdown === 'left', 'expanded': isDropDownExpanded}">
 
-    <ng-container *ngFor="let option of menuOptions">
+    <ng-container *ngFor="let option of menuOptions; let inx = index">
 
       <ng-container [ngSwitch]="option.typeEvent">
 
@@ -39,11 +39,9 @@
           (click)="selectOption(option)"
           [routerLink]="option.eventValue"
           [style.color]="option.color"
-
-
         >
 
-          <p class="title waves-effect waves-dark">{{option.title | excerpt: 35}}</p>
+          <p class="title waves-effect waves-dark">{{option.title | excerpt: 30}}</p>
 
           <!-- Extra Buttons -->
           <ng-container *ngIf="classIcon.extraButton">
@@ -75,7 +73,7 @@
             [href]="option.eventValue"
             class="title waves-effect waves-dark"
           >
-            {{option.title | excerpt: 35}}
+            {{option.title | excerpt: 30}}
           </a>
 
           <!-- Extra Buttons -->
@@ -104,7 +102,7 @@
           [style.color]="option.color"
         >
 
-          <p class="title waves-effect waves-dark">{{option.title | excerpt: 35}}</p>
+          <p class="title waves-effect waves-dark">{{option.title | excerpt: 30}}</p>
 
           <!-- Extra Buttons -->
           <ng-container *ngIf="classIcon.extraButton">
@@ -123,6 +121,57 @@
             </div>
 
           </ng-container>
+
+        </li>
+
+      </ng-container>
+
+    </ng-container>
+
+    <ng-container *ngIf="menuOptions.length > 6">
+
+      <ng-container [ngSwitch]="lookMore.typeEvent">
+
+        <ng-container *ngIf="lookMore.divider">
+          <li class="divider"></li>
+        </ng-container>
+
+        <li
+          *ngSwitchCase="'routerLink'"
+          (click)="selectOption(lookMore)"
+          [routerLink]="lookMore.eventValue"
+          [style.color]="lookMore.color"
+          class="lookMoreOption waves-effect waves-dark"
+        >
+
+          <p class="title">{{lookMore.title | excerpt: 30}}</p>
+
+
+        </li>
+
+        <li
+          *ngSwitchCase="'aHref'"
+          (click)="selectOption(lookMore)"
+          class="lookMoreOption waves-effect waves-dark"
+        >
+
+          <a
+            [style.color]="lookMore.color"
+            [href]="lookMore.eventValue"
+          >
+            {{lookMore.title | excerpt: 30}}
+          </a>
+
+        </li>
+
+        <li
+          *ngSwitchDefault
+          [style.color]="lookMore.color"
+          (click)="selectOption(lookMore)"
+          class="lookMoreOption waves-effect waves-dark"
+        >
+
+          <p class="title">{{lookMore.title | excerpt: 30}}</p>
 
         </li>
 

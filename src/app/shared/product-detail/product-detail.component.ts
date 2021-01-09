@@ -14,6 +14,7 @@ export class ProductDetailComponent implements OnInit, OnChanges {
   @Input() selectedProduct: ProductsCardsOptions;
   @Output() clickButtonCart = new EventEmitter();
 
+  buttonTitle = 'Añadir al carrito';
   quantityProduct = 0;
 
   constructor() { }

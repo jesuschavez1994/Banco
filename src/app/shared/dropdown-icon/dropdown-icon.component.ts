@@ -26,6 +26,12 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
   };
   @Input() displayDropdown = 'left';
   @Input() menuOptions: DropdownOption[] = [];
+  @Input() lookMore: DropdownOption;
+  // = {
+  //   title: 'Ver más',
+  //   divider: true,
+  //   typeEvent: 'none'
+  // };
   @Input() showItemsCounter = true;
 
   @Output() selected = new EventEmitter<DropdownOption>();
