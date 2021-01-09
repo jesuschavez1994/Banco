@@ -1,14 +1,30 @@
 <label class="dropdown--custom" #dropdownCustom>
 
-  <div class="dd-button waves-effect waves-dark">
-    <i [class]="classIcon.class" [style.color]="classIcon.color"></i>
+  <div class="dd-button waves-effect waves-dark" (click)="toogleDropDown()">
+    <i
+      [class]="classIcon.class"
+      [style.color]="menuOptions.length > 0 ? classIcon.color : '#D0D0D0'">
+    </i>
+
+    <ng-container *ngIf="menuOptions.length > 0 && showItemsCounter">
+
+      <div class="items-counter" [ngClass]="{'big': menuOptions.length > 99}">
+        <!-- <span class="more-simbol">
+          <div class="segment"></div>
+          <div class="segment"></div>
+        </span> -->
+        <p>{{menuOptions.length > 99 ? '99+' : menuOptions.length}}</p>
+      </div>
+
+    </ng-container>
+
   </div>
 
   <input type="checkbox" class="dd-input" id="test"
     #inputCheck
   >
 
-  <ul class="dd-menu" [ngClass]="{'left': displayDropdown === 'left'}">
+  <ul class="dd-menu" [ngClass]="{'left': displayDropdown === 'left', 'expanded': isDropDownExpanded}">
 
     <ng-container *ngFor="let option of menuOptions">
 
@@ -23,26 +39,62 @@
           (click)="selectOption(option)"
           [routerLink]="option.eventValue"
           [style.color]="option.color"
-          class="waves-effect waves-dark"
+
 
         >
 
-          {{option.title}}
+          <p class="title waves-effect waves-dark">{{option.title | excerpt: 35}}</p>
+
+          <!-- Extra Buttons -->
+          <ng-container *ngIf="classIcon.extraButton">
+
+            <div
+              class="icon-button waves-effect waves-dark"
+              (click)="selectExtraButton(classIcon.extraButton, option)"
+            >
+
+              <i
+                [class]="classIcon.extraButton.class"
+                [style.color]="classIcon.extraButton.color"
+              >
+              </i>
+
+            </div>
+
+          </ng-container>
 
         </li>
 
         <li
           *ngSwitchCase="'aHref'"
           (click)="selectOption(option)"
-          class="waves-effect waves-dark"
         >
 
           <a
             [style.color]="option.color"
             [href]="option.eventValue"
+            class="title waves-effect waves-dark"
           >
-            {{option.title}}
+            {{option.title | excerpt: 35}}
           </a>
+
+          <!-- Extra Buttons -->
+          <ng-container *ngIf="classIcon.extraButton">
+
+            <div
+              class="icon-button waves-effect waves-dark"
+              (click)="selectExtraButton(classIcon.extraButton, option)"
+            >
+
+              <i
+                [class]="classIcon.extraButton.class"
+                [style.color]="classIcon.extraButton.color"
+              >
+              </i>
+
+            </div>
+
+          </ng-container>
 
         </li>
 
@@ -50,10 +102,27 @@
           *ngSwitchDefault
           (click)="selectOption(option)"
           [style.color]="option.color"
-          class="waves-effect waves-dark"
         >
 
-          {{option.title}}
+          <p class="title waves-effect waves-dark">{{option.title | excerpt: 35}}</p>
+
+          <!-- Extra Buttons -->
+          <ng-container *ngIf="classIcon.extraButton">
+
+            <div
+              class="icon-button waves-effect waves-dark"
+              (click)="selectExtraButton(classIcon.extraButton, option)"
+            >
+
+              <i
+                [class]="classIcon.extraButton.class"
+                [style.color]="classIcon.extraButton.color"
+              >
+              </i>
+
+            </div>
+
+          </ng-container>
 
         </li>
 

@@ -18,7 +18,8 @@ import { PriceRange, Filter } from '@interfaces/components-options/sidebar-list.
 import { MatDialog } from '@angular/material/dialog';
 import { SuccessComponent } from '../../modals/success/success.component';
 import { PaymentProcessService } from '@services/payment-process/payment-process.service';
-import { DropdownMenu } from '@interfaces/components-options/dropdown.options.interface';
+import { DropdownOption } from '@interfaces/components-options/dropdown.options.interface';
+import { DropdownIconComponent } from '../../shared/dropdown-icon/dropdown-icon.component';
 
 @Component({
   selector: 'app-business-detail',
@@ -31,6 +32,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('productCards') productCards: ProductsCardsComponent;
   @ViewChild('productDetail') productDetail: ProductDetailComponent;
   @ViewChild('sidebarList') sidebarList: SidebarListComponent;
+  // @ViewChild('dropdownIcon') dropdownIcon: DropdownIconComponent;
 
   // Components Inputs
   breadcrumb: BreadcrumbOptions[];
@@ -83,7 +85,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   preloadedValueSearch = '';
 
   // navbar
-  menuOptions: DropdownMenu[] = [];
+  menuOptions: DropdownOption[] = [];
 
   // Variables
   StoreName = '';
@@ -95,7 +97,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     private storeService: StoreService,
     private paymentProcessService: PaymentProcessService,
     private utils: Utils,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private dropdownIconComp: DropdownIconComponent
 
   ){
     this.loadDataByParams();
@@ -414,19 +417,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
           data: { title: 'Producto agregado al carrito', message: resp.message}
         });
 
-        this.menuOptions = [];
-        resp.data.forEach( product => {
+        const products = resp.data;
 
-          let option;
-
-          option = {
-            title: product.name,
-            typeEvent: 'routerLink',
-            eventValue: ['/panel/carrito-compras']
-          };
-
-          this.menuOptions.push(option);
-        });
+        this.menuOptions = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
 
       }else{
 

@@ -25,8 +25,8 @@ export class PaymentProcessService extends Service{
     return this.execQuery(`cart/details`);
   }
 
-  public deleteProsductFromCart(idProduct: number){
-    return this.DeleteQuery(`cart/${idProduct}`);
+  public deleteProsductFromCart(idProduct: number): Observable<ProductToCartResp>{
+    return this.DeleteQuery<ProductToCartResp>(`cart/${idProduct}`);
   }
 
   public emptyCart(){

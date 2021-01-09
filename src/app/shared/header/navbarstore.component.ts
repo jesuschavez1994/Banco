@@ -4,8 +4,9 @@ import { StoreService } from '@services/store/store.service';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from '@services/usuario/usuario.service';
 import { URL_SERVICIOS } from 'src/app/config/config';
-import { DropdownMenu, ClassIcon } from '@interfaces/components-options/dropdown.options.interface';
+import { DropdownOption, ClassIcon, ExtraButtonEmitter } from '@interfaces/components-options/dropdown.options.interface';
 import { PaymentProcessService } from '@services/payment-process/payment-process.service';
+import { DropdownIconComponent } from '../dropdown-icon/dropdown-icon.component';
 
 
 @Component({
@@ -20,9 +21,14 @@ export class NavbarstoreComponent implements OnInit {
   // Button DropDown - cart
   classIcon: ClassIcon = {
     class: 'fas fa-shopping-cart',
-    color: '#F09207'
+    color: '#F09207',
+    extraButton: {
+      name: 'delete',
+      class: 'fas fa-trash',
+      color: '#f00707'
+    }
   };
-  @Input() menuOptions: DropdownMenu[] = [];
+  @Input() menuOptions: DropdownOption[] = [];
 
 
   usuario: Usuario;
@@ -34,11 +40,13 @@ export class NavbarstoreComponent implements OnInit {
     public userStoreServices: UserStoreService,
     public storeService: StoreService,
     private paymentProcessService: PaymentProcessService,
+    private dropdownIconComp: DropdownIconComponent
 
   ) {
    }
 
   ngOnInit() {
+
     this.userStoreServices.getStore().subscribe( resp => {
       this.datosUsuario.push(resp);
     });
@@ -53,16 +61,47 @@ export class NavbarstoreComponent implements OnInit {
         console.log('getProductsFromCart');
         console.log(resp);
 
-        resp.data.forEach( product => {
-          let option;
-          option = {
-            title: product.name,
-            typeEvent: 'routerLink',
-            eventValue: ['/panel/carrito-compras']
-          };
+        const products = resp.data;
 
-          this.menuOptions.push(option);
-        });
+        this.menuOptions = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
+
+      }
+    );
+
+  }
+
+  public deleteProductFromCart(event: ExtraButtonEmitter) {
+
+    console.log('deleteProductFromCart');
+    console.log(event);
+    const idProduct = event.option.data.id;
+
+    this.paymentProcessService.deleteProsductFromCart(idProduct).subscribe(
+
+      resp => {
+
+        console.log('deleteProsductFromCart');
+        console.log(resp);
+
+        this.menuOptions = [];
+
+        if (resp.data.length > 0) {
+
+          resp.data.forEach( product => {
+
+            let option;
+
+            option = {
+              title: product.name,
+              typeEvent: 'none',
+              eventValue: ['/panel/carrito-compras'],
+              data: product
+            };
+
+            this.menuOptions.push(option);
+          });
+        }
+
       }
     );
 

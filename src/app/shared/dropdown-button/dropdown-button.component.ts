@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { DropdownMenu, TitleButton } from '@interfaces/components-options/dropdown.options.interface';
+import { DropdownOption, TitleButton } from '@interfaces/components-options/dropdown.options.interface';
 
 @Component({
   selector: 'app-dropdown-button',
@@ -16,7 +16,7 @@ export class DropdownButtonComponent implements OnInit, AfterViewInit {
     color: '#F09207',
   };
   @Input() displayDropdown = 'left';
-  @Input() menuOptions: DropdownMenu[] = [
+  @Input() menuOptions: DropdownOption[] = [
     {
       title: 'titulo',
       color: '',
@@ -56,7 +56,7 @@ export class DropdownButtonComponent implements OnInit, AfterViewInit {
 
   }
 
-  public selectOption(option: DropdownMenu) {
+  public selectOption(option: DropdownOption) {
     this.selected.emit(option);
 
     console.log('DropdownIconComponent');

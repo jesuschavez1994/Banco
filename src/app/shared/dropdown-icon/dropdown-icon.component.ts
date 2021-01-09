@@ -1,6 +1,10 @@
-import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { DropdownMenu, ClassIcon } from '@interfaces/components-options/dropdown.options.interface';
+import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, Injectable } from '@angular/core';
+import { DropdownOption, ClassIcon, ExtraButton, ExtraButtonEmitter } from '@interfaces/components-options/dropdown.options.interface';
+import { Product } from '@interfaces/productCart.interface';
 
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'app-dropdown-icon',
   templateUrl: './dropdown-icon.component.html',
@@ -14,11 +18,20 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
   @Input() classIcon: ClassIcon = {
     class: 'fas fa-heart',
     color: '#F09207',
+    extraButton: {
+      name: 'delete',
+      class: 'fas fa-trash',
+      color: '#f00707'
+    }
   };
   @Input() displayDropdown = 'left';
-  @Input() menuOptions: DropdownMenu[];
+  @Input() menuOptions: DropdownOption[] = [];
+  @Input() showItemsCounter = true;
 
-  @Output() selected = new EventEmitter();
+  @Output() selected = new EventEmitter<DropdownOption>();
+  @Output() extraButton = new EventEmitter<ExtraButtonEmitter>();
+
+  isDropDownExpanded = false;
 
   constructor() { }
 
@@ -32,17 +45,56 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
 
       if (!isClickInside) {
         this.inputCheck.nativeElement.checked = false;
+        this.isDropDownExpanded = false;
       }
 
     });
 
   }
 
-  public selectOption(option: DropdownMenu) {
+  public selectOption(option: DropdownOption) {
     this.selected.emit(option);
 
-    console.log('DropdownIconComponent');
-    console.log(option);
   }
 
+  public selectExtraButton(extraButton: ExtraButton, option: DropdownOption) {
+    this.extraButton.emit(
+      {
+        extraButton,
+        option
+      }
+    );
+  }
+
+  public loadOptionsWithProductsCartResp( products: Product[] ) {
+    console.log('loadOptionsWithProductsCartResp');
+    console.log(products);
+
+    if (products.length > 0) {
+
+      const menuOptions = [];
+
+      products.forEach( product => {
+
+        let option;
+
+        option = {
+          title: product.name,
+          typeEvent: 'none',
+          eventValue: ['/panel/carrito-compras'],
+          data: product
+        };
+
+        menuOptions.push(option);
+
+      });
+
+      return menuOptions;
+    }
+  }
+
+
+  public toogleDropDown(){
+    this.isDropDownExpanded = this.isDropDownExpanded ? false : true;
+  }
 }
