@@ -1,58 +1,64 @@
-<form   [formGroup]="cropper"
-        enctype='multipart/form-data' 
-        (ngSubmit)="CropperImg()"
-        enctype="multipart/form-data" 
-        class="col-md-12"
-        >
-
-    <div class="col-md-12">
-        <section>
-            <label  for="cropper" 
-                class="cursor-poniter width-100 text-align-end pr-5">
-                Editar
-            </label>
-            <div class="display-flex flex-direction-column align-items-center">
-                <input accept="image/*" type="file" (change)="fileChangeEvent($event)" id="cropper"/>
-                <image-cropper style="width: 310px"
-                    *ngIf="Recortador"                        
-                    [imageChangedEvent]="imageChangedEvent"
-                    [maintainAspectRatio]="true"
-                    [aspectRatio]="2 / 2"
-                    [resizeToWidth]="300"
-                    [resizeToHeight]="300"
-                    [cropperMinWidth]="250"
-                    [cropperMinHeight]="250"
-                    format="png"
-                    (imageCropped)="imageCropped($event)"
-                    (imageLoaded)="imageLoaded()"
-                    (cropperReady)="cropperReady()"
-                    (loadImageFailed)="loadImageFailed()"
-                ></image-cropper>
-
-                <label  *ngIf="Recortador" 
-                    class="family-400 size-14 pt-1">
-                    Las imágenes deben ser de 600X600 px y 2MG
-                </label>
-
-            </div>
-        </section>
-    </div>
-
-    <footer class="display-flex justify-content-flex-end pr-5">
-        <button     class="btn btn-outline-primary button width-30 fredoka" 
-                    type="submit"
-                    *ngIf="Recortador"
-                    (click)="cambiarImagen()"
-                    >
-                    Aceptar
-        </button>
-    </footer>
-
+<form
+  [formGroup]="cropper"
+  enctype="multipart/form-data"
+  (ngSubmit)="CropperImg()"
+  enctype="multipart/form-data"
+  class="col-md-12"
+>
+  <div class="col-md-12">
     <section>
-        <!-- <app-card-shimmer-photo-user-edit class="animated fadeIn" *ngIf="!spinner"></app-card-shimmer-photo-user-edit> -->
-        <app-card-shimmer-photo-user-edit class="animated fadeIn" *ngIf="alert"></app-card-shimmer-photo-user-edit>
-        <!-- <mat-spinner *ngIf="!spinner"></mat-spinner> -->
-        <img [src]="IMG_USER | avatarDefault" class="w150" *ngIf="!mostrarAvatar">
-    </section>
+      <label for="cropper" class="cursor-poniter width-100 text-align-end pr-5">
+        Editar
+      </label>
+      <div class="display-flex flex-direction-column align-items-center">
+        <input
+          accept="image/*"
+          type="file"
+          (change)="fileChangeEvent($event)"
+          id="cropper"
+        />
+        <image-cropper
+          style="width: 310px"
+          *ngIf="Recortador"
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="2 / 2"
+          [resizeToWidth]="300"
+          [resizeToHeight]="300"
+          [cropperMinWidth]="250"
+          [cropperMinHeight]="250"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
 
+        <label *ngIf="Recortador" class="family-400 size-14 pt-1">
+          Las imágenes deben ser de 600X600 px y 2MG
+        </label>
+      </div>
+    </section>
+  </div>
+
+  <footer class="display-flex justify-content-flex-end pr-5">
+    <button
+      class="btn btn-outline-primary button width-30 fredoka"
+      type="submit"
+      *ngIf="Recortador"
+      (click)="cambiarImagen()"
+    >
+      Aceptar
+    </button>
+  </footer>
+
+  <section>
+    <!-- <app-card-shimmer-photo-user-edit class="animated fadeIn" *ngIf="!spinner"></app-card-shimmer-photo-user-edit> -->
+    <app-card-shimmer-photo-user-edit
+      class="animated fadeIn"
+      *ngIf="alert"
+    ></app-card-shimmer-photo-user-edit>
+    <!-- <mat-spinner *ngIf="!spinner"></mat-spinner> -->
+    <img [src]="IMG_USER | avatarDefault" class="w150" *ngIf="!mostrarAvatar" />
+  </section>
 </form>
