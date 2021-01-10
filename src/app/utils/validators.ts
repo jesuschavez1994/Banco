@@ -60,6 +60,25 @@ export class MyValidators {
     };
   }
 
+  static existInArray(options: any[]) {
+
+    return (control?: AbstractControl): { [key: string]: boolean} => {
+
+      const value = control.value;
+
+      if (options.indexOf(value) === -1) {
+        return {
+          existIn: true
+        };
+      }
+
+      return null;
+
+    };
+
+  }
+
+
 }
 
 function containsNumber(value: string){
@@ -70,3 +89,7 @@ function containsNumber(value: string){
 function isNumber(value: string){
   return !isNaN(parseInt(value, 10));
 }
+
+
+
+

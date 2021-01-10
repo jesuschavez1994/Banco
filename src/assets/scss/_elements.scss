@@ -91,10 +91,35 @@ button:focus {
     border: 1px solid $color__border-gray--medium;
     border-radius: 5px;
     font-size: 13px;
-    margin-bottom: 15px;
     padding: 12px 9px;
     text-transform: capitalize;
 
+  }
+
+  .input-container {
+    margin-bottom: 15px;
+
+    .errors{
+      margin-top: 3px;
+
+      ul{
+        display: flex;
+
+        li {
+          color: $color__text-orange;
+          font-size: 12px;
+
+          &::after{
+            content: '/';
+            margin: 0px 3px;
+          }
+
+          &:last-child:after{
+            display: none;
+          }
+        }
+      }
+    }
   }
 
   .button{

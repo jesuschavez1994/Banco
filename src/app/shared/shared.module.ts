@@ -21,7 +21,6 @@ import { RouterModule } from '@angular/router';
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrderEditorComponent } from './order-editor/order-editor.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { OrderProcessComponent } from './order-process/order-process.component';
 import { OrderPaymentFormsComponent } from './order-payment-forms/order-payment-forms.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownButtonComponent } from './dropdown-button/dropdown-button.component';
@@ -46,7 +45,6 @@ import { DropdownIconComponent } from './dropdown-icon/dropdown-icon.component';
       OrderListComponent,
       OrderEditorComponent,
       InvoiceComponent,
-      OrderProcessComponent,
       OrderPaymentFormsComponent,
       DropdownButtonComponent,
       DropdownIconComponent,
@@ -70,9 +68,8 @@ import { DropdownIconComponent } from './dropdown-icon/dropdown-icon.component';
       SearchBarComponent, ImagePreviewGalleryComponent,
       ProductDetailComponent, QuantityCounterComponent,
       OrderListComponent, OrderEditorComponent,
-      InvoiceComponent, OrderProcessComponent,
-      OrderPaymentFormsComponent, DropdownButtonComponent,
-      DropdownIconComponent,
+      InvoiceComponent, OrderPaymentFormsComponent,
+      DropdownButtonComponent, DropdownIconComponent,
     ]
 })
 

@@ -44,9 +44,22 @@
 
           <p>región</p>
 
-          <select name="" id="">
+          <select formControlName="region">
             <option value="-1">seleccione región</option>
+            <option value="hola">hola</option>
+            <option value="adios">adios</option>
           </select>
+
+          <!-- Errors -->
+          <ng-container *ngIf="form.get('region')">
+
+            <ng-container
+              [ngTemplateOutlet]="errorsList"
+              [ngTemplateOutletContext]="{controlErrors: form.get('region')}"
+            >
+            </ng-container>
+
+          </ng-container>
 
         </div>
 
@@ -54,9 +67,22 @@
 
           <p>comuna</p>
 
-          <select name="" id="">
+          <select formControlName="comuna">
             <option value="-1">seleccione comuna</option>
+            <option value="hola">hola</option>
+            <option value="adios">adios</option>
           </select>
+
+          <!-- Errors -->
+          <ng-container *ngIf="form.get('comuna')">
+
+            <ng-container
+              [ngTemplateOutlet]="errorsList"
+              [ngTemplateOutletContext]="{controlErrors: form.get('comuna')}"
+            >
+            </ng-container>
+
+          </ng-container>
 
         </div>
 
@@ -65,21 +91,21 @@
           <p>dirección*</p>
 
           <input
-            formControlName="location"
             type="text"
-            name=""
-            id=""
-            placeholder="Seleccione Dirección"
+            formControlName="direccion"
+            name="direccion"
+            placeholder="Calle 10"
           >
 
-          <ng-container
-            *ngIf="form.get('location').errors"
-          >
-            <div class="errors">
-              <ul>
-                <li></li>
-              </ul>
-            </div>
+         <!-- Errors -->
+          <ng-container *ngIf="form.get('direccion')">
+
+            <ng-container
+              [ngTemplateOutlet]="errorsList"
+              [ngTemplateOutletContext]="{controlErrors: form.get('direccion')}"
+            >
+            </ng-container>
+
           </ng-container>
 
         </div>
@@ -88,7 +114,20 @@
 
           <p class="capitalize">casa/dpto/oficina</p>
 
-          <input type="text" name="" id="">
+          <input type="text"
+          placeholder="Casa Nro. 94"
+          formControlName="hospedaje">
+
+          <!-- Errors -->
+          <ng-container *ngIf="form.get('hospedaje')">
+
+            <ng-container
+              [ngTemplateOutlet]="errorsList"
+              [ngTemplateOutletContext]="{controlErrors: form.get('hospedaje')}"
+            >
+            </ng-container>
+
+          </ng-container>
 
         </div>
 
@@ -96,7 +135,20 @@
 
           <p>teléfono*</p>
 
-          <input type="tel" name="" id="">
+          <input type="tel"
+          placeholder="04240293382"
+          formControlName="telefono">
+
+          <!-- Errors -->
+          <ng-container *ngIf="form.get('telefono')">
+
+            <ng-container
+              [ngTemplateOutlet]="errorsList"
+              [ngTemplateOutletContext]="{controlErrors: form.get('telefono')}"
+            >
+            </ng-container>
+
+          </ng-container>
 
         </div>
 
@@ -104,7 +156,20 @@
 
           <p class="uppercase">rut*</p>
 
-          <input type="text" name="" id="">
+          <input type="text"
+          placeholder="30686957-4"
+          formControlName="rut">
+
+          <!-- Errors -->
+          <ng-container *ngIf="form.get('rut')">
+
+            <ng-container
+              [ngTemplateOutlet]="errorsList"
+              [ngTemplateOutletContext]="{controlErrors: form.get('rut')}"
+            >
+            </ng-container>
+
+          </ng-container>
 
         </div>
 
@@ -112,7 +177,21 @@
 
           <p class="small-type">Nombre para guardar dirección*</p>
 
-          <input type="text" name="" id="">
+          <input
+          type="text"
+          placeholder="Mi casa / Oficina Central"
+          formControlName="nombreDirección">
+
+          <!-- Errors -->
+          <ng-container *ngIf="form.get('nombreDirección')">
+
+            <ng-container
+              [ngTemplateOutlet]="errorsList"
+              [ngTemplateOutletContext]="{controlErrors: form.get('nombreDirección')}"
+            >
+            </ng-container>
+
+          </ng-container>
 
         </div>
 
@@ -128,15 +207,16 @@
 
       </div>
 
-      <div class="button button--full-width" (click)="step = 2">
+      <button class="button button--full-width" type="submit">
         continuar
-      </div>
+      </button>
 
     </form>
 
   </div>
 </ng-container>
 
+<!-- STEP 2 -->
 <ng-container *ngIf="step === 2">
 
   <p (click)="step = 1" class="back-process">
@@ -219,8 +299,9 @@
         </div>
 
       </div>
-
-      <div class="button button--full-width" (click)="step = 2">
+      <!-- (click)="step = 2" -->
+      <div class="button button--full-width" type="submit">
+        <!-- bu -->
         pagar ahora
       </div>
 
@@ -228,4 +309,25 @@
 
   </div>
 </ng-container>
+
+<!-- Template error -->
+
+<ng-template #errorsList let-controlErrors='controlErrors'>
+
+  <div class="errors">
+
+    <ul>
+
+      <ng-container *ngFor="let message of getErrorsWithMessages(controlErrors)">
+
+        <li>{{message}}</li>
+
+      </ng-container>
+
+    </ul>
+
+  </div>
+
+</ng-template>
+
 
