@@ -1,6 +1,6 @@
 /* ---------------- Resets fot global stylings -------------- */
 ul {
-  margin: 0;
+  padding: 0;
 }
 
 .payment-details {
@@ -31,6 +31,29 @@ ul {
   height: 4em;
   background: #f7f7f7;
   padding: 10px;
+}
+
+.voucher .voucher-title small.text {
+  margin-top: 1.2em;
+  margin-right: 1.5em;
+}
+
+.voucher .voucher-title .check {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: green;
+  text-align: center;
+  margin-bottom: 5em;
+}
+
+.voucher .voucher-title .check > img {
+  align-self: center;
+  color: #fff;
 }
 
 .voucher .voucher-body {
