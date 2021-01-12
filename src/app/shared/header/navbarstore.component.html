@@ -1,147 +1,170 @@
 <header class="topbar">
-    <nav class="navbar top-navbar navbar-expand-md navbar-light">
-        <!-- ============================================================== -->
-        <!-- Logo -->
-        <!-- ============================================================== -->
-        <div class="navbar-header width-15 pl-4">
-            <a class="navbar-brand" [routerLink]="['home']">   
-                <!--Logo icon -->
-                <span>
-                    <!-- dark Logo text -->
-                    <img src="../../../assets/img/Navbar/Logo Founduss.svg" width="10%" alt="homepage" class="dark-logo" />
-                    <!-- Light Logo text -->    
-                    <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
-                </span>                 
-            </a>
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Logo -->
-        <!-- ============================================================== -->
-        <div class="navbar-collapse justify-content-space-between">
-            <!-- ============================================================== -->
-            <!-- Search -->
-            <!-- ============================================================== -->
-            <ul class="navbar-nav width-70">
-                <form class="form-inline my-2 my-lg-0 width-100">
-                    <input  class="form-control width-100 icon-magnifying-glass" 
-                            type="search" 
-                            placeholder="Buscar producto..." 
-                            aria-label="Search"
-                    >
-                </form>
+  <nav class="navbar top-navbar navbar-expand-md navbar-light">
+    <!-- ============================================================== -->
+    <!-- Logo -->
+    <!-- ============================================================== -->
+    <div class="navbar-header width-15 pl-4">
+      <a class="navbar-brand" [routerLink]="['home']">
+        <!--Logo icon -->
+        <span>
+          <!-- dark Logo text -->
+          <img
+            src="../../../assets/img/Navbar/Logo Founduss.svg"
+            width="10%"
+            alt="homepage"
+            class="dark-logo"
+          />
+          <!-- Light Logo text -->
+          <img
+            src="assets/images/logo-light-text.png"
+            class="light-logo"
+            alt="homepage"
+          />
+        </span>
+      </a>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Logo -->
+    <!-- ============================================================== -->
+    <div class="navbar-collapse justify-content-space-between">
+      <!-- ============================================================== -->
+      <!-- Search -->
+      <!-- ============================================================== -->
+      <ul class="navbar-nav width-70">
+        <form class="form-inline my-2 my-lg-0 width-100">
+          <input
+            class="form-control width-100 icon-magnifying-glass"
+            type="search"
+            placeholder="Buscar producto..."
+            aria-label="Search"
+          />
+        </form>
+      </ul>
+      <!-- ============================================================== -->
+      <!-- Profile -->
+      <!-- ============================================================== -->
+      <ul
+        class="navbar-nav my-lg-0 width-20 display-flex justify-content-center align-items-center width-25"
+      >
+        <li class="nav-item dropdown mega-dropdown mr-2">
+          <a
+            class="Gear nav-link width-100 height-50 display-flex align-items-center justify-content-center"
+            [routerLink]="['/account']"
+          >
+            <img
+              src="../../../assets/img/iconos/icons-main/icons/gear.svg"
+              alt=""
+              width="25"
+              height="25"
+              title="Configuración de tu cuenta"
+            />
+          </a>
+        </li>
+
+        <li class="nav-item dropdown mega-dropdown mr-2">
+          <button
+            class="btn btn-primary button fredoka width-100"
+            aria-haspopup="true"
+            aria-expanded="false"
+            [routerLink]="['/my-store/contact']"
+          >
+            Mi Tienda
+          </button>
+        </li>
+
+        <li class="nav-item dropdown" *ngFor="let item of datosUsuario">
+          <a
+            class="nav-link dropdown-toggle waves-effect waves-dark"
+            href=""
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <img
+              [src]="IMG_USER | avatarDefault"
+              alt="user"
+              class="profile-pic"
+            />
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right mt-2 animated flipInY">
+            <ul class="dropdown-user">
+              <li>
+                <div
+                  class="dw-user-box display-flex align-items-center"
+                  align="center"
+                >
+                  <div class="u-img">
+                    <img [src]="IMG_USER | avatarDefault" alt="user" />
+                  </div>
+                  <div class="u-text">
+                    <h4 class="name-user OpenSans-700 text-left">
+                      {{ item.name }}
+                    </h4>
+                    <p class="text-muted">
+                      {{ item.email }}
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li class="nav-item">
+                <a
+                  class="a-menu-user nav-link OpenSans-400"
+                  routerLink="/perfil"
+                >
+                  <img
+                    class="mr-2"
+                    src="../../../assets/img/iconos/icons-main/icons/person.svg"
+                    alt=""
+                    width="18"
+                    height="18"
+                    title="Person"
+                  />
+                  Perfil
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a
+                  class="a-menu-user nav-link OpenSans-400"
+                  [routerLink]="['/account']"
+                >
+                  <img
+                    class="mr-2"
+                    src="../../../assets/img/iconos/icons-main/icons/gear.svg"
+                    alt=""
+                    width="18"
+                    height="18"
+                    title="Configuración"
+                  />
+
+                  Configuración de tu cuenta
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="a-menu-user nav-link OpenSans-400"
+                  (click)="storeService.logout()"
+                >
+                  <img
+                    class="mr-2"
+                    src="../../../assets/img/iconos/icons-main/icons/power.svg"
+                    alt=""
+                    width="18"
+                    height="18"
+                    title="Logout"
+                  />
+
+                  Salir
+                </a>
+              </li>
             </ul>
-            <!-- ============================================================== -->
-            <!-- Profile -->
-            <!-- ============================================================== -->
-            <ul class="navbar-nav my-lg-0 width-20 display-flex justify-content-center align-items-center width-25">
-
-                <li class="nav-item dropdown mega-dropdown mr-2">
-
-                    <a  class="Gear nav-link width-100 height-50 display-flex align-items-center justify-content-center"
-                        [routerLink]="['/account']">
-
-                        <img     
-                                src="../../../assets/img/iconos/icons-main/icons/gear.svg" 
-                                alt="" 
-                                width="25" 
-                                height="25" 
-                                title="Configuración de tu cuenta"
-                        >
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item dropdown mega-dropdown mr-2">
-
-                    <button class="btn btn-primary button fredoka width-100" 
-                            aria-haspopup="true" 
-                            aria-expanded="false"
-                            [routerLink]="['/my-store/contact']">
-
-                            Mi Tienda
-
-                    </button> 
-
-                </li>
-
-
-                <li class="nav-item dropdown" *ngFor="let item of datosUsuario">
-
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img [src]="IMG_USER | avatarDefault" alt="user" class="profile-pic" />
-                    </a>
-                 
-                    <div  class="dropdown-menu dropdown-menu-right mt-2 animated flipInY">
-                        <ul class="dropdown-user">
-                            <li>
-                                <div class="dw-user-box display-flex align-items-center" align="center">
-                                    <div class="u-img"><img [src]=" IMG_USER | avatarDefault " alt="user"></div> 
-                                    <div class="u-text">
-                                        <h4 class="name-user OpenSans-700 text-left">
-                                            {{ item.name }} 
-                                        </h4> 
-                                        <p class="text-muted">
-                                            {{ item.email }} 
-                                        </p> 
-                                    </div>
-                                </div>
-                            </li>
-                            <li role="separator" class="divider"></li>
-                            <li class="nav-item">
-                                <a class="a-menu-user nav-link OpenSans-400"  routerLink="/perfil">
-
-                                    <img    class="mr-2" 
-                                            src="../../../assets/img/iconos/icons-main/icons/person.svg" 
-                                            alt="" width="18" 
-                                            height="18" 
-                                            title="Person"
-                                    >
-                                        Perfil
-                                </a>
-                            </li>
-                            <li class="nav-item" routerLinkActive="active">
-                                <a  class="a-menu-user nav-link OpenSans-400" [routerLink]="['/account']">
-
-                                    <img    class="mr-2" 
-                                            src="../../../assets/img/iconos/icons-main/icons/gear.svg" 
-                                            alt="" 
-                                            width="18" 
-                                            height="18" 
-                                            title="Configuración"
-                                    >
-
-                                    Configuración de tu cuenta
-
-                                </a>
-                            </li>
-                            <li class="nav-item">
-
-                                <a  class="a-menu-user nav-link OpenSans-400" 
-                                    (click)="storeService.logout()">
-
-                                    <img    class="mr-2" 
-                                            src="../../../assets/img/iconos/icons-main/icons/power.svg" 
-                                            alt="" 
-                                            width="18" 
-                                            height="18" 
-                                            title="Logout"
-                                    >
-
-                                    Salir
-
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-            <!-- ============================================================== -->
-            <!-- END Profile -->
-            <!-- ============================================================== -->
-        </div>
-    </nav>
+          </div>
+        </li>
+      </ul>
+      <!-- ============================================================== -->
+      <!-- END Profile -->
+      <!-- ============================================================== -->
+    </div>
+  </nav>
 </header>
-
-
-
