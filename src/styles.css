@@ -521,7 +521,7 @@ a:hover {
 .mat-typography h5 {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
-  font-size: 28px !important;
+  font-size: 28px;
 }
 
 .modal-backdrop {
@@ -1789,6 +1789,7 @@ ul.list-style-none li a:hover {
  *******************/
 .fix-header .topbar {
   position: fixed;
+  top: 0;
   width: 100%;
   -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
@@ -4235,12 +4236,12 @@ table th {
  ******************/
 /* Radio Buttons
     ========================================================================== */
-[type="radio"]:not(:checked),
+/* [type="radio"]:not(:checked),
 [type="radio"]:checked {
   position: absolute;
   left: -9999px;
   opacity: 0;
-}
+} */
 
 [type="radio"]:not(:checked) + label,
 [type="radio"]:checked + label {
@@ -4385,12 +4386,12 @@ form p:last-child {
 }
 
 /* Remove default checkbox */
-[type="checkbox"]:not(:checked),
+/* [type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
   position: absolute;
   left: -9999px;
   opacity: 0;
-}
+} */
 
 [type="checkbox"] {
   /* checkbox aspect */
@@ -8280,17 +8281,8 @@ table.dataTable thead .sorting:after {
 html,
 body {
   height: 100%;
+  scroll-behavior: smooth;
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
