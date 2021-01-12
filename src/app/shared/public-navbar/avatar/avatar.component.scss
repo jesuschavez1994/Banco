@@ -1,0 +1,81 @@
+.avat{
+    a{
+        width: auto;
+        img.profile-pic{
+            border-radius: 100%;
+            min-width: 40px;
+            width: 40px;
+        }
+    }
+    /*MENU DROPDOWN*/ 
+    .dropdown-menu {
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+        -webkit-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+        border-color: rgba(120, 130, 140, 0.13);
+      }
+      .dropdown-toggle::after{
+        display: none;
+      }
+      .dropdown-menu .dropdown-item {
+        padding: 7px 1.5rem;
+      }
+      ul.dropdown-user {
+        padding: 0px;
+        min-width: 270px;
+      }
+      ul.dropdown-user li {
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+      }
+      ul.dropdown-user li.divider {
+        height: 1px;
+        margin: 9px 0;
+        overflow: hidden;
+        background-color: rgba(120, 130, 140, 0.13);
+      }
+      ul.dropdown-user li .dw-user-box {
+        padding: 10px 15px;
+      }
+      ul.dropdown-user li .dw-user-box .u-img {
+        width: 70px;
+        display: inline-block;
+        vertical-align: top;
+      }
+      ul.dropdown-user li .dw-user-box .u-img img {
+        width: 100%;
+        border-radius: 5px;
+      }
+      ul.dropdown-user li .dw-user-box .u-text {
+        display: inline-block;
+        padding-left: 10px;
+      }
+      ul.dropdown-user li .dw-user-box .u-text h4 {
+        margin: 0px;
+        font-size: 0.98rem;
+      }
+      ul.dropdown-user li .dw-user-box .u-text p {
+        margin-bottom: 2px;
+        font-size: 12px;
+      }
+      ul.dropdown-user li .dw-user-box .u-text .btn {
+        color: #ffffff;
+        padding: 5px 10px;
+        display: inline-block;
+      }
+      ul.dropdown-user li .dw-user-box .u-text .btn:hover {
+        background: #e6294b;
+      }
+      ul.dropdown-user li a {
+        padding: 9px 15px;
+        display: block;
+        color: #0e1318;
+      }
+      ul.dropdown-user li a:hover {
+        background: #e9edf2;
+        color: #f09207;
+        text-decoration: none;
+      }
+      /*--------*/
+}

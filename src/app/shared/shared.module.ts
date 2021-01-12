@@ -28,6 +28,8 @@ import { ButtonLoginComponent } from './public-navbar/button-login/button-login.
 import { AvatarComponent } from './public-navbar/avatar/avatar.component';
 import { NavOptionsComponent } from './public-navbar/nav-options/nav-options.component';
 import { SearchComponent } from './public-navbar/search/search.component';
+import { SidebarHomeComponent } from './sidebar-home/sidebar-home.component';
+import { SliderComponent } from './slider/slider.component';
 
 @NgModule({
     declarations: [
@@ -55,6 +57,8 @@ import { SearchComponent } from './public-navbar/search/search.component';
       AvatarComponent,
       NavOptionsComponent,
       SearchComponent,
+      SidebarHomeComponent,
+      SliderComponent,
 
     ],
     imports: [
@@ -75,6 +79,7 @@ import { SearchComponent } from './public-navbar/search/search.component';
       PublicNavbarComponent, NavBrandComponent,
       CategoryLinkComponent, SearchComponent,
       ButtonShopComponent, NavOptionsComponent,
+      SidebarHomeComponent, SliderComponent,
     ]
 })
 

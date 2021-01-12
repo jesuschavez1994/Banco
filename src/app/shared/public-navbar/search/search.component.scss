@@ -1,0 +1,21 @@
+ /* menor medida */
+$telfP : 320px;
+/* menor media */
+$telfM : 375px;
+/* menor grande */
+$telfG : 425px;
+/*media  */
+$tablets: 768px;
+/*  laptop*/
+$laptop: 1024px;
+/* laptopG */
+$laptopG: 1440px;
+
+form input{
+    width: 80%;
+    padding-left:35px;
+    background-position-y: .25rem;
+    background-position-x: .15rem;
+    background-color: rgba(0, 0, 0, 0.01);
+    border: black 1px solid  ;
+}

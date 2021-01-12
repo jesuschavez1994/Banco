@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
 import { StoreService } from '@services/store/store.service';
 import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import { ProductosLoads } from '@interfaces/InterfaceProducto';
@@ -23,8 +23,8 @@ import { ProductosLoads } from '@interfaces/InterfaceProducto';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  itemProductos: DataProductDB[] = [];
+  @ViewChild('modalRegister') modalRegister: ElementRef;
+    itemProductos: DataProductDB[] = [];
 
   constructor(public storeService: StoreService) { }
 

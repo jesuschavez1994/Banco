@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
     <a href="">
       CATEGORIAS
     </a>`,
-  styleUrls: ['./category-link.component.css']
+  styleUrls: ['./category-link.component.scss']
 })
 export class CategoryLinkComponent implements OnInit {
 

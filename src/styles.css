@@ -88,6 +88,8 @@
 
 .icon-magnifying-glass {
   background-image: url(./assets/img/iconos/iconos-lupa.png);
+  /*Permite el no repetir la imagen de fondo en la barra de busqueda*/
+  background-repeat: no-repeat;
 }
 
 .icon-phone {
