@@ -22,7 +22,6 @@ import { MaterialModule } from '@Angula-Material/material.module';
 // Mapa //
 import { AgmCoreModule } from '@agm/core';
 
-
 import { ContactDescriptionEditComponent } from './components/contact-description-edit/contact-description-edit.component';
 import { ContactDescriptionComponent } from './components/contact-description/contact-description.component';
 import { AsideComponent } from './shared/aside/aside.component';
@@ -37,7 +36,6 @@ import { ScheduleStoreComponent } from './components/schedule-store/schedule-sto
 import { ComponentsComponent } from './components/components.component';
 import { SheduleStoreEditComponent } from './components/shedule-store-edit/shedule-store-edit.component';
 
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { ProductLoadingComponent } from './product-loading/product-loading.component';
@@ -45,14 +43,11 @@ import { MyStoreComponent } from './pages/my-store/my-store.component';
 
 // PAGINATION //
 
-import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 
 // ALYLE //
 
-import {
-  HAMMER_GESTURE_CONFIG,
-  HammerModule
-} from '@angular/platform-browser';
+import { HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 
 /** Import Alyle UI */
 import {
@@ -60,7 +55,7 @@ import {
   StyleRenderer,
   LY_THEME,
   LY_THEME_NAME,
-  LyHammerGestureConfig
+  LyHammerGestureConfig,
 } from '@alyle/ui';
 
 import { LyIconModule } from '@alyle/ui/icon';
@@ -77,84 +72,90 @@ import { ViewProductsLoadsComponent } from './components/view-products-loads/vie
 import { AccountComponent } from './account/account.component';
 import { ROUTING_VIEW_STORE } from './view.routes';
 import { ProductLoadingSmartComponent } from './product-loading/container/product-loading-smart/product-loading-smart.component';
-
+import { SettingsComponent } from './settings/settings.component';
+import { SidebarComponent } from './settings/components/sidebar/sidebar.component';
+import { PlanCardComponent } from './settings/components/plan-card/plan-card.component';
+import { PlanDetailsComponent } from './settings/components/plan-details/plan-details.component';
+import { PaymentDetailsComponent } from './settings/components/payment-details/payment-details.component';
 
 @NgModule({
-    entryComponents: [
-      MapEditarComponent,
-      ContactDescriptionEditComponent
-    ],
-    // tslint:disable-next-line: max-line-length
-    declarations: [
-      AccountComponent,
-      DashboardComponent,
-      ProductLoadComponent,
-      FormAccountComponent,
-      ContactComponent,
-      ContactInformationEditComponent,
-      ContactInformationComponent,
-      MapaComponent,
-      MapEditarComponent,
-      ContactDescriptionEditComponent,
-      ContactDescriptionComponent,
-      AsideComponent,
-      PhotoUserEditComponent,
-      PhotoUserComponent,
-      CardShimmerFormConfigurationComponent,
-      CardShimmerPhotoUserEditComponent,
-      CardShimmerTableInformacionComponent,
-      CardShimmerTitleStoreComponent,
-      ScheduleStoreComponent,
-      ComponentsComponent,
-      SheduleStoreEditComponent,
-      ProductLoadingComponent,
-      MyStoreComponent,
-      ViewProductsLoadsComponent,
-      ProductLoadingSmartComponent],
+  entryComponents: [MapEditarComponent, ContactDescriptionEditComponent],
+  // tslint:disable-next-line: max-line-length
+  declarations: [
+    AccountComponent,
+    DashboardComponent,
+    ProductLoadComponent,
+    FormAccountComponent,
+    ContactComponent,
+    ContactInformationEditComponent,
+    ContactInformationComponent,
+    MapaComponent,
+    MapEditarComponent,
+    ContactDescriptionEditComponent,
+    ContactDescriptionComponent,
+    AsideComponent,
+    PhotoUserEditComponent,
+    PhotoUserComponent,
+    CardShimmerFormConfigurationComponent,
+    CardShimmerPhotoUserEditComponent,
+    CardShimmerTableInformacionComponent,
+    CardShimmerTitleStoreComponent,
+    ScheduleStoreComponent,
+    ComponentsComponent,
+    SheduleStoreEditComponent,
+    ProductLoadingComponent,
+    MyStoreComponent,
+    ViewProductsLoadsComponent,
+    ProductLoadingSmartComponent,
+    SettingsComponent,
+    SidebarComponent,
+    PlanCardComponent,
+    PlanDetailsComponent,
+    PaymentDetailsComponent,
+  ],
 
-    imports: [
-      CommonModule,
-      MaterialModule,
-      NgxPaginationModule,
-      SharedModule,
-      PipesModule,
-      ImageCropperModule,
-      BrowserAnimationsModule,
-      // MODULOS Alyle //
-      LyButtonModule,
-      LyToolbarModule,
-      LyImageCropperModule,
-      LyIconModule,
-      // END MODULOS Alyle //
-      HammerModule,
-      ComponentsModule,
-      APP_ROUTING,
-      ROUTING_VIEW_STORE,
-      NzTimePickerModule,
-      FormsModule,
-      ReactiveFormsModule,
-      AgmCoreModule.forRoot({
-        apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'
-      }),
-      NgbModule
-      ],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    NgxPaginationModule,
+    SharedModule,
+    PipesModule,
+    ImageCropperModule,
+    BrowserAnimationsModule,
+    // MODULOS Alyle //
+    LyButtonModule,
+    LyToolbarModule,
+    LyImageCropperModule,
+    LyIconModule,
+    // END MODULOS Alyle //
+    HammerModule,
+    ComponentsModule,
+    APP_ROUTING,
+    ROUTING_VIEW_STORE,
+    NzTimePickerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14',
+    }),
+    NgbModule,
+  ],
 
-    exports: [
-      PhotoUserEditComponent,
-      PhotoUserComponent,
-      CardShimmerFormConfigurationComponent
-    ],
+  exports: [
+    PhotoUserEditComponent,
+    PhotoUserComponent,
+    CardShimmerFormConfigurationComponent,
+  ],
 
-    providers: [
-      [ LyTheme2 ],
-      [ StyleRenderer ],
-      // Theme that will be applied to this module
-      { provide: LY_THEME_NAME, useValue: 'minima-light' },
-      { provide: LY_THEME, useClass: MinimaLight, multi: true }, // name: `minima-light`
-      { provide: LY_THEME, useClass: MinimaDark, multi: true }, // name: `minima-dark`
-      // Gestures
-      { provide: HAMMER_GESTURE_CONFIG, useClass: LyHammerGestureConfig }
-    ],
-
-  })
-  export class PrivateviewModule { }
+  providers: [
+    [LyTheme2],
+    [StyleRenderer],
+    // Theme that will be applied to this module
+    { provide: LY_THEME_NAME, useValue: 'minima-light' },
+    { provide: LY_THEME, useClass: MinimaLight, multi: true }, // name: `minima-light`
+    { provide: LY_THEME, useClass: MinimaDark, multi: true }, // name: `minima-dark`
+    // Gestures
+    { provide: HAMMER_GESTURE_CONFIG, useClass: LyHammerGestureConfig },
+  ],
+})
+export class PrivateviewModule {}
