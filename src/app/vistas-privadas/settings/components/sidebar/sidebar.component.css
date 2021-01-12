@@ -1,0 +1,50 @@
+/* -------------------- SideNav styling -----------------------*/
+#sideNav {
+  width: 250px;
+  position: relative;
+  transition: all 0.5s;
+  padding: 0px 10px;
+}
+
+#sideNav h3 {
+  font-family: "Montserrat", "Segoe UI", sans-serif;
+  font-weight: bold;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+#sideNav ul {
+  margin-left: 0;
+}
+
+#sideNav ul li {
+  list-style: none;
+  margin: 3px 20px;
+  transition: all 0.5s;
+}
+
+.sidebar-link {
+  border-radius: 5px;
+  padding: 5px;
+  color: var(--font-color);
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar-link.active {
+  background: #ece9e9;
+  font-weight: bold;
+}
+
+.sidebar-link:hover {
+  background: #ece9e9;
+  font-weight: bold;
+}
+
+#sideNav ul li i {
+  margin-right: 20px;
+  font-size: 1em;
+  color: var(--font-color);
+}
