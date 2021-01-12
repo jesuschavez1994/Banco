@@ -1,0 +1,135 @@
+/* ---------------- Resets fot global stylings -------------- */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", "Segoe UI", sans-serif;
+}
+/* -------------------- Button stylings --------------------- */
+.btn {
+  margin: 5px;
+}
+
+/* --------- Payment details section stylings --------------- */
+.payment-details {
+  /* margin-top: 1em; */
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-details .plan-name {
+  font-size: 1.3em;
+  margin: 0.8em 0;
+}
+
+.payment-details .total {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+.payment-details .total span {
+  color: #24c8af;
+  font-weight: 400;
+}
+
+/* Payment methods section stylings -------------------------- */
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-methods h5 {
+  font-size: 1.3em;
+  margin: 1em 0em;
+}
+
+.payment-methods .note {
+  margin: 1em 0;
+  grid-area: note;
+}
+
+.payment-methods .webpay-banner {
+  display: grid;
+  grid-template-columns: 30px auto;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "title title"
+    "checkbox content"
+    "... note";
+}
+
+.payment-methods .webpay-banner .title {
+  width: 65%;
+  grid-area: title;
+  text-align: center;
+  margin: 1em 0;
+  font-size: 1.2em;
+}
+
+.payment-methods .webpay-banner .checkbox {
+  grid-area: checkbox;
+}
+
+.payment-methods .webpay-banner .banner {
+  grid-area: content;
+  padding: 10px;
+  width: 65%;
+  border: 0.2px solid rgb(168, 167, 167);
+  height: 80px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas: "image text";
+  justify-items: center;
+}
+
+.payment-methods .webpay-banner .banner > img {
+  grid-area: image;
+  width: 100%;
+  height: 100%;
+}
+
+.payment-methods .webpay-banner .banner p {
+  grid-area: text;
+  text-align: left;
+  justify-self: center;
+  font-size: 0.8em;
+  line-height: 1.5;
+}
+
+.payment-methods .webpay-banner .note p {
+  width: 55%;
+}
+
+.payment-methods .btn {
+  background: #ef9109;
+  border-radius: 5px;
+  color: whitesmoke;
+  font-weight: bold;
+  width: 55%;
+  margin-left: 30px;
+}
+
+/* ---------- Different colors for each plan stylings ---------- */
+.payment-details .plan-name.basic {
+  color: #24c8af;
+}
+
+.payment-details h5 > span.basic {
+  color: #24c8af;
+}
+
+.payment-details .plan-name.standard {
+  color: #ff8647;
+}
+
+.payment-details h5 > span.standard {
+  color: #ff8647;
+}
+
+.payment-details .plan-name.premium {
+  color: #3673ff;
+}
+
+.payment-details h5 > span.premium {
+  color: #3673ff;
+}
