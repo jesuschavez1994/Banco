@@ -1,0 +1,156 @@
+<mat-card
+  class="card"
+  [class.basic]="planInfo.name === 'Basic'"
+  [class.standard]="planInfo.name === 'Standard'"
+  [class.premium]="planInfo.name === 'Premium'"
+>
+  <mat-card-header class="card-title" mat-card-image>
+    <h4>{{ planInfo.name }}</h4>
+    <i class="fas fa-caret-down fa-2x arrow"></i>
+  </mat-card-header>
+
+  <div
+    class="band"
+    mat-card-image
+    *ngIf="planInfo.adquired"
+    [class.basic]="planInfo.name === 'Basic'"
+    [class.standard]="planInfo.name === 'Standard'"
+    [class.premium]="planInfo.name === 'Premium'"
+  >
+    <small> Plan actual </small>
+  </div>
+
+  <!-- Card body -->
+  <mat-card-content class="card-body">
+    <ul class="bonuses">
+      <li>
+        <i
+          class="fas"
+          [class.fa-check]="planInfo.productLoad"
+          [class.fa-times]="!planInfo.productLoad"
+        ></i
+        >Carga de 100 productos.
+      </li>
+      <li>
+        <i
+          class="fas"
+          [class.fa-check]="planInfo.contactInfo"
+          [class.fa-times]="!planInfo.contactInfo"
+        ></i>
+        Información de contacto.
+      </li>
+      <li>
+        <i
+          class="fas"
+          [class.fa-check]="planInfo.bussinessHours"
+          [class.fa-times]="!planInfo.bussinessHours"
+        ></i>
+        Horario de negocio.
+      </li>
+      <li>
+        <i
+          class="fas"
+          [class.fa-check]="planInfo.geoLocation"
+          [class.fa-times]="!planInfo.geoLocation"
+        ></i>
+        Ubicación geográfica.
+      </li>
+    </ul>
+
+    <div class="price">
+      <small class="plan-type">Plan básico</small>
+      <h5 [class.gray]="moreInfo">{{ planInfo.price | currency }}</h5>
+      <small class="renew">{{ planInfo.payType }}</small>
+    </div>
+
+    <button class="btn" (click)="showMore()" *ngIf="!moreInfo" mat-button>
+      Ver más
+    </button>
+    <!-- Wrapper needed for the expand animation -->
+    <div class="wrapper">
+      <!-- More info -->
+      <div class="more-info" [class.show]="moreInfo">
+        <!-- Price additional info -->
+        <div class="price">
+          <small class="plan-type">Banco de productos</small>
+          <h5>
+            {{ planInfo.productBankPrice | currency }}
+          </h5>
+          <small class="renew">De por vida</small>
+
+          <p class="total"><b>Total: &nbsp; &nbsp;</b><span>64.98</span></p>
+        </div>
+        <!-- #Price additional info -->
+
+        <!-- Products sync info -->
+        <div class="sync">
+          <h5>Sincronización de productos</h5>
+          <ul>
+            <mat-radio-group [(ngModel)]="productSync">
+              <li *ngIf="planInfo.productsPics.amount1">
+                <mat-radio-button
+                  type="radio"
+                  value="100"
+                  class="radio"
+                ></mat-radio-button>
+                <p>
+                  <span
+                    class="amount"
+                    [class.basic]="planInfo.name === 'Basic'"
+                    [class.standard]="planInfo.name === 'Standard'"
+                    [class.premium]="planInfo.name === 'Premium'"
+                    >1-100</span
+                  >
+                  fotos del banco de productos.
+                </p>
+              </li>
+
+              <li *ngIf="planInfo.productsPics.amount2">
+                <mat-radio-button
+                  type="radio"
+                  value="300"
+                  class="radio"
+                ></mat-radio-button>
+                <p>
+                  <span
+                    class="amount"
+                    [class.basic]="planInfo.name === 'Basic'"
+                    [class.standard]="planInfo.name === 'Standard'"
+                    [class.premium]="planInfo.name === 'Premium'"
+                    >101-300</span
+                  >
+                  fotos del banco de productos.
+                </p>
+              </li>
+
+              <li *ngIf="planInfo.productsPics.amount3">
+                <mat-radio-button
+                  type="radio"
+                  value="301+"
+                  class="radio"
+                ></mat-radio-button>
+                <p>
+                  <span
+                    class="amount"
+                    [class.basic]="planInfo.name === 'Basic'"
+                    [class.standard]="planInfo.name === 'Standard'"
+                    [class.premium]="planInfo.name === 'Premium'"
+                    >301+</span
+                  >
+                  fotos del banco de productos.
+                </p>
+              </li>
+            </mat-radio-group>
+          </ul>
+
+          <button class="btn" (click)="onPlanSelected($event)" mat-button>
+            <b>Adquirir ahora</b>
+          </button>
+        </div>
+        <!-- #Products sync info -->
+      </div>
+      <!-- #More info -->
+    </div>
+  </mat-card-content>
+  <!-- #Card body -->
+</mat-card>

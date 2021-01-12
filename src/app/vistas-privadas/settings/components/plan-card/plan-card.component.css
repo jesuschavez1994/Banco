@@ -1,0 +1,326 @@
+/* ---------- Reset for all the global styles ------------ */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  line-height: 0px;
+}
+
+h2 {
+  line-height: 0px;
+}
+
+h3 {
+  line-height: 0px;
+}
+
+h4 {
+  line-height: 0px;
+}
+
+h5 {
+  line-height: 0px;
+}
+
+/* Reset for weird global style -------------------- */
+
+.card {
+  margin: 10px;
+  width: 240px;
+  height: auto;
+  background: #fff;
+  border-radius: 12px 12px 5px 5px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  -webkit-box-shadow: 10px 10px 26px -5px rgba(0, 0, 0, 0.32);
+  -moz-box-shadow: 10px 10px 26px -5px rgba(0, 0, 0, 0.32);
+  box-shadow: 10px 10px 26px -5px rgba(0, 0, 0, 0.32);
+}
+
+.card-title {
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 2.8em;
+}
+
+.card-title h4 {
+  position: relative;
+  color: #fff;
+  font-size: 1.2em;
+  margin-top: 0.7em;
+}
+
+/* Arrow below the title ---------------------------------*/
+.arrow {
+  color: #24c8af;
+  position: absolute;
+  top: 65%;
+}
+
+/* Colors for each plan ---------------------------------*/
+.card.basic .card-title {
+  background: #24c8af;
+}
+
+.card.basic .card-title .arrow {
+  color: #24c8af;
+}
+
+.card.basic .sync .btn {
+  color: #24c8af;
+}
+
+.card.standard .card-title {
+  background: #ff8647;
+}
+
+.card.standard .card-title .arrow {
+  color: #ff8647;
+}
+
+.card.standard .sync .btn {
+  color: #ff8647;
+}
+
+.card.premium .card-title {
+  background: #3673ff;
+}
+
+.card.premium .card-title .arrow {
+  color: #3673ff;
+}
+
+.card.premium .sync .btn {
+  color: #3673ff;
+}
+
+/* .card-title::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #24c8af transparent transparent transparent;
+} */
+
+/* "Actual plan" section styling ------------------------*/
+.band {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  height: 1.8em;
+  color: #fff;
+}
+
+.band small {
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.band.basic {
+  background: #24c8af;
+}
+
+.band.standard {
+  background: #ff8647;
+}
+
+.band.premium {
+  background: #3673ff;
+}
+
+/* Card body section styling ----------------------------*/
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.card-body h5 {
+  margin: 0;
+}
+
+.card-body ul {
+  list-style: none;
+}
+
+.card-body ul li {
+  font-size: 0.8em;
+  padding: 10px 0;
+  position: relative;
+}
+
+.card-body ul.bonuses li::after {
+  content: "";
+  position: absolute;
+  left: 25%;
+  top: 18px;
+  height: 0.5px;
+  width: 50%; /* percentage of the element width*/
+  border-bottom: 0.5px solid rgba(35, 36, 35, 0.1);
+  margin-top: 1.2em; /*move the border below the text*/
+}
+
+.card-body a {
+  font-size: 0.8em;
+  margin-top: 0.8em;
+  text-decoration: none;
+}
+
+.fa-check {
+  color: green;
+  margin-right: 10px;
+}
+
+.fa-times {
+  color: red;
+  margin-right: 10px;
+}
+
+.price {
+  margin-top: 0.5em;
+  margin-bottom: 0.4em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas:
+    "plan-type price"
+    "... renew";
+  align-items: center;
+}
+
+.price small.plan-type {
+  font-size: 0.8em;
+  grid-area: plan-type;
+}
+
+.price h5 {
+  grid-area: price;
+}
+
+.price small.renew {
+  grid-area: renew;
+  justify-self: end;
+}
+
+/* More info section styling ----------------------------*/
+.wrapper {
+  overflow: hidden;
+}
+
+.more-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  margin-top: -250%;
+  transition: all 1s;
+}
+
+.more-info.show {
+  margin-top: 0;
+}
+
+.gray {
+  color: rgb(201, 201, 201);
+}
+
+.more-info > div.price {
+  margin-top: 0.5em;
+  margin-bottom: 0.4em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas:
+    "plan-type price"
+    "... renew"
+    "... total";
+  align-items: center;
+  padding: 0em 1em;
+}
+
+.more-info > div.price small {
+  line-height: 1;
+}
+
+.total {
+  margin-top: 1em;
+  font-size: 1.1em;
+  grid-area: total;
+}
+
+.total span {
+  color: #24c8af;
+}
+
+/* Sync section styling ----------------------------*/
+.sync {
+  margin-top: 0.8em;
+  padding: 0.8em;
+  display: flex;
+  flex-direction: column;
+}
+
+.sync h5 {
+  font-size: 0.9em;
+  font-weight: 300;
+  margin-bottom: 0.5em;
+  text-align: center;
+  line-height: 1;
+}
+
+.sync ul li {
+  display: grid;
+  grid-template-columns: 35px auto;
+  grid-template-rows: 40px;
+  grid-template-areas: "radio text";
+}
+
+.sync ul li p span.amount {
+  font-weight: bold;
+}
+
+.sync ul li p span.amount.basic {
+  font-weight: bold;
+  color: #24c8af;
+}
+
+.sync ul li p span.amount.standard {
+  color: #ff8647;
+}
+
+.sync ul li p span.amount.premium {
+  color: #3673ff;
+}
+
+.sync ul li .radio {
+  grid-area: radio;
+  justify-self: center;
+  align-self: center;
+}
+
+.sync ul li p {
+  grid-area: text;
+}
+
+/* --------------------Button styling ---------------------*/
+.sync .btn {
+  margin: 1em 0em 0em 0em;
+  color: #24c8af;
+}
+
+/* -------------------- Animations---------------------*/
