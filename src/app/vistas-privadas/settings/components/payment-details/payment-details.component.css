@@ -1,0 +1,68 @@
+/* ---------------- Resets fot global stylings -------------- */
+ul {
+  margin: 0;
+}
+
+.payment-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-details .back {
+  align-self: flex-start;
+}
+
+/* -------------------- Voucher stylings -------------------- */
+.voucher {
+  position: relative;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 0.5px solid gainsboro;
+  width: 20em;
+  height: 25em;
+}
+
+.voucher .voucher-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4em;
+  background: #f7f7f7;
+  padding: 10px;
+}
+
+.voucher .voucher-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.voucher .voucher-body ul {
+  list-style: none;
+  margin: 0 1em;
+}
+
+.voucher .voucher-body ul .square {
+  padding: 5px 0;
+  border-top: 0.5px solid rgb(231, 231, 231);
+  border-bottom: 0.5px solid rgb(231, 231, 231);
+}
+
+.voucher .voucher-body ul .square li.last {
+  margin-bottom: 0;
+}
+
+.voucher .voucher-body ul li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.3em;
+}
+
+.voucher .voucher-body button.btn-details {
+  align-self: center;
+  margin-top: 1em;
+}
+
+/* -------------------- Button stylings --------------------- */
