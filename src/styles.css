@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700");
 /* You can add global styles to this file, and also import other style files */
+:root {
+  scroll-behavior: smooth;
+}
+
 .width-5 {
   width: 5% !important;
 }
@@ -4236,12 +4240,14 @@ table th {
  ******************/
 /* Radio Buttons
     ========================================================================== */
-/* [type="radio"]:not(:checked),
+/* 
+[type="radio"]:not(:checked),
 [type="radio"]:checked {
   position: absolute;
   left: -9999px;
   opacity: 0;
-} */
+} 
+*/
 
 [type="radio"]:not(:checked) + label,
 [type="radio"]:checked + label {
@@ -4386,12 +4392,14 @@ form p:last-child {
 }
 
 /* Remove default checkbox */
-/* [type="checkbox"]:not(:checked),
+/* 
+[type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
   position: absolute;
   left: -9999px;
   opacity: 0;
-} */
+} 
+*/
 
 [type="checkbox"] {
   /* checkbox aspect */
