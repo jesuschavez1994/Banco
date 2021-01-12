@@ -17,65 +17,68 @@ import { ProductLoadingComponent } from './vistas-privadas/product-loading/produ
 import { MyStoreComponent } from './vistas-privadas/pages/my-store/my-store.component';
 import { ProductLoadingSmartComponent } from './vistas-privadas/product-loading/container/product-loading-smart/product-loading-smart.component';
 
+// Prueba para visualizacion de la vistas desarrolladas
+import { SettingsComponent } from './vistas-privadas/settings/settings.component';
+
 const APP_ROUTES: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'register', component: RegisterComponent },
 
-    {path: 'home', component: HomeComponent},
-    {path: 'register', component: RegisterComponent},
+  { path: 'register-negocio', component: FormDataNegocioComponent },
 
-    {   path: 'register-negocio',
-        component: FormDataNegocioComponent,
-    },
+  { path: 'rut-store', component: RutStoreComponent },
 
-    {   path: 'rut-store',
-        component: RutStoreComponent,
-    },
+  {
+    path: 'account',
+    component: AccountComponent,
+    canActivate: [LoginGuardGuard],
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
+  },
 
-    {   path: 'account',
-        component: AccountComponent,
-        canActivate: [ LoginGuardGuard ],
-    },
+  // VISTAS ADMINISTRATIVAS DEL STORE //
 
-    // VISTAS ADMINISTRATIVAS DEL STORE //
+  {
+    path: 'my-store',
+    component: MyStoreComponent,
+    canActivate: [LoginGuardGuard],
+    children: [
+      {
+        path: 'contact',
+        component: ContactComponent,
+      },
+      {
+        path: 'product-loading',
+        component: ProductLoadingComponent,
+      },
 
-    {
-        path: 'my-store',
-        component: MyStoreComponent,
-        canActivate: [ LoginGuardGuard ],
-        children: [
-            {
-                path: 'contact',
-                component: ContactComponent,
-            },
-            {
-                path: 'product-loading',
-                component: ProductLoadingComponent
-            },
+      { path: '**', pathMatch: 'full', redirectTo: 'contact' },
+    ],
+  },
 
-            {path: '**', pathMatch: 'full', redirectTo: 'contact'},
-        ]
-    },
+  // {   path: 'contact',
+  //     component: ContactComponent,
+  //     canActivate: [ LoginGuardGuard ],
+  //     children: [
+  //         { path: 'contact-information-edit', component: ContactInformationEditComponent},
+  //     ]
+  // },
 
-    // {   path: 'contact',
-    //     component: ContactComponent,
-    //     canActivate: [ LoginGuardGuard ],
-    //     children: [
-    //         { path: 'contact-information-edit', component: ContactInformationEditComponent},
-    //     ]
-    // },
+  { path: 'login-usuario', component: LoginUsuarioComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'terminos-ycondiciones', component: TerminosYCondicionesComponent },
+  {
+    path: 'public-views',
+    component: PublicViewsComponent,
+    children: [
+      { path: 'detalle-producto/:id', component: DetalleProductoComponent },
+    ],
+  },
+  // { path: 'detalle-producto/:id', component: ViewProductoComponent},
 
-    {path: 'login-usuario', component: LoginUsuarioComponent},
-    {path: 'dashboard', component: DashboardComponent},
-    {path: 'terminos-ycondiciones', component: TerminosYCondicionesComponent},
-    {
-        path: 'public-views',
-        component: PublicViewsComponent,
-        children: [
-            { path: 'detalle-producto/:id', component: DetalleProductoComponent},
-        ]
-    },
-    // { path: 'detalle-producto/:id', component: ViewProductoComponent},
-
-    { path: '**', pathMatch: 'full', redirectTo: 'home' }
+  { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];
 
-export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES, {useHash: true});
+export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES, { useHash: true });
