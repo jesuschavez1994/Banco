@@ -1,0 +1,15 @@
+ 
+ .page{
+   min-height: 100%;
+   display: flex;
+   flex-wrap: nowrap;
+   .content-home{
+     width: 100%;
+     
+     .categorys-group{
+       padding: 8% 4%;
+
+     }
+
+   }
+ }

@@ -1,0 +1,30 @@
+<header class="cty-header">
+    <h3 class="cty-title">
+        Title.category
+    </h3>
+    <a class="cty-link">ver mas</a>
+    <hr>
+</header>
+
+<main>
+
+    <nav class="list-items">
+        <ol>
+            <li class=" item product" id="index" *ngFor=" let i of listCategory; let j = index">
+                <article class="product-item-info card">
+                    <picture class="product-image-container">
+                                <img    src="assets/img/box.svg" 
+                                        class="card-img-top" 
+                                        alt="..." 
+                                >
+                    </picture>
+                    <div class="card-body pb-0 pt-0">
+                            <p class="family-600 size-11 mb-0 detail-name card-text line" title="description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit fugiat dolorum sunt.
+                            </p>
+                        </div>
+                </article>
+            </li>
+        </ol>
+    </nav>
+</main>

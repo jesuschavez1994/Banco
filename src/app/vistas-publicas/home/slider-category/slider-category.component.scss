@@ -1,0 +1,94 @@
+.cty-header{
+    padding: 0 0 15px 10px;
+    .cty-title{
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-right: 5px;
+    }
+}
+.list-items{
+    ol{
+        padding: 0;
+        margin: 0;
+        text-decoration: none;
+        text-decoration-style: none;
+        display: flex;
+        flex-wrap: nowrap;
+
+        overflow-x: scroll;
+    }
+    .item{
+        display: inline-block;
+        width: 175px;
+        height: 255px;
+        min-width: 175px !important;
+        min-height: 255px !important;
+
+        .card {
+            display: inline-block;
+            width: 80%;
+
+            background-color: #fff;
+            height: 370px;
+            width: 100%;
+
+
+            .material-icons{
+                display: none;
+            }
+
+            &:hover{
+                box-shadow: 0px 1px 5px 1px rgba(0,0,0,.1) !important;
+                border: none !important;
+                padding-bottom: .1%;
+                cursor: pointer;
+                filter: grayscale(5%) brightness(90%) opacity(100%);
+                -webkit-filter: grayscale(5%) brightness(90%) opacity(100%);
+                -moz-filter: grayscale(5%) brightness(90%) opacity(100%);
+
+                .material-icons{
+                    display: block;
+                }
+            }
+            i{
+                z-index: 10;
+
+            }
+
+            .icon-gris{color: #aeaeb8 !important;}
+
+            .product-image-container {
+                display: inline-block;
+                max-width: 100%;
+
+                .product-image-wrapper {
+                    display: block;
+                    height: 0;
+                    overflow: hidden;
+                    position: relative;
+                    z-index: 1;
+                    padding-bottom: 95% !important;
+                    
+                    &:hover{
+                        -webkit-transform:scale(1.1);
+                        -moz-transform:scale(1.1);
+                        -ms-transform:scale(1.1);
+                        -o-transform:scale(1.1);
+                        transform:scale(1.1);
+                        transition: all .7s cubic-bezier(.165,.84,.44,1);
+                    } 
+                }
+                
+            }
+            .card-body{
+                
+
+                .detail-name{
+                    max-height: 55px;
+                    min-height: 55px;
+                }
+            }
+        }
+    }
+}
+ 

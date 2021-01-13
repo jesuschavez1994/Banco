@@ -1,0 +1,24 @@
+.carousel{
+    width: 100%;
+     
+    ol{
+        margin-bottom: 5px;
+        li{
+            width: 5px;
+            height: 5px;
+            border-radius: 100%;
+            margin: 0 5px;
+        &.active{
+            background-color: #F19301;
+        }
+        }
+    }
+    .carousel-inner{
+
+    }
+    .carousel-item{
+        img{
+            width: 100%;
+        }
+    }
+}

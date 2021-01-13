@@ -18,6 +18,7 @@ import { MaterialModule } from '../Angula-Material/material.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { PrivateviewModule } from '../vistas-privadas/privateview.module';
 import { APP_ROUTING } from '../app.routes';
+import { SliderCategoryComponent } from './home/slider-category/slider-category.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { APP_ROUTING } from '../app.routes';
     // ShoppingCartComponent,
     BusinessDetailComponent,
     LoginComponent,
+    SliderCategoryComponent,
   ],
   imports: [
     CommonModule,
