@@ -72,7 +72,7 @@
 .payment-methods .webpay-banner .banner {
   grid-area: content;
   padding: 10px;
-  width: 65%;
+  width: 55%;
   border: 0.2px solid rgb(168, 167, 167);
   height: 80px;
   display: grid;
