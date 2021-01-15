@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Plan } from './models/plan';
+import { SubscriptionService } from '@services/subscription/subscription.service';
 
 import {
   trigger,
@@ -33,10 +34,8 @@ import {
   ],
 })
 export class SettingsComponent implements OnInit {
-  currentPage = 'payment-details';
+  currentPage = 'plans';
   selectedPlan: Plan;
-  fadeOut = true;
-  fadeIn = true;
 
   plans: Array<Plan>;
   route = 'Planes';
@@ -50,12 +49,12 @@ export class SettingsComponent implements OnInit {
     this.currentPage = page;
   }
 
-  constructor() {}
+  constructor(private subscriptionDataService: SubscriptionService) {}
 
   ngOnInit(): void {
     this.plans = [
       new Plan(
-        'Basic',
+        'basic',
         true,
         false,
         false,
@@ -67,7 +66,7 @@ export class SettingsComponent implements OnInit {
         true
       ),
       new Plan(
-        'Standard',
+        'standard',
         true,
         true,
         false,
@@ -78,7 +77,7 @@ export class SettingsComponent implements OnInit {
         49.99
       ),
       new Plan(
-        'Premium',
+        'premium',
         true,
         true,
         true,
@@ -91,7 +90,7 @@ export class SettingsComponent implements OnInit {
     ];
 
     this.selectedPlan = new Plan(
-      'Basic',
+      'basic',
       true,
       false,
       false,

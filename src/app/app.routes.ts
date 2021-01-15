@@ -36,6 +36,7 @@ const APP_ROUTES: Routes = [
   {
     path: 'settings',
     component: SettingsComponent,
+    children: []
   },
 
   // VISTAS ADMINISTRATIVAS DEL STORE //

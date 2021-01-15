@@ -5,7 +5,7 @@
   [class.premium]="planInfo.name === 'premium'"
 >
   <mat-card-header class="card-title" mat-card-image>
-    <h4>{{ planInfo.name }}</h4>
+    <h4>{{ planInfo.name | titlecase }}</h4>
     <i class="fas fa-caret-down fa-2x arrow"></i>
   </mat-card-header>
 

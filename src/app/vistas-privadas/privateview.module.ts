@@ -72,11 +72,14 @@ import { ViewProductsLoadsComponent } from './components/view-products-loads/vie
 import { AccountComponent } from './account/account.component';
 import { ROUTING_VIEW_STORE } from './view.routes';
 import { ProductLoadingSmartComponent } from './product-loading/container/product-loading-smart/product-loading-smart.component';
-import { SettingsComponent } from './settings/settings.component';
-import { SidebarComponent } from './settings/components/sidebar/sidebar.component';
-import { PlanCardComponent } from './settings/components/plan-card/plan-card.component';
-import { PlanDetailsComponent } from './settings/components/plan-details/plan-details.component';
-import { PaymentDetailsComponent } from './settings/components/payment-details/payment-details.component';
+
+/* Account settings components imports */
+import { SettingsComponent } from './account-settings/settings.component';
+import { SidebarComponent } from './account-settings/components/sidebar/sidebar.component';
+import { PlanCardComponent } from './account-settings/components/plan-card/plan-card.component';
+import { PlanDetailsComponent } from './account-settings/components/plan-details/plan-details.component';
+import { PaymentDetailsComponent } from './account-settings/components/payment-details/payment-details.component';
+import { PlansComponent } from './account-settings/pages/plans/plans.component';
 
 @NgModule({
   entryComponents: [MapEditarComponent, ContactDescriptionEditComponent],
@@ -112,6 +115,7 @@ import { PaymentDetailsComponent } from './settings/components/payment-details/p
     PlanCardComponent,
     PlanDetailsComponent,
     PaymentDetailsComponent,
+    PlansComponent,
   ],
 
   imports: [
