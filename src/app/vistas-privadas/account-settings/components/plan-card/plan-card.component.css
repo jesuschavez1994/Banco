@@ -281,7 +281,7 @@ h5 {
 
 .sync ul li {
   display: grid;
-  grid-template-columns: 35px auto;
+  grid-template-columns: 45px auto;
   grid-template-rows: 40px;
   grid-template-areas: "radio text";
 }

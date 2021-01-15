@@ -4,16 +4,20 @@ Servicio donde se implementará la lógica referente a la suscripción de los pl
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICIOS } from 'src/app/config/config';
+import { BROWSER_STORAGE } from '../../browserStorage';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SubscriptionService {
-  constructor(private httpService: HttpClient) {}
+  constructor(
+    private httpService: HttpClient,
+    @Inject(BROWSER_STORAGE) private localStorage: Storage
+  ) {}
 
   private apiBaseURL = URL_SERVICIOS;
-  private userId = localStorage.getItem('id');
-  private token = localStorage.getItem('token');
+  private userId = this.localStorage.getItem('id');
+  private token = this.localStorage.getItem('token');
 
   public createOrderNumber(planDetails: Object): Promise<Object> {
     const url = `${this.apiBaseURL}/api/users/${this.userId}/orders`;
