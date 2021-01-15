@@ -19,6 +19,7 @@ import { ProductLoadingSmartComponent } from './vistas-privadas/product-loading/
 
 // Prueba para visualizacion de la vistas desarrolladas
 import { SettingsComponent } from './vistas-privadas/account-settings/settings.component';
+import { PlansComponent } from './vistas-privadas/account-settings/pages/plans/plans.component';
 
 const APP_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
@@ -36,7 +37,12 @@ const APP_ROUTES: Routes = [
   {
     path: 'settings',
     component: SettingsComponent,
-    children: []
+    children: [
+      {
+        path: 'plans',
+        component: PlansComponent,
+      },
+    ],
   },
 
   // VISTAS ADMINISTRATIVAS DEL STORE //
