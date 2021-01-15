@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Plan } from '../../../../models/plan';
+import { Plan } from '../../models/plan';
 
 @Component({
   selector: 'app-payment-details',

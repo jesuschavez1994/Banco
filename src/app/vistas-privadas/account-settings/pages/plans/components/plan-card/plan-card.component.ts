@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Plan } from '../../../../models/plan';
+import { Plan } from '../../models/plan';
 import { SubscriptionService } from '@services/subscription/subscription.service';
 
 @Component({
@@ -34,7 +34,9 @@ export class PlanCardComponent implements OnInit {
 
   onPlanSelected(event): void {
     this.selectPlan.emit(this.planInfo);
-    this.getOrderNumber();
+    this.pageChange.emit(this.nextPage);
+    window.scrollTo(0, 0);
+    // this.getOrderNumber();
   }
 
   onCheck(): void {
