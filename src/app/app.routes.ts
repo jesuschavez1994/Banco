@@ -18,7 +18,7 @@ import { MyStoreComponent } from './vistas-privadas/pages/my-store/my-store.comp
 import { ProductLoadingSmartComponent } from './vistas-privadas/product-loading/container/product-loading-smart/product-loading-smart.component';
 
 // Prueba para visualizacion de la vistas desarrolladas
-import { SettingsComponent } from './vistas-privadas/settings/settings.component';
+import { SettingsComponent } from './vistas-privadas/account-settings/settings.component';
 
 const APP_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
