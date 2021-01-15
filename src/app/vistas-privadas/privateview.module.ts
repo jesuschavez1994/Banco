@@ -75,10 +75,10 @@ import { ProductLoadingSmartComponent } from './product-loading/container/produc
 
 /* Account settings components imports */
 import { SettingsComponent } from './account-settings/settings.component';
-import { SidebarComponent } from './account-settings/components/sidebar/sidebar.component';
-import { PlanCardComponent } from './account-settings/components/plan-card/plan-card.component';
-import { PlanDetailsComponent } from './account-settings/components/plan-details/plan-details.component';
-import { PaymentDetailsComponent } from './account-settings/components/payment-details/payment-details.component';
+import { SidebarComponent } from './account-settings/pages/plans/components/sidebar/sidebar.component';
+import { PlanCardComponent } from './account-settings/pages/plans/components/plan-card/plan-card.component';
+import { PlanDetailsComponent } from './account-settings/pages/plans/components/plan-details/plan-details.component';
+import { PaymentDetailsComponent } from './account-settings/pages/plans/components/payment-details/payment-details.component';
 import { PlansComponent } from './account-settings/pages/plans/plans.component';
 
 @NgModule({
