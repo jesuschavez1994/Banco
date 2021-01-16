@@ -9,17 +9,26 @@ export interface OrderNumberCreation {
   plan_name: string;
   type: string;
   price: number;
-  strore_id: number;
+  store_id: number;
 }
 
 export interface CreatedOrder {
-  user_id: number;
-  title: string;
-  total_price: number;
-  type: string;
-  updated_at: string;
-  created_at: string;
-  id: number;
+  order: {
+    user_id: number;
+    title: string;
+    total_price: number;
+    type: string;
+    updated_at: string;
+    created_at: string;
+    id: number;
+  };
+  subscription: {
+    store_id: number;
+    plan_id: number;
+    updated_at: string;
+    created_at: string;
+    id: number;
+  };
 }
 
 export interface Payment {
