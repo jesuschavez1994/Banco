@@ -1,11 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Servicios //
-import { HttpClientModule  } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 // Rutas //
 import { APP_ROUTING } from './app.routes';
 
@@ -21,7 +21,7 @@ import { LoginModule } from './Login/login.module';
 
 // ngrx => PATRÓN REDUX//
 import { StoreModule } from '@ngrx/store';
-import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { appReducers } from './app.reducer';
 import { InterceptorService } from './services/Interceotores/interceptor.service';
@@ -31,7 +31,6 @@ import { PrivateviewModule } from './vistas-privadas/privateview.module';
 import { AgmCoreModule } from '@agm/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { ca_ES } from 'ng-zorro-antd/i18n';
@@ -39,13 +38,10 @@ import { registerLocaleData } from '@angular/common';
 import ca from '@angular/common/locales/ca';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 registerLocaleData(ca);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     ImageCropperModule,
@@ -69,12 +65,11 @@ registerLocaleData(ca);
       logOnly: environment.production,
     }),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'
+      apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14',
     }),
-    NgbModule
+    NgbModule,
   ],
-  providers: [
-  { provide: NZ_I18N, useValue: ca_ES }],
-  bootstrap: [AppComponent]
+  providers: [Title, { provide: NZ_I18N, useValue: ca_ES }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

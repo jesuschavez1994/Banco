@@ -41,6 +41,7 @@ const APP_ROUTES: Routes = [
       {
         path: 'plans',
         component: PlansComponent,
+        data: { title: 'Founduss | Plans' },
       },
     ],
   },
