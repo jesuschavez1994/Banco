@@ -11,26 +11,24 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "lib": ["es2018", "dom"],
     // short import //
     "paths": {
+      "@app/*": ["src/app/*"],
       "@services/*": ["src/app/services/*"],
       "@models/*": ["src/app/models/*"],
       "@classes/*": ["src/app/vistas-privadas/classes/*"],
       "@interfaces/*": ["src/app/interfaces/*"],
       "@utils/*": ["src/app/utils/*"],
-      "@Cards-Shimmer/*": ["src/app/vistas-privadas/components/Cards-Shimmer/*"],
+      "@Cards-Shimmer/*": [
+        "src/app/vistas-privadas/components/Cards-Shimmer/*"
+      ],
       "@Angula-Material/*": ["src/app/Angula-Material/*"],
-      "@pipes/*": ["src/app/pipes/*"],
-    },
+      "@pipes/*": ["src/app/pipes/*"]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
-  },
-  
-
+  }
 }
