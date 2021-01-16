@@ -144,7 +144,8 @@
           </ul>
 
           <button class="btn" (click)="onPlanSelected($event)" mat-button>
-            <b>Adquirir ahora</b>
+            <b *ngIf="!waitingResponse">Adquirir ahora</b>
+            <mat-spinner *ngIf="waitingResponse" [diameter]="30"></mat-spinner>
           </button>
         </div>
         <!-- #Products sync info -->

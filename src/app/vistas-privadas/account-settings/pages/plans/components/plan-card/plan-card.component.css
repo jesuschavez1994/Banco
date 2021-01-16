@@ -315,8 +315,11 @@ h5 {
 
 /* --------------------Button styling ---------------------*/
 .sync .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 1em 0em 0em 0em;
   color: #24c8af;
 }
 
-/* -------------------- Animations---------------------*/
+/* -------------------- Spinner styling ---------------------*/
