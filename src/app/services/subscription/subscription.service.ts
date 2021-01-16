@@ -5,6 +5,10 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICIOS } from 'src/app/config/config';
 import { BROWSER_STORAGE } from '../../browserStorage';
+import {
+  OrderNumberCreation,
+  CreatedOrder,
+} from '@interfaces/SettingsInterfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +23,9 @@ export class SubscriptionService {
   private userId = this.localStorage.getItem('id');
   private token = this.localStorage.getItem('token');
 
-  public createOrderNumber(planDetails: Object): Promise<Object> {
+  public createOrderNumber(
+    planDetails: OrderNumberCreation
+  ): Promise<CreatedOrder> {
     const url = `${this.apiBaseURL}/api/users/${this.userId}/orders`;
     // We add the corresponding headers to the request
     const httpOptions = {
@@ -31,7 +37,7 @@ export class SubscriptionService {
     return this.httpService
       .post(url, planDetails, httpOptions)
       .toPromise()
-      .then((response) => response as Object)
+      .then((response) => response as CreatedOrder)
       .catch(this.handleError);
   }
 
