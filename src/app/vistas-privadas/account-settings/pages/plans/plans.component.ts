@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Plan } from './models/plan';
 import { SubscriptionService } from '@services/subscription/subscription.service';
+import { CreatedOrder } from '@interfaces/SettingsInterfaces';
 
 import {
   trigger,
@@ -36,6 +37,7 @@ import {
 export class PlansComponent implements OnInit {
   currentPage = 'plans';
   selectedPlan: Plan;
+  orderInfo: CreatedOrder;
 
   plans: Array<Plan>;
   route = 'Planes';
@@ -43,6 +45,10 @@ export class PlansComponent implements OnInit {
   // Processing the events data from the <app-product-card></app-product-card> component.
   onPlanSelected(plan: Plan): void {
     this.selectedPlan = plan;
+  }
+
+  gotOrderDetails(orderDetails: CreatedOrder): void {
+    this.orderInfo = orderDetails;
   }
 
   onPageChange(page: string): void {
