@@ -17,6 +17,7 @@
         [planInfo]="plan"
         (selectPlan)="onPlanSelected($event)"
         (pageChange)="onPageChange($event)"
+        (gotOrderDetails)="gotOrderDetails($event)"
       ></app-plan-card>
     </div>
   </div>
@@ -29,6 +30,7 @@
     <app-plan-details
       (pageChange)="onPageChange($event)"
       [selectedPlanDetails]="selectedPlan"
+      [orderDetails]="orderInfo"
     ></app-plan-details>
   </div>
 
