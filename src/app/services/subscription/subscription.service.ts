@@ -31,24 +31,6 @@ export class SubscriptionService {
   private userId = this.localStorage.getItem('id');
   private token = this.localStorage.getItem('token');
 
-  /*   public createOrderNumber(
-    planDetails: OrderNumberCreation
-  ): Promise<CreatedOrder> {
-    const url = `${this.apiBaseURL}/api/users/${this.userId}/orders`;
-    // We add the corresponding headers to the request
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${this.token}`,
-      }),
-    };
-
-    return this.httpService
-      .post(url, planDetails, httpOptions)
-      .toPromise()
-      .then((response) => response as CreatedOrder)
-      .catch(this.handleError);
-  } */
-
   createOrderNumber(planDetails: OrderNumberCreation) {
     const url = `${this.apiBaseURL}/api/users/${this.userId}/orders`;
     // We add the corresponding headers to the request
@@ -63,7 +45,7 @@ export class SubscriptionService {
       .pipe(catchError(this.handleError));
   }
 
-  /*   paymentCreation(userId: number, orderId: number): Promise<Payment> {
+  paymentCreation(userId: number, orderId: number) {
     const url = `${this.apiBaseURL}/api/users/${userId}/orders/${orderId}/payments`;
     // We add the corresponding headers to the request
     const httpOptions = {
@@ -73,11 +55,9 @@ export class SubscriptionService {
     };
 
     return this.httpService
-      .post(url, httpOptions)
-      .toPromise()
-      .then((response) => response as Payment)
-      .catch(this.handleError);
-  } */
+      .post<Payment>(url, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
