@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PublicNavbarComponent } from './public-navbar.component';
+import { CategorysComponent } from './categorys.component';
 
-describe('PublicNavbarComponent', () => {
-  let component: PublicNavbarComponent;
-  let fixture: ComponentFixture<PublicNavbarComponent>;
+describe('CategorysComponent', () => {
+  let component: CategorysComponent;
+  let fixture: ComponentFixture<CategorysComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PublicNavbarComponent ]
+      declarations: [ CategorysComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PublicNavbarComponent);
+    fixture = TestBed.createComponent(CategorysComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

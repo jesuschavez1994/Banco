@@ -7,6 +7,7 @@ import { LoginUsuarioComponent } from './Login/Logins/login-usuario.component';
 import { FormDataNegocioComponent } from './form-register/form-data-negocio/form-data-negocio.component';
 import { DashboardComponent } from './vistas-privadas/dashboard/dashboard.component';
 import { HomeComponent } from './vistas-publicas/home/home.component';
+import { CategorysComponent } from './vistas-publicas/categorys/categorys.component';
 import { RegisterComponent } from './vistas-publicas/Registers/Usuario/register.component';
 import { RutStoreComponent } from './form-register/rut-store/rut-store.component';
 import { AccountComponent } from './vistas-privadas/account/account.component';
@@ -42,6 +43,7 @@ const APP_ROUTES: Routes = [
 
     {path: 'home', component: HomeComponent},
     {path: 'register', component: RegisterComponent},
+    {path: 'categorys', component: CategorysComponent},
     {   path: 'admin',
         component: LoadBanckProductComponent,
         children: [
@@ -160,7 +162,6 @@ const APP_ROUTES: Routes = [
     },
 
 
-    
     {path: 'dashboard', component: DashboardComponent},
     {path: 'terminos-ycondiciones', component: TerminosYCondicionesComponent},
     {

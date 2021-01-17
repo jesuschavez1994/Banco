@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-category-link',
   template: `
-    <a href="">
+    <a [routerLink]="['/categorys']">
       CATEGORIAS
     </a>`,
   styleUrls: ['./category-link.component.scss']

@@ -2,48 +2,62 @@
 picture{
     padding-bottom: 1rem;
 } */
-/* menor medida */
-$telfP : 320px;
-/* menor media */
-$telfM : 375px;
-/* menor grande */
-$telfG : 425px;
-/*media  */
-$tablets: 768px;
-/*  laptop*/
-$laptop: 1024px;
-/* laptopG */
-$laptopG: 1440px;
 
-svg{
-    max-height: 45px; 
+
+/* menor medida */
+
+$telfP: 320px;
+
+/* menor media */
+
+$telfM: 375px;
+
+/* menor grande */
+
+$telfG: 425px;
+
+/*media  */
+
+$tablets: 768px;
+
+/*  laptop*/
+
+$laptop: 1024px;
+
+/* laptopG */
+
+$laptopG: 1440px;
+svg {
+    max-height: 45px;
 }
+
 svg * {
     cursor: pointer;
 }
-a{
+
+a {
     display: block;
     width: auto;
     padding: 0 8px;
 }
-a.brand{
-        display: block;
-        min-width: 160px;
-    }
-a.brand-responsive{
+
+a.brand {
+    display: block;
+    min-width: 160px;
+}
+
+a.brand-responsive {
+    display: none;
+}
+
+@media(max-width: $telfG) {
+    a.brand {
         display: none;
     }
-@media(max-width: $telfG) {
-        a.brand{
-             display: none;
-         }
-        a.brand-responsive{
-            display: block;
-            svg{
-                min-width: 35px;
-            
-            }
+    a.brand-responsive {
+        display: block;
+        svg {
+            min-width: 35px;
         }
-        
-     
- }
+    }
+}

@@ -8,13 +8,12 @@ import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@
 export class SidebarHomeComponent implements OnInit {
  @ViewChild('menuContainerFixed') menuContainerFixed: ElementRef;
  @ViewChild('configurationMenu') configurationMenu: ElementRef;
-
-        auth = false;
+ @Input() auth: boolean;
   constructor() { }
 
   ngOnInit(): void {
   }
-   @HostListener('window:scroll', ['$event'])
+  @HostListener('window:scroll', ['$event'])
   public fixedMenu( $event: Event){
 
     const menuContainerFixed = this.menuContainerFixed.nativeElement;

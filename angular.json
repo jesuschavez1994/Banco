@@ -50,6 +50,7 @@
               "node_modules/@grapecity/spread-sheets/dist/gc.spread.sheets.all.min.js"
               
               
+              
             ]
           },
           "configurations": {
@@ -116,7 +117,7 @@
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["./src/assets/bootstrap4/js/popper.min.js"]
           }
         },
         "lint": {

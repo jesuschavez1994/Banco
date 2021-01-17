@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-nav-options',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-options.component.scss']
 })
 export class NavOptionsComponent implements OnInit {
-  auth = false;
+  @Input() auth: boolean;
   constructor() { }
 
   ngOnInit(): void {

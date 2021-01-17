@@ -1,5 +1,6 @@
  
  .page{
+  font-family: "Montserrat", sans-serif;
    min-height: 100%;
    display: flex;
    flex-wrap: nowrap;
@@ -7,9 +8,36 @@
      width: 100%;
      
      .categorys-group{
-       padding: 8% 4%;
+       padding: 4% 4%;
 
      }
+    
 
    }
  }
+ 
+ @media(max-width: 768px){
+  .page{
+    .content-home{
+       width: 94%;
+      
+    .categorys-group{
+      padding: 4% 4%;
+
+    } 
+  }
+ }
+}
+ @media(max-width: 425px){
+  .page{
+    .content-home{
+       width: 87%;
+      
+    .categorys-group{
+      padding: 6% 4%;
+
+    } 
+  }
+ }
+}
+

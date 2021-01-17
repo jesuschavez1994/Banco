@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-public-navbar',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./public-navbar.component.scss']
 })
 export class PublicNavbarComponent implements OnInit {
-
+  @Input() userLog: boolean;
   constructor() { }
 
   ngOnInit(): void {

@@ -29,5 +29,4 @@ export class ProductService extends Service{
   public getProductByStore( idStore: number, idProduct: number ): Observable<Product> {
     return this.execQuery<Product>(`stores/${idStore}/products/${idProduct}`);
   }
-
 }

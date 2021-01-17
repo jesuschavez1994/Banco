@@ -10,6 +10,6 @@
 
 //// ==================== PRODUCCION ============================////
 
-export const URL_SERVICIOS = 'http://31.220.108.209';
+export const URL_SERVICIOS = 'http://founduss.com';
 
 //=======================================================//////

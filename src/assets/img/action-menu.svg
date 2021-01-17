@@ -1,55 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="menu-act-00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-		viewBox="-73 164.9 448 512" style="enable-background:new -73 164.9 448 512;" xml:space="preserve">
+<svg version="1.1"  id="menu-act-00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 400 400" style="enable-background:new 0 0 400 400;" xml:space="preserve">
+
 		<def>
 			<title>Menu Action</title>
 			<style>
 		 
 
 				@keyframes rotarDesaparecer{
-					to{
-						transform: rotate(360deg);
+					0%{
+						opacity: 1;
+						transform: scale(.4);
+					}
+					 
+					100%{
+						transform: scale(2);
 						opacity: 0;
 					}
 				}
 				@keyframes rotarAparecer{
-					to{
-						transform: rotate(360deg);
+					0%{
+						opacity:0;
+						transform: scale(2);
+					}
+					 
+					100%{
 						opacity: 1;
+						transform: scale(1);
+
 					}
 				}
 				.rotar-d{
 					animation-name: rotarDesaparecer;
-					animation-duration: .4s;
+					animation-duration: .42s;
 					animation-timing-function: ease-in;
 					animation-fill-mode: forwards;
 				}
 				.rotar-a{
 					animation-name: rotarAparecer;
-					animation-duration: .4s;
+					animation-duration: .42s;
 					animation-timing-function: ease-out;
 					animation-fill-mode: forwards;
 		
 				}
 				.active{
 					opacity:1;
-					
 				}
 		
-				path{
+				g{
 					opacity:0;
-					transition: .4s;
+					transition: .42s;
+					transform-origin: center 50%;
 				}
+				 
 			</style>
 		</def>
-		<path id="bars" class="bars active" d="M-57,296.9h416c8.8,0,16-7.2,16-16v-40c0-8.8-7.2-16-16-16H-57c-8.8,0-16,7.2-16,16v40C-73,289.7-65.8,296.9-57,296.9z
-			M-57,456.9h416c8.8,0,16-7.2,16-16v-40c0-8.8-7.2-16-16-16H-57c-8.8,0-16,7.2-16,16v40C-73,449.7-65.8,456.9-57,456.9z M-57,616.9
-			h416c8.8,0,16-7.2,16-16v-40c0-8.8-7.2-16-16-16H-57c-8.8,0-16,7.2-16,16v40C-73,609.7-65.8,616.9-57,616.9z"/>
-		<path id="cross" class="cross" d="M328.5,299.3L204.4,423.4l119.1,119.1c6.3,6.3,6.3,16.4,0,22.6l-28.3,28.3c-6.3,6.3-16.4,6.3-22.6,0L153.5,474.3L34.4,593.4
-			c-6.3,6.3-16.4,6.3-22.6,0l-28.3-28.3c-6.3-6.3-6.3-16.4,0-22.6l119.1-119.1L-21.5,299.3c-6.3-6.3-6.3-16.4,0-22.6l28.3-28.3
-			c6.3-6.3,16.4-6.3,22.6,0l124.1,124.1l124.1-124.1c6.3-6.3,16.4-6.3,22.6,0l28.3,28.3C334.8,282.9,334.8,293,328.5,299.3z"/>
+	
+			<g  id="bars" class="bars active">
+				<path id="XMLID_3_" d="M367.1,86H32.9c-8.3,0-15-6.7-15-15V40.3c0-8.3,6.7-15,15-15h334.1c8.3,0,15,6.7,15,15V71
+					C382.1,79.2,375.4,86,367.1,86z"/>
+				<path id="XMLID_7_" d="M367.1,230.3H32.9c-8.3,0-15-6.7-15-15v-30.7c0-8.3,6.7-15,15-15h334.1c8.3,0,15,6.7,15,15v30.7
+					C382.1,223.6,375.4,230.3,367.1,230.3z"/>
+				<path id="XMLID_2_" d="M367.1,374.7H32.9c-8.3,0-15-6.7-15-15V329c0-8.3,6.7-15,15-15h334.1c8.3,0,15,6.7,15,15v30.7
+					C382.1,368,375.4,374.7,367.1,374.7z"/>
+			</g>
+			<g id="cross" class="cross" >
+				<path id="XMLID_12_" d="M368.6,316.8c7.1,7.1,7.1,18.5,0,25.6l-26.2,26.2c-7.1,7.1-18.5,7.1-25.6,0L200,251.8L83.2,368.6
+					c-7.1,7.1-18.5,7.1-25.6,0l-26.2-26.2c-7.1-7.1-7.1-18.5,0-25.6L148.2,200L31.4,83.2c-7.1-7.1-7.1-18.5,0-25.6l26.2-26.2
+					c7.1-7.1,18.5-7.1,25.6,0L200,148.2L316.8,31.4c7.1-7.1,18.5-7.1,25.6,0l26.2,26.2c7.1,7.1,7.1,18.5,0,25.6L251.8,200L368.6,316.8z
+					"/>
+			</g>
+ 
 		<script>
 			let flag=false;
 			const menuAct = document.getElementById('menu-act-00');

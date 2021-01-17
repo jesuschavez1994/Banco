@@ -19,6 +19,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { PrivateviewModule } from '../vistas-privadas/privateview.module';
 import { APP_ROUTING } from '../app.routes';
 import { SliderCategoryComponent } from './home/slider-category/slider-category.component';
+import { CategorysComponent } from './categorys/categorys.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SliderCategoryComponent } from './home/slider-category/slider-category.
     BusinessDetailComponent,
     LoginComponent,
     SliderCategoryComponent,
+    CategorysComponent,
   ],
   imports: [
     CommonModule,

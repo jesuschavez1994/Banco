@@ -24,6 +24,7 @@ import { ProductosLoads } from '@interfaces/InterfaceProducto';
 })
 export class HomeComponent implements OnInit {
   @ViewChild('modalRegister') modalRegister: ElementRef;
+    userLog = false;
     itemProductos: DataProductDB[] = [];
 
   constructor(public storeService: StoreService) { }

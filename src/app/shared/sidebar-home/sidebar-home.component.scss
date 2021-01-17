@@ -5,7 +5,7 @@
     height: 100%;
     padding-right: 20px;
     padding-top: 65px;
-  
+
     h2 {
       padding-left: 40px;
       margin-bottom: 24px;
@@ -202,6 +202,7 @@
       .responsive-menu-container--fixed {
         position: fixed;
         top: 39px;
+        left: 0;
         z-index: 3;
   
       }
