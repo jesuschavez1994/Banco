@@ -1,0 +1,96 @@
+<div class="banner">
+
+  <ng-container>
+    <!-- [ngClass]="{'button-upload-file': !isOpen, 'camera': isOpen}"  -->
+    <div class="content-button-upload-file">
+      <button [ngClass]="{'button-upload-file': !isOpen, 'camera': isOpen}" 
+              (click)="isOpen = !isOpen" 
+              type="button" 
+              cdkOverlayOrigin 
+              #trigger="cdkOverlayOrigin"
+              >
+              <span *ngIf="!isOpen">Subir foto de portada</span>
+              <!-- {{isOpen ? "Cerrar" : "Subir foto de portada"}} -->
+      </button>
+    </div>
+
+    <img  *ngIf="!showCropper"
+          #imgBanner
+          [src]="currentImg | imgFallback: 'banner'" alt="banner"
+          onerror="if (this.src != 'assets/img/Banner/Banner1.svg') this.src = 'assets/img/Banner/Banner1.svg';"
+    >
+
+    <img  [src]="croppedImage" 
+          class="imgPreview" 
+          onerror="if (this.src != 'assets/img/Banner/Banner1.svg') this.src = 'assets/img/Banner/Banner1.svg';"
+    />
+
+    <ng-template  cdkConnectedOverlay
+                  [cdkConnectedOverlayOrigin]="trigger"
+                  [cdkConnectedOverlayOpen]="isOpen">
+
+                  <div  class="dropzone min-dropzone" 
+                        #dropzone 
+                        [ngClass]="{'expand-dropzone': (isexpand && this.ErrorImageFailed === false) }">
+                   
+                      <span class="x-close" 
+                            (click)="Close()">
+                            <img src="assets/img/iconos/icons-main/icons/x.svg">
+                      </span>
+                    
+                    <h2> Editar foto de portada </h2>
+                    <h3>Tamaño recomendado 1920px x 400 pixeles</h3>
+                    <h3>Formato de archivo soportado: PNG, JPG, GIF</h3>
+                  
+                      
+                      <div class="content-label" *ngIf="showInput">
+                        <label for="fileDropref">
+
+                          <input  type="file" 
+                            #fileDropref 
+                            id="fileDropref"
+                            accept="image/*" 
+                            multiple 
+                            (change)="fileBrowseHandler($event)"
+                            title="Haz clic o suelta para anexar tu archivo"
+                          >
+
+                          <div>
+                            <img src="assets/img/iconos/icons-main/icons/upload.svg">
+                            Click or drag here to upload
+                          </div>
+
+                        </label>
+                      </div>
+
+                      
+                      <div *ngFor="let file of files">
+
+                        <!-- Progress bar-->
+                        <app-progress-bar [progress]="file?.progress" 
+                                          *ngIf="!showInput && file?.progress !== 100">
+                        </app-progress-bar>
+
+                        <!-- Cropper Edit -->
+                        <app-cropper-img-banner [imageChangedEvent]="imageChangedEvent" 
+                                                [NameFile]="NameFile"
+                                                (previewIMG)="imagePreview($event)"
+                                                (NoCropperImg)="NoImgCropper($event)"
+                                                (ErrorImage)="ShowError($event)"
+                                                (SaveSucessFull)="SaveImgOk($event)"
+                                                *ngIf="showCropper && file?.progress === 100">
+                        </app-cropper-img-banner>
+
+                      </div>
+                      
+                      <!-- Message Error -->
+                      <app-error-failed-message [ErrorMessage]="ErrorImageFailed"></app-error-failed-message>
+
+                  </div>
+    </ng-template>
+
+  </ng-container>
+
+</div>
+
+

@@ -1,56 +1,47 @@
+
+<!-- ======= LOAD SPINNER ===========-->
+<!-- ================================-->
 <ngx-spinner
   bdColor="rgba(0, 0, 0, .45)">
-  <p style="font-size: 20px; color: white">Cargando...</p>
+    <p style="font-size: 20px; color: white">
+        Cargando...
+    </p>
 </ngx-spinner>
 
+<!--======== END LOAD SPINNER =========-->
+<!--===================================-->
+
+<!-- BOTENES DE SCROLL NAVEGACIÒN TOP Y DOWN -->
+<!--=========================================-->
 <span class="ir-arriba icon-arrow-up2" (click)="scrollDown()" *ngIf="!scroll">
-    <i  class="figure material-icons" 
-        name="camera">
-        keyboard_arrow_down
-    </i>
+    <i  class="fas fa-chevron-down" >  </i>
 </span>
-
 <span class="ir-arriba icon-arrow-up2" (click)="scrollTop()" *ngIf="scroll">
-    <i  class="figure material-icons" 
-        name="camera">
-        keyboard_arrow_up
-    </i>
+    <i class="fas fa-chevron-up"></i>
 </span>
+<!--===================================-->
+<!--===================================-->
 
-<section class="display-flex">    
+<main   class="display-flex" 
+        (swipe)="onSwipe($event)"  
+        (window:scroll)="doSomethingOnWindowScroll($event)"
+        #main>
+    
+    
     <div class="container-fluid">
         <section class="row" *ngIf="!addProductNew">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <app-banner [imgs]="imgsBanners"></app-banner>
-                <div class="row">
-                    <div class="col-10 col-sm-6 col-md-4 display-flex justify-content-center">
-                        <button class="btn btn-primary button mt-5 fredoka" 
-                                type="button"
-                                (click)="addNewProduct()"
-                                [routerLink]="['/my-store/load-product']"     
-                                >
-                                + Agregar nuevo producto
-                        </button>
-                    </div>
-                    <div class="col-10 col-sm-8 col-md-7">
-                        <ul class="navbar-nav width-100 mt-5">
-                            <app-search class="width-100" (searchEmitter)="handleSearch($event)"></app-search>
-                        </ul>
-                    </div>
-                </div>
-                <!-- <section class="container col-md-12 mt-5" *ngIf="!addProductNew">
-                    <ol class="row products list items pl-0">
-                        <app-view-products-loads    *ngFor="let item of MyProduct | paginate: 
-                                                    { itemsPerPage: 28, currentPage: page, totalItems: totalProductAPI };
-                                                    let i = index;"
-                                                    class="product-item"
-                                                    [item]="item"
-                                                    [MyProduct]="MyProduct"
-                                                    [index]="i">
-                        </app-view-products-loads>
-                    </ol>
-                </section> -->
 
+                <app-search-store   (searchEmitter)="handleSearch($event)" 
+                                    [isExpanded]="expandSidebar"
+                                    (sidebarExpand)="toogleSidebar($event)" 
+                                    [buttonSidebarList]="true"
+                                    [debounce]="1000">
+                </app-search-store>
+
+
+                <!-- FICHEROS DE LOS PRODUCTOS DE LA TIENDA -->
+                <!--=========================================-->     
                 <app-products-cards-store
                     #productCardsStore
                     [MyProduct]="this.MyProduct"
@@ -58,17 +49,11 @@
                     [totalItems]="totalProductAPI"
                     [itemsPerPage]="itemsPerPage"
                 >
-
                 </app-products-cards-store>
-
-                <!-- PAGINACIÓN -->
-                <!-- <footer class="col-md-11" *ngIf="showFooterPaginations">
-                    <pagination-controls    previousLabel = "Anterior"
-                                            nextLabel = "Siguiente"
-                                            (pageChange)="pageChanged($event)">
-                    </pagination-controls>
-                </footer> -->
+                <!--=========================================-->
+                <!--=========================================-->
+                
             </div>      
         </section>
     </div>   
-</section>
+</main>

@@ -24,8 +24,8 @@
                         <form   [formGroup]="forma"
                                 (ngSubmit)="ActualizarDatosUser(forma.value)" 
                                 novalidate="novalidate"
-                                *ngFor="let data of datosUsuario"
                                 class="col-md-6"
+                                *ngIf="!this.card_shimmer"
                                 >
 
                             <div class="row">
@@ -55,7 +55,6 @@
                                                     type="text"
                                                     placeholder="Ingresa tú nombre de usuario"
                                                     formControlName="username"
-                                                    [ngModel]="data.username"
                                                     [ngClass]="{'is-invalid':  (!forma.controls['username'].valid || forma.controls['username'].errors?.minlength)&& forma.controls['username'].touched, 'is-valid': forma.controls['username'].valid }"     
                                             >
 
@@ -80,7 +79,6 @@
                                             <input  class="form-control"
                                                     type="text"                                  
                                                     formControlName="name"
-                                                    [ngModel]="data.name"
                                                     [ngClass]="{'is-invalid':  (!forma.controls['name'].valid || forma.controls['name'].errors?.minlength)&& forma.controls['name'].touched, 'is-valid': forma.controls['name'].valid }" 
                                                     
                                             >
@@ -109,7 +107,6 @@
                                                     placeholder="Correo electrónico"
                                                     formControlName="email"
                                                     disabled="true"
-                                                    [ngModel]="data.email"
                                                     [ngClass]="{'is-invalid':  (!forma.controls['email'].valid || forma.controls['email'].errors?.minlength)&& forma.controls['email'].touched, 'is-valid': forma.controls['email'].valid }" 
                                             >
 
@@ -135,8 +132,7 @@
                                             <input  class="form-control icon-phone input"
                                                     type="text"
                                                     placeholder="Ingrese telefono"
-                                                    formControlName="phone"
-                                                    [ngModel]="data.phone"   
+                                                    formControlName="phone"   
                                                     [ngClass]="{'is-invalid':  (!forma.controls['phone'].valid || forma.controls['phone'].errors?.minlength)&& forma.controls['phone'].touched, 'is-valid': forma.controls['phone'].valid }" 
                                             >
 
@@ -272,7 +268,8 @@
                        <!-- ============================================================== -->
                         <!-- SUVIDA DEL AVATAR DEL USUARIO  -->
                         <!-- ============================================================== --> 
-                        <section class="col-md-4">
+                        <section class="col-md-4 pr-0">
+
                             <app-photo-user-edit></app-photo-user-edit>
                             <app-photo-user></app-photo-user>
                         </section>

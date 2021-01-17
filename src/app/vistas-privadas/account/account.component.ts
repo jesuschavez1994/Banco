@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Negocio } from '@models/negocio.model';
 import { Usuario } from '@models/usuario.model';
 import { MyValidators } from '@utils/validators';
+import { DataUsuarioAccount } from '@interfaces/usuario/usuario';
 
 @Component({
   selector: 'app-account',
@@ -15,13 +16,14 @@ import { MyValidators } from '@utils/validators';
 })
 
 export class AccountComponent implements OnInit {
-
+  
+  isOpen = false;
   forma: FormGroup;
   items: any = {};
   userStore: Negocio;
   usuario: Usuario;
   token: string;
-  datosUsuario: any[] = [];
+  datosUsuario: DataUsuarioAccount;
   // tslint:disable-next-line: variable-name
   card_shimmer = true;
   // tslint:disable-next-line: member-ordering
@@ -47,10 +49,17 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userStoreServices.getStore().subscribe(resp => {
+    this.userStoreServices.getStore().subscribe( (resp: DataUsuarioAccount) => {
       console.log('xx', resp);
+      this.datosUsuario = resp;
+
+      // SET DEL FORMULARIO //
+      this.forma.get('username').setValue(this.datosUsuario.username);
+      this.forma.get('name').setValue(this.datosUsuario.name);
+      this.forma.get('email').setValue(this.datosUsuario.email);
+      this.forma.get('phone').setValue(this.datosUsuario.phone);
       this.card_shimmer = false;
-      this.datosUsuario.push(resp);
+
     });
   }
 

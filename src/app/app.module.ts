@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable  } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -42,8 +42,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 
 
+// HAmmerjs //
+
+// particular imports for hammer
+import * as Hammer from 'hammerjs';
+import {
+HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 
 registerLocaleData(ca);
+
+@Injectable()
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = {
+    swipe: { direction: Hammer.DIRECTION_ALL },
+  } as any;
+}
 
 @NgModule({
   declarations: [
@@ -68,6 +81,7 @@ registerLocaleData(ca);
     ReactiveFormsModule,
     FormsModule,
     LoginModule,
+    HammerModule ,
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -80,12 +94,17 @@ registerLocaleData(ca);
 
   ],
   providers: [
-  { provide: NZ_I18N, useValue: ca_ES },
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: InterceptorService,
-    multi: true
-  },],
+    { provide: NZ_I18N, useValue: ca_ES },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    },
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

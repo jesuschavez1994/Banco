@@ -14,11 +14,12 @@
                             >
                             <mat-grid-tile>
                                 <article    *ngIf="suggestion.images.length > 0">
-                                    <img    [src]="suggestion.images[0].src_size.s | imgProductLoad" 
+                                    <img    [src]="suggestion.images[0].src_size.s | imgFallback: 'box'" 
                                             alt="{{item.name}}"
                                             style="display: block;"
                                             *ngIf="suggestion.images.length > 0"
-                                        >
+                                            onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
+                                    >
                                 </article>
                             </mat-grid-tile>
 

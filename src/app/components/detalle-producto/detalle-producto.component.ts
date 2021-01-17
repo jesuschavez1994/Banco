@@ -17,19 +17,7 @@ export class DetalleProductoComponent implements OnInit {
   constructor(  private activatedRoute: ActivatedRoute,
                 private publicViews: PublicViewsComponent,
                 private services: ServicioService
-              ) {
-
-    this.loadcard = true;
-    this.activatedRoute.params.subscribe( params => {
-      // tslint:disable-next-line: no-string-literal
-      this.services.getproducto(params['id']).subscribe( producto => {
-        setTimeout(() => {
-          this.producto = producto;
-          this.loadcard = false;
-        }, 2000);
-      });
-    });
-  }
+              ) {}
 
   ngOnInit(): void {
   }

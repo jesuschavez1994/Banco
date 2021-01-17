@@ -17,6 +17,14 @@ a{
   border-bottom: 1px solid #dadada;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+
 .file-input{
     position: absolute;
     top: 0;

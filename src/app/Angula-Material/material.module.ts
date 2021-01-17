@@ -17,13 +17,22 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatIconModule} from '@angular/material/icon';
 import {CdkTableModule} from '@angular/cdk/table';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
+
+import {MatListModule} from '@angular/material/list';
+import {MatDividerModule} from '@angular/material/divider';
+
+import {OverlayModule} from '@angular/cdk/overlay';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
+    MatDividerModule,
+    MatListModule,
     MatFormFieldModule,
     MatButtonModule,
     MatCardModule,
@@ -38,6 +47,9 @@ import {CdkTableModule} from '@angular/cdk/table';
     MatBadgeModule,
     MatIconModule,
     CdkTableModule,
+    MatProgressBarModule,
+    MatBottomSheetModule,
+    OverlayModule
 
   ],
   exports: [
@@ -55,7 +67,12 @@ import {CdkTableModule} from '@angular/cdk/table';
     MatBadgeModule,
     MatIconModule,
     CdkTableModule,
+    MatProgressBarModule,
+    MatBottomSheetModule,
+    MatDividerModule,
+    MatListModule,
+    OverlayModule
 
-  ]
+  ],
 })
 export class MaterialModule { }

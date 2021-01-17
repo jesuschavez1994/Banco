@@ -113,7 +113,13 @@ import { AppRoutingModule } from '../app-routing.module';
 import { CatalogoBankProductComponent } from './Admin/pages/container/catalogo-bank-product/catalogo-bank-product.component';
 import { EditProductBankComponent } from './Admin/pages/container/edit-product-bank/edit-product-bank.component';
 import { ProductsCardsStoreComponent } from './shared/products-cards-store/products-cards-store/products-cards-store.component';
-
+import { SearchStoreComponent } from './sincronizacion/components/search/container/search-store/search-store.component';
+import { BannerEditComponent } from './shared/banner-edit/banner-edit.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { CropperImgBannerComponent } from './shared/banner-edit/container/cropper-img-banner/cropper-img-banner.component';
+import { ErrorFailedMessageComponent } from './shared/banner-edit/container/error-failed-message/error-failed-message.component';
+import { ProgressBarComponent } from './shared/banner-edit/container/progress-bar/progress-bar.component';
+import { DropZoneComponent } from './shared/banner-edit/container/drop-zone/drop-zone.component';
 
 @NgModule({
     entryComponents: [
@@ -178,11 +184,18 @@ import { ProductsCardsStoreComponent } from './shared/products-cards-store/produ
       CarouselSuggestedComponent,
       CatalogoBankProductComponent,
       EditProductBankComponent,
-      ProductsCardsStoreComponent
+      ProductsCardsStoreComponent,
+      SearchStoreComponent,
+      BannerEditComponent,
+      CropperImgBannerComponent,
+      ErrorFailedMessageComponent,
+      ProgressBarComponent,
+      DropZoneComponent,
       ],
 
     imports: [
       CommonModule,
+      NgxDropzoneModule,
       AppRoutingModule,
       SpreadSheetsModule,
       MaterialModule,
@@ -206,9 +219,7 @@ import { ProductsCardsStoreComponent } from './shared/products-cards-store/produ
         apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'
       }),
       NgbModule,
-      NgxSpinnerModule
-   
-    
+      NgxSpinnerModule,
     ],
 
     exports: [
@@ -220,7 +231,8 @@ import { ProductsCardsStoreComponent } from './shared/products-cards-store/produ
       NavbarSincronizacionComponent,
       TableComponent,
       SynchronizedProductsTableComponent,
-      TableroDeSincronizacionComponent
+      TableroDeSincronizacionComponent,
+      SearchStoreComponent
     ],
 
     providers: [

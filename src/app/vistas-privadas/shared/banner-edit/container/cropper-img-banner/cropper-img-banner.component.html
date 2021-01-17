@@ -1,0 +1,78 @@
+<ng-container *ngIf="!imgFailed">
+
+    <header *ngIf="!spinner && !AlertSucces">
+
+        <div>
+            <button [ngClass]="{'arrows-angle-contract': containWithinAspectRatio,
+                    'fullscreen': !containWithinAspectRatio}" 
+                    (click)="toggleContainWithinAspectRatio()" 
+                    title="{{containWithinAspectRatio ? 'Contraer' : 'Expandir' }}">
+            </button>
+            <button (click)="flipHorizontal()" class="arrow-left-right" title="Dar vuelta Horizontalmente"></button>
+            <button (click)="flipVertical()" class="arrow-down-up" title="Dar vuelta verticalmente"></button>
+            <button (click)="zoomOut()" class="zoomOut" title="Disminuir Zoom"></button>
+            <button (click)="zoomIn()" class="zoomIn" title="Aumentar Zoom"></button> 
+        </div>
+           
+    </header>
+
+    <section [ngClass]="{cropper: !spinner, 'load': spinner}">
+        <image-cropper
+            #imgCropper
+            *ngIf="!spinner && !AlertSucces"
+            [ngClass]="{'image-cropper-flex': !containWithinAspectRatio,
+            'image-cropper': containWithinAspectRatio}"
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="1/1"
+            format="png | jpeg"
+            [transform]="transform"
+            [onlyScaleDown]="true"
+            [style.display]="imgLoaded ? null : 'none'"
+            (imageCropped)="imageCropped($event)"
+            (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady($event)"
+            (loadImageFailed)="loadImageFailed()"
+            [containWithinAspectRatio]="containWithinAspectRatio"
+            [imageQuality]="100"
+        ></image-cropper>
+        
+        <ng-container *ngIf="spinner && !ErrorAlert && !AlertSucces">
+            <app-spinner></app-spinner>
+            <span class="mt-4 family-400">Procesando tu foto</span>
+        </ng-container>
+
+        <ng-container>
+            <div class="alert alert-success mt-4" role="alert" *ngIf="AlertSucces">
+                Se actualizo correctamente tu foto de portada
+            </div>
+        </ng-container>
+        
+    </section>
+        
+
+    <footer *ngIf="!spinner && !AlertSucces">
+
+        <div>
+            <button (click)="save()">
+                Configurar como foto de portada
+            </button>
+        </div>
+        
+        <section>
+            <button (click)="cambiarImg()">
+                Cambiar foto
+            </button>
+        </section>
+
+        <mat-error class="invalid-feedback" *ngIf="ErrorAlert">
+            !Ha ocurrido un error, Revise su conexión a internet!
+        </mat-error>
+
+    </footer>
+
+    
+    
+
+</ng-container>
+    

@@ -2,57 +2,71 @@
         enctype='multipart/form-data' 
         (ngSubmit)="CropperImg()"
         enctype="multipart/form-data" 
-        class="col-md-12"
+        class="col-md-12 pl-0 pr-0"
         >
 
-    <div class="col-md-12">
-        <section>
-            <label  for="cropper" 
-                class="cursor-poniter width-100 text-align-end pr-5">
-                Editar
-            </label>
-            <div class="display-flex flex-direction-column align-items-center">
-                <input accept="image/*" type="file" (change)="fileChangeEvent($event)" id="cropper"/>
-                <image-cropper style="width: 310px"
-                    *ngIf="Recortador"                        
-                    [imageChangedEvent]="imageChangedEvent"
-                    [maintainAspectRatio]="true"
-                    [aspectRatio]="2 / 2"
-                    [resizeToWidth]="300"
-                    [resizeToHeight]="300"
-                    [cropperMinWidth]="250"
-                    [cropperMinHeight]="250"
-                    format="png"
-                    (imageCropped)="imageCropped($event)"
-                    (imageLoaded)="imageLoaded()"
-                    (cropperReady)="cropperReady()"
-                    (loadImageFailed)="loadImageFailed()"
-                ></image-cropper>
+        
 
-                <label  *ngIf="Recortador" 
-                    class="family-400 size-14 pt-1">
-                    Las imágenes deben ser de 600X600 px y 2MG
-                </label>
+            <div class="content-section col-md-12 pl-0 pr-0">
+                <section class="section-img">
+                    <label  for="cropper" 
+                            class="cursor-poniter width-100 text-align-end">
+                        <div class="content-icon-i">
+                            <i  class="figure material-icons" 
+                                name="camera"
+                                >
+                                camera_alt
+                            </i>
+                        </div>
+                        
+                    </label>
+                    <div class="content-cropper">
+                        <input accept="image/*" type="file" (change)="fileChangeEvent($event)" id="cropper"/>
+                        <image-cropper style="width: 310px"
+                            *ngIf="Recortador && (this.type_fyle === 'image/jpeg' || this.type_fyle ==='image/png')"                        
+                            [imageChangedEvent]="imageChangedEvent"
+                            [maintainAspectRatio]="true"
+                            [aspectRatio]="2 / 2"
+                            [resizeToWidth]="300"
+                            [resizeToHeight]="300"
+                            [cropperMinWidth]="250"
+                            [cropperMinHeight]="250"
+                            format="png"
+                            (imageCropped)="imageCropped($event)"
+                            (imageLoaded)="imageLoaded()"
+                            (cropperReady)="cropperReady()"
+                            (loadImageFailed)="loadImageFailed()"
+                        ></image-cropper>
 
+                        <label  *ngIf="Recortador && (this.type_fyle === 'image/jpeg' || this.type_fyle ==='image/png')" 
+                            class="family-400 size-14 pt-1">
+                            Las imágenes deben ser de 600X600 px y 2MG.
+                        </label>
+
+                        <footer *ngIf="Recortador && (this.type_fyle === 'image/jpeg' || this.type_fyle ==='image/png')">
+                            <button     class="btn btn-outline-primary button fredoka" 
+                                        type="submit"
+                                        *ngIf="Recortador"
+                                        (click)="cambiarImagen()"
+                                        >
+                                        Aceptar
+                            </button>
+                        </footer>
+
+                    </div>
+
+                </section>
             </div>
-        </section>
-    </div>
 
-    <footer class="display-flex justify-content-flex-end pr-5">
-        <button     class="btn btn-outline-primary button width-30 fredoka" 
-                    type="submit"
-                    *ngIf="Recortador"
-                    (click)="cambiarImagen()"
-                    >
-                    Aceptar
-        </button>
-    </footer>
+            <section class="edit-img">
+                
+                <div>
+                    <mat-progress-bar mode="indeterminate" *ngIf="alert"></mat-progress-bar>
+                </div>
+                
+                <img [src]="IMG_USER | avatarDefault" class="w150" *ngIf="!mostrarAvatar">
 
-    <section>
-        <!-- <app-card-shimmer-photo-user-edit class="animated fadeIn" *ngIf="!spinner"></app-card-shimmer-photo-user-edit> -->
-        <app-card-shimmer-photo-user-edit class="animated fadeIn" *ngIf="alert"></app-card-shimmer-photo-user-edit>
-        <!-- <mat-spinner *ngIf="!spinner"></mat-spinner> -->
-        <img [src]="IMG_USER | avatarDefault" class="w150" *ngIf="!mostrarAvatar">
-    </section>
+            </section>
 
+        
 </form>

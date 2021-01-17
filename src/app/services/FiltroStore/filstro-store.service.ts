@@ -48,15 +48,4 @@ export class FilstroStoreService {
     //******* END SERVICIOS GET *******//
     // ********************************//
 
-
-    // ********************************//
-    // ********* SERVICIOS POST ******// 
-    // ******************************//
-
-    PostProductSearchFiltro(userId: string, storeId: string, data: any){
-      const url = `/api/users/${storeId}/stores/${storeId}/products_search`;
-      return this.postQuery(url, data);
-    }
-
-
 }

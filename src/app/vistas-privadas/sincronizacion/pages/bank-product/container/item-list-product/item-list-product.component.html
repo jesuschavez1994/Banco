@@ -1,4 +1,4 @@
-
+<!-- 
     <li class="col-md-12 item product" id="{{index}}">
         <div    class="product-item-info card"
                 >
@@ -38,4 +38,52 @@
                     </p>
                 </div>
         </div>
-    </li>
+    </li> -->
+
+
+    <div class="products-container">
+
+        <ng-container *ngFor="let product of products | paginate: { id:'pagination', itemsPerPage: itemsPerPage, currentPage: p, totalItems: totalItems} ; let i = index">
+      
+          <article class="product">
+      
+            <div class="img">
+      
+              <img
+                [src]="product.images | imgFallback: 'box'"
+                [alt]="product.name"
+                onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
+              >
+              
+              <i  class="fas fa-sync-alt"
+                  [routerLink]="['/my-store/sync-this-product', MyProduct[i].id]"
+                  title="sincronizar"
+              ></i>
+    
+            </div>
+
+            <!-- ====== DETAIL PRODUCT ====== -->
+            <!-- ====== ====== ====== ====== -->
+    
+            <h3 class="name">
+              {{ product.name | excerpt: 66}}
+            </h3>
+    
+      
+          </article>
+      
+        </ng-container>
+    
+    </div>
+
+    <footer>
+        <pagination-controls
+          class="my-pagination"
+          id="pagination"
+          #paginationControls
+          previousLabel = "Anterior"
+          nextLabel = "Siguiente"
+          (pageChange)="pageChanged($event)"
+        >
+        </pagination-controls>
+      </footer>

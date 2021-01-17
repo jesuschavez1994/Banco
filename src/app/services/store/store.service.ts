@@ -206,7 +206,7 @@ export class StoreService extends Service{
   }
 
   // -----
-  getStoreById(idStore: number): Observable<StoreResponse> {
+  getStoreById(idStore: any): Observable<StoreResponse> {
     return this.execQuery<StoreResponse>(`stores/${idStore}`);
 
   }

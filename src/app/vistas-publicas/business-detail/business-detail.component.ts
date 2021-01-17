@@ -289,7 +289,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
       this.productService.getProductsByStore(idStore, page, filter).subscribe( resp => {
 
-        console.log('response', resp)
 
         const products = resp.data;
         this.totalProducts = resp.total;

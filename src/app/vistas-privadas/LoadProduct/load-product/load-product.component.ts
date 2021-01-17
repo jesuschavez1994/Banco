@@ -1,22 +1,51 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter, HostListener, Renderer2, ElementRef } from '@angular/core';
 import { StoreService } from '@services/store/store.service';
 import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+// tslint:disable-next-line: import-spacing
 import { BannerOptions }  from '@interfaces/components-options/banner.options.interface';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 import { FilstroStoreService } from '../../../services/FiltroStore/filstro-store.service';
-import { FiltroStore } from '../../../models/filtro/filtro-store.model';
 import { ProductsCardsStoreComponent } from '../../shared/products-cards-store/products-cards-store/products-cards-store.component';
-import { map } from 'rxjs/operators';
+import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
+import { StoreResponse } from '@interfaces/store.interface';
+import { SearchStore } from '@models/search/search-store.model';
+import { SearchService } from '@services/Search/search.service';
+import { FilterOption } from '@interfaces/components-options/search-bar.options.interface';
+
+import * as Hammer from 'hammerjs';
+import { MyStoreComponent } from '../../pages/my-store/my-store.component';
+
 @Component({
   selector: 'app-load-product',
   templateUrl: './load-product.component.html',
-  styleUrls: ['./load-product.component.css']
+  styleUrls: ['./load-product.component.scss']
 })
 export class LoadProductComponent implements OnInit {
 
+  @Input() isExpanded = false;
+
+  @Output() sidebarExpand = new EventEmitter<boolean>();
+
+  // Selectores //
+  @ViewChild('main') main: ElementRef;
   @ViewChild('productCardsStore') productCardsStore: ProductsCardsStoreComponent;
+  @ViewChild('MyStoreComponent') estadoAside: MyStoreComponent;
+
+
+  breadcrumb: BreadcrumbOptions[];
+  StoreName = '';
+  // sidebar-list
+  expandSidebar = true;
+
+  marks         = [];
+  subcategories = [];
+  factories     = [];
+  price         = [];
+  delivery      = '';
+  recipes       = [];
+  categories    = [];
 
   imgsBanners: BannerOptions = {
     m: 'assets/img/Banner/Banner1.svg'
@@ -31,30 +60,29 @@ export class LoadProductComponent implements OnInit {
    totalProductAPI: number = 0;
    // tslint:disable-next-line: no-inferrable-types
    page: number = 1;
-   scroll:boolean=false;
+   scroll = false;
    addProductNew = false;
    showFooterPaginations = false;
    itemsPerPage = 16;
-   
 
-   marks         = [];
-   subcategories = [];
-   categories    = [];
-   factories     = [];
-   price         = [];
-   delivery      = '';
-   recipes       = [];
+   filterOptions: FilterOption[] = [
+    {label: 'filtrar por', value: 0},
+    {label: 'producto', value: 1},
+    {label: 'Empresa', value: 'hola'},
+  ];
 
   constructor(public storeService: StoreService,
               private route: ActivatedRoute,
               private router: Router,
               private spinnerService: NgxSpinnerService,
-              private filtroService: FilstroStoreService) { }
+              private filtroService: FilstroStoreService,
+              private renderer: Renderer2,
+              private _searchService: SearchService) { }
 
   ngOnInit() {
     this.getData(this.page);
-    this.spinner();
-    window.addEventListener('scroll', this.scrolling, true)
+    // this.spinner();
+    window.addEventListener('scroll', this.scrolling, true);
     // sistema que nos permita leer el parámetro de la página una vez que cambiamos entre estas usando la función
     this.route.queryParams.subscribe(params => {
       this.page = parseInt(params.page, 10) || 1;
@@ -95,10 +123,10 @@ export class LoadProductComponent implements OnInit {
       page)
       .subscribe( (resp: any) => {
 
-        const products = resp.data
+        const products = resp.data;
 
         this.MyProduct = resp.data;
-        console.log('MY PRODUCTOS', this.MyProduct);
+        // console.log('MY PRODUCTOS', this.MyProduct);
         this.last_Page_Pagination = resp.last_page;
         this.totalProductAPI = resp.total;
         this.itemsPerPage = resp.per_page;
@@ -107,14 +135,14 @@ export class LoadProductComponent implements OnInit {
         this.scrollTop();
 
         this.productCardsStore.products = products.map( product => {
-          console.log('MAP', product);
+          // console.log('MAP', product);
 
 
-          if( ( product.images.length > 0 || product.images.length === 0) && product.sync_bank.length === 0 ){
+          if ( ( product.images.length > 0 || product.images.length === 0) && product.sync_bank.length === 0 ){
             const images = product.images.map(image => {
               return image.src;
             });
-  
+
             return {
               name: product.name,
               description: product.description,
@@ -128,11 +156,11 @@ export class LoadProductComponent implements OnInit {
             };
           }
 
-          if(product.sync_bank.length > 0){
+          if (product.sync_bank.length > 0){
             const images = product.sync_bank.map(image => {
               return image.images[0].src_size.xl;
             });
-  
+
             return {
               name: product.name,
               description: product.description,
@@ -148,7 +176,7 @@ export class LoadProductComponent implements OnInit {
 
         });
 
-        console.log('products loaded: ', this.productCardsStore.products);
+        // console.log('products loaded: ', this.productCardsStore.products);
 
 
     });
@@ -157,11 +185,9 @@ export class LoadProductComponent implements OnInit {
 
   public handleSearch(value: string): void {
 
-    
-
-    console.log('value', value);
-    if(value !== undefined){
-      let comparacion = new FiltroStore( 
+    // console.log('value', value);
+    if (value !== undefined){
+      const comparacion = new SearchStore(
         value,
         this.marks,
         this.subcategories,
@@ -170,28 +196,30 @@ export class LoadProductComponent implements OnInit {
         this.price,
         this.delivery,
         this.recipes,
-          
+
       );
-      this.filtroService.PostProductSearchFiltro(
-        localStorage.getItem('id'),
-        localStorage.getItem('storeId'),
+      this._searchService.SearchProductStore(
+        localStorage.getItem('id'), // id => user
+        localStorage.getItem('storeId'), // id => store
         comparacion).subscribe( (resp: ProductosLoads) => {
           this.MyProduct = resp.data;
-      })
+      });
     }
   }
+
+
 
   addNewProduct(){
     this.addProductNew = true;
   }
 
 
-  scrolling=(s)=>{
-    let sc = s.target.scrollingElement.scrollTop;
-    console.log(sc);
-    if(sc >=2733){this.scroll=true}
+  scrolling = (s) => {
+    const sc = s.target.scrollingElement.scrollTop;
+    // console.log(sc);
+    if (sc >= 2733 ){ this.scroll = true; }
     else{
-      this.scroll=false
+      this.scroll = false;
     }
   }
 
@@ -200,16 +228,46 @@ export class LoadProductComponent implements OnInit {
       top: 10000000,
     });
   }
-  
+
 
   scrollTop(){
     window.scrollTo({
-      top:0,
+      top: 0 ,
     });
   }
 
+  public toggleSidebarList(event){
+    this.isExpanded = event;
+    this.sidebarExpand.emit( this.isExpanded );
+  }
 
+  // Expand or contract sidebar-list on responsive mode
+  public toogleSidebar(event) {
+    this.expandSidebar = event;
+  }
 
-  // ****** ///
+  @HostListener('window:scroll', ['$event'])
+
+  doSomethingOnWindowScroll($event: Event ){
+    // console.log('window scroll:', $event);
+  }
+
+  // FUNCIONALIDAD DE TOUCHED //
+  onSwipe(event?: any) {
+
+    // console.log(event);
+    if (event.direction === 4){
+      this.expandSidebar = true;
+      this.renderer.removeClass(this.main.nativeElement, 'touched');
+    }
+    if (event.direction === 2){
+      this.expandSidebar = false;
+      this.renderer.removeClass(this.main.nativeElement, 'touched');
+    }
+    if (event.direction === 8){
+      this.renderer.removeAttribute(this.main.nativeElement, 'touch-action');
+    }
+
+  }
 
 }

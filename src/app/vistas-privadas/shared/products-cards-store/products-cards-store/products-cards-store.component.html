@@ -48,8 +48,7 @@
             </div>
           </div>
 
-
-          <i class="fas fa-trash-alt"></i>
+          <i class="fas fa-trash-alt" (click)="openDialog(i)"></i>
           <i class="fas fa-sync-alt"></i>
 
         </div>
@@ -62,6 +61,11 @@
         </h3>
 
         <p class="cost">{{ product.price | currency }}</p>
+
+        <span *ngIf=" product.sinchronized === 'sincronizado' " 
+              class="badge badge-primary puntero pt-1">
+              Sincronizado
+        </span>
   
       </article>
   

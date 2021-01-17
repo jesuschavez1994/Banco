@@ -2,6 +2,8 @@ import { Component, Input, OnInit, EventEmitter, Output, ViewChild, ChangeDetect
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface';
 import { DataProductDB } from '../../../../interfaces/InterfaceProducto';
 import { StoreService } from '../../../../services/store/store.service';
+import {MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ModalDeleteProductComponent } from '../../../components/view-products-loads/container/modal-delete-product/modal-delete-product.component'
 
 @Component({
   selector: 'app-products-cards-store',
@@ -20,11 +22,12 @@ export class ProductsCardsStoreComponent implements OnInit {
   @Input() products: ProductsCardsOptions[] = [];
   @Input() MyProduct: DataProductDB;
 
-  // SALIDAS // 
+  // SALIDAS //
   @Output() pagination = new EventEmitter<number>();
 
-
-  constructor(private cd: ChangeDetectorRef, public storeService: StoreService) { }
+  constructor(private cd: ChangeDetectorRef,
+              public storeService: StoreService,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -51,6 +54,22 @@ export class ProductsCardsStoreComponent implements OnInit {
   public pageChanged(event) {
     this.p = event;
     this.pagination.emit(this.p);
+  }
+
+  openDialog(index: number): void {
+    const dialogRef = this.dialog.open(ModalDeleteProductComponent, {
+      width: '350px',
+      data: {
+        indexProductoDelete: index,
+        idProducto: this.MyProduct[index].id
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
+
   }
 
 }
