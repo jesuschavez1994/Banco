@@ -80,9 +80,14 @@ import { PlanCardComponent } from './account-settings/pages/plans/components/pla
 import { PlanDetailsComponent } from './account-settings/pages/plans/components/plan-details/plan-details.component';
 import { PaymentDetailsComponent } from './account-settings/pages/plans/components/payment-details/payment-details.component';
 import { PlansComponent } from './account-settings/pages/plans/plans.component';
+import { RedirectionModalComponent } from './account-settings/pages/plans/components/redirection-modal/redirection-modal.component';
 
 @NgModule({
-  entryComponents: [MapEditarComponent, ContactDescriptionEditComponent],
+  entryComponents: [
+    MapEditarComponent,
+    ContactDescriptionEditComponent,
+    RedirectionModalComponent,
+  ],
   // tslint:disable-next-line: max-line-length
   declarations: [
     AccountComponent,
@@ -116,6 +121,7 @@ import { PlansComponent } from './account-settings/pages/plans/plans.component';
     PlanDetailsComponent,
     PaymentDetailsComponent,
     PlansComponent,
+    RedirectionModalComponent,
   ],
 
   imports: [
