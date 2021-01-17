@@ -35,7 +35,7 @@ import {
   ],
 })
 export class PlansComponent implements OnInit {
-  currentPage = 'plans';
+  currentPage = 'payment';
   selectedPlan: Plan;
   orderInfo: CreatedOrder;
 
