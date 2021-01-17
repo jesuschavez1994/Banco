@@ -12,7 +12,7 @@
       [class.standard]="selectedPlanDetails.name === 'Standard'"
       [class.premium]="selectedPlanDetails.name === 'Premium'"
     >
-      Plan {{ selectedPlanDetails.name }}
+      Plan {{ selectedPlanDetails.name | titlecase }}
     </h5>
     <h5 class="total">
       <b>Total:&nbsp; &nbsp;</b>
@@ -46,7 +46,12 @@
         </div>
       </div>
 
-      <button class="btn" (click)="toNextPage()" mat-flat-button>
+      <button
+        class="btn"
+        (click)="openDialog()"
+        mat-flat-button
+        [disabled]="!webpayDebitCard"
+      >
         PAGAR AHORA
       </button>
     </div>
