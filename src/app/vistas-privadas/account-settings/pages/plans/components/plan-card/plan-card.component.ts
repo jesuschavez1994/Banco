@@ -1,7 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Injectable, Inject } from '@angular/core';
 import { Plan } from '../../models/plan';
-import { OrderNumberCreation } from '@interfaces/SettingsInterfaces';
+import {
+  OrderNumberCreation,
+  CreatedOrder,
+} from '@interfaces/SettingsInterfaces';
 import { SubscriptionService } from '@services/subscription/subscription.service';
 import { BROWSER_STORAGE } from '@app/browserStorage';
 
@@ -52,12 +55,11 @@ export class PlanCardComponent implements OnInit {
 
       // We start the progress spinner, and the API call.
       this.waitingResponse = true;
-      this.subscriptionDataService
+      /*       this.subscriptionDataService
         .createOrderNumber(this.planDetails)
         .then((serverResponse) => {
           // Got a reply, stop spinner.
           this.waitingResponse = false;
-          console.log(`La respuesta del servidor fue: ${serverResponse}`);
           this.gotOrderDetails.emit(serverResponse);
           this.selectPlan.emit(this.planInfo);
           this.pageChange.emit(this.nextPage);
@@ -65,6 +67,16 @@ export class PlanCardComponent implements OnInit {
         })
         .catch((error) => {
           this.waitingResponse = false;
+        }); */
+
+      this.subscriptionDataService
+        .createOrderNumber(this.planDetails)
+        .subscribe((serverResponse: CreatedOrder) => {
+          this.waitingResponse = false;
+          this.gotOrderDetails.emit(serverResponse);
+          this.selectPlan.emit(this.planInfo);
+          this.pageChange.emit(this.nextPage);
+          window.scrollTo(0, 0);
         });
     } else {
       this.selectPlan.emit(this.planInfo);
