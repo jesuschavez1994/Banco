@@ -41,6 +41,59 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   @Input() marks: Filter[] = [];
 
   // Selected Filters
+  filterrOptions = [
+    {
+      title: 'categorias2',
+      type: 'single', // multiple
+      paramName: 'categoria',
+      options: [
+        {
+          filterId: 0,
+          name: 'Cosmeticos',
+          totalFounds: 200,
+          isSelected: false
+        },
+        {
+          filterId: 1,
+          name: 'Alimentos',
+          totalFounds: 200,
+          isSelected: false
+        },
+      ]
+    },
+    {
+      title: 'categorias3',
+      type: 'multiple', // multiple
+      paramName: 'sub-categoria',
+      options: [
+        {
+          filterId: 0,
+          parentTitle: 'categorias2',
+          parentFilterId: 0,
+          name: 'labial',
+          totalFounds: 200,
+          isSelected: false
+        },
+        {
+          filterId: 1,
+          parentTitle: 'categorias2',
+          parentFilterId: 0,
+          name: 'labia2',
+          totalFounds: 200,
+          isSelected: false
+        },
+        {
+          filterId: 2,
+          parentTitle: 'categorias2',
+          parentFilterId: 0,
+          name: 'labial3',
+          totalFounds: 200,
+          isSelected: false
+        },
+      ]
+    },
+
+  ];
 
   // // category
   currentCategory: Category;
@@ -509,6 +562,86 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       [],
       navigationOptions
     );
+  }
+
+  public selectOptionsFilter2(
+    option,
+    list
+
+  ){
+
+    let navigationOptions;
+    let queryParams;
+
+    queryParams = {};
+
+    option.isSelected = option.isSelected ? false : true;
+
+    console.log('option');
+    console.log(option);
+
+    if (list.type === 'multiple') {
+
+      this.filterrOptions.forEach( filter => {
+
+        if (filter.title === option.parentTitle) {
+          console.log('filterrOptions');
+          console.log(filter);
+
+          filter.options.forEach( filterOp => {
+
+            if (filterOp.filterId === option.parentFilterId) {
+
+              if (option.isSelected) {
+                filterOp.isSelected = true;
+                queryParams[filter.paramName] = filter.title;
+
+              }else{
+
+                if ( list.options.every( lOption => lOption.isSelected === false) ) {
+                  filterOp.isSelected = false;
+                  queryParams = {};
+
+                }
+
+              }
+
+            }
+
+            console.log('filterOp');
+            console.log(filterOp);
+
+          });
+
+        }
+
+      });
+
+    }
+
+    if (option.isSelected) {
+      queryParams[list.paramName] = option.name;
+
+    }else{
+      queryParams = {};
+    }
+
+    navigationOptions = {
+      relativeTo: this.route,
+    };
+
+    if (Object.keys(queryParams).length > 0) {
+      navigationOptions = {
+        relativeTo: this.route,
+        queryParams,
+      };
+    }
+
+    this.router.navigate(
+      [],
+      navigationOptions
+    );
+
   }
 
 }
