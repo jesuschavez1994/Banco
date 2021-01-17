@@ -16,6 +16,8 @@ import {
   OrderNumberCreation,
   CreatedOrder,
   Payment,
+  WebpayPayment,
+  PaymentCredentials,
 } from '@interfaces/SettingsInterfaces';
 
 @Injectable({
@@ -56,6 +58,38 @@ export class SubscriptionService {
 
     return this.httpService
       .post<Payment>(url, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  createWebpayPayment(paymentId: number) {
+    const url = `${this.apiBaseURL}/api/webpayplus/create`;
+    // We add the corresponding headers to the request
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${this.token}`,
+      }),
+    };
+
+    const wepayData: WebpayPayment = {
+      payment_id: paymentId,
+      user_id: 1,
+    };
+
+    return this.httpService
+      .get<PaymentCredentials>(url, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  redirectToWebpay(url: string, token: string) {
+    // We add the corresponding headers to the request
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    return this.httpService
+      .post(url, httpOptions)
       .pipe(catchError(this.handleError));
   }
 
