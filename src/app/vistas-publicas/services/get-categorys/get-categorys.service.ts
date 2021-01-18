@@ -1,12 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Category } from '@interfaces/categorys';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICIOS } from 'src/app/config/config';
-import { ServiceModule } from '@services/service.module'
+import { Service } from '@services/service.service';
+import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
-export class GetCategorysService {
+export class GetCategorysService extends Service{
 
-  constructor() { }
+
+  constructor(){}
+  
+   public getCategoryList(): Observable<Category>{
+     
+      return this.execQuery<Category>('categories');
+
+   }
 }

@@ -9,14 +9,14 @@
 
         <section class="d-container">
 
-            <article class="category-description">
+            <article class="category-description" *ngFor="let cat of boxCategory">
                 <header class="cty-header">
-                    <h2 class="cty-title">Medicamentos</h2>
+                    <h2 (click)="showProducts(cat.id, 0)" class="cty-title">{{cat.name}}</h2>
                 </header>
                 <nav class="list-items">
                     <ol>
-                        <li class=" item subcategory" id="index">
-                            <a [routerLink]="" class="subcategory-l">link</a>
+                        <li class=" item subcategory" id="index" *ngFor="let subcat of cat.subcategories ">
+                            <a (click)="showProducts(cat.id, subcat.id)" class="subcategory-l">{{subcat.name}}</a>
                         </li>
                     </ol>
                 </nav>

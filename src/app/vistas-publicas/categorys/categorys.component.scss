@@ -22,6 +22,7 @@
                 .cty-header {
                     padding-bottom: 16px;
                     .cty-title {
+                        text-transform: capitalize;
                         font-weight: normal;
                         font-size: 1.4rem;
                     }
@@ -37,6 +38,11 @@
                             max-width: 25%;
                             font-size: 1rem;
                             text-transform: capitalize;
+                            padding-bottom: 10px;
+                            a {
+                                text-decoration: none;
+                                color: inherit;
+                            }
                         }
                     }
                 }
