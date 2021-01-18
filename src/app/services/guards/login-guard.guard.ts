@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanLoad } from '@angular/router';
 import { Observable } from 'rxjs';
 import { StoreService } from '../store/store.service';
 
@@ -7,7 +7,7 @@ import { StoreService } from '../store/store.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginGuardGuard implements CanActivate {
+export class LoginGuardGuard implements CanActivate, CanLoad {
 
   constructor(private storeService: StoreService) {}
 
@@ -21,7 +21,18 @@ export class LoginGuardGuard implements CanActivate {
       return false;
     }
 
-    return true;
+  }
+
+  canLoad() {
+
+    if ( this.storeService.estaLogueado() ){
+      console.log('Paso por el login Guard');
+      return true;
+    }else{
+      console.log('Bloqueado por el  Guard');
+      return false;
+    }
 
   }
+
 }

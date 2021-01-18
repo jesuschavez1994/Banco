@@ -25,6 +25,8 @@ import { OrderPaymentFormsComponent } from './order-payment-forms/order-payment-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownButtonComponent } from './dropdown-button/dropdown-button.component';
 import { DropdownIconComponent } from './dropdown-icon/dropdown-icon.component';
+import { InvoiceBComponent } from './invoice-b/invoice-b.component';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
     declarations: [
@@ -48,6 +50,7 @@ import { DropdownIconComponent } from './dropdown-icon/dropdown-icon.component';
       OrderPaymentFormsComponent,
       DropdownButtonComponent,
       DropdownIconComponent,
+      InvoiceBComponent,
     ],
     imports: [
       // APP_ROUTING,
@@ -57,6 +60,7 @@ import { DropdownIconComponent } from './dropdown-icon/dropdown-icon.component';
       FormsModule,
       ReactiveFormsModule,
       NgxPaginationModule,
+      ComponentsModule
 
     ],
     exports: [
@@ -70,6 +74,7 @@ import { DropdownIconComponent } from './dropdown-icon/dropdown-icon.component';
       OrderListComponent, OrderEditorComponent,
       InvoiceComponent, OrderPaymentFormsComponent,
       DropdownButtonComponent, DropdownIconComponent,
+      InvoiceBComponent,
     ]
 })
 

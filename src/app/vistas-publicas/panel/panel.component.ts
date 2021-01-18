@@ -23,7 +23,7 @@ export class PanelComponent implements OnInit {
     },
     {
       label: 'ventas',
-      iconClass: 'fas fa-user',
+      iconClass: 'fab fa-sellsy',
       routerLink: ['ventas'],
       // isActive: false,
     },
