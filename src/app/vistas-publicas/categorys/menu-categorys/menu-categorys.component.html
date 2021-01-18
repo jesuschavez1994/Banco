@@ -1,0 +1,27 @@
+<div class="main-container">
+
+    <main>
+
+        <header class="cty-header-main">
+            <h1 class="cty-title">Categorías</h1>
+        </header>
+
+        <section class="d-container">
+
+            <article class="category-description" *ngFor="let cat of boxCategory; let ind = index">
+                <header class="cty-header">
+                    <h2 (click)="showProducts(ind, 'none')" class="cty-title">{{cat.name}}</h2>
+                </header>
+                <nav class="list-items">
+                    <ol>
+                        <li class=" item subcategory" id="index" *ngFor="let subcat of cat.subcategories;let indx = index ">
+                            <a (click)="showProducts(ind, indx)" class="subcategory-l">{{subcat.name}}</a>
+                        </li>
+                    </ol>
+                </nav>
+            </article>
+
+        </section>
+    </main>
+
+</div>

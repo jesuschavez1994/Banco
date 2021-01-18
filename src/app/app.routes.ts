@@ -8,6 +8,9 @@ import { FormDataNegocioComponent } from './form-register/form-data-negocio/form
 import { DashboardComponent } from './vistas-privadas/dashboard/dashboard.component';
 import { HomeComponent } from './vistas-publicas/home/home.component';
 import { CategorysComponent } from './vistas-publicas/categorys/categorys.component';
+import { MenuCategorysComponent } from './vistas-publicas/categorys/menu-categorys/menu-categorys.component';
+import { ListProductComponent } from './vistas-publicas/categorys/list-product/list-product.component';
+
 import { RegisterComponent } from './vistas-publicas/Registers/Usuario/register.component';
 import { RutStoreComponent } from './form-register/rut-store/rut-store.component';
 import { AccountComponent } from './vistas-privadas/account/account.component';
@@ -43,7 +46,16 @@ const APP_ROUTES: Routes = [
 
     {path: 'home', component: HomeComponent},
     {path: 'register', component: RegisterComponent},
-    {path: 'categorys', component: CategorysComponent},
+    {path: 'categorys',component: CategorysComponent,
+
+            children: [
+            {path: '', component: MenuCategorysComponent},
+            {path: ':categories/products',component: ListProductComponent},
+            {path: ':categories/:subcategories/products',component: ListProductComponent},
+
+        ],
+    
+    },
     {   path: 'admin',
         component: LoadBanckProductComponent,
         children: [
