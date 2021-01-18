@@ -28,7 +28,7 @@ import { SincronizacionService } from './sincronizacion/sincronizacion.service';
     },
   ],
   imports: [CommonModule],
-  exports: [],
+  exports: [StoreService, LoginGuardGuard],
 
 })
 

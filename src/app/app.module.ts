@@ -19,6 +19,7 @@ import { ServiceModule } from './services/service.module';
 import { FormularioRegisterModule } from './form-register/formulario-register.module';
 import { VistasPublicasModule } from './vistas-publicas/vistas-publicas.module';
 import { LoginModule } from './Login/login.module';
+import { PublicServices } from './vistas-publicas/services/public-services.module';
 
 // ngrx => PATRÓN REDUX//
 import { StoreModule } from '@ngrx/store';
@@ -62,6 +63,7 @@ registerLocaleData(ca);
     PagesModule,
     SharedModule,
     ServiceModule,
+    PublicServices,
     FormularioRegisterModule,
     VistasPublicasModule,
     PrivateviewModule,

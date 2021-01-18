@@ -1,0 +1,46 @@
+.main-container {
+    background: #f9f9f9;
+    padding-top: 32px;
+    min-height: 100%;
+    main {
+        width: 75%;
+        margin: 0 auto;
+        .cty-header-main {
+            padding-bottom: 32px;
+            .cty-title {
+                font-size: 1.6rem;
+                font-weight: 500;
+            }
+        }
+        .d-container {
+            padding: 35px;
+            background-color: white;
+            border-radius: 15px;
+            .category-description {
+                text-align: left;
+                padding-bottom: 40px;
+                .cty-header {
+                    padding-bottom: 16px;
+                    .cty-title {
+                        font-weight: normal;
+                        font-size: 1.4rem;
+                    }
+                }
+                .list-items {
+                    padding: 0 !important;
+                    ol {
+                        padding: 0 !important;
+                        display: flex;
+                        flex-wrap: wrap;
+                        li {
+                            min-width: 25%;
+                            max-width: 25%;
+                            font-size: 1rem;
+                            text-transform: capitalize;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
