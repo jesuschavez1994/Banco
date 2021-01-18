@@ -8,7 +8,10 @@ import { OrderListOptions } from '@interfaces/components-options/order.options.i
 })
 export class OrderListComponent implements OnInit {
 
+  @Input() isExpanded = false;
+  @Input() isListToPaid = true;
   @Input() orders: OrderListOptions[] = [];
+
   @Output() selected = new EventEmitter<OrderListOptions>();
   orderSelected: OrderListOptions;
 

@@ -1,8 +1,10 @@
 export interface OrderListOptions {
   id: number;
-  business: Business;
+  group: Group;
   orders: Order[];
   hasPaid: boolean;
+  datePaid?: string;
+  deliveryTargetLocation?: string;
 }
 /**
  * agrego el atributo de porcentaje de impuesto aquí
@@ -25,7 +27,7 @@ export interface Order {
   deliveryCost?: number;
 
 }
-export interface Business {
+export interface Group {
   name: string;
   img: string;
 }

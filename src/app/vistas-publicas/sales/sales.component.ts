@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderListOptions } from '@interfaces/components-options/order.options.interface';
-import { PaymentProcessService } from '@services/payment-process/payment-process.service';
+import { OrderListOptions } from '../../interfaces/components-options/order.options.interface';
+import { PaymentProcessService } from '../../services/payment-process/payment-process.service';
 
 @Component({
-  selector: 'app-shopping-cart',
-  templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.scss']
+  selector: 'app-sales',
+  templateUrl: './sales.component.html',
+  styleUrls: ['./sales.component.scss']
 })
-export class ShoppingCartComponent implements OnInit {
+export class SalesComponent implements OnInit {
 
   taxPorcentage = 10;
   deliveryCost = 5;
 
-  tabSelected: 1 | 2 | 3 = 3;
+  tabSelected: 1 | 2 = 1;
   ordersLists: OrderListOptions[] = [
     {
       id: 1,
@@ -116,39 +116,24 @@ export class ShoppingCartComponent implements OnInit {
 
   ordersListSelected: OrderListOptions;
 
-  constructor( private paymentService: PaymentProcessService) { }
+
+
+  constructor(
+    private paymentService: PaymentProcessService
+  ) { }
 
   ngOnInit(): void {
+
     this.ordersListSelected = this.ordersLists[0];
 
-    console.log('ShoppingCartComponent');
+    console.log('salesComponent');
 
     this.paymentService.getCartResume().subscribe(resp => {
       console.log('getCartResume');
       console.log(resp);
     });
 
-    // this.paymentService.getProductsFromCart().subscribe(resp => {
-    //   console.log('getProductsFromCart');
-    //   console.log(resp);
-    // });
-
-    // this.paymentService.addProductToCart(129, 2).subscribe(resp => {
-    //   console.log('addProductToCart');
-    //   console.log(resp);
-    // });
-
-    // console.log('deleteProsductFromCart');
-    // this.paymentService.deleteProsductFromCart(129).subscribe(resp => {
-    //   console.log(resp);
-    // });
-
-    // console.log('emptyCart');
-    // this.paymentService.emptyCart().subscribe(resp => {
-    //   console.log(resp);
-    // });
-
-    console.log('ShoppingCartComponent///');
+    console.log('salesComponent///');
 
   }
 
@@ -162,7 +147,7 @@ export class ShoppingCartComponent implements OnInit {
 
   public purchaseAction(event) {
     console.log(event);
-    this.tabSelected = 3;
+    this.tabSelected = 2;
   }
 
 }

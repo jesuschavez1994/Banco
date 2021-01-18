@@ -33,5 +33,20 @@ export class PaymentProcessService extends Service{
     return this.DeleteQuery(`cart`);
   }
 
+  public getOrders(idUser: number){
+    return this.execQuery(`users/${idUser}/orders/`);
+  }
+
+  public statusPayment(idProduct: number){
+    return this.execQuery(`pago-tienda/${idProduct}/status`);
+  }
+
+  public orderPayments(idUser: number, idOrder: number){
+    return this.postQuery(`users/${idUser}/orders/${idOrder}/payments`, {});
+  }
+
+  public createTransaction(){
+    return this.execQuery(`webpayplus/createdMallTransaction`);
+  }
 
 }
