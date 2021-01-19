@@ -10,10 +10,13 @@
 //   imgPath: 'https://image.tmdb.org/t/p'
 // };
 
+// url: 'http://31.220.108.209/',
+//   apiUrl: 'http://31.220.108.209/api/',
+
 export const environment = {
   production: false,
-  url: 'http://31.220.108.209/',
-  apiUrl: 'http://31.220.108.209/api/',
+  url: 'http://founduss.com',
+  apiUrl: 'http://founduss.com/api/',
   apiKey: 'aac1706fe8a46b5700714aead65c5e39',
   imgPath: ''
 };

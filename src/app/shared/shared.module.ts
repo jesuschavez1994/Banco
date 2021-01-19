@@ -27,6 +27,7 @@ import { DropdownButtonComponent } from './dropdown-button/dropdown-button.compo
 import { DropdownIconComponent } from './dropdown-icon/dropdown-icon.component';
 import { InvoiceBComponent } from './invoice-b/invoice-b.component';
 import { ComponentsModule } from '../components/components.module';
+import { CardShimmerComponent } from './card-shimmer/card-shimmer.component';
 
 @NgModule({
     declarations: [
@@ -51,6 +52,7 @@ import { ComponentsModule } from '../components/components.module';
       DropdownButtonComponent,
       DropdownIconComponent,
       InvoiceBComponent,
+      CardShimmerComponent
     ],
     imports: [
       // APP_ROUTING,
@@ -60,7 +62,7 @@ import { ComponentsModule } from '../components/components.module';
       FormsModule,
       ReactiveFormsModule,
       NgxPaginationModule,
-      ComponentsModule
+      // ComponentsModule
 
     ],
     exports: [
@@ -74,7 +76,7 @@ import { ComponentsModule } from '../components/components.module';
       OrderListComponent, OrderEditorComponent,
       InvoiceComponent, OrderPaymentFormsComponent,
       DropdownButtonComponent, DropdownIconComponent,
-      InvoiceBComponent,
+      InvoiceBComponent, CardShimmerComponent
     ]
 })
 

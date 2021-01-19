@@ -36,6 +36,32 @@
 
     // }
 
+    .filter--buttons{
+      display: flex;
+
+      .filter {
+        border: 2px solid transparent;
+        cursor: pointer;
+        font-size: $font__size--small;
+        padding: 3px 18px;
+        transition: all .3s;
+
+        &:hover {
+          background: none;
+          border: 2px solid $color__background-gray;
+          color: $color__text-orange;
+
+        }
+
+        &.active{
+          background: $color__background-gray;
+          border: 2px solid $color__background-gray;
+        }
+
+      }
+
+    }
+
     table {
       width: 100%;
       background: $color__background-white;
