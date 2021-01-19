@@ -39,7 +39,7 @@
 
       <section class="products-infomation">
 
-        <h1 class="profile-name">{{StoreName}}</h1>
+        <h1 class="profile-name" (click)="openToast()">{{StoreName}}</h1>
 
         <app-product-detail
           #productDetail
@@ -76,3 +76,5 @@
   </div>
 
 </main>
+
+<app-toast #toastRef ></app-toast>

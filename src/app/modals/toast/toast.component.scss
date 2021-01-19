@@ -1,0 +1,26 @@
+@import 'src/assets/scss/style.scss';
+
+.toast-container{
+  background: $color__background-gray--dark;
+  cursor: pointer;
+  padding: 7px 45px;
+  transition: all 0.5s;
+  // opacity: 0.8;
+
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  border-radius: 5px;
+
+
+  p{
+    color: $color__text-white;
+    // opacity: 1;
+    text-transform: lowercase;
+
+    &::first-letter{
+      text-transform: uppercase;
+    }
+  }
+
+}

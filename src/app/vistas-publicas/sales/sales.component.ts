@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderListOptions } from '../../interfaces/components-options/order.options.interface';
 import { PaymentProcessService } from '../../services/payment-process/payment-process.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ToastComponent } from '../../modals/toast/toast.component';
 
 @Component({
   selector: 'app-sales',
@@ -119,7 +121,7 @@ export class SalesComponent implements OnInit {
 
 
   constructor(
-    private paymentService: PaymentProcessService
+    private paymentService: PaymentProcessService,
   ) { }
 
   ngOnInit(): void {
@@ -149,5 +151,6 @@ export class SalesComponent implements OnInit {
     console.log(event);
     this.tabSelected = 2;
   }
+
 
 }

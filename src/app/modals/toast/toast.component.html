@@ -1,0 +1,10 @@
+<div class="toast-container fade slower"
+  #ToastRef
+  [ngClass]="{'show': showToast}"
+  (click)="close()"
+  [style.background]="data.colors.background"
+>
+
+  <p [style.color]="data.colors.color">{{data.title}}</p>
+
+</div>

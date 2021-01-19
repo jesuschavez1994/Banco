@@ -44,6 +44,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { SuccessComponent } from './modals/success/success.component';
+import { ToastComponent } from './modals/toast/toast.component';
 
 registerLocaleData(ca);
 
@@ -51,6 +52,7 @@ registerLocaleData(ca);
   declarations: [
     AppComponent,
     SuccessComponent,
+
   ],
   imports: [
     BrowserModule,

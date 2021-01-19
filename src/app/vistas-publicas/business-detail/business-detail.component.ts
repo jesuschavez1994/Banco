@@ -15,11 +15,10 @@ import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Utils } from '../../utils/utils';
 import { PriceRange, Filter } from '@interfaces/components-options/sidebar-list.options.interface';
-import { MatDialog } from '@angular/material/dialog';
-import { SuccessComponent } from '../../modals/success/success.component';
 import { PaymentProcessService } from '@services/payment-process/payment-process.service';
 import { DropdownOption } from '@interfaces/components-options/dropdown.options.interface';
 import { DropdownIconComponent } from '../../shared/dropdown-icon/dropdown-icon.component';
+import { ToastComponent } from '../../modals/toast/toast.component';
 
 @Component({
   selector: 'app-business-detail',
@@ -32,6 +31,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('productCards') productCards: ProductsCardsComponent;
   @ViewChild('productDetail') productDetail: ProductDetailComponent;
   @ViewChild('sidebarList') sidebarList: SidebarListComponent;
+  @ViewChild('toastRef') toastRef: ToastComponent;
   // @ViewChild('dropdownIcon') dropdownIcon: DropdownIconComponent;
 
   // Components Inputs
@@ -90,6 +90,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   // Variables
   StoreName = '';
 
+  // Toast
+  // dataToast: any = '';
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -97,7 +100,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     private storeService: StoreService,
     private paymentProcessService: PaymentProcessService,
     private utils: Utils,
-    public dialog: MatDialog,
     private dropdownIconComp: DropdownIconComponent
 
   ){
@@ -143,8 +145,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     //   }
     // );
 
-  }
 
+
+  }
 
   public loadDataByParams(){
 
@@ -408,29 +411,37 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     const idProduct = event.product.id;
     const quantity = event.quantity;
 
-    this.paymentProcessService.addProductToCart(idProduct, quantity).subscribe( resp => {
+    this.paymentProcessService.addProductToCart(idProduct, quantity).subscribe(
+      resp => {
 
-      if (resp.success) {
+        if (resp.success) {
 
-        this.dialog.open(SuccessComponent, {
-          width: '250px',
-          data: { title: 'Producto agregado al carrito', message: resp.message}
-        });
+          const products = resp.data;
 
-        const products = resp.data;
+          this.menuOptions = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
 
-        this.menuOptions = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
+          this.toastRef.open(
+            'Producto agregado al carrito'
+          );
 
-      }else{
+        }else{
 
-        this.dialog.open(SuccessComponent, {
-          width: '250px',
-          data: { title: 'Producto no agregado al carrito', message: resp.message }
-        });
+          this.toastRef.open(
+            'Producto no agregado al carrito',
+            { color: '#ffffff', background: '#900909c2'}
 
+          );
+
+        }
+
+      },
+      error => {
+        this.toastRef.open(
+          'Producto no agregado al carrito',
+          { color: '#ffffff', background: '#900909c2'}
+        );
       }
-
-    } );
+    );
 
   }
 
@@ -633,5 +644,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
 
+  // Notifications
+  public showToast(data?){
+    this.toastRef.open(data);
+  }
 
 }

@@ -8,16 +8,17 @@ import { APP_ROUTING } from '../app.routes';
 import { LoginModule } from '../Login/login.module';
 import { ComponentsModule } from '../components/components.module';
 // import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ToastComponent } from '../modals/toast/toast.component';
 import { BusinessDetailComponent } from './business-detail/business-detail.component';
 import { RouterModule } from '@angular/router';
 import { PanelModule } from './panel/panel.module';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     RegisterComponent,
     BusinessDetailComponent,
+    ToastComponent,
 
   ],
   imports: [
