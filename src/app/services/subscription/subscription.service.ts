@@ -19,6 +19,7 @@ import {
   WebpayPayment,
   PaymentCredentials,
 } from '@interfaces/SettingsInterfaces';
+import { toNumber } from '@alyle/ui';
 
 @Injectable({
   providedIn: 'root',
@@ -70,13 +71,13 @@ export class SubscriptionService {
       }),
     };
 
-    const wepayData: WebpayPayment = {
+    const webpayData: WebpayPayment = {
       payment_id: paymentId,
-      user_id: 1,
+      user_id: parseInt(this.userId),
     };
 
     return this.httpService
-      .get<PaymentCredentials>(url, httpOptions)
+      .post<PaymentCredentials>(url, webpayData, httpOptions)
       .pipe(catchError(this.handleError));
   }
 
