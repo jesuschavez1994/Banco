@@ -7,6 +7,7 @@ import { Plan } from '../../models/plan';
   styleUrls: ['./payment-details.component.css'],
 })
 export class PaymentDetailsComponent implements OnInit {
+  @Input() voucherDetails: object;
   @Output() pageChange: EventEmitter<string>;
 
   nextPage = 'plans';
@@ -21,5 +22,7 @@ export class PaymentDetailsComponent implements OnInit {
     this.pageChange = new EventEmitter<string>();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(`Details of the voucher: ${this.voucherDetails}`);
+  }
 }
