@@ -1,14 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SubscriptionService } from '@services/subscription/subscription.service';
 
-export interface DialogData {
-  url: string;
-  token: string;
-}
+import { PaymentCredentials } from '@interfaces/SettingsInterfaces';
 
 @Component({
   selector: 'app-redirection-modal',
@@ -16,13 +10,31 @@ export interface DialogData {
   styleUrls: ['./redirection-modal.component.css'],
 })
 export class RedirectionModalComponent implements OnInit {
-  constructor(
-    public dialogRef: MatDialogRef<RedirectionModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {}
+  dialogData: PaymentCredentials;
 
-  onNoClick(): void {
+  constructor(
+    private subscriptionDataService: SubscriptionService,
+    private dialogRef: MatDialogRef<RedirectionModalComponent>,
+    @Inject(MAT_DIALOG_DATA) data: PaymentCredentials
+  ) {
+    // We pass the data to the dialog context.
+    this.dialogData = {
+      url: data.url,
+      token: data.token,
+    };
+  }
+
+  close() {
     this.dialogRef.close();
+  }
+
+  redirectToTransbank(): void {
+    this.subscriptionDataService
+      .redirectToWebpay(this.dialogData.url, this.dialogData.token)
+      .subscribe((transactionDetails: object) => {
+        console.log(`Resultado de la transacción: ${transactionDetails}`);
+        this.dialogRef.close(transactionDetails);
+      });
   }
 
   ngOnInit(): void {}

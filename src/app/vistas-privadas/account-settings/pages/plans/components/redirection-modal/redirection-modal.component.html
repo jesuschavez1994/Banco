@@ -1,14 +1,12 @@
 <h1 mat-dialog-title>Redirección al sitio de pago.</h1>
-<div mat-dialog-content>
+<mat-dialog-content>
   <p>
     Por favor presione el botón en la parte inferior de este mensaje para ser
     redirigido al sitio web de Transbank y así completar su proceso de pago.
   </p>
-</div>
+</mat-dialog-content>
 
-<div mat-dialog-actions>
-  <form method="post" action="{{ data.url }}">
-    <input type="hidden" name="token_ws" value="{{ data.token }}" />
-    <input type="submit" value="Ir a pagar" mat-button />
-  </form>
-</div>
+<mat-dialog-actions>
+  <button mat-raised-button (click)="close()">Cerrar</button>
+  <button mat-raised-button (click)="redirectToTransbank()">Ir a pagar</button>
+</mat-dialog-actions>
