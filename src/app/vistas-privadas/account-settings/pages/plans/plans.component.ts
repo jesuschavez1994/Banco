@@ -38,6 +38,7 @@ export class PlansComponent implements OnInit {
   currentPage = 'payment';
   selectedPlan: Plan;
   orderInfo: CreatedOrder;
+  voucherDetails: object;
 
   plans: Array<Plan>;
   route = 'Planes';
@@ -53,6 +54,10 @@ export class PlansComponent implements OnInit {
 
   onPageChange(page: string): void {
     this.currentPage = page;
+  }
+
+  gotVoucherDetails(details: object) {
+    this.voucherDetails = details;
   }
 
   constructor(private subscriptionDataService: SubscriptionService) {}

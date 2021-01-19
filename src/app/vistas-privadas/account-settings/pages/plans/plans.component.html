@@ -29,6 +29,7 @@
   >
     <app-plan-details
       (pageChange)="onPageChange($event)"
+      (voucherDetails)="gotVoucherDetails($event)"
       [selectedPlanDetails]="selectedPlan"
       [orderDetails]="orderInfo"
     ></app-plan-details>
@@ -41,6 +42,7 @@
   >
     <app-payment-details
       (pageChange)="onPageChange($event)"
+      [voucherDetails]="voucherDetails"
     ></app-payment-details>
   </div>
 </div>
