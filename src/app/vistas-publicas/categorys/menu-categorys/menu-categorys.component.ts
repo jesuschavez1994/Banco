@@ -51,4 +51,16 @@ export class MenuCategorysComponent implements OnInit {
     
     
   }
+  log(ev:any){
+    console.log(ev);
+    if(!ev.classList.contains('fadeInDown')){
+      ev.classList.add('fadeInDown');
+    }
   }
+  ulog(ev:any){
+    if(ev.classList.contains('fadeInDown')){
+      ev.classList.remove('fadeOutUp');
+    } 
+  }
+ 
+}

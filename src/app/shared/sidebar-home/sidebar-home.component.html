@@ -77,14 +77,14 @@
                 </g>
      
             <script>
-                let flag=false;
+                let ___flag=false;
                 const menuAct = document.getElementById('menu-act-00');
                 
                 const bars = document.getElementById('bars');
                 const cross = document.getElementById('cross');
                 menuAct.addEventListener('click',()=>{
                 
-                if(!flag){
+                if(!___flag){
     
                     bars.classList.remove('rotar-a');
                     bars.classList.remove('active');
@@ -93,7 +93,7 @@
                     cross.classList.remove('rotar-d');
                     cross.classList.add('rotar-a');
                     cross.classList.add('active');				
-                    flag=!flag;
+                    ___flag=!___flag;
                     
                 }else{
     
@@ -105,7 +105,7 @@
                     cross.classList.remove('active');				
     
                     cross.classList.add('rotar-d');
-                    flag=!flag;
+                    ___flag=!___flag;
                     
                 }
                             },false);

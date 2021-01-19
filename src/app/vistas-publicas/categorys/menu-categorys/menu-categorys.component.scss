@@ -5,13 +5,6 @@
     main {
         width: 75%;
         margin: 0 auto;
-        .cty-header-main {
-            padding-bottom: 32px;
-            .cty-title {
-                font-size: 1.6rem;
-                font-weight: 500;
-            }
-        }
         .d-container {
             padding: 35px;
             background-color: white;
@@ -19,12 +12,20 @@
             .category-description {
                 text-align: left;
                 padding-bottom: 40px;
+                transition: linear .4s;
                 .cty-header {
                     padding-bottom: 16px;
                     .cty-title {
-                        text-transform: capitalize;
-                        font-weight: normal;
-                        font-size: 1.4rem;
+                        .span {
+                            color: black;
+                            border-bottom: solid transparent 1px;
+                            text-transform: capitalize;
+                            font-weight: normal;
+                            font-size: 1.2rem;
+                            &:hover {
+                                border-bottom: solid black 1px;
+                            }
+                        }
                     }
                 }
                 .list-items {
@@ -42,6 +43,57 @@
                             a {
                                 text-decoration: none;
                                 color: inherit;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 768px) {
+    .main-container {
+        main {
+            width: 95%;
+            .d-container {
+                .category-description {
+                    .list-items {
+                        ol {
+                            li {
+                                min-width: 50%;
+                                max-width: 50%;
+                                padding-left: 5%;
+                                a {
+                                    text-decoration: none;
+                                    color: inherit;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 425px) {
+    .main-container {
+        main {
+            width: 95%;
+            .d-container {
+                .category-description {
+                    .list-items {
+                        ol {
+                            justify-items: center;
+                            li {
+                                min-width: 75%;
+                                max-width: 75%;
+                                padding-left: 5%;
+                                a {
+                                    text-decoration: none;
+                                    color: inherit;
+                                }
                             }
                         }
                     }
