@@ -18,12 +18,10 @@ export class PlanDetailsComponent implements OnInit {
   @Input() selectedPlanDetails: Plan;
   @Input() orderDetails: CreatedOrder;
   @Output() pageChange: EventEmitter<string>;
+  @Output() voucherDetails: EventEmitter<object>;
 
   nextPage = 'plans';
   webpayDebitCard = false;
-  // Test
-  url: 'Hai, this is the url.';
-  token: 'Hai, I am the token!';
 
   backToPreviousPage(): void {
     this.nextPage = 'plans';
@@ -31,9 +29,10 @@ export class PlanDetailsComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
-  toNextPage(): void {
+  toNextPage(voucherDetail: object): void {
     this.nextPage = 'payment-details';
     this.pageChange.emit(this.nextPage);
+    this.voucherDetails.emit(voucherDetail);
     window.scrollTo(0, 0);
   }
 
@@ -48,7 +47,7 @@ export class PlanDetailsComponent implements OnInit {
         this.subscriptionDataService
           .createWebpayPayment(serverResponse.order_id)
           .subscribe((paymentCredentials: PaymentCredentials) => {
-            console.log('Hi');
+            console.log(`Response from the server: `, paymentCredentials);
             this.openDialog(paymentCredentials.url, paymentCredentials.token);
           });
       });
@@ -57,11 +56,15 @@ export class PlanDetailsComponent implements OnInit {
   openDialog(url: string, token: string): void {
     const dialogRef = this.dialog.open(RedirectionModalComponent, {
       disableClose: true,
-      data: { url: this.url, token: this.token },
+      data: { url: url, token: token },
     });
 
     dialogRef.afterClosed().subscribe((transactionDetails) => {
-      console.log('The dialog was closed');
+      console.log(
+        'The dialog was . And the response from the server was: ',
+        transactionDetails
+      );
+      this.toNextPage(transactionDetails);
     });
   }
 
@@ -70,6 +73,7 @@ export class PlanDetailsComponent implements OnInit {
     private subscriptionDataService: SubscriptionService
   ) {
     this.pageChange = new EventEmitter<string>();
+    this.voucherDetails = new EventEmitter<object>();
   }
 
   ngOnInit(): void {}
