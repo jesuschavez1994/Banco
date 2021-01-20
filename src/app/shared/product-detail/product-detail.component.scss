@@ -59,6 +59,10 @@
         padding: 6px 40px;
         transition: all .3s;
 
+        &.disabled{
+          opacity: 0.5;
+          pointer-events: none;
+        }
 
         &:hover{
           background: $color__background-gray--dark;

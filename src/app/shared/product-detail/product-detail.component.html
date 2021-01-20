@@ -43,6 +43,8 @@
         </app-quantity-counter>
 
         <button
+          [ngClass]="{'disabled': isDisableButtonCart}"
+          [disabled]="isDisableButtonCart"
           class="btn-add-to-cart"
           (click)="addToCart()">
           {{buttonTitle}}
