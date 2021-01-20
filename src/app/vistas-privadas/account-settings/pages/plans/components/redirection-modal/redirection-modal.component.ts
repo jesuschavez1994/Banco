@@ -28,6 +28,7 @@ export class RedirectionModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  // API calls handler methods-------------------------------
   redirectToTransbank(): void {
     this.subscriptionDataService
       .redirectToWebpay(this.dialogData.url, this.dialogData.token)

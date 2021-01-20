@@ -26,10 +26,20 @@ export class PlanCardComponent implements OnInit {
   waitingResponse = false;
   planDetails: OrderNumberCreation;
 
+  // Events that happens in the component -----------------
   showMore(): void {
     this.moreInfo = !this.moreInfo;
   }
 
+  onPlanSelected(event): void {
+    this.getOrderNumber();
+  }
+
+  onCheck(): void {
+    console.log(this.productSync);
+  }
+
+  // API calls handler methods-------------------------------
   private getOrderNumber(): void {
     this.numberOfRetries++;
     this.planDetails = {
@@ -55,20 +65,6 @@ export class PlanCardComponent implements OnInit {
 
       // We start the progress spinner, and the API call.
       this.waitingResponse = true;
-      /*       this.subscriptionDataService
-        .createOrderNumber(this.planDetails)
-        .then((serverResponse) => {
-          // Got a reply, stop spinner.
-          this.waitingResponse = false;
-          this.gotOrderDetails.emit(serverResponse);
-          this.selectPlan.emit(this.planInfo);
-          this.pageChange.emit(this.nextPage);
-          window.scrollTo(0, 0);
-        })
-        .catch((error) => {
-          this.waitingResponse = false;
-        }); */
-
       this.subscriptionDataService
         .createOrderNumber(this.planDetails)
         .subscribe((serverResponse: CreatedOrder) => {
@@ -83,17 +79,6 @@ export class PlanCardComponent implements OnInit {
       this.pageChange.emit(this.nextPage);
       window.scrollTo(0, 0);
     }
-  }
-
-  onPlanSelected(event): void {
-    /*     this.selectPlan.emit(this.planInfo);
-    this.pageChange.emit(this.nextPage);
-    window.scrollTo(0, 0); */
-    this.getOrderNumber();
-  }
-
-  onCheck(): void {
-    console.log(this.productSync);
   }
 
   constructor(

@@ -23,6 +23,7 @@ export class PlanDetailsComponent implements OnInit {
   nextPage = 'plans';
   webpayDebitCard = false;
 
+  // Events that happens in the component -----------------
   backToPreviousPage(): void {
     this.nextPage = 'plans';
     this.pageChange.emit(this.nextPage);
@@ -36,6 +37,7 @@ export class PlanDetailsComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
+  // API calls handler methods-------------------------------
   createPayment(): void {
     this.subscriptionDataService
       .paymentCreation(
