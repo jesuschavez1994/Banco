@@ -26,7 +26,7 @@ export class SidebarHomeComponent implements OnInit {
       menuContainerFixed.classList.remove( 'responsive-menu-container--fixed' );
     }
 
-  }
+  } 
 
   public toggleMenu(){
     this.configurationMenu.nativeElement.classList.toggle( 'configuration-menu--responsive-expanded' );

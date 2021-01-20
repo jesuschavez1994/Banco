@@ -1,4 +1,5 @@
 .main-container {
+    min-width: 100%;
     background: #f9f9f9;
     padding-top: 32px;
     min-height: 100%;
@@ -90,6 +91,7 @@
                                 min-width: 75%;
                                 max-width: 75%;
                                 padding-left: 5%;
+                                padding-top: 2%;
                                 a {
                                     text-decoration: none;
                                     color: inherit;

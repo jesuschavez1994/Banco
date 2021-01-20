@@ -1,4 +1,4 @@
-interface productSubcat {
+export interface ProductCategories {
   current_page: number;
   data: Datum[];
   first_page_url: string;

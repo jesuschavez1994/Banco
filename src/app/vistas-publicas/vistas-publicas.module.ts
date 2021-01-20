@@ -6,7 +6,7 @@ import { FormularioRegisterModule } from '../form-register/formulario-register.m
 import { SharedModule } from '../shared/shared.module';
 import { LoginModule } from '../Login/login.module';
 import { ComponentsModule } from '../components/components.module';
-
+import {PipesModule }from '@pipes/pipes.module';
 // import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { BusinessDetailComponent } from './business-detail/business-detail.component';
 import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
@@ -25,6 +25,7 @@ import { ListProductComponent } from './categorys/list-product/list-product.comp
 
 @NgModule({
   declarations: [
+    
     HomeComponent,
     RegisterComponent,
     // ShoppingCartComponent,
@@ -48,6 +49,7 @@ import { ListProductComponent } from './categorys/list-product/list-product.comp
     RouterModule,
     LoginModule,
     ComponentsModule,
+    PipesModule,
     ShoppingCartModule
   ],
   exports: [
