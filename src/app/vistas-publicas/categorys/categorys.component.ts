@@ -2,7 +2,7 @@ import { Component, OnInit, OnChanges ,Output, ViewChild, ElementRef } from '@an
 import { GetCategorysService } from './services/get-categorys.service';
 import { Category } from '@interfaces/categorys';
 import { Router } from '@angular/router';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-categorys',
   templateUrl: './categorys.component.html',

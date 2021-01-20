@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Input, Output, ViewChild, ElementRef } fr
 import { GetCategorysService } from '.././services/get-categorys.service';
 import { Category } from '@interfaces/categorys';
 import { Router} from '@angular/router';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-categorys',
@@ -15,21 +15,24 @@ export class MenuCategorysComponent implements OnInit {
   //par de id de categorias y sub categorias
   stateid: number[] = [null,null];
   constructor(private getCategorysService: GetCategorysService,  
-              private router: Router,  ) {
+              private router: Router,
+              private spinner : NgxSpinnerService  ) {
                 console.log('menu constructor');
                }
 
   ngOnInit(): void {
+    this.spinner.show();
     console.log('menu on Init')
     //si el request de las categorias ya ha sido realizado
     //obtiene su valor
-    //this.boxCategory = this.getCategorysService._bxCategory;
+    this.boxCategory = this.getCategorysService._bxCategory;
     if(this.boxCategory== undefined){
        this.obtCategories();
        console.log('obtCategories get');
       }else{
        console.log('obtCategories saved load');
       this.boxCategory = this.getCategorysService._bxCategory;
+      this.spinner.hide();
       }
 
   }
@@ -50,11 +53,14 @@ export class MenuCategorysComponent implements OnInit {
     this.getCategorysService.getCategoryList().subscribe( 
          cat => {
            this.boxCategory = cat;
-          console.log('categorias obtenidaS');
+          console.log('categorias obtenidas');
+          this.spinner.hide();
           
           },
           error=>{
             console.log('error cargando categorias '+error);
+          this.spinner.hide();
+
           }
           )
      } 

@@ -3,8 +3,9 @@
 
         <header class="cty-header">
             <h3 class="cty-title">
-                {{titleCat}}
+                {{titleCat}} > {{titleSubcat}}
             </h3>
+
             <hr>
         </header>
 
@@ -39,7 +40,7 @@
                     </li>
 
                     <li id="{{item}}" (click)="getProductsPG($event.target.id)" class="page-item active" *ngFor="let item of pgOptions; let ind = index ">
-                        <a class="page-link">{{ind+1}}</a>
+                        <a class="page-link" (click)="getProductsPG(item)">{{ind+1}}</a>
                     </li>
 
                     <li class="page-item">
@@ -61,3 +62,6 @@
     </main>
 
 </div>
+<ngx-spinner bdColor="rgb(255,255,255)" size="large" color="#f19301" type="ball-atom">
+    <p style="color: black"> Cargando </p>
+</ngx-spinner>

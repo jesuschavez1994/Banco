@@ -4,7 +4,7 @@ import { ProductCategories } from '@interfaces/productCategories';
 import { Service } from '@services/service.service';
 import { Router } from '@angular/router';
 import { GetCategorysService } from '.././services/get-categorys.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-list-product',
   templateUrl: './list-product.component.html',
@@ -16,6 +16,7 @@ export class ListProductComponent implements OnInit {
   constructor(  private service: Service,
                 private getCategorys: GetCategorysService,
                 private router: Router,
+                public spinner: NgxSpinnerService,
                 ) {
                   console.log('Constructor list product');
       /* Obtiene el ultimo valor que envio el menu */
@@ -24,15 +25,24 @@ export class ListProductComponent implements OnInit {
         this.idsProduct= this.getCategorys._boxEstateRequestId[0];
       }
      }
-
+     //peticion paginacion
     peticionesPP: ProductCategories[];
+    //peticion lista de Productos
     listaProductos: ProductCategories;
+    //Identificador Ids subcat y cat
     idsProduct: number[];
+    //Array que contendra rutas de items paginacion
     pgOptions: string[]=[];
+    //respuesta .data empty
     empty: boolean=false;
+    //titulo de categoria de seleccion
     titleCat: string;
+    //titulo de subcategoria de seleccion
+    titleSubcat: string;
   ngOnInit(): void {
-    
+    console.log('show spinner');
+    this.spinner.show(); 
+
     console.log('on init list product', this.getCategorys._requestCategoryL);
          
       if(this.getCategorys._requestCategoryL == undefined){
@@ -41,14 +51,16 @@ export class ListProductComponent implements OnInit {
   }
  
 ngOndestroy(){
+
   console.log('on destroy list product');
   //guardar la ultima respuesta obtenida
   if(this.listaProductos!= undefined){
   this.getCategorys._requestCategoryL =this.listaProductos;
   console.log(this.listaProductos);
+  console.log(this.getCategorys._bxCategory);
   
 }
-  
+
 }
   //Obtiene listado de productos
   obtProduct(){
@@ -74,10 +86,14 @@ ngOndestroy(){
             this.pgOptions[rt]= 'page='+(rt+1); 
             }
             //para titulo de seccion
-            this.titleCat =this.getCategorys._bxCategory[this.idsProduct[0]].name;
+            this.titleCat =this.getCategorys._bxCategory[this.idsProduct[0]-1].name;
+            this.titleSubcat =this.getCategorys._bxCategory[this.idsProduct[0]-1].subcategories[this.idsProduct[1]-1].name;
+            console.log(this.titleSubcat);
+            
+            this.spinner.hide();
           }else{
             console.log('mostran mensaje de VOID');
-            
+            this.spinner.hide();
             //flag de existencia de productos
             this.empty=true;
           }
@@ -85,6 +101,9 @@ ngOndestroy(){
           //setear estados iniciales
           console.log('setear estados iniciales pg');
            this.handlerPagination('none',  this.listaProductos.current_page, this.listaProductos.last_page );
+         },err=>{
+          this.spinner.hide();
+           console.log('err' ,err);
          }
        )
      }
@@ -104,14 +123,20 @@ ngOndestroy(){
         }
       }
     }
+
   }
 
   getProductsPG( pathBx: string){
-    console.log('peticion por path pg');
-    
-      if(pathBx!='none'){
+    console.log('peticion por path pg '+ pathBx );
+
+      if(pathBx!=undefined){
         console.log(pathBx);
-        this.getCategorys.getListPWPath(pathBx).subscribe(req => {console.log(req)});
+        this.spinner.show();
+        this.getCategorys.getListPWPath('categories/'+this.idsProduct[0]+'/subcategories/'+this.idsProduct[1]+'/products?'+pathBx).subscribe(
+          req =>{
+            this.listaProductos=req;
+            this.spinner.hide();
+          } );
       }
   } 
 }

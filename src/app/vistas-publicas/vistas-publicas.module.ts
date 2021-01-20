@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from '../vistas-publicas/home/home.component';
 import { RegisterComponent } from './Registers/Usuario/register.component';
@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { LoginModule } from '../Login/login.module';
 import { ComponentsModule } from '../components/components.module';
 import {PipesModule }from '@pipes/pipes.module';
+import { NgxSpinnerModule } from "ngx-spinner";
 // import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { BusinessDetailComponent } from './business-detail/business-detail.component';
 import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
@@ -50,7 +51,8 @@ import { ListProductComponent } from './categorys/list-product/list-product.comp
     LoginModule,
     ComponentsModule,
     PipesModule,
-    ShoppingCartModule
+    ShoppingCartModule,
+    NgxSpinnerModule
   ],
   exports: [
     HomeComponent,
