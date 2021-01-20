@@ -73,8 +73,8 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
   }
 
   public loadOptionsWithProductsCartResp( products: Product[] ) {
-    console.log('loadOptionsWithProductsCartResp');
-    console.log(products);
+    // console.log('loadOptionsWithProductsCartResp');
+    // console.log(products);
 
     if (products.length > 0) {
 
@@ -99,8 +99,8 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
     }
   }
 
-
   public toogleDropDown(){
     this.isDropDownExpanded = this.isDropDownExpanded ? false : true;
   }
+
 }

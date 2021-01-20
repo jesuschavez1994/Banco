@@ -26,8 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownButtonComponent } from './dropdown-button/dropdown-button.component';
 import { DropdownIconComponent } from './dropdown-icon/dropdown-icon.component';
 import { InvoiceBComponent } from './invoice-b/invoice-b.component';
-import { ComponentsModule } from '../components/components.module';
 import { CardShimmerComponent } from './card-shimmer/card-shimmer.component';
+import { ToastComponent } from '../modals/toast/toast.component';
 
 @NgModule({
     declarations: [
@@ -52,7 +52,8 @@ import { CardShimmerComponent } from './card-shimmer/card-shimmer.component';
       DropdownButtonComponent,
       DropdownIconComponent,
       InvoiceBComponent,
-      CardShimmerComponent
+      CardShimmerComponent,
+      ToastComponent
     ],
     imports: [
       // APP_ROUTING,
@@ -76,7 +77,8 @@ import { CardShimmerComponent } from './card-shimmer/card-shimmer.component';
       OrderListComponent, OrderEditorComponent,
       InvoiceComponent, OrderPaymentFormsComponent,
       DropdownButtonComponent, DropdownIconComponent,
-      InvoiceBComponent, CardShimmerComponent
+      InvoiceBComponent, CardShimmerComponent,
+      ToastComponent
     ]
 })
 

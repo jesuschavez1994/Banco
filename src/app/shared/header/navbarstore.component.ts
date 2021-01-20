@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { UserStoreService } from '@services/user-store/user-store.service';
 import { StoreService } from '@services/store/store.service';
 import { Usuario } from 'src/app/models/usuario.model';
@@ -7,6 +7,7 @@ import { URL_SERVICIOS } from 'src/app/config/config';
 import { DropdownOption, ClassIcon, ExtraButtonEmitter } from '@interfaces/components-options/dropdown.options.interface';
 import { PaymentProcessService } from '@services/payment-process/payment-process.service';
 import { DropdownIconComponent } from '../dropdown-icon/dropdown-icon.component';
+import { ToastComponent } from '../../modals/toast/toast.component';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { DropdownIconComponent } from '../dropdown-icon/dropdown-icon.component'
 })
 export class NavbarstoreComponent implements OnInit {
 
+  @ViewChild('toastRef') toastRef: ToastComponent;
   @Input() fixed = true;
 
   // Button DropDown - cart
@@ -58,11 +60,10 @@ export class NavbarstoreComponent implements OnInit {
 
     this.paymentProcessService.getProductsFromCart().subscribe(
       resp => {
-        console.log('getProductsFromCart');
-        console.log(resp);
+        // console.log('getProductsFromCart');
+        // console.log(resp);
 
         const products = resp.data;
-
         this.menuOptions = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
 
       }
@@ -72,16 +73,16 @@ export class NavbarstoreComponent implements OnInit {
 
   public deleteProductFromCart(event: ExtraButtonEmitter) {
 
-    console.log('deleteProductFromCart');
-    console.log(event);
+    // console.log('deleteProductFromCart');
+    // console.log(event);
     const idProduct = event.option.data.id;
 
     this.paymentProcessService.deleteProsductFromCart(idProduct).subscribe(
 
       resp => {
 
-        console.log('deleteProsductFromCart');
-        console.log(resp);
+        // console.log('deleteProsductFromCart');
+        // console.log(resp);
 
         this.menuOptions = [];
 
@@ -93,16 +94,26 @@ export class NavbarstoreComponent implements OnInit {
 
             option = {
               title: product.name,
-              typeEvent: 'none',
+              typeEvent: 'routerLink',
               eventValue: ['/panel/carrito-compras'],
               data: product
             };
 
             this.menuOptions.push(option);
           });
+
+          this.toastRef.open(
+            'Producto eliminado del carrito'
+          );
         }
 
+      },
+      error => {
+        this.toastRef.open(
+          'Producto eliminado del carrito'
+        );
       }
+
     );
 
   }

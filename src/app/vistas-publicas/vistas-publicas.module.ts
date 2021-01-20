@@ -18,7 +18,7 @@ import { PanelModule } from './panel/panel.module';
     HomeComponent,
     RegisterComponent,
     BusinessDetailComponent,
-    ToastComponent,
+    // ToastComponent,
 
   ],
   imports: [

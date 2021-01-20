@@ -644,9 +644,4 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
 
-  // Notifications
-  public showToast(data?){
-    this.toastRef.open(data);
-  }
-
 }
