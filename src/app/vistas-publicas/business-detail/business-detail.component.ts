@@ -355,7 +355,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
 
 
-      this.productService.getProductsByStore(idStore, page, filter).subscribe( resp => {
+      this.productService.getProductsByStore(idStore, page, filter).subscribe(
+        resp => {
 
         const products = resp.data;
         this.totalProducts = resp.total;
@@ -400,6 +401,13 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         console.log('products loaded: ', this.productCards.products);
 
+      },
+      error => {
+        this.toastRef.open(
+          'Error al cargar los productos, Recargue la página',
+          { color: '#ffffff', background: '#900909c2'}
+
+        );
       });
 
     }

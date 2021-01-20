@@ -23,4 +23,19 @@
     }
   }
 
+  @media screen and (max-width: 509px) {
+    max-width: 246px;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 510px) and (max-width: 767px){
+    max-width: 312px;
+    // text-align: center;
+  }
+
+  @media screen and (min-width: 768px){
+    max-width: 469px;
+    // text-align: center;
+  }
+
 }

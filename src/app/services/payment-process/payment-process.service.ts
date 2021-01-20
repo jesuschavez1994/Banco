@@ -14,7 +14,8 @@ export class PaymentProcessService extends Service{
   }
 
   public addProductToCart(idProduct: number, quantity: number): Observable<ProductToCartResp> {
-    return this.postQuery<ProductToCartResp>(`cart`, {id: idProduct, qty: quantity});
+    console.log('adddProductTocart');
+    return this.postQuery<ProductToCartResp>(`cart`, {id: 12, qty: 1});
   }
 
   public getProductsFromCart(): Observable<ProductToCartResp>{
@@ -25,7 +26,7 @@ export class PaymentProcessService extends Service{
     return this.execQuery(`cart/details`);
   }
 
-  public deleteProsductFromCart(idProduct: number): Observable<ProductToCartResp>{
+  public deleteProductFromCart(idProduct: number): Observable<ProductToCartResp>{
     return this.DeleteQuery<ProductToCartResp>(`cart/${idProduct}`);
   }
 

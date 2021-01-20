@@ -77,7 +77,7 @@ export class NavbarstoreComponent implements OnInit {
     // console.log(event);
     const idProduct = event.option.data.id;
 
-    this.paymentProcessService.deleteProsductFromCart(idProduct).subscribe(
+    this.paymentProcessService.deleteProductFromCart(idProduct).subscribe(
 
       resp => {
 
