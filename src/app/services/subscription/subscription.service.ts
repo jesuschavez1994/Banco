@@ -19,7 +19,6 @@ import {
   WebpayPayment,
   PaymentCredentials,
 } from '@interfaces/SettingsInterfaces';
-import { toNumber } from '@alyle/ui';
 
 @Injectable({
   providedIn: 'root',
