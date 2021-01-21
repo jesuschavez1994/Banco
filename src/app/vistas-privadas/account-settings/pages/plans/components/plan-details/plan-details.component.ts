@@ -22,6 +22,15 @@ export class PlanDetailsComponent implements OnInit {
 
   nextPage = 'plans';
   webpayDebitCard = false;
+  constructor(
+    public dialog: MatDialog,
+    private subscriptionDataService: SubscriptionService
+  ) {
+    this.pageChange = new EventEmitter<string>();
+    this.voucherDetails = new EventEmitter<object>();
+  }
+
+  ngOnInit(): void {}
 
   // Events that happens in the component -----------------
   backToPreviousPage(): void {
@@ -58,23 +67,5 @@ export class PlanDetailsComponent implements OnInit {
       disableClose: true,
       data: { url: url, token: token },
     });
-
-    dialogRef.afterClosed().subscribe((transactionDetails) => {
-      console.log(
-        'The dialog was . And the response from the server was: ',
-        transactionDetails
-      );
-      this.toNextPage(transactionDetails);
-    });
   }
-
-  constructor(
-    public dialog: MatDialog,
-    private subscriptionDataService: SubscriptionService
-  ) {
-    this.pageChange = new EventEmitter<string>();
-    this.voucherDetails = new EventEmitter<object>();
-  }
-
-  ngOnInit(): void {}
 }
