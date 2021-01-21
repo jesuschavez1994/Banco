@@ -1,5 +1,5 @@
 /* 
-Servicio donde se implementará la lógica referente a la suscripción de los planes y sus respectivas pasarelas de pago. 
+  Servicio donde se implementará la lógica referente a la suscripción de los planes y sus respectivas pasarelas de pago. 
 */
 import { Injectable, Inject } from '@angular/core';
 import {
@@ -82,15 +82,11 @@ export class SubscriptionService {
 
   redirectToWebpay(url: string, token: string) {
     // We add the corresponding headers to the request
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${token}`,
-      }),
+    const body = {
+      token_ws: token,
     };
 
-    return this.httpService
-      .post(url, httpOptions)
-      .pipe(catchError(this.handleError));
+    return this.httpService.post(url, body).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
