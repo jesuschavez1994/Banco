@@ -30,8 +30,14 @@ import { NavOptionsComponent } from './public-navbar/nav-options/nav-options.com
 import { SearchComponent } from './public-navbar/search/search.component';
 import { SidebarHomeComponent } from './sidebar-home/sidebar-home.component';
 import { SliderComponent } from './slider/slider.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ModalErrComponent } from './modal-err/modal-err.component';
 
 @NgModule({
+  entryComponents:[
+    ModalErrComponent
+  ],
+
     declarations: [
       NavbarComponent,
       NavbarToHomeComponent,
@@ -59,6 +65,8 @@ import { SliderComponent } from './slider/slider.component';
       SearchComponent,
       SidebarHomeComponent,
       SliderComponent,
+      ModalErrComponent,
+      
 
     ],
     imports: [
@@ -67,6 +75,7 @@ import { SliderComponent } from './slider/slider.component';
       PipesModule,
       CommonModule,
       NgxPaginationModule,
+      MatDialogModule,
     ],
     exports: [
       NavbarComponent, NavbarToHomeComponent,
@@ -79,7 +88,7 @@ import { SliderComponent } from './slider/slider.component';
       PublicNavbarComponent, NavBrandComponent,
       CategoryLinkComponent, SearchComponent,
       ButtonShopComponent, NavOptionsComponent,
-      SidebarHomeComponent, SliderComponent,
+      SidebarHomeComponent, SliderComponent, 
     ]
 })
 

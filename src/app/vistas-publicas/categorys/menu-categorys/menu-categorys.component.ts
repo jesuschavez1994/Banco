@@ -3,7 +3,8 @@ import { GetCategorysService } from '.././services/get-categorys.service';
 import { Category } from '@interfaces/categorys';
 import { Router} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import { ModalErrComponent} from '@shared/modal-err/modal-err.component'
+import {MatDialog, MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-categorys',
   templateUrl: './menu-categorys.component.html',
@@ -11,12 +12,14 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class MenuCategorysComponent implements OnInit {
   userLog = false;
+  loadError :boolean =false;
   boxCategory: Category;
   //par de id de categorias y sub categorias
   stateid: number[] = [null,null];
   constructor(private getCategorysService: GetCategorysService,  
               private router: Router,
-              private spinner : NgxSpinnerService  ) {
+              private spinner : NgxSpinnerService,
+              private modal : MatDialog  ) {
                 console.log('menu constructor');
                }
 
@@ -58,8 +61,9 @@ export class MenuCategorysComponent implements OnInit {
           
           },
           error=>{
-            console.log('error cargando categorias '+error);
-          this.spinner.hide();
+            console.log('error cargando categorias ',error);
+            this.spinner.hide();
+            this.openDialog('Ha ocurrido un error cargando la lista de categorias');
 
           }
           )
@@ -89,4 +93,10 @@ export class MenuCategorysComponent implements OnInit {
     
     
   }
+  openDialog(mensaje:string): void {
+    const dialogRef = this.modal.open(ModalErrComponent, {
+      data: {title: 'Ooops!', description: mensaje}
+    });
+  }
+
 }
