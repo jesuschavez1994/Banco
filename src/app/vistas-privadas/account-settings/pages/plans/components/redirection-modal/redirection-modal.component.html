@@ -8,5 +8,14 @@
 
 <mat-dialog-actions>
   <button mat-raised-button (click)="close()">Cerrar</button>
-  <button mat-raised-button (click)="redirectToTransbank()">Ir a pagar</button>
+
+  <form #redirectForm method="post" action="{{ dialogData.url }}">
+    <input type="hidden" name="token_ws" value="{{ dialogData.token }}" />
+    <input
+      type="submit"
+      value="Ir a pagar"
+      mat-raised-button
+      (click)="redirectForm.submit()"
+    />
+  </form>
 </mat-dialog-actions>
