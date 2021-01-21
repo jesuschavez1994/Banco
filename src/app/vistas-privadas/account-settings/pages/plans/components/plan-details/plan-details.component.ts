@@ -45,11 +45,9 @@ export class PlanDetailsComponent implements OnInit {
         this.orderDetails.order.id
       )
       .subscribe((serverResponse: Payment) => {
-        console.log(`Response from server: ${serverResponse}`);
         this.subscriptionDataService
           .createWebpayPayment(serverResponse.order_id)
           .subscribe((paymentCredentials: PaymentCredentials) => {
-            console.log(`Response from the server: `, paymentCredentials);
             this.openDialog(paymentCredentials.url, paymentCredentials.token);
           });
       });

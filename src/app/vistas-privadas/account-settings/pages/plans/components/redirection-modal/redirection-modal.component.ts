@@ -33,7 +33,6 @@ export class RedirectionModalComponent implements OnInit {
     this.subscriptionDataService
       .redirectToWebpay(this.dialogData.url, this.dialogData.token)
       .subscribe((transactionDetails: object) => {
-        console.log(`Resultado de la transacción: ${transactionDetails}`);
         this.dialogRef.close(transactionDetails);
       });
   }
