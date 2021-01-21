@@ -36,9 +36,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   // Components Inputs
   breadcrumb: BreadcrumbOptions[];
-  imgsBanners: BannerOptions = {
-    m: 'assets/img/test-img/banner.png'
-  };
+  imgsBanners: BannerOptions;
 
   // sidebar-list
   expandSidebar = true;
@@ -112,6 +110,18 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
+    // setTimeout(() => {
+
+    //   this.imgsBanners = {
+    //     m: 'hola',
+    //     s: 'hola 2'
+    //   };
+
+    //   console.log('setTimeout - ngAfterViewInit');
+
+    // }, 10000);
+
     // this.productService.getFavoriteProducts(1).subscribe(
     //   resp => {
     //     console.log('getFavoriteProducts');
@@ -353,62 +363,74 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         console.log('queryParamsAllowed: ', queryParamsAllowed);
       }
 
-
-
       this.productService.getProductsByStore(idStore, page, filter).subscribe(
         resp => {
 
-        const products = resp.data;
-        this.totalProducts = resp.total;
-        this.itemsPerPage = resp.per_page;
+          console.log('getProductsByStore');
+          console.log(resp.data);
+          const products = resp.data;
+          this.totalProducts = resp.total;
+          this.itemsPerPage = resp.per_page;
 
-        this.productCards.products = products.map( product => {
+          if (products.length > 0) {
 
-          let images = [];
+            this.productCards.products = products.map( product => {
 
-          if (product.sync_bank) {
+              let images = [];
 
-            if (product.sync_bank.length === 0) {
+              if (product.sync_bank) {
 
-              images = product.images.map(image => {
-                return image.src;
-              });
+                if (product.sync_bank.length === 0) {
 
-            }else {
-              images = product.sync_bank.map(syncBank => {
-                return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
-              });
-            }
+                  images = product.images.map(image => {
+                    return image.src;
+                  });
 
-          }else {
-            images = product.images.map(image => {
-              return image.src;
-            });
+                }else {
+                  images = product.sync_bank.map(syncBank => {
+                    return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
+                  });
+                }
+
+              }else {
+                images = product.images.map(image => {
+                  return image.src;
+                });
+              }
+
+              return {
+                name: product.name,
+                description: product.description,
+                price: product.price,
+                stock: product.stock,
+                images, // product.images
+                id: product.id ? product.id : -1,
+                idStore: product.store_id ? product.store_id : -1,
+                isFavorite: product.isFavorite ? product.isFavorite : false,
+                };
+
+            } );
+
+            console.log('products loaded: ', this.productCards.products);
+
+          } else{
+            this.toastRef.open(
+              'Tienda sin productos disponibles',
+              { color: '#ffffff', background: '#900909c2'}
+
+            );
           }
 
-          return {
-            name: product.name,
-            description: product.description,
-            price: product.price,
-            stock: product.stock,
-            images, // product.images
-            id: product.id ? product.id : -1,
-            idStore: product.store_id ? product.store_id : -1,
-            isFavorite: product.isFavorite ? product.isFavorite : false,
-            };
 
-        } );
+        },
+        error => {
+          this.toastRef.open(
+            'Error al cargar los productos, Recargue la página',
+            { color: '#ffffff', background: '#900909c2'}
 
-        console.log('products loaded: ', this.productCards.products);
-
-      },
-      error => {
-        this.toastRef.open(
-          'Error al cargar los productos, Recargue la página',
-          { color: '#ffffff', background: '#900909c2'}
-
-        );
-      });
+          );
+        }
+      );
 
     }
 
@@ -501,9 +523,40 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         this.StoreName = storeResp.name;
 
-        // this.imgsBanners = {
-        //   m: storeResp.banner_image[0]
-        // }
+        console.log(storeResp);
+
+        if (storeResp.banner_image.length > 0) {
+
+          const storeBanners = storeResp.banner_image;
+
+          console.log('storeBanners');
+          console.log(storeBanners);
+
+          const sizes = Object.keys(storeBanners[0].src_size);
+
+          // this.imgsBanners = {
+          //   m: storeBanners[0].src_size.xl
+          // };
+
+          if (sizes.length > 1) {
+
+            this.imgsBanners = {
+              m: storeBanners[0].src_size.xl,
+              s: storeBanners[0].src_size.s
+            };
+
+          } else if (sizes.length === 1){
+            this.imgsBanners = {
+              m: storeBanners[0].src_size.xl
+            };
+          }
+
+          console.log('this.imgsBanners');
+          console.log(this.imgsBanners);
+
+
+        }
+
 
         this.setSidebarOptions(idStore, storeResp);
         this.setBreadcrumbOptions(idStore, storeResp);

@@ -14,7 +14,7 @@ export interface StoreResponse {
   contact: Contact;
   social: Social;
   images: any[];
-  banner_image: any[];
+  banner_image: BannerImage[];
 }
 
 export interface Social {
@@ -55,4 +55,29 @@ export interface User {
   created_at: string;
   updated_at: string;
   deleted_at?: any;
+}
+
+
+export interface BannerImage {
+  id: number;
+  name: string;
+  src: string;
+  src_size: SrcSize;
+  version: number;
+  created_at: string;
+  updated_at: string;
+  deleted_at?: string;
+  pivot: Pivot;
+}
+
+export interface Pivot {
+  store_id: number;
+  image_id: number;
+}
+
+export interface SrcSize {
+  xl: string;
+  l: string;
+  m: string;
+  s: string;
 }

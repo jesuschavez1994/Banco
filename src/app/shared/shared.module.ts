@@ -28,32 +28,22 @@ import { DropdownIconComponent } from './dropdown-icon/dropdown-icon.component';
 import { InvoiceBComponent } from './invoice-b/invoice-b.component';
 import { CardShimmerComponent } from './card-shimmer/card-shimmer.component';
 import { ToastComponent } from '../modals/toast/toast.component';
+import { BannerShimmerComponent } from './banner-shimmer/banner-shimmer.component';
 
 @NgModule({
     declarations: [
-      NavbarComponent,
-      NavbarToHomeComponent,
-      CategoriasComponent,
-      NavbarstoreComponent,
-      SidebarMenuComponent,
-      SidebarListComponent,
-      BreadcrumbComponent,
-      SidebarListButtonComponent,
-      BannerComponent,
-      ProductsCardsComponent,
-      SearchBarComponent,
-      ImagePreviewGalleryComponent,
-      ProductDetailComponent,
-      QuantityCounterComponent,
-      OrderListComponent,
-      OrderEditorComponent,
-      InvoiceComponent,
-      OrderPaymentFormsComponent,
-      DropdownButtonComponent,
-      DropdownIconComponent,
-      InvoiceBComponent,
-      CardShimmerComponent,
-      ToastComponent
+      NavbarComponent, NavbarToHomeComponent,
+      CategoriasComponent, NavbarstoreComponent,
+      SidebarMenuComponent, SidebarListComponent,
+      BreadcrumbComponent, SidebarListButtonComponent,
+      BannerComponent, ProductsCardsComponent,
+      SearchBarComponent, ImagePreviewGalleryComponent,
+      ProductDetailComponent, QuantityCounterComponent,
+      OrderListComponent, OrderEditorComponent,
+      InvoiceComponent, OrderPaymentFormsComponent,
+      DropdownButtonComponent, DropdownIconComponent,
+      InvoiceBComponent, CardShimmerComponent,
+      ToastComponent, BannerShimmerComponent
     ],
     imports: [
       // APP_ROUTING,
@@ -78,7 +68,7 @@ import { ToastComponent } from '../modals/toast/toast.component';
       InvoiceComponent, OrderPaymentFormsComponent,
       DropdownButtonComponent, DropdownIconComponent,
       InvoiceBComponent, CardShimmerComponent,
-      ToastComponent
+      ToastComponent, BannerShimmerComponent,
     ]
 })
 

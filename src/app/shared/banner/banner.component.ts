@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit, OnChanges } from '@angular/core';
 import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
 
 @Component({
@@ -6,6 +6,7 @@ import { BannerOptions } from '@interfaces/components-options/banner.options.int
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.scss']
 })
+// export class BannerComponent implements OnInit, OnChanges {
 export class BannerComponent implements OnInit {
 
   @Input() imgs: BannerOptions;
@@ -15,8 +16,19 @@ export class BannerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.currentImg = this.imgs.m;
+    if (this.imgs) {
+      this.currentImg = this.imgs.m;
+    }
+
+    console.log('ngOnInit - imgs');
+    console.log(this.imgs);
+
   }
+
+  // ngOnChanges() {
+  //   console.log('Changes ngOnInit - imgs');
+  //   console.log(this.imgs);
+  // }
 
   @HostListener('window:resize', ['$event'])
   public changeImg( $event: Event){
@@ -28,7 +40,7 @@ export class BannerComponent implements OnInit {
 
     }else if ( widthWindow <= 480 ) {
 
-      if (this.imgs.s >= ''){
+      if (this.imgs.s !== ''){
         this.currentImg = this.imgs.s;
       }
 
