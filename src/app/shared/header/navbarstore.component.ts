@@ -86,26 +86,31 @@ export class NavbarstoreComponent implements OnInit {
 
         this.menuOptions = [];
 
-        if (resp.data.length > 0) {
+        if (resp.data) {
 
-          resp.data.forEach( product => {
+          if (resp.data.length > 0) {
 
-            let option;
+            resp.data.forEach( product => {
 
-            option = {
-              title: product.name,
-              typeEvent: 'routerLink',
-              eventValue: ['/panel/carrito-compras'],
-              data: product
-            };
+              let option;
 
-            this.menuOptions.push(option);
-          });
+              option = {
+                title: product.name,
+                typeEvent: 'routerLink',
+                eventValue: ['/panel/carrito-compras'],
+                data: product
+              };
 
-          this.toastRef.open(
-            'Producto eliminado del carrito'
-          );
+              this.menuOptions.push(option);
+            });
+
+          }
+
         }
+
+        this.toastRef.open(
+          'Producto eliminado del carrito'
+        );
 
       },
       error => {
