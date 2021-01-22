@@ -24,6 +24,9 @@ export class RedirectionModalComponent implements OnInit {
     };
   }
 
+  ngOnInit(): void {}
+
+  // Functionality ----------------------
   close() {
     this.dialogRef.close();
   }
@@ -36,6 +39,4 @@ export class RedirectionModalComponent implements OnInit {
         this.dialogRef.close(transactionDetails);
       });
   }
-
-  ngOnInit(): void {}
 }
