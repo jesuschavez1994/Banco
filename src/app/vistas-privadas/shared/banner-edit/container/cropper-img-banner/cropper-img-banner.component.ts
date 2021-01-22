@@ -29,6 +29,7 @@ export class CropperImgBannerComponent implements OnInit {
     @Output() NoCropperImg = new EventEmitter<boolean | any>();
     @Output() ErrorImage = new EventEmitter<boolean>();
     @Output() SaveSucessFull = new EventEmitter<boolean>();
+    @Output() DragZoneShow = new EventEmitter<boolean>();
 
     // imageChangedEvent: any = '';
     croppedImage: any = '';
@@ -56,6 +57,7 @@ export class CropperImgBannerComponent implements OnInit {
     imageCropped(event: ImageCroppedEvent) {
         this.croppedImage = event.base64;
         console.log(event, base64ToFile(event.base64));
+        console.log(event.base64);
         setTimeout(() => this.previewIMG.emit(this.croppedImage), 0);
         this.base64ToFileSave = event;
     }
@@ -139,10 +141,12 @@ export class CropperImgBannerComponent implements OnInit {
             console.log(resp);
             this.spinner = false;
             this.AlertSucces = true;
+            this.showInput = true;
             this.SaveSucessFull.emit(this.AlertSucces);
             setTimeout(() => {
                 this.AlertSucces = false;
                 this.SaveSucessFull.emit(this.AlertSucces);
+                this.DragZoneShow.emit(this.showInput);
             }, 8000);
         }, error => {
             this.ErrorAlert = true;

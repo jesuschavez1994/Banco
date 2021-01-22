@@ -23,11 +23,11 @@
             [ngClass]="{'image-cropper-flex': !containWithinAspectRatio,
             'image-cropper': containWithinAspectRatio}"
             [imageChangedEvent]="imageChangedEvent"
+            [aspectRatio]="4/1"
             [maintainAspectRatio]="true"
-            [aspectRatio]="1/1"
             format="png | jpeg"
             [transform]="transform"
-            [onlyScaleDown]="true"
+            [onlyScaleDown]="false"
             [style.display]="imgLoaded ? null : 'none'"
             (imageCropped)="imageCropped($event)"
             (imageLoaded)="imageLoaded()"

@@ -15,14 +15,16 @@
     </div>
 
     <img  *ngIf="!showCropper"
+          style="width: auto; height: auto;"
           #imgBanner
-          [src]="currentImg | imgFallback: 'banner'" alt="banner"
-          onerror="if (this.src != 'assets/img/Banner/Banner1.svg') this.src = 'assets/img/Banner/Banner1.svg';"
-    >
+          [src]="currentImg  | imgFallback: 'banner'" alt="banner"
+          onerror="if (this.src != 'assets/img/no-image-banner.jpg') this.src = 'assets/img/no-image-banner.jpg';"
+    />
 
-    <img  [src]="croppedImage" 
+    <img  [src]="croppedImage"
+          *ngIf="showCropper" 
           class="imgPreview" 
-          onerror="if (this.src != 'assets/img/Banner/Banner1.svg') this.src = 'assets/img/Banner/Banner1.svg';"
+          onerror="if (this.src != 'assets/img/Banner/Banner1.svg')"
     />
 
     <ng-template  cdkConnectedOverlay
@@ -78,7 +80,8 @@
                                                 (NoCropperImg)="NoImgCropper($event)"
                                                 (ErrorImage)="ShowError($event)"
                                                 (SaveSucessFull)="SaveImgOk($event)"
-                                                *ngIf="showCropper && file?.progress === 100">
+                                                *ngIf="showCropper && file?.progress === 100"
+                                                (DragZoneShow)="DragZoneShow($event)">
                         </app-cropper-img-banner>
 
                       </div>

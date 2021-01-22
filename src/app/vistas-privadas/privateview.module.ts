@@ -120,6 +120,10 @@ import { CropperImgBannerComponent } from './shared/banner-edit/container/croppe
 import { ErrorFailedMessageComponent } from './shared/banner-edit/container/error-failed-message/error-failed-message.component';
 import { ProgressBarComponent } from './shared/banner-edit/container/progress-bar/progress-bar.component';
 import { DropZoneComponent } from './shared/banner-edit/container/drop-zone/drop-zone.component';
+import { DragDropZoneFileComponent } from './sincronizacion/pages/exportar-lista-excel/container/drag-drop-zone-file/drag-drop-zone-file.component';
+import { SizeFileComponent } from './sincronizacion/pages/exportar-lista-excel/container/size-file/size-file.component';
+import { ProgessBarFileExcelComponent } from './sincronizacion/pages/exportar-lista-excel/container/progess-bar-file-excel/progess-bar-file-excel.component';
+
 
 @NgModule({
     entryComponents: [
@@ -191,6 +195,9 @@ import { DropZoneComponent } from './shared/banner-edit/container/drop-zone/drop
       ErrorFailedMessageComponent,
       ProgressBarComponent,
       DropZoneComponent,
+      DragDropZoneFileComponent,
+      SizeFileComponent,
+      ProgessBarFileExcelComponent,
       ],
 
     imports: [

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
-
+import { ConnectionService } from 'ngx-connection-service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +10,25 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 export class AppComponent {
   title = 'BancoDeProductos';
   deviceInfo = null;
+  // Variables To Check connection to internet //
+  hasNetworkConnection: boolean;
+  hasInternetAccess: boolean;
+  status: string;
 
-
-  constructor( private deviceService: DeviceDetectorService) {
+  constructor( private deviceService: DeviceDetectorService, private connectionService: ConnectionService ) {
     this.epicFunction();
+
+    this.connectionService.monitor().subscribe(currentState => {
+      console.log(currentState);
+      this.hasNetworkConnection = currentState.hasNetworkConnection;
+      this.hasInternetAccess = currentState.hasInternetAccess;
+      if (this.hasNetworkConnection && this.hasInternetAccess) {
+        this.status = 'ONLINE';
+      } else {
+        this.status = 'OFFLINE';
+      }
+    });
+
   }
 
   epicFunction() {

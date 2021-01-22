@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ActivatedRoutesParams  } from '@interfaces/components-options/sidebar-list.options.interface';
 import { StoreService } from '@services/store/store.service';
 import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
-import { StoreResponse } from '@interfaces/store.interface';
+import { StoreResponse, Bannerimage, Srcsize } from '@interfaces/store.interface';
 import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
 import { SearchStore } from '@models/search/search-store.model';
 import { SearchService } from '@services/Search/search.service';
@@ -30,6 +30,7 @@ export class MyStoreComponent implements OnInit {
   StoreName = '';
   BannerVerifiqued: any;
   VerifiquedSuccesfull =  false;
+  Onerror = false;
 
   profile: Profile;
   anchorsMenu: AnchorsMenu;
@@ -41,10 +42,12 @@ export class MyStoreComponent implements OnInit {
   @ViewChild('sidebarList') sidebarList: AsideFiltrosComponent;
 
 
-  imgsBanners: BannerOptions = {
-    m: 'assets/img/Banner/Banner1.svg'
+  imgsBanners: Srcsize = {
+      xl: 'assets/img/Banner/Banner1.svg',
+      l: 'assets/img/Banner/Banner1.svg',
+      m: 'assets/img/Banner/Banner1.svg',
+      s: 'assets/img/Banner/Banner1.svg'
   };
-
 
   constructor(  private activateRoute: ActivatedRoute,
                 private router: Router,
@@ -71,11 +74,13 @@ export class MyStoreComponent implements OnInit {
         if ( resp.banner_image.length === 0){
           this.BannerVerifiqued = this.imgsBanners;
         }else{
-          this.BannerVerifiqued = resp.banner_image['0'].src;
+          this.BannerVerifiqued = resp.banner_image[0].src_size;
         }
         this.VerifiquedSuccesfull = true;
     }, error => {
       this.BannerVerifiqued = 'assets/img/no-image-banner.JPG';
+      this.VerifiquedSuccesfull = true;
+      this.Onerror = true;
     });
   }
 

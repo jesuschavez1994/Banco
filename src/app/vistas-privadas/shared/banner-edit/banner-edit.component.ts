@@ -4,7 +4,7 @@ import {  Component, HostBinding,
           ElementRef } from '@angular/core';
 import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { StoreResponse } from '@interfaces/store.interface';
+import { StoreResponse, Bannerimage, Srcsize } from '@interfaces/store.interface';
 import { UserStoreService } from '@services/user-store/user-store.service';
 
 @Component({
@@ -16,7 +16,9 @@ import { UserStoreService } from '@services/user-store/user-store.service';
 
 export class BannerEditComponent implements OnInit, AfterViewInit {
 
-  @Input() imgs: string;
+  @Input() imgs: Srcsize;
+  @Input() Onerror: boolean;
+
   @ViewChild('dropzone') dropzone: ElementRef;
   isexpand = false;
 
@@ -40,31 +42,34 @@ export class BannerEditComponent implements OnInit, AfterViewInit {
   constructor(private renderer: Renderer2, private userStoreService: UserStoreService) { }
 
   ngOnInit(): void {
-    this.currentImg = this.imgs;
-    // this.VeriquedBanner();
+    this.currentImg = this.imgs.xl;
     console.log('img Banner', this.imgs);
-      // this.currentImg = 'assets/img/Banner/Banner1.svg';
   }
 
   ngAfterViewInit(){
   }
 
-  // @HostListener('window:resize', ['$event'])
-  // public changeImg( $event: Event){
-  //   const widthWindow = window.innerWidth;
-  //   // console.log(widthWindow);
+  @HostListener('window:resize', ['$event'])
+  public changeImg( $event: Event){
+    const widthWindow = window.innerWidth;
 
-  //   if ( widthWindow > 480 ) {
-  //     this.currentImg = this.imgs.m;
+    if ( widthWindow <= 480 ){
+      this.currentImg = this.imgs.s;
+    }
 
-  //   }else if ( widthWindow <= 480 ) {
+    if (  widthWindow > 480 && widthWindow < 780){
+      this.currentImg = this.imgs.m;
+    }
 
-  //     if (this.imgs.s >= ''){
-  //       this.currentImg = this.imgs.s;
-  //     }
+    if (  widthWindow >= 781 && widthWindow < 1100 ) {
+      this.currentImg = this.imgs.l;
+    }
 
-  //   }
-  // }
+    if ( widthWindow >=  1100 ){
+      this.currentImg = this.imgs.xl;
+    }
+
+  }
 
   // DragLeave Listener
   @HostListener('dragover', ['$event']) onDragOver(evt){
@@ -98,11 +103,9 @@ export class BannerEditComponent implements OnInit, AfterViewInit {
       this.type_fyle = archivo.target.files[0].type;
       this.prepareFilesList(archivo.target.files);
       this.showInput = false;
-      this.showCropper = true;
       this.renderer.removeClass(this.dropzone.nativeElement, 'min-dropzone');
       // this.isexpand = true;
       this.imageChangedEvent = archivo;
-
       const longitud = archivo.target.files[0].name.length;
       const  name = archivo.target.files[0].name.split(' ');
       this.NameFile = this.modificarname(name, longitud),
@@ -165,6 +168,10 @@ export class BannerEditComponent implements OnInit, AfterViewInit {
     }
   }
 
+  DragZoneShow($event: boolean){
+    this.showInput = $event;
+  }
+
 
   // **** Verificamos si existe un Banner ****//
   VeriquedBanner(){
@@ -207,6 +214,7 @@ export class BannerEditComponent implements OnInit, AfterViewInit {
           if (this.files[index].progress === 100) {
             clearInterval(progressInterval);
             this.isexpand = true;
+            this.showCropper = true;
             this.uploadFilesSimulator(index + 1);
           } else {
             this.files[index].progress += 5;

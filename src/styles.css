@@ -729,6 +729,7 @@ body {
   overflow-x: hidden;
   color: #67757c;
   font-weight: 300;
+  position: relative;
 }
 
 html {

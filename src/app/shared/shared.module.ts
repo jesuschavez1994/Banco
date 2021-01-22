@@ -19,6 +19,7 @@ import { QuantityCounterComponent } from './quantity-counter/quantity-counter.co
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RouterModule } from '@angular/router';
 import { SpinnerComponent } from './spinner/spinner/spinner.component';
+import { CheckInternetConnectionComponent } from './check-internet-connection/check-internet-connection.component';
 
 @NgModule({
     declarations: [
@@ -37,6 +38,7 @@ import { SpinnerComponent } from './spinner/spinner/spinner.component';
       ProductDetailComponent,
       QuantityCounterComponent,
       SpinnerComponent,
+      CheckInternetConnectionComponent,
 
     ],
     imports: [
@@ -54,7 +56,7 @@ import { SpinnerComponent } from './spinner/spinner/spinner.component';
       BannerComponent, ProductsCardsComponent,
       SearchBarComponent, ImagePreviewGalleryComponent,
       ProductDetailComponent, QuantityCounterComponent,
-      SpinnerComponent,
+      SpinnerComponent, CheckInternetConnectionComponent
     ]
 })
 

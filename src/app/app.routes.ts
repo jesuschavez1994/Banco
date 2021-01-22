@@ -36,7 +36,7 @@ import { DesincronizarComponent } from './vistas-privadas/sincronizacion/compone
 import { LoginComponent } from './vistas-publicas/login/login/login.component';
 import { EditProductBankComponent } from './vistas-privadas/Admin/pages/container/edit-product-bank/edit-product-bank.component';
 
-
+import { PageUnderConstructionComponent } from './vistas-publicas/page-under-construction/page-under-construction.component'
 
 const APP_ROUTES: Routes = [
 
@@ -52,6 +52,8 @@ const APP_ROUTES: Routes = [
         ]
     },
     {path: 'login', component: LoginComponent},
+
+    {path: 'page-under-construction', component: PageUnderConstructionComponent},
 
     // Christopher Views
     {
@@ -159,8 +161,6 @@ const APP_ROUTES: Routes = [
         ]
     },
 
-
-    
     {path: 'dashboard', component: DashboardComponent},
     {path: 'terminos-ycondiciones', component: TerminosYCondicionesComponent},
     {
@@ -172,7 +172,7 @@ const APP_ROUTES: Routes = [
     },
     // { path: 'detalle-producto/:id', component: ViewProductoComponent},
 
-    { path: '**', pathMatch: 'full', redirectTo: 'home' }
+    { path: '**', pathMatch: 'full', redirectTo: 'page-under-construction' }
 ];
 
 export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES, {useHash: true});

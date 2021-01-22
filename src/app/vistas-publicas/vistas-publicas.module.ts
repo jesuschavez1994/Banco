@@ -18,6 +18,7 @@ import { MaterialModule } from '../Angula-Material/material.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { PrivateviewModule } from '../vistas-privadas/privateview.module';
 import { APP_ROUTING } from '../app.routes';
+import { PageUnderConstructionComponent } from './page-under-construction/page-under-construction.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { APP_ROUTING } from '../app.routes';
     // ShoppingCartComponent,
     BusinessDetailComponent,
     LoginComponent,
+    PageUnderConstructionComponent,
   ],
   imports: [
     CommonModule,

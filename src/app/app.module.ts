@@ -58,6 +58,9 @@ export class MyHammerConfig extends HammerGestureConfig {
   } as any;
 }
 
+// Check Modue conecction to internet //
+import {ConnectionServiceModule, ConnectionServiceOptions, ConnectionServiceOptionsToken} from 'ngx-connection-service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +73,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     BrowserAnimationsModule,
     HttpClientModule,
     PipesModule,
+    ConnectionServiceModule,
     APP_ROUTING,
     RouterModule,
     PagesModule,
@@ -104,6 +108,15 @@ export class MyHammerConfig extends HammerGestureConfig {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig,
     },
+    {
+      provide: ConnectionServiceOptionsToken,
+      useValue:  {
+        enableHeartbeat: false,
+        heartbeatUrl: '/assets/ping.json',
+        requestMethod: 'get',
+        heartbeatInterval: 3000
+      } as ConnectionServiceOptions
+    }
   ],
   bootstrap: [AppComponent]
 })
