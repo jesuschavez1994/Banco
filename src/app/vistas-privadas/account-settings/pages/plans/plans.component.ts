@@ -43,23 +43,6 @@ export class PlansComponent implements OnInit {
   plans: Array<Plan>;
   route = 'Planes';
 
-  // Processing the events data from the <app-product-card></app-product-card> component.
-  onPlanSelected(plan: Plan): void {
-    this.selectedPlan = plan;
-  }
-
-  gotOrderDetails(orderDetails: CreatedOrder): void {
-    this.orderInfo = orderDetails;
-  }
-
-  onPageChange(page: string): void {
-    this.currentPage = page;
-  }
-
-  gotVoucherDetails(details: object) {
-    this.voucherDetails = details;
-  }
-
   constructor(private subscriptionDataService: SubscriptionService) {}
 
   ngOnInit(): void {
@@ -111,5 +94,22 @@ export class PlansComponent implements OnInit {
       { amount1: true, amount2: false, amount3: false },
       49.99
     );
+  }
+
+  // Processing the events data from the <app-product-card></app-product-card> component.
+  onPlanSelected(plan: Plan): void {
+    this.selectedPlan = plan;
+  }
+
+  gotOrderDetails(orderDetails: CreatedOrder): void {
+    this.orderInfo = orderDetails;
+  }
+
+  onPageChange(page: string): void {
+    this.currentPage = page;
+  }
+
+  gotVoucherDetails(details: object) {
+    this.voucherDetails = details;
   }
 }
