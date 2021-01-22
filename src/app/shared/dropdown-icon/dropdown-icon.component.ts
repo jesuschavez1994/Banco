@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, Injectable } from '@angular/core';
 import { DropdownOption, ClassIcon, ExtraButton, ExtraButtonEmitter } from '@interfaces/components-options/dropdown.options.interface';
 import { Product } from '@interfaces/productCart.interface';
+import { Favorite, FavoriteResp } from '../../interfaces/product.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -27,11 +28,6 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
   @Input() displayDropdown = 'left';
   @Input() menuOptions: DropdownOption[] = [];
   @Input() lookMore: DropdownOption;
-  // = {
-  //   title: 'Ver más',
-  //   divider: true,
-  //   typeEvent: 'none'
-  // };
   @Input() showItemsCounter = true;
 
   @Output() selected = new EventEmitter<DropdownOption>();
@@ -73,8 +69,6 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
   }
 
   public loadOptionsWithProductsCartResp( products: Product[] ) {
-    // console.log('loadOptionsWithProductsCartResp');
-    // console.log(products);
 
     if (products.length > 0) {
 
@@ -99,7 +93,37 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public toogleDropDown(){
+  public loadOptionsWithFavoriteProductResp( favoritesResp: FavoriteResp ) {
+
+    const productsFavorites = favoritesResp.favorites;
+
+    if (productsFavorites.length > 0) {
+
+      const menuOptions = [];
+
+      productsFavorites.forEach( productFa => {
+
+        let option;
+
+        option = {
+          title: productFa.name,
+          typeEvent: 'routerLink',
+          eventValue: ['/panel/carrito-compras'],
+          data: {
+            idUser: favoritesResp.id,
+            productFavorite: productFa,
+          }
+        };
+
+        menuOptions.push(option);
+
+      });
+
+      return menuOptions;
+    }
+  }
+
+  public toggleDropDown(){
     this.isDropDownExpanded = this.isDropDownExpanded ? false : true;
   }
 

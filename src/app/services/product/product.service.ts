@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ProductsResponse } from '@interfaces/product.interface';
 import { Product } from '@interfaces/product.interface';
 import { FilterProductResp } from '@interfaces/product.interface';
+import { FavoriteResp } from '../../interfaces/product.interface';
 
 
 @Injectable({
@@ -40,9 +41,8 @@ export class ProductService extends Service{
     return this.DeleteQuery(`consumers/${idUser}/products/${idProduct}/favorites`);
   }
 
-  public getFavoriteProducts( idUser: number ) {
-    console.log('getFavoriteProducts - idUser: ', idUser);
-    return this.execQuery(`consumers/${idUser}/favorites`);
+  public getFavoriteProducts( idUser: number ): Observable<FavoriteResp> {
+    return this.execQuery<FavoriteResp>(`consumers/${idUser}/favorites`);
   }
 
 }

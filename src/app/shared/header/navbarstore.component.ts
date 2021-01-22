@@ -3,11 +3,12 @@ import { UserStoreService } from '@services/user-store/user-store.service';
 import { StoreService } from '@services/store/store.service';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from '@services/usuario/usuario.service';
-import { URL_SERVICIOS } from 'src/app/config/config';
 import { DropdownOption, ClassIcon, ExtraButtonEmitter } from '@interfaces/components-options/dropdown.options.interface';
 import { PaymentProcessService } from '@services/payment-process/payment-process.service';
 import { DropdownIconComponent } from '../dropdown-icon/dropdown-icon.component';
 import { ToastComponent } from '../../modals/toast/toast.component';
+import { ProductService } from '../../services/product/product.service';
+import { FavoriteResp } from '../../interfaces/product.interface';
 
 
 @Component({
@@ -32,6 +33,18 @@ export class NavbarstoreComponent implements OnInit {
   };
   @Input() menuOptions: DropdownOption[] = [];
 
+  // Button DropDown - favorite
+  classIconFavorite: ClassIcon = {
+    class: 'fas fa-heart',
+    color: '#F09207',
+    extraButton: {
+      name: 'delete',
+      class: 'fas fa-trash',
+      color: '#f00707'
+    }
+  };
+
+  @Input() menuOptionsFavorite: DropdownOption[] = [];
 
   usuario: Usuario;
   datosUsuario: any[] = [];
@@ -42,7 +55,8 @@ export class NavbarstoreComponent implements OnInit {
     public userStoreServices: UserStoreService,
     public storeService: StoreService,
     private paymentProcessService: PaymentProcessService,
-    private dropdownIconComp: DropdownIconComponent
+    private dropdownIconComp: DropdownIconComponent,
+    private productService: ProductService,
 
   ) {
    }
@@ -57,12 +71,8 @@ export class NavbarstoreComponent implements OnInit {
       this.IMG_USER = Response[0].src;
     });
 
-
     this.paymentProcessService.getProductsFromCart().subscribe(
       resp => {
-        // console.log('getProductsFromCart');
-        // console.log(resp);
-
         const products = resp.data;
         this.menuOptions = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
 
@@ -73,16 +83,11 @@ export class NavbarstoreComponent implements OnInit {
 
   public deleteProductFromCart(event: ExtraButtonEmitter) {
 
-    // console.log('deleteProductFromCart');
-    // console.log(event);
     const idProduct = event.option.data.id;
 
     this.paymentProcessService.deleteProductFromCart(idProduct).subscribe(
 
       resp => {
-
-        // console.log('deleteProsductFromCart');
-        // console.log(resp);
 
         this.menuOptions = [];
 
@@ -125,5 +130,35 @@ export class NavbarstoreComponent implements OnInit {
 
 
   buscar( ){}
+
+  public loadFavoriteList() {
+    this.productService.getFavoriteProducts(1).subscribe(
+      resp => {
+        console.log('loadFavoriteList');
+        console.log(resp);
+        this.menuOptionsFavorite = this.dropdownIconComp.loadOptionsWithFavoriteProductResp(resp);
+      }
+    );
+  }
+
+  public deleteProductFromFavorite(data) {
+    console.log('deleteProductFromFavorite');
+    console.log(data);
+    // this.productService.removeProductFromFavorite(favorite.id, 3).subscribe(
+    //   resp => {
+    //     console.log(resp);
+
+    //     this.toastRef.open(
+    //       'Producto eliminado de favoritos'
+    //     );
+    //   },
+    //   error => {
+    //     console.log(error);
+    //     this.toastRef.open(
+    //       'Producto no eliminado de favoritos'
+    //     );
+    //   }
+    // );
+  }
 
 }

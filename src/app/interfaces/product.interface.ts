@@ -97,7 +97,7 @@ export interface Pivot {
   bank_id: number;
 }
 
-interface Recipe { //
+export interface Recipe { //
   id: number;
   name: string;
   created_at?: any;
@@ -105,7 +105,7 @@ interface Recipe { //
   pivot: Pivot4;
 }
 
-interface Store { //
+export interface Store { //
   id: number;
   user_id: number;
   rut: string;
@@ -120,7 +120,7 @@ interface Store { //
   delivery: Delivery;
 }
 
-interface Delivery { //
+export interface Delivery { //
   id: number;
   product_id: number;
   delivery: string;
@@ -129,7 +129,7 @@ interface Delivery { //
   updated_at: string;
 }
 
-interface Subcategory { //
+export interface Subcategory { //
   id: number;
   name: string;
   category_id: number;
@@ -142,7 +142,7 @@ interface Subcategory { //
   category: Category;
 }
 
-interface Category { //
+export interface Category { //
   id: number;
   name: string;
   creator: string;
@@ -152,7 +152,7 @@ interface Category { //
   updated_at?: any;
 }
 
-interface Mark { //
+export interface Mark { //
   id: number;
   name: string;
   created_at?: any;
@@ -160,7 +160,7 @@ interface Mark { //
   pivot: Pivot;
 }
 
-interface Factory { //
+export interface Factory { //
   id: number;
   name: string;
   created_at?: any;
@@ -168,12 +168,12 @@ interface Factory { //
   pivot: Pivot2;
 }
 
-interface Pivot3 {
+export interface Pivot3 {
   product_id: number;
   subcategory_id: number;
 }
 
-interface Pivot4 {
+export interface Pivot4 {
   product_id: number;
   recipe_id: number;
 }
@@ -188,3 +188,43 @@ export interface FilterProductResp{
   delivery?: boolean;
   recipes?: string[];
 }
+
+
+// -----
+
+export interface FavoriteResp {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  phone?: any;
+  email_verified_at?: any;
+  provider_id?: any;
+  role: string;
+  created_at?: any;
+  updated_at?: any;
+  deleted_at?: any;
+  favorites: Favorite[];
+}
+
+export interface Favorite {
+  id: number;
+  store_id: number;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  sincronice: string;
+  aviable: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at?: any;
+  pivot: Pivot;
+}
+
+export interface Pivot {
+  user_id: number;
+  product_id: number;
+}
+
+
