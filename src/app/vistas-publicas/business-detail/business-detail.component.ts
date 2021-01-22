@@ -360,14 +360,14 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         filter = queryParamsAllowed;
 
-        console.log('queryParamsAllowed: ', queryParamsAllowed);
+        // console.log('queryParamsAllowed: ', queryParamsAllowed);
       }
 
       this.productService.getProductsByStore(idStore, page, filter).subscribe(
         resp => {
 
-          console.log('getProductsByStore');
-          console.log(resp.data);
+          // console.log('getProductsByStore');
+          // console.log(resp.data);
           const products = resp.data;
           this.totalProducts = resp.total;
           this.itemsPerPage = resp.per_page;
@@ -523,14 +523,14 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         this.StoreName = storeResp.name;
 
-        console.log(storeResp);
+        // console.log(storeResp);
 
         if (storeResp.banner_image.length > 0) {
 
           const storeBanners = storeResp.banner_image;
 
-          console.log('storeBanners');
-          console.log(storeBanners);
+          // console.log('storeBanners');
+          // console.log(storeBanners);
 
           const sizes = Object.keys(storeBanners[0].src_size);
 
@@ -551,8 +551,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             };
           }
 
-          console.log('this.imgsBanners');
-          console.log(this.imgsBanners);
+          // console.log('this.imgsBanners');
+          // console.log(this.imgsBanners);
 
 
         }
