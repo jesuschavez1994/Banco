@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Plan } from './models/plan';
 import { SubscriptionService } from '@services/subscription/subscription.service';
 import { CreatedOrder } from '@interfaces/SettingsInterfaces';
+import { BROWSER_STORAGE } from '../../../../browserStorage';
 
 import {
   trigger,
@@ -35,7 +36,7 @@ import {
   ],
 })
 export class PlansComponent implements OnInit {
-  currentPage = 'plans';
+  currentPage = this.localStorage.getItem('settingsActualPage');
   selectedPlan: Plan;
   orderInfo: CreatedOrder;
   voucherDetails: object;
@@ -43,7 +44,10 @@ export class PlansComponent implements OnInit {
   plans: Array<Plan>;
   route = 'Planes';
 
-  constructor(private subscriptionDataService: SubscriptionService) {}
+  constructor(
+    private subscriptionDataService: SubscriptionService,
+    @Inject(BROWSER_STORAGE) private localStorage: Storage
+  ) {}
 
   ngOnInit(): void {
     this.plans = [
@@ -106,6 +110,7 @@ export class PlansComponent implements OnInit {
   }
 
   onPageChange(page: string): void {
+    this.localStorage.setItem('settingsActualPage', page);
     this.currentPage = page;
   }
 

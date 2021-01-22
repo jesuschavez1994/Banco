@@ -72,25 +72,27 @@ export class UsuarioService {
     localStorage.setItem('usuario', JSON.stringify(usuario));
     localStorage.setItem('id', id);
     localStorage.setItem('email', email);
-    // Prueba para mantener el estado de las páginas en "/settings/plans"
-    localStorage.setItem('settingsActualPage', 'plans');
 
     this.usuario = usuario;
     // this.token = token;
   }
 
   guardarStorage(id: string, token: string, usuario: Usuario) {
+    // Prueba para mantener el estado de las páginas en "/settings/plans"
+    localStorage.setItem('settingsActualPage', 'plans');
+
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
-    // Prueba para mantener el estado de las páginas en "/settings/plans"
-    localStorage.setItem('settingsActualPage', 'plans');
 
     this.usuario = usuario;
     this.token = token;
   }
 
   login(usuario: Usuario, recordar: boolean = false) {
+    // Prueba para mantener el estado de las páginas en "/settings/plans"
+    localStorage.setItem('settingsActualPage', 'plans');
+
     const url = '/api/login';
 
     if (recordar) {

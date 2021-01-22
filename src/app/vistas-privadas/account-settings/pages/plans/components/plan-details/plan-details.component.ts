@@ -1,6 +1,14 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  Input,
+  Inject,
+} from '@angular/core';
 import { Plan } from '../../models/plan';
 import { MatDialog } from '@angular/material/dialog';
+import { BROWSER_STORAGE } from '../../../../../../browserStorage';
 import { RedirectionModalComponent } from '../redirection-modal/redirection-modal.component';
 import { SubscriptionService } from '@services/subscription/subscription.service';
 import {
@@ -24,7 +32,8 @@ export class PlanDetailsComponent implements OnInit {
   webpayDebitCard = false;
   constructor(
     public dialog: MatDialog,
-    private subscriptionDataService: SubscriptionService
+    private subscriptionDataService: SubscriptionService,
+    @Inject(BROWSER_STORAGE) private localStorage: Storage
   ) {
     this.pageChange = new EventEmitter<string>();
     this.voucherDetails = new EventEmitter<object>();
@@ -57,6 +66,7 @@ export class PlanDetailsComponent implements OnInit {
         this.subscriptionDataService
           .createWebpayPayment(serverResponse.order_id)
           .subscribe((paymentCredentials: PaymentCredentials) => {
+            this.localStorage.setItem('settingsActualPage', 'payment-details');
             this.openDialog(paymentCredentials.url, paymentCredentials.token);
           });
       });
