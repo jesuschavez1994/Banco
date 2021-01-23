@@ -29,6 +29,7 @@ import { InvoiceBComponent } from './invoice-b/invoice-b.component';
 import { CardShimmerComponent } from './card-shimmer/card-shimmer.component';
 import { ToastComponent } from '../modals/toast/toast.component';
 import { BannerShimmerComponent } from './banner-shimmer/banner-shimmer.component';
+import { SidebarListShimmerComponent } from './sidebar-list-shimmer/sidebar-list-shimmer.component';
 
 @NgModule({
     declarations: [
@@ -43,7 +44,8 @@ import { BannerShimmerComponent } from './banner-shimmer/banner-shimmer.componen
       InvoiceComponent, OrderPaymentFormsComponent,
       DropdownButtonComponent, DropdownIconComponent,
       InvoiceBComponent, CardShimmerComponent,
-      ToastComponent, BannerShimmerComponent
+      ToastComponent, BannerShimmerComponent,
+      SidebarListShimmerComponent,
     ],
     imports: [
       // APP_ROUTING,
@@ -69,6 +71,7 @@ import { BannerShimmerComponent } from './banner-shimmer/banner-shimmer.componen
       DropdownButtonComponent, DropdownIconComponent,
       InvoiceBComponent, CardShimmerComponent,
       ToastComponent, BannerShimmerComponent,
+      SidebarListShimmerComponent,
     ]
 })
 

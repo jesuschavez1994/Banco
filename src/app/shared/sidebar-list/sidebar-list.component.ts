@@ -126,15 +126,19 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   @HostListener('window:scroll', ['$event'])
   public fixedSidebar($event: Event) {
 
-    const sidebarList = this.sidebarList.nativeElement;
-    const pxTopElement = sidebarList.offsetTop;
-    const pxTopDocument = document.documentElement.scrollTop;
+    if (this.sidebarList) {
 
-    if (pxTopDocument > pxTopElement) {
-      sidebarList.classList.add('aside--fixed');
+      const sidebarList = this.sidebarList.nativeElement;
+      const pxTopElement = sidebarList.offsetTop;
+      const pxTopDocument = document.documentElement.scrollTop;
 
-    } else {
-      sidebarList.classList.remove('aside--fixed');
+      if (pxTopDocument > pxTopElement) {
+        sidebarList.classList.add('aside--fixed');
+
+      } else {
+        sidebarList.classList.remove('aside--fixed');
+
+      }
 
     }
 
@@ -148,20 +152,23 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   public routerLinkActive() {
 
-    this.productsOptionMenu.nativeElement.classList.remove('active');
-    this.contactoOptionMenu.nativeElement.classList.remove('active');
+    if (this.productsOptionMenu){
+      this.productsOptionMenu.nativeElement.classList.remove('active');
+      this.contactoOptionMenu.nativeElement.classList.remove('active');
 
-    this.route.paramMap.subscribe(params => {
+      this.route.paramMap.subscribe(params => {
 
-      if ((params.has('show') && params.get('show') === this.anchorsMenu.wordToMatch)) {
-        this.productsOptionMenu.nativeElement.classList.add('active');
+        if ((params.has('show') && params.get('show') === this.anchorsMenu.wordToMatch)) {
+          this.productsOptionMenu.nativeElement.classList.add('active');
 
-      } else {
-        this.contactoOptionMenu.nativeElement.classList.add('active');
+        } else {
+          this.contactoOptionMenu.nativeElement.classList.add('active');
 
-      }
+        }
 
-    });
+      });
+    }
+
 
   }
 

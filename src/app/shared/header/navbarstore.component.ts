@@ -28,7 +28,7 @@ export class NavbarstoreComponent implements OnInit {
     extraButton: {
       name: 'delete',
       class: 'fas fa-trash',
-      color: '#f00707'
+      color: '#f32323'
     }
   };
   @Input() menuOptions: DropdownOption[] = [];
@@ -40,7 +40,7 @@ export class NavbarstoreComponent implements OnInit {
     extraButton: {
       name: 'delete',
       class: 'fas fa-trash',
-      color: '#f00707'
+      color: '#f32323'
     }
   };
 
@@ -68,16 +68,14 @@ export class NavbarstoreComponent implements OnInit {
     });
 
     this.usuarioService.datosUserImages(localStorage.getItem('id')).subscribe( (Response: any) => {
-      this.IMG_USER = Response[0].src;
+      if (Response.length > 0) {
+        this.IMG_USER = Response[0].src;
+      }
     });
 
-    this.paymentProcessService.getProductsFromCart().subscribe(
-      resp => {
-        const products = resp.data;
-        this.menuOptions = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
+    this.loadProductCart();
 
-      }
-    );
+    this.loadFavoriteList();
 
   }
 
@@ -131,34 +129,65 @@ export class NavbarstoreComponent implements OnInit {
 
   buscar( ){}
 
+  public loadProductCart() {
+    this.paymentProcessService.getProductsFromCart().subscribe(
+      resp => {
+        const products = resp.data;
+        this.menuOptions = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
+
+      }
+    );
+  }
+
   public loadFavoriteList() {
-    this.productService.getFavoriteProducts(1).subscribe(
+    this.productService.getFavoriteProducts(2).subscribe(
       resp => {
         console.log('loadFavoriteList');
         console.log(resp);
         this.menuOptionsFavorite = this.dropdownIconComp.loadOptionsWithFavoriteProductResp(resp);
+
       }
     );
   }
 
   public deleteProductFromFavorite(data) {
-    console.log('deleteProductFromFavorite');
-    console.log(data);
-    // this.productService.removeProductFromFavorite(favorite.id, 3).subscribe(
-    //   resp => {
-    //     console.log(resp);
 
-    //     this.toastRef.open(
-    //       'Producto eliminado de favoritos'
-    //     );
-    //   },
-    //   error => {
-    //     console.log(error);
-    //     this.toastRef.open(
-    //       'Producto no eliminado de favoritos'
-    //     );
-    //   }
-    // );
+    const idUser = data.option.data.idUser;
+    const idProductFav = data.option.data.productFavorite.id;
+
+    // console.log('idUser');
+    // console.log(idUser);
+
+    // console.log('idProductFav');
+    // console.log(idProductFav);
+
+    this.productService.removeProductFromFavorite(idUser, idProductFav).subscribe(
+      resp => {
+
+        if (resp.deleted) {
+
+          this.productService.getFavoriteProducts(2).subscribe(
+            favoriteProduct => {
+
+              this.menuOptionsFavorite = this.dropdownIconComp.loadOptionsWithFavoriteProductResp(favoriteProduct);
+
+            }
+          );
+
+          this.toastRef.open(
+            'Producto eliminado de favoritos'
+          );
+
+        }
+
+      },
+      error => {
+        console.log(error);
+        this.toastRef.open(
+          'Producto no eliminado de favoritos'
+        );
+      }
+    );
   }
 
 }

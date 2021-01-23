@@ -13,13 +13,16 @@
 
     <div class="content">
 
-      <h2 class="name">
-          {{selectedProduct.name}}
-      </h2>
+      <div class="name_description">
+        <h2 class="name">
+            {{selectedProduct.name}}
+        </h2>
 
-      <p class="description">
-        {{selectedProduct.description | excerpt: 985}}
-      </p>
+        <p class="description">
+          {{selectedProduct.description | excerpt: 985}}
+        </p>
+      </div>
+
 
       <div class="shopping-cart">
 

@@ -45,9 +45,13 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
 
       const isClickInside = this.dropdownCustom.nativeElement.contains(e.target);
 
-      if (!isClickInside) {
-        this.inputCheck.nativeElement.checked = false;
-        this.isDropDownExpanded = false;
+      if (this.inputCheck) {
+
+        if (!isClickInside) {
+          this.inputCheck.nativeElement.checked = false;
+          this.isDropDownExpanded = false;
+        }
+
       }
 
     });
@@ -68,59 +72,71 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
     );
   }
 
-  public loadOptionsWithProductsCartResp( products: Product[] ) {
+  public loadOptionsWithProductsCartResp( products: Product[]) {
 
-    if (products.length > 0) {
+    const menuOptions = [];
 
-      const menuOptions = [];
+    if (products) {
 
-      products.forEach( product => {
+      if (products.length > 0) {
 
-        let option;
+        products.forEach( product => {
 
-        option = {
-          title: product.name,
-          typeEvent: 'routerLink',
-          eventValue: ['/panel/carrito-compras'],
-          data: product
-        };
+          let option;
 
-        menuOptions.push(option);
+          option = {
+            title: product.name,
+            typeEvent: 'routerLink',
+            eventValue: ['/panel/carrito-compras'],
+            data: product
+          };
 
-      });
+          menuOptions.push(option);
 
-      return menuOptions;
+        });
+
+      }
+
     }
+
+    return menuOptions;
+
   }
 
   public loadOptionsWithFavoriteProductResp( favoritesResp: FavoriteResp ) {
 
+    const menuOptions = [];
     const productsFavorites = favoritesResp.favorites;
 
-    if (productsFavorites.length > 0) {
+    if (productsFavorites) {
 
-      const menuOptions = [];
+      if (productsFavorites.length > 0) {
 
-      productsFavorites.forEach( productFa => {
+        productsFavorites.forEach( productFa => {
 
-        let option;
+          let option;
 
-        option = {
-          title: productFa.name,
-          typeEvent: 'routerLink',
-          eventValue: ['/panel/carrito-compras'],
-          data: {
-            idUser: favoritesResp.id,
-            productFavorite: productFa,
-          }
-        };
+          option = {
+            title: productFa.name,
+            typeEvent: 'routerLink',
+            eventValue: ['/panel/carrito-compras'],
+            data: {
+              idUser: favoritesResp.id,
+              productFavorite: productFa,
+            }
+          };
 
-        menuOptions.push(option);
+          menuOptions.push(option);
 
-      });
+        });
 
-      return menuOptions;
+
+      }
+
     }
+
+    return menuOptions;
+
   }
 
   public toggleDropDown(){

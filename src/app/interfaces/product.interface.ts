@@ -227,4 +227,8 @@ export interface Pivot {
   product_id: number;
 }
 
+export interface RemoveProductResp {
+  deleted: boolean;
+}
+
 
