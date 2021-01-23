@@ -3,7 +3,7 @@ import { Category } from '@interfaces/categorys';
 import { ProductCategories } from '@interfaces/productCategories';
 
 import { URL_SERVICIOS } from 'src/app/config/config';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Service } from '@services/service.service';
 import { Observable } from 'rxjs';
@@ -17,7 +17,7 @@ export class GetCategorysService extends Service   {
   public _requestCategoryL: ProductCategories;
   //ids de categorias y subcategorias
   public _boxEstateRequestId : number[][]=[null];
-  constructor( protected http: HttpClient) { 
+  constructor( protected http: HttpClient ) { 
     super(http);
     console.log('Constructor service');
   }
@@ -33,7 +33,7 @@ export class GetCategorysService extends Service   {
  //Los parametros ingresados deben ser numeros
  //devuelve un Observable
  public getListProduct(cat: number, subcat: number): Observable<ProductCategories>{
-  console.log('Get listProducts');
+  console.log('Get listProducts', cat, subcat);
      
   //categories/idCategoria/subcategories/idSucategoria/product  <- Trae productos por subcategorias
     if(cat != undefined && subcat != undefined){
@@ -47,10 +47,11 @@ export class GetCategorysService extends Service   {
     return this.execQuery<ProductCategories>('categories/'+cat+'/products');
   }
 }
+//get list Product With path
 public getListPWPath(query: string): Observable<ProductCategories>{
-  console.log('obt productList with path');
+  console.log('obt productList with path'+ query);
   
-  return  this.execQuery<ProductCategories>(query);
+  return  this.execQuery<ProductCategories>(query)
 }
 ngOnDestroy(){
   console.log('service get-categorys destroyed');

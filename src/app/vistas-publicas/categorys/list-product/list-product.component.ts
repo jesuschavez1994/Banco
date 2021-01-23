@@ -8,7 +8,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ModalErrComponent} from '@shared/modal-err/modal-err.component'
 import {MatDialog, MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';  
-
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, retry } from 'rxjs/operators';
 @Component({
   selector: 'app-list-product',
   templateUrl: './list-product.component.html',
@@ -116,6 +117,7 @@ ngOndestroy(){
            for(let rt =0; rt < this.listaProductos.last_page; rt++){
             this.pgOptions[rt]= rt+1; 
             }
+            console.log(this.pgOptions);
             //para titulo de seccion
             this.titleCat =this.getCategorys._bxCategory[this.idsProduct[0]-1].name;
             this.titleSubcat =this.getCategorys._bxCategory[this.idsProduct[0]-1].subcategories[this.idsProduct[1]-1].name;
@@ -130,8 +132,6 @@ ngOndestroy(){
           }
           //manejador de paginacion
           //setear estados iniciales
-          console.log('setear estados iniciales pg');
-           this.handlerPagination('none',  this.listaProductos.current_page, this.listaProductos.last_page );
          },err=>{
             this.spinner.hide();
             this.openDialog('Ha ocurrido un error en la carga de los productos');
@@ -141,59 +141,41 @@ ngOndestroy(){
      }
     }
     
-  handlerPagination(parent: any, state: number,maxP: number ){
    
 
-    if(parent != 'none'){
-      /*Ignorado la 1era vez*/
-      console.log(parent);
-   console.log(parent.firstChild);
-   console.log(parent.firstChild.classList);
-  console.log(parent.children[state]);
-   console.log('ultimo hijo', parent.lastChild);
-      if(state <= 1){
-       if(!parent.firstChild.classList.contains('disabled')){
-        parent.firstChild.classList.add('disabled');
-        }else{
-        parent.firstChild.classList.remove('disabled');
-        }
-      }
-      if(state >= maxP){
-         if(!parent.lastChild.classList.contains('disabled')){
-        parent.lastChild.classList.add('disabled');
-        }else{
-          parent.lastChild.classList.remove('disabled');
-          }  
-      }
-      //setear current page
-     // parent[state].classList.add('active');
-
-    }
-
-  }
-
-  getProductsPG( par,pathBx: number){
-    
-    console.log('peticion por path pg '+ pathBx , par);
-      if(pathBx <= 0){
+  getProductsPG( par,pathBx: number | string){
+        console.log(par);
+        console.log(pathBx);
+        pathBx = Number(pathBx);
+    if(pathBx <= 0){
         pathBx = 1
       }
       if(pathBx >= this.listaProductos.last_page){
         pathBx = this.listaProductos.last_page;
       }
+       
       if(pathBx!=undefined){
         console.log(pathBx);
         this.spinner.show();
         this.getCategorys.getListPWPath('categories/'+this.idsProduct[0]+'/subcategories/'+this.idsProduct[1]+'/products?page='+pathBx).subscribe(
           req =>{
+            console.log('quest pag ok',req);
             this.listaProductos=req;
-           this.handlerPagination(par,  this.listaProductos.current_page, this.listaProductos.last_page );
+          
+            //this.handlerPagination(par,  this.listaProductos.current_page, this.listaProductos.last_page );
             //llevar scroll a top
             window.scroll(0,0);
             this.spinner.hide();
           },err =>{
             this.openDialog('Ha ocurrido un error en la carga de los productos');
-          } );
+            console.log(err);
+          },()=>{
+            console.log('finaliza peticion');
+            window.scroll(0,0);
+            this.spinner.hide();
+          } ).add(
+            console.log('peticion add')
+          )
       }
   } 
   openDialog(mensaje:string): void {
@@ -201,4 +183,20 @@ ngOndestroy(){
       data: {title: 'Ooops!', description: mensaje}
     });
   }
+  /* 
+private handleError(error: HttpErrorResponse) {
+  if (error.error instanceof ErrorEvent) {
+    // A client-side or network error occurred. Handle it accordingly.
+    console.error('An error occurred:', error.error.message);
+  } else {
+    // The backend returned an unsuccessful response code.
+    // The response body may contain clues as to what went wrong.
+    console.error(
+      `Backend returned code ${error.status}, ` +
+      `body was: ${error.error}`);
+  }
+  // Return an observable with a user-facing error message.
+  return throwError(
+    'Something bad happened; please try again later.');
+} */
 }
