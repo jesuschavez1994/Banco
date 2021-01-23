@@ -1,13 +1,21 @@
 .main-container {
     min-width: 100%;
     background: #f9f9f9;
-    padding-top: 32px;
+    padding-top: 52px;
     min-height: 100%;
+    font-family: 'Montserrat', sans-serif !important;
     main {
         width: 75%;
         margin: 0 auto;
+        .cty-header-main {
+            margin-bottom: 42px;
+            .cty-title {
+                font-size: 2.0rem;
+                color: black;
+            }
+        }
         .d-container {
-            padding: 35px;
+            padding: 45px;
             background-color: white;
             border-radius: 15px;
             .category-description {
@@ -15,14 +23,14 @@
                 padding-bottom: 40px;
                 transition: linear .4s;
                 .cty-header {
-                    padding-bottom: 16px;
+                    padding-bottom: 42px;
                     .cty-title {
                         .span {
                             color: black;
                             border-bottom: solid transparent 1px;
                             text-transform: capitalize;
                             font-weight: normal;
-                            font-size: 1.2rem;
+                            font-size: 1.5rem;
                             &:hover {
                                 border-bottom: solid black 1px;
                             }
@@ -53,7 +61,7 @@
     }
 }
 
-@media(max-width: 768px) {
+@media(max-width: 950px) {
     .main-container {
         main {
             width: 95%;

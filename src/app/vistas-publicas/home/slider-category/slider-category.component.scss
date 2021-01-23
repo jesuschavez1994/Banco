@@ -1,27 +1,27 @@
-.category-container{
+.category-container {
     margin-bottom: 7%;
-    .cty-header{
+    font-family: 'Montserrat', sans-serif !important;
+    .cty-header {
         padding: 0 0 15px 10px;
-        .cty-title{
+        .cty-title {
             color: #1D1D1B;
             display: inline-block;
             font-size: 1.8rem;
             font-weight: normal;
             margin-right: 10px;
         }
-        .cty-link{
+        .cty-link {
             font-size: 1rem;
             font-style: italic;
             font-weight: lighter;
             color: black;
         }
     }
-    main{
-        .list-items{
+    main {
+        .list-items {
             height: 450px;
             position: relative;
-
-            ol{
+            ol {
                 overflow-x: scroll;
                 overflow-y: hidden;
                 position: relative;
@@ -34,8 +34,7 @@
                 text-decoration-style: none;
                 display: flex;
                 flex-wrap: nowrap;
-                .item{
-
+                .item {
                     margin: 0;
                     padding: 14px;
                     display: inline-block;
@@ -49,39 +48,32 @@
                         width: 80%;
                         margin: 0;
                         background-color: #fff;
-                        
                         width: 100%;
-            
-                        .material-icons{
+                        .material-icons {
                             display: none;
                         }
-            
-                        &:hover{
-                            box-shadow: 0px 1px 5px 1px rgba(0,0,0,.1) !important;
+                        &:hover {
+                            box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, .1) !important;
                             border: none !important;
                             padding-bottom: .1%;
                             cursor: pointer;
                             filter: grayscale(5%) brightness(90%) opacity(100%);
                             -webkit-filter: grayscale(5%) brightness(90%) opacity(100%);
                             -moz-filter: grayscale(5%) brightness(90%) opacity(100%);
-            
-                            .material-icons{
+                            .material-icons {
                                 display: block;
                             }
                         }
-
-                        i{
+                        i {
                             z-index: 10;
-            
                         }
-            
-                        .icon-gris{color: #aeaeb8 !important;}
-            
+                        .icon-gris {
+                            color: #aeaeb8 !important;
+                        }
                         .product-image-container {
                             display: block;
                             max-width: 100%;
-                            
-                            img{
+                            img {
                                 width: 215px;
                                 height: 245px;
                                 margin-bottom: 5px;
@@ -93,23 +85,22 @@
                                 position: relative;
                                 z-index: 1;
                                 padding-bottom: 95% !important;
-                                
-                                &:hover{
-                                    -webkit-transform:scale(1.1);
-                                    -moz-transform:scale(1.1);
-                                    -ms-transform:scale(1.1);
-                                    -o-transform:scale(1.1);
-                                    transform:scale(1.1);
-                                    transition: all .7s cubic-bezier(.165,.84,.44,1);
-                                } 
+                                &:hover {
+                                    -webkit-transform: scale(1.1);
+                                    -moz-transform: scale(1.1);
+                                    -ms-transform: scale(1.1);
+                                    -o-transform: scale(1.1);
+                                    transform: scale(1.1);
+                                    transition: all .7s cubic-bezier(.165, .84, .44, 1);
+                                }
                             }
-                            
                         }
-                        .card-body{
+                        .card-body {
+                            font-weight: 600;
                             width: 215px;
                             padding: 12px 0 0 0;
-                            font-size: 15px;
-                            .price{
+                            font-size: 14px;
+                            .price {
                                 font-size: 1.4em;
                             }
                         }
@@ -118,4 +109,4 @@
             }
         }
     }
-}    
+}

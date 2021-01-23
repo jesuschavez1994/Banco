@@ -1,10 +1,14 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component, OnInit,OnChanges,OnDestroy } from '@angular/core';
 import { Category } from '@interfaces/categorys';
 import { ProductCategories } from '@interfaces/productCategories';
 import { Service } from '@services/service.service';
 import { Router } from '@angular/router';
 import { GetCategorysService } from '.././services/get-categorys.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ModalErrComponent} from '@shared/modal-err/modal-err.component'
+import {MatDialog, MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';  
+
 @Component({
   selector: 'app-list-product',
   templateUrl: './list-product.component.html',
@@ -17,14 +21,25 @@ export class ListProductComponent implements OnInit {
                 private getCategorys: GetCategorysService,
                 private router: Router,
                 public spinner: NgxSpinnerService,
+                private modal : MatDialog,
                 ) {
-                  console.log('Constructor list product');
+      console.log('Constructor list product');
       /* Obtiene el ultimo valor que envio el menu */
       if(this.getCategorys._boxEstateRequestId[0]!= undefined){
         console.log('anterior request products ',this.getCategorys._boxEstateRequestId[0]);
         this.idsProduct= this.getCategorys._boxEstateRequestId[0];
       }
+
+      console.log('setting list product', this.getCategorys._requestCategoryL);
+     
+    if(this.getCategorys._requestCategoryL == undefined){
+      console.log('pidiendo productos', this.idsProduct , this.listaProductos , this.getCategorys._requestCategoryL);
+      this.obtProduct();
+     }else{
+      this.listaProductos = this.getCategorys._requestCategoryL;
      }
+     }
+     
      //peticion paginacion
     peticionesPP: ProductCategories[];
     //peticion lista de Productos
@@ -32,21 +47,33 @@ export class ListProductComponent implements OnInit {
     //Identificador Ids subcat y cat
     idsProduct: number[];
     //Array que contendra rutas de items paginacion
-    pgOptions: string[]=[];
+    pgOptions: number[]=[];
     //respuesta .data empty
     empty: boolean=false;
     //titulo de categoria de seleccion
     titleCat: string;
     //titulo de subcategoria de seleccion
     titleSubcat: string;
+  
+  ngOnChanges(){
+
+    console.log('on changes list product', this.getCategorys._requestCategoryL);
+     /* 
+    if(this.getCategorys._requestCategoryL == undefined){
+      this.obtProduct();
+     }else{
+      this.listaProductos = this.getCategorys._requestCategoryL;
+     } */
+  }
   ngOnInit(): void {
     console.log('show spinner');
     this.spinner.show(); 
 
     console.log('on init list product', this.getCategorys._requestCategoryL);
-         
+    
       if(this.getCategorys._requestCategoryL == undefined){
-       this.obtProduct();
+        
+        this.obtProduct();
       }
   }
  
@@ -64,9 +91,13 @@ ngOndestroy(){
 }
   //Obtiene listado de productos
   obtProduct(){
+
+    this.spinner.show(); 
+
     //Si no existe referencia de productos
     //redireccion a categorys
     if(this.idsProduct == undefined){
+      console.log('redireccion', this.idsProduct);
       this.router.navigate(['categorys']);
     }else{
     //obtencion de data primera mano
@@ -83,7 +114,7 @@ ngOndestroy(){
            if(! (this.listaProductos.data.length == 0) ){
              //creacion de elementos de paginacion
            for(let rt =0; rt < this.listaProductos.last_page; rt++){
-            this.pgOptions[rt]= 'page='+(rt+1); 
+            this.pgOptions[rt]= rt+1; 
             }
             //para titulo de seccion
             this.titleCat =this.getCategorys._bxCategory[this.idsProduct[0]-1].name;
@@ -102,41 +133,72 @@ ngOndestroy(){
           console.log('setear estados iniciales pg');
            this.handlerPagination('none',  this.listaProductos.current_page, this.listaProductos.last_page );
          },err=>{
-          this.spinner.hide();
-           console.log('err' ,err);
+            this.spinner.hide();
+            this.openDialog('Ha ocurrido un error en la carga de los productos');
+           
          }
        )
      }
     }
     
   handlerPagination(parent: any, state: number,maxP: number ){
+   
+
     if(parent != 'none'){
       /*Ignorado la 1era vez*/
+      console.log(parent);
+   console.log(parent.firstChild);
+   console.log(parent.firstChild.classList);
+  console.log(parent.children[state]);
+   console.log('ultimo hijo', parent.lastChild);
       if(state <= 1){
-        if(!parent.firstChild.classList.contains('disabled')){
+       if(!parent.firstChild.classList.contains('disabled')){
         parent.firstChild.classList.add('disabled');
+        }else{
+        parent.firstChild.classList.remove('disabled');
         }
       }
       if(state >= maxP){
-        if(!parent.firstChild.classList.contains('disabled')){
-        parent.firstChild.classList.add('disabled');
-        }
+         if(!parent.lastChild.classList.contains('disabled')){
+        parent.lastChild.classList.add('disabled');
+        }else{
+          parent.lastChild.classList.remove('disabled');
+          }  
       }
+      //setear current page
+     // parent[state].classList.add('active');
+
     }
 
   }
 
-  getProductsPG( pathBx: string){
-    console.log('peticion por path pg '+ pathBx );
-
+  getProductsPG( par,pathBx: number){
+    
+    console.log('peticion por path pg '+ pathBx , par);
+      if(pathBx <= 0){
+        pathBx = 1
+      }
+      if(pathBx >= this.listaProductos.last_page){
+        pathBx = this.listaProductos.last_page;
+      }
       if(pathBx!=undefined){
         console.log(pathBx);
         this.spinner.show();
-        this.getCategorys.getListPWPath('categories/'+this.idsProduct[0]+'/subcategories/'+this.idsProduct[1]+'/products?'+pathBx).subscribe(
+        this.getCategorys.getListPWPath('categories/'+this.idsProduct[0]+'/subcategories/'+this.idsProduct[1]+'/products?page='+pathBx).subscribe(
           req =>{
             this.listaProductos=req;
+           this.handlerPagination(par,  this.listaProductos.current_page, this.listaProductos.last_page );
+            //llevar scroll a top
+            window.scroll(0,0);
             this.spinner.hide();
+          },err =>{
+            this.openDialog('Ha ocurrido un error en la carga de los productos');
           } );
       }
   } 
+  openDialog(mensaje:string): void {
+    const dialogRef = this.modal.open(ModalErrComponent, {
+      data: {title: 'Ooops!', description: mensaje}
+    });
+  }
 }

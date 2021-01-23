@@ -18,6 +18,7 @@ export class ModalErrComponent implements OnInit {
       this.dialogRef.close();
       window.location.reload();
     }
+    
   ngOnInit(): void {
   }
 

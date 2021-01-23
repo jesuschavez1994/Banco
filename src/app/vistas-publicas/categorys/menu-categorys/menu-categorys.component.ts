@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit,OnChanges, OnDestroy, Input, Output, ViewChild, ElementRef } from '@angular/core';
 import { GetCategorysService } from '.././services/get-categorys.service';
 import { Category } from '@interfaces/categorys';
 import { Router} from '@angular/router';
@@ -22,8 +22,10 @@ export class MenuCategorysComponent implements OnInit {
               private modal : MatDialog  ) {
                 console.log('menu constructor');
                }
-
-  ngOnInit(): void {
+  ngOnCHanges(){
+    
+  }
+  ngOnInit(): void {  
     this.spinner.show();
     console.log('menu on Init')
     //si el request de las categorias ya ha sido realizado
@@ -40,6 +42,8 @@ export class MenuCategorysComponent implements OnInit {
 
   }
   ngOnDestroy(){
+    this.spinner.show();
+
     //guarda en servicio el request
     console.log('destroy menu:', this.boxCategory, this.stateid)
     if(this.boxCategory!=undefined){
