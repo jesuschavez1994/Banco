@@ -22,14 +22,14 @@ export class AppComponent implements OnInit {
 
   constructor(
     private deviceService: DeviceDetectorService,
+    private connectionService: ConnectionService,
     private titleService: Title,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-  constructor( private deviceService: DeviceDetectorService, private connectionService: ConnectionService ) {
     this.epicFunction();
 
-    this.connectionService.monitor().subscribe(currentState => {
+    this.connectionService.monitor().subscribe((currentState) => {
       console.log(currentState);
       this.hasNetworkConnection = currentState.hasNetworkConnection;
       this.hasInternetAccess = currentState.hasInternetAccess;
@@ -39,7 +39,6 @@ export class AppComponent implements OnInit {
         this.status = 'OFFLINE';
       }
     });
-
   }
 
   epicFunction() {
