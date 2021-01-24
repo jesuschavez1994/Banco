@@ -5,10 +5,20 @@
   "projects": {
     "BancoDeProductos": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "defaults": {
+        "styleExt": "scss"
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -19,20 +29,15 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-              "src/styles.css",
+              "src/styles.scss",
               "src/_animations.scss",
-              
               "src/assets/bootstrap4/css/bootstrap.min.css",
               "node_modules/@grapecity/spread-sheets/styles/gc.spread.sheets.excel2013white.css"
-              
             ],
             "scripts": [
               "src/assets/jquery/jquery.min.js",
@@ -47,8 +52,6 @@
               "src/assets/bootstrap4/js/bootstrap.min.js",
               "src/assets/bootstrap4/js/popper.min.js",
               "node_modules/@grapecity/spread-sheets/dist/gc.spread.sheets.all.min.js"
-              
-              
             ]
           },
           "configurations": {
@@ -106,14 +109,11 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -126,9 +126,7 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
@@ -153,5 +151,10 @@
   "defaultProject": "BancoDeProductos",
   "cli": {
     "analytics": "74217c49-642f-4b72-b92d-8fdd2723fa2e"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
   }
 }

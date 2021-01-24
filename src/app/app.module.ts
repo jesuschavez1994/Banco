@@ -59,7 +59,7 @@ export class MyHammerConfig extends HammerGestureConfig {
   } as any;
 }
 
-// Check Modue conecction to internet //
+// Check Module connection to internet //
 import {
   ConnectionServiceModule,
   ConnectionServiceOptions,
