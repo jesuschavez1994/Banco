@@ -80,15 +80,6 @@ export class SubscriptionService {
       .pipe(catchError(this.handleError));
   }
 
-  redirectToWebpay(url: string, token: string) {
-    // We add the corresponding headers to the request
-    const body = {
-      token_ws: token,
-    };
-
-    return this.httpService.post(url, body).pipe(catchError(this.handleError));
-  }
-
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // Manejamos los errores que ocurran del lado del cliente.
