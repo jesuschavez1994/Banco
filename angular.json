@@ -16,9 +16,6 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
-      "defaults": {
-        "styleExt": "scss"
-      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -150,7 +147,7 @@
   },
   "defaultProject": "BancoDeProductos",
   "cli": {
-    "analytics": "74217c49-642f-4b72-b92d-8fdd2723fa2e"
+    "analytics": false
   },
   "schematics": {
     "@schematics/angular:component": {
