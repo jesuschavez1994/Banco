@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Service } from '@services/service.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ProductsResponse } from '@interfaces/product.interface';
+import { FavoriteResp, AddFavoriteProductResp, ProductsResponse, RemoveFavoriteProductResp } from '@interfaces/product.interface';
 import { Product } from '@interfaces/product.interface';
 import { FilterProductResp } from '@interfaces/product.interface';
-import { FavoriteResp, RemoveProductResp } from '../../interfaces/product.interface';
+import { UsuarioService } from '../usuario/usuario.service';
 
 
 @Injectable({
@@ -13,9 +13,20 @@ import { FavoriteResp, RemoveProductResp } from '../../interfaces/product.interf
 })
 export class ProductService extends Service{
 
-  constructor(protected http: HttpClient) {
+  constructor(
+    protected http: HttpClient,
+    protected userService: UsuarioService,
+  ){
     super(http);
   }
+
+  private idUser: number;
+
+  private setIdUser() {
+    this.idUser = this.userService.getIdUser();
+
+  }
+
 
   // Products By Store
   public getProductsByStore( idStore: number, page: number = 1, filter?: FilterProductResp ): Observable<ProductsResponse> {
@@ -32,17 +43,22 @@ export class ProductService extends Service{
     return this.execQuery<Product>(`stores/${idStore}/products/${idProduct}`);
   }
 
+  // Como estos métodos utilizan el idUser, luego de probar con payment-process, aplicare aquí
+  // la manera de trabajar con idUser
   // Favorite oF the user - Need to be log in
-  public addProductToFavorite(idUser: number, idProduct: number) {
-    return this.postQuery(`consumers/${idUser}/products/${idProduct}/favorites`, {});
+  public addProductToFavorite( idProduct: number ): Observable<AddFavoriteProductResp> {
+    this.setIdUser();
+    return this.postQuery<AddFavoriteProductResp>(`consumers/${this.idUser}/products/${idProduct}/favorites`, {});
   }
 
-  public removeProductFromFavorite(idUser: number, idProduct: number): Observable<RemoveProductResp>{
-    return this.DeleteQuery<RemoveProductResp>(`consumers/${idUser}/products/${idProduct}/favorites`);
+  public removeProductFromFavorite(idProduct: number): Observable<RemoveFavoriteProductResp>{
+    this.setIdUser();
+    return this.DeleteQuery<RemoveFavoriteProductResp>(`consumers/${this.idUser}/products/${idProduct}/favorites`);
   }
 
-  public getFavoriteProducts( idUser: number ): Observable<FavoriteResp> {
-    return this.execQuery<FavoriteResp>(`consumers/${idUser}/favorites`);
+  public getFavoriteProducts(): Observable<FavoriteResp> {
+    this.setIdUser();
+    return this.execQuery<FavoriteResp>(`consumers/${this.idUser}/favorites`);
   }
 
 }

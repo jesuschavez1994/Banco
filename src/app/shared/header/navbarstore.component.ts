@@ -58,8 +58,8 @@ export class NavbarstoreComponent implements OnInit {
     private dropdownIconComp: DropdownIconComponent,
     private productService: ProductService,
 
-  ) {
-   }
+  ){
+  }
 
   ngOnInit() {
 
@@ -74,6 +74,45 @@ export class NavbarstoreComponent implements OnInit {
     });
 
     this.loadProductCart();
+
+    this.productService.addProductToFavorite( 3 ).subscribe(
+      resp => {
+        console.log('addProductToFavorite');
+        console.log(resp);
+
+        if (resp) {
+
+          if (resp.created) {
+
+            if (!resp.created) {
+              this.toastRef.open(
+                'Producto no agregado a favoritos',
+                { color: '#ffffff', background: '#900909c2'}
+              );
+            }
+
+          }else if (resp.message) {
+
+            if ( resp.message === 'ya existe como favorito' ) {
+              this.toastRef.open(
+                'Producto existe como favorito',
+                { color: '#ffffff', background: '#900909c2'}
+              );
+            }
+
+          }
+
+
+        }
+
+      },
+      error => {
+        this.toastRef.open(
+          'Producto no agregado a favoritos',
+          { color: '#ffffff', background: '#900909c2'}
+        );
+      }
+    );
 
     this.loadFavoriteList();
 
@@ -140,10 +179,10 @@ export class NavbarstoreComponent implements OnInit {
   }
 
   public loadFavoriteList() {
-    this.productService.getFavoriteProducts(2).subscribe(
+    this.productService.getFavoriteProducts().subscribe(
       resp => {
-        console.log('loadFavoriteList');
-        console.log(resp);
+        // console.log('loadFavoriteList');
+        // console.log(resp);
         this.menuOptionsFavorite = this.dropdownIconComp.loadOptionsWithFavoriteProductResp(resp);
 
       }
@@ -151,8 +190,6 @@ export class NavbarstoreComponent implements OnInit {
   }
 
   public deleteProductFromFavorite(data) {
-
-    const idUser = data.option.data.idUser;
     const idProductFav = data.option.data.productFavorite.id;
 
     // console.log('idUser');
@@ -161,12 +198,12 @@ export class NavbarstoreComponent implements OnInit {
     // console.log('idProductFav');
     // console.log(idProductFav);
 
-    this.productService.removeProductFromFavorite(idUser, idProductFav).subscribe(
+    this.productService.removeProductFromFavorite(idProductFav).subscribe(
       resp => {
 
         if (resp.deleted) {
 
-          this.productService.getFavoriteProducts(2).subscribe(
+          this.productService.getFavoriteProducts().subscribe(
             favoriteProduct => {
 
               this.menuOptionsFavorite = this.dropdownIconComp.loadOptionsWithFavoriteProductResp(favoriteProduct);
@@ -188,6 +225,7 @@ export class NavbarstoreComponent implements OnInit {
         );
       }
     );
+
   }
 
 }

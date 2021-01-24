@@ -227,8 +227,11 @@ export interface Pivot {
   product_id: number;
 }
 
-export interface RemoveProductResp {
+export interface RemoveFavoriteProductResp {
   deleted: boolean;
 }
 
-
+export interface AddFavoriteProductResp {
+  created: boolean;
+  message: string;
+}

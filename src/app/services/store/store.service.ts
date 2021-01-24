@@ -44,21 +44,6 @@ export class StoreService extends Service{
     this.cargarStorage();
   }
 
-  // private postQuery<T>(query: string, data: any){
-  //   query = URL_SERVICIOS + query;
-  //   return this.http.post<T>( query, data );
-  // }
-
-  // private execQuery<T>( query: string ) {
-  //   query = URL_SERVICIOS + query;
-  //   return this.http.get<T>( query );
-  // }
-
-  // private DeleteQuery<T>( query: string ) {
-  //   query = URL_SERVICIOS + query;
-  //   return this.http.delete<T>( query );
-  // }
-
   cargarStorage() {
 
     if ( localStorage.getItem('token')) {

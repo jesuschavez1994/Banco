@@ -7,45 +7,41 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { tokenName } from '@angular/compiler';
 import swal from 'sweetalert';
+import { Service } from '../service.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
+export class UsuarioService extends Service {
 
   usuario: Usuario;
   token: string;
   google: any;
 
-  private postQuery<T>(query: string, data: any){
-    query = URL_SERVICIOS + query;
-    return this.http.post<T>( query, data );
-  }
-
-  private execQuery<T>( query: string ) {
-    query = URL_SERVICIOS + query;
-    return this.http.get<T>( query );
-  }
+  private useApiUrl = false;
 
   constructor(
-    public http: HttpClient
-  ) {
+    protected http: HttpClient
+  ){
+    super(http);
   }
 
   // tslint:disable-next-line: variable-name
   loginGoogle( nombre: string, email: string, user_id: string, img: string ){
-    const url = '/api/login/google/callback';
-    return this.postQuery(url, { nombre, email, user_id, img} );
+
+    return this.postQuery('login/google/callback', { nombre, email, user_id, img});
   }
 
   RegisterGoogle( name: string, email: string, role: string ){
-    const url = '/api/signup/google';
-    return this.postQuery(url, { name, email, role} ).subscribe( resp => {
+
+    return this.postQuery('signup/google', { name, email, role} ).subscribe( resp => {
+
       this.google = resp;
       console.log('Respuesta desde Google', this.google);
       console.log(this.google);
       this.guardarStorageGoogle(this.google, this.google.user.email, this.google.user.id, this.google.remember_token);
       window.location.href = '#/rut-store';
+
     }, err => {
        swal({
         text: err.error.message,
@@ -81,7 +77,7 @@ export class UsuarioService {
 
   login(usuario: Usuario, recordar: boolean = false){
 
-    const url = '/api/login';
+    const url = 'login';
 
     if ( recordar ) {
       localStorage.setItem('email', usuario.email );
@@ -93,14 +89,13 @@ export class UsuarioService {
   }
 
   crearUsuario( usuario: Usuario ) {
-    const url = URL_SERVICIOS + '/usuario';
-    return this.http.post( url, usuario )
-    ;
+    const url = '/usuario';
+    // return this.http.post( url, usuario );
+    return this.postQuery(url, usuario, this.useApiUrl);
   }
 
   subirArchivo( archivo: any, userId: string, ){
-    const url = `/api/users/${userId}/images`;
-    return this.postQuery( url, archivo);
+    return this.postQuery( `users/${userId}/images`, archivo );
   }
 
   cambiarImagen( archivo: any, userId: string ) {
@@ -108,8 +103,22 @@ export class UsuarioService {
   }
 
   datosUserImages(userId: string){
-    const query = `/api/users/${userId}/images`;
-    return this.execQuery(query);
+    return this.execQuery(`users/${userId}/images`);
+  }
+
+  //
+  public getIdUser(): number | null {
+
+    if ( localStorage.getItem('token') && localStorage.getItem('id') ){
+
+      // tslint:disable-next-line: radix
+      return parseInt(localStorage.getItem('id'));
+
+    } else {
+      return null;
+
+    }
+
   }
 
 }
