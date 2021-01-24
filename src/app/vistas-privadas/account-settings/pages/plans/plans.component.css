@@ -29,7 +29,8 @@
 
 .plans-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-around;
   position: relative;
   width: 100%;
 }
@@ -42,4 +43,16 @@
 .payment-details-container {
   display: flex;
   position: relative;
+}
+
+/* -------- Responsive media queries -------------- */
+@media (max-width: 980px) {
+  .description {
+    font-size: 0.8em;
+  }
+
+  .plans-container {
+    flex-direction: column;
+    align-items: center;
+  }
 }
