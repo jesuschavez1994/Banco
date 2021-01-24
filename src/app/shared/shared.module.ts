@@ -20,8 +20,28 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { RouterModule } from '@angular/router';
 import { SpinnerComponent } from './spinner/spinner/spinner.component';
 import { CheckInternetConnectionComponent } from './check-internet-connection/check-internet-connection.component';
+import { PublicNavbarComponent } from './public-navbar/public-navbar.component';
+import { NavBrandComponent } from './public-navbar/nav-brand/nav-brand.component';
+import { CategoryLinkComponent } from './public-navbar/category-link/category-link.component';
+import { ButtonShopComponent } from './public-navbar/button-shop/button-shop.component';
+import { ButtonUserSettingsComponent } from './public-navbar/button-user-settings/button-user-settings.component';
+import { ButtonSignInComponent } from './public-navbar/button-sign-in/button-sign-in.component';
+import { ButtonLoginComponent } from './public-navbar/button-login/button-login.component';
+import { AvatarComponent } from './public-navbar/avatar/avatar.component';
+import { NavOptionsComponent } from './public-navbar/nav-options/nav-options.component';
+import { SearchComponent } from './public-navbar/search/search.component';
+import { SidebarHomeComponent } from './sidebar-home/sidebar-home.component';
+import { SliderComponent } from './slider/slider.component';
+import { ModalErrComponent } from './modal-err/modal-err.component';
+
+// Angular Material //
+import { MaterialModule } from '../Angula-Material/material.module';
 
 @NgModule({
+  entryComponents: [
+    ModalErrComponent
+  ],
+
     declarations: [
       NavbarComponent,
       NavbarToHomeComponent,
@@ -39,15 +59,30 @@ import { CheckInternetConnectionComponent } from './check-internet-connection/ch
       QuantityCounterComponent,
       SpinnerComponent,
       CheckInternetConnectionComponent,
-
+      PublicNavbarComponent,
+      NavBrandComponent,
+      CategoryLinkComponent,
+      ButtonShopComponent,
+      ButtonUserSettingsComponent,
+      ButtonSignInComponent,
+      ButtonLoginComponent,
+      AvatarComponent,
+      NavOptionsComponent,
+      SearchComponent,
+      SidebarHomeComponent,
+      SliderComponent,
+      ModalErrComponent,
     ],
+
     imports: [
       // APP_ROUTING,
       RouterModule,
       PipesModule,
       CommonModule,
       NgxPaginationModule,
+      MaterialModule
     ],
+
     exports: [
       NavbarComponent, NavbarToHomeComponent,
       CategoriasComponent, NavbarstoreComponent,
@@ -56,7 +91,11 @@ import { CheckInternetConnectionComponent } from './check-internet-connection/ch
       BannerComponent, ProductsCardsComponent,
       SearchBarComponent, ImagePreviewGalleryComponent,
       ProductDetailComponent, QuantityCounterComponent,
-      SpinnerComponent, CheckInternetConnectionComponent
+      SpinnerComponent, CheckInternetConnectionComponent,
+      PublicNavbarComponent, NavBrandComponent,
+      CategoryLinkComponent, SearchComponent,
+      ButtonShopComponent, NavOptionsComponent,
+      SidebarHomeComponent, SliderComponent,
     ]
 })
 

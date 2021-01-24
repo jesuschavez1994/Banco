@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsuarioService } from './usuario/usuario.service';
-import { ServicioService } from './servicio.service';
 import { LoginGuardGuard } from './guards/login-guard.guard';
 import { StoreService } from './store/store.service';
 import { UserStoreService } from './user-store/user-store.service';
@@ -16,7 +15,6 @@ import { SincronizacionService } from './sincronizacion/sincronizacion.service';
   providers: [
     UsuarioService,
     StoreService,
-    ServicioService,
     LoginGuardGuard,
     UserStoreService,
     InterceptorService,

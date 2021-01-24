@@ -1,0 +1,34 @@
+<div class="main-container">
+
+    <main>
+
+        <header class="cty-header-main pointer">
+            <h1 class="cty-title">Categorías</h1>
+        </header>
+
+        <section class="d-container">
+            <article id="categorys-ls" role="tablist" aria-multiselectable="true">
+                <section class="category-description animated" *ngFor="let cat of boxCategory; let ind = index">
+                    <header class=" cty-header" role="tab" id="section1HeaderId{{ind}}">
+                        <h3 class="cty-title">
+                            <a class="span" data-toggle="collapse" data-parent="#categorys-ls" href="#section1ContentId{{ind}}" aria-expanded="true" [attr.aria-controls]="'section1ContentId'+ind">
+                        {{cat.name}}
+                        </a>
+                        </h3>
+                    </header>
+                    <nav id="section1ContentId{{ind}}" class="collapse in list-items" role="tabpanel" [attr.aria-labelledby]="'section1HeaderId'+ind">
+                        <ol>
+                            <li class=" item subcategory" id="index" *ngFor="let subcat of cat.subcategories;let indx = index ">
+                                <a (click)="showProducts(ind, indx)" class="subcategory-l">{{subcat.name}}</a>
+                            </li>
+                        </ol>
+                    </nav>
+                </section>
+            </article>
+        </section>
+    </main>
+
+</div>
+<ngx-spinner bdColor="rgb(255,255,255)" size="large" color="#f19301" type="ball-atom">
+    <p style="color: black"> Cargando </p>
+</ngx-spinner>

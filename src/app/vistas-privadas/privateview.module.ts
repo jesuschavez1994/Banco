@@ -108,7 +108,7 @@ import { SearchComponent } from './sincronizacion/components/search/search.compo
 import { DesincronizarComponent } from './sincronizacion/components/desincronizar/desincronizar.component';
 import { AsideFiltrosComponent } from './shared/aside-filtros/aside-filtros.component';
 import { CarouselSuggestedComponent } from './sincronizacion/pages/suggested-products/container/carousel-suggested/carousel-suggested.component';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppRoutingModule } from '../app-routing.module';
 import { CatalogoBankProductComponent } from './Admin/pages/container/catalogo-bank-product/catalogo-bank-product.component';
 import { EditProductBankComponent } from './Admin/pages/container/edit-product-bank/edit-product-bank.component';
@@ -256,5 +256,4 @@ import { ProgessBarFileExcelComponent } from './sincronizacion/pages/exportar-li
   })
 
 
-  
   export class PrivateviewModule { }

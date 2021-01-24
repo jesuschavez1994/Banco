@@ -1,0 +1,7 @@
+<app-public-navbar [userLog]="userLog"></app-public-navbar>
+<main class="page">
+    <app-sidebar-home [auth]="userLog"></app-sidebar-home>
+    <section class="cont">
+        <router-outlet></router-outlet>
+    </section>
+</main>
