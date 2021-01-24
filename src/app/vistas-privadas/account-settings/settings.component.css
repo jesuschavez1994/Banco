@@ -11,8 +11,13 @@
   scroll-behavior: smooth;
 }
 
-.container {
+/* 
+  Wrapper del contenido que se muestre en el "router-outlet".
+  Se debe modificar la propiedad "padding" y reducirlo para pantallas pequeñas.
+*/
+.content-wrapper {
   margin-top: 90px;
+  padding: 0px 240px 0px 15px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: auto 50px auto;
