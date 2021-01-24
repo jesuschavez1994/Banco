@@ -1,0 +1,36 @@
+<div class="search-engine" [ngClass]="{'search-engine--wrap': buttonSidebarList}">
+
+  <ng-container *ngIf="buttonSidebarList">
+
+    <div class="btn-toogle-sidebar-list">
+      <app-sidebar-list-button
+        [expand]="isExpanded"
+        (isExpanded)="toggleSidebarList($event)"
+      >
+      </app-sidebar-list-button>
+    </div>
+
+  </ng-container>
+
+  <div class="searcher">
+    <i><img src="assets/img/icons/loupe.svg"></i>
+    <input
+    [value]="preloadedValue"
+    #searchInput
+    type="search"
+    placeholder="Busca un producto en esta tienda">
+  </div>
+
+  <div class="filter">
+
+    <select #selectFilter >
+
+      <ng-container *ngFor="let option of filterOptions">
+        <option [value]="option.value">{{option.label}}</option>
+      </ng-container>
+
+    </select>
+
+  </div>
+
+</div>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
@@ -13,7 +13,6 @@ import { MapaComponent } from './components/mapa/mapa.component';
 import { MapEditarComponent } from './components/map-editar/map-editar.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { PipesModule } from '@pipes/pipes.module';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // ANGULAR MATERIAL //
@@ -70,8 +69,54 @@ import { MinimaLight, MinimaDark } from '@alyle/ui/themes/minima';
 import { ProductLoadComponent } from './components/product-load/product-load/product-load.component';
 import { ViewProductsLoadsComponent } from './components/view-products-loads/view-products-loads.component';
 import { AccountComponent } from './account/account.component';
-import { ROUTING_VIEW_STORE } from './view.routes';
 import { ProductLoadingSmartComponent } from './product-loading/container/product-loading-smart/product-loading-smart.component';
+import { LoadProductComponent } from './LoadProduct/load-product/load-product.component';
+import { ModalAddCategoriasAndSubcategoriasComponent } from './product-loading/container/modals/modal-add-categorias-and-subcategorias/modal-add-categorias-and-subcategorias.component';
+// tslint:disable-next-line: max-line-length
+import { ModalDeleteProductComponent } from './components/view-products-loads/container/modal-delete-product/modal-delete-product.component';
+import { NavbarSincronizacionComponent } from './shared/navbar-sincronizacion/navbar-sincronizacion.component';
+import { ExportarListaExcelComponent } from './sincronizacion/pages/exportar-lista-excel/exportar-lista-excel.component';
+import { SuggestedProductsComponent } from './sincronizacion/pages/suggested-products/suggested-products.component';
+import { SincronizacionViewsComponent } from './sincronizacion/components/sincronizacion-views/sincronizacion-views.component';
+import { ItemsSuggestedProductsComponent } from './sincronizacion/pages/suggested-products/container/items-suggested-products/items-suggested-products.component';
+import { NoSuggestedProductsComponent } from './sincronizacion/pages/suggested-products/container/no-suggested-products/no-suggested-products.component';
+import { SynchronizedProductsComponent } from './sincronizacion/pages/synchronized-products/synchronized-products.component';
+import { NoSynchronizedProductsComponent } from './sincronizacion/pages/synchronized-products/container/no-synchronized-products/no-synchronized-products.component';
+import { SpreadSheetsModule } from '@grapecity/spread-sheets-angular';
+import { TableComponent } from './sincronizacion/pages/exportar-lista-excel/container/table/table.component';
+import { SynchronizedProductsTableComponent } from './sincronizacion/pages/synchronized-products/container/synchronized-products-table/synchronized-products-table.component';
+import { DialogSynchronizedComponent } from './sincronizacion/pages/synchronized-products/container/dialog-synchronized/dialog-synchronized.component';
+import { TableroDeSincronizacionComponent } from './sincronizacion/pages/synchronized-products/container/tablero-de-sincronizacion/tablero-de-sincronizacion.component';
+import { BankProductComponent } from './sincronizacion/pages/bank-product/bank-product.component';
+import { ItemListProductComponent } from './sincronizacion/pages/bank-product/container/item-list-product/item-list-product.component';
+
+// CARRUSEL //
+
+import { LoadBanckProductComponent } from './Admin/pages/load-banck-product/load-banck-product.component';
+import { FormBanckProductAdminComponent } from './Admin/pages/load-banck-product/container/form-banck-product-admin/form-banck-product-admin.component';
+import { FormBanckProductSyncComponent } from './sincronizacion/components/form-banck-product-sync/form-banck-product-sync.component';
+import { EditProdutcComponent } from './components/edit-produtc/edit-produtc.component';
+import { EditSincronizacionComponent } from './sincronizacion/components/edit-sincronizacion/edit-sincronizacion.component';
+import { EditProductNoDisponibleComponent } from './components/edit-product-no-disponible/edit-product-no-disponible.component';
+import { SearchComponent } from './sincronizacion/components/search/search.component';
+import { DesincronizarComponent } from './sincronizacion/components/desincronizar/desincronizar.component';
+import { AsideFiltrosComponent } from './shared/aside-filtros/aside-filtros.component';
+import { CarouselSuggestedComponent } from './sincronizacion/pages/suggested-products/container/carousel-suggested/carousel-suggested.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { AppRoutingModule } from '../app-routing.module';
+import { CatalogoBankProductComponent } from './Admin/pages/container/catalogo-bank-product/catalogo-bank-product.component';
+import { EditProductBankComponent } from './Admin/pages/container/edit-product-bank/edit-product-bank.component';
+import { ProductsCardsStoreComponent } from './shared/products-cards-store/products-cards-store/products-cards-store.component';
+import { SearchStoreComponent } from './sincronizacion/components/search/container/search-store/search-store.component';
+import { BannerEditComponent } from './shared/banner-edit/banner-edit.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { CropperImgBannerComponent } from './shared/banner-edit/container/cropper-img-banner/cropper-img-banner.component';
+import { ErrorFailedMessageComponent } from './shared/banner-edit/container/error-failed-message/error-failed-message.component';
+import { ProgressBarComponent } from './shared/banner-edit/container/progress-bar/progress-bar.component';
+import { DropZoneComponent } from './shared/banner-edit/container/drop-zone/drop-zone.component';
+import { DragDropZoneFileComponent } from './sincronizacion/pages/exportar-lista-excel/container/drag-drop-zone-file/drag-drop-zone-file.component';
+import { SizeFileComponent } from './sincronizacion/pages/exportar-lista-excel/container/size-file/size-file.component';
+import { ProgessBarFileExcelComponent } from './sincronizacion/pages/exportar-lista-excel/container/progess-bar-file-excel/progess-bar-file-excel.component';
 
 /* Account settings components imports */
 import { SettingsComponent } from './account-settings/settings.component';
@@ -86,6 +131,7 @@ import { RedirectionModalComponent } from './account-settings/pages/plans/compon
   entryComponents: [
     MapEditarComponent,
     ContactDescriptionEditComponent,
+    ModalAddCategoriasAndSubcategoriasComponent,
     RedirectionModalComponent,
   ],
   // tslint:disable-next-line: max-line-length
@@ -115,17 +161,58 @@ import { RedirectionModalComponent } from './account-settings/pages/plans/compon
     MyStoreComponent,
     ViewProductsLoadsComponent,
     ProductLoadingSmartComponent,
-    SettingsComponent,
+    LoadProductComponent,
+    ModalAddCategoriasAndSubcategoriasComponent,
+    ModalDeleteProductComponent,
+    NavbarSincronizacionComponent,
+    ExportarListaExcelComponent,
+    SuggestedProductsComponent,
+    SincronizacionViewsComponent,
+    ItemsSuggestedProductsComponent,
+    NoSuggestedProductsComponent,
+    SynchronizedProductsComponent,
+    NoSynchronizedProductsComponent,
+    TableComponent,
+    SynchronizedProductsTableComponent,
+    DialogSynchronizedComponent,
+    TableroDeSincronizacionComponent,
+    BankProductComponent,
+    ItemListProductComponent,
+    LoadBanckProductComponent,
+    FormBanckProductAdminComponent,
+    FormBanckProductSyncComponent,
+    EditProdutcComponent,
+    EditSincronizacionComponent,
+    EditProductNoDisponibleComponent,
+    SearchComponent,
+    DesincronizarComponent,
+    AsideFiltrosComponent,
+    CarouselSuggestedComponent,
+    CatalogoBankProductComponent,
+    EditProductBankComponent,
+    ProductsCardsStoreComponent,
+    SearchStoreComponent,
+    BannerEditComponent,
+    CropperImgBannerComponent,
+    ErrorFailedMessageComponent,
+    ProgressBarComponent,
+    DropZoneComponent,
+    DragDropZoneFileComponent,
+    SizeFileComponent,
+    ProgessBarFileExcelComponent,
     SidebarComponent,
+    SettingsComponent,
     PlanCardComponent,
     PlanDetailsComponent,
     PaymentDetailsComponent,
     PlansComponent,
-    RedirectionModalComponent,
   ],
 
   imports: [
     CommonModule,
+    NgxDropzoneModule,
+    AppRoutingModule,
+    SpreadSheetsModule,
     MaterialModule,
     NgxPaginationModule,
     SharedModule,
@@ -140,8 +227,6 @@ import { RedirectionModalComponent } from './account-settings/pages/plans/compon
     // END MODULOS Alyle //
     HammerModule,
     ComponentsModule,
-    APP_ROUTING,
-    ROUTING_VIEW_STORE,
     NzTimePickerModule,
     FormsModule,
     ReactiveFormsModule,
@@ -149,12 +234,20 @@ import { RedirectionModalComponent } from './account-settings/pages/plans/compon
       apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14',
     }),
     NgbModule,
+    NgxSpinnerModule,
   ],
 
   exports: [
     PhotoUserEditComponent,
+    SearchComponent,
     PhotoUserComponent,
     CardShimmerFormConfigurationComponent,
+    ModalAddCategoriasAndSubcategoriasComponent,
+    NavbarSincronizacionComponent,
+    TableComponent,
+    SynchronizedProductsTableComponent,
+    TableroDeSincronizacionComponent,
+    SearchStoreComponent,
   ],
 
   providers: [

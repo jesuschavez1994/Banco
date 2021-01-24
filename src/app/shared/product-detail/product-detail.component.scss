@@ -1,0 +1,130 @@
+@import 'src/assets/scss/style.scss';
+
+.product-detail{
+  border-bottom: 2px solid $color__border-gray--medium;
+  margin-bottom: 33px;
+  padding-right: 29px;
+  padding-bottom: 23px;
+
+  display: flex;
+  justify-content: flex-end;
+
+  .main-img{
+    width: 40.5%;
+    margin-right: 36px;
+  }
+
+  .content{
+    width: 56%;
+
+    .name{
+      font-size: 19px;
+      font-weight: 500;
+      line-height: 25px;
+      margin-bottom: 23px;
+    }
+
+    .description{
+      color: $color__text-gray--dark;
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    .shopping-cart{
+      margin-top: 30px;
+
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+
+      .cost{
+        font-size: 29px;
+        font-weight: 600;
+
+        margin-bottom: 18px;
+        margin-top: 0px;
+      }
+
+      .btn-add-to-cart{
+        background: $color__background-gray;
+        border: 2px solid $color__border-gray--dark;
+        border-radius: 0px;
+        font-size: $font__size--small + 1;
+        font-weight: bold;
+
+        margin-bottom: 18px;
+        padding: 6px 40px;
+        transition: all .3s;
+
+
+        &:hover{
+          background: $color__background-gray--dark;
+          color: $color__text-white;
+        }
+
+      }
+
+    }
+  }
+
+}
+
+@media screen and (max-width: 480px){
+
+  .product-detail{
+
+    .content{
+
+      .shopping-cart{
+
+        .cost{
+          margin: auto;
+          margin-bottom: 18px;
+        }
+
+        .quantity {
+          margin: auto;
+          margin-bottom: 18px;
+        }
+
+        .btn-add-to-cart{
+          margin: auto;
+          margin-bottom: 18px;
+        }
+
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 999px){
+
+  .product-detail{
+    flex-direction: column;
+    justify-content: center !important;
+    padding-right: 0px !important;
+
+    .main-img{
+      width: 100%;
+      margin-right: 0px;
+
+    }
+
+    .content{
+      width: 100% !important;
+
+      .name{
+        text-align: justify;
+      }
+
+      .description{
+        text-align: justify;
+      }
+
+    }
+
+  }
+
+}

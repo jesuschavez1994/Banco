@@ -1,11 +1,12 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { CommonModule } from '@angular/common';
 // Servicios //
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 // Rutas //
 import { APP_ROUTING } from './app.routes';
 
@@ -37,19 +38,47 @@ import { ca_ES } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import ca from '@angular/common/locales/ca';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
+
+// HAmmerjs //
+
+// particular imports for hammer
+import * as Hammer from 'hammerjs';
+import {
+  HammerModule,
+  HammerGestureConfig,
+  HAMMER_GESTURE_CONFIG,
+} from '@angular/platform-browser';
 
 registerLocaleData(ca);
+
+@Injectable()
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = {
+    swipe: { direction: Hammer.DIRECTION_ALL },
+  } as any;
+}
+
+// Check Modue conecction to internet //
+import {
+  ConnectionServiceModule,
+  ConnectionServiceOptions,
+  ConnectionServiceOptionsToken,
+} from 'ngx-connection-service';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     ImageCropperModule,
-    AppRoutingModule,
+    // AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     PipesModule,
+    ConnectionServiceModule,
     APP_ROUTING,
+    RouterModule,
     PagesModule,
     SharedModule,
     ServiceModule,
@@ -59,6 +88,7 @@ registerLocaleData(ca);
     ReactiveFormsModule,
     FormsModule,
     LoginModule,
+    HammerModule,
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -69,7 +99,29 @@ registerLocaleData(ca);
     }),
     NgbModule,
   ],
-  providers: [Title, { provide: NZ_I18N, useValue: ca_ES }],
+
+  providers: [
+    Title,
+    { provide: NZ_I18N, useValue: ca_ES },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true,
+    },
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig,
+    },
+    {
+      provide: ConnectionServiceOptionsToken,
+      useValue: {
+        enableHeartbeat: false,
+        heartbeatUrl: '/assets/ping.json',
+        requestMethod: 'get',
+        heartbeatInterval: 3000,
+      } as ConnectionServiceOptions,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

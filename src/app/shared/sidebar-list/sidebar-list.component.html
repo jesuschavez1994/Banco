@@ -1,0 +1,292 @@
+
+<aside class="aside"
+  #sidebarList
+  [ngClass]="{'aside--expanded': isExpanded}">
+
+  <div class="btn-toogle">
+
+    <app-sidebar-list-button
+      [expand]="isExpanded"
+      (isExpanded)="toggleSidebarList($event)"
+      class="btn-toogle"
+    >
+    </app-sidebar-list-button>
+
+  </div>
+
+  <div class="business-info">
+
+    <div class="business-perfil">
+
+      <div class="profile-img">
+        <img
+          [src]="profile.img | imgFallback"
+          onerror="if (this.src != 'assets/img/no-image-banner.jpg') this.src = 'assets/img/no-image-banner.jpg';"
+          alt="medicalback"
+        >
+      </div>
+
+      <div class="profile-data">
+
+        <h2 class="name">
+
+          {{profile.name}}
+
+          <ng-container *ngIf="profile.isVerified">
+            <span class="simbol-verifiqued">
+              <img
+                [src]="'assets/img/no-image-banner.jpg' | imgFallback"
+                alt="cuenta verificada"
+                onerror="if (this.src != 'assets/img/no-image-banner.jpg') this.src = 'assets/img/no-image-banner.jpg';"
+              >
+            </span>
+          </ng-container>
+
+        </h2>
+
+        <div class="instagram">
+          <!-- <a [href]="profile.instagram.url"> -->
+            {{profile.instagram.name}}
+          <!-- </a> -->
+        </div>
+
+      </div>
+
+    </div>
+
+    <ul class="options">
+
+      <li
+        [routerLink]="anchorsMenu.productLink"
+        #productsOptionMenu
+      >
+        <a>productos</a>
+      </li>
+
+      <li
+        [routerLink]="anchorsMenu.contactLink"
+        #contactoOptionMenu
+      >
+        <a>contacto</a>
+      </li>
+
+    </ul>
+
+  </div>
+
+  <nav class="menu">
+
+    <!-- Categorias -->
+    <ng-container *ngIf="categories">
+
+      <ul class="list">
+
+        <h4 class="title">
+          Categorías
+        </h4>
+
+        <ng-container *ngFor="let category of categories">
+
+          <li
+
+            class="category"
+            (click)="selectCategory(category)"
+            [ngClass]="{'active': category.name == categorySelected.name}"
+          >
+            <a>{{category.name}}</a>
+          </li>
+        </ng-container>
+
+      </ul>
+
+    </ng-container>
+
+    <!-- SubCategorias -->
+    <ng-container *ngIf="currentCategory.subcategories">
+
+      <ul class="list">
+
+        <h4 class="title">
+            Subcategorías
+        </h4>
+
+        <ng-container *ngFor="let subcategory of currentCategory.subcategories">
+
+          <div (click)="selectSubCategories(subcategory)">
+
+            <li class="subCategory">
+
+              <input type="checkbox"
+                class="subCategory-input"
+                [id]="subcategory.id"
+                [name]="subcategory.id"
+                [checked]="subCategoriesSelected.indexOf(subcategory.name)  !== -1"
+              >
+
+              <label
+                [for]="subcategory.id"
+                >
+
+                <a>{{subcategory.name}}</a>
+
+              </label>
+
+            </li>
+
+          </div>
+
+        </ng-container>
+
+      </ul>
+
+    </ng-container>
+
+
+    <!-- precios -->
+    <ng-container *ngIf="priceRanges">
+
+      <ul class="list">
+        <h4 class="title">
+            Precios
+        </h4>
+
+        <ng-container *ngFor="let range of priceRanges; index as inx">
+
+          <div (click)="selectPriceRange(range)">
+            <li>
+
+              <input type="radio"
+                class="input--rango"
+                id="rango-{{inx}}"
+                name="rangos"
+                [checked]="range.id === priceRangesSelected.id"
+              >
+
+              <label for="rango-{{inx}}">
+                  <a>
+                    {{range.min | currency: 'USD' : 'symbol' : '1.0-0'}} -
+                    {{range.max | currency: 'USD' : 'symbol' : '1.0-0'}} ({{range.totalFounds}})
+                  </a>
+              </label>
+
+            </li>
+
+          </div>
+
+        </ng-container>
+
+      </ul>
+
+    </ng-container>
+
+    <!-- fabricantes -->
+    <ng-container *ngIf="factories">
+      <ul class="list">
+        <h4 class="title">
+          fabricantes
+        </h4>
+
+        <ng-container *ngFor="let factory of factories; index as inx">
+
+          <div (click)="selectOptionsFilter(factory.name, 'factoriesSelected', 'fabricantes')">
+
+            <li>
+
+              <input type="checkbox"
+                id="factory-{{inx}}"
+                name="factory-{{inx}}"
+                [checked]="factoriesSelected.indexOf(factory.name)  !== -1"
+              >
+
+              <label for="factory-{{inx}}">
+                <a>
+                  {{factory.name}} ({{factory.totalFounds}})
+                </a>
+              </label>
+
+            </li>
+
+          </div>
+
+        </ng-container>
+
+      </ul>
+    </ng-container>
+
+    <!-- Delivery -->
+    <ng-container *ngIf="delivery">
+
+      <ul class="list">
+
+        <h4 class="title">
+          delivery
+        </h4>
+
+        <ng-container *ngFor="let delivery of delivery; index as inx">
+
+          <div (click)="selectOptionsFilter(delivery.name, 'deliverySelected', 'delivery', true)">
+
+            <li>
+
+              <input type="radio"
+                id="delivery-{{inx}}"
+                name="delivery-option"
+                [checked]="deliverySelected.indexOf(delivery.name)  !== -1"
+              >
+
+              <label for="delivery-{{inx}}">
+                <a>
+                  {{delivery.name}} ({{deliverySelected.indexOf(delivery.name)  !== -1}})
+                </a>
+              </label>
+
+            </li>
+
+          </div>
+
+        </ng-container>
+
+      </ul>
+    </ng-container>
+
+    <!-- marcas -->
+    <ng-container *ngIf="marks">
+      <ul class="list">
+        <h4 class="title">
+          marca
+        </h4>
+
+        <ng-container *ngFor="let mark of marks; index as inx">
+
+          <div (click)="selectOptionsFilter(mark.name, 'marksSelected', 'marcas')">
+
+            <li>
+
+              <input type="checkbox"
+                id="mark-{{inx}}"
+                name="mark-{{inx}}"
+                [checked]="marksSelected.indexOf(mark.name)  !== -1"
+              >
+
+              <label for="mark-{{inx}}">
+                <a>
+                  {{mark.name}} ({{mark.totalFounds}})
+                </a>
+              </label>
+
+            </li>
+
+          </div>
+
+        </ng-container>
+
+      </ul>
+    </ng-container>
+
+
+
+
+  </nav>
+
+
+</aside>

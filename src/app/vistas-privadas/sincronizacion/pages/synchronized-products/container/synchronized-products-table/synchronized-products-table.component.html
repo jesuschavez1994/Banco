@@ -1,0 +1,137 @@
+<!-- ==== SPINNER ======-->
+<!--====================-->
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, .45)">
+  <p style="font-size: 20px; color: white">Cargando...</p>
+</ngx-spinner>
+<!-- ==== END SPINNER ======-->
+<!--====================-->
+
+
+<!--======== SCROLL =========-->
+<!--=========================-->
+
+<span class="ir-arriba icon-arrow-up2" (click)="scrollDown()" *ngIf="!scroll">
+  <i  class="figure material-icons" 
+      name="camera">
+      keyboard_arrow_down
+  </i>
+</span>
+
+<span class="ir-arriba icon-arrow-up2" (click)="scrollTop()" *ngIf="scroll">
+  <i  class="figure material-icons" 
+      name="camera">
+      keyboard_arrow_up
+  </i>
+</span>
+<!--======= END SCROLL ======-->
+<!--=========================-->
+
+<section class="container-fluid mt-5">
+  <div class="row">
+      <div class="col-md-12 display-flex justify-content-space-between">
+          <button 
+                  type="button" 
+                  class="mr-3 family-700">
+                  Desincronizar
+          </button>
+          <app-search (searchEmitter)="handleSearch($event)" class="width-70"></app-search>
+      </div>
+  </div>
+</section>
+
+
+<section class="row">
+    <table class="table table-bordered mt-5">
+      <thead>
+        <tr>
+          <th scope="col" class="family-500">.</th>
+          <th scope="col" class="family-500">Cantidad</th>
+          <th scope="col" class="family-500">Nombre del producto</th>
+          <th scope="col" class="family-500">Marca</th>
+          <th scope="col" class="family-500">Precio</th>
+          <th scope="col" class="family-500">Estatus</th>
+          <th scope="col" class="family-500">Ver</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of itemProductos | paginate: { itemsPerPage: 28, currentPage: page, totalItems: totalPage };
+              let i = index;
+              let par = even;
+              let impar = odd">
+        <tr [ngClass]="{'is-impar':  par, 'is-par': impar }" 
+            *ngIf="item.sincronice === 'sincronizado' || item.sincronice === 'no sincronizado'">
+          <td style="background: white; border: none;">
+            <mat-checkbox   color="primary"
+                            (change)="SynchronizedThis($event, i)"></mat-checkbox>
+          </td>
+          <td class="family-500">
+              {{item.stock}}
+          </td>
+          <td>
+            <div [ngSwitch]="item.sincronice">
+              <div *ngSwitchCase="'sincronizado'">
+                <span class="family-500" *ngIf="item.sync_bank.length > 0">
+                  {{item.sync_bank[0].name}}
+                </span>
+              </div>
+              <div *ngSwitchCase="'no sincronizado'">
+                <span>
+                  {{item.name}}
+                </span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div [ngSwitch]="item.sincronice">
+              <div *ngSwitchCase="'sincronizado'">
+                {{item.marks[0].name}}
+              </div>
+              <div *ngSwitchCase="'no sincronizado'">
+                <span>
+                  Consultar
+                </span>
+              </div>
+            </div>
+          </td>
+          <td class="family-500">
+            {{item.price}}
+          </td>
+          <td>
+            <div [ngSwitch]="item.sincronice">
+              <div *ngSwitchCase="'sincronizado'">
+                <span class="family-700 synchronized">{{item.sincronice}}</span>
+              </div>
+              <div *ngSwitchCase="'no sincronizado'">
+                <span class="family-700 NoSynchronized">NO SINCRONIZADO</span>
+              </div>
+              <!-- <div *ngSwitchDefault>
+                <span class="family-700 NoSynchronized">NO SINCRONIZADO</span>
+              </div> -->
+            </div>
+          </td>
+          <td class="family-500">
+            <div [ngSwitch]="item.sincronice">
+              <div *ngSwitchCase="'sincronizado'">
+                <a  [routerLink]="['/my-store/desincronizar', itemProductos[i].id]" >
+                    ver
+                </a>
+              </div>
+              <div *ngSwitchCase="'no sincronizado'">
+                <a  [routerLink]="['/my-store/sincronizacion/suggested-products-list', itemProductos[i].name, 'list']" >
+                  ver
+                </a>
+              </div>
+            </div>
+            
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</section>
+
+
+<footer *ngIf="showFooterPaginations">
+  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+</footer>
+  
+  

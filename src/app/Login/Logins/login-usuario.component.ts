@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './login-usuario.component.html',
   styleUrls: ['./login-usuario.component.css']
 })
-export class LoginUsuarioComponent implements OnInit, OnDestroy {
+export class LoginUsuarioComponent implements OnInit {
 
   email: string;
   forma: FormGroup;
@@ -42,10 +42,6 @@ export class LoginUsuarioComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.subscription = this.store.select('ui').subscribe( ui => {
-      this.cargando =  ui.isLoading;
-     });
-
     this.email = localStorage.getItem('email') || '';
     if ( this.email.length > 1 ) {
       this.isChecked = true;
@@ -53,17 +49,13 @@ export class LoginUsuarioComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
-  }
+  // ngOnDestroy(){
+  //   this.subscription.unsubscribe();
+  // }
 
   loginRegister(){
 
-  }
-
-  Ingresar() {
-
-    this.store.dispatch( new ActivarLoadingAction() );
+      
 
     // tslint:disable-next-line: prefer-const
     let usuario = new Usuario(
@@ -78,9 +70,35 @@ export class LoginUsuarioComponent implements OnInit, OnDestroy {
       console.log('FFFF', resp);
       this.guardarStorage(resp.remember_token, resp.user.id);
       console.log(resp);
-      this.router.navigate(['/account']);
-      this.store.dispatch( new DesactivarLoadingAction() );
+
+      if (resp.user.role === 'store')
+      {
+        this.router.navigate(['account']);
+      }
+
+      // switch(resp.user.role){
+      //   case 'admin':
+      //   this.router.navigate(['admin']);
+      //   break;
+      //   case 'store':
+      //   this.router.navigate(['account']);
+      //   // window.location.href = '#/account'
+      //   break;
+      // }
+
+      // if (resp.user.role === 'admin')
+      // {
+      //   this.router.navigate(['view-admin']);
+      //   return;
+      // }
+
     });
+
+  }
+
+  Ingresar() {
+
+ 
 
   }
 

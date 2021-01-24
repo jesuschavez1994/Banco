@@ -19,7 +19,7 @@ export class InterceptorService implements HttpInterceptor {
       Accept: 'application/json'
     });
 
-    console.log('Paso el interceptor');
+    // console.log('Paso el interceptor');
 
     const reqClone = req.clone({
       headers

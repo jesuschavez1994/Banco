@@ -1,0 +1,173 @@
+@import 'src/assets/scss/style.scss';
+
+.imgs{
+  width: 100%;
+
+  display: flex;
+
+  .img-option{
+	width: min-content;
+
+    .option{
+      min-width: 29px;
+      min-height: 36px;
+      width: 4.8%;
+      height: 2.6vw;
+      border: 1px solid $color__border-gray--medium;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all .3s;
+      display: flex;
+	  align-items: center;
+	  
+	  div div img{
+		height: 100%; 
+	  }
+
+      img{
+        height: 100%;
+
+      }
+
+      &:hover{
+        filter: brightness(0.9);
+      }
+    }
+  }
+
+  .img-selected{
+    min-width: 255px;
+    min-height: 255px;
+
+    width: 93%;
+    height: 29.6vw;
+
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    img{
+      height: 100%;
+      object-fit: contain;
+      object-position: top;
+    }
+
+    .ngxImageZoomContainer[_ngcontent-cci-c236] {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
+}
+
+
+.image {
+  max-width: 100%;
+  height: 100%;
+	cursor: none;
+
+	a {
+		cursor: none;
+	}
+
+	img {
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+		vertical-align: middle;
+		z-index: 1;
+	}
+}
+
+.zoom {
+	width: 14rem;
+	height: 14rem;
+	background: #fff;
+	border-radius: 50%;
+	position: absolute;
+	// box-shadow: inset 0 0 0 1px #000;
+	pointer-events: none;
+	transition: transform .25s ease, opacity 0s linear .25s, background .25s ease;
+	opacity: 0;
+	transform: scale(0);
+	transform-origin: 50% 50%;
+	overflow: hidden;
+
+	&:before {
+		content: '';
+		position: absolute;
+		margin: auto;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		display: none;
+	}
+
+	&.show {
+		transform: scale(1);
+		opacity: 1;
+		transition: transform .25s ease, opacity 0s linear;
+	}
+
+	&.loading {
+		background: transparent;
+
+		&:before {
+			display: block;
+			animation: loading .5s ease infinite alternate;
+		}
+
+		@keyframes loading {
+			0% {
+				transform: scale(0.1);
+				box-shadow: inset 0 0 0 150px $color__background-orange;
+			}
+			50% {
+				transform: scale(1);
+				box-shadow: inset 0 0 0 140px golf;
+			}
+			100% {
+				box-shadow: inset 0 0 0 0 $color__background-orange;
+			}
+		}
+
+		.zoom-image {
+			opacity: 0;
+		}
+	}
+
+	.zoom-image {
+		position: absolute;
+		left: 0;
+		top: 0;
+		transition: opacity .25s ease;
+	}
+}
+
+@media screen and (max-width: 480px){
+
+  .imgs{
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 20px;
+
+  }
+
+}
+
+@media screen and (max-width: 999px){
+  .imgs{
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    .img-selected{
+      width: min-content;
+    }
+
+  }
+
+}

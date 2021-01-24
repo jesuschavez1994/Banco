@@ -1,0 +1,10 @@
+<div class="breadcrumb">
+
+  <ul>
+    <ng-container *ngFor="let crumb of breadcrumb">
+      <li [routerLink]="crumb.routerLink"><a>{{crumb.title}}</a></li>
+    </ng-container>
+
+  </ul>
+
+</div>

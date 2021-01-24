@@ -11,13 +11,17 @@
                 </li>
                 <li class="family-400 size-16 puntero">
                     <a  routerLinkActive="active" 
-                        [routerLink]="['product-loading']"
+                        [routerLink]="['product-catalogue']"
                         class="pl-3">
                         Productos
                     </a>
                 </li>
                 <li class="family-400 size-16 pb-2 puntero">
-                    <a class="pl-3">Sincronización</a>
+                    <a  class="pl-3"
+                        routerLinkActive="active" 
+                        [routerLink]="['sincronizacion/exportar-lista-excel']">
+                        Sincronización
+                    </a>
                 </li>
                 <li class="family-400 size-16 pb-2 puntero">
                     <a class="pl-3">Ventas</a>

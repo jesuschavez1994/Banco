@@ -1,0 +1,145 @@
+@import 'src/assets/scss/style.scss';
+
+.products-container{
+  display: grid;
+  flex-wrap: wrap;
+  grid-template-columns: auto auto auto auto;
+  padding-top: 4%;
+
+
+  .product{
+    min-width: 221px;
+    width: 16.3vw;
+    cursor: pointer;
+    margin: 0px 10px 80px 10px;
+    transition: all .3s;
+    padding: 13px;
+
+    overflow: hidden;
+
+    &:hover{
+      transform: scale(1.03);
+      background-color:#e6e6e6;
+
+      .img{
+        filter: grayscale(5%) brightness(90%) opacity(100%);
+        -webkit-filter: grayscale(5%) brightness(90%) opacity(100%);
+        -moz-filter: grayscale(5%) brightness(90%) opacity(100%);
+        i{
+          opacity: 1;
+        }
+      }
+
+    }
+
+    .img{
+      width: 100%;
+      min-height: 225px;
+      height: 16.6vw;
+      margin-bottom: 10px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+
+      &:hover{
+        i{
+          opacity: 1;
+        }
+      }
+
+      img{
+        height: 100%;
+        object-position: top;
+        padding: 12px;
+        padding-bottom: 0px;
+        position: absolute;
+      }
+
+      i{
+        color: dimgray;
+        cursor: pointer;
+        font-size: 18px;
+        transition: opacity .3S;
+        position: absolute;
+        right: 0px;
+        z-index: 2;
+        opacity: 0;
+
+        &:hover{
+          color: #F09207;
+        }
+
+        &.fas{
+          font-family: Font Awesome\ 5 Free !important;
+        }
+
+
+      }
+
+      .fa-pencil-alt{
+        top: 10px;
+      }
+
+      .fa-trash-alt{
+        top: 45px;
+      }
+
+      .fa-sync-alt{
+        top: 80px;
+      }
+
+    }
+
+    .name{
+      font-size: $font__size--small;
+      line-height: 14px;
+      word-break: break-word;
+    }
+
+    .descriptions{
+      font-size: $font__size--small;
+      line-height: 14px;
+      word-break: break-word;
+    }
+
+    .cost{
+      font-size: $font__size--head;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: .25em .4em;
+      font-size: 75%;
+      font-weight: 500;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      border-radius: .25rem;
+      transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+  
+    .badge-primary {
+      color: #fff;
+      background-color: #007bff;
+    }
+
+  }
+
+  .my-pagination .ngx-pagination .current::root {
+    background: $color__background-orange;
+  }
+}
+
+
+@media screen and (max-width: 1185px){
+
+  .products-container{
+    display: flex !important;
+    justify-content: space-around;
+
+  }
+
+}

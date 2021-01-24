@@ -1,0 +1,200 @@
+<section class="display-flex mt-5">
+
+    <div class="container-fluid">
+        <div class="row">    
+            <form   [formGroup]="forma"
+                    (ngSubmit)="addProducts()" 
+                    novalidate="novalidate"
+                    class="row width-100 pl-3"
+                    >
+
+                    <section class="col-12 col-sm-12 col-md-4">
+                        <div class="display-flex justify-content-center">
+                            <div  *ngFor="let item of [0, 1, 2, 3]; let i = index">
+                                <figure class="img-box{{i}} ml-1 mr-1" 
+                                        (mouseover)="hover = true" 
+                                        (mouseleave)="hover = false"
+                                        >
+    
+                                        <i  class="figure__icon material-icons" 
+                                            name="camera"
+                                            *ngIf="hover"
+                                            >
+                                            camera_alt
+                                        </i>
+    
+                                        <input  type="file"
+                                                formControlName="input{{i}}"
+                                                (change)="onFileChange($event, i)"
+                                                class="figure__input cursor-poniter"
+                                        />
+    
+                                        <img    [src]="this.File[i].image | boxDefault " 
+                                                style="width: 80px; height: 80px" 
+                                        />
+                                </figure>
+                            </div>
+                        </div>
+
+                        <figure (mouseover)="icon = true" 
+                        (mouseleave)="icon = false">
+
+
+
+                        
+                                        <input  type="file" 
+                                                (change)="onFileChange($event)"
+                                                formControlName="input4"
+                                                class="figure__input cursor-poniter" 
+                                                    
+                                        />
+                                        <img    class="width-95" 
+                                                src="assets/img/box.svg"
+                                                *ngIf="this.forma.value.file.length <= 1"
+                                                    
+                                        >
+                                        <img    class="width-100"
+                                                [src]="this.forma.value.file"
+                                                *ngIf="this.forma.value.file.length > 1"
+                                        >
+                        </figure>
+                 
+                        
+                    </section>
+
+                    
+
+                    <section class="col-12 col-sm-12 col-md-6">
+
+                        <div class="form-group row">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <label class="family-500 size-16">Nombre</label>
+                                <textarea  class="form-control"
+                                        type="text"
+                                        placeholder="Ingresar nombre del producto"
+                                        formControlName="name"
+                                        [ngClass]="{'is-invalid':  (!forma.controls['name'].valid || forma.controls['name'].errors?.minlength)&& forma.controls['name'].touched, 'is-valid': forma.controls['name'].valid }"     
+                                ></textarea>
+
+                                <mat-error    *ngIf="forma.get('name').errors?.required"  
+                                        class="invalid-feedback">
+                                        Ingresa un nombre del producto
+                                </mat-error>
+
+                                <mat-error    *ngIf="forma.get('name').errors?.minlength"  
+                                        class="invalid-feedback">
+                                        Por lo menos 5 caracteres
+                                </mat-error>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-12 col-sm-10 col-md-12 col-lg-12 col-xl-12">
+                                <label class="family-500 size-16">Descripción</label>
+                                <textarea   class="form-control text-area" 
+                                            type="text"
+                                            placeholder="Ingresar descripción del producto" 
+                                            formControlName="description"
+                                            [ngClass]="{'is-invalid':  (!forma.controls['description'].valid || forma.controls['description'].errors?.minlength)&& forma.controls['description'].touched, 'is-valid': forma.controls['description'].valid }"     
+                                            ></textarea>
+    
+                                <mat-error  *ngIf="forma.get('description').errors?.required"  
+                                            class="invalid-feedback">
+                                            Debe indicar una descripción del producto
+                                </mat-error>
+
+                                <mat-error  *ngIf="forma.get('description').errors?.minlength"  
+                                            class="invalid-feedback">
+                                            Por lo menos 5 caracteres
+                                </mat-error>
+
+                            </div>
+                        </div>
+
+                        
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="Marca" class="family-500 size-14">Marca</label>
+                                <select id="Marca" 
+                                        class="form-control"
+                                        formControlName="mark">
+
+                                        <option class="family-300">
+                                            Seleccionar
+                                        </option>
+                                        <option [value]="item.name" *ngFor="let item of marks">
+                                            {{item.name}}
+                                        </option>
+
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="Fabricante" class="family-500 size-14">Fabicante</label>
+                                <select id="Fabricante"
+                                        class="form-control"
+                                        formControlName="factory">
+                                        <option class="family-300">Seleccionar</option>
+                                        <option [value]="item.name" *ngFor="let item of factories">
+                                                {{item.name}}
+                                        </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="Categoria" class="family-500 size-14">Categorias</label>
+                                <select id="Categoria" 
+                                        class="form-control"
+                                        formControlName="category"
+                                        (change)="onChange($event.target.value)"
+                                        >
+                                    <option class="family-300">Seleccionar</option>
+                                    <option *ngFor="let item of category; let i = index" 
+                                            [value]="item.name"
+                                            >
+                                            {{item.name}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="Subcategoria" class="family-500 size-14">Subcategoria</label>
+                                <select id="Subcategoria" 
+                                        class="form-control"
+                                        formControlName="subcategory_id"
+                                        (change)="Subcategory($event.target.value)">
+                                        <option class="family-300">Seleccionar</option>
+                                        <option *ngFor="let item of subcategory"[value]="item.id">{{ item.name }}</option>
+                                </select>
+                            </div>
+<!-- 
+                            <div class="form-group col-md-4">
+                                <label for="Receta" class="family-500 size-14">Receta Médica</label>
+                                <input  class="form-control"
+                                        disabled
+                                        id="Receta"
+                                        formControlName="recipe"
+                                        type="text"
+                                        placeholder="Fabrica"
+                                        [ngClass]="{'is-invalid':  (!forma.controls['stock'].valid || forma.controls['stock'].errors?.minlength)&& forma.controls['stock'].touched, 'is-valid': forma.controls['stock'].valid }" 
+                                >
+                            </div> -->
+
+
+                        </div>
+
+                        <button class="btn btn-primary button fredoka" 
+                                type="submit"
+                                (click)="Send()"       
+                                >
+                                Guardar Cambios
+                        </button>
+
+
+                    </section>
+
+            </form>
+        </div>
+    </div>
+</section>

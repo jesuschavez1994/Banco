@@ -8,7 +8,7 @@ import { URL_SERVICIOS } from 'src/app/config/config';
 @Component({
   selector: 'app-photo-user-edit',
   templateUrl: './photo-user-edit.component.html',
-  styleUrls: ['./photo-user-edit.component.css']
+  styleUrls: ['./photo-user-edit.component.scss']
 })
 export class PhotoUserEditComponent implements OnInit {
 
@@ -24,6 +24,7 @@ export class PhotoUserEditComponent implements OnInit {
   spinner = false;
   alert = false;
   Recortador = false;
+  type_fyle: string;
   // sALIDAS//
   // tslint:disable-next-line: variable-name
   @Output() mostarComponent: EventEmitter<any>;
@@ -42,13 +43,14 @@ export class PhotoUserEditComponent implements OnInit {
   }
 
 
-  fileChangeEvent(archivo: File) {
+  fileChangeEvent(archivo: any) {
     if ( !archivo ) {
       this.imageChangedEvent = null;
       return;
     }
 
     if ( archivo ) {
+      this.type_fyle = archivo.target.files[0].type;
       this.alert = true;
       this.Recortador = false;
       this.mostrarAvatar = true;
@@ -81,16 +83,17 @@ export class PhotoUserEditComponent implements OnInit {
       this.cropper.value.avatar
     );
     this.usuarioService.cambiarImagen(avatar, localStorage.getItem('id')).subscribe((Response: any) => {
-      console.log(Response.src);
+      console.log('Response Avatar', Response.src);
       this.IMG_USER = URL_SERVICIOS + '/' + Response.src;
       console.log(this.IMG_USER);
+      this.mostrarAvatar = false;
     });
-    this.mostrarAvatar = false;
   }
 
 
   GetAvatar(){
     this.usuarioService.datosUserImages(localStorage.getItem('id')).subscribe( (Response: any) => {
+      console.log('avatar', Response);
       this.IMG_USER = Response[0].src;
       console.log(this.IMG_USER);
       this.spinner = true;

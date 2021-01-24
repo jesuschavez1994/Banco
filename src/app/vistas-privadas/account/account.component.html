@@ -16,27 +16,20 @@
           >
           </app-card-shimmer-form-configuration>
 
-          <!-- ============================================================== -->
-          <!-- Formulario de Configuración  -->
-          <!-- ============================================================== -->
-          <form
-            [formGroup]="forma"
-            (ngSubmit)="ActualizarDatosUser(forma.value)"
-            novalidate="novalidate"
-            *ngFor="let data of datosUsuario"
-            class="col-md-6"
-          >
-            <div class="row">
-              <h2 class="OpenSans-700 pl-3 pb-3 h2-title">
-                Configuración de tu cuenta
-              </h2>
+                        <app-card-shimmer-form-configuration    class="col-md-6 animated 
+                                                                fadeIn" 
+                                                                *ngIf="card_shimmer">
+                        </app-card-shimmer-form-configuration>
 
-              <div class="col-md-12">
-                <div class="form-group row mb-0 mt-4">
-                  <div class="col-12">
-                    <h5 class="family-500 orange">Información de contacto</h5>
-                  </div>
-                </div>
+                        <!-- ============================================================== -->
+                        <!-- Formulario de Configuración  -->
+                        <!-- ============================================================== -->
+                        <form   [formGroup]="forma"
+                                (ngSubmit)="ActualizarDatosUser(forma.value)" 
+                                novalidate="novalidate"
+                                class="col-md-6"
+                                *ngIf="!this.card_shimmer"
+                                >
 
                 <div class="form-group row">
                   <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
@@ -75,24 +68,12 @@
                   </div>
                 </div>
 
-                <div class="form-group row">
-                  <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
-                    <mat-label class="OpenSans-600 size-12">
-                      Nombre y Apellido
-                    </mat-label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      formControlName="name"
-                      [ngModel]="data.name"
-                      [ngClass]="{
-                        'is-invalid':
-                          (!forma.controls['name'].valid ||
-                            forma.controls['name'].errors?.minlength) &&
-                          forma.controls['name'].touched,
-                        'is-valid': forma.controls['name'].valid
-                      }"
-                    />
+                                            <input  class="form-control"
+                                                    type="text"
+                                                    placeholder="Ingresa tú nombre de usuario"
+                                                    formControlName="username"
+                                                    [ngClass]="{'is-invalid':  (!forma.controls['username'].valid || forma.controls['username'].errors?.minlength)&& forma.controls['username'].touched, 'is-valid': forma.controls['username'].valid }"     
+                                            >
 
                     <mat-error
                       *ngIf="forma.get('name').errors?.required"
@@ -110,25 +91,20 @@
                   </div>
                 </div>
 
-                <div class="form-group row">
-                  <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
-                    <mat-label class="OpenSans-600 size-12"> Correo </mat-label>
-                    <input
-                      class="form-control email-icon"
-                      type="email"
-                      value="{{ items.email }}"
-                      placeholder="Correo electrónico"
-                      formControlName="email"
-                      disabled="true"
-                      [ngModel]="data.email"
-                      [ngClass]="{
-                        'is-invalid':
-                          (!forma.controls['email'].valid ||
-                            forma.controls['email'].errors?.minlength) &&
-                          forma.controls['email'].touched,
-                        'is-valid': forma.controls['email'].valid
-                      }"
-                    />
+                                        </div>
+                                    </div>
+                
+                                    <div class="form-group row">
+                                        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
+                                            <mat-label  class="OpenSans-600 size-12">
+                                                Nombre y Apellido
+                                            </mat-label>
+                                            <input  class="form-control"
+                                                    type="text"                                  
+                                                    formControlName="name"
+                                                    [ngClass]="{'is-invalid':  (!forma.controls['name'].valid || forma.controls['name'].errors?.minlength)&& forma.controls['name'].touched, 'is-valid': forma.controls['name'].valid }" 
+                                                    
+                                            >
 
                     <mat-error
                       *ngIf="forma.get('email').errors?.required"
@@ -138,43 +114,27 @@
                       iniciar sesión con tu dirección de correo electrónico.
                     </mat-error>
 
-                    <mat-error
-                      *ngIf="forma.get('email').errors?.minlength"
-                      class="invalid-feedback"
-                    >
-                      Por lo menos 5 caracteres.
-                    </mat-error>
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
-                    <mat-label class="OpenSans-600 size-12">
-                      Telefono
-                    </mat-label>
-                    <input
-                      class="form-control icon-phone input"
-                      type="text"
-                      placeholder="Ingrese telefono"
-                      formControlName="phone"
-                      [ngModel]="data.phone"
-                      [ngClass]="{
-                        'is-invalid':
-                          (!forma.controls['phone'].valid ||
-                            forma.controls['phone'].errors?.minlength) &&
-                          forma.controls['phone'].touched,
-                        'is-valid': forma.controls['phone'].valid
-                      }"
-                    />
-
-                    <mat-error
-                      *ngIf="forma.get('phone').errors?.required"
-                      class="invalid-feedback"
-                    >
-                      Ingresa tu número teléfonico.
-                    </mat-error>
-                  </div>
-                </div>
+                                            <mat-error  *ngIf="forma.get('name').errors?.minlength"  
+                                                        class="invalid-feedback">
+                                                        Por lo menos 5 caracteres.
+                                            </mat-error>
+                                    
+                                        </div>
+                                    </div>
+                
+                                    <div class="form-group row">
+                                        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
+                                            <mat-label  class="OpenSans-600 size-12">
+                                                Correo
+                                            </mat-label>
+                                            <input  class="form-control email-icon"
+                                                    type="email"
+                                                    value = {{items.email}}
+                                                    placeholder="Correo electrónico"
+                                                    formControlName="email"
+                                                    disabled="true"
+                                                    [ngClass]="{'is-invalid':  (!forma.controls['email'].valid || forma.controls['email'].errors?.minlength)&& forma.controls['email'].touched, 'is-valid': forma.controls['email'].valid }" 
+                                            >
 
                 <div class="form-group row">
                   <div class="col-12">
@@ -201,12 +161,20 @@
                       }"
                     />
 
-                    <mat-error
-                      *ngIf="forma.get('password1').errors?.required"
-                      class="invalid-feedback"
-                    >
-                      Este campo es requerido
-                    </mat-error>
+                                        </div>
+                                    </div>
+                
+                                    <div class="form-group row">
+                                        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
+                                            <mat-label class="OpenSans-600 size-12">
+                                                Telefono
+                                            </mat-label>
+                                            <input  class="form-control icon-phone input"
+                                                    type="text"
+                                                    placeholder="Ingrese telefono"
+                                                    formControlName="phone"   
+                                                    [ngClass]="{'is-invalid':  (!forma.controls['phone'].valid || forma.controls['phone'].errors?.minlength)&& forma.controls['phone'].touched, 'is-valid': forma.controls['phone'].valid }" 
+                                            >
 
                     <mat-error
                       *ngIf="forma.get('password1').errors?.minlength"
@@ -277,22 +245,23 @@
                   <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
                     <h5 class="family-500 orange">Desactivar mi cuenta</h5>
 
-                    <p class="size-14">
-                      Si desactivas tu cuenta ya no podrás acceder a tu tienda,
-                      ni iniciar sesión en founduss. Si quieres desactivar es´ta
-                      cuenta, está no se eliminaráapp-categorias,
-                      <span class="family-500 orange">
-                        para eliminar tu cuenta ponte en contacto con nuestro
-                        equipo de ayuda
-                      </span>
-                    </p>
-                  </div>
-                  <button
-                    type="submit"
-                    class="btn btn-outline-primary btn-block fredoka mt-4 col-6 button"
-                  >
-                    Desactivar cuenta
-                  </button>
+                       <!-- ============================================================== -->
+                        <!-- SUVIDA DEL AVATAR DEL USUARIO  -->
+                        <!-- ============================================================== --> 
+                        <section class="col-md-4 pr-0">
+
+                            <app-photo-user-edit></app-photo-user-edit>
+                            <app-photo-user></app-photo-user>
+                        </section>
+                        <!-- ============================================================== -->
+                        <!-- End SUVIDA DEL AVATAR DEL USUARIO -->
+                        <!-- ============================================================== -->
+                        
+                        
+                        <!-- ============================================================== -->
+                        <!-- End Formulario de Configuración  -->
+                        <!-- ============================================================== -->
+                   
                 </div>
               </div>
             </div>

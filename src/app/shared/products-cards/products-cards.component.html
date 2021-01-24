@@ -1,0 +1,43 @@
+<div class="products-container">
+
+  <ng-container *ngFor="let product of products | paginate: { id:'pagination', itemsPerPage: itemsPerPage, currentPage: p, totalItems: totalItems}">
+
+    <article class="product" (click)="selectedProduct(product)">
+
+      <div class="img">
+
+        <img
+          [src]="product.images[0] | imgFallback: 'box'"
+          [alt]="product.name"
+          onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
+        >
+
+        <i class="fa-heart"
+          [ngClass]="{'fas': product.isFavorite,'far': !product.isFavorite}">
+        </i>
+
+      </div>
+
+
+      <h3 class="name">
+        {{ product.name | excerpt: 66}}
+      </h3>
+
+      <p class="cost">{{ product.price | currency }}</p>
+
+    </article>
+
+  </ng-container>
+
+
+</div>
+
+<pagination-controls
+  class="my-pagination"
+  id="pagination"
+  #paginationControls
+  previousLabel = "Anterior"
+  nextLabel = "Siguiente"
+  (pageChange)="pageChanged($event)"
+>
+</pagination-controls>

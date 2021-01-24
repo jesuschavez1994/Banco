@@ -1,0 +1,163 @@
+
+<aside class="aside"
+#sidebarList
+[ngClass]="{'aside--expanded': isExpanded}">
+
+<div class="btn-toogle">
+
+    <app-sidebar-list-button
+    [expand]="isExpanded"
+    (isExpanded)="toggleSidebarList($event)"
+    class="btn-toogle"
+  >
+  </app-sidebar-list-button>
+
+</div>
+
+
+<div class="business-info">
+
+  <div class="business-perfil">
+
+    <div class="profile-img">
+      <img src="assets/img/no-image-banner.jpg" alt="medicalback">
+    </div>
+
+    <div class="profile-data">
+
+      <h2 class="name">  Mystore <span class="simbol-verifiqued">
+        <img src="assets/img/no-image-banner.jpg" alt="#"></span>
+      </h2>
+
+      <div class="instagram">@medicalbackground</div>
+
+    </div>
+
+  </div>
+
+  <ul class="options">
+
+    <li routerLinkActive="active">
+        <a [routerLink]="['contact']">
+            Contacto
+        </a>
+    </li>
+
+    <li routerLinkActive="active">
+        <a [routerLink]="['product-catalogue']">
+            Productos
+        </a>
+    </li>
+
+    <li routerLinkActive="active">
+        <a [routerLink]="['sincronizacion/exportar-lista-excel']">
+            Sincronización
+        </a>
+    </li>
+    
+    
+    <li>
+        <a>Ventas</a>
+    </li>
+
+  </ul>
+
+</div>
+
+<nav class="menu" *ngIf="this.showcategory === '/my-store/product-catalogue'">
+
+    
+    <!-- Categorias -->
+    <ng-container *ngIf="categories">
+
+        <ul class="list">
+    
+            <h4 class="title">
+                Categorías
+            </h4>
+        
+            <ng-container *ngFor="let category of categories">
+
+                <li class="category">
+                  <a>{{category.name}}</a>
+                </li>
+              </ng-container>
+    
+        </ul>
+    
+    </ng-container>
+
+ 
+
+    <ul class="list">
+        <h4 class="title">
+            Subcategorías
+        </h4>
+
+        <li>
+            <a>
+                Antibioticos
+            </a>
+        </li>
+        <li>
+            <a>
+                Antibirales
+            </a>
+        </li>
+        <li>
+            <a>
+                Anéstesico
+            </a>
+        </li>
+        <li>
+            <a>
+                Oncológico
+            </a>
+        </li>
+    </ul>
+
+    <ul class="list">
+        <h4 class="title">
+            Precios
+        </h4>
+
+        <li>
+            <input type="radio" id="rango-1" name="rango-1">
+            <label for="rango-1">
+                <a>$0 - $10.000</a>
+            </label>
+        </li>
+
+        <li>
+            <input type="radio" id="rango-2" name="rango-1">
+            <label for="rango-2">
+                <a>$10.000 - $20.000</a>
+            </label>
+        </li>
+
+        <li>
+            <input type="radio" id="rango-3" name="rango-1">
+            <label for="rango-3">
+                <a>$20.000 - $30.000</a>
+            </label>
+        </li>
+
+        <li>
+            <input type="radio" id="rango-4" name="rango-1">
+            <label for="rango-4">
+                <a>$30.000 - $40.000</a>
+            </label>
+        </li>
+
+        <li>
+            <input type="radio" id="rango-5" name="rango-1">
+            <label for="rango-5">
+                <a>$50.000 - $60.000</a>
+            </label>
+        </li>
+
+    </ul>
+
+</nav>
+
+</aside>

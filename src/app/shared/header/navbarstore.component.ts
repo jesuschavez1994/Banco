@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UserStoreService } from '@services/user-store/user-store.service';
 import { StoreService } from '@services/store/store.service';
 import { Usuario } from 'src/app/models/usuario.model';
@@ -12,6 +12,8 @@ import { URL_SERVICIOS } from 'src/app/config/config';
   styleUrls: ['./navbarstore.component.css']
 })
 export class NavbarstoreComponent implements OnInit {
+
+  @Input() fixed = true;
 
   usuario: Usuario;
   datosUsuario: any[] = [];

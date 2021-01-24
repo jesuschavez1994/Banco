@@ -1,0 +1,28 @@
+@import 'src/assets/scss/style.scss';
+
+.banner{
+  width: 100%;
+  min-height: 200px;
+  height: 14.8vw;
+  border-radius: 10px;
+  overflow: hidden;
+
+  img{
+    height: 100%;
+    width: 100%;
+  }
+
+  &.banner--small{
+    height: 10vw;
+    display: none;
+  }
+
+}
+
+@media screen and (max-width: 480px){
+
+  .banner{
+    min-height: 255px !important;
+  }
+
+}

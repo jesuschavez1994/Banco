@@ -24,6 +24,11 @@ export class UserStoreService {
     this.cargarStorage();
    }
 
+  private postQuery<T>(query: string, data: any){
+    query = URL_SERVICIOS + query;
+    return this.http.post<T>( query, data );
+  }
+
   private execQuery<T>( query: string ) {
     query = URL_SERVICIOS + query;
     return this.http.get<T>( query );
@@ -48,6 +53,12 @@ export class UserStoreService {
 
   }
 
+  SaveBanner(userId: string, id: string, data: any){
+    const url = `/api/users/${userId}/stores/${id}/banners`;
+    return this.postQuery(url, data);
+  }
+
+
   ActualizarUsuarioNegocio(id: string, user: Usuario){
     const url = `/api/users/${id}`;
     return this.putQuery(url, user);
@@ -62,6 +73,7 @@ export class UserStoreService {
     const url = `/api/users/${userId}/stores/${id}`;
     return this.execQuery(url);
   }
+
 
   getStore(){
     const url = '/api/users';
