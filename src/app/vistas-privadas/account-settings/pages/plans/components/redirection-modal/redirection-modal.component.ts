@@ -1,7 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SubscriptionService } from '@services/subscription/subscription.service';
-
 import { PaymentCredentials } from '@interfaces/SettingsInterfaces';
 
 @Component({
@@ -13,7 +11,6 @@ export class RedirectionModalComponent implements OnInit {
   dialogData: PaymentCredentials;
 
   constructor(
-    private subscriptionDataService: SubscriptionService,
     private dialogRef: MatDialogRef<RedirectionModalComponent>,
     @Inject(MAT_DIALOG_DATA) data: PaymentCredentials
   ) {
@@ -29,14 +26,5 @@ export class RedirectionModalComponent implements OnInit {
   // Functionality ----------------------
   close() {
     this.dialogRef.close();
-  }
-
-  // API calls handler methods-------------------------------
-  redirectToTransbank(): void {
-    this.subscriptionDataService
-      .redirectToWebpay(this.dialogData.url, this.dialogData.token)
-      .subscribe((transactionDetails: object) => {
-        this.dialogRef.close(transactionDetails);
-      });
   }
 }
