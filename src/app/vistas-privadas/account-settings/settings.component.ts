@@ -11,13 +11,13 @@ export class SettingsComponent implements OnInit {
     {
       label: 'mi cuenta',
       iconClass: 'fas fa-user',
-      routerLink: ['/settings', 'my-account'],
+      routerLink: ['/settings/my-account'],
       // isActive: false,
     },
     {
       label: 'planes',
       iconClass: 'fas fa-user',
-      routerLink: ['/settings', 'plans'],
+      routerLink: ['/settings/plans'],
       // isActive: false,
     },
   ];
