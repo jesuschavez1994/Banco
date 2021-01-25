@@ -31,6 +31,10 @@
   font-weight: 400;
 }
 
+.payment-details .text {
+  font-size: 1em;
+}
+
 /* Payment methods section stylings -------------------------- */
 .payment-methods {
   display: flex;
@@ -132,4 +136,30 @@
 
 .payment-details h5 > span.premium {
   color: #3673ff;
+}
+
+/* --------------------------- 
+  Responsive media queries 
+------------------------------ */
+@media screen and (max-width: 485px) {
+  .payment-methods .webpay-banner .title {
+    width: auto;
+  }
+
+  .payment-details .text {
+    font-size: 0.9em;
+    text-align: center;
+  }
+
+  .payment-methods .webpay-banner .banner {
+    width: 80%;
+  }
+
+  .payment-methods .webpay-banner .note p {
+    width: 80%;
+  }
+
+  .payment-methods .btn {
+    width: 80%;
+  }
 }

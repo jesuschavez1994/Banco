@@ -209,7 +209,8 @@ h5 {
 
 .price small.renew {
   grid-area: renew;
-  justify-self: end;
+  justify-self: flex-start;
+  margin-left: 15px;
 }
 
 /* More info section styling ----------------------------*/
@@ -353,4 +354,7 @@ h5 {
 }
 
 @media screen and (max-width: 485px) {
+  .more-info > div.price small {
+    line-height: 0;
+  }
 }

@@ -5,6 +5,7 @@
 
 /* ------------ Main section stylings ---------------- */
 .title {
+  font-size: 1.5em;
   margin-bottom: 10px;
 }
 
@@ -76,5 +77,14 @@
   .plans-container {
     flex-direction: column;
     align-items: center;
+  }
+}
+
+@media screen and (max-width: 485px) {
+  .title {
+    font-size: 1.3em;
+  }
+  .description {
+    font-size: 0.9em;
   }
 }
