@@ -27,6 +27,24 @@
   position: relative;
 }
 
+.main-container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 50px auto;
+  grid-template-areas:
+    "route"
+    "content";
+  scroll-behavior: smooth;
+}
+
+.route-area {
+  grid-area: route;
+}
+
+.content-area {
+  grid-area: content;
+}
+
 .plans-container {
   display: flex;
   flex-direction: row;
@@ -46,9 +64,13 @@
 }
 
 /* -------- Responsive media queries -------------- */
-@media (max-width: 980px) {
-  .description {
-    font-size: 0.8em;
+@media screen and (max-width: 757px) {
+  .main-container {
+    grid-template-rows: 25px auto;
+  }
+
+  .content-area {
+    max-width: 600px;
   }
 
   .plans-container {

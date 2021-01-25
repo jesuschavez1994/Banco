@@ -20,37 +20,16 @@
   padding: 0px 240px 0px 15px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: auto 50px auto;
+  grid-template-rows: 50px auto;
   grid-template-areas:
-    "white-space route route route route route"
+    "white-space content content content content content"
     "sidebar content content content content content";
   scroll-behavior: smooth;
 }
 
-.title {
-  margin-bottom: 10px;
-}
-
-.title > h2 {
-  font-family: "Montserrat", "Segoe UI", sans-serif;
-}
-
-.main-area p {
-  margin-bottom: 20px;
-  font-size: 1em;
-}
-
 .white-space {
   grid-area: white-space;
-  width: 100%;
-}
-
-.navbar-area {
-  grid-area: navbar;
-}
-
-.route-area {
-  grid-area: route;
+  height: 50px;
 }
 
 .sidebar-area {
@@ -89,4 +68,27 @@
 .payment-details-container {
   display: flex;
   position: relative;
+}
+
+/* ------------ Sidenav section stylings ---------------- */
+app-sidebar-menu > section.configuration-menu {
+  padding-right: 0px;
+  padding-top: 0px;
+}
+
+/* ------------ Responsive media queries ---------------- */
+@media screen and (max-width: 999px) {
+  /* Nothing to do here for now */
+}
+
+@media screen and (max-width: 757px) {
+  .content-wrapper {
+    padding: 0px 120px 0px 15px;
+  }
+}
+
+@media screen and (max-width: 485px) {
+  .content-wrapper {
+    padding: 0px 10px 0px 15px;
+  }
 }
