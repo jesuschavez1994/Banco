@@ -16,9 +16,6 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
-      "defaults": {
-        "styleExt": "scss"
-      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
