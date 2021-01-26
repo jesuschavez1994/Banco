@@ -25,6 +25,7 @@ const components = [
   PlanDetailsComponent,
   PaymentDetailsComponent,
   PlansComponent,
+  RedirectionModalComponent,
 ];
 
 const modules = [
