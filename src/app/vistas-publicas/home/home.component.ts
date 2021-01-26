@@ -1,16 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
 import { StoreService } from '@services/store/store.service';
 import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import { ProductosLoads } from '@interfaces/InterfaceProducto';
-
+/*
+  header{
+    brand
+    link categoria
+    search bar
+    btn cart
+    user settings
+    user register
+    user login
+    avatar
+  }
+  banner{
+    slider jpg´s
+  }
+*/
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  itemProductos: DataProductDB[] = [];
+  @ViewChild('modalRegister') modalRegister: ElementRef;
+    userLog = false;
+    itemProductos: DataProductDB[] = [];
 
   constructor(public storeService: StoreService) { }
 

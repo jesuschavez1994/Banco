@@ -7,6 +7,10 @@ import { LoginUsuarioComponent } from './Login/Logins/login-usuario.component';
 import { FormDataNegocioComponent } from './form-register/form-data-negocio/form-data-negocio.component';
 import { DashboardComponent } from './vistas-privadas/dashboard/dashboard.component';
 import { HomeComponent } from './vistas-publicas/home/home.component';
+import { CategorysComponent } from './vistas-publicas/categorys/categorys.component';
+import { MenuCategorysComponent } from './vistas-publicas/categorys/menu-categorys/menu-categorys.component';
+import { ListProductComponent } from './vistas-publicas/categorys/list-product/list-product.component';
+
 import { RegisterComponent } from './vistas-publicas/Registers/Usuario/register.component';
 import { RutStoreComponent } from './form-register/rut-store/rut-store.component';
 import { AccountComponent } from './vistas-privadas/account/account.component';
@@ -38,13 +42,22 @@ import { EditProductBankComponent } from './vistas-privadas/Admin/pages/containe
 
 import { PageUnderConstructionComponent } from './vistas-publicas/page-under-construction/page-under-construction.component';
 
-// Prueba para visualizacion de la vistas desarrolladas
-import { SettingsComponent } from './vistas-privadas/account-settings/settings.component';
-import { PlansComponent } from './vistas-privadas/account-settings/pages/plans/plans.component';
-
-const APP_ROUTES = [
+const APP_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
+  {
+    path: 'categorys',
+    component: CategorysComponent,
+
+    children: [
+      { path: '', component: MenuCategorysComponent },
+      { path: ':categories/products', component: ListProductComponent },
+      {
+        path: ':categories/:subcategories/products',
+        component: ListProductComponent,
+      },
+    ],
+  },
   {
     path: 'admin',
     component: LoadBanckProductComponent,
@@ -96,13 +109,6 @@ const APP_ROUTES = [
     component: AccountComponent,
     canActivate: [LoginGuardGuard],
   },
-  {
-    path: 'settings',
-    loadChildren: () =>
-      import('./vistas-privadas/account-settings/account-settings.module').then(
-        (module) => module.AccountSettingsModule
-      ),
-  },
 
   // VISTAS ADMINISTRATIVAS DEL STORE //
 
@@ -112,77 +118,29 @@ const APP_ROUTES = [
     canActivate: [LoginGuardGuard],
     children: [
       {
-        path: 'contact',
-        component: ContactComponent,
-      },
-      { path: 'product-catalogue', component: LoadProductComponent },
-      {
-        path: 'load-product',
-        component: ProductLoadingComponent,
+        path: 'exportar-lista-excel',
+        component: ExportarListaExcelComponent,
       },
       {
-        path: 'sync-this-product/:id',
-        component: FormBanckProductSyncComponent,
+        path: 'suggested-products',
+        component: SuggestedProductsComponent,
       },
       {
-        path: 'edit-product-sync/:id',
-        component: EditSincronizacionComponent,
+        path: 'suggested-products-list/:id/:list',
+        component: SuggestedProductsComponent,
       },
       {
-        path: 'desincronizar/:id',
-        component: DesincronizarComponent,
+        path: 'synchronized-products',
+        component: SynchronizedProductsComponent,
       },
       {
-        path: 'edit/:id',
-        component: EditProdutcComponent,
+        path: 'bank-product',
+        component: BankProductComponent,
       },
-      {
-        path: 'edit-product/:id',
-        component: EditProductNoDisponibleComponent,
-      },
-      {
-        path: 'sincronizacion',
-        component: SincronizacionViewsComponent,
-        children: [
-          {
-            path: 'exportar-lista-excel',
-            component: ExportarListaExcelComponent,
-          },
-          {
-            path: 'suggested-products',
-            component: SuggestedProductsComponent,
-          },
-          {
-            path: 'suggested-products-list/:id/:list',
-            component: SuggestedProductsComponent,
-          },
-          {
-            path: 'synchronized-products',
-            component: SynchronizedProductsComponent,
-          },
-          {
-            path: 'bank-product',
-            component: BankProductComponent,
-          },
-        ],
-      },
-
-      { path: '**', pathMatch: 'full', redirectTo: 'contact' },
     ],
   },
 
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'terminos-ycondiciones', component: TerminosYCondicionesComponent },
-  {
-    path: 'public-views',
-    component: PublicViewsComponent,
-    children: [
-      { path: 'detalle-producto/:id', component: DetalleProductoComponent },
-    ],
-  },
-  // { path: 'detalle-producto/:id', component: ViewProductoComponent},
-
-  { path: '**', pathMatch: 'full', redirectTo: 'page-under-construction' },
+  { path: '**', pathMatch: 'full', redirectTo: 'contact' },
 ];
 
 export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES, { useHash: true });

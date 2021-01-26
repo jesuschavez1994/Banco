@@ -1,0 +1,26 @@
+.page {
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    min-height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    .cont {
+        width: 100%;
+    }
+}
+
+@media(max-width: 768px) {
+    .page {
+        .cont {
+            width: 94%;
+        }
+    }
+}
+
+@media(max-width: 425px) {
+    .page {
+        .cont {
+            width: 87%;
+        }
+    }
+}

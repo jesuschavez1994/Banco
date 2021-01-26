@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1"  id="menu-act-00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 400 400" style="enable-background:new 0 0 400 400;" xml:space="preserve">
+
+		<def>
+			<title>Menu Action</title>
+			<style>
+		 
+
+				@keyframes rotarDesaparecer{
+					0%{
+						opacity: 1;
+						transform: scale(.4);
+					}
+					 
+					100%{
+						transform: scale(2);
+						opacity: 0;
+					}
+				}
+				@keyframes rotarAparecer{
+					0%{
+						opacity:0;
+						transform: scale(2);
+					}
+					 
+					100%{
+						opacity: 1;
+						transform: scale(1);
+
+					}
+				}
+				.rotar-d{
+					animation-name: rotarDesaparecer;
+					animation-duration: .42s;
+					animation-timing-function: ease-in;
+					animation-fill-mode: forwards;
+				}
+				.rotar-a{
+					animation-name: rotarAparecer;
+					animation-duration: .42s;
+					animation-timing-function: ease-out;
+					animation-fill-mode: forwards;
+		
+				}
+				.active{
+					opacity:1;
+				}
+		
+				g{
+					opacity:0;
+					transition: .42s;
+					transform-origin: center 50%;
+				}
+				 
+			</style>
+		</def>
+	
+			<g  id="bars" class="bars active">
+				<path id="XMLID_3_" d="M367.1,86H32.9c-8.3,0-15-6.7-15-15V40.3c0-8.3,6.7-15,15-15h334.1c8.3,0,15,6.7,15,15V71
+					C382.1,79.2,375.4,86,367.1,86z"/>
+				<path id="XMLID_7_" d="M367.1,230.3H32.9c-8.3,0-15-6.7-15-15v-30.7c0-8.3,6.7-15,15-15h334.1c8.3,0,15,6.7,15,15v30.7
+					C382.1,223.6,375.4,230.3,367.1,230.3z"/>
+				<path id="XMLID_2_" d="M367.1,374.7H32.9c-8.3,0-15-6.7-15-15V329c0-8.3,6.7-15,15-15h334.1c8.3,0,15,6.7,15,15v30.7
+					C382.1,368,375.4,374.7,367.1,374.7z"/>
+			</g>
+			<g id="cross" class="cross" >
+				<path id="XMLID_12_" d="M368.6,316.8c7.1,7.1,7.1,18.5,0,25.6l-26.2,26.2c-7.1,7.1-18.5,7.1-25.6,0L200,251.8L83.2,368.6
+					c-7.1,7.1-18.5,7.1-25.6,0l-26.2-26.2c-7.1-7.1-7.1-18.5,0-25.6L148.2,200L31.4,83.2c-7.1-7.1-7.1-18.5,0-25.6l26.2-26.2
+					c7.1-7.1,18.5-7.1,25.6,0L200,148.2L316.8,31.4c7.1-7.1,18.5-7.1,25.6,0l26.2,26.2c7.1,7.1,7.1,18.5,0,25.6L251.8,200L368.6,316.8z
+					"/>
+			</g>
+ 
+		<script>
+			let flag=false;
+			const menuAct = document.getElementById('menu-act-00');
+			
+			const bars = document.getElementById('bars');
+			const cross = document.getElementById('cross');
+			menuAct.addEventListener('click',()=>{
+			
+			if(!flag){
+
+				bars.classList.remove('rotar-a');
+				bars.classList.remove('active');
+				bars.classList.add('rotar-d');
+				
+				cross.classList.remove('rotar-d');
+				cross.classList.add('rotar-a');
+				cross.classList.add('active');				
+				flag=!flag;
+				
+			}else{
+
+				bars.classList.remove('rotar-d');
+				bars.classList.add('rotar-a');
+				bars.classList.add('active');
+				
+				cross.classList.remove('rotar-a');	
+				cross.classList.remove('active');				
+
+				cross.classList.add('rotar-d');
+				flag=!flag;
+				
+			}
+						},false);
+			
+		</script>
+		</svg>
