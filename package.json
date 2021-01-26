@@ -14,7 +14,7 @@
     "@agm/core": "^1.1.0",
     "@alyle/ui": "^10.3.0",
     "@angular/animations": "^9.1.12",
-    "@angular/cdk": "^9.2.4",
+    "@angular/cdk": "^10.2.0",
     "@angular/common": "~9.1.11",
     "@angular/compiler": "~9.1.11",
     "@angular/core": "~9.1.11",
