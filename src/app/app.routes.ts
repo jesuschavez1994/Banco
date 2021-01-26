@@ -109,6 +109,13 @@ const APP_ROUTES: Routes = [
     component: AccountComponent,
     canActivate: [LoginGuardGuard],
   },
+  {
+    path: 'settings',
+    loadChildren: () =>
+      import('./vistas-privadas/account-settings/account-settings.module').then(
+        (module) => module.AccountSettingsModule
+      ),
+  },
 
   // VISTAS ADMINISTRATIVAS DEL STORE //
 
