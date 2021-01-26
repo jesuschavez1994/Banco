@@ -28,6 +28,7 @@
         <p class="title">Método de pago:</p>
         <mat-checkbox
           class="checkbox"
+          (change)="onChange()"
           [(ngModel)]="webpayDebitCard"
         ></mat-checkbox>
 

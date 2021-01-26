@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 /* 
   Components
 */
@@ -13,7 +14,6 @@ import { SidebarComponent } from '../account-settings/pages/plans/components/sid
   Modules
 */
 import { AccountSettingsRoutingModule } from './account-settings-routing.module';
-import { SharedModule } from '@shared/shared.module';
 
 const components = [
   SidebarComponent,
@@ -24,7 +24,7 @@ const components = [
   PlansComponent,
 ];
 
-const modules = [AccountSettingsRoutingModule, SharedModule];
+const modules = [AccountSettingsRoutingModule, CommonModule];
 
 @NgModule({
   entryComponents: [RedirectionModalComponent],
