@@ -68,6 +68,11 @@ export class PlanCardComponent implements OnInit {
       this.subscriptionDataService
         .createOrderNumber(this.planDetails)
         .subscribe((serverResponse: CreatedOrder) => {
+          // Setting the value on the localStorage, in case the page refresh and the payment process isn't finished yet.
+          this.localStorage.setItem(
+            'createdOrder',
+            JSON.stringify(serverResponse)
+          );
           this.waitingResponse = false;
           this.gotOrderDetails.emit(serverResponse);
           this.selectPlan.emit(this.planInfo);

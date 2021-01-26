@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { Plan } from '../../models/plan';
 import { MatDialog } from '@angular/material/dialog';
-import { BROWSER_STORAGE } from '../../../../../../browserStorage';
+import { BROWSER_STORAGE } from '@app/browserStorage';
 import { RedirectionModalComponent } from '../redirection-modal/redirection-modal.component';
 import { SubscriptionService } from '@services/subscription/subscription.service';
 import {
@@ -30,6 +30,9 @@ export class PlanDetailsComponent implements OnInit {
 
   nextPage = 'plans';
   webpayDebitCard = false;
+  // We use the value on the localStorage as fallback.
+  createdOrderDetails = JSON.parse(this.localStorage.getItem('createdOrder'));
+
   constructor(
     public dialog: MatDialog,
     private subscriptionDataService: SubscriptionService,
@@ -57,11 +60,25 @@ export class PlanDetailsComponent implements OnInit {
 
   // API calls handler methods-------------------------------
   createPayment(): void {
+    let requestParams = {
+      user_id: 0,
+      order_id: 0,
+    };
+
+    // We check if the values are still on memory.
+    if (
+      (this.orderDetails.order.user_id === null || undefined) &&
+      (this.orderDetails.order.id === null || undefined)
+    ) {
+      requestParams.user_id = this.createdOrderDetails.order.user_id;
+      requestParams.order_id = this.createdOrderDetails.order.id;
+    } else {
+      requestParams.user_id = this.orderDetails.order.user_id;
+      requestParams.order_id = this.orderDetails.order.id;
+    }
+
     this.subscriptionDataService
-      .paymentCreation(
-        this.orderDetails.order.user_id,
-        this.orderDetails.order.id
-      )
+      .paymentCreation(requestParams.order_id, requestParams.user_id)
       .subscribe((serverResponse: Payment) => {
         this.subscriptionDataService
           .createWebpayPayment(serverResponse.order_id)
