@@ -2,16 +2,15 @@
 
 .toast-container{
   background: $color__background-gray--dark;
+  border-radius: 5px;
   cursor: pointer;
   padding: 7px 45px;
   transition: all 0.5s;
-  // opacity: 0.8;
 
   position: fixed;
   right: 25px;
   bottom: 25px;
-  border-radius: 5px;
-
+  z-index: 20;
 
   p{
     color: $color__text-white;

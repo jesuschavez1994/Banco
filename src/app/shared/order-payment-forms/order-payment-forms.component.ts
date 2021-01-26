@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MyValidators } from '../../utils/validators';
 
@@ -7,9 +7,10 @@ import { MyValidators } from '../../utils/validators';
   templateUrl: './order-payment-forms.component.html',
   styleUrls: ['./order-payment-forms.component.scss']
 })
-export class OrderPaymentFormsComponent implements OnInit {
+export class OrderPaymentFormsComponent implements OnInit, OnChanges {
 
   step = 1;
+  isAllowedSecondStep = false;
   regiones = ['hola'];
 
   form = new FormGroup({
@@ -25,31 +26,123 @@ export class OrderPaymentFormsComponent implements OnInit {
       Validators.required, Validators.minLength(5),
       Validators.pattern(/^[0-9]+[-|‐]{1}[0-9kK]{1}$/)
     ]),
-    nombreDirección: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    nombreDireccion: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    paymentOption: new FormControl('', [Validators.required]),
   });
 
+  buttonSubmitWasCLicked = false;
 
+  optionPaymentSelected;
+  optionPayment = [
+    {
+      name: 'tarjeta de débito (redcompra webpay)',
+      image: 'assets/images/webpay-brand.png',
+      data: {
+        id: 2
+      },
+    },
+    {
+      name: 'Paypal',
+      image: 'assets/images/webpay-brand.png',
+      data: {
+        id: -1
+      },
+    },
+  ];
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.optionPaymentSelected = this.optionPayment[0];
+    // this.
+    // this.ngOnChanges();
+    this.form.valueChanges.subscribe(x => {
+      console.log('form value changed');
+      console.log(x);
+
+
+      const controlsKeys = [
+        'region',
+        'comuna',
+        'direccion',
+        'hospedaje',
+        'telefono',
+        'rut',
+        'nombreDireccion'
+      ];
+
+      let formControls;
+      formControls = [];
+
+      controlsKeys.forEach( controlKey => {
+        formControls.push(this.form.controls[controlKey]);
+      });
+
+      if (!this.form.valid) {
+
+        this.isAllowedSecondStep = formControls.every( currentValue => {
+          return currentValue.errors === null;
+        });
+
+        console.log('isAllowedSecondStep');
+        console.log(this.isAllowedSecondStep);
+      }
+
+    });
   }
 
   public processDataPay(){
     console.clear();
 
     const formData = {
-      location: this.form.value.location
+      nombreDirección: this.form.value.nombreDireccion
     };
 
     console.log('form');
     console.log(this.form);
-    console.log(this.form.get('rut').errors);
 
     console.log('formData');
     console.log(formData);
-    // this.getErrorsWithMessages( this.form.get('location').errors );
+
+    // const controlsKeys = [
+    //   'region',
+    //   'comuna',
+    //   'direccion',
+    //   'hospedaje',
+    //   'telefono',
+    //   'rut',
+    //   'nombreDireccion'
+    // ];
+
+    // let formControls;
+    // formControls = [];
+
+    // controlsKeys.forEach( controlKey => {
+    //   formControls.push(this.form.controls[controlKey]);
+    // });
+
+    if (!this.form.valid) {
+
+      // this.isAllowedSecondStep = formControls.every( currentValue => {
+      //   return currentValue.errors === null;
+      // });
+
+      if (this.isAllowedSecondStep) {
+        this.step = 2;
+      }
+
+    }else if (this.form.valid) {
+      // aquí colocamos la ruta y enviamos los datos
+      console.log('se envian los datos');
+    }
+
+  }
+
+  public goToNextStep() {
+    if (this.isAllowedSecondStep) {
+      this.step = 2;
+    }
   }
 
   public getErrorsWithMessages( control ) {
@@ -62,7 +155,7 @@ export class OrderPaymentFormsComponent implements OnInit {
       let errorMessages;
       errorMessages = [];
 
-      if (control.dirty) {
+      if (control.dirty || this.buttonSubmitWasCLicked) {
 
         keysAvailable.forEach( ( key ) => {
 
@@ -107,7 +200,28 @@ export class OrderPaymentFormsComponent implements OnInit {
       return errorMessages;
     }
 
+  }
+
+
+  public disabledBtnSubmit() {
+
+
+    if (this.step === 1 && this.isAllowedSecondStep) {
+
+      return false;
+
+    } else {
+
+      return this.form.invalid;
+
+    }
+
+    // if (buttonSubmitWasCLicked) {
+
+    // }
 
   }
+
+
 
 }

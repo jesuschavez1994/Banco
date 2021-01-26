@@ -1,42 +1,50 @@
-<ng-container *ngIf="step === 1">
 
-  <p (click)="step = 1" class="back-process">
-    <span><</span>Atrás
-  </p>
 
-  <p class="instruction">para concretar la compra, complete los siguientes pasos:</p>
+<p (click)="step === 1 ? 2 : 1" class="back-process">
+  <span><</span>Atrás
+</p>
 
-  <div class="breadcrumb-steps-container">
+<p class="instruction">para concretar la compra, complete los siguientes pasos:</p>
 
-    <div class="breadcrumb-steps">
+<div class="breadcrumb-steps-container">
 
-      <div class="step active">
+  <div class="breadcrumb-steps">
 
-        <p>paso 1</p>
-        <div class="circle"></div>
+    <div class="step"
+      [ngClass]="{'active': step === 1}"
+      (click)="step = 1"
+    >
 
-      </div>
-
-      <div class="step">
-
-        <p>paso 2</p>
-        <div class="circle"></div>
-
-      </div>
+      <p>paso 1</p>
+      <div class="circle"></div>
 
     </div>
 
-    <div class="line"></div>
+    <div class="step"
+      [ngClass]="{'active': step === 2}"
+      (click)="goToNextStep()"
+    >
+
+      <p>paso 2</p>
+      <div class="circle"></div>
+
+    </div>
 
   </div>
 
-  <div>
+  <div class="line"></div>
 
-    <form action=""
-      class="form"
-      [formGroup]="form"
-      (ngSubmit)="processDataPay()"
-      novalidate="novalidate">
+</div>
+
+<div>
+
+  <form action=""
+    class="form"
+    [formGroup]="form"
+    (ngSubmit)="processDataPay()"
+    novalidate="novalidate">
+
+    <ng-container *ngIf="step === 1">
 
       <div class="inputs-container">
 
@@ -97,7 +105,7 @@
             placeholder="Calle 10"
           >
 
-         <!-- Errors -->
+        <!-- Errors -->
           <ng-container *ngIf="form.get('direccion')">
 
             <ng-container
@@ -180,14 +188,14 @@
           <input
           type="text"
           placeholder="Mi casa / Oficina Central"
-          formControlName="nombreDirección">
+          formControlName="nombreDireccion">
 
           <!-- Errors -->
-          <ng-container *ngIf="form.get('nombreDirección')">
+          <ng-container *ngIf="form.get('nombreDireccion')">
 
             <ng-container
               [ngTemplateOutlet]="errorsList"
-              [ngTemplateOutletContext]="{controlErrors: form.get('nombreDirección')}"
+              [ngTemplateOutletContext]="{controlErrors: form.get('nombreDireccion')}"
             >
             </ng-container>
 
@@ -207,19 +215,105 @@
 
       </div>
 
-      <button class="button button--full-width" type="submit">
-        continuar
-      </button>
+    </ng-container>
 
-    </form>
+    <!-- STEP 2 -->
+    <ng-container *ngIf="step === 2">
 
-  </div>
-</ng-container>
+      <div class="inputs-container">
+
+        <div class="input-container">
+
+          <div class="select-cards">
+
+            <ng-container *ngFor="let option of optionPayment">
+
+            <article
+              (click)="optionPaymentSelected = option"
+            >
+
+              <input
+                id="paymentOption"
+                name="paymentOption"
+                type="radio"
+                class="checkbox-default radio-default"
+                formControlName="paymentOption"
+                [value]="option.data.id"
+                [checked]="optionPaymentSelected.data.id === option.data.id"
+              >
+
+              <label for="paymentOption">
+
+                <div class="select-card">
+
+                  <div class="img">
+                    <img [src]="option.image" [alt]="option.name">
+                  </div>
+
+                  <p>
+                    {{option.name}}
+                  </p>
+
+                </div>
+              </label>
+
+            </article>
+
+
+            </ng-container>
+
+          </div>
+
+          <!-- Errors -->
+          <ng-container *ngIf="form.get('paymentOption')">
+
+            <ng-container
+              [ngTemplateOutlet]="errorsList"
+              [ngTemplateOutletContext]="{controlErrors: form.get('paymentOption')}"
+            >
+            </ng-container>
+
+          </ng-container>
+
+        </div>
+
+
+
+        <div class="note">
+
+          <p>NOTA:</p>
+
+          <p>
+            Te recomendamos no cerrar el navegador
+            hasta que la compra sea finalizada
+          </p>
+
+        </div>
+
+      </div>
+
+    </ng-container>
+
+    <button
+      (click)="buttonSubmitWasCLicked = true"
+      [ngClass]="{'disabled': disabledBtnSubmit()}"
+      [disabled]="disabledBtnSubmit()"
+      class="button button--full-width"
+      type="submit"
+
+    >
+      {{step === 1 ? 'continuar' : 'pagar ahora'}}
+    </button>
+
+  </form>
+
+</div>
+
 
 <!-- STEP 2 -->
-<ng-container *ngIf="step === 2">
 
-  <p (click)="step = 1" class="back-process">
+
+  <!-- <p (click)="step = 1" class="back-process">
     <span><</span>Atrás
   </p>
 
@@ -248,6 +342,8 @@
     <div class="line"></div>
 
   </div>
+
+<ng-container *ngIf="step === 2">
 
   <div>
 
@@ -299,16 +395,16 @@
         </div>
 
       </div>
-      <!-- (click)="step = 2" -->
+
       <div class="button button--full-width" type="submit">
-        <!-- bu -->
         pagar ahora
       </div>
 
     </form>
 
   </div>
-</ng-container>
+
+</ng-container> -->
 
 <!-- Template error -->
 

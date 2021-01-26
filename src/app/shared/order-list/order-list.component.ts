@@ -9,7 +9,7 @@ import { OrderListOptions } from '@interfaces/components-options/order.options.i
 export class OrderListComponent implements OnInit {
 
   @Input() isExpanded = false;
-  @Input() isListToPaid = true;
+  @Input() isListToPaid = false;
   @Input() orders: OrderListOptions[] = [];
 
   @Output() selected = new EventEmitter<OrderListOptions>();
@@ -18,11 +18,16 @@ export class OrderListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if (this.orders.length) {
-      this.orderSelected = this.orders[0];
-      this.selected.emit(this.orderSelected);
+
+    if (this.orders) {
+
+      if (this.orders.length) {
+        this.orderSelected = this.orders[0];
+        this.selected.emit(this.orderSelected);
+      }
 
     }
+
   }
 
 

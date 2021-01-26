@@ -35,6 +35,7 @@
           <div class="order-list" [ngClass]="{'expanded': tabSelected === 2}">
 
             <app-order-list
+              [isListToPaid]="true"
               [isExpanded]="tabSelected === 2"
               (selected)="selectedOrderList($event)"
               [orders]="ordersLists">

@@ -4,75 +4,81 @@
 
     <h1 class="text-capitalize">Carrito de compra</h1>
 
-    <div class="tab-container">
+    <ng-container *ngIf="ordersLists.length > 0">
 
-      <ul class="tab-menu">
+      <div class="tab-container">
 
-        <li
-          class="tab-item"
-          [ngClass]="{'active': tabSelected === 1 || tabSelected === 3}"
-          (click)="filterByTab(1)"
-        >
-          pedidos
-        </li>
+        <ul class="tab-menu">
 
-        <li
-          class="tab-item"
-          [ngClass]="{'active': tabSelected === 2}"
-          (click)="filterByTab(2)"
-        >
-          compras
-        </li>
+          <li
+            class="tab-item"
+            [ngClass]="{'active': tabSelected === 1 || tabSelected === 3}"
+            (click)="filterByTab(1)"
+          >
+            pedidos
+          </li>
 
-      </ul>
+          <li
+            class="tab-item"
+            [ngClass]="{'active': tabSelected === 2}"
+            (click)="filterByTab(2)"
+          >
+            compras
+          </li>
 
-      <div class="tab-content" [ngClass]="{'justify--init': tabSelected === 3 }">
+        </ul>
 
-        <!-- Order -> list, editor, e invoice -->
-        <ng-container *ngIf="tabSelected === 1 || tabSelected === 2">
+        <div class="tab-content" [ngClass]="{'justify--init': tabSelected === 3 }">
 
-          <!-- Order list by business -->
-          <div class="order-list">
-            <app-order-list
-              (selected)="selectedOrderList($event)"
-              [orders]="ordersLists">
-            </app-order-list>
-          </div>
+          <!-- Order -> list, editor, e invoice -->
+          <ng-container *ngIf="tabSelected === 1 || tabSelected === 2">
 
-          <div class="detail-content">
+            <!-- Order list by business -->
+            <div class="order-list">
+              <app-order-list
+                (selected)="selectedOrderList($event)"
+                [orders]="ordersLists"
+              >
+              </app-order-list>
+            </div>
 
-            <!-- Order editor -->
-            <ng-container *ngIf="tabSelected === 1">
+            <div class="detail-content">
 
-              <app-order-editor
-                [orders]="ordersListSelected.orders"
-                (purchaseAction)="purchaseAction($event)">
-              </app-order-editor>
+              <!-- Order editor -->
+              <ng-container *ngIf="tabSelected === 1">
 
-            </ng-container>
+                <app-order-editor
+                  [orders]="ordersListSelected.orders"
+                  (purchaseAction)="purchaseAction($event)">
+                </app-order-editor>
 
-            <!-- invoice -->
-            <ng-container *ngIf="tabSelected === 2">
+              </ng-container>
 
-              <app-invoice></app-invoice>
+              <!-- invoice -->
+              <ng-container *ngIf="tabSelected === 2">
 
-            </ng-container>
+                <app-invoice></app-invoice>
 
-          </div>
+              </ng-container>
 
-        </ng-container>
+            </div>
 
-        <ng-container *ngIf="tabSelected === 3">
+          </ng-container>
 
-          <div class="order-payment-forms">
-            <app-order-payment-forms></app-order-payment-forms>
-          </div>
+          <ng-container *ngIf="tabSelected === 3">
 
-        </ng-container>
+            <div class="order-payment-forms">
+              <app-order-payment-forms>
+              </app-order-payment-forms>
+            </div>
+
+          </ng-container>
+
+        </div>
 
       </div>
 
-    </div>
+    </ng-container>
 
   </section>
 

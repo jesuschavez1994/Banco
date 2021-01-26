@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, Injectable } from '@angular/core';
 import { DropdownOption, ClassIcon, ExtraButton, ExtraButtonEmitter } from '@interfaces/components-options/dropdown.options.interface';
-import { Product } from '@interfaces/productCart.interface';
+import { ProductOfCart } from '@interfaces/productCart.interface';
 import { Favorite, FavoriteResp } from '../../interfaces/product.interface';
 
 @Injectable({
@@ -72,7 +72,7 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
     );
   }
 
-  public loadOptionsWithProductsCartResp( products: Product[]) {
+  public loadOptionsWithProductsCartResp( products: ProductOfCart[]) {
 
     const menuOptions = [];
 

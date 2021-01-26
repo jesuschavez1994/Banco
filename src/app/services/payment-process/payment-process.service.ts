@@ -4,6 +4,7 @@ import { Service } from '@services/service.service';
 import { ProductToCartResp } from '@interfaces/productCart.interface';
 import { Observable } from 'rxjs';
 import { UsuarioService } from '../usuario/usuario.service';
+import { Order, PaymentCreated } from '../../interfaces/order.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -60,31 +61,64 @@ export class PaymentProcessService extends Service {
    * @returns {*}
    * @memberof PaymentProcessService
    */
-  public createOrder(){
+  public createOrder(): Observable<Order> {
     this.setIdUser();
-
-    return this.postQuery(`users/${this.idUser}/orders/`, {});
+    return this.postQuery<Order>(`users/${this.idUser}/orders`, {});
   }
 
-  public getOrders(){
+  /**
+   * @description Se obtiene el pedido a pagar, es importante porque
+   * aquí se obtendrá las opciones de pago (payments)
+   * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christopher@matiz.com.ve
+   * @date 24/01/2021
+   * @returns {*}
+   * @memberof PaymentProcessService
+   */
+  public getOrders(): Observable<Order> {
     this.setIdUser();
-
-    return this.execQuery(`users/${this.idUser}/orders/`);
+    return this.execQuery<Order>(`users/${this.idUser}/orders`);
   }
 
   public statusPayment(idProduct: number){
     return this.execQuery(`pago-tienda/${idProduct}/status`);
   }
 
-  public orderPayments(idOrder: number) {
+
+  /**
+   * @description Agrega los datos en el atributo payment de un order, el cual significa que
+   * agrega al order el tipo de pago seleccionado, por defecto es WebPayPlus
+   *
+   * El objetivo es asignar el tipo de pago seleccionado al pedido especifico, para obtener el
+   * payment_id para realizar la createTransaction.
+   *
+   * Las ordenes de compra, tienen el atributo payment,
+   * el cual en caso de ser null, significa que aún no selecciona una opción de pago.
+   * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christopher<@>matiz.com.ve
+   * @date 24/01/2021
+   * @param {number} idOrder
+   * @returns {*}
+   * @memberof PaymentProcessService
+   */
+  public createOrderPayment(idOrder: number): Observable<PaymentCreated> {
     this.setIdUser();
-
-    return this.postQuery(`users/${this.idUser}/orders/${idOrder}/payments`, {});
+    return this.postQuery<PaymentCreated>(`users/${this.idUser}/orders/${idOrder}/payments`, {});
   }
 
-  public createTransaction() {
-    return this.execQuery(`webpayplus/createdMallTransaction`);
+  /**
+   * @description Crea la transacción de compra con webPay.
+   * retorna el token y url de pago de webPay
+   * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christopher@matiz.com.ve
+   * @date 24/01/2021
+   * @param {number} paymentId
+   * @returns {*}
+   * @memberof PaymentProcessService
+   */
+  public createTransaction(paymentId: number) {
+    return this.execQuery(`webpayplus/createdMallTransaction?payment_id=${paymentId}`);
   }
 
+  public mallReturnUrl() {
+    return this.execQuery(`webpayplus/mallReturnUrl`);
+  }
 
 }
