@@ -21,7 +21,6 @@ import { MaterialModule } from '@Angula-Material/material.module';
 // Mapa //
 import { AgmCoreModule } from '@agm/core';
 
-
 import { ContactDescriptionEditComponent } from './components/contact-description-edit/contact-description-edit.component';
 import { ContactDescriptionComponent } from './components/contact-description/contact-description.component';
 import { AsideComponent } from './shared/aside/aside.component';
@@ -36,7 +35,6 @@ import { ScheduleStoreComponent } from './components/schedule-store/schedule-sto
 import { ComponentsComponent } from './components/components.component';
 import { SheduleStoreEditComponent } from './components/shedule-store-edit/shedule-store-edit.component';
 
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { ProductLoadingComponent } from './product-loading/product-loading.component';
@@ -44,14 +42,11 @@ import { MyStoreComponent } from './pages/my-store/my-store.component';
 
 // PAGINATION //
 
-import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 
 // ALYLE //
 
-import {
-  HAMMER_GESTURE_CONFIG,
-  HammerModule
-} from '@angular/platform-browser';
+import { HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 
 /** Import Alyle UI */
 import {
@@ -59,7 +54,7 @@ import {
   StyleRenderer,
   LY_THEME,
   LY_THEME_NAME,
-  LyHammerGestureConfig
+  LyHammerGestureConfig,
 } from '@alyle/ui';
 
 import { LyIconModule } from '@alyle/ui/icon';
@@ -95,7 +90,6 @@ import { TableroDeSincronizacionComponent } from './sincronizacion/pages/synchro
 import { BankProductComponent } from './sincronizacion/pages/bank-product/bank-product.component';
 import { ItemListProductComponent } from './sincronizacion/pages/bank-product/container/item-list-product/item-list-product.component';
 
-
 // CARRUSEL //
 
 import { LoadBanckProductComponent } from './Admin/pages/load-banck-product/load-banck-product.component';
@@ -124,136 +118,147 @@ import { DragDropZoneFileComponent } from './sincronizacion/pages/exportar-lista
 import { SizeFileComponent } from './sincronizacion/pages/exportar-lista-excel/container/size-file/size-file.component';
 import { ProgessBarFileExcelComponent } from './sincronizacion/pages/exportar-lista-excel/container/progess-bar-file-excel/progess-bar-file-excel.component';
 
+/* Account settings components imports */
+import { SettingsComponent } from './account-settings/settings.component';
+import { SidebarComponent } from './account-settings/pages/plans/components/sidebar/sidebar.component';
+import { PlanCardComponent } from './account-settings/pages/plans/components/plan-card/plan-card.component';
+import { PlanDetailsComponent } from './account-settings/pages/plans/components/plan-details/plan-details.component';
+import { PaymentDetailsComponent } from './account-settings/pages/plans/components/payment-details/payment-details.component';
+import { PlansComponent } from './account-settings/pages/plans/plans.component';
+import { RedirectionModalComponent } from './account-settings/pages/plans/components/redirection-modal/redirection-modal.component';
 
 @NgModule({
-    entryComponents: [
-      MapEditarComponent,
-      ContactDescriptionEditComponent,
-      ModalAddCategoriasAndSubcategoriasComponent
+  entryComponents: [
+    MapEditarComponent,
+    ContactDescriptionEditComponent,
+    ModalAddCategoriasAndSubcategoriasComponent,
+    RedirectionModalComponent,
+  ],
+  // tslint:disable-next-line: max-line-length
+  declarations: [
+    AccountComponent,
+    DashboardComponent,
+    ProductLoadComponent,
+    FormAccountComponent,
+    ContactComponent,
+    ContactInformationEditComponent,
+    ContactInformationComponent,
+    MapaComponent,
+    MapEditarComponent,
+    ContactDescriptionEditComponent,
+    ContactDescriptionComponent,
+    AsideComponent,
+    PhotoUserEditComponent,
+    PhotoUserComponent,
+    CardShimmerFormConfigurationComponent,
+    CardShimmerPhotoUserEditComponent,
+    CardShimmerTableInformacionComponent,
+    CardShimmerTitleStoreComponent,
+    ScheduleStoreComponent,
+    ComponentsComponent,
+    SheduleStoreEditComponent,
+    ProductLoadingComponent,
+    MyStoreComponent,
+    ViewProductsLoadsComponent,
+    ProductLoadingSmartComponent,
+    LoadProductComponent,
+    ModalAddCategoriasAndSubcategoriasComponent,
+    ModalDeleteProductComponent,
+    NavbarSincronizacionComponent,
+    ExportarListaExcelComponent,
+    SuggestedProductsComponent,
+    SincronizacionViewsComponent,
+    ItemsSuggestedProductsComponent,
+    NoSuggestedProductsComponent,
+    SynchronizedProductsComponent,
+    NoSynchronizedProductsComponent,
+    TableComponent,
+    SynchronizedProductsTableComponent,
+    DialogSynchronizedComponent,
+    TableroDeSincronizacionComponent,
+    BankProductComponent,
+    ItemListProductComponent,
+    LoadBanckProductComponent,
+    FormBanckProductAdminComponent,
+    FormBanckProductSyncComponent,
+    EditProdutcComponent,
+    EditSincronizacionComponent,
+    EditProductNoDisponibleComponent,
+    SearchComponent,
+    DesincronizarComponent,
+    AsideFiltrosComponent,
+    CarouselSuggestedComponent,
+    CatalogoBankProductComponent,
+    EditProductBankComponent,
+    ProductsCardsStoreComponent,
+    SearchStoreComponent,
+    BannerEditComponent,
+    CropperImgBannerComponent,
+    ErrorFailedMessageComponent,
+    ProgressBarComponent,
+    DropZoneComponent,
+    DragDropZoneFileComponent,
+    SizeFileComponent,
+    ProgessBarFileExcelComponent,
+    SidebarComponent,
+    SettingsComponent,
+    PlanCardComponent,
+    PlanDetailsComponent,
+    PaymentDetailsComponent,
+    PlansComponent,
+  ],
 
-    ],
-    // tslint:disable-next-line: max-line-length
-    declarations: [
-      AccountComponent,
-      DashboardComponent,
-      ProductLoadComponent,
-      FormAccountComponent,
-      ContactComponent,
-      ContactInformationEditComponent,
-      ContactInformationComponent,
-      MapaComponent,
-      MapEditarComponent,
-      ContactDescriptionEditComponent,
-      ContactDescriptionComponent,
-      AsideComponent,
-      PhotoUserEditComponent,
-      PhotoUserComponent,
-      CardShimmerFormConfigurationComponent,
-      CardShimmerPhotoUserEditComponent,
-      CardShimmerTableInformacionComponent,
-      CardShimmerTitleStoreComponent,
-      ScheduleStoreComponent,
-      ComponentsComponent,
-      SheduleStoreEditComponent,
-      ProductLoadingComponent,
-      MyStoreComponent,
-      ViewProductsLoadsComponent,
-      ProductLoadingSmartComponent,
-      LoadProductComponent,
-      ModalAddCategoriasAndSubcategoriasComponent,
-      ModalDeleteProductComponent,
-      NavbarSincronizacionComponent,
-      ExportarListaExcelComponent,
-      SuggestedProductsComponent,
-      SincronizacionViewsComponent,
-      ItemsSuggestedProductsComponent,
-      NoSuggestedProductsComponent,
-      SynchronizedProductsComponent,
-      NoSynchronizedProductsComponent,
-      TableComponent,
-      SynchronizedProductsTableComponent,
-      DialogSynchronizedComponent,
-      TableroDeSincronizacionComponent,
-      BankProductComponent,
-      ItemListProductComponent,
-      LoadBanckProductComponent,
-      FormBanckProductAdminComponent,
-      FormBanckProductSyncComponent,
-      EditProdutcComponent,
-      EditSincronizacionComponent,
-      EditProductNoDisponibleComponent,
-      SearchComponent,
-      DesincronizarComponent,
-      AsideFiltrosComponent,
-      CarouselSuggestedComponent,
-      CatalogoBankProductComponent,
-      EditProductBankComponent,
-      ProductsCardsStoreComponent,
-      SearchStoreComponent,
-      BannerEditComponent,
-      CropperImgBannerComponent,
-      ErrorFailedMessageComponent,
-      ProgressBarComponent,
-      DropZoneComponent,
-      DragDropZoneFileComponent,
-      SizeFileComponent,
-      ProgessBarFileExcelComponent,
-      ],
+  imports: [
+    CommonModule,
+    NgxDropzoneModule,
+    AppRoutingModule,
+    SpreadSheetsModule,
+    MaterialModule,
+    NgxPaginationModule,
+    SharedModule,
+    PipesModule,
+    ImageCropperModule,
+    BrowserAnimationsModule,
+    // MODULOS Alyle //
+    LyButtonModule,
+    LyToolbarModule,
+    LyImageCropperModule,
+    LyIconModule,
+    // END MODULOS Alyle //
+    HammerModule,
+    ComponentsModule,
+    NzTimePickerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14',
+    }),
+    NgbModule,
+    NgxSpinnerModule,
+  ],
 
-    imports: [
-      CommonModule,
-      NgxDropzoneModule,
-      AppRoutingModule,
-      SpreadSheetsModule,
-      MaterialModule,
-      NgxPaginationModule,
-      SharedModule,
-      PipesModule,
-      ImageCropperModule,
-      BrowserAnimationsModule,
-      // MODULOS Alyle //
-      LyButtonModule,
-      LyToolbarModule,
-      LyImageCropperModule,
-      LyIconModule,
-      // END MODULOS Alyle //
-      HammerModule,
-      ComponentsModule,
-      NzTimePickerModule,
-      FormsModule,
-      ReactiveFormsModule,
-      AgmCoreModule.forRoot({
-        apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'
-      }),
-      NgbModule,
-      NgxSpinnerModule,
-    ],
+  exports: [
+    PhotoUserEditComponent,
+    SearchComponent,
+    PhotoUserComponent,
+    CardShimmerFormConfigurationComponent,
+    ModalAddCategoriasAndSubcategoriasComponent,
+    NavbarSincronizacionComponent,
+    TableComponent,
+    SynchronizedProductsTableComponent,
+    TableroDeSincronizacionComponent,
+    SearchStoreComponent,
+  ],
 
-    exports: [
-      PhotoUserEditComponent,
-      SearchComponent,
-      PhotoUserComponent,
-      CardShimmerFormConfigurationComponent,
-      ModalAddCategoriasAndSubcategoriasComponent,
-      NavbarSincronizacionComponent,
-      TableComponent,
-      SynchronizedProductsTableComponent,
-      TableroDeSincronizacionComponent,
-      SearchStoreComponent
-    ],
-
-    providers: [
-      [ LyTheme2 ],
-      [ StyleRenderer ],
-      // Theme that will be applied to this module
-      { provide: LY_THEME_NAME, useValue: 'minima-light' },
-      { provide: LY_THEME, useClass: MinimaLight, multi: true }, // name: `minima-light`
-      { provide: LY_THEME, useClass: MinimaDark, multi: true }, // name: `minima-dark`
-      // Gestures
-      { provide: HAMMER_GESTURE_CONFIG, useClass: LyHammerGestureConfig }
-    ],
-
-  })
-
-
-  export class PrivateviewModule { }
+  providers: [
+    [LyTheme2],
+    [StyleRenderer],
+    // Theme that will be applied to this module
+    { provide: LY_THEME_NAME, useValue: 'minima-light' },
+    { provide: LY_THEME, useClass: MinimaLight, multi: true }, // name: `minima-light`
+    { provide: LY_THEME, useClass: MinimaDark, multi: true }, // name: `minima-dark`
+    // Gestures
+    { provide: HAMMER_GESTURE_CONFIG, useClass: LyHammerGestureConfig },
+  ],
+})
+export class PrivateviewModule {}

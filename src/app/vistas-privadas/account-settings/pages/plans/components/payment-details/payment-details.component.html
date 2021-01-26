@@ -1,0 +1,54 @@
+<!-- Payment details section -->
+<div class="payment-details">
+  <button class="back" (click)="backToPreviousPage()" mat-button>
+    <i class="fas fa-caret-left"></i> Atrás
+  </button>
+
+  <mat-card class="voucher">
+    <mat-card-header class="voucher-title" mat-card-image>
+      <div class="check">
+        <img
+          src="../../../../../assets/img/Suscription/CheckMark.svg"
+          alt="CheckMark"
+          height="80"
+          width="80"
+        />
+      </div>
+      <small class="text">¡Tu pago fue realizado con éxito!</small>
+    </mat-card-header>
+
+    <mat-card-content class="voucher-body">
+      <ul>
+        <li>
+          <small><b>Total:</b></small>
+          <p><b>$68.89</b></p>
+        </li>
+
+        <li>
+          <small>Hora:</small>
+          <small>09:43</small>
+        </li>
+
+        <li>
+          <small>Fecha:</small>
+          <small>29/03/2021</small>
+        </li>
+
+        <div class="square">
+          <li>
+            <small>Número de tarjeta:</small>
+            <small>*******6066</small>
+          </li>
+
+          <li class="last">
+            <small>Cód. autorización:</small>
+            <small>076729</small>
+          </li>
+        </div>
+      </ul>
+
+      <button class="btn-details" mat-button>Ver detalles</button>
+    </mat-card-content>
+  </mat-card>
+</div>
+<!-- #Payment details section -->

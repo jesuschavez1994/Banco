@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700");
 /* You can add global styles to this file, and also import other style files */
 .width-5 {
   width: 5% !important;
@@ -72,7 +73,6 @@
   justify-content: center !important;
   padding: 0px !important;
 }
-
 
 .correo-icon {
   background-image: url(./assets/img/LoginIconos/email.svg);
@@ -161,7 +161,6 @@
   height: 100vh;
 }
 
-
 /* Left */
 .left-85 {
   left: 85%;
@@ -228,9 +227,6 @@
   top: 5%;
 }
 
-
-
-
 .p-10 {
   padding: 10px;
 }
@@ -242,62 +238,67 @@
 
 /* Familias */
 .family {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .family-300 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 300;
 }
 
 .family-400 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
 }
 
 .family-500 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
 }
 
 .family-600 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
 }
 
 .family-700 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
 }
 
 /* Familias Fredoka one */
 .fredoka {
-  font-family: 'Fredoka One', cursive;
+  font-family: "Fredoka One", cursive;
 }
 
 /* Familias Open Sans*/
 .OpenSans-700 {
-  font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+  font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica,
+    Arial, sans-serif;
   font-weight: 700;
 }
 
 .OpenSans-600 {
-  font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+  font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica,
+    Arial, sans-serif;
   font-weight: 600;
 }
 
 .OpenSans-500 {
-  font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+  font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica,
+    Arial, sans-serif;
   font-weight: 500;
 }
 
 .OpenSans-400 {
-  font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+  font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica,
+    Arial, sans-serif;
   font-weight: 400;
 }
 
 .OpenSans-300 {
-  font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+  font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica,
+    Arial, sans-serif;
   font-weight: 300;
 }
 
@@ -519,16 +520,22 @@
 }
 
 .orange {
-  color: #F09207;
+  color: #f09207;
 }
 
 .button {
-  background-color: #F09207 !important;
+  background-color: #f09207 !important;
   border: none !important;
   cursor: pointer;
   color: white !important;
 }
 
+.button {
+  background-color: #f09207 !important;
+  border: none !important;
+  cursor: pointer;
+  color: white !important;
+}
 
 .animated {
   -webkit-animation-duration: 1s;
@@ -559,13 +566,10 @@
   background-color: rgba(96, 195, 235, 0.54) !important;
 }
 
-
-
 @keyframes fadeIn {
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }
@@ -576,7 +580,7 @@
 }
 
 ::placeholder {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 15px;
 }
@@ -600,11 +604,11 @@
 }
 
 #registrarme:hover {
-  color: #F09207
+  color: #f09207;
 }
 
 #inisiar-sesion:hover {
-  color: #F09207
+  color: #f09207;
 }
 
 .boxp:hover {
@@ -623,7 +627,7 @@
 }
 
 .button-hover:hover {
-  background: #F09207 !important;
+  background: #f09207 !important;
 }
 
 .background-white {
@@ -635,7 +639,7 @@ li {
 }
 
 a:hover {
-  color: #F09207;
+  color: #f09207;
   text-decoration: none !important;
   cursor: pointer;
 }
@@ -648,13 +652,12 @@ a:hover {
   cursor: pointer;
 }
 
-
 /* Edit angular material */
 .mat-h5,
 .mat-typography h5 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
-  font-size: 28px !important;
+  font-size: 28px;
 }
 
 .modal-backdrop {
@@ -683,6 +686,7 @@ html {
   background: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 a:hover,
@@ -693,7 +697,6 @@ a:focus {
 a.link {
   color: #455a64;
 }
-
 a.link:hover,
 a.link:focus {
   color: #398bf7;
@@ -2232,7 +2235,6 @@ form p:last-child {
   .website-visitor {
     height: 333px;
   }
-
   .auto-height {
     min-height: 240px;
   }
@@ -2298,13 +2300,11 @@ form p:last-child {
   .container-fluid {
     padding: 25px 15px 25px 15px;
   }
-
   /*Header*/
   .topbar {
     position: fixed;
     width: 100%;
   }
-
   .topbar .top-navbar {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -2323,7 +2323,6 @@ form p:last-child {
     display: flex;
     width: 100%;
   }
-
   .topbar .top-navbar .navbar-nav {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -2332,18 +2331,18 @@ form p:last-child {
     flex-direction: row;
   }
 
-  .topbar .top-navbar .navbar-nav>.nav-item.show {
+  .topbar .top-navbar .navbar-nav > .nav-item.show {
     position: static;
   }
 
-  .topbar .top-navbar .navbar-nav>.nav-item.show .dropdown-menu {
+  .topbar .top-navbar .navbar-nav > .nav-item.show .dropdown-menu {
     width: 100%;
     margin-top: 0px;
   }
 
-  .topbar .top-navbar .navbar-nav>.nav-item>.nav-link {
-    padding-left: .50rem;
-    padding-right: .50rem;
+  .topbar .top-navbar .navbar-nav > .nav-item > .nav-link {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 
   .topbar .top-navbar .navbar-nav .dropdown-menu {
@@ -2354,15 +2353,12 @@ form p:last-child {
     height: 480px;
     overflow: auto;
   }
-
   /*Sidebar and wrapper*/
   .mini-sidebar .page-wrapper {
     margin-left: 0px;
     padding-top: 70px;
   }
-
 }
-
 
 html,
 body {
@@ -2371,45 +2367,40 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
 
 /* Estilos barra (thumb) de scroll */
 
 /* Tamaño del scroll */
 body::-webkit-scrollbar {
-	width: 0.8em;
-    height: 0.8em;
+  width: 0.8em;
+  height: 0.8em;
 }
 
 body::-webkit-scrollbar-thumb {
-	background: #ccc;
-	border-radius: 1em;
+  background: #ccc;
+  border-radius: 1em;
 }
 
 body::-webkit-scrollbar-thumb:active {
-	background-color: #999999;
+  background-color: #999999;
 }
 
 body::-webkit-scrollbar-thumb:hover {
-	background: #b3b3b3;
-	box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 /* Estilos track de scroll */
 body::-webkit-scrollbar-track {
-	background: #e1e1e1;
-	border-radius: 4px;
-	display: none;
+  background: #e1e1e1;
+  border-radius: 4px;
+  display: none;
 }
 
 body::-webkit-scrollbar-track:hover,
 body::-webkit-scrollbar-track:active {
-	background: #d4d4d4;
+  background: #d4d4d4;
 }
 
 /* // */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

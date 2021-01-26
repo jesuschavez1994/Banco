@@ -40,153 +40,157 @@ import { DesincronizarComponent } from './vistas-privadas/sincronizacion/compone
 import { LoginComponent } from './vistas-publicas/login/login/login.component';
 import { EditProductBankComponent } from './vistas-privadas/Admin/pages/container/edit-product-bank/edit-product-bank.component';
 
-import { PageUnderConstructionComponent } from './vistas-publicas/page-under-construction/page-under-construction.component'
+import { PageUnderConstructionComponent } from './vistas-publicas/page-under-construction/page-under-construction.component';
 
-const APP_ROUTES: Routes = [
+// Prueba para visualizacion de la vistas desarrolladas
+import { SettingsComponent } from './vistas-privadas/account-settings/settings.component';
+import { PlansComponent } from './vistas-privadas/account-settings/pages/plans/plans.component';
 
-    {path: 'home', component: HomeComponent},
-    {path: 'register', component: RegisterComponent},
-    {path: 'categorys', component: CategorysComponent,
+const APP_ROUTES = [
+  { path: 'home', component: HomeComponent },
+  { path: 'register', component: RegisterComponent },
+  {
+    path: 'admin',
+    component: LoadBanckProductComponent,
+    children: [
+      {
+        path: 'edit-bank-admin/:id',
+        component: EditProductBankComponent,
+      },
+    ],
+  },
+  { path: 'login', component: LoginComponent },
 
-            children: [
-            {path: '', component: MenuCategorysComponent},
-            {path: ':categories/products', component: ListProductComponent},
-            {path: ':categories/:subcategories/products', component: ListProductComponent},
+  {
+    path: 'page-under-construction',
+    component: PageUnderConstructionComponent,
+  },
 
+  // Christopher Views
+  {
+    path: 'shopping-cart',
+    // component: ShoppingCartComponent,
+    loadChildren: () =>
+      import('./vistas-publicas/shopping-cart/shopping-cart.module').then(
+        (m) => m.ShoppingCartModule
+      ),
+  },
+
+  {
+    path: 'business-detail/:idStore', // Se obtiene el id de la tienda para mostrar su listo productos
+    component: BusinessDetailComponent,
+  },
+  {
+    path: 'business-detail/:idStore/:show', // Se obtiene el id de la tienda para mostrar su listo productos
+    component: BusinessDetailComponent,
+  },
+  {
+    path: 'business-detail/:idStore/:show/:idProduct', // Se obtiene el id de la tienda para mostrar su listo productos
+    component: BusinessDetailComponent,
+  },
+
+  // Christopher Views //
+
+  { path: 'register-negocio', component: FormDataNegocioComponent },
+
+  { path: 'rut-store', component: RutStoreComponent },
+
+  {
+    path: 'account',
+    component: AccountComponent,
+    canActivate: [LoginGuardGuard],
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
+    children: [
+      {
+        path: 'plans',
+        component: PlansComponent,
+        data: { title: 'Founduss | Plans' },
+      },
+    ],
+  },
+
+  // VISTAS ADMINISTRATIVAS DEL STORE //
+
+  {
+    path: 'my-store',
+    component: MyStoreComponent,
+    canActivate: [LoginGuardGuard],
+    children: [
+      {
+        path: 'contact',
+        component: ContactComponent,
+      },
+      { path: 'product-catalogue', component: LoadProductComponent },
+      {
+        path: 'load-product',
+        component: ProductLoadingComponent,
+      },
+      {
+        path: 'sync-this-product/:id',
+        component: FormBanckProductSyncComponent,
+      },
+      {
+        path: 'edit-product-sync/:id',
+        component: EditSincronizacionComponent,
+      },
+      {
+        path: 'desincronizar/:id',
+        component: DesincronizarComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: EditProdutcComponent,
+      },
+      {
+        path: 'edit-product/:id',
+        component: EditProductNoDisponibleComponent,
+      },
+      {
+        path: 'sincronizacion',
+        component: SincronizacionViewsComponent,
+        children: [
+          {
+            path: 'exportar-lista-excel',
+            component: ExportarListaExcelComponent,
+          },
+          {
+            path: 'suggested-products',
+            component: SuggestedProductsComponent,
+          },
+          {
+            path: 'suggested-products-list/:id/:list',
+            component: SuggestedProductsComponent,
+          },
+          {
+            path: 'synchronized-products',
+            component: SynchronizedProductsComponent,
+          },
+          {
+            path: 'bank-product',
+            component: BankProductComponent,
+          },
         ],
+      },
 
-    },
-    {   path: 'admin',
-        component: LoadBanckProductComponent,
-        children: [
-            {
-                path: 'edit-bank-admin/:id',
-                component: EditProductBankComponent
-            },
-        ]
-    },
-    {path: 'login', component: LoginComponent},
+      { path: '**', pathMatch: 'full', redirectTo: 'contact' },
+    ],
+  },
 
-    {path: 'page-under-construction', component: PageUnderConstructionComponent},
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'terminos-ycondiciones', component: TerminosYCondicionesComponent },
+  {
+    path: 'public-views',
+    component: PublicViewsComponent,
+    children: [
+      { path: 'detalle-producto/:id', component: DetalleProductoComponent },
+    ],
+  },
+  // { path: 'detalle-producto/:id', component: ViewProductoComponent},
 
-    // Christopher Views
-    {
-      path: 'shopping-cart',
-      // component: ShoppingCartComponent,
-      loadChildren: () => import('./vistas-publicas/shopping-cart/shopping-cart.module').then( m => m.ShoppingCartModule)
-    },
-
-    {
-      path: 'business-detail/:idStore', // Se obtiene el id de la tienda para mostrar su listo productos
-      component: BusinessDetailComponent
-    },
-    {
-      path: 'business-detail/:idStore/:show', // Se obtiene el id de la tienda para mostrar su listo productos
-      component: BusinessDetailComponent,
-    },
-    {
-      path: 'business-detail/:idStore/:show/:idProduct', // Se obtiene el id de la tienda para mostrar su listo productos
-      component: BusinessDetailComponent,
-    },
-
-    // Christopher Views //
-
-    {   path: 'register-negocio',
-        component: FormDataNegocioComponent,
-    },
-
-    {   path: 'rut-store',
-        component: RutStoreComponent,
-    },
-
-    {   path: 'account',
-        component: AccountComponent,
-        canActivate: [ LoginGuardGuard ],
-    },
-
-    // VISTAS ADMINISTRATIVAS DEL STORE //
-
-
-
-    {
-        path: 'my-store',
-        component: MyStoreComponent,
-        canActivate: [ LoginGuardGuard ],
-        children: [
-            {
-                path: 'contact',
-                component: ContactComponent,
-            },
-            {   path: 'product-catalogue',
-                component: LoadProductComponent,
-            },
-            {
-                path: 'load-product',
-                component: ProductLoadingComponent
-            },
-            {
-                path: 'sync-this-product/:id',
-                component: FormBanckProductSyncComponent
-            },
-            {
-                path: 'edit-product-sync/:id',
-                component: EditSincronizacionComponent
-            },
-            {
-                path: 'desincronizar/:id',
-                component: DesincronizarComponent
-            },
-            {
-                path: 'edit/:id',
-                component: EditProdutcComponent
-            },
-            {
-                path: 'edit-product/:id',
-                component: EditProductNoDisponibleComponent
-            },
-            {
-                path: 'sincronizacion',
-                component: SincronizacionViewsComponent,
-                children: [
-                    {
-                        path: 'exportar-lista-excel',
-                        component: ExportarListaExcelComponent
-                   },
-                   {
-                    path: 'suggested-products',
-                    component: SuggestedProductsComponent
-                    },
-                   {
-                    path: 'suggested-products-list/:id/:list',
-                    component: SuggestedProductsComponent
-                    },
-                    {
-                        path: 'synchronized-products',
-                        component: SynchronizedProductsComponent
-                    },
-                    {
-                        path: 'bank-product',
-                        component: BankProductComponent
-                    }
-                ]
-            },
-
-            {path: '**', pathMatch: 'full', redirectTo: 'contact'},
-        ]
-    },
-
-    {path: 'dashboard', component: DashboardComponent},
-    {path: 'terminos-ycondiciones', component: TerminosYCondicionesComponent},
-    {
-        path: 'public-views',
-        component: PublicViewsComponent,
-        children: [
-            { path: 'detalle-producto/:id', component: DetalleProductoComponent},
-        ]
-    },
-    // { path: 'detalle-producto/:id', component: ViewProductoComponent},
-
-    { path: '**', pathMatch: 'full', redirectTo: 'page-under-construction' }
+  { path: '**', pathMatch: 'full', redirectTo: 'page-under-construction' },
 ];
 
-export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES, {useHash: true});
+export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES, { useHash: true });

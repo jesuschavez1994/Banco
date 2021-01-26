@@ -1,0 +1,92 @@
+/* ---------------- Resets fot global stylings -------------- */
+* {
+  font-family: "Montserrat", "Segoe UI", sans-serif;
+}
+
+/* ------------ Main section stylings ---------------- */
+.main-wrapper {
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  scroll-behavior: smooth;
+}
+
+/* 
+  Wrapper del contenido que se muestre en el "router-outlet".
+  Se debe modificar la propiedad "padding" y reducirlo para pantallas pequeñas.
+*/
+.content-wrapper {
+  margin-top: 90px;
+  padding: 0px 240px 0px 15px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: auto 50px auto;
+  grid-template-areas:
+    "white-space route route route route route"
+    "sidebar content content content content content";
+  scroll-behavior: smooth;
+}
+
+.title {
+  margin-bottom: 10px;
+}
+
+.title > h2 {
+  font-family: "Montserrat", "Segoe UI", sans-serif;
+}
+
+.main-area p {
+  margin-bottom: 20px;
+  font-size: 1em;
+}
+
+.white-space {
+  grid-area: white-space;
+  width: 100%;
+}
+
+.navbar-area {
+  grid-area: navbar;
+}
+
+.route-area {
+  grid-area: route;
+}
+
+.sidebar-area {
+  grid-area: sidebar;
+}
+
+.main-area {
+  grid-area: content;
+  grid-column-start: 2;
+  grid-column-end: 7;
+  position: relative;
+}
+
+.main-area .description {
+  font-size: 0.9em;
+}
+
+.views {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.plans-container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.payment-container {
+  display: flex;
+  position: relative;
+}
+
+.payment-details-container {
+  display: flex;
+  position: relative;
+}
