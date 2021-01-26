@@ -19,13 +19,16 @@
       <span>64.98</span>
     </h5>
 
-    <p>PARA COMPLETAR LA COMPRA COMPLETE EL SIGUIENTE REQUERIMIENTO:</p>
+    <p class="text">
+      PARA COMPLETAR LA COMPRA COMPLETE EL SIGUIENTE REQUERIMIENTO:
+    </p>
 
     <div class="payment-methods">
       <div class="webpay-banner">
         <p class="title">Método de pago:</p>
         <mat-checkbox
           class="checkbox"
+          (change)="onChange()"
           [(ngModel)]="webpayDebitCard"
         ></mat-checkbox>
 

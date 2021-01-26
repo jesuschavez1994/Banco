@@ -98,14 +98,10 @@ const APP_ROUTES = [
   },
   {
     path: 'settings',
-    component: SettingsComponent,
-    children: [
-      {
-        path: 'plans',
-        component: PlansComponent,
-        data: { title: 'Founduss | Plans' },
-      },
-    ],
+    loadChildren: () =>
+      import('./vistas-privadas/account-settings/account-settings.module').then(
+        (module) => module.AccountSettingsModule
+      ),
   },
 
   // VISTAS ADMINISTRATIVAS DEL STORE //

@@ -118,21 +118,11 @@ import { DragDropZoneFileComponent } from './sincronizacion/pages/exportar-lista
 import { SizeFileComponent } from './sincronizacion/pages/exportar-lista-excel/container/size-file/size-file.component';
 import { ProgessBarFileExcelComponent } from './sincronizacion/pages/exportar-lista-excel/container/progess-bar-file-excel/progess-bar-file-excel.component';
 
-/* Account settings components imports */
-import { SettingsComponent } from './account-settings/settings.component';
-import { SidebarComponent } from './account-settings/pages/plans/components/sidebar/sidebar.component';
-import { PlanCardComponent } from './account-settings/pages/plans/components/plan-card/plan-card.component';
-import { PlanDetailsComponent } from './account-settings/pages/plans/components/plan-details/plan-details.component';
-import { PaymentDetailsComponent } from './account-settings/pages/plans/components/payment-details/payment-details.component';
-import { PlansComponent } from './account-settings/pages/plans/plans.component';
-import { RedirectionModalComponent } from './account-settings/pages/plans/components/redirection-modal/redirection-modal.component';
-
 @NgModule({
   entryComponents: [
     MapEditarComponent,
     ContactDescriptionEditComponent,
     ModalAddCategoriasAndSubcategoriasComponent,
-    RedirectionModalComponent,
   ],
   // tslint:disable-next-line: max-line-length
   declarations: [
@@ -200,12 +190,6 @@ import { RedirectionModalComponent } from './account-settings/pages/plans/compon
     DragDropZoneFileComponent,
     SizeFileComponent,
     ProgessBarFileExcelComponent,
-    SidebarComponent,
-    SettingsComponent,
-    PlanCardComponent,
-    PlanDetailsComponent,
-    PaymentDetailsComponent,
-    PlansComponent,
   ],
 
   imports: [

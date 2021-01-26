@@ -36,7 +36,7 @@ import {
   ],
 })
 export class PlansComponent implements OnInit {
-  currentPage = this.localStorage.getItem('settingsActualPage');
+  currentPage: string = '';
   selectedPlan: Plan;
   orderInfo: CreatedOrder;
   voucherDetails: object;
@@ -50,6 +50,8 @@ export class PlansComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.currentPage = this.localStorage.getItem('settingsActualPage');
+    console.log(this.currentPage);
     this.plans = [
       new Plan(
         'basic',

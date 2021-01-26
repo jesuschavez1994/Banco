@@ -1,5 +1,12 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Plan } from '../../models/plan';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  Input,
+  Inject,
+} from '@angular/core';
+import { BROWSER_STORAGE } from '@app/browserStorage';
 
 @Component({
   selector: 'app-payment-details',
@@ -18,11 +25,13 @@ export class PaymentDetailsComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
-  constructor() {
+  constructor(@Inject(BROWSER_STORAGE) private localStorage: Storage) {
     this.pageChange = new EventEmitter<string>();
   }
 
   ngOnInit(): void {
+    // Since the order was processed, we clear the value.
+    this.localStorage.removeItem('createdOrderDetails');
     console.log(`Details of the voucher: ${this.voucherDetails}`);
   }
 }

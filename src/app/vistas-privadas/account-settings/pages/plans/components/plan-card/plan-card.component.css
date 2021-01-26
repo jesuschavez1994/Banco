@@ -111,8 +111,7 @@ h5 {
   display: flex;
   position: relative;
   flex-direction: column;
-  align-items: center;
-  justify-items: center;
+  justify-content: center;
   text-align: center;
   height: 1.8em;
   color: #fff;
@@ -205,11 +204,15 @@ h5 {
 
 .price h5 {
   grid-area: price;
+  font-size: 1.6em;
+  font-weight: 500;
+  margin-left: 20px;
 }
 
 .price small.renew {
   grid-area: renew;
-  justify-self: end;
+  justify-self: flex-start;
+  margin-left: 15px;
 }
 
 /* More info section styling ----------------------------*/
@@ -256,7 +259,7 @@ h5 {
 
 .total {
   margin-top: 1em;
-  font-size: 1.1em;
+  font-size: 1em;
   grid-area: total;
 }
 
@@ -272,7 +275,7 @@ h5 {
 }
 
 .sync h5 {
-  font-size: 0.9em;
+  font-size: 1.1em;
   font-weight: 300;
   margin-bottom: 0.5em;
   text-align: center;
@@ -314,6 +317,10 @@ h5 {
 }
 
 /* --------------------Button styling ---------------------*/
+.btn {
+  margin: 0 0 5px 0;
+}
+
 .sync .btn {
   display: flex;
   align-items: center;
@@ -322,4 +329,38 @@ h5 {
   color: #24c8af;
 }
 
-/* -------------------- Spinner styling ---------------------*/
+/* --------------------------- 
+  Responsive media queries 
+------------------------------ */
+@media screen and (max-width: 999px) {
+  .card-body {
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 757px) {
+  .card {
+    width: auto;
+  }
+
+  .card-title h4 {
+    font-size: 1.5em;
+  }
+
+  .band {
+    height: 2em;
+  }
+  .band small {
+    font-size: 1.3em;
+  }
+
+  .card-body {
+    font-size: 1.3em;
+  }
+}
+
+@media screen and (max-width: 485px) {
+  .more-info > div.price small {
+    line-height: 0;
+  }
+}
