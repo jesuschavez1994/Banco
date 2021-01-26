@@ -42,8 +42,8 @@ export class MenuCategorysComponent implements OnInit {
   ngOnDestroy(){
     //guarda en servicio el request
     console.log('destroy menu:', this.boxCategory, this.stateid)
-    if(this.boxCategory!=undefined){
-      this.getCategorysService._bxCategory= this.boxCategory;
+    if(this.boxCategory != undefined){
+      this.getCategorysService._bxCategory = this.boxCategory;
     }
 
     // envio a servicio de ids para posteriores consultas

@@ -11,9 +11,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GetCategorysService extends Service   {
-  //request Categories
+  // request Categories
   public _bxCategory: Category;
-  //request Productos
+  // request Productos
   public _requestCategoryL: ProductCategories;
   //ids de categorias y subcategorias
   public _boxEstateRequestId : number[][]=[null];
