@@ -21,43 +21,39 @@ import { RouterModule } from '@angular/router';
 import { SpinnerComponent } from './spinner/spinner/spinner.component';
 import { CheckInternetConnectionComponent } from './check-internet-connection/check-internet-connection.component';
 
+const components = [
+  NavbarComponent,
+  NavbarToHomeComponent,
+  CategoriasComponent,
+  NavbarstoreComponent,
+  SidebarMenuComponent,
+  SidebarListComponent,
+  BreadcrumbComponent,
+  SidebarListButtonComponent,
+  BannerComponent,
+  ProductsCardsComponent,
+  SearchBarComponent,
+  ImagePreviewGalleryComponent,
+  ProductDetailComponent,
+  QuantityCounterComponent,
+  SpinnerComponent,
+  CheckInternetConnectionComponent,
+];
+
+const modules = [
+  RouterModule,
+  PipesModule,
+  CommonModule,
+  NgxPaginationModule,
+  CommonModule,
+];
+
 @NgModule({
-    declarations: [
-      NavbarComponent,
-      NavbarToHomeComponent,
-      CategoriasComponent,
-      NavbarstoreComponent,
-      SidebarMenuComponent,
-      SidebarListComponent,
-      BreadcrumbComponent,
-      SidebarListButtonComponent,
-      BannerComponent,
-      ProductsCardsComponent,
-      SearchBarComponent,
-      ImagePreviewGalleryComponent,
-      ProductDetailComponent,
-      QuantityCounterComponent,
-      SpinnerComponent,
-      CheckInternetConnectionComponent,
-
-    ],
-    imports: [
-      // APP_ROUTING,
-      RouterModule,
-      PipesModule,
-      CommonModule,
-      NgxPaginationModule,
-    ],
-    exports: [
-      NavbarComponent, NavbarToHomeComponent,
-      CategoriasComponent, NavbarstoreComponent,
-      SidebarMenuComponent, SidebarListComponent,
-      BreadcrumbComponent, SidebarListButtonComponent,
-      BannerComponent, ProductsCardsComponent,
-      SearchBarComponent, ImagePreviewGalleryComponent,
-      ProductDetailComponent, QuantityCounterComponent,
-      SpinnerComponent, CheckInternetConnectionComponent
-    ]
+  declarations: [...components],
+  imports: [
+    // APP_ROUTING,
+    ...modules,
+  ],
+  exports: [...components, ...modules],
 })
-
-export class SharedModule { }
+export class SharedModule {}

@@ -14,6 +14,9 @@ import { SidebarComponent } from '../account-settings/pages/plans/components/sid
   Modules
 */
 import { AccountSettingsRoutingModule } from './account-settings-routing.module';
+import { FormsModule } from '@angular/forms';
+import { MaterialModule } from '@Angula-Material/material.module';
+import { SharedModule } from '@shared/shared.module';
 
 const components = [
   SidebarComponent,
@@ -24,7 +27,13 @@ const components = [
   PlansComponent,
 ];
 
-const modules = [AccountSettingsRoutingModule, CommonModule];
+const modules = [
+  AccountSettingsRoutingModule,
+  CommonModule,
+  FormsModule,
+  MaterialModule,
+  SharedModule,
+];
 
 @NgModule({
   entryComponents: [RedirectionModalComponent],
