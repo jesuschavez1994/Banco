@@ -1,4 +1,19 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700");
+/* 
+  Customizing Angular Material's typography.
+  We can also customize other styles here.
+*/
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+$custom-typography: mat-typography-config(
+  $font-family: "Montserrat",
+);
+@include mat-core($custom-typography);
+
 /* You can add global styles to this file, and also import other style files */
 .width-5 {
   width: 5% !important;
@@ -663,8 +678,6 @@ a:hover {
 .modal-backdrop {
   z-index: 990 !important;
 }
-
-@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700");
 
 * {
   outline: none;
