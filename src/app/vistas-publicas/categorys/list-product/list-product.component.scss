@@ -1,6 +1,9 @@
 .main-container {
     margin-bottom: 7%;
     font-family: 'Montserrat', sans-serif !important;
+    /*  @media(max-width: 1024px) {
+        width: calc(100% - 50px);
+    } */
     .cty-header {
         padding: 0 0 15px 10px;
         .cty-title {
@@ -20,8 +23,18 @@
     }
     main {
         .list-items {
+            ul {
+                padding: 0;
+                margin: 0;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
             .item {
                 margin: 0;
+                @media(max-width: 551px) {
+                    margin: 0 auto;
+                }
                 padding: 14px;
                 display: inline-block;
                 width: 175px;
@@ -82,12 +95,11 @@
                         }
                     }
                     .card-body {
-                        .card-description {
-                            min-height: 82px;
-                        }
+                        color: black;
+                        font-weight: 600;
                         width: 215px;
                         padding: 12px 0 0 0;
-                        font-size: 15px;
+                        font-size: 14px;
                         .price {
                             font-size: 1.4em;
                         }

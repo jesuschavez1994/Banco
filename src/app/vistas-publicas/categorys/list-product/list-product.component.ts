@@ -133,6 +133,7 @@ ngOndestroy(){
           //manejador de paginacion
           //setear estados iniciales
          },err=>{
+           console.log(err);
             this.spinner.hide();
             this.openDialog('Ha ocurrido un error en la carga de los productos');
            
