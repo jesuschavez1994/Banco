@@ -7,6 +7,8 @@ import {
   Inject,
 } from '@angular/core';
 import { BROWSER_STORAGE } from '@app/browserStorage';
+import { SubscriptionService } from '@services/subscription/subscription.service';
+import { VoucherDetails } from '@interfaces/SettingsInterfaces';
 
 @Component({
   selector: 'app-payment-details',
@@ -14,24 +16,36 @@ import { BROWSER_STORAGE } from '@app/browserStorage';
   styleUrls: ['./payment-details.component.css'],
 })
 export class PaymentDetailsComponent implements OnInit {
-  @Input() voucherDetails: object;
   @Output() pageChange: EventEmitter<string>;
 
   nextPage = 'plans';
+  voucherDetails: VoucherDetails[];
 
-  backToPreviousPage(): void {
-    this.nextPage = 'plans';
-    this.pageChange.emit(this.nextPage);
-    window.scrollTo(0, 0);
+  constructor(
+    @Inject(BROWSER_STORAGE) private localStorage: Storage,
+    private _subscriptionDataService: SubscriptionService
+  ) {
+    this.pageChange = new EventEmitter<string>();
   }
 
-  constructor(@Inject(BROWSER_STORAGE) private localStorage: Storage) {
-    this.pageChange = new EventEmitter<string>();
+  // API calls handler methods-------------------------------
+  getVoucherDetails(): void {
+    this._subscriptionDataService
+      .getVoucherDetails()
+      .subscribe((serverResponse: VoucherDetails[]) => {
+        this.voucherDetails = serverResponse;
+      });
   }
 
   ngOnInit(): void {
     // Since the order was processed, we clear the value.
     this.localStorage.removeItem('createdOrderDetails');
-    console.log(`Details of the voucher: ${this.voucherDetails}`);
+    this.getVoucherDetails();
+  }
+
+  backToPreviousPage(): void {
+    this.nextPage = 'plans';
+    this.pageChange.emit(this.nextPage);
+    window.scrollTo(0, 0);
   }
 }

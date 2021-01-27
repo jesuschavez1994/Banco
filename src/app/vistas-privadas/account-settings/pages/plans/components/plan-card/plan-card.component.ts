@@ -26,6 +26,17 @@ export class PlanCardComponent implements OnInit {
   waitingResponse = false;
   planDetails: OrderNumberCreation;
 
+  constructor(
+    private subscriptionDataService: SubscriptionService,
+    @Inject(BROWSER_STORAGE) private localStorage: Storage
+  ) {
+    this.selectPlan = new EventEmitter<Plan>();
+    this.pageChange = new EventEmitter<string>();
+    this.gotOrderDetails = new EventEmitter<Object>();
+  }
+
+  ngOnInit(): void {}
+
   // Events that happens in the component -----------------
   showMore(): void {
     this.moreInfo = !this.moreInfo;
@@ -70,8 +81,8 @@ export class PlanCardComponent implements OnInit {
         .subscribe((serverResponse: CreatedOrder) => {
           // Setting the value on the localStorage, in case the page refresh and the payment process isn't finished yet.
           this.localStorage.setItem(
-            'createdOrder',
-            JSON.stringify(serverResponse)
+            'createdOrderID',
+            serverResponse.order.id.toString()
           );
           this.waitingResponse = false;
           this.gotOrderDetails.emit(serverResponse);
@@ -85,15 +96,4 @@ export class PlanCardComponent implements OnInit {
       window.scrollTo(0, 0);
     }
   }
-
-  constructor(
-    private subscriptionDataService: SubscriptionService,
-    @Inject(BROWSER_STORAGE) private localStorage: Storage
-  ) {
-    this.selectPlan = new EventEmitter<Plan>();
-    this.pageChange = new EventEmitter<string>();
-    this.gotOrderDetails = new EventEmitter<Object>();
-  }
-
-  ngOnInit(): void {}
 }
