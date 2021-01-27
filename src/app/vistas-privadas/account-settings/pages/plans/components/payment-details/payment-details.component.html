@@ -21,28 +21,39 @@
       <ul>
         <li>
           <small><b>Total:</b></small>
-          <p><b>$68.89</b></p>
+          <p>
+            <b>{{
+              voucherDetails[0].webpayplusnormaltransaction
+                .webpayplusnormalresponse.amount | currency
+            }}</b>
+          </p>
         </li>
 
         <li>
           <small>Hora:</small>
-          <small>09:43</small>
+          <small>{{ voucherDetails[0].updated_at | date: "shortTime" }}</small>
         </li>
 
         <li>
           <small>Fecha:</small>
-          <small>29/03/2021</small>
+          <small>{{ voucherDetails[0].updated_at | date: "shortDate" }}</small>
         </li>
 
         <div class="square">
           <li>
             <small>Número de tarjeta:</small>
-            <small>*******6066</small>
+            <small>{{
+              voucherDetails[0].webpayplusnormaltransaction
+                .webpayplusnormalresponse.card_detail | slice: 16:20
+            }}</small>
           </li>
 
           <li class="last">
             <small>Cód. autorización:</small>
-            <small>076729</small>
+            <small>{{
+              voucherDetails[0].webpayplusnormaltransaction
+                .webpayplusnormalresponse.authorization_code
+            }}</small>
           </li>
         </div>
       </ul>
