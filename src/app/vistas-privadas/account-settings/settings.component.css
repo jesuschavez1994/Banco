@@ -83,7 +83,7 @@ app-sidebar-menu > section.configuration-menu {
 
 @media screen and (max-width: 757px) {
   .content-wrapper {
-    padding: 0px 120px 0px 15px;
+    padding: 0px 0px 0px 0px;
   }
 }
 

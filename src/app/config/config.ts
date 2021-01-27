@@ -6,14 +6,14 @@
 // export const URL_SERVICIOS = 'http://192.168.0.130/founduss/public';
 /// ===========================================================/////
 
-// ==================== PRODUCCION =============================== //
+// ==================== PRODUCCION founduss.cl =============================== //
 
-export const URL_SERVICIOS = 'http://founduss.com';
+// export const URL_SERVICIOS = 'https://founduss.cl';
 
 // ============================================================== //
 
-// ===================== Founduss.com ========================== //
+// ===================== PRODUCCION Founduss.com ========================== //
 
-// export const URL_SERVICIOS = 'http://founduss.com';
+export const URL_SERVICIOS = 'http://founduss.com';
 
 // ============================================================== //

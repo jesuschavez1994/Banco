@@ -9,14 +9,14 @@ import { SidebarMenuOptions } from '@interfaces/components-options/sidebar-menu.
 export class SettingsComponent implements OnInit {
   menuOptions: SidebarMenuOptions[] = [
     {
-      label: 'mi cuenta',
-      iconClass: 'fas fa-user',
-      routerLink: ['/settings/my-account'],
+      label: 'Configuración',
+      iconClass: 'fas fa-cog',
+      routerLink: ['/account'],
       // isActive: false,
     },
     {
       label: 'planes',
-      iconClass: 'fas fa-user',
+      iconClass: 'fas fa-handshake',
       routerLink: ['/settings/plans'],
       // isActive: false,
     },
