@@ -85,19 +85,19 @@ export class NavbarstoreComponent implements OnInit {
           if (resp.created) {
 
             if (!resp.created) {
-              this.toastRef.open(
-                'Producto no agregado a favoritos',
-                { color: '#ffffff', background: '#900909c2'}
-              );
+              // this.toastRef.open(
+              //   'Producto no agregado a favoritos',
+              //   { color: '#ffffff', background: '#900909c2'}
+              // );
             }
 
           }else if (resp.message) {
 
             if ( resp.message === 'ya existe como favorito' ) {
-              this.toastRef.open(
-                'Producto existe como favorito',
-                { color: '#ffffff', background: '#900909c2'}
-              );
+              // this.toastRef.open(
+              //   'Producto existe como favorito',
+              //   { color: '#ffffff', background: '#900909c2'}
+              // );
             }
 
           }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MyValidators } from '../../utils/validators';
 
@@ -7,7 +7,7 @@ import { MyValidators } from '../../utils/validators';
   templateUrl: './order-payment-forms.component.html',
   styleUrls: ['./order-payment-forms.component.scss']
 })
-export class OrderPaymentFormsComponent implements OnInit, OnChanges {
+export class OrderPaymentFormsComponent implements OnInit {
 
   step = 1;
   isAllowedSecondStep = false;
@@ -50,17 +50,15 @@ export class OrderPaymentFormsComponent implements OnInit, OnChanges {
     },
   ];
 
+  @Output() submitForm = new EventEmitter();
+
   constructor() {
   }
 
   ngOnInit(): void {
     this.optionPaymentSelected = this.optionPayment[0];
-    // this.
-    // this.ngOnChanges();
-    this.form.valueChanges.subscribe(x => {
-      console.log('form value changed');
-      console.log(x);
 
+    this.form.valueChanges.subscribe(x => {
 
       const controlsKeys = [
         'region',
@@ -85,56 +83,30 @@ export class OrderPaymentFormsComponent implements OnInit, OnChanges {
           return currentValue.errors === null;
         });
 
-        console.log('isAllowedSecondStep');
-        console.log(this.isAllowedSecondStep);
       }
 
     });
   }
 
   public processDataPay(){
-    console.clear();
 
-    const formData = {
-      nombreDirección: this.form.value.nombreDireccion
-    };
-
-    console.log('form');
-    console.log(this.form);
-
-    console.log('formData');
-    console.log(formData);
-
-    // const controlsKeys = [
-    //   'region',
-    //   'comuna',
-    //   'direccion',
-    //   'hospedaje',
-    //   'telefono',
-    //   'rut',
-    //   'nombreDireccion'
-    // ];
-
-    // let formControls;
-    // formControls = [];
-
-    // controlsKeys.forEach( controlKey => {
-    //   formControls.push(this.form.controls[controlKey]);
-    // });
+    let formData;
+    formData = this.form.value;
 
     if (!this.form.valid) {
 
-      // this.isAllowedSecondStep = formControls.every( currentValue => {
-      //   return currentValue.errors === null;
-      // });
 
       if (this.isAllowedSecondStep) {
         this.step = 2;
       }
 
     }else if (this.form.valid) {
-      // aquí colocamos la ruta y enviamos los datos
-      console.log('se envian los datos');
+
+      const paymentOption = this.optionPaymentSelected;
+      formData.paymentOption = this.optionPaymentSelected;
+
+      this.submitForm.emit(formData);
+
     }
 
   }
@@ -205,7 +177,6 @@ export class OrderPaymentFormsComponent implements OnInit, OnChanges {
 
   public disabledBtnSubmit() {
 
-
     if (this.step === 1 && this.isAllowedSecondStep) {
 
       return false;
@@ -215,10 +186,6 @@ export class OrderPaymentFormsComponent implements OnInit, OnChanges {
       return this.form.invalid;
 
     }
-
-    // if (buttonSubmitWasCLicked) {
-
-    // }
 
   }
 

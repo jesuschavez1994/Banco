@@ -68,7 +68,7 @@
           <ng-container *ngIf="tabSelected === 3">
 
             <div class="order-payment-forms">
-              <app-order-payment-forms>
+              <app-order-payment-forms (submitForm)="formData($event)">
               </app-order-payment-forms>
             </div>
 

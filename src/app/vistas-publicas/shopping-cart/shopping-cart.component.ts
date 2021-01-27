@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderListOptions } from '@interfaces/components-options/order.options.interface';
 import { PaymentProcessService } from '@services/payment-process/payment-process.service';
+import { CurrentPaymentData } from '../../interfaces/components-options/shopping-cart.options.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { SuccessComponent } from '../../modals/success/success.component';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -170,15 +173,14 @@ export class ShoppingCartComponent implements OnInit {
 
   ordersListSelected: OrderListOptions;
 
-  private currentPaymentData = {
-    order: {},
-    paymentId: -1,
-    tokenWebPay: '',
-    urlWebPay: '',
+  private currentPaymentData: CurrentPaymentData = {};
 
-  };
+  constructor(
+    private paymentService: PaymentProcessService,
+    public dialog: MatDialog
+  ){
 
-  constructor( private paymentService: PaymentProcessService) { }
+  }
 
   ngOnInit(): void {
 
@@ -261,15 +263,82 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   public purchaseAction(event) {
-    // console.log(event);
-    // this.tabSelected = 3;
-    this.paymentService.createOrder().subscribe( orderCreated => {
-      console.log('createOrder');
-      console.log(orderCreated);
-      this.currentPaymentData.order = orderCreated;
-      this.tabSelected = 3;
 
+    const modalConfirm = this.dialog.open(SuccessComponent, {
+      data: {
+        title: 'noooo',
+        message: 'mensajeeeee',
+        buttons: [
+          'Cancelar',
+          'Pagar',
+        ],
+      }
     });
+
+    modalConfirm.componentInstance.emitSelectData.subscribe( result => {
+      // console.log('valooooor');
+      // console.log(result);
+
+      if (result === 'Pagar') {
+
+        if (!this.currentPaymentData.order) {
+
+          this.paymentService.createOrder().subscribe( orderCreated => {
+
+            console.log('createOrder');
+            console.log(orderCreated);
+
+            this.currentPaymentData.order = orderCreated;
+
+            modalConfirm.close();
+            this.tabSelected = 3;
+
+
+
+          });
+
+        } else {
+
+          if (Object.keys(this.currentPaymentData.order).length === 0) {
+
+            this.paymentService.createOrder().subscribe( orderCreated => {
+
+              console.log('createOrder');
+              console.log(orderCreated);
+
+              this.currentPaymentData.order = orderCreated;
+
+              modalConfirm.close();
+              this.tabSelected = 3;
+
+            });
+
+          }
+
+        }
+
+      }
+    });
+
+  }
+
+  public formData(event) {
+    // console.log('formData');
+    // console.log(event);
+    if (this.currentPaymentData.order){
+
+      if (Object.keys(this.currentPaymentData.order).length === 0) {
+        this.paymentService.addPaymentToOrder(this.currentPaymentData.order.id).subscribe(
+          resp => {
+            this.currentPaymentData.paymentId = resp.id;
+          }, error => {
+
+          }
+        );
+      }
+
+    }
+
   }
 
 }

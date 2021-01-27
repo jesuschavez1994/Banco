@@ -233,7 +233,7 @@
             >
 
               <input
-                id="paymentOption"
+                id="paymentOption-{{option.data.id}}"
                 name="paymentOption"
                 type="radio"
                 class="checkbox-default radio-default"
@@ -242,7 +242,7 @@
                 [checked]="optionPaymentSelected.data.id === option.data.id"
               >
 
-              <label for="paymentOption">
+              <label for="paymentOption-{{option.data.id}}">
 
                 <div class="select-card">
 

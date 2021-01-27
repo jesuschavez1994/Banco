@@ -99,7 +99,7 @@ export class PaymentProcessService extends Service {
    * @returns {*}
    * @memberof PaymentProcessService
    */
-  public createOrderPayment(idOrder: number): Observable<PaymentCreated> {
+  public addPaymentToOrder(idOrder: number): Observable<PaymentCreated> {
     this.setIdUser();
     return this.postQuery<PaymentCreated>(`users/${this.idUser}/orders/${idOrder}/payments`, {});
   }

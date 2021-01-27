@@ -7,8 +7,8 @@ export interface Order {
   currency: string;
   status: string;
   type: string;
-  created_at: string;
-  updated_at: string;
+  created_at?: string;
+  updated_at?: string;
   payment?: Payment;
 }
 
