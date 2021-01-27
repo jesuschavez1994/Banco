@@ -60,28 +60,14 @@ export class PlanDetailsComponent implements OnInit {
 
   // API calls handler methods-------------------------------
   createPayment(): void {
-    let requestParams = {
-      user_id: 0,
-      order_id: 0,
-    };
-
-    // We check if the values are still on memory.
-    if (
-      (this.orderDetails.order.user_id === null || undefined) &&
-      (this.orderDetails.order.id === null || undefined)
-    ) {
-      requestParams.user_id = this.createdOrderDetails.order.user_id;
-      requestParams.order_id = this.createdOrderDetails.order.id;
-    } else {
-      requestParams.user_id = this.orderDetails.order.user_id;
-      requestParams.order_id = this.orderDetails.order.id;
-    }
-
     this.subscriptionDataService
-      .paymentCreation(requestParams.order_id, requestParams.user_id)
+      .paymentCreation(
+        this.orderDetails.order.user_id,
+        this.orderDetails.order.id
+      )
       .subscribe((serverResponse: Payment) => {
         this.subscriptionDataService
-          .createWebpayPayment(serverResponse.order_id)
+          .createWebpayPayment(serverResponse.id)
           .subscribe((paymentCredentials: PaymentCredentials) => {
             this.localStorage.setItem('settingsActualPage', 'payment-details');
             this.openDialog(paymentCredentials.url, paymentCredentials.token);
