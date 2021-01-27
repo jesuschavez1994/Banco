@@ -57,7 +57,7 @@ export class PlanCardComponent implements OnInit {
       plan_name: this.planInfo.name,
       type: 'subscription',
       price: 300,
-      store_id: 1,
+      store_id: parseInt(this.localStorage.getItem('storeId')),
     };
 
     // To avoid making the same API call many times, we check if the name or price of the selected plan has changed. If it hasn't, the API call is not made.
