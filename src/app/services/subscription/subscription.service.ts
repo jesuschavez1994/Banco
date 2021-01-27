@@ -31,6 +31,7 @@ export class SubscriptionService {
 
   private apiBaseURL = URL_SERVICIOS;
   private userId = this.localStorage.getItem('id');
+  private orderId = this.localStorage.getItem('createdOrderID');
   private token = this.localStorage.getItem('token');
 
   createOrderNumber(planDetails: OrderNumberCreation) {
@@ -77,6 +78,20 @@ export class SubscriptionService {
 
     return this.httpService
       .post<PaymentCredentials>(url, webpayData, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  getVoucherDetails() {
+    const url = `${this.apiBaseURL}/api/users/${this.userId}/orders/${this.orderId}/payments`;
+    // We add the corresponding headers to the request
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${this.token}`,
+      }),
+    };
+
+    return this.httpService
+      .get(url, httpOptions)
       .pipe(catchError(this.handleError));
   }
 
