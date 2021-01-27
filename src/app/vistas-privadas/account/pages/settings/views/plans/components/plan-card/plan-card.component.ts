@@ -24,7 +24,7 @@ export class PlanCardComponent implements OnInit {
   nextPage = 'payment';
   waitingResponse = false;
   planDetails: OrderNumberCreation;
-  totalPrice = 64.98;
+  totalPrice = 64;
 
   constructor(
     private subscriptionDataService: SubscriptionService,

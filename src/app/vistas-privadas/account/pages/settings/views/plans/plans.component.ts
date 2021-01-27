@@ -59,10 +59,10 @@ export class PlansComponent implements OnInit {
         false,
         false,
         false,
-        14.99,
+        14,
         'Mensual',
         { amount1: true, amount2: false, amount3: false },
-        49.99,
+        49,
         true
       ),
       new Plan(
@@ -71,10 +71,10 @@ export class PlansComponent implements OnInit {
         true,
         false,
         false,
-        24.99,
+        24,
         'Mensual',
         { amount1: true, amount2: true, amount3: false },
-        49.99
+        49
       ),
       new Plan(
         'premium',
@@ -82,10 +82,10 @@ export class PlansComponent implements OnInit {
         true,
         true,
         true,
-        29.99,
+        29,
         'Mensual',
         { amount1: true, amount2: true, amount3: true },
-        169.99
+        169
       ),
     ];
 
