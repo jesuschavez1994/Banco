@@ -41,6 +41,7 @@ import { LoginComponent } from './vistas-publicas/login/login/login.component';
 import { EditProductBankComponent } from './vistas-privadas/Admin/pages/container/edit-product-bank/edit-product-bank.component';
 
 import { PageUnderConstructionComponent } from './vistas-publicas/page-under-construction/page-under-construction.component';
+import { SettingsComponent } from './vistas-privadas/account/pages/settings/settings.component';
 
 const APP_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
@@ -106,46 +107,92 @@ const APP_ROUTES: Routes = [
 
   {
     path: 'account',
-    component: AccountComponent,
+    component: SettingsComponent,
     canActivate: [LoginGuardGuard],
+    children: [
+      {
+        path: 'settings',
+        loadChildren: () =>
+          import('./vistas-privadas/account-settings/account-settings.module').then(
+            (module) => module.AccountSettingsModule
+          ),
+      },
+      {
+        path: 'form-account',
+        component: AccountComponent,
+    },
+    ]
   },
-  {
-    path: 'settings',
-    loadChildren: () =>
-      import('./vistas-privadas/account-settings/account-settings.module').then(
-        (module) => module.AccountSettingsModule
-      ),
-  },
+  
 
   // VISTAS ADMINISTRATIVAS DEL STORE //
 
   {
     path: 'my-store',
     component: MyStoreComponent,
-    canActivate: [LoginGuardGuard],
+    canActivate: [ LoginGuardGuard ],
     children: [
-      {
-        path: 'exportar-lista-excel',
-        component: ExportarListaExcelComponent,
-      },
-      {
-        path: 'suggested-products',
-        component: SuggestedProductsComponent,
-      },
-      {
-        path: 'suggested-products-list/:id/:list',
-        component: SuggestedProductsComponent,
-      },
-      {
-        path: 'synchronized-products',
-        component: SynchronizedProductsComponent,
-      },
-      {
-        path: 'bank-product',
-        component: BankProductComponent,
-      },
-    ],
-  },
+        {
+            path: 'contact',
+            component: ContactComponent,
+        },
+        {   path: 'product-catalogue',
+            component: LoadProductComponent,
+        },
+        {
+            path: 'load-product',
+            component: ProductLoadingComponent
+        },
+        {
+            path: 'sync-this-product/:id',
+            component: FormBanckProductSyncComponent
+        },
+        {
+            path: 'edit-product-sync/:id',
+            component: EditSincronizacionComponent
+        },
+        {
+            path: 'desincronizar/:id',
+            component: DesincronizarComponent
+        },
+        {
+            path: 'edit/:id',
+            component: EditProdutcComponent
+        },
+        {
+            path: 'edit-product/:id',
+            component: EditProductNoDisponibleComponent
+        },
+        {
+            path: 'sincronizacion',
+            component: SincronizacionViewsComponent,
+            children: [
+                {
+                    path: 'exportar-lista-excel',
+                    component: ExportarListaExcelComponent
+               },
+               {
+                path: 'suggested-products',
+                component: SuggestedProductsComponent
+                },
+               {
+                path: 'suggested-products-list/:id/:list',
+                component: SuggestedProductsComponent
+                },
+                {
+                    path: 'synchronized-products',
+                    component: SynchronizedProductsComponent
+                },
+                {
+                    path: 'bank-product',
+                    component: BankProductComponent
+                }
+            ]
+        },
+
+        {path: '**', pathMatch: 'full', redirectTo: 'contact'},
+    ]
+},
 
   // { path: '**', pathMatch: 'full', redirectTo: 'contact' },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }

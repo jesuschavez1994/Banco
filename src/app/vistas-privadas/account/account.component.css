@@ -9,7 +9,9 @@
     border: none;
   }
 
-
+  .page-wrapper{
+      margin-left: 0 !important;
+  }
 
 .h2-title{
     color: #0e1318;

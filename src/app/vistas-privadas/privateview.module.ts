@@ -2,7 +2,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
-import { FormAccountComponent } from './form-account/form-account.component';
 import { ContactComponent } from './contact/contact.component';
 import { ComponentsModule } from '../components/components.module';
 import { APP_ROUTING } from '../app.routes';
@@ -117,6 +116,7 @@ import { DropZoneComponent } from './shared/banner-edit/container/drop-zone/drop
 import { DragDropZoneFileComponent } from './sincronizacion/pages/exportar-lista-excel/container/drag-drop-zone-file/drag-drop-zone-file.component';
 import { SizeFileComponent } from './sincronizacion/pages/exportar-lista-excel/container/size-file/size-file.component';
 import { ProgessBarFileExcelComponent } from './sincronizacion/pages/exportar-lista-excel/container/progess-bar-file-excel/progess-bar-file-excel.component';
+import { SettingsComponent } from './account/pages/settings/settings.component';
 
 @NgModule({
   entryComponents: [
@@ -129,7 +129,6 @@ import { ProgessBarFileExcelComponent } from './sincronizacion/pages/exportar-li
     AccountComponent,
     DashboardComponent,
     ProductLoadComponent,
-    FormAccountComponent,
     ContactComponent,
     ContactInformationEditComponent,
     ContactInformationComponent,
@@ -190,6 +189,7 @@ import { ProgessBarFileExcelComponent } from './sincronizacion/pages/exportar-li
     DragDropZoneFileComponent,
     SizeFileComponent,
     ProgessBarFileExcelComponent,
+    SettingsComponent,
   ],
 
   imports: [

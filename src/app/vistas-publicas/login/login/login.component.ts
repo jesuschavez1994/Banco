@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
           console.log('FFFF', resp);
           this.guardarStorage(resp.remember_token, resp.user.id);
           console.log(resp);
-          if (resp.user.role === 'store'){this.router.navigate(['account']);}
+          if (resp.user.role === 'store'){this.router.navigate(['account/form-account']);}
           if (resp.user.role === 'admin'){this.router.navigate(['admin']);}
         });
         
