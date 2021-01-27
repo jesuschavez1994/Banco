@@ -21,10 +21,10 @@ export class PlanCardComponent implements OnInit {
 
   moreInfo = false;
   productSync = '100';
-  numberOfRetries = 0;
   nextPage = 'payment';
   waitingResponse = false;
   planDetails: OrderNumberCreation;
+  totalPrice = 64.98;
 
   constructor(
     private subscriptionDataService: SubscriptionService,
@@ -52,11 +52,10 @@ export class PlanCardComponent implements OnInit {
 
   // API calls handler methods-------------------------------
   private getOrderNumber(): void {
-    this.numberOfRetries++;
     this.planDetails = {
       plan_name: this.planInfo.name,
       type: 'subscription',
-      price: 300,
+      price: this.totalPrice,
       store_id: parseInt(this.localStorage.getItem('storeId')),
     };
 
