@@ -21,7 +21,6 @@ export class PlanCardComponent implements OnInit {
 
   moreInfo = false;
   productSync = '100';
-  numberOfRetries = 0;
   nextPage = 'payment';
   waitingResponse = false;
   planDetails: OrderNumberCreation;
@@ -52,7 +51,6 @@ export class PlanCardComponent implements OnInit {
 
   // API calls handler methods-------------------------------
   private getOrderNumber(): void {
-    this.numberOfRetries++;
     this.planDetails = {
       plan_name: this.planInfo.name,
       type: 'subscription',
