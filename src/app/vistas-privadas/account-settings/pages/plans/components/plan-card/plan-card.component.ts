@@ -24,6 +24,7 @@ export class PlanCardComponent implements OnInit {
   nextPage = 'payment';
   waitingResponse = false;
   planDetails: OrderNumberCreation;
+  totalPrice = 64.98;
 
   constructor(
     private subscriptionDataService: SubscriptionService,
@@ -54,7 +55,7 @@ export class PlanCardComponent implements OnInit {
     this.planDetails = {
       plan_name: this.planInfo.name,
       type: 'subscription',
-      price: 300,
+      price: this.totalPrice,
       store_id: parseInt(this.localStorage.getItem('storeId')),
     };
 
