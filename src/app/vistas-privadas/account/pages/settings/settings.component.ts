@@ -4,28 +4,25 @@ import { SidebarMenuOptions } from '@interfaces/components-options/sidebar-menu.
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  styleUrls: ['./settings.component.css'],
 })
 export class SettingsComponent implements OnInit {
-
   menuOptions: SidebarMenuOptions[] = [
     {
       label: 'Configuración',
       iconClass: 'fas fa-cog',
-      routerLink: ['/account/form-account'],
+      routerLink: ['/account'],
       // isActive: false,
     },
     {
       label: 'planes',
       iconClass: 'fas fa-handshake',
-      routerLink: ['/account/settings/plans'],
+      routerLink: ['/settings/plans'],
       // isActive: false,
     },
   ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

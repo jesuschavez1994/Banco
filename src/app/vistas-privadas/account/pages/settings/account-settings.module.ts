@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 /*
   Components
 */
-import { PlanCardComponent } from '../account-settings/pages/plans/components/plan-card/plan-card.component';
-import { PlanDetailsComponent } from '../account-settings/pages/plans/components/plan-details/plan-details.component';
-import { PaymentDetailsComponent } from '../account-settings/pages/plans/components/payment-details/payment-details.component';
-import { PlansComponent } from '../account-settings/pages/plans/plans.component';
-import { RedirectionModalComponent } from '../account-settings/pages/plans/components/redirection-modal/redirection-modal.component';
-import { SettingsComponent } from '../account-settings/settings.component';
-import { SidebarComponent } from '../account-settings/pages/plans/components/sidebar/sidebar.component';
+import { PlanCardComponent } from './views/plans/components/plan-card/plan-card.component';
+import { PlanDetailsComponent } from './views/plans/components/plan-details/plan-details.component';
+import { PaymentDetailsComponent } from './views/plans/components/payment-details/payment-details.component';
+import { PlansComponent } from './views/plans/plans.component';
+import { RedirectionModalComponent } from './views/plans/components/redirection-modal/redirection-modal.component';
+import { SettingsComponent } from './settings.component';
+import { SidebarComponent } from './views/plans/components/sidebar/sidebar.component';
 /*
   Modules
 */
@@ -25,7 +25,7 @@ const components = [
   PlanDetailsComponent,
   PaymentDetailsComponent,
   PlansComponent,
-  RedirectionModalComponent
+  RedirectionModalComponent,
 ];
 
 const modules = [

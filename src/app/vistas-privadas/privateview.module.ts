@@ -67,7 +67,7 @@ import { LyImageCropperModule } from '@alyle/ui/image-cropper';
 import { MinimaLight, MinimaDark } from '@alyle/ui/themes/minima';
 import { ProductLoadComponent } from './components/product-load/product-load/product-load.component';
 import { ViewProductsLoadsComponent } from './components/view-products-loads/view-products-loads.component';
-import { AccountComponent } from './account/account.component';
+import { AccountComponent } from '../vistas-privadas/account/pages/settings/views/my-account/account.component';
 import { ProductLoadingSmartComponent } from './product-loading/container/product-loading-smart/product-loading-smart.component';
 import { LoadProductComponent } from './LoadProduct/load-product/load-product.component';
 import { ModalAddCategoriasAndSubcategoriasComponent } from './product-loading/container/modals/modal-add-categorias-and-subcategorias/modal-add-categorias-and-subcategorias.component';
@@ -116,7 +116,7 @@ import { DropZoneComponent } from './shared/banner-edit/container/drop-zone/drop
 import { DragDropZoneFileComponent } from './sincronizacion/pages/exportar-lista-excel/container/drag-drop-zone-file/drag-drop-zone-file.component';
 import { SizeFileComponent } from './sincronizacion/pages/exportar-lista-excel/container/size-file/size-file.component';
 import { ProgessBarFileExcelComponent } from './sincronizacion/pages/exportar-lista-excel/container/progess-bar-file-excel/progess-bar-file-excel.component';
-import { SettingsComponent } from './account/pages/settings/settings.component';
+import { SettingsComponent } from './account/settings.component';
 
 @NgModule({
   entryComponents: [

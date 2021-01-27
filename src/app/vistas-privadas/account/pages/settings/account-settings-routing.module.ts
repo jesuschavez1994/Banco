@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PlansComponent } from '../account-settings/pages/plans/plans.component';
-import { SettingsComponent } from '../account-settings/settings.component';
+import { AccountComponent } from './views/my-account/account.component';
+import { PlansComponent } from './views/plans/plans.component';
+import { SettingsComponent } from './settings.component';
 
 const routes: Routes = [
   {
