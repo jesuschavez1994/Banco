@@ -70,6 +70,10 @@
   position: relative;
 }
 
+.sidebar {
+  padding: 0;
+}
+
 /* ------------ Sidenav section stylings ---------------- */
 app-sidebar-menu > section.configuration-menu {
   padding-right: 0px;
