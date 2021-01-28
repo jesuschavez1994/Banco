@@ -32,10 +32,12 @@ import { SidebarHomeComponent } from './sidebar-home/sidebar-home.component';
 import { SliderComponent } from './slider/slider.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ModalErrComponent } from './modal-err/modal-err.component';
+import { ModalRegisterComponent } from './modal-register/modal-register.component';
 
 @NgModule({
   entryComponents:[
-    ModalErrComponent
+    ModalErrComponent,
+    ModalRegisterComponent
   ],
 
     declarations: [
@@ -66,6 +68,7 @@ import { ModalErrComponent } from './modal-err/modal-err.component';
       SidebarHomeComponent,
       SliderComponent,
       ModalErrComponent,
+      ModalRegisterComponent,
       
 
     ],

@@ -21,6 +21,9 @@
         .list-items {
             height: 450px;
             position: relative;
+            @media (max-width: 425px) {
+                height: 200px;
+            }
             ol {
                 overflow-x: scroll;
                 overflow-y: hidden;
@@ -78,30 +81,74 @@
                                 height: 245px;
                                 margin-bottom: 5px;
                             }
-                            .product-image-wrapper {
-                                display: block;
-                                height: 0;
-                                overflow: hidden;
-                                position: relative;
-                                z-index: 1;
-                                padding-bottom: 95% !important;
-                                &:hover {
-                                    -webkit-transform: scale(1.1);
-                                    -moz-transform: scale(1.1);
-                                    -ms-transform: scale(1.1);
-                                    -o-transform: scale(1.1);
-                                    transform: scale(1.1);
-                                    transition: all .7s cubic-bezier(.165, .84, .44, 1);
-                                }
-                            }
                         }
                         .card-body {
                             font-weight: 600;
                             width: 215px;
                             padding: 12px 0 0 0;
                             font-size: 14px;
+                            p {
+                                min-height: 60px;
+                                text-transform: capitalize;
+                            }
                             .price {
                                 font-size: 1.4em;
+                            }
+                        }
+                    }
+                    @media (max-width: 425px) {
+                        margin: 0 8px 0 15px;
+                        padding: 10px 5px 0 5px;
+                        display: inline-block;
+                        min-width: 100px !important;
+                        min-height: 146px !important;
+                        max-width: 100px;
+                        max-width: 146px;
+                        .card {
+                            display: inline-block;
+                            margin: 0;
+                            background-color: #fff;
+                            width: 100%;
+                            .material-icons {
+                                display: none;
+                            }
+                            &:hover {
+                                box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, .1) !important;
+                                border: none !important;
+                                padding-bottom: .1%;
+                                cursor: pointer;
+                                filter: grayscale(5%) brightness(90%) opacity(100%);
+                                -webkit-filter: grayscale(5%) brightness(90%) opacity(100%);
+                                -moz-filter: grayscale(5%) brightness(90%) opacity(100%);
+                                .material-icons {
+                                    display: block;
+                                }
+                            }
+                            i {
+                                z-index: 10;
+                            }
+                            .icon-gris {
+                                color: #aeaeb8 !important;
+                            }
+                            .product-image-container {
+                                display: block;
+                                max-width: 100%;
+                                img {
+                                    width: 88px;
+                                    height: 99px;
+                                    margin-bottom: 5px;
+                                }
+                            }
+                            .card-body {
+                                font-weight: 600;
+                                width: 90px;
+                                p {
+                                    text-transform: lowercase;
+                                    min-height: 14px;
+                                }
+                                .card-description {
+                                    margin-bottom: 4px;
+                                }
                             }
                         }
                     }

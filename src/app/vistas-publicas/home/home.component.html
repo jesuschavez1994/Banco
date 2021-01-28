@@ -5,12 +5,12 @@
 
     <section class="content-home">
         <app-slider class="slider-home"></app-slider>
-        <section class="categorys-group">
-            <app-slider-category>
-            </app-slider-category>
-
-            <app-slider-category>
+        <section class="categorys-group" *ngIf="requestReady">
+            <app-slider-category *ngFor="let cat of homeComp" [_cat]="cat">
             </app-slider-category>
         </section>
     </section>
 </main>
+<ngx-spinner bdColor="rgb(255,255,255)" size="large" color="#f19301" type="ball-atom">
+    <p style="color: black"> Cargando </p>
+</ngx-spinner>

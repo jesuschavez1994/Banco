@@ -1,4 +1,9 @@
 import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { StoreService } from '@services/store/store.service';
+import { UsuarioService } from "@services/usuario/usuario.service";
+import { HomeServiceService } from "../../vistas-publicas/services/home-service.service";
+import {ModalRegisterComponent} from '@shared/modal-register/modal-register.component';
+import {MatDialog, MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-sidebar-home',
@@ -9,10 +14,18 @@ export class SidebarHomeComponent implements OnInit {
  @ViewChild('menuContainerFixed') menuContainerFixed: ElementRef;
  @ViewChild('configurationMenu') configurationMenu: ElementRef;
  @Input() auth: boolean;
-  constructor() { }
+          userId: number | string;
+          userImg: any;
+          userName: string;
+          userEmail: string;
+  constructor( public authService: StoreService,
+                public userService: UsuarioService,
+                public homeService: HomeServiceService,
+                private modal : MatDialog) { }
 
   ngOnInit(): void {
-  }
+    this.imgUser();
+}
   @HostListener('window:scroll', ['$event'])
   public fixedMenu( $event: Event){
 
@@ -31,5 +44,26 @@ export class SidebarHomeComponent implements OnInit {
   public toggleMenu(){
     this.configurationMenu.nativeElement.classList.toggle( 'configuration-menu--responsive-expanded' );
   }
+  imgUser(){
+    if(this.auth){
+      this.userId= localStorage.getItem('id');
+      this.homeService.obtUserData(this.userId).subscribe(
+        data=>{
 
+           this.userImg=data.image;
+           this.userEmail= data.email;
+           this.userName= data.name;
+          console.log(data);
+        }
+      );
+    }
+  }
+  logout(){
+    this.homeService.logout();
+    window.location.reload();
+  }
+  
+  openDialog(): void {
+    const dialogRef = this.modal.open(ModalRegisterComponent,{ height: 'auto', panelClass: 'custom-modalbox'} );
+  }
 }

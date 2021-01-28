@@ -3,7 +3,7 @@ import { GetCategorysService } from '.././services/get-categorys.service';
 import { Category } from '@interfaces/categorys';
 import { Router} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ModalErrComponent} from '@shared/modal-err/modal-err.component'
+import { ModalErrComponent} from '@shared/modal-err/modal-err.component';
 import {MatDialog, MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-categorys',
@@ -84,18 +84,14 @@ export class MenuCategorysComponent implements OnInit {
        this.stateid[1]=subcat+1;
       console.log('redirect ', this.stateid);
       
-      this.router.navigate(['categorys',encodeURI(this.boxCategory[cat].name),encodeURI(this.boxCategory[cat].subcategories[subcat].name),'products']);
+      this.router.navigate(['categorys',this.boxCategory[cat].name,this.boxCategory[cat].subcategories[subcat].name,'products']);
      
 
     }else{
       //busqueda por sub categoria
-      this.router.navigate(['categorys',encodeURI(this.boxCategory[cat].name),'products']);
+      this.router.navigate(['categorys',this.boxCategory[cat].name,'products']);
       this.stateid.push(cat);
-
-      
     }
-    
-    
   }
   openDialog(mensaje:string): void {
     const dialogRef = this.modal.open(ModalErrComponent, {

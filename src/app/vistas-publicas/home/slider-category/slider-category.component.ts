@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, Input } from '@angular/core';
+import { CategoriesHome, Product  } from "@interfaces/homeProduct.interface";
 @Component({
   selector: 'app-slider-category',
   templateUrl: './slider-category.component.html',
   styleUrls: ['./slider-category.component.scss']
 })
 export class SliderCategoryComponent implements OnInit {
-  listCategory = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8', 'Item 9'];
+  @Input() _cat: CategoriesHome;
+  listCategory: Product[];
   constructor() { }
 
   ngOnInit(): void {
+    this.listCategory= this._cat.products;
   }
 
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StoreService } from '@services/store/store.service';
+import { UsuarioService } from "@services/usuario/usuario.service";
 
 @Component({
   selector: 'app-avatar',
@@ -6,10 +8,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./avatar.component.scss']
 })
 export class AvatarComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+  userId: number | string;
+          userImg: any;
+  constructor(private auth: StoreService, public userService: UsuarioService) { 
+    this.imgUser();
   }
 
+  ngOnInit(): void {
+    
+  }
+  imgUser(){
+    if(this.auth){
+      this.userId= localStorage.getItem('id');
+      this.userService.datosUserImages(this.userId).subscribe(
+        data=>{
+           this.userImg=data;
+          console.log(data);
+        }
+      );
+    }
+  }
+  logout(){
+    this.auth.logout();
+    window.location.reload();
+  }
 }

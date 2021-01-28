@@ -13,6 +13,7 @@ import { LimitarNameProductoPipe } from './limitar-name-producto/limitar-name-pr
 import { PreviewGalleryPipe } from './preview-gallery/preview-gallery.pipe';
 import {EditProductPipe} from './edir-product/edit-produt.pipe';
 import { SeacrhPipe } from './search/seacrh.pipe';
+import { stringResponsive } from "./pipeResponsive/stringResponsive.pipe";
 
 
 
@@ -30,7 +31,8 @@ import { SeacrhPipe } from './search/seacrh.pipe';
     LimitarNameProductoPipe,
     PreviewGalleryPipe,
     EditProductPipe,
-    SeacrhPipe
+    SeacrhPipe,
+    stringResponsive,
   ],
   exports: [
     ImagenPipe,
@@ -45,7 +47,8 @@ import { SeacrhPipe } from './search/seacrh.pipe';
     LimitarNameProductoPipe,
     PreviewGalleryPipe,
     EditProductPipe,
-    SeacrhPipe
+    SeacrhPipe,
+    stringResponsive,
   ],
   imports: [
     CommonModule

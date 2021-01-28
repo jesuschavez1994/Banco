@@ -1,5 +1,4 @@
 import { Component, OnInit,OnChanges,OnDestroy } from '@angular/core';
-import { Category } from '@interfaces/categorys';
 import { ProductCategories } from '@interfaces/productCategories';
 import { Service } from '@services/service.service';
 import { Router } from '@angular/router';
@@ -7,9 +6,13 @@ import { GetCategorysService } from '.././services/get-categorys.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ModalErrComponent} from '@shared/modal-err/modal-err.component'
 import {MatDialog, MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';  
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, retry } from 'rxjs/operators';
+import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
+import {
+  Category, Profile, SidebarListOptions, AnchorsMenu,
+  SelectedEmitter, Filter, PriceRange
+} from '@interfaces/components-options/sidebar-list.options.interface';
+import { FilterOption } from '@interfaces/components-options/search-bar.options.interface';
+
 @Component({
   selector: 'app-list-product',
   templateUrl: './list-product.component.html',
@@ -24,7 +27,8 @@ export class ListProductComponent implements OnInit {
                 public spinner: NgxSpinnerService,
                 private modal : MatDialog,
                 ) {
-      console.log('Constructor list product');
+                 /*  this.breadCru = this.getCategorys.generateBreadcrumb(); */
+                  console.log('Constructor list product');
       /* Obtiene el ultimo valor que envio el menu */
       if(this.getCategorys._boxEstateRequestId[0]!= undefined){
         console.log('anterior request products ',this.getCategorys._boxEstateRequestId[0]);
@@ -40,7 +44,48 @@ export class ListProductComponent implements OnInit {
       this.listaProductos = this.getCategorys._requestCategoryL;
      }
      }
-     
+
+
+     /********************************* */
+            
+          // sidebar-list
+          expandSidebar = true;
+          anchorsMenu: AnchorsMenu;
+          profile: Profile;
+          categories: Category[];
+          priceRanges: PriceRange[] = [
+            { min: 0, max: 10000, totalFounds: 559 },
+            { min: 10000, max: 20000, totalFounds: 58 },
+            { min: 20000, max: 30000, totalFounds: 9 },
+            { min: 30000, max: 40000, totalFounds: 1 },
+            { min: 50000, max: 60000, totalFounds: 1 },
+          ];
+          filterOptions: FilterOption[] = [
+            {label: 'filtrar por', value: 0},
+            {label: 'producto', value: 1},
+            {label: 'Empresa', value: 'hola'},
+          ];
+          factories: Filter[] = [
+            {name: 'abbot', totalFounds: 1},
+            {name: 'anc', totalFounds: 36},
+            {name: 'andrómaatico', totalFounds: 1},
+            {name: 'aura vitalis', totalFounds: 38},
+            {name: 'bach', totalFounds: 7},
+          ];
+          delivery: Filter[] = [
+            { name: 'si', totalFounds: 579 },
+            { name: 'no', totalFounds: 274 },
+          ];
+          marks: Filter[] = [
+            { name: 'albaderm', totalFounds: 16 },
+            { name: 'Aquasolar', totalFounds: 3 },
+            { name: 'Arama', totalFounds: 8 },
+            { name: 'Bosque miel', totalFounds: 2 },
+            { name: 'Brota', totalFounds: 5 },
+          ];
+
+     /*********************************** */
+     breadCru: BreadcrumbOptions[]=[ ];
      //peticion paginacion
     peticionesPP: ProductCategories[];
     //peticion lista de Productos
@@ -121,6 +166,10 @@ ngOndestroy(){
             //para titulo de seccion
             this.titleCat =this.getCategorys._bxCategory[this.idsProduct[0]-1].name;
             this.titleSubcat =this.getCategorys._bxCategory[this.idsProduct[0]-1].subcategories[this.idsProduct[1]-1].name;
+            this.breadCru=[ {title: 'Home', routerLink:['/']},
+                            {title: 'Categorias', routerLink:['categorys']},
+                            {title:this.titleCat, routerLink:['categorys',this.titleCat,'products']},
+                            {title:this.titleSubcat, routerLink:['categorys',this.titleCat,this.titleSubcat,'products']}];
             console.log(this.titleSubcat);
             
             this.spinner.hide();
@@ -142,7 +191,6 @@ ngOndestroy(){
      }
     }
     
-   
 
   getProductsPG( par,pathBx: number | string){
         console.log(par);
@@ -184,20 +232,5 @@ ngOndestroy(){
       data: {title: 'Ooops!', description: mensaje}
     });
   }
-  /* 
-private handleError(error: HttpErrorResponse) {
-  if (error.error instanceof ErrorEvent) {
-    // A client-side or network error occurred. Handle it accordingly.
-    console.error('An error occurred:', error.error.message);
-  } else {
-    // The backend returned an unsuccessful response code.
-    // The response body may contain clues as to what went wrong.
-    console.error(
-      `Backend returned code ${error.status}, ` +
-      `body was: ${error.error}`);
-  }
-  // Return an observable with a user-facing error message.
-  return throwError(
-    'Something bad happened; please try again later.');
-} */
+ 
 }

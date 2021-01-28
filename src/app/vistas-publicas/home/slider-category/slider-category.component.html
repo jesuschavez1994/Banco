@@ -1,8 +1,8 @@
-<section class="category-container">
+<section class="category-container" *ngIf="listCategory.length >= 1">
 
     <header class="cty-header">
         <h3 class="cty-title">
-            Title.category
+            {{_cat.name}}
         </h3>
         <a class="cty-link">ver más</a>
         <hr>
@@ -10,21 +10,18 @@
 
     <main>
 
-        <nav class="list-items" >
+        <nav class="list-items">
             <ol>
-                <li class=" item product" id="index" *ngFor=" let i of listCategory; let j = index">
+                <li id="{{i.id}}" class=" item product" id="index" *ngFor=" let i of listCategory; let j = index">
                     <article class="product-item-info card">
                         <picture class="product-image-container">
-                                    <img    src="assets/img/box.svg" 
-                                            class="card-img-top" 
-                                            alt="..." 
-                                    >
+                            <img src="{{i.images[0] | imgFallback: 'box' }}" class="card-img-top" alt="{{i.name}}">
                         </picture>
                         <div class="card-body pb-0 pt-0">
-                                <p class="card-description" title="description">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit fugiat dolorum sunt.
-                                </p>
-                                <span class="price">$99.26</span>
+                            <p class="card-description" title="description">
+                                {{i.description | stringResponsive:66}}
+                            </p>
+                            <span class="price">{{i.price | currency}}</span>
                         </div>
                     </article>
                 </li>
