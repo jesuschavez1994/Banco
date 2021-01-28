@@ -51,7 +51,6 @@ export class OrderPaymentFormsComponent implements OnInit {
   ];
 
   @Input() buttonDisabled = false;
-  @Input() mallTransaction: {url: string, token: string};
 
   @Output() submitForm = new EventEmitter();
   @Output() currentStep = new EventEmitter<number>();

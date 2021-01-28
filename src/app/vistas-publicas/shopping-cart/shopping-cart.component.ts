@@ -178,7 +178,7 @@ export class ShoppingCartComponent implements OnInit {
 
   termsAndConditions = false;
 
-  protected currentPaymentData: CurrentPaymentData = {};
+  currentPaymentData: CurrentPaymentData = {};
 
   constructor(
     private paymentService: PaymentProcessService,
@@ -328,8 +328,6 @@ export class ShoppingCartComponent implements OnInit {
 
   public formData(event) {
 
-    this.form = event;
-
     if (this.currentPaymentData.order){
 
       if (Object.keys(this.currentPaymentData.order).length > 0) {
@@ -380,6 +378,16 @@ export class ShoppingCartComponent implements OnInit {
     if (event === 0) {
       this.tabSelected = 1;
     }
+  }
+
+  public showFormToPay() {
+    if (this.currentPaymentData) {
+      if (this.currentPaymentData) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
 }

@@ -73,7 +73,6 @@
 
             <div class="order-payment-forms">
               <app-order-payment-forms
-                [mallTransaction]="currentPaymentData.mallTransaction"
                 [buttonDisabled]="buttonDisabledForm"
                 (currentStep)="backProcessForm($event)"
                 (submitForm)="formData($event)">
@@ -84,8 +83,7 @@
 
           <ng-container *ngIf="tabSelected === 4">
 
-            <ng-container *ngIf="currentPaymentData.mallTransaction">
-
+            <ng-container *ngIf="showFormToPay()">
 
               <div class="order-payment-forms">
 
@@ -103,7 +101,6 @@
                 </form>
 
               </div>
-
 
             </ng-container>
 
