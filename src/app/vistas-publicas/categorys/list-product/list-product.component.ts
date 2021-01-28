@@ -43,7 +43,6 @@ export class ListProductComponent implements OnInit {
      }else{
       this.listaProductos = this.getCategorys._requestCategoryL;
      }
-<<<<<<< HEAD
      }
 
 
@@ -88,21 +87,13 @@ export class ListProductComponent implements OnInit {
      /*********************************** */
      breadCru: BreadcrumbOptions[]=[ ];
      //peticion paginacion
-=======
-     // peticion paginacion
->>>>>>> remotes/origin/feature/settings-page
     peticionesPP: ProductCategories[];
     // peticion lista de Productos
     listaProductos: ProductCategories;
     // Identificador Ids subcat y cat
     idsProduct: number[];
-<<<<<<< HEAD
     //Array que contendra rutas de items paginacion
     pgOptions: number[]=[];
-=======
-    // Array que contendra rutas de items paginacion
-    pgOptions: string[]=[];
->>>>>>> remotes/origin/feature/settings-page
     //respuesta .data empty
     empty: boolean=false;
     // titulo de categoria de seleccion
