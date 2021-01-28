@@ -15,7 +15,7 @@
     <div class="views">
       <div
         *ngIf="currentPage === 'plans'"
-        class="plans-container"
+        class="plans-container animated fadeIn"
         [@inOutAnimation]
       >
         <div *ngFor="let plan of plans; index as i">
@@ -29,7 +29,7 @@
       </div>
 
       <div
-        class="payment-container"
+        class="payment-container animated fadeIn"
         *ngIf="currentPage === 'payment'"
         [@inOutAnimation]
       >
@@ -42,7 +42,7 @@
       </div>
 
       <div
-        class="payment-details-container"
+        class="payment-details-container animated fadeIn"
         *ngIf="currentPage === 'payment-details'"
         [@inOutAnimation]
       >

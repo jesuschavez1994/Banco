@@ -76,13 +76,14 @@
 .payment-methods .webpay-banner .banner {
   grid-area: content;
   padding: 10px;
-  width: 55%;
+  width: 80%;
   border: 0.2px solid rgb(168, 167, 167);
   height: 80px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
   grid-template-areas: "image text";
+  align-content: center;
   justify-items: center;
 }
 
@@ -95,13 +96,13 @@
 .payment-methods .webpay-banner .banner p {
   grid-area: text;
   text-align: left;
-  justify-self: center;
+  align-self: center;
   font-size: 0.8em;
   line-height: 1.5;
 }
 
 .payment-methods .webpay-banner .note p {
-  width: 55%;
+  width: 80%;
 }
 
 .payment-methods .btn {
@@ -141,6 +142,20 @@
 /* --------------------------- 
   Responsive media queries 
 ------------------------------ */
+@media screen and (max-width: 999px) {
+  .payment-methods .webpay-banner .banner {
+    width: 80%;
+  }
+
+  .payment-methods .webpay-banner .note p {
+    width: 80%;
+  }
+
+  .payment-methods .btn {
+    width: 80%;
+  }
+}
+
 @media screen and (max-width: 485px) {
   .payment-methods .webpay-banner .title {
     width: auto;

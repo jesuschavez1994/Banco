@@ -22,7 +22,7 @@ h5 {
 /* Reset for weird global style -------------------- */
 
 .card {
-  margin: 10px;
+  margin: 10px 10px 70px 10px;
   width: 240px;
   height: auto;
   background: #fff;
@@ -259,7 +259,7 @@ h5 {
 
 .total {
   margin-top: 1em;
-  font-size: 1em;
+  font-size: 0.9em;
   grid-area: total;
 }
 
@@ -360,6 +360,10 @@ h5 {
 }
 
 @media screen and (max-width: 485px) {
+  .card {
+    margin: 10px 10px 30px 10px;
+  }
+
   .more-info > div.price small {
     line-height: 0;
   }

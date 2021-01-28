@@ -52,16 +52,19 @@
   justify-content: space-around;
   position: relative;
   width: 100%;
+  transition: all;
 }
 
 .payment-container {
   display: flex;
   position: relative;
+    transition: all;
 }
 
 .payment-details-container {
   display: flex;
   position: relative;
+    transition: all;
 }
 
 /* -------- Responsive media queries -------------- */

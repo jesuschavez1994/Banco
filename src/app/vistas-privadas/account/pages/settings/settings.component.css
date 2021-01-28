@@ -9,7 +9,7 @@
 */
 .content-wrapper {
   margin-top: 90px;
-  padding: 0px 320px 0px 15px;
+  padding: 0px 340px 0px 15px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 50px auto;
@@ -26,12 +26,14 @@
 
 /* ------------ Responsive media queries ---------------- */
 @media screen and (max-width: 999px) {
-  /* Nothing to do here for now */
+  .content-wrapper {
+    padding: 0px 250px 0px 110px;
+  }
 }
 
 @media screen and (max-width: 757px) {
   .content-wrapper {
-    padding: 0px 0px 0px 0px;
+    padding: 0px 200px 0px 65px;
   }
 }
 

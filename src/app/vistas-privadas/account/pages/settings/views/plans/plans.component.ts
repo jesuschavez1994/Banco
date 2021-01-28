@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Plan } from './models/plan';
 import { SubscriptionService } from '@services/subscription/subscription.service';
 import { CreatedOrder } from '@interfaces/SettingsInterfaces';
-import { BROWSER_STORAGE } from '../../../../../../browserStorage';
+import { BROWSER_STORAGE } from '@app/browserStorage';
 
 import {
   trigger,
