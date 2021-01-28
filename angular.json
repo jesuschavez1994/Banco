@@ -1,153 +1,157 @@
 {
-    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-    "version": 1,
-    "newProjectRoot": "projects",
-    "projects": {
-        "BancoDeProductos": {
-            "projectType": "application",
-            "schematics": {},
-            "root": "",
-            "sourceRoot": "src",
-            "prefix": "app",
-            "architect": {
-                "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
-                    "options": {
-                        "outputPath": "dist/BancoDeProductos",
-                        "index": "src/index.html",
-                        "main": "src/main.ts",
-                        "polyfills": "src/polyfills.ts",
-                        "tsConfig": "tsconfig.app.json",
-                        "aot": true,
-                        "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
-                        ],
-                        "styles": [
-                            "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
-                            "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                            "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-                            "src/styles.css",
-                            "src/assets/Fonstastic/styles.css",
-                            "src/_animations.scss",
-                            "src/assets/font-awesome/css/font-awesome.min.css",
-                            "node_modules/@grapecity/spread-sheets/styles/gc.spread.sheets.excel2013white.css"
-
-                        ],
-                        "scripts": [
-                            "src/assets/jquery/jquery.min.js",
-                            "src/assets/jquery/jquery-3.5.1.slim.min.js",
-                            "src/assets/jquery/tether.min.js",
-                            "src/assets/js/custom.js",
-                            "src/assets/js/perfect-scrollbar.jquery.min.js",
-                            "src/assets/js/waves.js",
-                            "src/assets/js/sidebarmenu.js",
-                            "src/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js",
-                            "src/assets/plugins/sparkline/jquery.sparkline.min.js",
-                            "src/assets/bootstrap4/js/bootstrap.min.js",
-                            "src/assets/bootstrap4/js/popper.min.js",
-                            "node_modules/@grapecity/spread-sheets/dist/gc.spread.sheets.all.min.js"
-
-                        ]
-                    },
-                    "configurations": {
-                        "production": {
-                            "fileReplacements": [{
-                                "replace": "src/environments/environment.ts",
-                                "with": "src/environments/environment.prod.ts"
-                            }],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "extractLicenses": true,
-                            "vendorChunk": false,
-                            "buildOptimizer": true,
-                            "budgets": [{
-                                    "type": "initial",
-                                    "maximumWarning": "2mb",
-                                    "maximumError": "11mb"
-                                },
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb",
-                                    "maximumError": "200kb"
-                                }
-                            ]
-                        }
-                    }
-                },
-                "serve": {
-                    "builder": "@angular-devkit/build-angular:dev-server",
-                    "options": {
-                        "browserTarget": "BancoDeProductos:build"
-                    },
-                    "configurations": {
-                        "production": {
-                            "browserTarget": "BancoDeProductos:build:production"
-                        }
-                    }
-                },
-                "extract-i18n": {
-                    "builder": "@angular-devkit/build-angular:extract-i18n",
-                    "options": {
-                        "browserTarget": "BancoDeProductos:build"
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "src/test.ts",
-                        "polyfills": "src/polyfills.ts",
-                        "tsConfig": "tsconfig.spec.json",
-                        "karmaConfig": "karma.conf.js",
-                        "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
-                        ],
-                        "styles": [
-                            "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
-                            "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-                            "src/styles.css"
-                        ],
-                        "scripts": ["./src/assets/bootstrap4/js/popper.min.js"]
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "tsconfig.app.json",
-                            "tsconfig.spec.json",
-                            "e2e/tsconfig.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**"
-                        ]
-                    }
-                },
-                "e2e": {
-                    "builder": "@angular-devkit/build-angular:protractor",
-                    "options": {
-                        "protractorConfig": "e2e/protractor.conf.js",
-                        "devServerTarget": "BancoDeProductos:serve"
-                    },
-                    "configurations": {
-                        "production": {
-                            "devServerTarget": "BancoDeProductos:serve:production"
-                        }
-                    }
-                },
-                "deploy": {
-                    "builder": "angular-cli-ghpages:deploy",
-                    "options": {}
-                }
-            }
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "BancoDeProductos": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
         }
-    },
-    "defaultProject": "BancoDeProductos",
-    "cli": {
-        "analytics": "74217c49-642f-4b72-b92d-8fdd2723fa2e"
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/BancoDeProductos",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "src/styles.scss",
+              "src/_animations.scss",
+              "src/assets/bootstrap4/css/bootstrap.min.css",
+              "node_modules/@grapecity/spread-sheets/styles/gc.spread.sheets.excel2013white.css"
+            ],
+            "scripts": [
+              "src/assets/jquery/jquery.min.js",
+              "src/assets/jquery/jquery-3.5.1.slim.min.js",
+              "src/assets/jquery/tether.min.js",
+              "src/assets/js/custom.js",
+              "src/assets/js/perfect-scrollbar.jquery.min.js",
+              "src/assets/js/waves.js",
+              "src/assets/js/sidebarmenu.js",
+              "src/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js",
+              "src/assets/plugins/sparkline/jquery.sparkline.min.js",
+              "src/assets/bootstrap4/js/bootstrap.min.js",
+              "src/assets/bootstrap4/js/popper.min.js",
+              "node_modules/@grapecity/spread-sheets/dist/gc.spread.sheets.all.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "11mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "200kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "BancoDeProductos:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "BancoDeProductos:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "BancoDeProductos:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "BancoDeProductos:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "BancoDeProductos:serve:production"
+            }
+          }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
+        }
+      }
     }
+  },
+  "defaultProject": "BancoDeProductos",
+  "cli": {
+    "analytics": "74217c49-642f-4b72-b92d-8fdd2723fa2e"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

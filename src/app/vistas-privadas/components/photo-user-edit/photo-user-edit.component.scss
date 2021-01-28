@@ -1,0 +1,212 @@
+// input[type="file" i] {
+//     appearance: initial;
+//     visibility: hidden;
+//     background-color: initial;
+//     cursor: default;
+//     align-items: baseline;
+//     color: transparent;
+//     text-align: start !important;
+//     padding: initial;
+//     border: initial;
+//     position: absolute;
+//     top: 0;
+
+// }
+
+// .section-img{
+//     position: relative;
+//     height: 100%;
+// }
+
+// .section-img label{
+//     z-index: 10;
+//     height: 100%;
+//     margin: 0;
+    
+// }
+
+// .content-section{
+//     position: absolute;
+//     z-index: 10;
+//     height: 100%;
+// }
+
+// .edit-img{
+//     position: relative;
+// }
+
+// .content-wrapper{
+//     width: 100%;
+// }
+
+
+// Scss //
+
+form {
+    .content-section{
+
+        position: absolute;
+        z-index: 10;
+        height: 100%;
+
+        .section-img{
+
+            position: relative;
+            height: 100%;
+
+            label{
+
+                z-index: 10;
+                height: 100%;
+                margin: 0;
+
+                .content-icon-i{
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                    padding: 20px;
+                }
+                
+            }
+
+            &:hover{
+                i{
+                    opacity: 1;
+                }
+
+                background: rgba(0, 0, 0, .25);
+            }
+
+            i{
+                opacity: 0;
+            }
+        }
+
+        .content-cropper{
+
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+
+            input[type="file" i] {
+                appearance: initial;
+                visibility: hidden;
+                background-color: initial;
+                cursor: default;
+                align-items: baseline;
+                color: transparent;
+                text-align: start !important;
+                padding: initial;
+                border: initial;
+                position: absolute;
+                top: 0;
+
+            }
+
+            footer{
+                display: flex;
+                justify-content: flex-end;
+                padding-top: 5px;
+                width: 100%;
+            }
+
+        }
+    }
+
+    .edit-img{
+
+        position: relative;
+
+    }
+}
+
+
+/* .section-img label{
+    position: relative;
+    height: 100%;
+}
+
+.section-img{
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    height: 100%;
+}
+
+.edit-img{
+    position: relative;
+}
+
+form div{
+    position: absolute;
+    height: 100%;
+} */
+
+
+/* form{
+    div{
+        position: absolute;
+        height: 100%;
+
+        .section-img{
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+            height: 100%;
+
+            label{
+                position: relative;
+                height: 100%;
+
+                .content-icon-i{
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                    padding: 20px;
+                }
+                
+            }
+
+            &:hover{
+                i{
+                    opacity: 1;
+                }
+
+                background: rgba(0, 0, 0, .25);
+            }
+
+            i{
+                opacity: 0;
+            }
+
+            .content-cropper{
+
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+
+                input[type="file" i] {
+                    appearance: initial;
+                    visibility: hidden;
+                    background-color: initial;
+                    cursor: default;
+                    align-items: baseline;
+                    color: transparent;
+                    text-align: start !important;
+                    padding: initial;
+                    border: initial;
+                    position: absolute;
+                    top: 0;
+
+                }
+
+            }
+
+        }
+
+    }
+
+    .edit-img{
+        position: relative;
+    }
+} */

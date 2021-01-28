@@ -1,0 +1,55 @@
+<div class="main-container">
+  <div class="route-area">
+    <p>Planes</p>
+  </div>
+
+  <div class="content-area">
+    <h2 class="title">Planes de suscripción y banco de productos</h2>
+    <p classs="description">
+      Te proporcionamos un banco de productos con imágenes y descripción para
+      que puedas sincronizarlo con tu inventario (tu inventario debes exportarlo
+      desde excel), el cual te permitirá ahorrar tiempo y costos sin tener que
+      fotografiar todos tus productos.
+    </p>
+
+    <div class="views">
+      <div
+        *ngIf="currentPage === 'plans'"
+        class="plans-container animated fadeIn"
+        [@inOutAnimation]
+      >
+        <div *ngFor="let plan of plans; index as i">
+          <app-plan-card
+            [planInfo]="plan"
+            (selectPlan)="onPlanSelected($event)"
+            (pageChange)="onPageChange($event)"
+            (gotOrderDetails)="gotOrderDetails($event)"
+          ></app-plan-card>
+        </div>
+      </div>
+
+      <div
+        class="payment-container animated fadeIn"
+        *ngIf="currentPage === 'payment'"
+        [@inOutAnimation]
+      >
+        <app-plan-details
+          (pageChange)="onPageChange($event)"
+          (voucherDetails)="gotVoucherDetails($event)"
+          [selectedPlanDetails]="selectedPlan"
+          [orderDetails]="orderInfo"
+        ></app-plan-details>
+      </div>
+
+      <div
+        class="payment-details-container animated fadeIn"
+        *ngIf="currentPage === 'payment-details'"
+        [@inOutAnimation]
+      >
+        <app-payment-details
+          (pageChange)="onPageChange($event)"
+        ></app-payment-details>
+      </div>
+    </div>
+  </div>
+</div>

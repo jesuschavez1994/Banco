@@ -1,0 +1,8 @@
+p{
+    text-align: center;
+}
+
+.content-button{
+    display: flex;
+    justify-content: center;
+}

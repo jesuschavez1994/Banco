@@ -1,8 +1,43 @@
-<form class="pl-5 col-md-10">
-    <input  type="search" 
-            placeholder="Busca en nustro banco de productos" 
-            aria-label="Search" 
-            class="form-control width-100 icon-magnifying-glass"
-            [formControl]="search"
-            [(ngModel)]="BuscarText">
-</form>
+<div class="search-engine" [ngClass]="{'search-engine--wrap': buttonSidebarList}">
+
+    <!-- =====  BOTÓN DESPLEGAR FILTRO Y CERRAR FILTRO =====-->
+    <!-- ===================================================-->
+    <ng-container *ngIf="buttonSidebarList">
+        <div class="btn-toogle-sidebar-list mr-0">
+          <app-sidebar-list-button
+            [expand]="isExpanded"
+            (isExpanded)="toggleSidebarList($event)"
+          >
+          </app-sidebar-list-button>
+        </div>
+    </ng-container>
+
+
+    <!-- === BOTÓN AGREGAR NUEVO PRODUCTO ====-->
+     <!-- ====================================-->
+    <!-- <div class="filter">
+        <button class="btn btn-primary button fredoka" 
+            type="button"
+            id="addProduct"
+            (click)="addNewProduct()"
+            [routerLink]="['/my-store/load-product']"     
+        >
+          + Agregar nuevo producto
+        </button>
+    </div> -->
+    
+
+    <!-- =====  BUSCADOR DE PRODUCTOS =====-->
+    <!-- ==================================-->
+    <!-- <form class="searcher">
+            <i><img src="assets/img/icons/loupe.svg"></i>
+            <input  type="search" 
+                    placeholder="Buscar producto..." 
+                    aria-label="Search" 
+                    [formControl]="search"
+                    [(ngModel)]="BuscarText"
+            >
+    </form> -->
+    
+</div>
+    

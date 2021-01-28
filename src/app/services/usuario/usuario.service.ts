@@ -9,57 +9,65 @@ import { tokenName } from '@angular/compiler';
 import swal from 'sweetalert';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsuarioService {
-
   usuario: Usuario;
   token: string;
   google: any;
 
-  private postQuery<T>(query: string, data: any){
+  private postQuery<T>(query: string, data: any) {
     query = URL_SERVICIOS + query;
-    return this.http.post<T>( query, data );
+    return this.http.post<T>(query, data);
   }
 
-  private execQuery<T>( query: string ) {
+  private execQuery<T>(query: string) {
     query = URL_SERVICIOS + query;
-    return this.http.get<T>( query );
+    return this.http.get<T>(query);
   }
 
-  constructor(
-    public http: HttpClient
-  ) {
-  }
+  constructor(public http: HttpClient) {}
 
   // tslint:disable-next-line: variable-name
-  loginGoogle( nombre: string, email: string, user_id: string, img: string ){
+  loginGoogle(nombre: string, email: string, user_id: string, img: string) {
     const url = '/api/login/google/callback';
-    return this.postQuery(url, { nombre, email, user_id, img} );
+    return this.postQuery(url, { nombre, email, user_id, img });
   }
 
-  RegisterGoogle( name: string, email: string, role: string ){
+  RegisterGoogle(name: string, email: string, role: string) {
     const url = '/api/signup/google';
-    return this.postQuery(url, { name, email, role} ).subscribe( resp => {
-      this.google = resp;
-      console.log('Respuesta desde Google', this.google);
-      console.log(this.google);
-      this.guardarStorageGoogle(this.google, this.google.user.email, this.google.user.id, this.google.remember_token);
-      window.location.href = '#/rut-store';
-    }, err => {
-       swal({
-        text: err.error.message,
-        icon: 'warning',
-        dangerMode: true,
-       });
-    }
+    return this.postQuery(url, { name, email, role }).subscribe(
+      (resp) => {
+        this.google = resp;
+        console.log('Respuesta desde Google', this.google);
+        console.log(this.google);
+        this.guardarStorageGoogle(
+          this.google,
+          this.google.user.email,
+          this.google.user.id,
+          this.google.remember_token
+        );
+        window.location.href = '#/rut-store';
+      },
+      (err) => {
+        swal({
+          text: err.error.message,
+          icon: 'warning',
+          dangerMode: true,
+        });
+      }
     );
   }
 
   // items: any =  localStorage.getItem('usuario');
   // toObject = JSON.parse(this.items);
 
-  guardarStorageGoogle(usuario: Usuario, email: string, id: string, token: string){
+  guardarStorageGoogle(
+    usuario: Usuario,
+    email: string,
+    id: string,
+    token: string
+  ) {
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
     localStorage.setItem('id', id);
@@ -69,8 +77,10 @@ export class UsuarioService {
     // this.token = token;
   }
 
+  guardarStorage(id: string, token: string, usuario: Usuario) {
+    // Prueba para mantener el estado de las páginas en "/settings/plans"
+    localStorage.setItem('settingsActualPage', 'plans');
 
-  guardarStorage(id: string, token: string, usuario: Usuario){
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
@@ -79,39 +89,37 @@ export class UsuarioService {
     this.token = token;
   }
 
-  login(usuario: Usuario, recordar: boolean = false){
+  login(usuario: Usuario, recordar: boolean = false) {
+    // Prueba para mantener el estado de las páginas en "/settings/plans"
+    localStorage.setItem('settingsActualPage', 'plans');
 
     const url = '/api/login';
 
-    if ( recordar ) {
-      localStorage.setItem('email', usuario.email );
-    }else {
+    if (recordar) {
+      localStorage.setItem('email', usuario.email);
+    } else {
       localStorage.removeItem('email');
     }
 
     return this.postQuery(url, usuario);
   }
 
-  crearUsuario( usuario: Usuario ) {
+  crearUsuario(usuario: Usuario) {
     const url = URL_SERVICIOS + '/usuario';
-    return this.http.post( url, usuario )
-    ;
+    return this.http.post(url, usuario);
   }
 
-  subirArchivo( archivo: any, userId: string, ){
+  subirArchivo(archivo: any, userId: string) {
     const url = `/api/users/${userId}/images`;
-    return this.postQuery( url, archivo);
+    return this.postQuery(url, archivo);
   }
 
-  cambiarImagen( archivo: any, userId: string ) {
-   return this.subirArchivo(archivo, userId);
+  cambiarImagen(archivo: any, userId: string) {
+    return this.subirArchivo(archivo, userId);
   }
 
-  datosUserImages(userId: string){
+  datosUserImages(userId: string) {
     const query = `/api/users/${userId}/images`;
     return this.execQuery(query);
   }
-
-
-
 }

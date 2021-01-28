@@ -7,10 +7,10 @@ bdColor="rgba(0, 0, 0, .45)">
   
     <form [formGroup]="forma"
           (ngSubmit)="enviarExcel()" >
-          <section class="row align-items-center">
-                <div class="form-group col-8 col-sm-4 col-md-4 col-lg-4 col-xl-3 mb-0">
-                  <!-- <input  class="form-control position-relative icon-excel" placeholder="Carga la lista de excel"> -->
-                  <input  type="file"
+          <section class="grid-container">
+                <div class="form-group">
+                  <!-- <input  class="form-control position-relative icon-excel" placeholder="Carga la lista de excel"> 
+                   <input  type="file"
                           id='fileUpload'
                           multiple='multiple'
                           accept='xlsx/*' 
@@ -18,11 +18,40 @@ bdColor="rgba(0, 0, 0, .45)">
                           class="form-control"
                           formControlName="file"
                           multiple="multiple"
-                  >
-                  <label for="fileUpload" class="form-control family-400 icon-excel mb-0">Cargar la lista de Excel</label>
+                  > -->
+
+                  <div class="content-button-upload-file">
+                    <button class="button-upload-file" 
+                            (click)="isOpen = !isOpen" 
+                            type="button" 
+                            cdkOverlayOrigin 
+                            #trigger="cdkOverlayOrigin"
+                            >
+                            <span>Subir listado de excel</span>
+                    </button>
+                  </div>
+
+                  <ng-template  cdkConnectedOverlay
+                                [cdkConnectedOverlayOrigin]="trigger"
+                                [cdkConnectedOverlayOpen]="isOpen">
+
+                                <app-drag-drop-zone-file [EstateisOpen]="isOpen" 
+                                                        (CloseOverlay)="CloseOverlay($event)"
+                                                        (ExistsFile)="ExistsFile($event)"
+                                                        (DataListExcel)="DataListExcel($event)"
+                                                        (ProgressBar)="ProgressBar($event)"
+                                                        (FileCompleted)="FileCompleted($event)">
+                                </app-drag-drop-zone-file>
+                                
+
+                  </ng-template>
+                  
+
+                  <!-- <label for="fileUpload" class="form-control family-400 icon-excel mb-0">Cargar la lista de Excel</label> -->
+
                 </div>
 
-                <div  class="col-8 col-sm-4 col-md-5 col-lg-5 col-xl-3">
+                <div>
 
                   <a  *ngIf="dowloadExcel === false"
                       class="family-300 black" 
@@ -41,7 +70,7 @@ bdColor="rgba(0, 0, 0, .45)">
                   </a>
                 </div>
 
-                <div class="form-group mb-0 col-5 col-sm-4 col-md-3">
+                <div class="form-group">
                     <div class="input-group">
                       <button type="submit" 
                               class="btn btn-primary button fredoka"
@@ -54,7 +83,7 @@ bdColor="rgba(0, 0, 0, .45)">
           </section>
    </form>
 
-   <table class="table table-striped table-bordered mt-5" *ngIf="archivo">
+   <table class="table table-striped table-bordered mt-5" *ngIf="FileCompletedLoad">
     <thead>
       <tr>
         <th scope="col" class="tex-align-center family-600">Stok</th>

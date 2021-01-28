@@ -1,0 +1,15 @@
+section{
+    display: flex;
+    padding-top: 10px;
+    .info{
+        width: 100%;
+        .name{
+            margin-bottom: 0;
+            text-align: initial;
+        }
+        .size{
+            margin-bottom: 0;
+            text-align: initial;
+        }
+    }
+}

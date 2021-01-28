@@ -2,7 +2,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
-import { FormAccountComponent } from './form-account/form-account.component';
 import { ContactComponent } from './contact/contact.component';
 import { ComponentsModule } from '../components/components.module';
 import { APP_ROUTING } from '../app.routes';
@@ -21,7 +20,6 @@ import { MaterialModule } from '@Angula-Material/material.module';
 // Mapa //
 import { AgmCoreModule } from '@agm/core';
 
-
 import { ContactDescriptionEditComponent } from './components/contact-description-edit/contact-description-edit.component';
 import { ContactDescriptionComponent } from './components/contact-description/contact-description.component';
 import { AsideComponent } from './shared/aside/aside.component';
@@ -36,7 +34,6 @@ import { ScheduleStoreComponent } from './components/schedule-store/schedule-sto
 import { ComponentsComponent } from './components/components.component';
 import { SheduleStoreEditComponent } from './components/shedule-store-edit/shedule-store-edit.component';
 
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { ProductLoadingComponent } from './product-loading/product-loading.component';
@@ -44,14 +41,11 @@ import { MyStoreComponent } from './pages/my-store/my-store.component';
 
 // PAGINATION //
 
-import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 
 // ALYLE //
 
-import {
-  HAMMER_GESTURE_CONFIG,
-  HammerModule
-} from '@angular/platform-browser';
+import { HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 
 /** Import Alyle UI */
 import {
@@ -59,7 +53,7 @@ import {
   StyleRenderer,
   LY_THEME,
   LY_THEME_NAME,
-  LyHammerGestureConfig
+  LyHammerGestureConfig,
 } from '@alyle/ui';
 
 import { LyIconModule } from '@alyle/ui/icon';
@@ -73,7 +67,7 @@ import { LyImageCropperModule } from '@alyle/ui/image-cropper';
 import { MinimaLight, MinimaDark } from '@alyle/ui/themes/minima';
 import { ProductLoadComponent } from './components/product-load/product-load/product-load.component';
 import { ViewProductsLoadsComponent } from './components/view-products-loads/view-products-loads.component';
-import { AccountComponent } from './account/account.component';
+import { AccountComponent } from '../vistas-privadas/account/pages/settings/views/my-account/account.component';
 import { ProductLoadingSmartComponent } from './product-loading/container/product-loading-smart/product-loading-smart.component';
 import { LoadProductComponent } from './LoadProduct/load-product/load-product.component';
 import { ModalAddCategoriasAndSubcategoriasComponent } from './product-loading/container/modals/modal-add-categorias-and-subcategorias/modal-add-categorias-and-subcategorias.component';
@@ -95,7 +89,6 @@ import { TableroDeSincronizacionComponent } from './sincronizacion/pages/synchro
 import { BankProductComponent } from './sincronizacion/pages/bank-product/bank-product.component';
 import { ItemListProductComponent } from './sincronizacion/pages/bank-product/container/item-list-product/item-list-product.component';
 
-
 // CARRUSEL //
 
 import { LoadBanckProductComponent } from './Admin/pages/load-banck-product/load-banck-product.component';
@@ -113,127 +106,143 @@ import { AppRoutingModule } from '../app-routing.module';
 import { CatalogoBankProductComponent } from './Admin/pages/container/catalogo-bank-product/catalogo-bank-product.component';
 import { EditProductBankComponent } from './Admin/pages/container/edit-product-bank/edit-product-bank.component';
 import { ProductsCardsStoreComponent } from './shared/products-cards-store/products-cards-store/products-cards-store.component';
-
+import { SearchStoreComponent } from './sincronizacion/components/search/container/search-store/search-store.component';
+import { BannerEditComponent } from './shared/banner-edit/banner-edit.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { CropperImgBannerComponent } from './shared/banner-edit/container/cropper-img-banner/cropper-img-banner.component';
+import { ErrorFailedMessageComponent } from './shared/banner-edit/container/error-failed-message/error-failed-message.component';
+import { ProgressBarComponent } from './shared/banner-edit/container/progress-bar/progress-bar.component';
+import { DropZoneComponent } from './shared/banner-edit/container/drop-zone/drop-zone.component';
+import { DragDropZoneFileComponent } from './sincronizacion/pages/exportar-lista-excel/container/drag-drop-zone-file/drag-drop-zone-file.component';
+import { SizeFileComponent } from './sincronizacion/pages/exportar-lista-excel/container/size-file/size-file.component';
+import { ProgessBarFileExcelComponent } from './sincronizacion/pages/exportar-lista-excel/container/progess-bar-file-excel/progess-bar-file-excel.component';
+import { SettingsComponent } from './account/settings.component';
 
 @NgModule({
-    entryComponents: [
-      MapEditarComponent,
-      ContactDescriptionEditComponent,
-      ModalAddCategoriasAndSubcategoriasComponent
+  entryComponents: [
+    MapEditarComponent,
+    ContactDescriptionEditComponent,
+    ModalAddCategoriasAndSubcategoriasComponent,
+  ],
+  // tslint:disable-next-line: max-line-length
+  declarations: [
+    AccountComponent,
+    DashboardComponent,
+    ProductLoadComponent,
+    ContactComponent,
+    ContactInformationEditComponent,
+    ContactInformationComponent,
+    MapaComponent,
+    MapEditarComponent,
+    ContactDescriptionEditComponent,
+    ContactDescriptionComponent,
+    AsideComponent,
+    PhotoUserEditComponent,
+    PhotoUserComponent,
+    CardShimmerFormConfigurationComponent,
+    CardShimmerPhotoUserEditComponent,
+    CardShimmerTableInformacionComponent,
+    CardShimmerTitleStoreComponent,
+    ScheduleStoreComponent,
+    ComponentsComponent,
+    SheduleStoreEditComponent,
+    ProductLoadingComponent,
+    MyStoreComponent,
+    ViewProductsLoadsComponent,
+    ProductLoadingSmartComponent,
+    LoadProductComponent,
+    ModalAddCategoriasAndSubcategoriasComponent,
+    ModalDeleteProductComponent,
+    NavbarSincronizacionComponent,
+    ExportarListaExcelComponent,
+    SuggestedProductsComponent,
+    SincronizacionViewsComponent,
+    ItemsSuggestedProductsComponent,
+    NoSuggestedProductsComponent,
+    SynchronizedProductsComponent,
+    NoSynchronizedProductsComponent,
+    TableComponent,
+    SynchronizedProductsTableComponent,
+    DialogSynchronizedComponent,
+    TableroDeSincronizacionComponent,
+    BankProductComponent,
+    ItemListProductComponent,
+    LoadBanckProductComponent,
+    FormBanckProductAdminComponent,
+    FormBanckProductSyncComponent,
+    EditProdutcComponent,
+    EditSincronizacionComponent,
+    EditProductNoDisponibleComponent,
+    SearchComponent,
+    DesincronizarComponent,
+    AsideFiltrosComponent,
+    CarouselSuggestedComponent,
+    CatalogoBankProductComponent,
+    EditProductBankComponent,
+    ProductsCardsStoreComponent,
+    SearchStoreComponent,
+    BannerEditComponent,
+    CropperImgBannerComponent,
+    ErrorFailedMessageComponent,
+    ProgressBarComponent,
+    DropZoneComponent,
+    DragDropZoneFileComponent,
+    SizeFileComponent,
+    ProgessBarFileExcelComponent,
+    SettingsComponent,
+  ],
 
-    ],
-    // tslint:disable-next-line: max-line-length
-    declarations: [
-      AccountComponent,
-      DashboardComponent,
-      ProductLoadComponent,
-      FormAccountComponent,
-      ContactComponent,
-      ContactInformationEditComponent,
-      ContactInformationComponent,
-      MapaComponent,
-      MapEditarComponent,
-      ContactDescriptionEditComponent,
-      ContactDescriptionComponent,
-      AsideComponent,
-      PhotoUserEditComponent,
-      PhotoUserComponent,
-      CardShimmerFormConfigurationComponent,
-      CardShimmerPhotoUserEditComponent,
-      CardShimmerTableInformacionComponent,
-      CardShimmerTitleStoreComponent,
-      ScheduleStoreComponent,
-      ComponentsComponent,
-      SheduleStoreEditComponent,
-      ProductLoadingComponent,
-      MyStoreComponent,
-      ViewProductsLoadsComponent,
-      ProductLoadingSmartComponent,
-      LoadProductComponent,
-      ModalAddCategoriasAndSubcategoriasComponent,
-      ModalDeleteProductComponent,
-      NavbarSincronizacionComponent,
-      ExportarListaExcelComponent,
-      SuggestedProductsComponent,
-      SincronizacionViewsComponent,
-      ItemsSuggestedProductsComponent,
-      NoSuggestedProductsComponent,
-      SynchronizedProductsComponent,
-      NoSynchronizedProductsComponent,
-      TableComponent,
-      SynchronizedProductsTableComponent,
-      DialogSynchronizedComponent,
-      TableroDeSincronizacionComponent,
-      BankProductComponent,
-      ItemListProductComponent,
-      LoadBanckProductComponent,
-      FormBanckProductAdminComponent,
-      FormBanckProductSyncComponent,
-      EditProdutcComponent,
-      EditSincronizacionComponent,
-      EditProductNoDisponibleComponent,
-      SearchComponent,
-      DesincronizarComponent,
-      AsideFiltrosComponent,
-      CarouselSuggestedComponent,
-      CatalogoBankProductComponent,
-      EditProductBankComponent,
-      ProductsCardsStoreComponent
-      ],
+  imports: [
+    CommonModule,
+    NgxDropzoneModule,
+    AppRoutingModule,
+    SpreadSheetsModule,
+    MaterialModule,
+    NgxPaginationModule,
+    SharedModule,
+    PipesModule,
+    ImageCropperModule,
+    BrowserAnimationsModule,
+    // MODULOS Alyle //
+    LyButtonModule,
+    LyToolbarModule,
+    LyImageCropperModule,
+    LyIconModule,
+    // END MODULOS Alyle //
+    HammerModule,
+    ComponentsModule,
+    NzTimePickerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14',
+    }),
+    NgbModule,
+    NgxSpinnerModule,
+  ],
 
-    imports: [
-      CommonModule,
-      AppRoutingModule,
-      SpreadSheetsModule,
-      MaterialModule,
-      NgxPaginationModule,
-      SharedModule,
-      PipesModule,
-      ImageCropperModule,
-      BrowserAnimationsModule,
-      // MODULOS Alyle //
-      LyButtonModule,
-      LyToolbarModule,
-      LyImageCropperModule,
-      LyIconModule,
-      // END MODULOS Alyle //
-      HammerModule,
-      ComponentsModule,
-      NzTimePickerModule,
-      FormsModule,
-      ReactiveFormsModule,
-      AgmCoreModule.forRoot({
-        apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'
-      }),
-      NgbModule,
-      NgxSpinnerModule
+  exports: [
+    PhotoUserEditComponent,
+    SearchComponent,
+    PhotoUserComponent,
+    CardShimmerFormConfigurationComponent,
+    ModalAddCategoriasAndSubcategoriasComponent,
+    NavbarSincronizacionComponent,
+    TableComponent,
+    SynchronizedProductsTableComponent,
+    TableroDeSincronizacionComponent,
+    SearchStoreComponent,
+  ],
 
-    ],
-
-    exports: [
-      PhotoUserEditComponent,
-      SearchComponent,
-      PhotoUserComponent,
-      CardShimmerFormConfigurationComponent,
-      ModalAddCategoriasAndSubcategoriasComponent,
-      NavbarSincronizacionComponent,
-      TableComponent,
-      SynchronizedProductsTableComponent,
-      TableroDeSincronizacionComponent
-    ],
-
-    providers: [
-      [ LyTheme2 ],
-      [ StyleRenderer ],
-      // Theme that will be applied to this module
-      { provide: LY_THEME_NAME, useValue: 'minima-light' },
-      { provide: LY_THEME, useClass: MinimaLight, multi: true }, // name: `minima-light`
-      { provide: LY_THEME, useClass: MinimaDark, multi: true }, // name: `minima-dark`
-      // Gestures
-      { provide: HAMMER_GESTURE_CONFIG, useClass: LyHammerGestureConfig }
-    ],
-
-  })
-
-
-  export class PrivateviewModule { }
+  providers: [
+    [LyTheme2],
+    [StyleRenderer],
+    // Theme that will be applied to this module
+    { provide: LY_THEME_NAME, useValue: 'minima-light' },
+    { provide: LY_THEME, useClass: MinimaLight, multi: true }, // name: `minima-light`
+    { provide: LY_THEME, useClass: MinimaDark, multi: true }, // name: `minima-dark`
+    // Gestures
+    { provide: HAMMER_GESTURE_CONFIG, useClass: LyHammerGestureConfig },
+  ],
+})
+export class PrivateviewModule {}

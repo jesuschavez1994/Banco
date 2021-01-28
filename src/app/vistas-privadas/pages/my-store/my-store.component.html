@@ -1,10 +1,54 @@
-<app-navbarstore id="header"></app-navbarstore>
-<div class="row">
-    <div class="col-md-2 pt-5">
-        <!-- <app-aside></app-aside> -->
-        <app-aside-filtros></app-aside-filtros>
-    </div>
-    <div class="col-12 col-sm-12 col-md-10 pt-5">
+<app-navbarstore    id="header" [fixed]="false"></app-navbarstore>
+
+<main class="page">
+
+    <ng-container>
+        <app-aside-filtros 
+        #sidebarList
+        [isExpanded]="expandSidebar"
+        (sidebarExpand)="toogleSidebar($event)"
+        [categories]="categories"
+        [anchorsMenu]="anchorsMenu"
+        [profile]="profile"
+        ></app-aside-filtros>
+    </ng-container>
+
+    <div class="column">
+
+        <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+
+        <app-banner-edit    [imgs]="BannerVerifiqued" 
+                            *ngIf="VerifiquedSuccesfull"
+                            [Onerror]="Onerror"></app-banner-edit>
+
+        <!-- <app-banner [imgs]="imgsBanners"></app-banner> -->
+
+        <!-- ==== BUSCADOR DE PRODUCTOS DE LA TIENDA ==== -->
+                <!--=============================================-->
+                <!-- <app-search 
+                            [isExpanded]="expandSidebar"
+                            (sidebarExpand)="toogleSidebar($event)" 
+                            (searchEmitter)="handleSearch($event)"
+                            [filterOptions]="filterOptions"
+                            [buttonSidebarList]="true"
+                            [debounce]="1000"
+                >
+                </app-search> -->
+
+                <!-- <app-search 
+                            [isExpanded]="expandSidebar"
+                            (sidebarExpand)="toogleSidebar($event)" 
+                            [buttonSidebarList]="true"
+                            [debounce]="1000"
+                >
+                </app-search> -->
+
+        <!--=============================================-->
+        <!--=============================================-->
+
         <router-outlet></router-outlet>
     </div>
-</div>
+
+</main>
+
+

@@ -30,7 +30,7 @@ export class ListProductComponent implements OnInit {
                  /*  this.breadCru = this.getCategorys.generateBreadcrumb(); */
                   console.log('Constructor list product');
       /* Obtiene el ultimo valor que envio el menu */
-      if(this.getCategorys._boxEstateRequestId[0]!= undefined){
+      if (this.getCategorys._boxEstateRequestId[0] != undefined){
         console.log('anterior request products ',this.getCategorys._boxEstateRequestId[0]);
         this.idsProduct= this.getCategorys._boxEstateRequestId[0];
       }
@@ -43,6 +43,7 @@ export class ListProductComponent implements OnInit {
      }else{
       this.listaProductos = this.getCategorys._requestCategoryL;
      }
+<<<<<<< HEAD
      }
 
 
@@ -87,18 +88,26 @@ export class ListProductComponent implements OnInit {
      /*********************************** */
      breadCru: BreadcrumbOptions[]=[ ];
      //peticion paginacion
+=======
+     // peticion paginacion
+>>>>>>> remotes/origin/feature/settings-page
     peticionesPP: ProductCategories[];
-    //peticion lista de Productos
+    // peticion lista de Productos
     listaProductos: ProductCategories;
-    //Identificador Ids subcat y cat
+    // Identificador Ids subcat y cat
     idsProduct: number[];
+<<<<<<< HEAD
     //Array que contendra rutas de items paginacion
     pgOptions: number[]=[];
+=======
+    // Array que contendra rutas de items paginacion
+    pgOptions: string[]=[];
+>>>>>>> remotes/origin/feature/settings-page
     //respuesta .data empty
     empty: boolean=false;
-    //titulo de categoria de seleccion
+    // titulo de categoria de seleccion
     titleCat: string;
-    //titulo de subcategoria de seleccion
+    // titulo de subcategoria de seleccion
     titleSubcat: string;
   
   ngOnChanges(){

@@ -2,18 +2,21 @@
 
 <section class="display-flex">
 
-    <div class="container-fluid">
+   
+
+    <div class="container-fluid pl-0">
+
+        <!-- <app-banner-edit [imgs]="BannerVerifiqued" *ngIf="VerifiquedSuccesfull"></app-banner-edit> -->
+
         <div class="row">
         
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
-                <app-banner [imgs]="imgsBanners" class="mt-5"></app-banner>
-
-                <div class="container pt-3 pb-4" *ngFor="let data of dataStore"> 
+                <div class="pt-3 pb-4" *ngFor="let data of dataStore"> 
                     <div class="row">
-                        <div class="col-md-6 pl-4">
+                        <div class="col-md-6">
                             <h5 class="name-store family-600 size-27 pl-2">
-                                {{data.name}}
+                                {{data.name | capitalizado}}
                             </h5>
                             <span  class="pl-2 family-300 size-16">
                                RUT {{data.rut}}
@@ -34,9 +37,9 @@
 
                         
 
-                    <div class="container">
+                    <div class="container pl-0 mr-0 ml-0">
                         <div class="row">
-                            <div class="col-md-6 pl-4">
+                            <div class="col-md-6">
 
                                 <div class="display-flex">
 

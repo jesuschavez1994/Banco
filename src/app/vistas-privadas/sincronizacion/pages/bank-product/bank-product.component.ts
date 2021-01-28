@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service';
 import { ProductosLoads,  DataProductDB} from '@interfaces/InterfaceProducto';
 import {  ActivatedRoute, Params, Router} from '@angular/router';
 import { Descripcion } from '../../../../interfaces/sincronizacion';
 import { NgxSpinnerService } from "ngx-spinner";
+import { ItemListProductComponent } from './container/item-list-product/item-list-product.component';
+
 
 export class Termino {
   constructor(
       public name: string,
   ) { }
 }
+
 @Component({
   selector: 'app-bank-product',
   templateUrl: './bank-product.component.html',
@@ -26,6 +29,9 @@ export class BankProductComponent implements OnInit {
   totalProductAPI: number = 0;
   showFooterPaginations = false;
   scroll:boolean=false;
+  itemsPerPage = 16;
+
+  @ViewChild('bankProductList') bankProductList: ItemListProductComponent;
 
   constructor(public sincronizacion: SincronizacionService,
               private route: ActivatedRoute,
@@ -34,7 +40,7 @@ export class BankProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData(this.page);
-    window.addEventListener('scroll', this.scrolling, true)
+    window.addEventListener('scroll', this.scrolling, true);
     this.spinner();
     // sistema que nos permita leer el parámetro de la página una vez que cambiamos entre estas usando la función
     this.route.queryParams.subscribe(params => {
@@ -74,15 +80,38 @@ export class BankProductComponent implements OnInit {
 
   getData(page?: number){
     this.spinner();
-    this.sincronizacion.GetBankProduct(page).subscribe( (resp: ProductosLoads) => {
+    this.sincronizacion.GetBankProduct(page).subscribe( (resp: any) => {
       this.itemProduct = resp.data;
-        console.log('RESPUESTA', resp);
-        this.last_Page_Pagination = resp.last_page;
-        this.totalProductAPI = resp.total;
-        this.showFooterPaginations = true;
-        this.spinnerService.hide();
+      console.log('RESPUESTA', resp);
+      this.last_Page_Pagination = resp.last_page;
+      this.totalProductAPI = resp.total;
+      this.itemsPerPage = resp.per_page;
+      this.showFooterPaginations = true;
+      this.spinnerService.hide();
+      const products = resp.data;
+      this.scrollTop();
 
-        this.scrollTop();
+      this.bankProductList.products = products.map( product => {
+
+        // console.log('MAP', product);
+
+        return {
+          name: product.name,
+          description: product.description,
+          price: product.price,
+          stock: product.stock,
+          images: product.images['0'].src_size.xl, // product.images
+          id: product.id ? product.id : -1,
+          idStore: product.store_id ? product.store_id : -1,
+          isFavorite: product.isFavorite ? product.isFavorite : false,
+          sinchronized: product.sincronice
+        };
+
+      });
+
+      console.log('products loaded: ', this.bankProductList.products);
+
+
     });
   }
 

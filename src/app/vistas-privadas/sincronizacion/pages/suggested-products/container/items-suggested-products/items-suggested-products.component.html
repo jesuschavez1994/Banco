@@ -8,14 +8,10 @@
 
 <section class="container-fluid mt-5">
     <div class="row">
-        <div class="col-md-12 display-flex justify-content-space-between">
-            <button 
-                    type="button" 
-                    class="mr-3 family-700">
-                Sincronizar
-            </button>
-            <app-search (searchEmitter)="handleSearch($event)" class="width-70" [BuscarText]="this.textBuscador"></app-search>
-        </div>
+        <app-search-store   (searchEmitter)="handleSearch($event)" 
+                            class="width-100" 
+                            [BuscarText]="this.textBuscador">
+        </app-search-store>
     </div>
 </section>
 

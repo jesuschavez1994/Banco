@@ -5,10 +5,12 @@
 
 <div class="btn-toogle">
 
-  <app-sidebar-list-button
-  [expand]="isExpanded"
-  (sidebarExpand)="toggleSidebarList($event)"
-  class="btn-toogle"></app-sidebar-list-button>
+    <app-sidebar-list-button
+    [expand]="isExpanded"
+    (isExpanded)="toggleSidebarList($event)"
+    class="btn-toogle"
+  >
+  </app-sidebar-list-button>
 
 </div>
 
@@ -23,7 +25,7 @@
 
     <div class="profile-data">
 
-      <h2 class="name"> medicalback <span class="simbol-verifiqued">
+      <h2 class="name">  Mystore <span class="simbol-verifiqued">
         <img src="assets/img/no-image-banner.jpg" alt="#"></span>
       </h2>
 
@@ -47,8 +49,7 @@
         </a>
     </li>
 
-    <li routerLinkActive="active" 
-        [routerLinkActiveOptions]="{exact: false}" >
+    <li routerLinkActive="active">
         <a [routerLink]="['sincronizacion/exportar-lista-excel']">
             Sincronización
         </a>
@@ -63,46 +64,36 @@
 
 </div>
 
-<nav class="menu">
+<nav class="menu" *ngIf="this.showcategory === '/my-store/product-catalogue'">
 
-    <ul class="list">
-        <h4 class="title">
-            Categorías
-        </h4>
-        <!-- <li *ngFor="let item of category">
-            <a (click)="CategorySelect(item.name)">{{item.name}}</a>
-        </li> -->
-        <li>
-            <a>Meidcamentos</a>
-        </li>
-        <li>
-            <a>Veterinaria</a>
-        </li>
-        <li>
-            <a>Salud sexual</a>
-        </li>
-        <li>
-            <a>
-                Higiene y estética
-            </a>
-        </li>
-        <li>
-            <a>
-                Dieta
-            </a>
-        </li>
-    </ul>
+    
+    <!-- Categorias -->
+    <ng-container *ngIf="categories">
+
+        <ul class="list">
+    
+            <h4 class="title">
+                Categorías
+            </h4>
+        
+            <ng-container *ngFor="let category of categories">
+
+                <li class="category">
+                  <a>{{category.name}}</a>
+                </li>
+              </ng-container>
+    
+        </ul>
+    
+    </ng-container>
+
+ 
 
     <ul class="list">
         <h4 class="title">
             Subcategorías
         </h4>
-        <!-- <li *ngFor="let item of subcategoria; let i = index"> 
-            <input type="checkbox" id="id_subcategoria{{i}}" name="{{item.name}}">
-            <label for="id_subcategoria{{i}}">
-                <a>{{item.name}}</a>
-            </label>
-        </li> -->
+
         <li>
             <a>
                 Antibioticos

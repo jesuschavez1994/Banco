@@ -12,7 +12,7 @@ export interface ProductsCardsOptions {
   id?: number;
   idStore?: number;
   isFavorite?: boolean;
-  // images_sync_bank?: any;
+  sinchronized?: string
 
 }
 

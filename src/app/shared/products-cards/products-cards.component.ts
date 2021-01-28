@@ -22,7 +22,7 @@ export class ProductsCardsComponent implements OnInit {
 
   ) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
   }
 
   public selectedProduct(product: ProductsCardsOptions){

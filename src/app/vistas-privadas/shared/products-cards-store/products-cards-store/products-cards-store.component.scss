@@ -4,6 +4,7 @@
   display: grid;
   flex-wrap: wrap;
   grid-template-columns: auto auto auto auto;
+  padding-top: 4%;
 
 
   .product{
@@ -12,11 +13,18 @@
     cursor: pointer;
     margin: 0px 10px 80px 10px;
     transition: all .3s;
+    padding: 13px;
+
+    overflow: hidden;
 
     &:hover{
       transform: scale(1.03);
+      background-color:#e6e6e6;
 
       .img{
+        filter: grayscale(5%) brightness(90%) opacity(100%);
+        -webkit-filter: grayscale(5%) brightness(90%) opacity(100%);
+        -moz-filter: grayscale(5%) brightness(90%) opacity(100%);
         i{
           opacity: 1;
         }
@@ -30,6 +38,8 @@
       height: 16.6vw;
       margin-bottom: 10px;
       position: relative;
+      display: flex;
+      justify-content: center;
 
       &:hover{
         i{
@@ -46,26 +56,36 @@
       }
 
       i{
-        color: #A81829;
+        color: dimgray;
         cursor: pointer;
-        font-size: 24px;
+        font-size: 18px;
         transition: opacity .3S;
         position: absolute;
-        top: 20px;
-        right: 20px;
+        right: 0px;
         z-index: 2;
-
         opacity: 0;
 
         &:hover{
-          color: #b81b2d;
+          color: #F09207;
         }
 
         &.fas{
-          opacity: 1;
+          font-family: Font Awesome\ 5 Free !important;
         }
 
 
+      }
+
+      .fa-pencil-alt{
+        top: 10px;
+      }
+
+      .fa-trash-alt{
+        top: 45px;
+      }
+
+      .fa-sync-alt{
+        top: 80px;
       }
 
     }
@@ -76,11 +96,36 @@
       word-break: break-word;
     }
 
+    .descriptions{
+      font-size: $font__size--small;
+      line-height: 14px;
+      word-break: break-word;
+    }
+
     .cost{
       font-size: $font__size--head;
       font-weight: 600;
       word-break: break-word;
     }
+
+    .badge {
+      display: inline-block;
+      padding: .25em .4em;
+      font-size: 75%;
+      font-weight: 500;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      border-radius: .25rem;
+      transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+  
+    .badge-primary {
+      color: #fff;
+      background-color: #007bff;
+    }
+
   }
 
   .my-pagination .ngx-pagination .current::root {

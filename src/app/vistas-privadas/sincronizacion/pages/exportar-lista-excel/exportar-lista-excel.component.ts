@@ -50,12 +50,17 @@ export class ExportarListaExcelComponent implements OnInit {
   path: any;
   userId: string;
   storeId: string;
+  ProgressBarFull: number;
+  FileCompletedLoad: boolean;
 
   // VARIABLES PAGINADOR //
   data = [];
   pagesActual = 1;
   total = 0;
   perPage = 10;
+
+  // Open drog //
+  isOpen = false;
 
 
   constructor(private sincronizacion: SincronizacionService,
@@ -89,7 +94,7 @@ export class ExportarListaExcelComponent implements OnInit {
       localStorage.getItem('storeId')
     ).subscribe(
       (response: any) => {
-        this.spinnerService.hide()
+        this.spinnerService.hide();
         console.log(response);
         if ( response.size > 1){
           this.dowloadExcel = true;
@@ -97,6 +102,8 @@ export class ExportarListaExcelComponent implements OnInit {
         }else{
           return this.dowloadExcel = false;
         }
+      }, error => {
+        this.spinnerService.hide();
       }
     );
 
@@ -104,6 +111,11 @@ export class ExportarListaExcelComponent implements OnInit {
 
   spinner(): void{
     this.spinnerService.show();
+  }
+
+  CloseOverlay($event){
+    console.log($event);
+    this.isOpen = $event;
   }
 
   SendDocumentExcel(){}
@@ -176,6 +188,16 @@ export class ExportarListaExcelComponent implements OnInit {
 
   }
 
+  ExistsFile($event){
+    console.log('Exists', $event);
+    this.archivo = $event;
+  }
+
+  DataListExcel($event){
+    this.Data = $event;
+    console.log('DataEvent', $event);
+  }
+
   exportData(tableId: string) {
     this.sincronizacion.exportToFile('contacts', tableId);
   }
@@ -195,10 +217,18 @@ export class ExportarListaExcelComponent implements OnInit {
       localStorage.getItem('storeId'),
       file).subscribe( response => {
       console.log(response);
-      this.spinnerService.hide()
+      this.spinnerService.hide();
     });
 
-    
+  }
+
+  ProgressBar($event){
+    this.ProgressBarFull = $event;
+  }
+
+  FileCompleted($event){
+    this.FileCompletedLoad = $event;
+    console.log('carga completada', $event);
   }
 
 

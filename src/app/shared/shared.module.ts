@@ -18,6 +18,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { QuantityCounterComponent } from './quantity-counter/quantity-counter.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RouterModule } from '@angular/router';
+import { SpinnerComponent } from './spinner/spinner/spinner.component';
+import { CheckInternetConnectionComponent } from './check-internet-connection/check-internet-connection.component';
 import { PublicNavbarComponent } from './public-navbar/public-navbar.component';
 import { NavBrandComponent } from './public-navbar/nav-brand/nav-brand.component';
 import { CategoryLinkComponent } from './public-navbar/category-link/category-link.component';
@@ -30,69 +32,64 @@ import { NavOptionsComponent } from './public-navbar/nav-options/nav-options.com
 import { SearchComponent } from './public-navbar/search/search.component';
 import { SidebarHomeComponent } from './sidebar-home/sidebar-home.component';
 import { SliderComponent } from './slider/slider.component';
-import {MatDialogModule} from '@angular/material/dialog';
 import { ModalErrComponent } from './modal-err/modal-err.component';
 import { ModalRegisterComponent } from './modal-register/modal-register.component';
+import { MaterialModule } from '../Angula-Material/material.module';
+ 
+const components = [
+  NavbarComponent,
+  NavbarToHomeComponent,
+  CategoriasComponent,
+  NavbarstoreComponent,
+  SidebarMenuComponent,
+  SidebarListComponent,
+  BreadcrumbComponent,
+  SidebarListButtonComponent,
+  BannerComponent,
+  ProductsCardsComponent,
+  SearchBarComponent,
+  ImagePreviewGalleryComponent,
+  ProductDetailComponent,
+  QuantityCounterComponent,
+  SpinnerComponent,
+  CheckInternetConnectionComponent,
+  PublicNavbarComponent,
+  NavBrandComponent,
+  CategoryLinkComponent,
+  ButtonShopComponent,
+  ButtonUserSettingsComponent,
+  ButtonSignInComponent,
+  ButtonLoginComponent,
+  AvatarComponent,
+  NavOptionsComponent,
+  SearchComponent,
+  SidebarHomeComponent,
+  SliderComponent,
+  ModalErrComponent,
+  ModalRegisterComponent,
+ 
+];
+
+const modules = [
+  RouterModule,
+  PipesModule,
+  CommonModule,
+  NgxPaginationModule,
+  CommonModule,
+  MaterialModule,
+];
 
 @NgModule({
+
   entryComponents:[
     ModalErrComponent,
     ModalRegisterComponent
   ],
-
-    declarations: [
-      NavbarComponent,
-      NavbarToHomeComponent,
-      CategoriasComponent,
-      NavbarstoreComponent,
-      SidebarMenuComponent,
-      SidebarListComponent,
-      BreadcrumbComponent,
-      SidebarListButtonComponent,
-      BannerComponent,
-      ProductsCardsComponent,
-      SearchBarComponent,
-      ImagePreviewGalleryComponent,
-      ProductDetailComponent,
-      QuantityCounterComponent,
-      PublicNavbarComponent,
-      NavBrandComponent,
-      CategoryLinkComponent,
-      ButtonShopComponent,
-      ButtonUserSettingsComponent,
-      ButtonSignInComponent,
-      ButtonLoginComponent,
-      AvatarComponent,
-      NavOptionsComponent,
-      SearchComponent,
-      SidebarHomeComponent,
-      SliderComponent,
-      ModalErrComponent,
-      ModalRegisterComponent,
-      
-
-    ],
-    imports: [
-      // APP_ROUTING,
-      RouterModule,
-      PipesModule,
-      CommonModule,
-      NgxPaginationModule,
-      MatDialogModule,
-    ],
-    exports: [
-      NavbarComponent, NavbarToHomeComponent,
-      CategoriasComponent, NavbarstoreComponent,
-      SidebarMenuComponent, SidebarListComponent,
-      BreadcrumbComponent, SidebarListButtonComponent,
-      BannerComponent, ProductsCardsComponent,
-      SearchBarComponent, ImagePreviewGalleryComponent,
-      ProductDetailComponent, QuantityCounterComponent,
-      PublicNavbarComponent, NavBrandComponent,
-      CategoryLinkComponent, SearchComponent,
-      ButtonShopComponent, NavOptionsComponent,
-      SidebarHomeComponent, SliderComponent, 
-    ]
+  declarations: [...components],
+  imports: [
+    // APP_ROUTING,
+    ...modules,
+  ],
+  exports: [...components, ...modules],
 })
-
-export class SharedModule { }
+export class SharedModule {}
