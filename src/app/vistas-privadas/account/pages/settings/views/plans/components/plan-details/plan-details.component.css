@@ -171,7 +171,32 @@
   }
 
   .payment-methods .webpay-banner .note p {
+    font-size: 0.8em;
     width: 80%;
+  }
+
+  .payment-methods .btn {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .payment-methods .webpay-banner .title {
+    width: auto;
+  }
+
+  .payment-details .text {
+    font-size: 0.9em;
+    text-align: center;
+  }
+
+  .payment-methods .webpay-banner .banner {
+    width: 100%;
+  }
+
+  .payment-methods .webpay-banner .note p {
+    font-size: 0.6em;
+    width: 100%;
   }
 
   .payment-methods .btn {
