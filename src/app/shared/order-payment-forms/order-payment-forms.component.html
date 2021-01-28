@@ -1,6 +1,6 @@
 
 
-<p (click)="step === 1 ? 2 : 1" class="back-process">
+<p (click)="goToBack()" class="back-process">
   <span><</span>Atrás
 </p>
 
@@ -38,13 +38,13 @@
 
 <div>
 
-  <form action=""
+  <form
     class="form"
     [formGroup]="form"
     (ngSubmit)="processDataPay()"
     novalidate="novalidate">
 
-    <ng-container *ngIf="step === 1">
+    <ng-container *ngIf="step === 1 || step === 0">
 
       <div class="inputs-container">
 
@@ -234,13 +234,13 @@
 
               <input
                 id="paymentOption-{{option.data.id}}"
-                name="paymentOption"
                 type="radio"
                 class="checkbox-default radio-default"
                 formControlName="paymentOption"
                 [value]="option.data.id"
-                [checked]="optionPaymentSelected.data.id === option.data.id"
+
               >
+              <!-- [checked]="optionPaymentSelected.data.id === option.data.id" -->
 
               <label for="paymentOption-{{option.data.id}}">
 
@@ -302,109 +302,13 @@
       type="submit"
 
     >
-      {{step === 1 ? 'continuar' : 'pagar ahora'}}
+      Continuar
     </button>
 
   </form>
 
 </div>
 
-
-<!-- STEP 2 -->
-
-
-  <!-- <p (click)="step = 1" class="back-process">
-    <span><</span>Atrás
-  </p>
-
-  <p class="instruction">para concretar la compra, complete los siguientes pasos:</p>
-
-  <div class="breadcrumb-steps-container">
-
-    <div class="breadcrumb-steps">
-
-      <div class="step active">
-
-        <p>paso 1</p>
-        <div class="circle"></div>
-
-      </div>
-
-      <div class="step">
-
-        <p>paso 2</p>
-        <div class="circle"></div>
-
-      </div>
-
-    </div>
-
-    <div class="line"></div>
-
-  </div>
-
-<ng-container *ngIf="step === 2">
-
-  <div>
-
-    <form action="" class="form">
-
-      <div class="inputs-container">
-
-        <div class="input-container">
-
-          <div class="select-cards">
-
-            <article>
-
-              <input
-                id="termsAndConditions"
-                name="termsAndConditions"
-                type="checkbox" class="checkbox-default"
-              >
-
-              <label for="termsAndConditions">
-                <div class="select-card">
-
-                  <div class="img">
-                    <img src="assets/images/webpay-brand.png" alt="webpay.cl">
-                  </div>
-
-                  <p>
-                    tarjeta de débito (redcompra webpay)
-                  </p>
-
-                </div>
-              </label>
-
-            </article>
-
-          </div>
-
-        </div>
-
-        <div class="note">
-
-          <p>NOTA:</p>
-
-          <p>
-            Te recomendamos no cerrar el navegador
-            hasta que la compra sea finalizada
-          </p>
-
-        </div>
-
-      </div>
-
-      <div class="button button--full-width" type="submit">
-        pagar ahora
-      </div>
-
-    </form>
-
-  </div>
-
-</ng-container> -->
 
 <!-- Template error -->
 

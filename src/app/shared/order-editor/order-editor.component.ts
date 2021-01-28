@@ -14,6 +14,8 @@ export class OrderEditorComponent implements OnInit {
   hasDelivery = false;
   orderSelected: Order[] = [];
 
+  termsAndConditions = false;
+
   constructor() { }
 
   ngOnInit(): void {

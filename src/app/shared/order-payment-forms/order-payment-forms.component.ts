@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MyValidators } from '../../utils/validators';
 
@@ -50,13 +50,16 @@ export class OrderPaymentFormsComponent implements OnInit {
     },
   ];
 
+  @Input() buttonDisabled = false;
+  @Input() mallTransaction: {url: string, token: string};
+
   @Output() submitForm = new EventEmitter();
+  @Output() currentStep = new EventEmitter<number>();
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.optionPaymentSelected = this.optionPayment[0];
 
     this.form.valueChanges.subscribe(x => {
 
@@ -86,15 +89,15 @@ export class OrderPaymentFormsComponent implements OnInit {
       }
 
     });
+
   }
 
-  public processDataPay(){
+  public processDataPay() {
 
     let formData;
     formData = this.form.value;
 
     if (!this.form.valid) {
-
 
       if (this.isAllowedSecondStep) {
         this.step = 2;
@@ -105,6 +108,8 @@ export class OrderPaymentFormsComponent implements OnInit {
       const paymentOption = this.optionPaymentSelected;
       formData.paymentOption = this.optionPaymentSelected;
 
+      this.step = 2;
+
       this.submitForm.emit(formData);
 
     }
@@ -112,7 +117,7 @@ export class OrderPaymentFormsComponent implements OnInit {
   }
 
   public goToNextStep() {
-    if (this.isAllowedSecondStep) {
+    if (this.isAllowedSecondStep || this.form.valid) {
       this.step = 2;
     }
   }
@@ -183,12 +188,16 @@ export class OrderPaymentFormsComponent implements OnInit {
 
     } else {
 
-      return this.form.invalid;
+      return this.buttonDisabled ? this.buttonDisabled : this.form.invalid;
 
     }
 
   }
 
+  public goToBack() {
+    this.step -= 1;
+    this.currentStep.emit(this.step);
+  }
 
 
 }

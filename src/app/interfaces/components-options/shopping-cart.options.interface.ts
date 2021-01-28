@@ -1,8 +1,7 @@
-import { Order } from '../order.interface';
+import { Order, PaymentCreated, CreatedMallTransaction } from '../order.interface';
 
 export interface CurrentPaymentData {
   order?: Order;
-  paymentId?: number;
-  tokenWebPay?: string;
-  urlWebPay?: string;
+  payment?: PaymentCreated;
+  mallTransaction?: CreatedMallTransaction;
 }

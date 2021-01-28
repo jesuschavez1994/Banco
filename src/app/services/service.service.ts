@@ -25,10 +25,11 @@ export class Service {
   protected postQuery<T>(
     query: string,
     data: any,
-    url: string | boolean = true
+    url: string | boolean = true,
+    options = {}
   ){
     query = this.createUrlQuery(query, url);
-    return this.http.post<T>( query, data );
+    return this.http.post<T>( query, data, options );
   }
 
   // Delete

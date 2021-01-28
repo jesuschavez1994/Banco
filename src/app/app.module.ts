@@ -45,6 +45,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { SuccessComponent } from './modals/success/success.component';
 import { ToastComponent } from './modals/toast/toast.component';
+import { ConfirmWebpayPlusComponent } from './modals/confirm-webpay-plus/confirm-webpay-plus.component';
 
 registerLocaleData(ca);
 
@@ -52,6 +53,7 @@ registerLocaleData(ca);
   declarations: [
     AppComponent,
     SuccessComponent,
+    ConfirmWebpayPlusComponent,
 
   ],
   imports: [

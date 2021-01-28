@@ -4,6 +4,7 @@ import { PaymentProcessService } from '@services/payment-process/payment-process
 import { CurrentPaymentData } from '../../interfaces/components-options/shopping-cart.options.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { SuccessComponent } from '../../modals/success/success.component';
+import { ConfirmWebpayPlusComponent } from '../../modals/confirm-webpay-plus/confirm-webpay-plus.component';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -15,7 +16,7 @@ export class ShoppingCartComponent implements OnInit {
   taxPorcentage = 10;
   deliveryCost = 0;
 
-  tabSelected: 1 | 2 | 3 = 1;
+  tabSelected: 1 | 2 | 3 | 4 = 1;
   ordersLists: OrderListOptions[] = [];
 
   // = [
@@ -173,7 +174,11 @@ export class ShoppingCartComponent implements OnInit {
 
   ordersListSelected: OrderListOptions;
 
-  private currentPaymentData: CurrentPaymentData = {};
+  buttonDisabledForm = false;
+
+  termsAndConditions = false;
+
+  protected currentPaymentData: CurrentPaymentData = {};
 
   constructor(
     private paymentService: PaymentProcessService,
@@ -251,6 +256,19 @@ export class ShoppingCartComponent implements OnInit {
 
     });
 
+    // Borrar el listado de pedidos y solo borrar el carrito al terminar con el proceso de compra.
+    // Considero que si el back, crea un pedido entero de todos los productos
+    // Y no un pedido por cada tienda, entonces no debería agregarse a un array de pedidos.
+    // sino, ser un y al utilizar el agregar otro pedido, se reescriba, solo permitiendo tener 1 pedido.
+    // a la vez.
+
+    // Sino, el back debería permitir en la ruta, colocar el id de la tienda y revisar en el registro de carrito.
+    // Para registrar los productos en el carrito que coincidan con el id de tienda, permitiendo así.
+    // Crear un pedido por cada tienda.
+    // Lo ideal sería tener ambas opciones, pagar todo y pagar solo productos de la tienda.
+    // Si el back actua de esta manera igual, sería bueno borrar el listado de pedidos al venir al carrito de compras
+    // y se carga el carrito de compras, con los productos aún no pagados.
+
 
   }
 
@@ -262,83 +280,106 @@ export class ShoppingCartComponent implements OnInit {
     this.ordersListSelected = ordersList;
   }
 
+  /**
+   * @description Muestra un modal de confirmación, si la acción es continuar,
+   * entonces se creara un nuevo pedido a procesar el pago
+   * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christopher<@>matiz.com.ve
+   * @date 27/01/2021
+   * @param {*} event
+   * @memberof ShoppingCartComponent
+   */
   public purchaseAction(event) {
 
     const modalConfirm = this.dialog.open(SuccessComponent, {
       data: {
-        title: 'noooo',
-        message: 'mensajeeeee',
+        title: '¿Continuar con el proceso de pago?',
         buttons: [
           'Cancelar',
-          'Pagar',
+          'Continuar',
         ],
       }
     });
 
     modalConfirm.componentInstance.emitSelectData.subscribe( result => {
-      // console.log('valooooor');
-      // console.log(result);
 
-      if (result === 'Pagar') {
+      if (result === 'Continuar') {
 
-        if (!this.currentPaymentData.order) {
+        modalConfirm.componentInstance.buttonDisabled = true;
 
-          this.paymentService.createOrder().subscribe( orderCreated => {
+        this.paymentService.createOrder().subscribe( orderCreated => {
 
-            console.log('createOrder');
-            console.log(orderCreated);
+          console.log('createOrder');
+          console.log(orderCreated);
 
-            this.currentPaymentData.order = orderCreated;
+          this.currentPaymentData.order = orderCreated;
 
-            modalConfirm.close();
-            this.tabSelected = 3;
+          modalConfirm.close();
+          this.tabSelected = 3;
 
+          modalConfirm.componentInstance.buttonDisabled = false;
 
-
-          });
-
-        } else {
-
-          if (Object.keys(this.currentPaymentData.order).length === 0) {
-
-            this.paymentService.createOrder().subscribe( orderCreated => {
-
-              console.log('createOrder');
-              console.log(orderCreated);
-
-              this.currentPaymentData.order = orderCreated;
-
-              modalConfirm.close();
-              this.tabSelected = 3;
-
-            });
-
-          }
-
-        }
+        });
 
       }
+
     });
 
   }
 
   public formData(event) {
-    // console.log('formData');
-    // console.log(event);
+
+    this.form = event;
+
     if (this.currentPaymentData.order){
 
-      if (Object.keys(this.currentPaymentData.order).length === 0) {
-        this.paymentService.addPaymentToOrder(this.currentPaymentData.order.id).subscribe(
-          resp => {
-            this.currentPaymentData.paymentId = resp.id;
-          }, error => {
+      if (Object.keys(this.currentPaymentData.order).length > 0) {
 
+        this.buttonDisabledForm = true;
+
+        this.paymentService.addPaymentToOrder(this.currentPaymentData.order.id).subscribe(
+
+          resp => {
+            console.log(resp);
+
+            if (!resp.message) {
+
+              this.currentPaymentData.payment = resp;
+
+              console.log('addPaymentToOrder');
+              console.log(this.currentPaymentData);
+
+              this.paymentService.createTransaction(this.currentPaymentData.payment.id).subscribe(
+                mallTransactionResp => {
+
+                  console.log('createTransaction');
+                  console.log(mallTransactionResp);
+
+                  this.currentPaymentData.mallTransaction = mallTransactionResp;
+
+                  this.tabSelected = 4;
+
+                }
+              );
+
+            }
+
+            this.buttonDisabledForm = true;
+
+          }, error => {
+            this.buttonDisabledForm = false;
           }
         );
+
       }
 
     }
 
+  }
+
+  public backProcessForm(event) {
+    if (event === 0) {
+      this.tabSelected = 1;
+    }
   }
 
 }

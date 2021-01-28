@@ -202,17 +202,26 @@
       </table>
 
       <label for="termsAndConditions">
-        <input id="termsAndConditions" name="termsAndConditions"  type="checkbox" class="checkbox-default">
+        <input
+          id="termsAndConditions" name="termsAndConditions"
+          type="checkbox" class="checkbox-default"
+          (click)="termsAndConditions ? false : true"
+          [checked]="termsAndConditions"
+        >
         Acepto términos y condiciones
       </label>
 
       <div class="actions">
-        <div class="button gray" (click)="cancelOrder()">
+        <button class="button gray" (click)="cancelOrder()">
           cancelar orden
-        </div>
-        <div class="button" (click)="processPayment()">
+        </button>
+        <button
+          [disabled]="termsAndConditions"
+          class="button"
+          [ngClass]="{'disabled': termsAndConditions}"
+          (click)="processPayment()">
           pagar
-        </div>
+        </button>
       </div>
 
     </div>

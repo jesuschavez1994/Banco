@@ -41,7 +41,10 @@
 
   <ng-container *ngIf="data.button else buttonsArray">
 
-    <button (click)="onClose()">
+    <button
+      [disabled]="buttonDisabled"
+      (click)="onClose()"
+    >
       {{data.button}}
     </button>
 
@@ -58,6 +61,7 @@
       <ng-container *ngIf="index + 1 !== data.buttons.length">
 
         <button
+          [disabled]="buttonDisabled"
           mat-button
           (click)="onButton(button)"
         >
@@ -71,6 +75,7 @@
       <ng-container *ngIf="index +1 === data.buttons.length">
 
         <button
+          [disabled]="buttonDisabled"
           mat-button
           cdkFocusInitial
           (click)="onButton(button, false)"
@@ -90,7 +95,10 @@
 
 <ng-template #buttonDefault>
 
-  <button (click)="onClose()">
+  <button
+    [disabled]="buttonDisabled"
+    (click)="onClose()"
+  >
     Ok
   </button>
 

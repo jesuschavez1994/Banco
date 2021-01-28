@@ -32,4 +32,36 @@ export interface PaymentCreated {
   updated_at: string;
   created_at: string;
   id: number;
+  message?: string;
+}
+
+// CreatedMallTransaction
+export interface CreatedMallTransaction {
+  token: string;
+  url: string;
+}
+
+interface CreatedMallTransactionStatus {
+  resp: Resp;
+  req: Req;
+}
+
+interface Req {
+  token: string;
+}
+
+interface Resp {
+  details: Detail[];
+  buy_order: string;
+  session_id: string;
+  accounting_date: string;
+  transaction_date: string;
+}
+
+interface Detail {
+  amount: number;
+  status: string;
+  installments_number: number;
+  commerce_code: string;
+  buy_order: string;
 }

@@ -4,7 +4,7 @@ import { Service } from '@services/service.service';
 import { ProductToCartResp } from '@interfaces/productCart.interface';
 import { Observable } from 'rxjs';
 import { UsuarioService } from '../usuario/usuario.service';
-import { Order, PaymentCreated } from '../../interfaces/order.interface';
+import { Order, PaymentCreated, CreatedMallTransaction } from '../../interfaces/order.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -113,8 +113,36 @@ export class PaymentProcessService extends Service {
    * @returns {*}
    * @memberof PaymentProcessService
    */
-  public createTransaction(paymentId: number) {
-    return this.execQuery(`webpayplus/createdMallTransaction?payment_id=${paymentId}`);
+  public createTransaction(paymentId: number): Observable<CreatedMallTransaction> {
+    this.setIdUser();
+    return this.execQuery<CreatedMallTransaction>(`webpayplus/createdMallTransaction?payment_id=${paymentId}&user_id=${this.idUser}`);
+  }
+  // /
+
+  public getTransactionStatus(token: string): Observable<CreatedMallTransaction> {
+
+    const options = {
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    };
+
+    const data = {
+      token
+    };
+
+    return this.postQuery<CreatedMallTransaction>(`webpayplus/mallTransactionStatus`, data, true, options);
+  }
+
+  public getUrlTransaction( url: string, token: string ) {
+
+    const options = {
+      headers: {'Content-Type': 'multipart/form-data'}
+    };
+
+    const data = {
+      token_ws: token,
+    };
+
+    return this.postQuery(`${url}`, data, ``, options);
   }
 
   public mallReturnUrl() {
