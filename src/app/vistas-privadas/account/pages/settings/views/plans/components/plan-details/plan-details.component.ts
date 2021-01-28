@@ -42,7 +42,11 @@ export class PlanDetailsComponent implements OnInit {
     this.voucherDetails = new EventEmitter<object>();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.createdOrderDetails = JSON.parse(
+      this.localStorage.getItem('createdOrder')
+    );
+  }
 
   // Events that happens in the component -----------------
   backToPreviousPage(): void {
@@ -62,8 +66,8 @@ export class PlanDetailsComponent implements OnInit {
   createPayment(): void {
     this.subscriptionDataService
       .paymentCreation(
-        this.orderDetails.order.user_id,
-        this.orderDetails.order.id
+        this.createdOrderDetails.order.user_id,
+        this.createdOrderDetails.order.id
       )
       .subscribe((serverResponse: Payment) => {
         this.subscriptionDataService

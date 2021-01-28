@@ -4,13 +4,7 @@ import { SubscriptionService } from '@services/subscription/subscription.service
 import { CreatedOrder } from '@interfaces/SettingsInterfaces';
 import { BROWSER_STORAGE } from '@app/browserStorage';
 
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from '@angular/animations';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-plans',
