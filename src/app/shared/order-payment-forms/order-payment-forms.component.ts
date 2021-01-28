@@ -17,7 +17,7 @@ export class OrderPaymentFormsComponent implements OnInit {
     region: new FormControl('', [Validators.required, MyValidators.existInArray(this.regiones)]),
     comuna: new FormControl('', [Validators.required, MyValidators.existInArray(this.regiones)]),
     direccion: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    hospedaje: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    hospedaje: new FormControl('', [Validators.required, Validators.minLength(6)]),
     telefono: new FormControl('', [
       Validators.required, Validators.minLength(10),
       Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g)

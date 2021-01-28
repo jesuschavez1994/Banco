@@ -212,7 +212,6 @@
           [checked]="isCheckedTermsAndConditions()"
         >
         Acepto términos y condiciones
-        {{isCheckedTermsAndConditions()}}
 
       </label>
 
@@ -220,8 +219,7 @@
         <button class="button gray" (click)="cancelOrder()">
           cancelar orden
         </button>
-        <!-- [disabled]="termsAndConditions"
-        [ngClass]="{'disabled': termsAndConditions}" -->
+
         <button
           [disabled]="!isCheckedTermsAndConditions()"
           [ngClass]="{'disabled': !isCheckedTermsAndConditions()}"
