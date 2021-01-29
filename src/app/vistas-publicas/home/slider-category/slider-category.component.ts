@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Container } from '@angular/compiler/src/i18n/i18n_ast';
+import { Component, OnInit, Input,ViewChild, ElementRef, Renderer2} from '@angular/core';
 import { CategoriesHome, Product  } from "@interfaces/homeProduct.interface";
 @Component({
   selector: 'app-slider-category',
@@ -7,11 +8,36 @@ import { CategoriesHome, Product  } from "@interfaces/homeProduct.interface";
 })
 export class SliderCategoryComponent implements OnInit {
   @Input() _cat: CategoriesHome;
-  listCategory: Product[];
-  constructor() { }
+   
+@ViewChild('container') scroll: ElementRef;
+@ViewChild('carr') scrollable: ElementRef;
+@ViewChild('back') back: ElementRef;
+@ViewChild('next') next: ElementRef;
 
+  listCategory: Product[];
+  constructor(private render: Renderer2 ) { }
+  
   ngOnInit(): void {
     this.listCategory= this._cat.products;
   }
+  scrollRight(value){
 
+    console.log(this.scroll.nativeElement.scrollLeft);
+    this.scrollable.nativeElement.scrollLeft += value ;
+    if(this.scrollable.nativeElement.scrollLeft >= this.scrollable.nativeElement.scrollWidth ){
+      this.scrollable.nativeElement.scrollLeft=  this.scrollable.nativeElement.scrollWidth;
+     this.next.nativeElement.setAttribute('disabled','true');
+      // this.render.setAttribute(this.next.nativeElement,'disabled','true');
+    }
+  }
+  scrollLeft(value){
+    value = (value * (-1));
+    
+    this.scrollable.nativeElement.scrollLeft += value ;
+    if(this.scrollable.nativeElement.scrollLeft <= 0 ){
+      this.scrollable.nativeElement.scrollLeft=  0
+      this.back.nativeElement.setAttribute('disabled','true');
+      //this.render.setAttribute(this.back.nativeElement,'disabled','true');
+    }
+  }
 }

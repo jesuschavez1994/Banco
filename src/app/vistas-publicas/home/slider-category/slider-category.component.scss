@@ -24,7 +24,29 @@
             @media (max-width: 425px) {
                 height: 200px;
             }
+            button {
+                display: none;
+                position: absolute;
+                font-size: 30px;
+                background-color: rgba($color: #e6af5e, $alpha: 1);
+                align-self: center;
+                top: 45%;
+                z-index: 25000;
+                @media(min-width: 768px) {
+                    display: block;
+                }
+            }
+            .next {
+                left: 98%;
+            }
+            .back {
+                right: 97%;
+            }
+            button:focus {
+                outline: none;
+            }
             ol {
+                scroll-behavior: smooth;
                 overflow-x: scroll;
                 overflow-y: hidden;
                 position: relative;
@@ -37,6 +59,19 @@
                 text-decoration-style: none;
                 display: flex;
                 flex-wrap: nowrap;
+                &::-webkit-scrollbar {
+                    width: 4px;
+                    height: 8px;
+                    background: transparent;
+                }
+                &::-webkit-scrollbar-thumb {
+                    background: rgba($color: #000000, $alpha: .3);
+                    border-radius: 4px;
+                }
+                &::-webkit-scrollbar-thumb:hover {
+                    background: rgba($color: #F09207, $alpha: .4);
+                    border-radius: 10px;
+                }
                 .item {
                     margin: 0;
                     padding: 14px;
@@ -53,6 +88,7 @@
                         background-color: #fff;
                         width: 100%;
                         transition: all .3s;
+                        border: none;
                         .material-icons {
                             display: none;
                         }

@@ -10,8 +10,11 @@
 
     <main>
 
-        <nav class="list-items">
-            <ol>
+        <nav class="list-items" #container>
+
+            <button #back mat-mini-fab class="back" (click)="scrollLeft(100)"> &lt;</button>
+
+            <ol #carr>
                 <li id="{{i.id}}" class=" item product" id="index" *ngFor=" let i of listCategory; let j = index">
                     <article class="product-item-info card">
                         <picture class="product-image-container">
@@ -25,7 +28,10 @@
                         </div>
                     </article>
                 </li>
+
             </ol>
+            <button #next mat-mini-fab (click)="scrollRight(100)" class="next">&gt;</button>
+
         </nav>
     </main>
 
