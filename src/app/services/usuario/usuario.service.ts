@@ -78,9 +78,6 @@ export class UsuarioService {
   }
 
   guardarStorage(id: string, token: string, usuario: Usuario) {
-    // Prueba para mantener el estado de las páginas en "/settings/plans"
-    localStorage.setItem('settingsActualPage', 'plans');
-
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
@@ -90,9 +87,6 @@ export class UsuarioService {
   }
 
   login(usuario: Usuario, recordar: boolean = false) {
-    // Prueba para mantener el estado de las páginas en "/settings/plans"
-    localStorage.setItem('settingsActualPage', 'plans');
-
     const url = '/api/login';
 
     if (recordar) {
