@@ -1,6 +1,7 @@
 import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit, Input,ViewChild, ElementRef, Renderer2} from '@angular/core';
 import { CategoriesHome, Product  } from "@interfaces/homeProduct.interface";
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-slider-category',
   templateUrl: './slider-category.component.html',
@@ -15,7 +16,7 @@ export class SliderCategoryComponent implements OnInit {
 @ViewChild('next') next: ElementRef;
 
   listCategory: Product[];
-  constructor(private render: Renderer2 ) { }
+  constructor(private render: Renderer2, private route: Router, ) { }
   
   ngOnInit(): void {
     this.listCategory= this._cat.products;
@@ -39,5 +40,9 @@ export class SliderCategoryComponent implements OnInit {
       this.back.nativeElement.setAttribute('disabled','true');
       //this.render.setAttribute(this.back.nativeElement,'disabled','true');
     }
+  }
+  getProductDetail(idStore,idProduct){
+    console.log('route',idStore,idProduct);
+    this.route.navigate(['business-detail',idStore,'products',idProduct]);
   }
 }

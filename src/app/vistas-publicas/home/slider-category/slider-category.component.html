@@ -17,7 +17,7 @@
             <ol #carr>
                 <li id="{{i.id}}" class=" item product" id="index" *ngFor=" let i of listCategory; let j = index">
                     <article class="product-item-info card">
-                        <picture class="product-image-container">
+                        <picture class="product-image-container" (click)="getProductDetail(i.store_id,i.id)">
                             <img src="{{i.images[0] | imgFallback: 'box' }}" class="card-img-top" alt="{{i.name}}">
                         </picture>
                         <div class="card-body pb-0 pt-0">
