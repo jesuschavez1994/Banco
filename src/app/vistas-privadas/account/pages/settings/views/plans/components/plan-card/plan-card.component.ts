@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router, Navigation } from '@angular/router';
 import { Injectable, Inject } from '@angular/core';
 import { Plan } from '../../models/plan';
 import {
@@ -15,9 +16,6 @@ import { BROWSER_STORAGE } from '@app/browserStorage';
 })
 export class PlanCardComponent implements OnInit {
   @Input() planInfo: Plan;
-  @Output() private selectPlan: EventEmitter<Plan>;
-  @Output() private gotOrderDetails: EventEmitter<Object>;
-  @Output() private pageChange: EventEmitter<string>;
 
   moreInfo = false;
   productSync = '100';
@@ -27,13 +25,10 @@ export class PlanCardComponent implements OnInit {
   totalPrice = 64;
 
   constructor(
+    private router: Router,
     private subscriptionDataService: SubscriptionService,
     @Inject(BROWSER_STORAGE) private localStorage: Storage
-  ) {
-    this.selectPlan = new EventEmitter<Plan>();
-    this.pageChange = new EventEmitter<string>();
-    this.gotOrderDetails = new EventEmitter<Object>();
-  }
+  ) {}
 
   ngOnInit(): void {}
 
@@ -42,16 +37,12 @@ export class PlanCardComponent implements OnInit {
     this.moreInfo = !this.moreInfo;
   }
 
-  onPlanSelected(event): void {
-    this.getOrderNumber();
-  }
-
   onCheck(): void {
     console.log(this.productSync);
   }
 
   // API calls handler methods-------------------------------
-  private getOrderNumber(): void {
+  public getOrderNumber(): void {
     this.planDetails = {
       plan_name: this.planInfo.name,
       type: 'subscription',
@@ -80,19 +71,25 @@ export class PlanCardComponent implements OnInit {
         .subscribe((serverResponse: CreatedOrder) => {
           // Setting the value on the localStorage, in case the page refresh and the payment process isn't finished yet.
           this.localStorage.setItem(
+            'planDetails',
+            JSON.stringify(this.planDetails)
+          );
+          this.localStorage.setItem(
             'createdOrder',
             JSON.stringify(serverResponse)
           );
           this.waitingResponse = false;
-          this.gotOrderDetails.emit(serverResponse);
-          this.selectPlan.emit(this.planInfo);
-          this.pageChange.emit(this.nextPage);
           window.scrollTo(0, 0);
+          this.router.navigate([
+            '/account',
+            'settings',
+            'plans',
+            'plan-details',
+          ]);
         });
     } else {
-      this.selectPlan.emit(this.planInfo);
-      this.pageChange.emit(this.nextPage);
       window.scrollTo(0, 0);
+      this.router.navigate(['/account', 'settings', 'plans', 'plan-details']);
     }
   }
 }

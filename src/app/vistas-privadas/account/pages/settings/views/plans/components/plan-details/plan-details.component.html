@@ -1,22 +1,26 @@
 <!-- Payment section -->
 <div class="payment">
-  <button class="btn" (click)="backToPreviousPage()" mat-button>
+  <button
+    class="btn"
+    [routerLink]="['/account', 'settings', 'plans', 'choose-plan']"
+    mat-button
+  >
     <i class="fas fa-caret-left"></i> Atrás
   </button>
 
   <!-- Payment details -->
-  <div class="payment-details">
+  <div class="payment-details animated fadeIn">
     <h5
       class="plan-name"
-      [class.basic]="selectedPlanDetails.name === 'Basic'"
-      [class.standard]="selectedPlanDetails.name === 'Standard'"
-      [class.premium]="selectedPlanDetails.name === 'Premium'"
+      [class.basic]="selectedPlanDetails.plan_name === 'Basic'"
+      [class.standard]="selectedPlanDetails.plan_name === 'Standard'"
+      [class.premium]="selectedPlanDetails.plan_name === 'Premium'"
     >
-      Plan {{ selectedPlanDetails.name | titlecase }}
+      Plan {{ selectedPlanDetails.plan_name | titlecase }}
     </h5>
     <h5 class="total">
       <b>Total:&nbsp; &nbsp;</b>
-      <span>64.98</span>
+      <span>{{ selectedPlanDetails.price | currency }}</span>
     </h5>
 
     <p class="text">

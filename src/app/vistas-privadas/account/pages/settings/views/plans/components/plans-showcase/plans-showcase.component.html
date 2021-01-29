@@ -1,0 +1,5 @@
+<div class="plans-container animated fadeIn">
+  <div *ngFor="let plan of plans; index as i">
+    <app-plan-card [planInfo]="plan"></app-plan-card>
+  </div>
+</div>

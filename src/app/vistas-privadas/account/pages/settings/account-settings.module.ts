@@ -17,6 +17,7 @@ import { AccountSettingsRoutingModule } from './account-settings-routing.module'
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@Angula-Material/material.module';
 import { SharedModule } from '@shared/shared.module';
+import { PlansShowcaseComponent } from './views/plans/components/plans-showcase/plans-showcase.component';
 
 const components = [
   SidebarComponent,
@@ -38,7 +39,7 @@ const modules = [
 
 @NgModule({
   entryComponents: [RedirectionModalComponent],
-  declarations: [...components],
+  declarations: [...components, PlansShowcaseComponent],
   imports: [...modules],
 })
 export class AccountSettingsModule {}
