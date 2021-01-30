@@ -47,6 +47,12 @@ import { SuccessComponent } from './modals/success/success.component';
 import { ToastComponent } from './modals/toast/toast.component';
 import { ConfirmWebpayPlusComponent } from './modals/confirm-webpay-plus/confirm-webpay-plus.component';
 
+// Check Module connection to internet //
+import {
+  ConnectionServiceModule,
+  ConnectionServiceOptions,
+  ConnectionServiceOptionsToken,
+} from 'ngx-connection-service';
 // HAmmerjs //
 
 // particular imports for hammer
@@ -66,19 +72,12 @@ export class MyHammerConfig extends HammerGestureConfig {
   } as any;
 }
 
-// Check Module connection to internet //
-import {
-  ConnectionServiceModule,
-  ConnectionServiceOptions,
-  ConnectionServiceOptionsToken,
-} from 'ngx-connection-service';
 
 @NgModule({
   declarations: [
     AppComponent,
     SuccessComponent,
     ConfirmWebpayPlusComponent,
-
   ],
   imports: [
     CommonModule,

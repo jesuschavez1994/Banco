@@ -30,6 +30,20 @@ import { CardShimmerComponent } from './card-shimmer/card-shimmer.component';
 import { ToastComponent } from '../modals/toast/toast.component';
 import { BannerShimmerComponent } from './banner-shimmer/banner-shimmer.component';
 import { SidebarListShimmerComponent } from './sidebar-list-shimmer/sidebar-list-shimmer.component';
+import { PublicNavbarComponent } from "./public-navbar/public-navbar.component";
+import { SpinnerComponent} from './spinner/spinner/spinner.component';
+import { CheckInternetConnectionComponent } from "./check-internet-connection/check-internet-connection.component";
+import { SidebarHomeComponent } from "./sidebar-home/sidebar-home.component";
+import { SliderComponent } from "./slider/slider.component";
+import { NavOptionsComponent } from "./public-navbar/nav-options/nav-options.component";
+import { CategoryLinkComponent } from "./public-navbar/category-link/category-link.component";
+import { NavBrandComponent } from "./public-navbar/nav-brand/nav-brand.component";
+import { AvatarComponent } from "./public-navbar/avatar/avatar.component";
+import { ButtonShopComponent } from "./public-navbar/button-shop/button-shop.component";
+import { ModalRegisterComponent } from "./modal-register/modal-register.component";
+import { SearchComponent } from "./public-navbar/search/search.component";
+
+
 
 @NgModule({
     declarations: [
@@ -45,7 +59,14 @@ import { SidebarListShimmerComponent } from './sidebar-list-shimmer/sidebar-list
       DropdownButtonComponent, DropdownIconComponent,
       InvoiceBComponent, CardShimmerComponent,
       ToastComponent, BannerShimmerComponent,
-      SidebarListShimmerComponent,
+      SidebarListShimmerComponent,PublicNavbarComponent,
+      SpinnerComponent, CheckInternetConnectionComponent,
+      SidebarHomeComponent,SliderComponent,
+NavOptionsComponent,CategoryLinkComponent,
+NavBrandComponent,AvatarComponent,
+ButtonShopComponent,ModalRegisterComponent,
+ModalRegisterComponent,SearchComponent,
+
     ],
     imports: [
       // APP_ROUTING,
@@ -71,7 +92,14 @@ import { SidebarListShimmerComponent } from './sidebar-list-shimmer/sidebar-list
       DropdownButtonComponent, DropdownIconComponent,
       InvoiceBComponent, CardShimmerComponent,
       ToastComponent, BannerShimmerComponent,
-      SidebarListShimmerComponent,
+      SidebarListShimmerComponent, PublicNavbarComponent,
+      SpinnerComponent, CheckInternetConnectionComponent,
+      SidebarHomeComponent,SliderComponent,
+NavOptionsComponent,CategoryLinkComponent,
+NavBrandComponent,AvatarComponent,
+ButtonShopComponent,ModalRegisterComponent,
+ModalRegisterComponent,SearchComponent,
+
     ]
 })
 export class SharedModule {}
