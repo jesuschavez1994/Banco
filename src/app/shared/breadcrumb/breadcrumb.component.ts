@@ -9,6 +9,7 @@ import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.opt
 export class BreadcrumbComponent implements OnInit {
 
   @Input() breadcrumb: BreadcrumbOptions[];
+  @Input() sync: string;
 
   constructor() { }
 

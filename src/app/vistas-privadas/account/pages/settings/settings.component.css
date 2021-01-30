@@ -1,0 +1,44 @@
+/* ---------------- Resets fot global stylings -------------- */
+* {
+  font-family: "Montserrat", "Segoe UI", sans-serif;
+}
+
+/* 
+  Wrapper del contenido que se muestre en el "router-outlet".
+  Se debe modificar la propiedad "padding" y reducirlo para pantallas pequeñas.
+*/
+.content-wrapper {
+  margin-top: 90px;
+  padding: 0px 340px 0px 15px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 50px auto;
+  grid-template-areas:
+    "content content content content content content"
+    "content content content content content content";
+  scroll-behavior: smooth;
+}
+
+.main-area {
+  grid-area: content;
+  position: relative;
+}
+
+/* ------------ Responsive media queries ---------------- */
+@media screen and (max-width: 999px) {
+  .content-wrapper {
+    padding: 0px 250px 0px 110px;
+  }
+}
+
+@media screen and (max-width: 757px) {
+  .content-wrapper {
+    padding: 0px 200px 0px 65px;
+  }
+}
+
+@media screen and (max-width: 485px) {
+  .content-wrapper {
+    padding: 0px 20px 0px 15px;
+  }
+}

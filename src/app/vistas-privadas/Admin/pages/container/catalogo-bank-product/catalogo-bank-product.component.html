@@ -1,0 +1,42 @@
+
+    <li class="col-md-12 item product" id="{{index}}">
+        <div    class="product-item-info card"
+                >
+                <i  class="material-icons position-absolute left-85 top-5 icon-gris" 
+                    name="create"
+                    title="Editar"
+                    (click)="Id(index)"
+                    [routerLink]="['/admin/edit-bank-admin', MyProduct[index].id]" 
+                >
+                create
+                </i>
+                <span class="product-image-container" style="width:240px;">
+                    <span class="product-image-wrapper">
+                        <img    [src]="item.images[0].src_size.xl | imgProductLoad" 
+                                class="product-image-photo lazyload"   
+                                alt="{{item.name}}"
+                                style="display: block;"
+                                *ngIf="item.images.length >= 1"    
+                        >
+
+                        <img    src="assets/img/box.svg" 
+                                class="card-img-top" 
+                                alt="..." 
+                                *ngIf="item.images.length === 0"
+                        >
+                            
+                    </span>
+                </span>
+                <div class="card-body pb-0 pt-0">
+                    <p class="family-600 size-14 color-p" title="{{item.name}} ">
+                        {{item.name  }} 
+                     
+                    </p>
+        
+                    <p class="family-600 size-11 mb-0 detail-name card-text line" title="{{item.description}}">
+                        {{item.description | LimitarTexto:105 }} 
+                   
+                    </p>
+                </div>
+        </div>
+    </li>

@@ -1,0 +1,35 @@
+ .page {
+     font-family: "Montserrat", sans-serif;
+     color: black !important;
+     min-height: 100%;
+     display: flex;
+     flex-wrap: nowrap;
+     .content-home {
+         width: 100%;
+         .categorys-group {
+             padding: 4% 4%;
+         }
+     }
+ }
+ 
+ @media(max-width: 768px) {
+     .page {
+         .content-home {
+             width: 94%;
+             .categorys-group {
+                 padding: 4% 4%;
+             }
+         }
+     }
+ }
+ 
+ @media(max-width: 425px) {
+     .page {
+         .content-home {
+             width: 87%;
+             .categorys-group {
+                 padding: 6% 0%;
+             }
+         }
+     }
+ }

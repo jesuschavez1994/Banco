@@ -170,6 +170,16 @@ export class StoreService extends Service{
     return this.postQuery(url, data);
   }
 
+  getSpecificProduct(userId: string, storeId: string, idProduct: string){
+    const url = `users/${userId}/stores/${storeId}/products/${idProduct}`;
+    return this.execQuery(url);
+  }
+
+  ProductGet(userId: string, storeId: string){
+    const url = `/api/users/${userId}/stores/${storeId}/products`;
+    return this.execQuery(url);
+  }
+
   geatAllProducts(userId: string, storeId: string, page?: number){
     const url = `users/${userId}/stores/${storeId}/products`  + '?page=' + page;
     return this.execQuery(url);
@@ -181,7 +191,7 @@ export class StoreService extends Service{
   }
 
   // -----
-  getStoreById(idStore: number): Observable<StoreResponse> {
+  getStoreById(idStore: any): Observable<StoreResponse> {
     return this.execQuery<StoreResponse>(`stores/${idStore}`);
 
   }

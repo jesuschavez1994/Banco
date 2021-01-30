@@ -1,0 +1,36 @@
+<form   [formGroup]="forma" 
+        (ngSubmit)="registrarNegocio()" 
+        novalidate="novalidate"
+        >    
+        <ol>
+            <li>
+                <mat-form-field>
+                <mat-label>Agregar categoria</mat-label>
+                <input formControlName="categoria" matInput>
+
+                <mat-error  *ngIf="forma.get('categoria').value[0] === 'Seleccionar'"  
+                                class="invalid-feedback"
+                                style="font-size: 100%;">
+                                Debe indicar la categoria
+                </mat-error>
+
+                </mat-form-field>
+            </li>
+            <li>
+                <mat-form-field>
+                <mat-label>Agregar subcategoria</mat-label>
+                <input formControlName="subcategoria" matInput>
+                </mat-form-field>
+            </li>
+            <li>
+                <button (click)="addCategory()" 
+                        mat-raised-button color="primary" 
+                        class="mr-1"
+                        [disabled]="forma.get('categoria').value[0] === 'Seleccionar'">
+                        Guardar
+                </button>
+                <button  (click)="closeModal()" mat-raised-button color="warn">Cancelar</button>
+            </li>
+            
+        </ol>
+</form>

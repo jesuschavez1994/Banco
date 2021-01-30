@@ -1,32 +1,16 @@
-<app-navbar></app-navbar>
-<div class="degradado animated fadeIn fast">
-    <div class="row">
-       <div class="col-md-5 display-flex justify-content-center animated fadeIn fast">
-            <img src="../../../assets/img/IconosHome/NIÑA.svg" style="max-height: 700px;">
-       </div>
-       <div class="col-md-7 white display-flex align-items-center justify-content-center flex-direction-column">
+<app-public-navbar [userLog]="userLog">
+</app-public-navbar>
+<main class="page">
+    <app-sidebar-home class="aside-home" [auth]="userLog"></app-sidebar-home>
 
-           <h2 class="fredoka size-45 mb-4">
-            ¿Qué medicinas estás buscando?
-           </h2>
-
-            <form class="form-inline my-2 my-lg-0 width-90 shadow">
-                <input  class="form-control mr-sm-2 width-75 icon-magnifying-glass" 
-                        type="search" 
-                        placeholder="¿ Qué medicina o farmacia estás buscando ?" 
-                        aria-label="Search"
-                >
-                <button class="btn btn-outline-success my-2 my-sm-0 fredoka width-20" 
-                        type="submit"
-                        >
-                        Buscar
-                </button>
-            </form>
-
-            <p class="family-700 black size-18 mt-5">Categorias</p>
-
-            <app-categorias></app-categorias>
-
-        </div>
-    </div>
-</div>
+    <section class="content-home">
+        <app-slider class="slider-home"></app-slider>
+        <section class="categorys-group" *ngIf="requestReady">
+            <app-slider-category *ngFor="let cat of homeComp" [_cat]="cat">
+            </app-slider-category>
+        </section>
+    </section>
+</main>
+<ngx-spinner bdColor="rgb(255,255,255)" size="large" color="#f19301" type="ball-atom">
+    <p style="color: black"> Cargando </p>
+</ngx-spinner>

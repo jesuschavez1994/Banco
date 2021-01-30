@@ -1,0 +1,38 @@
+
+.is-impar{background-color: rgba(0,0,0,.05) !important;}
+.is-par{background-color: white !important;}
+.synchronized{color: rgb(30, 206, 74); text-transform: uppercase;}
+.NoSynchronized{color: rgba(184, 17, 17, 0.795);}
+td, th{
+    text-align: center;
+}
+.Marcacador{
+    border-bottom: none;
+    border-top: none;
+}
+
+button{
+    border: 1px solid rgb(204, 203, 203);
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+section{
+    padding-top: 7px;
+}
+
+.ir-arriba {
+    display: flex;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+	padding:20px;
+    background:#2db0c7;
+    z-index: 20;
+	font-size:20px;
+	color:#fff;
+	cursor:pointer;
+	position: fixed;
+	bottom:20px;
+	right:20px;
+}

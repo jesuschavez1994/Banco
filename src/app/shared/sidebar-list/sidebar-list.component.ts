@@ -147,6 +147,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   public toggleSidebarList(event) {
     this.isExpanded = event;
     this.sidebarExpand.emit(this.isExpanded);
+    console.log('isExpanded', event)
 
   }
 

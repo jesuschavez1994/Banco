@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform, ElementRef } from '@angular/core';
-import { environment } from '@environments/environment';
+import { URL_SERVICIOS } from '../../config/config';
 
-const URL = environment.url;
+const URL = URL_SERVICIOS;
 
 @Pipe({
   name: 'imgFallback'

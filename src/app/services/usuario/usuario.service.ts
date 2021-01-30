@@ -10,7 +10,7 @@ import swal from 'sweetalert';
 import { Service } from '../service.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsuarioService extends Service {
 
@@ -55,7 +55,12 @@ export class UsuarioService extends Service {
   // items: any =  localStorage.getItem('usuario');
   // toObject = JSON.parse(this.items);
 
-  guardarStorageGoogle(usuario: Usuario, email: string, id: string, token: string){
+  guardarStorageGoogle(
+    usuario: Usuario,
+    email: string,
+    id: string,
+    token: string
+  ) {
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
     localStorage.setItem('id', id);
@@ -65,8 +70,10 @@ export class UsuarioService extends Service {
     // this.token = token;
   }
 
+  guardarStorage(id: string, token: string, usuario: Usuario) {
+    // Prueba para mantener el estado de las páginas en "/settings/plans"
+    localStorage.setItem('settingsActualPage', 'plans');
 
-  guardarStorage(id: string, token: string, usuario: Usuario){
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
@@ -75,13 +82,15 @@ export class UsuarioService extends Service {
     this.token = token;
   }
 
-  login(usuario: Usuario, recordar: boolean = false){
+  login(usuario: Usuario, recordar: boolean = false) {
+    // Prueba para mantener el estado de las páginas en "/settings/plans"
+    localStorage.setItem('settingsActualPage', 'plans');
 
     const url = 'login';
 
-    if ( recordar ) {
-      localStorage.setItem('email', usuario.email );
-    }else {
+    if (recordar) {
+      localStorage.setItem('email', usuario.email);
+    } else {
       localStorage.removeItem('email');
     }
 
@@ -98,8 +107,8 @@ export class UsuarioService extends Service {
     return this.postQuery( `users/${userId}/images`, archivo );
   }
 
-  cambiarImagen( archivo: any, userId: string ) {
-   return this.subirArchivo(archivo, userId);
+  cambiarImagen(archivo: any, userId: string) {
+    return this.subirArchivo(archivo, userId);
   }
 
   datosUserImages(userId: string){
@@ -120,5 +129,4 @@ export class UsuarioService extends Service {
     }
 
   }
-
 }

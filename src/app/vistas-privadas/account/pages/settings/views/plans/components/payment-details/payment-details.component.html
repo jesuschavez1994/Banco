@@ -1,0 +1,65 @@
+<!-- Payment details section -->
+<div class="payment-details">
+  <button class="back" (click)="backToPreviousPage()" mat-button>
+    <i class="fas fa-caret-left"></i> Atrás
+  </button>
+
+  <mat-card class="voucher">
+    <mat-card-header class="voucher-title" mat-card-image>
+      <div class="check">
+        <img
+          src="../../../../../assets/img/Suscription/CheckMark.svg"
+          alt="CheckMark"
+          height="80"
+          width="80"
+        />
+      </div>
+      <small class="text">¡Tu pago fue realizado con éxito!</small>
+    </mat-card-header>
+
+    <mat-card-content class="voucher-body">
+      <ul>
+        <li>
+          <small><b>Total:</b></small>
+          <p>
+            <b>{{
+              voucherDetails[0].webpayplusnormaltransaction
+                .webpayplusnormalresponse.amount | currency
+            }}</b>
+          </p>
+        </li>
+
+        <li>
+          <small>Hora:</small>
+          <small>{{ voucherDetails[0].updated_at | date: "shortTime" }}</small>
+        </li>
+
+        <li>
+          <small>Fecha:</small>
+          <small>{{ voucherDetails[0].updated_at | date: "shortDate" }}</small>
+        </li>
+
+        <div class="square">
+          <li>
+            <small>Número de tarjeta:</small>
+            <small>{{
+              voucherDetails[0].webpayplusnormaltransaction
+                .webpayplusnormalresponse.card_detail | slice: 16:20
+            }}</small>
+          </li>
+
+          <li class="last">
+            <small>Cód. autorización:</small>
+            <small>{{
+              voucherDetails[0].webpayplusnormaltransaction
+                .webpayplusnormalresponse.authorization_code
+            }}</small>
+          </li>
+        </div>
+      </ul>
+
+      <button class="btn-details" mat-button>Ver detalles</button>
+    </mat-card-content>
+  </mat-card>
+</div>
+<!-- #Payment details section -->

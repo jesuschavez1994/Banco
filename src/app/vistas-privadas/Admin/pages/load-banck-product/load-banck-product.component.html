@@ -1,0 +1,32 @@
+
+
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-10 pt-5">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2 pt-5">
+    </div>
+    <div class="col-12 col-sm-12 col-md-10 pt-5">
+        <app-form-banck-product-admin></app-form-banck-product-admin> 
+    </div>
+</div>
+
+
+<section class="container col-md-12 mt-5">
+    <ol class="row products list items pl-0">
+        <app-catalogo-bank-product *ngFor="let item of itemProduct | paginate: 
+        { itemsPerPage: 28, currentPage: page, totalItems: totalProductAPI };
+        let i = index;"
+        class="product-item"
+        [item]="item"
+        [MyProduct]="itemProduct"
+        [index]="i">
+    </app-catalogo-bank-product>
+    </ol>
+</section>
+
+
+

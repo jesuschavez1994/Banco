@@ -74,5 +74,4 @@ import { SidebarListShimmerComponent } from './sidebar-list-shimmer/sidebar-list
       SidebarListShimmerComponent,
     ]
 })
-
-export class SharedModule { }
+export class SharedModule {}

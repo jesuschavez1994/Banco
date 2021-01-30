@@ -14,7 +14,31 @@ export interface StoreResponse {
   contact: Contact;
   social: Social;
   images: any[];
-  banner_image: BannerImage[];
+  banner_image: Bannerimage[];
+}
+
+export interface Bannerimage {
+  id: number;
+  name: string;
+  src: string;
+  src_size: Srcsize;
+  version: number;
+  created_at: string;
+  updated_at: string;
+  deleted_at?: any;
+  pivot: Pivot;
+}
+
+export interface Pivot {
+  store_id: number;
+  image_id: number;
+}
+
+export interface Srcsize {
+  xl: string;
+  l: string;
+  m: string;
+  s: string;
 }
 
 export interface Social {

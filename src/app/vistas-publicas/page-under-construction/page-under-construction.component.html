@@ -1,0 +1,75 @@
+
+<ng-container>
+    <section class="main">
+        <div class="content-img">
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <img class="logo" src="assets/img/Navbar/Logo Founduss.svg">
+                </div>
+                
+                <div class="col-md-6">
+                    <div *ngFor="let item of information" class="information">
+
+                        <p class="family-700 information_Relevante mt-3">
+                            {{item.texto1.information_Relevante}}
+                        </p>
+
+                        <p class="family-400 footer_information">
+                            {{item.texto1.footer_information}}
+                        </p>
+
+                    </div>
+
+                    <div *ngFor="let item of information" class="information mt-3">
+
+                        <div class="itemVerificado">
+                            <img src="assets/img/IconosHome/comprobar.svg">
+                            <p class="items">
+                                {{item.texto2.item1}}
+                            </p>
+                        </div>
+                        
+                        <div class="itemVerificado">
+                            <img src="assets/img/IconosHome/comprobar.svg">
+                            <p class="items">
+                                {{item.texto2.item2}}
+                            </p>
+                        </div>
+
+                        <div class="itemVerificado">
+                            <img src="assets/img/IconosHome/comprobar.svg">
+                            <p class="items">
+                                {{item.texto2.item3}}
+                            </p>
+                        </div>
+
+                        <div class="itemVerificado">
+                            <img src="assets/img/IconosHome/comprobar.svg">
+                            <p class="items">
+                                {{item.texto2.item4}}
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <img src="assets/img/IconosHome/MuyPronto.png" width="100%" />
+                </div>
+
+            </div>
+
+        </div>
+
+        <footer>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="assets/img/IconosHome/tira de proximamente.png" width="90%" />
+                </div>
+            </div>
+        </footer>
+
+    </section>
+</ng-container>

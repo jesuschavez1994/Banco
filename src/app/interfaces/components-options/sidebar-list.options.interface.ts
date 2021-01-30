@@ -54,6 +54,8 @@ export interface AnchorsMenu {
   productLink: string;
   contactLink: string;
   wordToMatch: string;
+  synchronizationLink?: string;
+  salesLink?: string;
 }
 
 // Filters
@@ -75,4 +77,10 @@ export interface SelectedEmitter {
   currentCategory: Category;
   isSelectedCategory: boolean;
   SelectedSubCategories?: Subcategory[];
+}
+
+// Activated Routes //
+
+export interface ActivatedRoutesParams{
+  url: string
 }

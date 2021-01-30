@@ -1,0 +1,113 @@
+/* ---------------- Resets fot global stylings -------------- */
+* {
+  font-family: "Montserrat", "Segoe UI", sans-serif;
+}
+
+/* ------------ Main section stylings ---------------- */
+.title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.title > h2 {
+  font-family: "Montserrat", "Segoe UI", sans-serif;
+}
+
+.main-area p {
+  margin-bottom: 20px;
+  font-size: 1em;
+}
+
+.description {
+  font-size: 0.9em;
+}
+
+.views {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 50px auto;
+  grid-template-areas:
+    "route"
+    "content";
+  scroll-behavior: smooth;
+}
+
+.route-area {
+  grid-area: route;
+}
+
+.content-area {
+  grid-area: content;
+}
+
+.plans-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: relative;
+  width: 100%;
+  transition: all;
+}
+
+.payment-container {
+  display: flex;
+  position: relative;
+  transition: all;
+}
+
+.payment-details-container {
+  display: flex;
+  position: relative;
+  transition: all;
+}
+
+/* -------- Responsive media queries -------------- */
+@media screen and (max-width: 757px) {
+  .main-container {
+    grid-template-rows: 25px auto;
+  }
+
+  .content-area {
+    max-width: 600px;
+  }
+
+  .plans-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 484px) {
+  .content-area {
+    max-width: 400px;
+  }
+
+  .title {
+    font-size: 1.3em;
+  }
+  .description {
+    font-size: 0.9em;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .content-area {
+    max-width: 240px;
+  }
+
+  .title {
+    font-size: 1em;
+    line-height: 1.3;
+  }
+
+  .description {
+    font-size: 0.9em;
+    line-height: 1.4;
+  }
+}

@@ -10,7 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { RutStoreComponent } from './rut-store/rut-store.component';
 import { ButtomGoogleRegisterComponent } from './buttom-google-register/buttom-google-register.component';
 import { MaterialModule } from '../Angula-Material/material.module';
-import { ROUTING_VIEW_STORE } from '../vistas-privadas/view.routes';
+
 
 
 
@@ -23,7 +23,6 @@ import { ROUTING_VIEW_STORE } from '../vistas-privadas/view.routes';
     ButtomGoogleRegisterComponent, ],
   imports: [
     CommonModule,
-    ROUTING_VIEW_STORE,
     ReactiveFormsModule,
     MaterialModule,
     FormsModule,

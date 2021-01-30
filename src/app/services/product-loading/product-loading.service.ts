@@ -16,13 +16,23 @@ export class ProductLoadingService {
   }
 
 
-  GetCategorias(userId: string){
-    const url = `/api/admins/${userId}/categories`;
+  GetCategorias(){
+    const url = `/api/categories`;
     return this.execQuery(url);
   }
 
-  GetSubcategorias(userId: string, idCategory: number){
-    const url = `/api/admins/${userId}/categories/${idCategory}/subcategories`;
+  private putQuery<T>(query: string, data: any){
+    query = URL_SERVICIOS + query;
+    return this.http.put<T>( query, data );
+  }
+
+  GetCategoriasBancoProduct(idCategory){
+    const url = `/api/categories/${idCategory}`;
+    return this.execQuery(url);
+  }
+
+  GetSubcategorias(idCategory?: number){
+    const url = `/api/categories/${idCategory}/subcategories`;
     return this.execQuery(url);
   }
 
@@ -39,6 +49,16 @@ export class ProductLoadingService {
   GetRecetaMedica(userId: string){
     const url = `/api/admins/${userId}/recipes`;
     return this.execQuery(url);
+  }
+
+  EditProduct(userId: string, storeId: string, idProduct: string, data: any){
+    const url = `/api/users/${userId}/stores/${storeId}/products/${idProduct}`;
+    return this.putQuery(url, data);
+  }
+
+  ImagenProductEdit(userId: string, storeId: string, idProduct: string, idImg: string, data: any){
+    const url = `/api/users/${userId}/stores/${storeId}/products/${idProduct}/images/${idImg}`;
+    return this.putQuery(url, data);
   }
 
 

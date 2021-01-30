@@ -79,11 +79,9 @@ hr{color: rgb(180, 179, 179)}
     }
 }
 
-/* @media (min-width: 576px){
-    .card-deck {
-        display: block !important;
-    }
-} */
+.plus{
+    color: #34ad16;
+}
 
 
 

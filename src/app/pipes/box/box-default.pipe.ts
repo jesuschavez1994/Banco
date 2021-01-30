@@ -7,15 +7,11 @@ const URL = URL_SERVICIOS;
   name: 'boxDefault'
 })
 export class BoxDefaultPipe implements PipeTransform {
-
   transform(box: any): any {
-
     if (!box){
-      return '../../assets/img/Box/box.svg';
+      return 'assets/img/box.svg';
     }
-
     const imgUrl = `${box}`;
     return imgUrl;
   }
-
 }
