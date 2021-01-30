@@ -33,17 +33,14 @@ import { ListProductComponent } from './categorys/list-product/list-product.comp
     HomeComponent,
     RegisterComponent,
     BusinessDetailComponent,
-<<<<<<< HEAD
     // ToastComponent,
 
-=======
     LoginComponent,
     PageUnderConstructionComponent,
     SliderCategoryComponent,
     CategorysComponent,
     MenuCategorysComponent,
     ListProductComponent,
->>>>>>> a4a1ad15749d8a25ca621d2d653e12e55c07ae22
   ],
   imports: [
     CommonModule,
@@ -59,7 +56,7 @@ import { ListProductComponent } from './categorys/list-product/list-product.comp
     LoginModule,
     ComponentsModule,
     PanelModule,
-    // PipesModule,
+    PipesModule,
     // ShoppingCartModule,
     NgxSpinnerModule,
   ],
