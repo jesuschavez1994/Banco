@@ -47,6 +47,7 @@ const APP_ROUTES: Routes = [
 
     {path: 'home', component: HomeComponent},
     {path: 'register', component: RegisterComponent},
+    { path: 'login', component: LoginComponent },
 
     // Christopher Views
     {
