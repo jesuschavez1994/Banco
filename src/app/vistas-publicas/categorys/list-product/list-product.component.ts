@@ -7,11 +7,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ModalErrComponent} from '@shared/modal-err/modal-err.component'
 import {MatDialog, MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
-import {
+/* import {
   Category, Profile, SidebarListOptions, AnchorsMenu,
   SelectedEmitter, Filter, PriceRange
-} from '@interfaces/components-options/sidebar-list.options.interface';
+} from '@interfaces/components-options/sidebar-list.options.interface'; */
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface';
+import { Category } from '@interfaces/categorys';
 
 @Component({
   selector: 'app-list-product',
@@ -66,7 +67,7 @@ export class ListProductComponent implements OnInit {
     // *************************************************
     // parametros para filtro
     // *************************************************
-          // sidebar-list
+       /*    // sidebar-list
           expandSidebar = true;
           anchorsMenu: AnchorsMenu;
           profile: Profile;
@@ -101,7 +102,7 @@ export class ListProductComponent implements OnInit {
             { name: 'Bosque miel', totalFounds: 2 },
             { name: 'Brota', totalFounds: 5 },
           ];
-
+ */
     // PROPIEDADES DE COMPONENTE      
     
     breadCru: BreadcrumbOptions[]=[ ];
@@ -112,7 +113,7 @@ export class ListProductComponent implements OnInit {
     listaProductos: ProductCategories;
     
     // Identificador Ids subcat y cat
-     idsProduct: number[] | string[]=[];
+     idsProduct: number[]=[];
     //Array que contendra rutas de items paginacion
     pgOptions: number[]=[];
     
@@ -124,7 +125,8 @@ export class ListProductComponent implements OnInit {
     
     // titulo de subcategoria de seleccion
     titleSubcat: string;
-  
+    // Categorias
+    dataCategory: Category;
   ngOnChanges(){
 
     console.log('on changes list product', this.getCategorys._requestCategoryL);
@@ -140,9 +142,11 @@ export class ListProductComponent implements OnInit {
   ngOnInit(): void {
 
     console.log('show spinner');
+      
+      this.obtenerParams();
+      this.obtMenuCat();
     // siempre obtiene lista de productos
-    
-    this.obtProduct();
+      this.obtProduct();
 
     // Si productos no obtenidos
     // Obtenerlos
@@ -174,10 +178,7 @@ ngOndestroy(){
 }
   //Obtiene listado de productos
   
-  obtProduct(){
-    this.spinner.show(); 
-
-
+  obtenerParams(){
     this.rutaActiva.params.subscribe(
       (params: Params)=>{
         if(params.categories!= undefined){
@@ -193,6 +194,35 @@ ngOndestroy(){
         }
       }
     );
+  }
+  // para asegurar independencia de componente 
+  // metodo para obtener Titulo
+  obtMenuCat(){
+    
+      this.getCategorys.getCategoryList().subscribe( 
+        cat => {
+        this.dataCategory = cat;
+         console.log('categorias obtenidas');
+         console.log('categorias para titulo',this.dataCategory);
+         // brinda error tslint desconosco la razón, pero funciona
+         // Fixed, idsProduct solo debe  aceptar numeros para que la alerta no surja
+         this.titleSubcat = this.dataCategory[this.idsProduct[0]-1].subcategories[this.idsProduct[1]-1].name;
+         this.spinner.hide();
+         },
+         error=>{
+           console.log('error cargando categorias ',error);
+           this.spinner.hide();
+           this.openDialog('Ha ocurrido un error cargando la lista de categorias');
+           }
+         ) 
+   
+
+         //this.titleCat =this.getCategorys._bxCategory[this.idsProduct[0]-1].name;
+
+  }
+  obtProduct(){
+    this.spinner.show(); 
+
 
 
     // -- abandonado
