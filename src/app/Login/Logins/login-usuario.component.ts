@@ -73,7 +73,7 @@ export class LoginUsuarioComponent implements OnInit {
 
       if (resp.user.role === 'store')
       {
-        this.router.navigate(['account']);
+        this.router.navigate(['account/form-account']);
       }
 
       // switch(resp.user.role){

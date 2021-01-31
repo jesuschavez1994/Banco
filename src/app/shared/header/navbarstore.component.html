@@ -202,66 +202,65 @@
                   </a>
 
                   <div  class="dropdown-menu dropdown-menu-right mt-2 animated flipInY">
-                      <ul class="dropdown-user">
-                          <li>
-                              <div class="dw-user-box display-flex align-items-center" align="center">
-                                  <div class="u-img"><img [src]=" IMG_USER | avatarDefault " alt="user"></div>
-                                  <div class="u-text">
-                                      <h4 class="name-user OpenSans-700 text-left">
-                                          {{ item.name }}
-                                      </h4>
-                                      <p class="text-muted">
-                                          {{ item.email }}
-                                      </p>
-                                  </div>
-                              </div>
-                          </li>
-                          <li role="separator" class="divider"></li>
-                          <li class="nav-item">
-                              <a class="a-menu-user nav-link OpenSans-400"  routerLink="/perfil">
+                    <ul class="dropdown-user">
+                      <li>
+                        <div class="dw-user-box display-flex align-items-center" align="center">
+                          <div class="u-img"><img [src]=" IMG_USER | avatarDefault " alt="user"></div>
+                          <div class="u-text">
+                            <h4 class="name-user OpenSans-700 text-left">
+                              {{ item.name }}
+                            </h4>
+                            <p class="text-muted">
+                              {{ item.email }}
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                      <li role="separator" class="divider"></li>
+                      <li class="nav-item">
+                        <a class="a-menu-user nav-link OpenSans-400"  routerLink="/perfil">
+                          <img    class="mr-2"
+                                  src="../../../assets/img/iconos/icons-main/icons/person.svg"
+                                  alt="" width="18"
+                                  height="18"
+                                  title="Person"
+                          >
+                          Perfil
+                        </a>
+                      </li>
+                      <li class="nav-item" routerLinkActive="active">
+                        <a  class="a-menu-user nav-link OpenSans-400" [routerLink]="['/account']">
 
-                                  <img    class="mr-2"
-                                          src="../../../assets/img/iconos/icons-main/icons/person.svg"
-                                          alt="" width="18"
-                                          height="18"
-                                          title="Person"
-                                  >
-                                      Perfil
-                              </a>
-                          </li>
-                          <li class="nav-item" routerLinkActive="active">
-                              <a  class="a-menu-user nav-link OpenSans-400" [routerLink]="['/account']">
+                          <img    class="mr-2"
+                                  src="../../../assets/img/iconos/icons-main/icons/gear.svg"
+                                  alt=""
+                                  width="18"
+                                  height="18"
+                                  title="Configuración"
+                          >
 
-                                  <img    class="mr-2"
-                                          src="../../../assets/img/iconos/icons-main/icons/gear.svg"
-                                          alt=""
-                                          width="18"
-                                          height="18"
-                                          title="Configuración"
-                                  >
+                          Configuración de tu cuenta
 
-                                  Configuración de tu cuenta
+                        </a>
+                      </li>
+                      <li class="nav-item">
 
-                              </a>
-                          </li>
-                          <li class="nav-item">
+                        <a  class="a-menu-user nav-link OpenSans-400"
+                            (click)="storeService.logout()">
 
-                              <a  class="a-menu-user nav-link OpenSans-400"
-                                  (click)="storeService.logout()">
+                            <img    class="mr-2"
+                                    src="../../../assets/img/iconos/icons-main/icons/power.svg"
+                                    alt=""
+                                    width="18"
+                                    height="18"
+                                    title="Logout"
+                            >
 
-                                  <img    class="mr-2"
-                                          src="../../../assets/img/iconos/icons-main/icons/power.svg"
-                                          alt=""
-                                          width="18"
-                                          height="18"
-                                          title="Logout"
-                                  >
+                            Salir
 
-                                  Salir
-
-                              </a>
-                          </li>
-                      </ul>
+                        </a>
+                      </li>
+                    </ul>
                   </div>
               </li>
 

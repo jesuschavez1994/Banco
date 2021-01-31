@@ -79,8 +79,23 @@ const APP_ROUTES: Routes = [
         component: RutStoreComponent,
     },
 
-    {   path: 'account',
-        component: AccountComponent,
+    {
+      path: 'account',
+      component: SettingsComponent,
+      canActivate: [LoginGuardGuard],
+      children: [
+        {
+          path: 'settings',
+          loadChildren: () =>
+            import(
+              './vistas-privadas/account/pages/settings/account-settings.module'
+            ).then((module) => module.AccountSettingsModule),
+        },
+        {
+          path: 'form-account',
+          component: AccountComponent,
+        },
+      ],
     },
 
 
