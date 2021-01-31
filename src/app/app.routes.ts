@@ -47,7 +47,44 @@ const APP_ROUTES: Routes = [
 
     {path: 'home', component: HomeComponent},
     {path: 'register', component: RegisterComponent},
-
+    {
+      path: 'categorys',
+      component: CategorysComponent,
+  
+      children: [
+        // menu categorys vista predetermianda en categorys
+        { path: '', component: MenuCategorysComponent },
+        // ruta donde se muestra categorys por nombre o id
+        { path: ':categories/products', component: ListProductComponent },
+        {
+          // ruta donde se muestra subcategorys por nombre o id
+          path: ':categories/:subcategories/products',
+          component: ListProductComponent,
+        },
+        {
+          // ruta donde se muestra subcategorys por nombre o id más
+          // posicion de páginacion
+          path: ':categories/:subcategories/products?page=:page',
+          component: ListProductComponent,
+        },
+      ],
+    },
+    {
+      path: 'admin',
+      component: LoadBanckProductComponent,
+      children: [
+        {
+          path: 'edit-bank-admin/:id',
+          component: EditProductBankComponent,
+        },
+      ],
+    },
+    { path: 'login', component: LoginComponent },
+  
+    {
+      path: 'page-under-construction',
+      component: PageUnderConstructionComponent,
+    },
     // Christopher Views
     {
       path: 'panel',
