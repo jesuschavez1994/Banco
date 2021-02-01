@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../app.reducer';
 import { ActivarLoadingAction, DesactivarLoadingAction } from '../../shared/ui.accions';
 import { Subscription } from 'rxjs';
-
+import { UserStoreService } from '@services/user-store/user-store.service';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class LoginUsuarioComponent implements OnInit {
 
   constructor( public usuarioServices: UsuarioService,
                public router: Router,
-               private store: Store<AppState>
+               public userStoreService: UserStoreService
               )
   {
 
@@ -55,8 +55,6 @@ export class LoginUsuarioComponent implements OnInit {
 
   loginRegister(){
 
-      
-
     // tslint:disable-next-line: prefer-const
     let usuario = new Usuario(
       this.forma.value.username = null,
@@ -68,12 +66,17 @@ export class LoginUsuarioComponent implements OnInit {
     this.usuarioServices.login(usuario, this.forma.value.recuerdame).subscribe( (resp: any) => {
       console.log(this.forma.value.recuerdame);
       console.log('FFFF', resp);
-      this.guardarStorage(resp.remember_token, resp.user.id);
       console.log(resp);
 
       if (resp.user.role === 'store')
       {
-        this.router.navigate(['account/form-account']);
+        this.userStoreService.getStoreAccountEdit(resp.user.id).subscribe( (StoreResponse: any) => {
+          console.log('StoreResponse', StoreResponse);
+          this.guardarStorageStore(resp.remember_token, resp.user.id, StoreResponse['0'].social.store_id);
+          this.router.navigate(['account/form-account']);
+        });
+      }else{
+        this.guardarStorage(resp.remember_token, resp.user.id);
       }
 
       // switch(resp.user.role){
@@ -96,16 +99,19 @@ export class LoginUsuarioComponent implements OnInit {
 
   }
 
-  Ingresar() {
-
- 
-
-  }
+  Ingresar() {}
 
   guardarStorage(token: string, id: string){
     localStorage.setItem('token', token);
     localStorage.setItem('id', id);
     // localStorage.setItem('storeId', storeId);
+    this.token = token;
+  }
+
+  guardarStorageStore(token: string, id: string, storeId: string){
+    localStorage.setItem('token', token);
+    localStorage.setItem('id', id);
+    localStorage.setItem('storeId', storeId);
     this.token = token;
   }
 

@@ -85,7 +85,7 @@ export class UsuarioService extends Service {
   }
 
   login(usuario: Usuario, recordar: boolean = false) {
-    const url = '/api/login';
+    const url = 'login';
 
     if (recordar) {
       localStorage.setItem('email', usuario.email);

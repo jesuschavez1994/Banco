@@ -2,7 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { PublicViewsComponent } from './pages/components/public-views/public-views.component';
 import { TerminosYCondicionesComponent } from './views/terminos-ycondiciones/terminos-ycondiciones.component';
 import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
-import { LoginUsuarioComponent } from './Login/Logins/login-usuario.component';
 // import { RegisterComponent } from './vistas-publicas/Registers/Usuario/register-usuario/register/register.component';
 import { FormDataNegocioComponent } from './form-register/form-data-negocio/form-data-negocio.component';
 import { DashboardComponent } from './vistas-privadas/dashboard/dashboard.component';
@@ -48,6 +47,18 @@ const APP_ROUTES: Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'register', component: RegisterComponent},
     { path: 'login', component: LoginComponent },
+    {path: 'categorys', component: CategorysComponent,
+
+      children: [
+        {path: '', component: MenuCategorysComponent},
+        {path: ':categories/products',  component: ListProductComponent},
+        {path: ':categories/:subcategories/products', component: ListProductComponent},
+
+      ],
+
+    },
+
+    {path: 'page-under-construction', component: PageUnderConstructionComponent},
 
     // Christopher Views
     {
@@ -166,8 +177,7 @@ const APP_ROUTES: Routes = [
     ],
   },
 
-  // { path: '**', pathMatch: 'full', redirectTo: 'contact' },
-  { path: '**', pathMatch: 'full', redirectTo: 'home' },
+  { path: '**', pathMatch: 'full', redirectTo: 'page-under-construction' }
 ];
 
 export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES, { useHash: true });
