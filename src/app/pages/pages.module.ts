@@ -10,7 +10,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
 import { FormularioRegisterModule } from '../form-register/formulario-register.module';
-import { LoginModule } from '../Login/login.module';
 import { VistasPublicasModule } from '../vistas-publicas/vistas-publicas.module';
 
 
@@ -29,7 +28,6 @@ import { VistasPublicasModule } from '../vistas-publicas/vistas-publicas.module'
         SharedModule,
         ComponentsModule,
         FormularioRegisterModule,
-        LoginModule,
         VistasPublicasModule
     ]
 })

@@ -4,7 +4,6 @@ import { HomeComponent } from '../vistas-publicas/home/home.component';
 import { RegisterComponent } from './Registers/Usuario/register.component';
 import { FormularioRegisterModule } from '../form-register/formulario-register.module';
 import { SharedModule } from '../shared/shared.module';
-import { LoginModule } from '../Login/login.module';
 import { ComponentsModule } from '../components/components.module';
 import {PipesModule } from '@pipes/pipes.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -53,7 +52,6 @@ import { ListProductComponent } from './categorys/list-product/list-product.comp
     SharedModule,
     APP_ROUTING,
     RouterModule,
-    LoginModule,
     ComponentsModule,
     PanelModule,
     PipesModule,

@@ -14,8 +14,6 @@ import { UserStore } from '@models/models-@ngrx/userStore.models';
 import { ActivarLoadingAction } from '../../shared/ui.accions';
 import { DesactivarLoadingAction } from '../../shared/ui.accions';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.reducer';
-import { SetUserAction } from '../../Login/auth/auth.actions';
 import { Usuario } from 'src/app/models/usuario.model';
 import { Service } from '@services/service.service';
 import { StoreResponse } from '@interfaces/store.interface';
@@ -36,7 +34,6 @@ export class StoreService extends Service{
 
   constructor(
     protected http: HttpClient,
-    private store: Store<AppState>,
     private router: Router,
 
   ) {
@@ -75,8 +72,6 @@ export class StoreService extends Service{
       // Redux//
       this.respServidor = userStore;
       const storeconnect = new UserStore(this.respServidor.user);
-      this.store.dispatch(new SetUserAction(storeconnect));
-      this.store.dispatch( new ActivarLoadingAction() );
       // End Redux//
 
       this.guardarStorage(this.respServidor.user.id, this.respServidor.remember_token, this.respServidor);
@@ -122,7 +117,6 @@ export class StoreService extends Service{
     this.postQuery(url, nameStore).subscribe( resp => {
       window.location.href = '#/account';
       // this.router.navigate(['/account']);
-      this.store.dispatch(new DesactivarLoadingAction() );
     }, err => {
       console.log(err);
       swal({

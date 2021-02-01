@@ -4,7 +4,6 @@ import { RegistroEmpresa } from '@models/rut.model';
 import { StoreService } from '@services/store/store.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.reducer';
 import { Negocio } from '@models/negocio.model';
 
 
@@ -25,7 +24,6 @@ export class RutStoreComponent implements OnInit {
 
     public router: Router,
     public storageService: StoreService,
-    private store: Store<AppState>
 
     ) {
 
