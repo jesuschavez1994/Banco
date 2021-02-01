@@ -1,5 +1,10 @@
 <div class="main-container">
 
+
+    <app-sidebar-list #sidebarList [anchorsMenu]="anchorsMenu" [categories]="categories" [priceRanges]="priceRanges" [factories]="factories" [marks]="marks" [delivery]="delivery">
+    </app-sidebar-list>
+
+
     <main class="category-container">
 
         <header id="top" class="cty-header">
@@ -29,6 +34,9 @@
                     </li>
                 </ul>
             </nav>
+
+
+
             <!-- PAGINACION -->
             <nav class="pg-item" aria-label="Page navigation" *ngIf="!empty">
                 <!-- BTN ATRAS -->
@@ -43,8 +51,13 @@
 
 
                     <li id="{{item}}" [ngClass]="{'active':  item == listaProductos.current_page}" (click)="getProductsPG($event.target.parentElement.parentElement,$event.target.id)" class="page-item " *ngFor="let item of pgOptions; let ind = index ">
-                        <a id="{{item}}" class="page-link">{{ind+1}}</a>
+
+                        <a *ngIf="!(item-2 > 0) || !(item+2 != listaProductos.last_page)" id="{{item}}" class="page-link">{{ind+1}}</a>
+
+                        <a *ngIf="item-2 > 0 || item+2 != listaProductos.last_page  " id="{{item}}" class="page-link">...</a>
+
                     </li>
+
                     <!-- BTN SIGUIENTE -->
                     <li class="page-item" [ngClass]="{'disabled':  listaProductos.current_page>=listaProductos.last_page}">
                         <!-- DESABILITADO SI ¨PAGINA ACTUAL >= ULTIMA PAGINA -->
@@ -56,6 +69,8 @@
                     </li>
                 </ul>
             </nav>
+
+
             <div class="empty-disclaimer" *ngIf="empty">
                 <h4>
                     No hay productos en esta sección

@@ -1,4 +1,5 @@
 .main-container {
+    display: flex;
     margin-bottom: 7%;
     font-family: 'Montserrat', sans-serif !important;
     /*  @media(max-width: 1024px) {
@@ -32,7 +33,10 @@
                 margin: 0;
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: center;
+                justify-content: start;
+                @media (max-width: 1000px) {
+                    justify-content: center;
+                }
             }
             .item {
                 margin: 0;
@@ -83,6 +87,7 @@
                         p {
                             min-height: 60px;
                             text-transform: capitalize;
+                            line-height: 15px;
                         }
                         .price {
                             font-size: 1.5em;
@@ -95,6 +100,7 @@
             margin: 15px auto;
             text-align: center;
             .pagination {
+                color: #007bff;
                 display: inline-flex;
                 width: auto;
                 max-width: 75%;
