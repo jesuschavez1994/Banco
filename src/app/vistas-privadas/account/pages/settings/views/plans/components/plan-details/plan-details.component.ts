@@ -1,11 +1,5 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  Input,
-  Inject,
-} from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Router, Navigation } from '@angular/router';
 import { Plan } from '../../models/plan';
 import { MatDialog } from '@angular/material/dialog';
 import { BROWSER_STORAGE } from '@app/browserStorage';
@@ -13,6 +7,7 @@ import { RedirectionModalComponent } from '../redirection-modal/redirection-moda
 import { SubscriptionService } from '@services/subscription/subscription.service';
 import {
   CreatedOrder,
+  OrderNumberCreation,
   Payment,
   PaymentCredentials,
 } from '@interfaces/SettingsInterfaces';
@@ -23,12 +18,10 @@ import {
   styleUrls: ['./plan-details.component.css'],
 })
 export class PlanDetailsComponent implements OnInit {
-  @Input() selectedPlanDetails: Plan;
-  @Input() orderDetails: CreatedOrder;
-  @Output() pageChange: EventEmitter<string>;
-  @Output() voucherDetails: EventEmitter<object>;
-
   nextPage = 'plans';
+  selectedPlanDetails: OrderNumberCreation = JSON.parse(
+    this.localStorage.getItem('planDetails')
+  );
   webpayDebitCard = false;
   // We use the value on the localStorage as fallback.
   createdOrderDetails = JSON.parse(this.localStorage.getItem('createdOrder'));
@@ -37,30 +30,19 @@ export class PlanDetailsComponent implements OnInit {
     public dialog: MatDialog,
     private subscriptionDataService: SubscriptionService,
     @Inject(BROWSER_STORAGE) private localStorage: Storage
-  ) {
-    this.pageChange = new EventEmitter<string>();
-    this.voucherDetails = new EventEmitter<object>();
-  }
+  ) {}
 
   ngOnInit(): void {
     this.createdOrderDetails = JSON.parse(
       this.localStorage.getItem('createdOrder')
     );
+
+    this.selectedPlanDetails = JSON.parse(
+      this.localStorage.getItem('planDetails')
+    );
   }
 
   // Events that happens in the component -----------------
-  backToPreviousPage(): void {
-    this.nextPage = 'plans';
-    this.pageChange.emit(this.nextPage);
-    window.scrollTo(0, 0);
-  }
-
-  toNextPage(voucherDetail: object): void {
-    this.nextPage = 'payment-details';
-    this.pageChange.emit(this.nextPage);
-    this.voucherDetails.emit(voucherDetail);
-    window.scrollTo(0, 0);
-  }
 
   // API calls handler methods-------------------------------
   createPayment(): void {

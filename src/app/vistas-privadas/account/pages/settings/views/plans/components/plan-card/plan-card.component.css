@@ -329,6 +329,9 @@ h5 {
   margin: 1em 0em 0em 0em;
   color: #24c8af;
 }
+.mat-button {
+  margin-bottom: 16px;
+}
 
 /* --------------------------- 
   Responsive media queries 

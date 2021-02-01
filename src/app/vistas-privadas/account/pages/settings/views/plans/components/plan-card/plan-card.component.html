@@ -80,7 +80,7 @@
           <small class="renew">De por vida</small>
 
           <p class="total">
-            <b>Total: &nbsp; &nbsp;</b><span>{{totalPrice | currency}}</span>
+            <b>Total: &nbsp; &nbsp;</b><span>{{ totalPrice | currency }}</span>
           </p>
         </div>
         <!-- #Price additional info -->
@@ -146,7 +146,7 @@
             </mat-radio-group>
           </ul>
 
-          <button class="btn" (click)="onPlanSelected($event)" mat-button>
+          <button class="btn get-now" (click)="getOrderNumber()" mat-button>
             <b *ngIf="!waitingResponse">Adquirir ahora</b>
             <mat-spinner *ngIf="waitingResponse" [diameter]="30"></mat-spinner>
           </button>

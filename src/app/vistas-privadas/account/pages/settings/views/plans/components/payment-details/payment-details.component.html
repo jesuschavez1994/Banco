@@ -1,6 +1,10 @@
 <!-- Payment details section -->
-<div class="payment-details">
-  <button class="back" (click)="backToPreviousPage()" mat-button>
+<div class="payment-details animated fadeIn">
+  <button
+    class="back"
+    [routerLink]="['/account', 'settings', 'plans', 'choose-plan']"
+    mat-button
+  >
     <i class="fas fa-caret-left"></i> Atrás
   </button>
 

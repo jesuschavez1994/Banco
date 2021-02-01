@@ -17,7 +17,7 @@ export class SettingsComponent implements OnInit {
     {
       label: 'planes',
       iconClass: 'fas fa-handshake',
-      routerLink: ['/account/settings/plans'],
+      routerLink: ['/account/settings/plans/choose-plan'],
       // isActive: false,
     },
   ];

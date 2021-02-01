@@ -34,42 +34,31 @@ export class SubscriptionService {
   private orderId = this.localStorage.getItem('createdOrderID');
   private token = this.localStorage.getItem('token');
 
+  // We add the corresponding headers to the request
+  httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    }),
+  };
+
   createOrderNumber(planDetails: OrderNumberCreation) {
     const url = `${this.apiBaseURL}/api/users/${this.userId}/orders`;
-    // We add the corresponding headers to the request
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${this.token}`,
-      }),
-    };
 
     return this.httpService
-      .post<CreatedOrder>(url, planDetails, httpOptions)
+      .post<CreatedOrder>(url, planDetails, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
   paymentCreation(userId: number, orderId: number) {
     const url = `${this.apiBaseURL}/api/users/${userId}/orders/${orderId}/payments`;
-    // We add the corresponding headers to the request
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${this.token}`,
-      }),
-    };
 
     return this.httpService
-      .post<Payment>(url, httpOptions)
+      .post<Payment>(url, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
   createWebpayPayment(paymentId: number) {
     const url = `${this.apiBaseURL}/api/webpayplus/create`;
-    // We add the corresponding headers to the request
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${this.token}`,
-      }),
-    };
 
     const webpayData: WebpayPayment = {
       payment_id: paymentId,
@@ -77,21 +66,15 @@ export class SubscriptionService {
     };
 
     return this.httpService
-      .post<PaymentCredentials>(url, webpayData, httpOptions)
+      .post<PaymentCredentials>(url, webpayData, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
   getVoucherDetails() {
     const url = `${this.apiBaseURL}/api/users/${this.userId}/orders/${this.orderId}/payments`;
-    // We add the corresponding headers to the request
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${this.token}`,
-      }),
-    };
 
     return this.httpService
-      .get(url, httpOptions)
+      .get(url, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 

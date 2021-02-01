@@ -1,33 +1,17 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { Plan } from './models/plan';
 import { SubscriptionService } from '@services/subscription/subscription.service';
 import { CreatedOrder } from '@interfaces/SettingsInterfaces';
 import { BROWSER_STORAGE } from '@app/browserStorage';
 
-import { trigger, transition, style, animate } from '@angular/animations';
+import { slider } from '../../routing/route-transitions';
 
 @Component({
   selector: 'app-plans',
   templateUrl: './plans.component.html',
   styleUrls: ['./plans.component.css'],
-  animations: [
-    trigger('inOutAnimation', [
-      transition(':enter', [
-        style({ opacity: 0, zIndex: 100, position: 'absolute', top: 0 }),
-        animate(
-          '1s ease-out',
-          style({ opacity: 1, zIndex: 100, position: 'absolute', top: 0 })
-        ),
-      ]),
-      transition(':leave', [
-        style({ opacity: 1, zIndex: 100, position: 'absolute', top: 0 }),
-        animate(
-          '0.5s ease-in',
-          style({ opacity: 0, zIndex: 100, position: 'absolute', top: 0 })
-        ),
-      ]),
-    ]),
-  ],
+  animations: [slider],
 })
 export class PlansComponent implements OnInit {
   currentPage: string = '';
@@ -45,7 +29,6 @@ export class PlansComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentPage = this.localStorage.getItem('settingsActualPage');
-    console.log(this.currentPage);
     this.plans = [
       new Plan(
         'basic',
@@ -112,5 +95,14 @@ export class PlansComponent implements OnInit {
 
   gotVoucherDetails(details: object) {
     this.voucherDetails = details;
+  }
+
+  // Router animation handler
+  prepareRoute(outlet: RouterOutlet) {
+    return (
+      outlet &&
+      outlet.activatedRouteData &&
+      outlet.activatedRouteData['animation']
+    );
   }
 }

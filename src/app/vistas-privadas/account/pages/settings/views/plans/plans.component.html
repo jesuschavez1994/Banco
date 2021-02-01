@@ -12,7 +12,11 @@
       fotografiar todos tus productos.
     </p>
 
-    <div class="views">
+    <div [@routeAnimations]="prepareRoute(outlet)" class="views">
+      <router-outlet #outlet="outlet"></router-outlet>
+    </div>
+
+    <!--    <div class="views">
       <div
         *ngIf="currentPage === 'plans'"
         class="plans-container animated fadeIn"
@@ -50,6 +54,6 @@
           (pageChange)="onPageChange($event)"
         ></app-payment-details>
       </div>
-    </div>
+    </div>  -->
   </div>
 </div>
