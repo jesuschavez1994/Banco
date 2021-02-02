@@ -87,18 +87,22 @@
 
               <div class="order-payment-forms">
 
-                <form method="post" [action]="currentPaymentData.mallTransaction.url">
+                <div class="card-option-pay-redirect">
 
-                  <input type="hidden" name="token_ws" [value]="currentPaymentData.mallTransaction.token" />
+                  <form method="post" [action]="currentPaymentData.mallTransaction.url" class="form">
 
-                  <button
-                    class="button button--full-width"
-                    type="submit"
-                  >
-                    Continuar con el tipo de pago seleccionado
-                  </button>
+                    <input type="hidden" name="token_ws" [value]="currentPaymentData.mallTransaction.token" />
 
-                </form>
+                    <button
+                      class="button button--full-width"
+                      type="submit"
+                    >
+                      Continuar con el tipo de pago seleccionado
+                    </button>
+
+                  </form>
+
+                </div>
 
               </div>
 

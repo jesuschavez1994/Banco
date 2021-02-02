@@ -26,7 +26,7 @@
       #inputCheck
     >
 
-    <ul class="dd-menu" [ngClass]="{'left': displayDropdown === 'left', 'expanded': isDropDownExpanded}">
+    <ul class="dd-menu animated flipInY" [ngClass]="{'left': displayDropdown === 'left', 'expanded': isDropDownExpanded}">
 
       <ng-container *ngFor="let option of menuOptions; let inx = index">
 

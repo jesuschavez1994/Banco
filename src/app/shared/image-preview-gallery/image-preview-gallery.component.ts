@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit, OnChanges } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
-const URL = environment.url;
+const URL = `${environment.url}/`;
 
 @Component({
   selector: 'app-image-preview-gallery',
@@ -21,7 +21,7 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
   constructor() {}
 
   ngOnInit(): void {
-    console.log('INPUT', this.imgs);
+    // console.log('INPUT', this.imgs);
     this.currentImg = this.imgs[0];
     this.currentImg = `${URL}${this.currentImg}`;
 
@@ -58,8 +58,8 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
 
     switch(this.sync){
       case "sync":
-      image.getElementsByTagName('a')[0].setAttribute('href', `${URL}/${img.hires}`);
-      image.getElementsByTagName('img')[0].setAttribute('src', `${URL}/${img.thumb}`);
+      image.getElementsByTagName('a')[0].setAttribute('href', `${URL}${img.hires}`);
+      image.getElementsByTagName('img')[0].setAttribute('src', `${URL}${img.thumb}`);
       break;
       default:
       image.getElementsByTagName('a')[0].setAttribute('href', img.hires);
@@ -73,7 +73,7 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
       let img = new Image();
       // `${URL}/${img}`;
       // img.src = url;
-      img.src = `${URL}/${url}`;
+      img.src = `${URL}${url}`;
     };
 
 

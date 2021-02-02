@@ -228,37 +228,36 @@
 
             <ng-container *ngFor="let option of optionPayment">
 
-            <article
-              (click)="optionPaymentSelected = option"
-            >
-
-              <input
-                id="paymentOption-{{option.data.id}}"
-                type="radio"
-                class="checkbox-default radio-default"
-                formControlName="paymentOption"
-                [value]="option.data.id"
-
+              <article
+                (click)="optionPaymentSelected = option"
               >
-              <!-- [checked]="optionPaymentSelected.data.id === option.data.id" -->
 
-              <label for="paymentOption-{{option.data.id}}">
+                <input
+                  id="paymentOption-{{option.data.id}}"
+                  type="radio"
+                  class="checkbox-default radio-default"
+                  formControlName="paymentOption"
+                  [value]="option.data.id"
 
-                <div class="select-card">
+                >
+                <!-- [checked]="optionPaymentSelected.data.id === option.data.id" -->
 
-                  <div class="img">
-                    <img [src]="option.image" [alt]="option.name">
+                <label for="paymentOption-{{option.data.id}}">
+
+                  <div class="select-card">
+
+                    <div class="img">
+                      <img [src]="option.image" [alt]="option.name">
+                    </div>
+
+                    <p>
+                      {{option.name}}
+                    </p>
+
                   </div>
+                </label>
 
-                  <p>
-                    {{option.name}}
-                  </p>
-
-                </div>
-              </label>
-
-            </article>
-
+              </article>
 
             </ng-container>
 

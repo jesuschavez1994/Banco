@@ -17,6 +17,9 @@ export class ImgFallbackPipe implements PipeTransform {
       case 'default':
         imgDefault = 'assets/img/no-image-banner.jpg';
         break;
+      case 'banner-medick':
+        imgDefault = 'assets/img/Banner/Banner1.svg';
+        break;
       case 'box':
         imgDefault = 'assets/img/Box/box.svg';
         break;
