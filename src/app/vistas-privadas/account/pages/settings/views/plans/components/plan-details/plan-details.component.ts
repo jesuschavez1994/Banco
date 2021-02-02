@@ -18,11 +18,11 @@ import {
   styleUrls: ['./plan-details.component.css'],
 })
 export class PlanDetailsComponent implements OnInit {
-  nextPage = 'plans';
+  waitingResponse = false;
+  webpayDebitCard = false;
   selectedPlanDetails: OrderNumberCreation = JSON.parse(
     this.localStorage.getItem('planDetails')
   );
-  webpayDebitCard = false;
   // We use the value on the localStorage as fallback.
   createdOrderDetails = JSON.parse(this.localStorage.getItem('createdOrder'));
 
@@ -46,6 +46,8 @@ export class PlanDetailsComponent implements OnInit {
 
   // API calls handler methods-------------------------------
   createPayment(): void {
+    // We start the spinner.
+    this.waitingResponse = true;
     this.subscriptionDataService
       .paymentCreation(
         this.createdOrderDetails.order.user_id,
@@ -55,6 +57,7 @@ export class PlanDetailsComponent implements OnInit {
         this.subscriptionDataService
           .createWebpayPayment(serverResponse.id)
           .subscribe((paymentCredentials: PaymentCredentials) => {
+            this.waitingResponse = false;
             this.localStorage.setItem('settingsActualPage', 'payment-details');
             this.openDialog(paymentCredentials.url, paymentCredentials.token);
           });

@@ -14,6 +14,6 @@
 
 // ===================== PRODUCCION Founduss.com ========================== //
 
-export const URL_SERVICIOS = 'http://founduss.com';
+export const URL_SERVICIOS = 'https://founduss.cl';
 
 // ============================================================== //

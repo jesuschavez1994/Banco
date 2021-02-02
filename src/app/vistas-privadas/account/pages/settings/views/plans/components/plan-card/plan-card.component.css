@@ -207,7 +207,6 @@ h5 {
   font-size: 1.6em;
   line-height: 1.8rem;
   font-weight: 500;
-  margin-left: 20px;
 }
 
 .price small.renew {
@@ -256,11 +255,12 @@ h5 {
 
 .more-info > div.price small {
   line-height: 1;
+  margin-left: 1rem;
 }
 
 .total {
   margin-top: 1em;
-  font-size: 0.9em;
+  font-size: 0.8em;
   grid-area: total;
 }
 
@@ -287,7 +287,7 @@ h5 {
   display: grid;
   grid-template-columns: 50px auto;
   grid-template-rows: 40px;
-  grid-template-areas: "radio text";
+  grid-template-areas: "checkbox text";
 }
 
 .sync ul li p span.amount {
@@ -307,8 +307,8 @@ h5 {
   color: #3673ff;
 }
 
-.sync ul li .radio {
-  grid-area: radio;
+.sync ul li .checkbox {
+  grid-area: checkbox;
   justify-self: center;
   align-self: center;
 }

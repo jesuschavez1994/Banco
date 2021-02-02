@@ -15,8 +15,8 @@
 
 export const environment = {
   production: false,
-  url: 'http://founduss.com',
-  apiUrl: 'http://founduss.com/api/',
+  url: 'https://founduss.cl',
+  apiUrl: 'https://founduss.cl/api/',
   apiKey: 'aac1706fe8a46b5700714aead65c5e39',
   imgPath: ''
 };
