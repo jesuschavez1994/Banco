@@ -82,7 +82,7 @@ const APP_ROUTES: Routes = [
 
     // Christopher Views //
 
-    {   path: 'register-negocio',
+    {   path: 'store-registration',
         component: FormDataNegocioComponent,
     },
 
