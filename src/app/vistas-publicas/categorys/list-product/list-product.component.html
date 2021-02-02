@@ -22,7 +22,7 @@
                     <li class="item product" *ngFor=" let item of listaProductos.data; let j = index">
                         <article class="product-item-info card">
                             <picture class="product-image-container">
-                                <img src="{{item.images[0] | imgFallback: 'box' }}" alt="{{item.name}}">
+                                <img src="{{item.images[0] | imgFallback: 'box' }}" (click)="getProductDetail(item.store_id, item.id)" alt="{{item.name}}">
                             </picture>
                             <div class="card-body pb-0 pt-0">
                                 <p class="card-description" title="description">
@@ -34,7 +34,6 @@
                     </li>
                 </ul>
             </nav>
-
 
 
             <!-- PAGINACION -->

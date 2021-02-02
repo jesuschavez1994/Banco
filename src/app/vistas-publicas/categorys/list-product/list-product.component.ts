@@ -326,5 +326,8 @@ ngOndestroy(){
       data: {title: 'Ooops!', description: mensaje}
     });
   }
- 
+  getProductDetail(idStore,idProduct){
+    console.log('route',idStore,idProduct);
+    this.router.navigate(['business-detail',idStore,'products',idProduct]);
+  }
 }

@@ -29,7 +29,7 @@ import { ModalErrComponent} from '@shared/modal-err/modal-err.component';
 })
 export class HomeComponent implements OnInit {
   @ViewChild('modalRegister') modalRegister: ElementRef;
-    userLog = false;
+    userLog: boolean;
     
 
   constructor(  private homeService: HomeServiceService,
