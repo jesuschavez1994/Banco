@@ -42,6 +42,7 @@ import { AvatarComponent } from "./public-navbar/avatar/avatar.component";
 import { ButtonShopComponent } from "./public-navbar/button-shop/button-shop.component";
 import { ModalRegisterComponent } from "./modal-register/modal-register.component";
 import { SearchComponent } from "./public-navbar/search/search.component";
+import { BtnActionComponent } from './btn-action/btn-action.component';
 
 
 
@@ -65,7 +66,7 @@ import { SearchComponent } from "./public-navbar/search/search.component";
 NavOptionsComponent,CategoryLinkComponent,
 NavBrandComponent,AvatarComponent,
 ButtonShopComponent,ModalRegisterComponent,
-ModalRegisterComponent,SearchComponent,
+ModalRegisterComponent,SearchComponent, BtnActionComponent,
 
     ],
     imports: [
