@@ -17,12 +17,15 @@ import { BROWSER_STORAGE } from '@app/browserStorage';
 export class PlanCardComponent implements OnInit {
   @Input() planInfo: Plan;
 
-  moreInfo = false;
-  productSync = '100';
-  nextPage = 'payment';
-  waitingResponse = false;
   planDetails: OrderNumberCreation;
-  totalPrice = 64;
+  moreInfo = false;
+  waitingResponse = false;
+  // Variable to keep track of the user's selection
+  productBank = false;
+  productBankPrice: number;
+  totalPrice: number;
+  // Checkbox's logic required variables
+  selectedCheckbox: number;
 
   constructor(
     private router: Router,
@@ -30,15 +33,44 @@ export class PlanCardComponent implements OnInit {
     @Inject(BROWSER_STORAGE) private localStorage: Storage
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.totalPrice = this.planInfo.basicPrice;
+    this.selectedCheckbox = this.planInfo.id;
+    this.productBankPrice = this.planInfo.productBank[this.planInfo.id].price;
+  }
 
   // Events that happens in the component -----------------
   showMore(): void {
+    this.productBank = true;
     this.moreInfo = !this.moreInfo;
+    this.totalPrice =
+      this.planInfo.basicPrice +
+      this.planInfo.productBank[this.planInfo.id].price;
   }
 
-  onCheck(): void {
-    console.log(this.productSync);
+  updatePrice(checkboxIndex: number, productBankPrice: number): void {
+    /* 
+      If the checkboxIndex is the same as selectedCheckbox, 
+      it means that the checkbox was checked. Since it'll be unchecked, the price is the basic price.
+      If no checkbox is selected, the price to show, and the total price is the same as the basic price.
+    */
+    if (this.selectedCheckbox === checkboxIndex) {
+      // In case the user checks the same checkbox again, we update the value accordingly.
+      if (this.totalPrice === this.planInfo.basicPrice) {
+        this.productBank = true;
+        this.totalPrice = this.planInfo.basicPrice + productBankPrice;
+        this.productBankPrice = productBankPrice;
+      } else {
+        this.productBank = false;
+        this.totalPrice = this.productBankPrice = this.planInfo.basicPrice;
+        this.productBankPrice = productBankPrice;
+      }
+    } else {
+      this.productBank = true;
+      this.selectedCheckbox = checkboxIndex;
+      this.totalPrice = this.planInfo.basicPrice + productBankPrice;
+      this.productBankPrice = productBankPrice;
+    }
   }
 
   // API calls handler methods-------------------------------
