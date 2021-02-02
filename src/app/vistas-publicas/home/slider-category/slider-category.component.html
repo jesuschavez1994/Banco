@@ -4,7 +4,7 @@
         <h3 class="cty-title">
             {{_cat.name}}
         </h3>
-        <a class="cty-link">ver más</a>
+        <a class="cty-link" [routerLink]="['/categorys',_cat.id,'products']">ver más</a>
         <hr>
     </header>
 
@@ -12,7 +12,17 @@
 
         <nav class="list-items" #container>
 
-            <button #back mat-mini-fab class="back" (click)="scrollLeft(100)"> &lt;</button>
+            <button #back mat-stroked-button class="back" (click)="scrollLeft(100)">  
+                <svg version="1.1" id="backkkk"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     viewBox="0 0 31 52.8" style="enable-background:new 0 0 31 52.8;" xml:space="preserve">
+                <g>
+                    <g id="Chevron_Right_2_">
+                        <path d="M1.8,28.2l22.9,22.9c1,1,2.6,1,3.6,0c1-1,1-2.6,0-3.6L7.2,26.4L28.3,5.3c1-1,1-2.6,0-3.6s-2.6-1-3.6,0L1.8,24.7
+                            C0.8,25.6,0.8,27.2,1.8,28.2z"/>
+                    </g>
+                </g>
+                </svg>
+                </button>
 
             <ol #carr>
                 <li id="{{i.id}}" class=" item product" id="index" *ngFor=" let i of listCategory; let j = index">
@@ -30,7 +40,16 @@
                 </li>
 
             </ol>
-            <button #next mat-mini-fab (click)="scrollRight(100)" class="next">&gt;</button>
+            <button #next mat-stroked-button (click)="scrollRight(100)" class="next">
+                <svg version="1.1" id="nexxxt" xmlns="http://www.w3.org/2000/svg"   xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 31 52.8" style="enable-background:new 0 0 31 52.8;" xml:space="preserve">
+           <g>
+               <g id="Chevron_Right_2_">
+                   <path d="M28.3,24.7L5.5,1.7c-1-1-2.6-1-3.6,0c-1,1-1,2.6,0,3.6l21,21.2l-21.2,21c-1,1-1,2.6,0,3.6c1,1,2.6,1,3.6,0l23-22.8
+                       C29.2,27.3,29.3,25.7,28.3,24.7z"/>
+               </g>
+           </g>
+           </svg></button>
 
         </nav>
     </main>

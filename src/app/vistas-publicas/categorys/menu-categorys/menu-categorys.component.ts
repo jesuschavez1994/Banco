@@ -10,7 +10,14 @@ import {MatDialog, MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialo
   templateUrl: './menu-categorys.component.html',
   styleUrls: ['./menu-categorys.component.scss']
 })
+
 export class MenuCategorysComponent implements OnInit {
+  /* INPUTS */
+  /* Titulo para menú */
+  @Input() titleMenu: string;
+  /* Opciones para el menú*/
+  @Input() DataMenu: any[];
+  /* PROPIEDADES */
   userLog = false;
   loadError :boolean =false;
   boxCategory: Category;
@@ -21,13 +28,19 @@ export class MenuCategorysComponent implements OnInit {
               private spinner : NgxSpinnerService,
               private modal : MatDialog  ) {
                 console.log('menu constructor');
+                //Titulo por defecto para este uso
+                //Comentar linea si el componente obtiene esta entrada
+                this.titleMenu='Categorías'
                }
+
   ngOnCHanges(){
     
   }
+
   ngOnInit(): void {  
     this.spinner.show();
     console.log('menu on Init')
+    
     //si el request de las categorias ya ha sido realizado
     //obtiene su valor
     this.boxCategory = this.getCategorysService._bxCategory;
@@ -42,6 +55,7 @@ export class MenuCategorysComponent implements OnInit {
 
   }
   ngOnDestroy(){
+
     this.spinner.show();
 
     //guarda en servicio el request
@@ -56,7 +70,11 @@ export class MenuCategorysComponent implements OnInit {
 
     }
   }
+  // obtiene la data a usar en el menú
+  // en este caso categories
+  // modificar para que la data sea generica
   obtCategories(){
+  
     this.getCategorysService.getCategoryList().subscribe( 
          cat => {
            this.boxCategory = cat;
@@ -68,13 +86,16 @@ export class MenuCategorysComponent implements OnInit {
             console.log('error cargando categorias ',error);
             this.spinner.hide();
             this.openDialog('Ha ocurrido un error cargando la lista de categorias');
-
-          }
+            }
           )
      } 
-  showProducts(cat: number , subcat: any){
-    
 
+     // Funcion en desuso gracias a modificacion 
+     // ahora menu redirige por ruta, no paso de parametros
+  
+  
+  /*    showProducts(cat: number , subcat: any){
+    
     //Busqueda por categoria
     if(subcat != 'none'){
        //preparamos envio de ids para posteriores consultas
@@ -92,7 +113,7 @@ export class MenuCategorysComponent implements OnInit {
       this.router.navigate(['categorys',this.boxCategory[cat].name,'products']);
       this.stateid.push(cat);
     }
-  }
+  } */
   openDialog(mensaje:string): void {
     const dialogRef = this.modal.open(ModalErrComponent, {
       data: {title: 'Ooops!', description: mensaje}

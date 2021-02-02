@@ -19,7 +19,7 @@
     }
     main {
         .list-items {
-            height: 450px;
+            height: 380px;
             position: relative;
             @media (max-width: 425px) {
                 height: 200px;
@@ -27,20 +27,36 @@
             button {
                 display: none;
                 position: absolute;
+                height: 70px;
                 font-size: 30px;
-                background-color: rgba($color: #e6af5e, $alpha: 1);
                 align-self: center;
                 top: 45%;
                 z-index: 25000;
+                padding: 0 7px !important;
                 @media(min-width: 768px) {
                     display: block;
+                }
+                svg {
+                    height: 25px;
+                    &:hover {
+                        fill: #e6af5e;
+                    }
                 }
             }
             .next {
                 left: 98%;
+                border-left: none;
             }
             .back {
                 right: 97%;
+                border-right: none;
+            }
+            button:hover {
+                color: #e6af5e;
+                border-color: #e6af5e;
+                svg {
+                    fill: #e6af5e;
+                }
             }
             button:focus {
                 outline: none;
@@ -116,11 +132,13 @@
                             padding: 12px 0 0 0;
                             font-size: 12px;
                             p {
-                                min-height: 60px;
+                                min-height: 45px;
                                 text-transform: capitalize;
+                                line-height: 15px;
+                                margin-bottom: 4px;
                             }
                             .price {
-                                font-size: 1.5em;
+                                font-size: 1.6em;
                             }
                         }
                     }

@@ -1,5 +1,10 @@
 <div class="main-container">
-    <app-sidebar-list></app-sidebar-list>
+
+
+    <app-sidebar-list #sidebarList [anchorsMenu]="anchorsMenu" [categories]="categories" [priceRanges]="priceRanges" [factories]="factories" [marks]="marks" [delivery]="delivery">
+    </app-sidebar-list>
+
+
     <main class="category-container">
 
         <header id="top" class="cty-header">
@@ -7,7 +12,6 @@
                 {{titleSubcat}}
             </h3>
             <!--   <app-breadcrumb [breadcrumb]="breadCru"></app-breadcrumb> -->
-
             <hr>
         </header>
 
@@ -18,7 +22,7 @@
                     <li class="item product" *ngFor=" let item of listaProductos.data; let j = index">
                         <article class="product-item-info card">
                             <picture class="product-image-container">
-                                <img src="{{item.images[0] | imgFallback: 'box' }}" alt="{{item.name}}">
+                                <img src="{{item.images[0] | imgFallback: 'box' }}" (click)="getProductDetail(item.store_id, item.id)" alt="{{item.name}}">
                             </picture>
                             <div class="card-body pb-0 pt-0">
                                 <p class="card-description" title="description">
@@ -31,9 +35,12 @@
                 </ul>
             </nav>
 
-            <nav class="pg-item" aria-label="Page navigation" *ngIf="!empty">
-                <ul class="pagination">
 
+            <!-- PAGINACION -->
+            <nav class="pg-item" aria-label="Page navigation" *ngIf="!empty">
+                <!-- BTN ATRAS -->
+                <ul class="pagination">
+                    <!-- DESABILITADO SI PAGINA ACTUAL <= A LA PRIMERA -->
                     <li class="page-item" [ngClass]="{'disabled':  listaProductos.current_page<=1}">
                         <a class="page-link" (click)="getProductsPG($event.target.parentElement.parentElement,(listaProductos.current_page-1))" aria-label="Previous">
                             <span aria-hidden="true">&laquo;Anterior</span>
@@ -41,11 +48,19 @@
                         </a>
                     </li>
 
+
                     <li id="{{item}}" [ngClass]="{'active':  item == listaProductos.current_page}" (click)="getProductsPG($event.target.parentElement.parentElement,$event.target.id)" class="page-item " *ngFor="let item of pgOptions; let ind = index ">
-                        <a id="{{item}}" class="page-link">{{ind+1}}</a>
+
+                        <a *ngIf="item-2 > 0 || item+2 != listaProductos.last_page" id="{{item}}" class="page-link">{{ind+1}}</a>
+
+                        <a *ngIf="item-2 > 0 || item+2 != listaProductos.last_page  " id="{{item}}" class="page-link">...</a>
+
                     </li>
 
+                    <!-- BTN SIGUIENTE -->
                     <li class="page-item" [ngClass]="{'disabled':  listaProductos.current_page>=listaProductos.last_page}">
+                        <!-- DESABILITADO SI ¨PAGINA ACTUAL >= ULTIMA PAGINA -->
+
                         <a class="page-link" (click)="getProductsPG($event.target.parentElement.parentElement,(listaProductos.current_page+1))" aria-label="Next">
                             <span aria-hidden="true">Siguiente&raquo; </span>
                             <span class="sr-only">Siguiente</span>
@@ -53,12 +68,15 @@
                     </li>
                 </ul>
             </nav>
-            <div *ngIf="empty">
+
+
+            <div class="empty-disclaimer" *ngIf="empty">
                 <h4>
                     No hay productos en esta sección
                 </h4>
                 <a name="" id="" class="btn btn-primary" [routerLink]="['/categorys']" role="button">Volver a Menú</a>
             </div>
+
         </main>
 
     </main>

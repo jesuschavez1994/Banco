@@ -12,17 +12,14 @@ import { Observable } from 'rxjs';
 })
 export class GetCategorysService extends Service   {
   
-  
-  
   // breadCrumb
   //public  breadcr: BreadcrumbOptions[]=[{title: 'home', routerLink:['/']}]; 
-    // request Categories
+  // request Categories
   public _bxCategory: Category;
   // request Productos
   public _requestCategoryL: ProductCategories;
   // ids de categorias y subcategorias
   public _boxEstateRequestId : number[][]=[null];
-  
   
   // CONSTRUCTOR ********
   constructor( protected http: HttpClient,
@@ -30,19 +27,29 @@ export class GetCategorysService extends Service   {
     super(http);
     console.log('Constructor service');
   }
-
   
-// Ejecuta la peticion la peticion de la lista de categorias y sub categorias
+// Ejecuta  la peticion de la lista de categorias y sub categorias
 // Devuelve un Observable
   public getCategoryList(): Observable<Category>{
     console.log('get categories list /categories');
     return this.execQuery<Category>('categories');
  }
 
- // Obtiene la lista de productos segun los parametros pasados
+// Requerimentos
+// 
+//
+//
+// 
+/*  public getDataMenu(): Observable<>{
+
+ } */
+ 
+ 
+ // Obtiene la lista de productos según los parametros pasados
  // Los parametros ingresados deben ser numeros
  // devuelve un Observable
- public getListProduct(cat: number, subcat: number): Observable<ProductCategories>{
+
+ public getListProduct(cat: number | string, subcat: number | string): Observable<ProductCategories>{
   console.log('Get listProducts', cat, subcat);
      
   // categories/idCategoria/subcategories/idSucategoria/product  <- Trae productos por subcategorias
@@ -57,13 +64,38 @@ export class GetCategorysService extends Service   {
     return this.execQuery<ProductCategories>('categories/'+cat+'/products');
   }
 }
+// Requerimentos
+// 
+//
+//
+//
+/* 
+public getListProductG(){
+
+}
+ */
+
 // get list Product With path
+//
+//
+//
+
+// Esta funcion obtiene una lista de productos segun la ruta
+// Usada especificamente en la paginacion de categorias
+
 public getListPWPath(query: string): Observable<ProductCategories>{
   console.log('obt productList with path'+ query);
   
   return  this.execQuery<ProductCategories>(query)
 }
 /* 
+ ***********************************
+  Funcion para la generacion de un breadcrumb dinamico
+  es decir sin importar la ruta, generaria un grupo de datos
+  apto para ser usado en breadCrump Component
+  
+  -- abandonado
+ ***********************************
 public generateBreadcrumb():BreadcrumbOptions[]{
   console.log('breadCumbr');
   let breadCrumb:BreadcrumbOptions[]=[{title:"home",routerLink:['/']}];

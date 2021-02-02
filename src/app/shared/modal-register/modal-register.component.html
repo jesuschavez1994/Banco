@@ -13,10 +13,10 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-6 col-sm-6 col-md-6 display-flex justify-content-center">
-                        <img class="img-registro cursor-poniter" src="../../../assets/img/IconosHome/CONSUMIDOR.svg" data-dismiss="modal" [routerLink]="['/register']" aria-label="Close">
+                        <img class="img-registro cursor-poniter" src="../../../assets/img/IconosHome/CONSUMIDOR.svg" data-dismiss="modal" [routerLink]="['/register']" (click)="onNoClick()" aria-label="Close">
                     </div>
                     <div class="col-6 col-sm-6 col-md-6 display-flex justify-content-center">
-                        <img class="img-registro cursor-poniter" src="../../../assets/img/IconosHome/TIENDA.svg" data-dismiss="modal" [routerLink]="['/store-registration']" aria-label="Close">
+                        <img class="img-registro cursor-poniter" src="../../../assets/img/IconosHome/TIENDA.svg" data-dismiss="modal" [routerLink]="['/register-negocio']" (click)="onNoClick()" aria-label="Close">
                     </div>
                 </div>
                 <div class="row">
