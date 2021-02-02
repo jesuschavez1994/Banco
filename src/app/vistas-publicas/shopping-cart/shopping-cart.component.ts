@@ -207,52 +207,56 @@ export class ShoppingCartComponent implements OnInit {
       storeNames = [];
       productCartOrdered = [];
 
-      resp.data.forEach( productFor => {
+      if (resp.data) {
 
-        const storeName = productFor.attributes.store.name;
+        resp.data.forEach( productFor => {
 
-        if (!storeNames.includes(storeName)) {
+          const storeName = productFor.attributes.store.name;
 
-          storeNames.push(storeName);
+          if (!storeNames.includes(storeName)) {
 
-          const productOfCart = resp.data.filter( productOfCartFil => {
-            return storeName === productOfCartFil.attributes.store.name;
-          });
+            storeNames.push(storeName);
 
-          const formatProductCart = productOfCart.map( productOfCartMap => {
-            return {
-              name: productOfCartMap.name,
-              description: 'el back no devuelve la descripción',
-              price: productOfCartMap.price,
-              stock: productOfCartMap.quantity,
-              quantity: productOfCartMap.quantity,
-              images: [],
-              id: productOfCartMap.id,
-              idStore: productOfCartMap.attributes.store.store_id,
-              // taxPorcentageByProduct: this.taxPorcentage,
-              hasDelivery: false,
-              deliveryCost: this.deliveryCost,
-            };
-          });
+            const productOfCart = resp.data.filter( productOfCartFil => {
+              return storeName === productOfCartFil.attributes.store.name;
+            });
 
-          productCartOrdered.push({
-            id: productOfCart[0].attributes.store.store_id,
-            group: {
-              name: storeName,
-              img: './assets/img/avatar.svg',
-            },
-            orders: formatProductCart,
-            hasPaid: false,
-          });
+            const formatProductCart = productOfCart.map( productOfCartMap => {
+              return {
+                name: productOfCartMap.name,
+                description: 'el back no devuelve la descripción',
+                price: productOfCartMap.price,
+                stock: productOfCartMap.quantity,
+                quantity: productOfCartMap.quantity,
+                images: [],
+                id: productOfCartMap.id,
+                idStore: productOfCartMap.attributes.store.store_id,
+                // taxPorcentageByProduct: this.taxPorcentage,
+                hasDelivery: false,
+                deliveryCost: this.deliveryCost,
+              };
+            });
 
-        }
+            productCartOrdered.push({
+              id: productOfCart[0].attributes.store.store_id,
+              group: {
+                name: storeName,
+                img: './assets/img/avatar.svg',
+              },
+              orders: formatProductCart,
+              hasPaid: false,
+            });
 
-      });
+          }
 
-      this.ordersLists = productCartOrdered;
+        });
 
-      console.log('Products of cart loaded');
-      console.log(resp);
+        this.ordersLists = productCartOrdered;
+
+        console.log('Products of cart loaded');
+        console.log(resp);
+      }
+
 
     });
 

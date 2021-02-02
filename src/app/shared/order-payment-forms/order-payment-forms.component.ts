@@ -11,11 +11,13 @@ export class OrderPaymentFormsComponent implements OnInit {
 
   step = 1;
   isAllowedSecondStep = false;
-  regiones = ['hola'];
+  regions = [
+    {id: 1, label: 'hola'}
+  ];
 
   form = new FormGroup({
-    region: new FormControl('', [Validators.required, MyValidators.existInArray(this.regiones)]),
-    comuna: new FormControl('', [Validators.required, MyValidators.existInArray(this.regiones)]),
+    region: new FormControl('', [Validators.required, MyValidators.existInArray(this.regions.map( r => r.id ) )]),
+    comuna: new FormControl('', [Validators.required, MyValidators.existInArray(this.regions.map( r => r.id ) )]),
     direccion: new FormControl('', [Validators.required, Validators.minLength(10)]),
     hospedaje: new FormControl('', [Validators.required, Validators.minLength(6)]),
     telefono: new FormControl('', [

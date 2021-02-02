@@ -111,52 +111,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
 
-    // setTimeout(() => {
-
-    //   this.imgsBanners = {
-    //     m: 'hola',
-    //     s: 'hola 2'
-    //   };
-
-    //   console.log('setTimeout - ngAfterViewInit');
-
-    // }, 10000);
-
-    // this.productService.getFavoriteProducts(1).subscribe(
-    //   resp => {
-    //     console.log('getFavoriteProducts');
-    //     console.log(resp);
-    //   },
-    //   error => {
-    //     console.log('error');
-    //     console.log(error);
-    //   }
-    // );
-
-    // this.productService.addProductToFavorite(1, 134).subscribe(
-    //   resp => {
-    //     console.log('addProductToFavorite');
-    //     console.log(resp);
-    //   },
-    //   error => {
-    //     console.log('error');
-    //     console.log(error);
-    //   }
-    // );
-
-    // this.productService.removeProductFromFavorite(1, 134).subscribe(
-    //   resp => {
-    //     console.log('removeProductFromFavorite');
-    //     console.log(resp);
-    //   },
-    //   error => {
-    //     console.log('error');
-    //     console.log(error);
-    //   }
-    // );
-
-
-
   }
 
   public loadDataByParams(){

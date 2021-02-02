@@ -65,7 +65,7 @@ const APP_ROUTES: Routes = [
       path: 'panel',
       loadChildren: () => import('./vistas-publicas/panel/panel.module').then( m => m.PanelModule),
       // canLoad: [ LoginGuardGuard ],
-      // canActivate: [ LoginGuardGuard ],
+      canActivate: [ LoginGuardGuard ],
     },
     {
       path: 'business-detail/:idStore', // Se obtiene el id de la tienda para mostrar su listo productos
