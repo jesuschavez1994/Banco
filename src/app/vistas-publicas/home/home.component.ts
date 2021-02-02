@@ -6,22 +6,7 @@ import { CategoriesHome } from "@interfaces/homeProduct.interface";
 import { NgxSpinnerService } from 'ngx-spinner';
 import {MatDialog, MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ModalErrComponent} from '@shared/modal-err/modal-err.component';
-
-/*
-  header{
-    brand
-    link categoria
-    search bar
-    btn cart
-    user settings
-    user register
-    user login
-    avatar
-  }
-  banner{
-    slider jpg´s
-  }
-*/
+ 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
