@@ -140,6 +140,7 @@ export class StoreService extends Service{
       localStorage.removeItem('token');
       localStorage.removeItem('id');
       localStorage.removeItem('usuario');
+      localStorage.removeItem('storeId');
       this.router.navigate(['/home']);
     });
   }
