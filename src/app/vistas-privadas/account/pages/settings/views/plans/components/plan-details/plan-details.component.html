@@ -20,7 +20,7 @@
     </h5>
     <h5 class="total">
       <b>Total:&nbsp; &nbsp;</b>
-      <span>{{ selectedPlanDetails.price | currency }}</span>
+      <span>{{ selectedPlanDetails.price | number }}</span>
     </h5>
 
     <p class="text">
@@ -62,7 +62,8 @@
         mat-flat-button
         [disabled]="!webpayDebitCard"
       >
-        PAGAR AHORA
+        <b *ngIf="!waitingResponse">PAGAR AHORA</b>
+        <mat-spinner *ngIf="waitingResponse" [diameter]="30"></mat-spinner>
       </button>
     </div>
   </div>
