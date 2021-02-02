@@ -52,7 +52,7 @@
 
                     <li id="{{item}}" [ngClass]="{'active':  item == listaProductos.current_page}" (click)="getProductsPG($event.target.parentElement.parentElement,$event.target.id)" class="page-item " *ngFor="let item of pgOptions; let ind = index ">
 
-                        <a *ngIf="!(item-2 > 0) || !(item+2 != listaProductos.last_page)" id="{{item}}" class="page-link">{{ind+1}}</a>
+                        <a *ngIf="item-2 > 0 || item+2 != listaProductos.last_page" id="{{item}}" class="page-link">{{ind+1}}</a>
 
                         <a *ngIf="item-2 > 0 || item+2 != listaProductos.last_page  " id="{{item}}" class="page-link">...</a>
 
@@ -77,6 +77,7 @@
                 </h4>
                 <a name="" id="" class="btn btn-primary" [routerLink]="['/categorys']" role="button">Volver a Menú</a>
             </div>
+
         </main>
 
     </main>

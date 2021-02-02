@@ -34,6 +34,9 @@
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: start;
+                /*  display: grid;
+                flex-wrap: wrap;
+                grid-template-columns: auto auto auto auto; */
                 @media (max-width: 1000px) {
                     justify-content: center;
                 }
@@ -85,12 +88,13 @@
                         padding: 12px 0 0 0;
                         font-size: 12px;
                         p {
-                            min-height: 60px;
+                            min-height: 45px;
                             text-transform: capitalize;
                             line-height: 15px;
+                            margin-bottom: 4px;
                         }
                         .price {
-                            font-size: 1.5em;
+                            font-size: 1.6em;
                         }
                     }
                 }
@@ -106,6 +110,12 @@
                 max-width: 75%;
                 margin: 4rem auto;
             }
+        }
+        .empty-disclaimer {
+            margin-top: 80px;
+            font-size: 1.4rem;
+            width: 80vw;
+            text-align: center;
         }
     }
 }
