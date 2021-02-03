@@ -82,7 +82,7 @@ export class BankProductComponent implements OnInit {
     this.spinner();
     this.sincronizacion.GetBankProduct(page).subscribe( (resp: any) => {
       this.itemProduct = resp.data;
-      console.log('RESPUESTA', resp);
+      console.log('RESPUESTA BANK PRODUCT', resp);
       this.last_Page_Pagination = resp.last_page;
       this.totalProductAPI = resp.total;
       this.itemsPerPage = resp.per_page;
@@ -93,19 +93,39 @@ export class BankProductComponent implements OnInit {
 
       this.bankProductList.products = products.map( product => {
 
-        // console.log('MAP', product);
+          console.log('MAP', product);
 
-        return {
-          name: product.name,
-          description: product.description,
-          price: product.price,
-          stock: product.stock,
-          images: product.images['0'].src_size.xl, // product.images
-          id: product.id ? product.id : -1,
-          idStore: product.store_id ? product.store_id : -1,
-          isFavorite: product.isFavorite ? product.isFavorite : false,
-          sinchronized: product.sincronice
-        };
+          let images = [];
+
+          if (product.images) {
+
+            if (product.images.length === 0) {
+
+              images = product.images.map(image => {
+                console.log('images 0', image)
+              });
+
+            }
+
+            if ( product.images.length >= 1 ) {
+              images = product.images[0].src_size.xl;
+            }
+            
+          }
+       
+          return {
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            stock: product.stock,
+            images, // product.images
+            id: product.id ? product.id : -1,
+            idStore: product.store_id ? product.store_id : -1,
+            isFavorite: product.isFavorite ? product.isFavorite : false,
+            sinchronized: product.sincronice
+          };
+     
+          // product.images['0'].src_size.xl
 
       });
 

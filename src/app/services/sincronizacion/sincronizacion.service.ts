@@ -62,7 +62,7 @@ export class SincronizacionService {
   }
 
   GetBankProduct(page?: number){
-    const url = `/api/banks` + '?page=' + page;;
+    const url = `/api/banks` + '?page=' + page;
     return this.execQuery(url);
   }
 
