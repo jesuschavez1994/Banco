@@ -47,13 +47,13 @@
             <!-- ============================================================== -->
             <!-- Profile -->
             <!-- ============================================================== -->
-            <li class="item navbar-collapse pointer ">
+            <li class="item navbar-collapse pointer" *ngIf="userImg != undefined">
                 <!--   <li class="item navbar-collapse " *ngIf="auth && (userName != undefined)"> -->
                 <!-- <a class=" p-0 " href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
-                <ng-container *ngIf="userImg.length > 0">
+                <ng-container *ngIf="(userImg.length > 0 ) && (userImg != undefined)">
                     <img src="{{userImg[0].src}}" alt="user" class="m-0 responsive--icon profile-pic" />
                 </ng-container>
-                <ng-container *ngIf="userImg.length === 0">
+                <ng-container *ngIf="(userImg.length === 0) && (userImg != undefined)">
                     <img src="assets/img/avatar.svg" alt="user" class="m-0 responsive--icon profile-pic" />
                 </ng-container>
                 <span class="dropdown-toggle waves-effect waves-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi usuario</span>
@@ -63,10 +63,10 @@
                         <li>
                             <div class="dw-user-box display-flex align-items-center" align="center">
                                 <div class="u-img">
-                                    <span *ngIf="userImg.length > 0">
+                                    <span *ngIf="(userImg.length > 0) && (userImg != undefined)">
                                         <img src="{{userImg[0].src}}" alt="user" class="m-0 responsive--icon profile-pic" />
                                     </span>
-                                    <span *ngIf="userImg.length === 0">
+                                    <span *ngIf="(userImg.length === 0) && (userImg != undefined)">
                                         <img src="assets/img/avatar.svg" alt="user" class="m-0 responsive--icon profile-pic" />
                                     </span>
                                 </div>
