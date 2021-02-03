@@ -141,7 +141,7 @@ export class StoreService extends Service{
       localStorage.removeItem('id');
       localStorage.removeItem('usuario');
       localStorage.removeItem('storeId');
-      this.router.navigate(['/home']);
+      this.router.navigate(['/login']);
     });
   }
 
