@@ -16,6 +16,7 @@ export class ProductsCardsComponent implements OnInit {
   @Output() selected = new EventEmitter<ProductsCardsOptions>();
   @Output() pagination = new EventEmitter<number>();
 
+  showShimmer = true;
 
   constructor(
 
@@ -37,4 +38,7 @@ export class ProductsCardsComponent implements OnInit {
 
   }
 
+  public toggleShimmer(show = true) {
+    this.showShimmer = show;
+  }
 }
