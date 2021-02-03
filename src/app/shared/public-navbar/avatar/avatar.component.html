@@ -3,10 +3,10 @@
 <!-- ============================================================== -->
 <li class="item navbar-collapse avat " *ngIf="userImg != undefined">
     <a class=" p-0 dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span *ngIf="userImg.length > 0">
-            <img src="userImg[0].src" alt="user" class="m-0 responsive--icon profile-pic" />
+        <span *ngIf="(userImg.length > 0) && (userImg != undefined)">
+            <img src="{{userImg[0].src}}" alt="user" class="m-0 responsive--icon profile-pic" />
         </span>
-        <span *ngIf="userImg.length === 0">
+        <span *ngIf="(userImg.length === 0) && (userImg != undefined)">
             <img src="assets/img/avatar.svg" alt="user" class="m-0 responsive--icon profile-pic" />
         </span>
         
@@ -16,19 +16,20 @@
             <li>
                 <div class="dw-user-box display-flex align-items-center" align="center">
                     <div class="u-img">
-                        <span *ngIf="userImg.length > 0">
-                            <img src="userImg[0].src" alt="user" class="m-0 responsive--icon profile-pic" />
+                        <span *ngIf="(userImg.length > 0) && (userImg != undefined)">
+                            <img src="{{userImg[0].src}}" alt="user" class="m-0 responsive--icon profile-pic" />
                         </span>
-                        <span *ngIf="userImg.length === 0">
+                        <span *ngIf="(userImg.length === 0) && (userImg != undefined)">
                             <img src="assets/img/avatar.svg" alt="user" class="m-0 responsive--icon profile-pic" />
                         </span>
                     </div>
                     <div class="u-text">
                         <h4 class="name-user OpenSans-700 text-left">
-                            Nombre Usuario
+                            {{userName}}
+
                         </h4>
                         <p class="text-muted">
-                            email Usuario
+                            {{userEmail}}
                         </p>
                     </div>
                 </div>

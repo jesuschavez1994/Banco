@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from '@services/store/store.service';
-import { UsuarioService } from '@services/usuario/usuario.service';
+import { HomeServiceService } from "../../../vistas-publicas/services/home-service.service";
 @Component({
   selector: 'app-avatar',
   templateUrl: './avatar.component.html',
@@ -8,8 +8,11 @@ import { UsuarioService } from '@services/usuario/usuario.service';
 })
 export class AvatarComponent implements OnInit {
   userId: number | string;
-          userImg: any;
-  constructor(private auth: StoreService, public userService: UsuarioService) {
+  userImg: any;
+  userName: string;
+  userEmail: string;
+
+  constructor(private auth: StoreService, public homeService: HomeServiceService) {
     this.imgUser();
   }
 
@@ -17,16 +20,19 @@ export class AvatarComponent implements OnInit {
 
   }
   imgUser(){
-    if (this.auth){
-      this.userId = localStorage.getItem('id');
-      this.userService.datosUserImages(this.userId).subscribe(
-        data => {
-          this.userImg = data;
+    if(this.auth){
+      this.userId= localStorage.getItem('id');
+      this.homeService.obtUserData(this.userId).subscribe(
+        data=>{
+
+           this.userImg=data.image;
+           this.userEmail= data.email;
+           this.userName= data.name;
           console.log(data);
         }
       );
     }
-  }
+  } 
   logout(){
     this.auth.logout();
    // window.location.reload();
