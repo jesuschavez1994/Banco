@@ -2,6 +2,7 @@ import { Component, OnInit, Output, ViewChild, ElementRef } from '@angular/core'
 import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import {HomeServiceService} from '../services/home-service.service';
+
 import { CategoriesHome } from "@interfaces/homeProduct.interface";
 import { NgxSpinnerService } from 'ngx-spinner';
 import {MatDialog, MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog';
