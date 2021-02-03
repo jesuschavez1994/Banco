@@ -137,9 +137,13 @@ export class StoreService extends Service{
     return this.execQuery(url).subscribe( data => {
       this.usuario = null;
       this.token = '';
+      console.log('TOKEN');
       localStorage.removeItem('token');
+      console.log('ID');
       localStorage.removeItem('id');
+      console.log('USUARIO');
       localStorage.removeItem('usuario');
+      console.log('sotreID');
       localStorage.removeItem('storeId');
       this.router.navigate(['/login']);
     });

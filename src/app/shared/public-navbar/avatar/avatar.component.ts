@@ -29,6 +29,6 @@ export class AvatarComponent implements OnInit {
   }
   logout(){
     this.auth.logout();
-    window.location.reload();
+   // window.location.reload();
   }
 }

@@ -60,7 +60,7 @@ export class SidebarHomeComponent implements OnInit {
   }
   logout(){
     this.homeService.logout();
-    window.location.reload();
+    // window.location.reload();
   }
   
   openDialog(): void {
