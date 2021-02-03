@@ -207,7 +207,13 @@ ngOndestroy(){
          console.log('categorias para titulo',this.dataCategory);
          // brinda error tslint desconosco la razón, pero funciona
          // Fixed, idsProduct solo debe  aceptar numeros para que la alerta no surja
-         this.titleSubcat = this.dataCategory[this.idsProduct[0]-1].subcategories[this.idsProduct[1]-1].name;
+         if(this.idsProduct[1] != undefined){
+           this.titleSubcat = this.dataCategory[this.idsProduct[0]-1].subcategories[this.idsProduct[1]-1].name;
+
+         }else{
+          this.titleSubcat = this.dataCategory[this.idsProduct[0]-1].name;
+
+         }
          this.spinner.hide();
          },
          error=>{
@@ -300,26 +306,49 @@ ngOndestroy(){
       if(pathBx!=undefined){
         console.log(pathBx);
         this.spinner.show();
-        this.getCategorys.getListPWPath('categories/'+this.idsProduct[0]+'/subcategories/'+this.idsProduct[1]+'/products?page='+pathBx).subscribe(
-          req =>{
-            console.log('quest pag ok',req);
-            this.listaProductos=req;
-          
-            //this.handlerPagination(par,  this.listaProductos.current_page, this.listaProductos.last_page );
-            //llevar scroll a top
-            window.scroll(0,0);
-            this.spinner.hide();
-          },err =>{
-            this.openDialog('Ha ocurrido un error en la carga de los productos');
-            console.log(err);
-          },()=>{
-            console.log('finaliza peticion');
-            window.scroll(0,0);
-            this.spinner.hide();
-          } ).add(
-            console.log('peticion add')
-          )
-      }
+        if(this.idsProduct[1]!= undefined){
+
+          this.getCategorys.getListPWPath('categories/'+this.idsProduct[0]+'/subcategories/'+this.idsProduct[1]+'/products?page='+pathBx).subscribe(
+            req =>{
+              console.log('quest pag ok',req);
+              this.listaProductos=req;
+            
+              //this.handlerPagination(par,  this.listaProductos.current_page, this.listaProductos.last_page );
+              //llevar scroll a top
+              window.scroll(0,0);
+              this.spinner.hide();
+            },err =>{
+              this.openDialog('Ha ocurrido un error en la carga de los productos');
+              console.log(err);
+            },()=>{
+              console.log('finaliza peticion');
+              window.scroll(0,0);
+              this.spinner.hide();
+            } ).add(
+              console.log('peticion add')
+            )
+        }else{
+          this.getCategorys.getListPWPath('categories/'+this.idsProduct[0]+'/products?page='+pathBx).subscribe(
+            req =>{
+              console.log('quest pag ok',req);
+              this.listaProductos=req;
+            
+              //this.handlerPagination(par,  this.listaProductos.current_page, this.listaProductos.last_page );
+              //llevar scroll a top
+              window.scroll(0,0);
+              this.spinner.hide();
+            },err =>{
+              this.openDialog('Ha ocurrido un error en la carga de los productos');
+              console.log(err);
+            },()=>{
+              console.log('finaliza peticion');
+              window.scroll(0,0);
+              this.spinner.hide();
+            } ).add(
+              console.log('peticion add')
+            )
+        }
+        }
   } 
   openDialog(mensaje:string): void {
     const dialogRef = this.modal.open(ModalErrComponent, {

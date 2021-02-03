@@ -19,6 +19,7 @@ import { PaymentProcessService } from '@services/payment-process/payment-process
 import { DropdownOption } from '@interfaces/components-options/dropdown.options.interface';
 import { DropdownIconComponent } from '../../shared/dropdown-icon/dropdown-icon.component';
 import { ToastComponent } from '../../modals/toast/toast.component';
+import {HomeServiceService} from '../services/home-service.service';
 
 @Component({
   selector: 'app-business-detail',
@@ -37,6 +38,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   // Components Inputs
   breadcrumb: BreadcrumbOptions[];
   imgsBanners: BannerOptions;
+
+// Navbar
+  userLog: boolean = false;
 
   // sidebar-list
   expandSidebar = true;
@@ -92,6 +96,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   // dataToast: any = '';
 
   constructor(
+    /** */
+    private homeService: HomeServiceService,
+    /** */
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
@@ -105,9 +112,10 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-
-
+    this.userLog = this.homeService.islog();
   }
+/********************************************************************************* */
+/********************************************************************************* */
 
   ngAfterViewInit(): void {
 

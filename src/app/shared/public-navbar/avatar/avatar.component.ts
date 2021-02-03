@@ -8,7 +8,8 @@ import { UsuarioService } from "@services/usuario/usuario.service";
 })
 export class AvatarComponent implements OnInit {
   userId: number | string;
-          userImg: any;
+  userImg: any;
+  loaded: boolean = false;
   constructor(private auth: StoreService, public userService: UsuarioService) { 
     this.imgUser();
   }
@@ -21,6 +22,7 @@ export class AvatarComponent implements OnInit {
       this.userId= localStorage.getItem('id');
       this.userService.datosUserImages(this.userId).subscribe(
         data=>{
+          this.loaded= true;
            this.userImg=data;
           console.log(data);
         }

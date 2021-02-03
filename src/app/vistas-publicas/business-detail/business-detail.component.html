@@ -1,6 +1,4 @@
-<app-navbarstore [menuOptions]="menuOptions" [fixed]="false">
-</app-navbarstore>
-
+<app-public-navbar [userLog]="userLog"></app-public-navbar>
 <main class="page">
 
     <ng-container *ngIf="anchorsMenu && profile && categories">
@@ -17,8 +15,8 @@
 
             <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
 
-            <!--  <app-banner [imgs]="imgsBanners"></app-banner> -->
-            <app-slider></app-slider>
+            <app-banner [imgs]="imgsBanners"></app-banner>
+
 
         </section>
 
