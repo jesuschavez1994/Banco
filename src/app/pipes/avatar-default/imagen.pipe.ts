@@ -1,7 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { URL_SERVICIOS } from '../../config/config';
-import { UsuarioService } from '../../services/usuario/usuario.service';
 
 const URL = URL_SERVICIOS;
 
@@ -10,13 +9,13 @@ const URL = URL_SERVICIOS;
 })
 export class ImagenPipe implements PipeTransform {
 
-  constructor(public usuarioService: UsuarioService){}
 
-  transform(img: string): string {
+  transform(img: any): string {
 
+    let imgDefault;
 
-    if (!img){
-       return '../../assets/img/avatar.svg';
+    if (!img) {
+       return imgDefault = 'assets/img/avatar.svg';
     }
 
     if (img.indexOf('https') >= 0){

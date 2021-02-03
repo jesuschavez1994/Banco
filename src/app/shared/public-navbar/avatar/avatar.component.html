@@ -3,13 +3,26 @@
 <!-- ============================================================== -->
 <li class="item navbar-collapse avat " *ngIf="userImg != undefined">
     <a class=" p-0 dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img src="{{userImg[0].src | avatarDefault}}" alt="user" class="m-0 responsive--icon profile-pic" />
+        <span *ngIf="userImg.length > 0">
+            <img src="userImg[0].src" alt="user" class="m-0 responsive--icon profile-pic" />
+        </span>
+        <span *ngIf="userImg.length === 0">
+            <img src="assets/img/avatar.svg" alt="user" class="m-0 responsive--icon profile-pic" />
+        </span>
+        
     </a>
     <div class="dropdown-menu dropdown-menu-right mt-2 animated flipInY">
         <ul class="dropdown-user">
             <li>
                 <div class="dw-user-box display-flex align-items-center" align="center">
-                    <div class="u-img"><img src="{{userImg[0].src | avatarDefault}}" alt="user"></div>
+                    <div class="u-img">
+                        <span *ngIf="userImg.length > 0">
+                            <img src="userImg[0].src" alt="user" class="m-0 responsive--icon profile-pic" />
+                        </span>
+                        <span *ngIf="userImg.length === 0">
+                            <img src="assets/img/avatar.svg" alt="user" class="m-0 responsive--icon profile-pic" />
+                        </span>
+                    </div>
                     <div class="u-text">
                         <h4 class="name-user OpenSans-700 text-left">
                             Nombre Usuario

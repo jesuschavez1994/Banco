@@ -57,7 +57,10 @@ export class LoginComponent implements OnInit {
           }
 
           if (resp.user.role === 'admin'){this.router.navigate(['admin']); }
-          if (resp.user.role === 'user'){ this.guardarStorage(resp.remember_token, resp.user.id); }
+          if (resp.user.role === 'user'){ 
+            this.guardarStorage(resp.remember_token, resp.user.id);
+            this.router.navigate(['home']);
+           }
         });
 
   }
