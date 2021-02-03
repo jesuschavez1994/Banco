@@ -53,9 +53,13 @@
           <p>región</p>
 
           <select formControlName="region">
+
             <option value="-1">seleccione región</option>
-            <option value="hola">hola</option>
-            <option value="adios">adios</option>
+
+            <ng-container *ngFor="let region of regions">
+              <option [value]="region.id">region.label</option>
+            </ng-container>
+
           </select>
 
           <!-- Errors -->

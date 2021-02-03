@@ -21,15 +21,15 @@ export class BannerComponent implements OnInit, OnChanges {
       this.currentImg = this.imgs.m;
     }
 
-    console.log('ngOnInit - imgs');
-    console.log(this.imgs);
+    // console.log('ngOnInit - imgs');
+    // console.log(this.imgs);
 
   }
 
   ngOnChanges() {
-    console.log('Changes ngOnInit - imgs');
-    console.log(this.imgs);
-    console.log(this.currentImg);
+    // console.log('Changes ngOnInit - imgs');
+    // console.log(this.imgs);
+    // console.log(this.currentImg);
 
     this.loadCurrentImg();
 

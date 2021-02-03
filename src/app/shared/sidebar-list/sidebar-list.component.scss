@@ -151,11 +151,9 @@
           border-radius: 0px;
         }
 
-        // [type="radio"]:checked ~ label{
-        //   color: $color__text-orange;
-        //   font-style: italic;
-        //   font-weight: bold;
-        // }
+        [type="radio"]{
+          display: none;
+        }
 
         [type="radio"]+label:before, [type="radio"]+label:after {
           width: 12px;

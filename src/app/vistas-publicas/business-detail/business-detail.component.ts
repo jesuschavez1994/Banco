@@ -108,7 +108,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     private dropdownIconComp: DropdownIconComponent
 
   ){
-    this.loadDataByParams();
+    // this.loadDataByParams();
   }
 
   ngOnInit() {
@@ -118,53 +118,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 /********************************************************************************* */
 
   ngAfterViewInit(): void {
-
-    // setTimeout(() => {
-
-    //   this.imgsBanners = {
-    //     m: 'hola',
-    //     s: 'hola 2'
-    //   };
-
-    //   console.log('setTimeout - ngAfterViewInit');
-
-    // }, 10000);
-
-    // this.productService.getFavoriteProducts(1).subscribe(
-    //   resp => {
-    //     console.log('getFavoriteProducts');
-    //     console.log(resp);
-    //   },
-    //   error => {
-    //     console.log('error');
-    //     console.log(error);
-    //   }
-    // );
-
-    // this.productService.addProductToFavorite(1, 134).subscribe(
-    //   resp => {
-    //     console.log('addProductToFavorite');
-    //     console.log(resp);
-    //   },
-    //   error => {
-    //     console.log('error');
-    //     console.log(error);
-    //   }
-    // );
-
-    // this.productService.removeProductFromFavorite(1, 134).subscribe(
-    //   resp => {
-    //     console.log('removeProductFromFavorite');
-    //     console.log(resp);
-    //   },
-    //   error => {
-    //     console.log('error');
-    //     console.log(error);
-    //   }
-    // );
-
-
-
+    this.loadDataByParams();
   }
 
   public loadDataByParams(){
@@ -282,6 +236,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             isFavorite: product.isFavorite ? product.isFavorite : false,
           };
 
+          this.scrollToElement(document.querySelector('#profile-name'));
+
         }, error => {
 
           console.log('Error loading products', error);
@@ -368,8 +324,14 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         filter = queryParamsAllowed;
 
-        // console.log('queryParamsAllowed: ', queryParamsAllowed);
+        console.log('queryParamsAllowed: ', queryParamsAllowed);
       }
+
+      if (this.productCards) {
+        this.productCards.toggleShimmer();
+      }
+
+
 
       this.productService.getProductsByStore(idStore, page, filter).subscribe(
         resp => {
@@ -421,6 +383,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
             console.log('products loaded: ', this.productCards.products);
 
+            this.productCards.toggleShimmer(false);
+
           } else{
             this.toastRef.open(
               'Tienda sin productos disponibles',
@@ -429,7 +393,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             );
           }
 
-
         },
         error => {
           this.toastRef.open(
@@ -437,6 +400,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             { color: '#ffffff', background: '#900909c2'}
 
           );
+          console.log('error al cargar productos');
+          console.log(error);
         }
       );
 
@@ -719,5 +684,15 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     };
   }
 
+  public scrollToElement(element) {
+
+    element.scrollIntoView(
+      {
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest'
+      }
+    );
+  }
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanLoad } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanLoad, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { StoreService } from '../store/store.service';
 
@@ -10,11 +10,14 @@ import { StoreService } from '../store/store.service';
 })
 export class LoginGuardGuard implements CanActivate, CanLoad {
 
-  constructor(private storeService: StoreService) {
+  constructor(
+    private storeService: StoreService,
+    private router: Router
+  ) {
     this.storeService.cargarStorage();
   }
 
-  canActivate() {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
     this.storeService.cargarStorage();
 
@@ -23,6 +26,13 @@ export class LoginGuardGuard implements CanActivate, CanLoad {
       return true;
     }else{
       console.log('Bloqueado por el  Guard');
+
+      this.router.navigate(['/login'], {
+        queryParams: {
+          return: state.url
+        }
+      });
+
       return false;
     }
 

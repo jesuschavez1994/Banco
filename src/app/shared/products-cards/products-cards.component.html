@@ -1,5 +1,5 @@
 
-<ng-container *ngIf="(products | excludeMacthes: 0 : 'stock') && products.length > 0; else shimmer">
+<ng-container *ngIf="((products | excludeMacthes: 0 : 'stock') && products.length > 0) || !showShimmer; else shimmer">
 
   <div class="products-container">
 
@@ -14,12 +14,6 @@
             [alt]="product.name"
             onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
           >
-
-
-          <!-- <img
-            [src]="product.images[0]"
-            [alt]="product.name"
-          > -->
 
           <i class="fa-heart"
             [ngClass]="{'fas': product.isFavorite,'far': !product.isFavorite}">
