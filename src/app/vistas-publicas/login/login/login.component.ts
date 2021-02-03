@@ -44,22 +44,32 @@ export class LoginComponent implements OnInit {
         );
 
         this.usuarioServices.login(usuario, this.forma.value.recuerdame).subscribe( (resp: any) => {
+
           console.log(this.forma.value.recuerdame);
           console.log('FFFF', resp);
+          
           this.guardarStorage(resp.remember_token, resp.user.id);
+          
           console.log(resp);
+          
           if (resp.user.role === 'store'){
+
             this.userStoreService.getStoreAccountEdit(resp.user.id).subscribe( (StoreResponse: any) => {
+
               console.log('StoreResponse', StoreResponse);
               this.guardarStorageStore(StoreResponse['0'].social.store_id);
               this.router.navigate(['account/form-account']);
+           
             });
           }
 
           if (resp.user.role === 'admin'){this.router.navigate(['admin']); }
+          
           if (resp.user.role === 'user'){ 
+
             this.guardarStorage(resp.remember_token, resp.user.id);
-            this.router.navigate(['home']);
+            console.log('redireccion User');
+            this.router.navigate(['/home']);
            }
         });
 
