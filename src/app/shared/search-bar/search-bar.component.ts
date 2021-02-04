@@ -41,7 +41,11 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
 
   public textTosearch() {
     const searchInput = this.searchInput.nativeElement;
-    const selectFilter = this.selectFilter.nativeElement;
+    /***** */
+    if(this.showFilter){
+      const selectFilter = this.selectFilter.nativeElement;
+    }
+    /******/
     let timeoutSearchInput;
 
     searchInput.onkeyup = () => {
@@ -52,9 +56,16 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
 
           this.search.emit({
             value: searchInput.value,
+          //  filter: selectFilter.value
+          });
+    /***** */
+        if(this.showFilter){
+          this.search.emit({
+            value: searchInput.value,
             filter: selectFilter.value
           });
-
+        }
+    /******/
         }, this.debounce
 
       );
@@ -64,13 +75,17 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     searchInput.onkeypress = () => {
       clearTimeout(timeoutSearchInput);
     };
-
-    selectFilter.onchange = () => {
-      this.search.emit({
-        value: searchInput.value,
-        filter: selectFilter.value
-      });
-    };
+      /***** */
+      if(this.showFilter){
+        selectFilter.onchange = () => {
+          this.search.emit({
+            value: searchInput.value,
+            filter: selectFilter.value
+          });
+        };
+      }
+  /******/
+   
 
   }
 
