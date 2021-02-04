@@ -15,6 +15,10 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   @Input() isExpanded = false;
   @Input() buttonSidebarList = false;
   @Input() debounce = 3000;
+  /*********/
+  // POR DEFECTO MUESTRA EL FILTRO
+  @Input() showFilter: boolean = true;
+  /*********/
   @Output() sidebarExpand = new EventEmitter<boolean>();
   @Output() search = new EventEmitter<string | any>();
 
