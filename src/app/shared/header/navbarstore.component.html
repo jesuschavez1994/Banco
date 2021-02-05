@@ -44,7 +44,7 @@
       <!-- Profile -->
       <!-- ============================================================== -->
       <ul
-        class="navbar-nav my-lg-0 width-20 display-flex justify-content-center align-items-center width-25"
+        class="navbar-nav .navbar-nav.customCH my-lg-0 display-flex justify-content-center align-items-center width-25"
       >
 
         <ng-container *ngIf="datosUsuario.length > 0">
@@ -52,7 +52,7 @@
           <app-dropdown-icon
             (extraButton)="deleteProductFromCart($event)"
             [classIcon]="classIcon"
-            [menuOptions]="menuOptions"
+            [menuOptions]="menuOptionsShopping"
           >
           </app-dropdown-icon>
 

@@ -31,7 +31,7 @@ export class NavbarstoreComponent implements OnInit {
       color: '#f32323'
     }
   };
-  @Input() menuOptions: DropdownOption[] = [];
+  @Input() menuOptionsShopping: DropdownOption[] = [];
 
   // Button DropDown - favorite
   classIconFavorite: ClassIcon = {
@@ -126,7 +126,7 @@ export class NavbarstoreComponent implements OnInit {
 
       resp => {
 
-        this.menuOptions = [];
+        this.menuOptionsShopping = [];
 
         if (resp.data) {
 
@@ -143,7 +143,7 @@ export class NavbarstoreComponent implements OnInit {
                 data: product
               };
 
-              this.menuOptions.push(option);
+              this.menuOptionsShopping.push(option);
             });
 
           }
@@ -172,7 +172,7 @@ export class NavbarstoreComponent implements OnInit {
     this.paymentProcessService.getProductsFromCart().subscribe(
       resp => {
         const products = resp.data;
-        this.menuOptions = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
+        this.menuOptionsShopping = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
 
       }
     );

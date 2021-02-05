@@ -13,10 +13,12 @@ export class ProductsCardsComponent implements OnInit {
   @Input() itemsPerPage = 16;
   @Input() totalItems: number;
   @Input() products: ProductsCardsOptions[] = [];
+  @Input() showShimmer = true;
+
   @Output() selected = new EventEmitter<ProductsCardsOptions>();
   @Output() pagination = new EventEmitter<number>();
 
-  showShimmer = true;
+
 
   constructor(
 
