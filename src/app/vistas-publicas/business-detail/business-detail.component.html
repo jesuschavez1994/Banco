@@ -1,4 +1,8 @@
-<app-public-navbar [userLog]="userLog"></app-public-navbar>
+<app-navbarstore
+[fixed]="false"
+[menuOptionsShopping]="menuOptionsShopping"
+></app-navbarstore>
+
 <main class="page">
 
     <ng-container *ngIf="anchorsMenu && profile && categories">
@@ -24,7 +28,9 @@
 
             <section class="products-infomation">
 
-                <h1 class="profile-name">{{StoreName}}</h1>
+                <h1 class="profile-name" id="profile-name">
+                  {{StoreName}}
+                </h1>
 
                 <app-product-detail #productDetail (clickButtonCart)="addProductToCart($event)">
                 </app-product-detail>
@@ -32,7 +38,13 @@
                 <app-search-bar [preloadedValue]="preloadedValueSearch" [debounce]="1000" [isExpanded]="expandSidebar" [buttonSidebarList]="true" (sidebarExpand)="toogleSidebar($event)" (search)="search($event)" [filterOptions]="filterOptions">
                 </app-search-bar>
 
-                <app-products-cards #productCards (selected)="goTodetailProduct($event)" (pagination)="paginationProducts($event)" [totalItems]="totalProducts" [itemsPerPage]="itemsPerPage">
+                <app-products-cards
+                  #productCards
+                  (selected)="goTodetailProduct($event)"
+                  (pagination)="paginationProducts($event)"
+                  [totalItems]="totalProducts"
+                  [itemsPerPage]="itemsPerPage"
+                  [showShimmer]="showShimmerProductsCards">
                 </app-products-cards>
 
             </section>

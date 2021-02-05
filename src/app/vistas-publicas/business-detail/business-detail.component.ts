@@ -82,12 +82,13 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   showProducts = false;
   totalProducts: number;
   itemsPerPage = 16;
+  showShimmerProductsCards =  true;
 
   // SearchBar:
   preloadedValueSearch = '';
 
   // navbar
-  menuOptions: DropdownOption[] = [];
+  menuOptionsShopping: DropdownOption[] = [];
 
   // Variables
   StoreName = '';
@@ -327,11 +328,12 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         console.log('queryParamsAllowed: ', queryParamsAllowed);
       }
 
-      if (this.productCards) {
+
+      // this.showShimmerProductsCards = true;
+
+      if(this.productCards) {
         this.productCards.toggleShimmer();
       }
-
-
 
       this.productService.getProductsByStore(idStore, page, filter).subscribe(
         resp => {
@@ -383,7 +385,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
             console.log('products loaded: ', this.productCards.products);
 
+            // this.showShimmerProductsCards = false;
             this.productCards.toggleShimmer(false);
+            console.log('removing shimmer');
 
           } else{
             this.toastRef.open(
@@ -423,7 +427,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
           const products = resp.data;
 
-          this.menuOptions = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
+          this.menuOptionsShopping = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
 
           this.toastRef.open(
             'Producto agregado al carrito'
