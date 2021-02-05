@@ -15,11 +15,16 @@
 
     <div class="column">
 
-        <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+        <section class="introduction-page">
 
-        <app-banner-edit    [imgs]="BannerVerifiqued" 
-                            *ngIf="VerifiquedSuccesfull"
-                            [Onerror]="Onerror"></app-banner-edit>
+            <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+
+            <app-banner-edit    [imgs]="BannerVerifiqued" 
+                                *ngIf="VerifiquedSuccesfull"
+                                [Onerror]="Onerror">
+            </app-banner-edit>
+
+        </section>   
 
         <!-- <app-banner [imgs]="imgsBanners"></app-banner> -->
 
