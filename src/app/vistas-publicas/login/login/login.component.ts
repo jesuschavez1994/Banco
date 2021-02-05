@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UserStoreService } from '@services/user-store/user-store.service';
-
+import {HomeServiceService} from '../../services/home-service.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,8 +18,10 @@ export class LoginComponent implements OnInit {
   email: string;
   token: string;
   urlReturn = '';
-
+  userLog: boolean;
+  storeLog: boolean | string;
   constructor(
+    private homeService: HomeServiceService,
     public usuarioServices: UsuarioService,
     public router: Router,
     public userStoreService: UserStoreService,
@@ -37,6 +39,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams
       .subscribe(params => this.urlReturn = params.return || '/home');
+      this.userLog = this.homeService.islog();
+     this.storeLog= this.homeService.storeActive();
   }
 
   loginRegister(){

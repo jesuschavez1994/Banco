@@ -1,4 +1,5 @@
-
+<app-public-navbar [userLog]="userLog" [storeAct]="storeLog">
+</app-public-navbar>
 <ng-container>
     <section class="main">
         <div class="content-img">
@@ -8,7 +9,7 @@
                 <div class="col-md-12">
                     <img class="logo" src="assets/img/Navbar/Logo Founduss.svg">
                 </div>
-                
+
                 <div class="col-md-6">
                     <div *ngFor="let item of information" class="information">
 
@@ -30,7 +31,7 @@
                                 {{item.texto2.item1}}
                             </p>
                         </div>
-                        
+
                         <div class="itemVerificado">
                             <img src="assets/img/IconosHome/comprobar.svg">
                             <p class="items">
