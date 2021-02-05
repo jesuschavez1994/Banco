@@ -39,7 +39,7 @@ export class PlanCardComponent implements OnInit {
     this.productBankPrice = this.planInfo.productBank[this.planInfo.id].price;
   }
 
-  // Events that happens in the component -----------------
+  // Events that happen in the component -----------------
   showMore(): void {
     this.productBank = true;
     this.moreInfo = !this.moreInfo;
@@ -54,22 +54,20 @@ export class PlanCardComponent implements OnInit {
       it means that the checkbox was checked. Since it'll be unchecked, the price is the basic price.
       If no checkbox is selected, the price to show, and the total price is the same as the basic price.
     */
+    this.productBankPrice = productBankPrice;
     if (this.selectedCheckbox === checkboxIndex) {
       // In case the user checks the same checkbox again, we update the value accordingly.
       if (this.totalPrice === this.planInfo.basicPrice) {
         this.productBank = true;
         this.totalPrice = this.planInfo.basicPrice + productBankPrice;
-        this.productBankPrice = productBankPrice;
       } else {
         this.productBank = false;
         this.totalPrice = this.productBankPrice = this.planInfo.basicPrice;
-        this.productBankPrice = productBankPrice;
       }
     } else {
       this.productBank = true;
       this.selectedCheckbox = checkboxIndex;
       this.totalPrice = this.planInfo.basicPrice + productBankPrice;
-      this.productBankPrice = productBankPrice;
     }
   }
 
@@ -89,13 +87,6 @@ export class PlanCardComponent implements OnInit {
       this.localStorage.getItem('selectedPlanPrice') !==
         this.planDetails.price.toString()
     ) {
-      // We set the new values.
-      this.localStorage.setItem('selectedPlanName', this.planDetails.plan_name);
-      this.localStorage.setItem(
-        'selectedPlanPrice',
-        this.planDetails.price.toString()
-      );
-
       // We start the progress spinner, and the API call.
       this.waitingResponse = true;
       this.subscriptionDataService
