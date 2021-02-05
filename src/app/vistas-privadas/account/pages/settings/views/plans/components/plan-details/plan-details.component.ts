@@ -42,7 +42,7 @@ export class PlanDetailsComponent implements OnInit {
     );
   }
 
-  // Events that happens in the component -----------------
+  // Events that happen in the component -----------------
 
   // API calls handler methods-------------------------------
   createPayment(): void {
