@@ -75,7 +75,12 @@ html {
   min-width: fit-content !important;
 }
 
-.navbar-nav.customCH{
+.navbar-nav--searchbar{
+  width: 68.5%;
+  padding-right: 15px;
+}
+
+.navbar-nav--customs{
     width: fit-content !important;
 }
 

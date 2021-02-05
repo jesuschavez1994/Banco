@@ -8,15 +8,17 @@
         </div>
 
     </ng-container>
+
     <!-- NG CLASS PARA OCUPAR TODO ESPACIO DISPONIBLE -->
     <div class="searcher" [ngClass]="{'w-100':showFilter != true}">
         <i><img src="assets/img/icons/loupe.svg"></i>
         <input [value]="preloadedValue" #searchInput type="search" placeholder="Busca un producto en esta tienda">
     </div>
+
     <!-- NG IF PARA OCULTAR O MOSTRAR EL FILTRO POR DEFECTO MOSTRADO -->
     <div *ngIf="showFilter" class="filter">
 
-        <select #selectFilter>
+      <select #selectFilter>
 
       <ng-container *ngFor="let option of filterOptions">
         <option [value]="option.value">{{option.label}}</option>

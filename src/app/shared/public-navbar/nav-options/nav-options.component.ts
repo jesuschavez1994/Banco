@@ -35,6 +35,12 @@ export class NavOptionsComponent implements OnInit {
   @Input() menuOptions: DropdownOption[] = [];
   @Input() menuOptionsFavorite: DropdownOption[] = [];
   ngOnInit(): void {
+    this.menuOptionsFavorite.push(
+      {
+        title: 'name 1',
+        typeEvent: 'none',
+      }
+    );
   }
   openDialog(): void {
     const dialogRef = this.modal.open(ModalRegisterComponent,{width: 'auto',height: 'auto', panelClass: 'custom-modalbox'} );
