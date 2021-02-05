@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Order } from '@interfaces/components-options/order.options.interface';
 
 @Component({
@@ -6,19 +6,29 @@ import { Order } from '@interfaces/components-options/order.options.interface';
   templateUrl: './order-editor.component.html',
   styleUrls: ['./order-editor.component.scss']
 })
-export class OrderEditorComponent implements OnInit {
+export class OrderEditorComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('termsAndConditionsInput') termsAndConditionsInput: ElementRef;
 
   @Input() orders: Order[] = [];
   @Input() defaulTaxPercent = 19;
   @Output() purchaseAction = new EventEmitter();
+
   hasDelivery = false;
   orderSelected: Order[] = [];
+
+  termsAndConditions = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  ngAfterViewInit(): void {
+
+    this.termsAndConditions = this.termsAndConditionsInput.nativeElement.checked;
+
+  }
 
   public currentValue($event, order: Order) {
     order.quantity = $event;
@@ -171,6 +181,18 @@ export class OrderEditorComponent implements OnInit {
   public cancelOrder() {
     console.log('cancelOrder');
     this.purchaseAction.emit(this.orders);
+  }
+
+  public isCheckedTermsAndConditions() {
+
+    if (this.termsAndConditionsInput) {
+      const CheckedTermsConditionsInput = this.termsAndConditionsInput.nativeElement.checked;
+      this.termsAndConditions = CheckedTermsConditionsInput;
+      return CheckedTermsConditionsInput;
+    }
+
+    return this.termsAndConditions;
+
   }
 
 }

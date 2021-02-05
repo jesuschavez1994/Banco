@@ -7,7 +7,6 @@ import { Usuario } from '@models/usuario.model';
 
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.reducer';
 import { ActivarLoadingAction, DesactivarLoadingAction } from '../../shared/ui.accions';
 
 @Component({
@@ -27,7 +26,6 @@ export class FormDataUsuarioComponent implements OnInit, OnDestroy {
  constructor(
    public usuarioServices: UsuarioService,
    public router: Router,
-   public store: Store<AppState>
  )
   {
 
@@ -50,10 +48,6 @@ export class FormDataUsuarioComponent implements OnInit, OnDestroy {
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnInit() {
-    this.store.select('ui').subscribe( ui => {
-     this.cargando =  ui.isLoading;
-    });
-
   }
 
   ngOnDestroy(){
@@ -92,8 +86,6 @@ export class FormDataUsuarioComponent implements OnInit, OnDestroy {
 
   registrarUsuario(){
 
-    this.store.dispatch( new ActivarLoadingAction() );
-
     console.log(this.forma.value);
     console.log(this.forma);
 
@@ -107,7 +99,6 @@ export class FormDataUsuarioComponent implements OnInit, OnDestroy {
     this.usuarioServices.crearUsuario(usuario).subscribe( res => {
       console.log('usuario', res);
       this.router.navigate(['/login-usuario']);
-      this.store.dispatch( new DesactivarLoadingAction() );
     });
   }
 

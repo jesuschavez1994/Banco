@@ -3,7 +3,6 @@
   <div class="img-option">
 
     <ng-container *ngFor="let img of imgs">
-
       <div class="option" (click)="selectImg(img)">
 
         <img
@@ -12,7 +11,6 @@
         >
 
       </div>
-
     </ng-container>
 
   </div>
@@ -20,23 +18,32 @@
   <div class="img-selected">
 
     <div class="image" #image>
+
       <a [href]="currentImg" target="_blank">
         <img
           [src]="currentImg"
-          alt=""
           onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
         >
 
       </a>
+
+      <!-- <a target="_blank">
+        <img>
+      </a> -->
+
+      <div class="zoom" #zoom>
+        <img
+          class="zoom-image" #zoomImage src="" alt=""
+          onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
+        >
+
+      </div>
+
     </div>
 
-    <div class="zoom" #zoom>
-      <img
-        class="zoom-image" #zoomImage src="" alt=""
-        onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
-      >
 
-    </div>
+
+
 
   </div>
 

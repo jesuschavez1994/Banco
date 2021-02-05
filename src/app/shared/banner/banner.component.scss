@@ -9,6 +9,8 @@
 
   img{
     height: 100%;
+    width: 100%;
+    object-position: left;
   }
 
   &.banner--small{
@@ -18,10 +20,27 @@
 
 }
 
-@media screen and (max-width: 480px){
+@media screen and (max-width: 480px) {
 
   .banner{
     min-height: 255px !important;
+  }
+
+}
+
+
+@media screen and (max-width: 768px) {
+
+  .banner{
+    min-height: 200px;
+    height:  44.8vw;
+    min-width: 99vw;
+    position: relative;
+    right: 27px;
+
+    // img {
+    //   object-position: left;
+    // }
   }
 
 }

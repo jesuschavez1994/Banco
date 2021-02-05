@@ -17,6 +17,8 @@
   .content{
     width: 56%;
 
+    display: grid; //
+
     .name{
       font-size: 19px;
       font-weight: 500;
@@ -25,8 +27,6 @@
     }
 
     .description{
-      // min-height: 260px;
-      // height: 40vh;
       color: $color__text-gray--dark;
       font-size: 14px;
       line-height: 18px;
@@ -59,6 +59,10 @@
         padding: 6px 40px;
         transition: all .3s;
 
+        &.disabled{
+          opacity: 0.5;
+          pointer-events: none;
+        }
 
         &:hover{
           background: $color__background-gray--dark;

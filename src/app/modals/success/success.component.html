@@ -22,12 +22,85 @@
 </div> -->
 
 <h2 mat-dialog-title>{{data.title}}</h2>
-<ng-container *ngIf="data.message">
-  <mat-dialog-content>{{data.message}}</mat-dialog-content>
+
+<ng-container *ngIf="data.message as message">
+
+  <mat-dialog-content class="mat-typography">
+
+    <ng-container *ngIf="data.subTitle as subTitle">
+      <h3>{{subTitle}}</h3>
+    </ng-container>
+
+    <p>{{message}}</p>
+
+  </mat-dialog-content>
+
 </ng-container>
 
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>Ok</button>
-  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-  <!-- <button mat-button [mat-dialog-close]="true">Delete</button> -->
+<mat-dialog-actions align="end">
+
+  <ng-container *ngIf="data.button else buttonsArray">
+
+    <button
+      [disabled]="buttonDisabled"
+      (click)="onClose()"
+    >
+      {{data.button}}
+    </button>
+
+  </ng-container>
+
 </mat-dialog-actions>
+
+<ng-template #buttonsArray>
+
+  <ng-container *ngIf="data.buttons else buttonDefault">
+
+    <ng-container *ngFor="let button of data.buttons; let index = index">
+
+      <ng-container *ngIf="index + 1 !== data.buttons.length">
+
+        <button
+          [disabled]="buttonDisabled"
+          mat-button
+          (click)="onButton(button)"
+        >
+
+          {{button}}
+
+        </button>
+
+      </ng-container>
+
+      <ng-container *ngIf="index +1 === data.buttons.length">
+
+        <button
+          [disabled]="buttonDisabled"
+          mat-button
+          cdkFocusInitial
+          (click)="onButton(button, false)"
+        >
+
+          {{button}}
+
+        </button>
+
+      </ng-container>
+
+    </ng-container>
+
+  </ng-container>
+
+</ng-template>
+
+<ng-template #buttonDefault>
+
+  <button
+    [disabled]="buttonDisabled"
+    (click)="onClose()"
+  >
+    Ok
+  </button>
+
+</ng-template>
+

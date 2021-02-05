@@ -1,0 +1,155 @@
+figure {
+  margin: 0px;
+}
+
+img{
+  // width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+input[class="checkbox-default"]{
+  position: initial;
+  left: initial;
+  opacity: initial;
+}
+
+input[class="checkbox-default"]+label{
+  height: auto;
+  padding-left: 0px;
+  font-size: inherit;
+
+}
+
+input[class="checkbox-default"]+label:before{
+  display: none;
+}
+
+label{
+  margin-bottom: 0px;
+}
+
+button:focus {
+  outline: 0px dotted;
+  outline: 0px auto -webkit-focus-ring-color;
+}
+
+.button {
+  min-width: 110px;
+  width: fit-content;
+  background: $color__background-orange;
+  color: $color__text-white;
+  font-size: 13px;
+  padding: 2px 14px;
+  text-align: center;
+  text-transform: capitalize;
+  transition: .3s all;
+
+  &.button--full-width {
+    width: 100%;
+  }
+
+  &:hover {
+    background: $color__background-orange--hover;
+
+  }
+
+  &.gray{
+    background: $color__background-gray--medium-1;
+
+    &:hover {
+      background: $color__background-gray--hover;
+
+    }
+  }
+
+}
+
+.form {
+
+  p {
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-transform: lowercase;
+  }
+
+  p::first-letter {
+    text-transform: capitalize;
+  }
+
+  .capitalize {
+    text-transform: capitalize;
+  }
+
+  .uppercase {
+    text-transform: uppercase;
+  }
+
+  select,
+  input {
+    border: 1px solid $color__border-gray--medium;
+    border-radius: 5px;
+    font-size: 13px;
+    padding: 12px 9px;
+    text-transform: capitalize;
+
+  }
+
+  select,
+  input:not(.radio-default) {
+    width: 100%;
+  }
+
+  input[type="radio"]{
+    &.radio-default:not(:checked)+label {
+      padding-left: 0px !important;
+    }
+  }
+
+  .input-container {
+    margin-bottom: 15px;
+
+    .errors{
+      margin-top: 3px;
+
+      ul{
+        display: flex;
+
+        li {
+          color: $color__text-orange;
+          font-size: 12px;
+
+          &::after{
+            content: '/';
+            margin: 0px 3px;
+          }
+
+          &:last-child:after{
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  .button{
+    border-radius: 5px;
+    font-size: 13px;
+    padding: 12px 9px;
+    text-transform: uppercase;
+
+    &.disabled {
+      opacity: 0.7;
+    }
+  }
+}
+
+.button {
+  &.disabled {
+    opacity: 0.7;
+  }
+}
+
+.pointer-event--none{
+  pointer-events: none;
+}

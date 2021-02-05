@@ -14,8 +14,6 @@ import { UserStore } from '@models/models-@ngrx/userStore.models';
 import { ActivarLoadingAction } from '../../shared/ui.accions';
 import { DesactivarLoadingAction } from '../../shared/ui.accions';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.reducer';
-import { SetUserAction } from '../../Login/auth/auth.actions';
 import { Usuario } from 'src/app/models/usuario.model';
 import { Service } from '@services/service.service';
 import { StoreResponse } from '@interfaces/store.interface';
@@ -36,28 +34,12 @@ export class StoreService extends Service{
 
   constructor(
     protected http: HttpClient,
-    private store: Store<AppState>,
     private router: Router,
 
   ) {
     super(http);
     this.cargarStorage();
   }
-
-  // private postQuery<T>(query: string, data: any){
-  //   query = URL_SERVICIOS + query;
-  //   return this.http.post<T>( query, data );
-  // }
-
-  // private execQuery<T>( query: string ) {
-  //   query = URL_SERVICIOS + query;
-  //   return this.http.get<T>( query );
-  // }
-
-  // private DeleteQuery<T>( query: string ) {
-  //   query = URL_SERVICIOS + query;
-  //   return this.http.delete<T>( query );
-  // }
 
   cargarStorage() {
 
@@ -90,8 +72,6 @@ export class StoreService extends Service{
       // Redux//
       this.respServidor = userStore;
       const storeconnect = new UserStore(this.respServidor.user);
-      this.store.dispatch(new SetUserAction(storeconnect));
-      this.store.dispatch( new ActivarLoadingAction() );
       // End Redux//
 
       this.guardarStorage(this.respServidor.user.id, this.respServidor.remember_token, this.respServidor);
@@ -137,7 +117,6 @@ export class StoreService extends Service{
     this.postQuery(url, nameStore).subscribe( resp => {
       window.location.href = '#/account';
       // this.router.navigate(['/account']);
-      this.store.dispatch(new DesactivarLoadingAction() );
     }, err => {
       console.log(err);
       swal({
@@ -158,10 +137,15 @@ export class StoreService extends Service{
     return this.execQuery(url).subscribe( data => {
       this.usuario = null;
       this.token = '';
+      console.log('TOKEN');
       localStorage.removeItem('token');
+      console.log('ID');
       localStorage.removeItem('id');
+      console.log('USUARIO');
       localStorage.removeItem('usuario');
-      this.router.navigate(['/home']);
+      console.log('sotreID');
+      localStorage.removeItem('storeId');
+      this.router.navigate(['/login']);
     });
   }
 
@@ -185,6 +169,16 @@ export class StoreService extends Service{
     return this.postQuery(url, data);
   }
 
+  getSpecificProduct(userId: string, storeId: string, idProduct: string){
+    const url = `users/${userId}/stores/${storeId}/products/${idProduct}`;
+    return this.execQuery(url);
+  }
+
+  ProductGet(userId: string, storeId: string){
+    const url = `/api/users/${userId}/stores/${storeId}/products`;
+    return this.execQuery(url);
+  }
+
   geatAllProducts(userId: string, storeId: string, page?: number){
     const url = `users/${userId}/stores/${storeId}/products`  + '?page=' + page;
     return this.execQuery(url);
@@ -196,7 +190,7 @@ export class StoreService extends Service{
   }
 
   // -----
-  getStoreById(idStore: number): Observable<StoreResponse> {
+  getStoreById(idStore: any): Observable<StoreResponse> {
     return this.execQuery<StoreResponse>(`stores/${idStore}`);
 
   }

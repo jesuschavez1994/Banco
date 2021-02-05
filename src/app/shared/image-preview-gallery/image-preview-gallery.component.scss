@@ -6,7 +6,7 @@
   display: flex;
 
   .img-option{
-    width: min-content;
+	width: min-content;
 
     .option{
       min-width: 29px;
@@ -18,7 +18,11 @@
       overflow: hidden;
       transition: all .3s;
       display: flex;
-      align-items: center;
+	  align-items: center;
+
+	  div div img{
+		height: 100%;
+	  }
 
       img{
         height: 100%;
@@ -46,6 +50,11 @@
       height: 100%;
       object-fit: contain;
       object-position: top;
+    }
+
+    .image {
+      height: auto; //
+      position: relative;
     }
 
     .ngxImageZoomContainer[_ngcontent-cci-c236] {
@@ -87,6 +96,8 @@
 	transform: scale(0);
 	transform-origin: 50% 50%;
 	overflow: hidden;
+
+  z-index: 10;
 
 	&:before {
 		content: '';

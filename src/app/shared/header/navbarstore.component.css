@@ -71,6 +71,19 @@ html {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.navbar-nav .nav-item, .navbar-nav .nav-item .btn.button{
+  min-width: fit-content !important;
+}
+
+.navbar-nav--searchbar{
+  width: 68.5%;
+  padding-right: 15px;
+}
+
+.navbar-nav--customs{
+    width: fit-content !important;
+}
+
 .dark-logo {
 	width: 90%;
 }

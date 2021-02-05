@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit, OnChanges } from '@angular/core';
 import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
 
 @Component({
@@ -6,32 +6,56 @@ import { BannerOptions } from '@interfaces/components-options/banner.options.int
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.scss']
 })
-export class BannerComponent implements OnInit {
+// export class BannerComponent implements OnInit, OnChanges {
+export class BannerComponent implements OnInit, OnChanges {
 
   @Input() imgs: BannerOptions;
 
   currentImg: string;
+  widthWindow = 480;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.currentImg = this.imgs.m;
+    if (this.imgs) {
+      this.currentImg = this.imgs.m;
+    }
+
+    // console.log('ngOnInit - imgs');
+    // console.log(this.imgs);
+
+  }
+
+  ngOnChanges() {
+    // console.log('Changes ngOnInit - imgs');
+    // console.log(this.imgs);
+    // console.log(this.currentImg);
+
+    this.loadCurrentImg();
+
   }
 
   @HostListener('window:resize', ['$event'])
   public changeImg( $event: Event){
-    const widthWindow = window.innerWidth;
-    // console.log(widthWindow);
+    this.widthWindow = window.innerWidth;
 
-    if ( widthWindow > 480 ) {
-      this.currentImg = this.imgs.m;
+    this.loadCurrentImg();
 
-    }else if ( widthWindow <= 480 ) {
+  }
 
-      if (this.imgs.s >= ''){
-        this.currentImg = this.imgs.s;
+  public loadCurrentImg() {
+    if (this.imgs) {
+
+      if ( this.widthWindow > 480 ) {
+        this.currentImg = this.imgs.m;
+
+      }else if ( this.widthWindow <= 480 ) {
+
+        if (this.imgs.s !== ''){
+          this.currentImg = this.imgs.s;
+        }
+
       }
-
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MyValidators } from '../../utils/validators';
 
@@ -10,13 +10,16 @@ import { MyValidators } from '../../utils/validators';
 export class OrderPaymentFormsComponent implements OnInit {
 
   step = 1;
-  regiones = ['hola'];
+  isAllowedSecondStep = false;
+  regions = [
+    {id: 1, label: 'hola'}
+  ];
 
   form = new FormGroup({
-    region: new FormControl('', [Validators.required, MyValidators.existInArray(this.regiones)]),
-    comuna: new FormControl('', [Validators.required, MyValidators.existInArray(this.regiones)]),
+    region: new FormControl('', [Validators.required, MyValidators.existInArray(this.regions.map( r => r.id ) )]),
+    comuna: new FormControl('', [Validators.required, MyValidators.existInArray(this.regions.map( r => r.id ) )]),
     direccion: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    hospedaje: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    hospedaje: new FormControl('', [Validators.required, Validators.minLength(6)]),
     telefono: new FormControl('', [
       Validators.required, Validators.minLength(10),
       Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g)
@@ -25,31 +28,99 @@ export class OrderPaymentFormsComponent implements OnInit {
       Validators.required, Validators.minLength(5),
       Validators.pattern(/^[0-9]+[-|‐]{1}[0-9kK]{1}$/)
     ]),
-    nombreDirección: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    nombreDireccion: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    paymentOption: new FormControl('', [Validators.required]),
   });
 
+  buttonSubmitWasCLicked = false;
 
+  optionPaymentSelected;
+  optionPayment = [
+    {
+      name: 'tarjeta de débito (redcompra webpay)',
+      image: 'assets/images/webpay-brand.png',
+      data: {
+        id: 2
+      },
+    },
+    {
+      name: 'Paypal',
+      image: 'assets/images/webpay-brand.png',
+      data: {
+        id: -1
+      },
+    },
+  ];
+
+  @Input() buttonDisabled = false;
+
+  @Output() submitForm = new EventEmitter();
+  @Output() currentStep = new EventEmitter<number>();
 
   constructor() {
   }
 
   ngOnInit(): void {
+
+    this.form.valueChanges.subscribe(x => {
+
+      const controlsKeys = [
+        'region',
+        'comuna',
+        'direccion',
+        'hospedaje',
+        'telefono',
+        'rut',
+        'nombreDireccion'
+      ];
+
+      let formControls;
+      formControls = [];
+
+      controlsKeys.forEach( controlKey => {
+        formControls.push(this.form.controls[controlKey]);
+      });
+
+      if (!this.form.valid) {
+
+        this.isAllowedSecondStep = formControls.every( currentValue => {
+          return currentValue.errors === null;
+        });
+
+      }
+
+    });
+
   }
 
-  public processDataPay(){
-    console.clear();
+  public processDataPay() {
 
-    const formData = {
-      location: this.form.value.location
-    };
+    let formData;
+    formData = this.form.value;
 
-    console.log('form');
-    console.log(this.form);
-    console.log(this.form.get('rut').errors);
+    if (!this.form.valid) {
 
-    console.log('formData');
-    console.log(formData);
-    // this.getErrorsWithMessages( this.form.get('location').errors );
+      if (this.isAllowedSecondStep) {
+        this.step = 2;
+      }
+
+    }else if (this.form.valid) {
+
+      const paymentOption = this.optionPaymentSelected;
+      formData.paymentOption = this.optionPaymentSelected;
+
+      this.step = 2;
+
+      this.submitForm.emit(formData);
+
+    }
+
+  }
+
+  public goToNextStep() {
+    if (this.isAllowedSecondStep || this.form.valid) {
+      this.step = 2;
+    }
   }
 
   public getErrorsWithMessages( control ) {
@@ -62,7 +133,7 @@ export class OrderPaymentFormsComponent implements OnInit {
       let errorMessages;
       errorMessages = [];
 
-      if (control.dirty) {
+      if (control.dirty || this.buttonSubmitWasCLicked) {
 
         keysAvailable.forEach( ( key ) => {
 
@@ -107,7 +178,27 @@ export class OrderPaymentFormsComponent implements OnInit {
       return errorMessages;
     }
 
+  }
+
+
+  public disabledBtnSubmit() {
+
+    if (this.step === 1 && this.isAllowedSecondStep) {
+
+      return false;
+
+    } else {
+
+      return this.buttonDisabled ? this.buttonDisabled : this.form.invalid;
+
+    }
 
   }
+
+  public goToBack() {
+    this.step -= 1;
+    this.currentStep.emit(this.step);
+  }
+
 
 }

@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform, ElementRef } from '@angular/core';
-import { environment } from '@environments/environment';
+import { URL_SERVICIOS } from '../../config/config';
 
-const URL = environment.url;
+const URL = URL_SERVICIOS;
 
 @Pipe({
   name: 'imgFallback'
@@ -16,6 +16,9 @@ export class ImgFallbackPipe implements PipeTransform {
 
       case 'default':
         imgDefault = 'assets/img/no-image-banner.jpg';
+        break;
+      case 'banner-medick':
+        imgDefault = 'assets/img/Banner/Banner1.svg';
         break;
       case 'box':
         imgDefault = 'assets/img/Box/box.svg';

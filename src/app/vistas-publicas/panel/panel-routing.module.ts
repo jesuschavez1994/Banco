@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PanelComponent } from './panel.component';
 import { MyAccountComponent } from '../my-account/my-account.component';
 import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
+import { SalesComponent } from '../sales/sales.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'cuenta',
         component: MyAccountComponent,
+      },
+      {
+        path: 'ventas',
+        component: SalesComponent,
       },
       {path: '**', pathMatch: 'full', redirectTo: 'carrito-compras'},
     ]

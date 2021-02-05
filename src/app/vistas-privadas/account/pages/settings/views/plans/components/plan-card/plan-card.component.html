@@ -1,0 +1,104 @@
+<mat-card
+  class="card"
+  [class.basic]="planInfo.name === 'basic'"
+  [class.standard]="planInfo.name === 'standard'"
+  [class.premium]="planInfo.name === 'premium'"
+  [class.show]="moreInfo"
+>
+  <mat-card-header class="card-title" mat-card-image>
+    <h4>{{ planInfo.name | titlecase }}</h4>
+    <i class="fas fa-caret-down fa-2x arrow"></i>
+  </mat-card-header>
+
+  <div
+    class="band"
+    mat-card-image
+    *ngIf="planInfo.adquired"
+    [class.basic]="planInfo.name === 'basic'"
+    [class.standard]="planInfo.name === 'standard'"
+    [class.premium]="planInfo.name === 'premium'"
+  >
+    <small> Plan actual </small>
+  </div>
+
+  <!-- Card body -->
+  <mat-card-content class="card-body">
+    <ul class="bonuses">
+      <li *ngFor="let bonus of planInfo.planBonuses">
+        <i
+          class="fas"
+          [class.fa-check]="bonus.available"
+          [class.fa-times]="!bonus.available"
+        ></i>
+        {{ bonus.description }}
+      </li>
+    </ul>
+
+    <div class="price">
+      <small class="plan-type">Plan básico</small>
+      <h5 [class.gray]="productBank">${{ planInfo.basicPrice | number }}</h5>
+      <small class="renew">Mensual</small>
+    </div>
+
+    <button class="btn" (click)="showMore()" *ngIf="!moreInfo" mat-button>
+      Ver más
+    </button>
+    <!-- Wrapper needed for the expand animation -->
+    <div class="wrapper">
+      <!-- More info -->
+      <div class="more-info" [class.show]="moreInfo">
+        <!-- Price additional info -->
+        <div class="price">
+          <small class="plan-type">Banco de productos</small>
+          <h5 [class.gray]="!productBank">
+            {{ productBankPrice | number }}
+          </h5>
+          <small class="renew">De por vida</small>
+
+          <p class="total">
+            <b>Total: &nbsp;</b><span>${{ totalPrice | number }}</span>
+          </p>
+        </div>
+        <!-- #Price additional info -->
+
+        <!-- Products sync info -->
+        <div class="sync">
+          <h5>Sincronización de productos</h5>
+          <ul>
+            <li
+              *ngFor="
+                let productBankDetails of planInfo.productBank;
+                index as i
+              "
+            >
+              <mat-checkbox
+                [checked]="selectedCheckbox === i"
+                class="checkbox"
+                [value]="productBankDetails.price"
+                (change)="updatePrice(i, productBankDetails.price)"
+              ></mat-checkbox>
+              <p>
+                <span
+                  class="amount"
+                  [class.basic]="planInfo.name === 'basic'"
+                  [class.standard]="planInfo.name === 'standard'"
+                  [class.premium]="planInfo.name === 'premium'"
+                  >1-{{ productBankDetails.amountOfPictures }}</span
+                >
+                fotos del banco de productos.
+              </p>
+            </li>
+          </ul>
+
+          <button class="btn get-now" (click)="getOrderNumber()" mat-button>
+            <b *ngIf="!waitingResponse">Adquirir ahora</b>
+            <mat-spinner *ngIf="waitingResponse" [diameter]="30"></mat-spinner>
+          </button>
+        </div>
+        <!-- #Products sync info -->
+      </div>
+      <!-- #More info -->
+    </div>
+  </mat-card-content>
+  <!-- #Card body -->
+</mat-card>

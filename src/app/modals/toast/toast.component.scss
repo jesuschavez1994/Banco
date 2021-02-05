@@ -1,0 +1,40 @@
+@import 'src/assets/scss/style.scss';
+
+.toast-container{
+  background: $color__background-gray--dark;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 7px 45px;
+  transition: all 0.5s;
+
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  z-index: 20;
+
+  p{
+    color: $color__text-white;
+    // opacity: 1;
+    text-transform: lowercase;
+
+    &::first-letter{
+      text-transform: uppercase;
+    }
+  }
+
+  @media screen and (max-width: 509px) {
+    max-width: 246px;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 510px) and (max-width: 767px){
+    max-width: 312px;
+    // text-align: center;
+  }
+
+  @media screen and (min-width: 768px){
+    max-width: 469px;
+    // text-align: center;
+  }
+
+}

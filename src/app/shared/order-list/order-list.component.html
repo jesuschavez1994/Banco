@@ -1,4 +1,4 @@
-<div class="list-item">
+<div class="list-item" [ngClass]="{'expanded': isExpanded}">
 
   <ng-container *ngFor="let order of orders">
 
@@ -6,17 +6,27 @@
 
       <figure class="img">
 
-        <img src="{{order.business.img}}" alt="Avatar por defecto" />
+        <img src="{{order.group.img}}" alt="Avatar por defecto" />
 
       </figure>
 
       <div class="content">
 
-        <h3 class="name">{{order.business.name}}</h3>
+        <h3 class="name">{{order.group.name}}</h3>
 
-        <span class="info">Cantidad de producto <strong>({{order.orders.length}})</strong></span>
+        <div class="more-info">
 
-        <span class="info">Total a pagar <strong>${{order.orders.length}}</strong></span>
+          <span class="info">Cantidad de producto <strong>({{order.orders.length}})</strong></span>
+
+          <span class="info">{{isListToPaid ? 'Pagado' : 'Total a pagar'}} <strong>${{order.orders.length}}</strong></span>
+
+          <ng-container *ngIf="isExpanded">
+            <span class="info"><strong>{{order.datePaid}}</strong></span>
+            <span class="info">Radio de 15km</span>
+            <span class="info"><strong>Ver ubicación</strong></span>
+          </ng-container>
+
+        </div>
 
       </div>
 

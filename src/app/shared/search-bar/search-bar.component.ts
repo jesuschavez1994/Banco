@@ -15,6 +15,10 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   @Input() isExpanded = false;
   @Input() buttonSidebarList = false;
   @Input() debounce = 3000;
+  /*********/
+  // POR DEFECTO MUESTRA EL FILTRO
+  @Input() showFilter = true;
+  /*********/
   @Output() sidebarExpand = new EventEmitter<boolean>();
   @Output() search = new EventEmitter<string | any>();
 
@@ -37,7 +41,13 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
 
   public textTosearch() {
     const searchInput = this.searchInput.nativeElement;
-    const selectFilter = this.selectFilter.nativeElement;
+    let selectFilter;
+
+    /***** */
+    if(this.showFilter){
+      selectFilter = this.selectFilter.nativeElement;
+    }
+    /******/
     let timeoutSearchInput;
 
     searchInput.onkeyup = () => {
@@ -48,9 +58,16 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
 
           this.search.emit({
             value: searchInput.value,
-            filter: selectFilter.value
+          //  filter: selectFilter.value
           });
-
+          /***** */
+          if(this.showFilter){
+            this.search.emit({
+              value: searchInput.value,
+              filter: selectFilter.value
+            });
+          }
+          /******/
         }, this.debounce
 
       );
@@ -61,12 +78,16 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
       clearTimeout(timeoutSearchInput);
     };
 
-    selectFilter.onchange = () => {
-      this.search.emit({
-        value: searchInput.value,
-        filter: selectFilter.value
-      });
-    };
+    /***** */
+    if(this.showFilter){
+      selectFilter.onchange = () => {
+        this.search.emit({
+          value: searchInput.value,
+          filter: selectFilter.value
+        });
+      };
+    }
+    /******/
 
   }
 

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit, OnChanges } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
-const URL = environment.url;
+const URL = `${environment.url}/`;
 
 @Component({
   selector: 'app-image-preview-gallery',
@@ -12,6 +12,7 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
 
   @Input() imgs: string[];
   @Input() currentImg: string;
+  @Input() sync: any;
 
   @ViewChild('image') imageContainer: ElementRef;
   @ViewChild('zoom') zoomContainer: ElementRef;
@@ -22,26 +23,35 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
   ngOnInit(): void {
     this.currentImg = this.imgs[0];
     this.currentImg = `${URL}${this.currentImg}`;
+    console.log('this.currentImg - ngOnInit');
+    console.log(this.currentImg);
 
   }
 
   ngAfterViewInit(): void {
     this.imageZoom();
-
   }
 
   ngOnChanges(): void {
     this.currentImg = `${URL}${this.currentImg}`;
+    console.log('this.currentImg - ngOnChanges');
+    console.log(this.currentImg);
   }
 
   public selectImg( imgSelected ) {
+
     this.currentImg = `${URL}${imgSelected}`;
     this.imageZoom();
+
+    console.log('this.currentImg -  selectImg');
+    console.log(this.currentImg);
   }
 
   public imageZoom() {
 
     // this.currentImg = `${URL}${this.currentImg}`;
+    console.log('this.currentImg - imageZoom');
+    console.log(this.currentImg);
 
     const image = this.imageContainer.nativeElement;
     const zoom = this.zoomContainer.nativeElement;
@@ -55,17 +65,27 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
       hires: this.currentImg
     };
 
-    image.getElementsByTagName('a')[0].setAttribute('href', img.hires);
-    image.getElementsByTagName('img')[0].setAttribute('src', img.thumb);
+    switch (this.sync) {
+      case 'sync':
+      image.getElementsByTagName('a')[0].setAttribute('href', `${img.hires}`);
+      image.getElementsByTagName('img')[0].setAttribute('src', `${img.thumb}`);
+      break;
+      default:
+      image.getElementsByTagName('a')[0].setAttribute('href', img.hires);
+      image.getElementsByTagName('img')[0].setAttribute('src', img.thumb);
+    }
+
+    // image.getElementsByTagName('a')[0].setAttribute('href', img.hires);
+    // image.getElementsByTagName('img')[0].setAttribute('src', img.thumb);
 
     const preloadImage = url => {
       let img = new Image();
-      img.src = url;
+      img.src = `${URL}`;
+      console.log('preloadImage');
+      console.log(img.src);
     };
 
     preloadImage(img.hires);
-
-
 
     const enterImage = function(e) {
       zoom.classList.add('show', 'loading');
@@ -114,12 +134,13 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
       zoomLevel = 2;
       zoom.classList.remove('show');
       clearSrc = setTimeout(() => {
-                  zoomImage.setAttribute('src', '');
-                }, 250);
+        zoomImage.setAttribute('src', '');
+      }, 250);
     };
 
 
     const move = function(e) {
+
       e.preventDefault();
 
       let posX, posY, touch = false;
@@ -139,10 +160,16 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
       //   : zoom.style.top = `${posY - zoom.offsetHeight / 2}px`;
       // zoom.style.left = `${posX - zoom.offsetWidth / 2}px`;
 
+      // Circulo del zoom
       touch
         ? zoom.style.top = `${posY - zoom.offsetHeight + 450}px`
         : zoom.style.top = `${posY - zoom.offsetHeight + 400}px`;
       zoom.style.left = `${posX - zoom.offsetWidth / 2}px`;
+
+      // touch
+      //   ? zoom.style.top = `${posY - zoom.offsetHeight}px`
+      //   : zoom.style.top = `${posY - zoom.offsetHeight}px`;
+      // zoom.style.left = `${posX - zoom.offsetWidth}px`;
 
       // console.log('Zoom zoomLeft and top');
       // console.log(zoom.style.top);
@@ -155,18 +182,17 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
       const zoomLeft = -percX * zoomImage.offsetWidth + (zoom.offsetWidth / 2);
       const zoomTop = -percY * zoomImage.offsetHeight + (zoom.offsetHeight / 2);
 
-      // let zoomLeft = -percX * zoomImage.offsetWidth + (zoom.offsetWidth / 2),
-      // zoomTop = -percY * zoomImage.offsetHeight + (zoom.offsetHeight / 14);
+      // const zoomLeft = -percX * zoomImag
+      e.offsetWidth;
+      // const zoomTop = -percY * zoomImage.offsetHeight;
 
       zoomImage.style.left = `${zoomLeft}px`;
       zoomImage.style.top = `${zoomTop - 150}px`;
 
-      // console.log('ZoomImage zoomLeft and top');
-      // console.log(zoomImage.style.left);
-      // console.log( zoomImage.style.top);
+      console.log('ZoomImage zoomLeft and top');
+      console.log(zoomImage.style.left);
+      console.log( zoomImage.style.top);
     };
-
-
 
     image.addEventListener('mouseover', enterImage);
     image.addEventListener('touchstart', enterImage);
@@ -176,7 +202,6 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
 
     image.addEventListener('mousemove', move);
     image.addEventListener('touchmove', move);
-
 
     image.addEventListener('wheel', e => {
       e.preventDefault();
@@ -188,6 +213,11 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
       // console.log(`zoom level: ${zoomLevel}`);
       zoom.style.transform = `scale(${zoomLevel})`;
     });
+
+    console.log('this.currentImg -  selectImg');
+    console.log(this.currentImg);
+
+
   }
 
 }

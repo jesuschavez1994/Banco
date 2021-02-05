@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, Injectable } from '@angular/core';
 import { DropdownOption, ClassIcon, ExtraButton, ExtraButtonEmitter } from '@interfaces/components-options/dropdown.options.interface';
-import { Product } from '@interfaces/productCart.interface';
+import { ProductOfCart } from '@interfaces/productCart.interface';
+import { Favorite, FavoriteResp } from '../../interfaces/product.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -27,11 +28,6 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
   @Input() displayDropdown = 'left';
   @Input() menuOptions: DropdownOption[] = [];
   @Input() lookMore: DropdownOption;
-  // = {
-  //   title: 'Ver más',
-  //   divider: true,
-  //   typeEvent: 'none'
-  // };
   @Input() showItemsCounter = true;
 
   @Output() selected = new EventEmitter<DropdownOption>();
@@ -49,9 +45,13 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
 
       const isClickInside = this.dropdownCustom.nativeElement.contains(e.target);
 
-      if (!isClickInside) {
-        this.inputCheck.nativeElement.checked = false;
-        this.isDropDownExpanded = false;
+      if (this.inputCheck) {
+
+        if (!isClickInside) {
+          this.inputCheck.nativeElement.checked = false;
+          this.isDropDownExpanded = false;
+        }
+
       }
 
     });
@@ -72,35 +72,75 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
     );
   }
 
-  public loadOptionsWithProductsCartResp( products: Product[] ) {
-    console.log('loadOptionsWithProductsCartResp');
-    console.log(products);
+  public loadOptionsWithProductsCartResp( products: ProductOfCart[]) {
 
-    if (products.length > 0) {
+    const menuOptions = [];
 
-      const menuOptions = [];
+    if (products) {
 
-      products.forEach( product => {
+      if (products.length > 0) {
 
-        let option;
+        products.forEach( product => {
 
-        option = {
-          title: product.name,
-          typeEvent: 'routerLink',
-          eventValue: ['/panel/carrito-compras'],
-          data: product
-        };
+          let option;
 
-        menuOptions.push(option);
+          option = {
+            title: product.name,
+            typeEvent: 'routerLink',
+            eventValue: ['/panel/carrito-compras'],
+            data: product
+          };
 
-      });
+          menuOptions.push(option);
 
-      return menuOptions;
+        });
+
+      }
+
     }
+
+    return menuOptions;
+
   }
 
+  public loadOptionsWithFavoriteProductResp( favoritesResp: FavoriteResp ) {
 
-  public toogleDropDown(){
+    const menuOptions = [];
+    const productsFavorites = favoritesResp.favorites;
+
+    if (productsFavorites) {
+
+      if (productsFavorites.length > 0) {
+
+        productsFavorites.forEach( productFa => {
+
+          let option;
+
+          option = {
+            title: productFa.name,
+            typeEvent: 'routerLink',
+            eventValue: ['/panel/carrito-compras'],
+            data: {
+              idUser: favoritesResp.id,
+              productFavorite: productFa,
+            }
+          };
+
+          menuOptions.push(option);
+
+        });
+
+
+      }
+
+    }
+
+    return menuOptions;
+
+  }
+
+  public toggleDropDown(){
     this.isDropDownExpanded = this.isDropDownExpanded ? false : true;
   }
+
 }

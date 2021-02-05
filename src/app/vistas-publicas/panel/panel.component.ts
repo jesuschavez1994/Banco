@@ -21,6 +21,12 @@ export class PanelComponent implements OnInit {
       routerLink: ['carrito-compras'],
       // isActive: false,
     },
+    {
+      label: 'ventas',
+      iconClass: 'fab fa-sellsy',
+      routerLink: ['ventas'],
+      // isActive: false,
+    },
   ];
 
   constructor() { }

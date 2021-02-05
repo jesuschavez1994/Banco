@@ -1,42 +1,50 @@
-<ng-container *ngIf="step === 1">
 
-  <p (click)="step = 1" class="back-process">
-    <span><</span>Atrás
-  </p>
 
-  <p class="instruction">para concretar la compra, complete los siguientes pasos:</p>
+<p (click)="goToBack()" class="back-process">
+  <span><</span>Atrás
+</p>
 
-  <div class="breadcrumb-steps-container">
+<p class="instruction">para concretar la compra, complete los siguientes pasos:</p>
 
-    <div class="breadcrumb-steps">
+<div class="breadcrumb-steps-container">
 
-      <div class="step active">
+  <div class="breadcrumb-steps">
 
-        <p>paso 1</p>
-        <div class="circle"></div>
+    <div class="step"
+      [ngClass]="{'active': step === 1}"
+      (click)="step = 1"
+    >
 
-      </div>
-
-      <div class="step">
-
-        <p>paso 2</p>
-        <div class="circle"></div>
-
-      </div>
+      <p>paso 1</p>
+      <div class="circle"></div>
 
     </div>
 
-    <div class="line"></div>
+    <div class="step"
+      [ngClass]="{'active': step === 2}"
+      (click)="goToNextStep()"
+    >
+
+      <p>paso 2</p>
+      <div class="circle"></div>
+
+    </div>
 
   </div>
 
-  <div>
+  <div class="line"></div>
 
-    <form action=""
-      class="form"
-      [formGroup]="form"
-      (ngSubmit)="processDataPay()"
-      novalidate="novalidate">
+</div>
+
+<div>
+
+  <form
+    class="form"
+    [formGroup]="form"
+    (ngSubmit)="processDataPay()"
+    novalidate="novalidate">
+
+    <ng-container *ngIf="step === 1 || step === 0">
 
       <div class="inputs-container">
 
@@ -45,9 +53,13 @@
           <p>región</p>
 
           <select formControlName="region">
+
             <option value="-1">seleccione región</option>
-            <option value="hola">hola</option>
-            <option value="adios">adios</option>
+
+            <ng-container *ngFor="let region of regions">
+              <option [value]="region.id">region.label</option>
+            </ng-container>
+
           </select>
 
           <!-- Errors -->
@@ -97,7 +109,7 @@
             placeholder="Calle 10"
           >
 
-         <!-- Errors -->
+        <!-- Errors -->
           <ng-container *ngIf="form.get('direccion')">
 
             <ng-container
@@ -180,14 +192,14 @@
           <input
           type="text"
           placeholder="Mi casa / Oficina Central"
-          formControlName="nombreDirección">
+          formControlName="nombreDireccion">
 
           <!-- Errors -->
-          <ng-container *ngIf="form.get('nombreDirección')">
+          <ng-container *ngIf="form.get('nombreDireccion')">
 
             <ng-container
               [ngTemplateOutlet]="errorsList"
-              [ngTemplateOutletContext]="{controlErrors: form.get('nombreDirección')}"
+              [ngTemplateOutletContext]="{controlErrors: form.get('nombreDireccion')}"
             >
             </ng-container>
 
@@ -207,51 +219,10 @@
 
       </div>
 
-      <button class="button button--full-width" type="submit">
-        continuar
-      </button>
+    </ng-container>
 
-    </form>
-
-  </div>
-</ng-container>
-
-<!-- STEP 2 -->
-<ng-container *ngIf="step === 2">
-
-  <p (click)="step = 1" class="back-process">
-    <span><</span>Atrás
-  </p>
-
-  <p class="instruction">para concretar la compra, complete los siguientes pasos:</p>
-
-  <div class="breadcrumb-steps-container">
-
-    <div class="breadcrumb-steps">
-
-      <div class="step active">
-
-        <p>paso 1</p>
-        <div class="circle"></div>
-
-      </div>
-
-      <div class="step">
-
-        <p>paso 2</p>
-        <div class="circle"></div>
-
-      </div>
-
-    </div>
-
-    <div class="line"></div>
-
-  </div>
-
-  <div>
-
-    <form action="" class="form">
+    <!-- STEP 2 -->
+    <ng-container *ngIf="step === 2">
 
       <div class="inputs-container">
 
@@ -259,33 +230,57 @@
 
           <div class="select-cards">
 
-            <article>
+            <ng-container *ngFor="let option of optionPayment">
 
-              <input
-                id="termsAndConditions"
-                name="termsAndConditions"
-                type="checkbox" class="checkbox-default"
+              <article
+                (click)="optionPaymentSelected = option"
               >
 
-              <label for="termsAndConditions">
-                <div class="select-card">
+                <input
+                  id="paymentOption-{{option.data.id}}"
+                  type="radio"
+                  class="checkbox-default radio-default"
+                  formControlName="paymentOption"
+                  [value]="option.data.id"
 
-                  <div class="img">
-                    <img src="assets/images/webpay-brand.png" alt="webpay.cl">
+                >
+                <!-- [checked]="optionPaymentSelected.data.id === option.data.id" -->
+
+                <label for="paymentOption-{{option.data.id}}">
+
+                  <div class="select-card">
+
+                    <div class="img">
+                      <img [src]="option.image" [alt]="option.name">
+                    </div>
+
+                    <p>
+                      {{option.name}}
+                    </p>
+
                   </div>
+                </label>
 
-                  <p>
-                    tarjeta de débito (redcompra webpay)
-                  </p>
+              </article>
 
-                </div>
-              </label>
-
-            </article>
+            </ng-container>
 
           </div>
 
+          <!-- Errors -->
+          <ng-container *ngIf="form.get('paymentOption')">
+
+            <ng-container
+              [ngTemplateOutlet]="errorsList"
+              [ngTemplateOutletContext]="{controlErrors: form.get('paymentOption')}"
+            >
+            </ng-container>
+
+          </ng-container>
+
         </div>
+
+
 
         <div class="note">
 
@@ -299,16 +294,24 @@
         </div>
 
       </div>
-      <!-- (click)="step = 2" -->
-      <div class="button button--full-width" type="submit">
-        <!-- bu -->
-        pagar ahora
-      </div>
 
-    </form>
+    </ng-container>
 
-  </div>
-</ng-container>
+    <button
+      (click)="buttonSubmitWasCLicked = true"
+      [ngClass]="{'disabled': disabledBtnSubmit()}"
+      [disabled]="disabledBtnSubmit()"
+      class="button button--full-width"
+      type="submit"
+
+    >
+      Continuar
+    </button>
+
+  </form>
+
+</div>
+
 
 <!-- Template error -->
 

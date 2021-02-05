@@ -1,0 +1,47 @@
+<div    class="dropzone min-dropzone" 
+        #dropzone 
+        >
+                   
+        <span   class="x-close" 
+                (click)="Close()">
+                <img src="assets/img/iconos/icons-main/icons/x.svg">
+        </span>
+                    
+        <h2>Subir Listado de Excel</h2>
+           
+                      
+        <div class="content-label" *ngIf="showInput">
+            <label for="fileDropref">
+
+                <input  type="file" 
+                        #fileDropref 
+                        id="fileDropref"
+                        multiple='multiple'
+                        accept='xlsx/*' 
+                        (change)="fileBrowseHandler($event)"
+                        title="Haz clic o suelta para anexar tu archivo"
+                >
+
+                <div>
+                    <img src="assets/img/iconos/icons-main/icons/upload.svg">
+                    Click or drag here to upload
+                </div>
+
+            </label>
+        </div>
+
+        <div *ngFor="let file of files">
+
+            <!-- Size Files -->
+            <app-size-file [file]="file"></app-size-file>
+            
+            <!-- Progress bar-->
+            <!-- <app-progess-bar-file-excel [progress]="file?.progress"
+                                        (ProgressFinally) ="ProgressFinally($event, file?.progress)">
+
+            </app-progess-bar-file-excel> -->
+
+        </div>
+
+
+    </div>

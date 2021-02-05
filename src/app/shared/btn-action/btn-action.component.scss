@@ -1,0 +1,45 @@
+@keyframes rotarDesaparecer {
+    0% {
+        opacity: 1;
+        transform: scale(.4);
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes rotarAparecer {
+    0% {
+        opacity: 0;
+        transform: scale(2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.rotar-d {
+    animation-name: rotarDesaparecer;
+    animation-duration: .7s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+}
+
+.rotar-a {
+    animation-name: rotarAparecer;
+    animation-duration: .7s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+.active {
+    opacity: 1 !important;
+}
+
+#menu-actuate-btn-aside g {
+    opacity: 0;
+    transition: .7s;
+    transform-origin: center 50%;
+}

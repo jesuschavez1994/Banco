@@ -1,46 +1,61 @@
-.container-fluid{padding-top: 90px !important;}
-.active{color: #0e1318;font-weight: 600;}
-.button-edit{background: white;border: none;color: rgb(136, 136, 136); border-bottom: 1px solid rgba(136, 136, 136, .34);}
-button:focus {outline: none !important; outline: none !important; }
-.name-store{color:#0e1318;}
-.agm-map-container { height: 300px; }
+.container-fluid {
+  padding-top: 90px !important;
+}
+.active {
+  color: #0e1318;
+  font-weight: 600;
+}
+.button-edit {
+  background: white;
+  border: none;
+  color: rgb(136, 136, 136);
+  border-bottom: 1px solid rgba(136, 136, 136, 0.34);
+}
+button:focus {
+  outline: none !important;
+  outline: none !important;
+}
+.name-store {
+  color: #0e1318;
+}
+.agm-map-container {
+  height: 300px;
+}
 
 input[type="file" i] {
-    appearance: initial;
-    width: 138px;
-    background-color: initial;
-    cursor: default;
-    align-items: baseline;
-    color: transparent;
-    text-align: start !important;
-    padding: initial;
-    border: initial;
-
+  appearance: initial;
+  width: 138px;
+  background-color: initial;
+  cursor: default;
+  align-items: baseline;
+  color: transparent;
+  text-align: start !important;
+  padding: initial;
+  border: initial;
 }
 
-ul{
-    padding-left: 1%;
+ul {
+  padding-left: 1%;
 }
 
-li{
-    width: 100%;
-    padding: 0%;
+li {
+  width: 100%;
+  padding: 0%;
 }
 
-a{
-    width: 100%;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    box-sizing: border-box;
-    white-space: nowrap;
-    transition: background-color .15s ease-in-out,opacity .15s ease-in-out;
-    color: unset;
-    text-decoration: unset;
+a {
+  width: 100%;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  white-space: nowrap;
+  transition: background-color 0.15s ease-in-out, opacity 0.15s ease-in-out;
+  color: unset;
+  text-decoration: unset;
 }
 
-li :hover{
-    background-color: rgba(64,87,109,.07);
+li :hover {
+  background-color: rgba(64, 87, 109, 0.07);
 }
-

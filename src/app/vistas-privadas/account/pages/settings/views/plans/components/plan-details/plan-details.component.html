@@ -1,0 +1,72 @@
+<!-- Payment section -->
+<div class="payment">
+  <button
+    class="btn"
+    [routerLink]="['/account', 'settings', 'plans', 'choose-plan']"
+    mat-button
+  >
+    <i class="fas fa-caret-left"></i> Atrás
+  </button>
+
+  <!-- Payment details -->
+  <div class="payment-details animated fadeIn">
+    <h5
+      class="plan-name"
+      [class.basic]="selectedPlanDetails.plan_name === 'Basic'"
+      [class.standard]="selectedPlanDetails.plan_name === 'Standard'"
+      [class.premium]="selectedPlanDetails.plan_name === 'Premium'"
+    >
+      Plan {{ selectedPlanDetails.plan_name | titlecase }}
+    </h5>
+    <h5 class="total">
+      <b>Total:&nbsp; &nbsp;</b>
+      <span>{{ selectedPlanDetails.price | number }}</span>
+    </h5>
+
+    <p class="text">
+      PARA COMPLETAR LA COMPRA COMPLETE EL SIGUIENTE REQUERIMIENTO:
+    </p>
+
+    <div class="payment-methods">
+      <div class="webpay-banner">
+        <p class="title">Método de pago:</p>
+        <mat-checkbox
+          class="checkbox"
+          [(ngModel)]="webpayDebitCard"
+        ></mat-checkbox>
+
+        <div class="banner">
+          <img
+            src="../../../../../assets/img/Suscription/webpay-cl.png"
+            alt="webpay-banner"
+          />
+          <p>
+            Tarjeta de Débito
+            <br />
+            (Redcompra Webpay)
+          </p>
+        </div>
+
+        <div class="note">
+          <h5>NOTA:</h5>
+          <p>
+            Te recomendamos no cerrar el navegador hasta que la compra sea
+            finalizada.
+          </p>
+        </div>
+      </div>
+
+      <button
+        class="btn"
+        (click)="createPayment()"
+        mat-flat-button
+        [disabled]="!webpayDebitCard"
+      >
+        <b *ngIf="!waitingResponse">PAGAR AHORA</b>
+        <mat-spinner *ngIf="waitingResponse" [diameter]="30"></mat-spinner>
+      </button>
+    </div>
+  </div>
+  <!-- #Payment details -->
+</div>
+<!-- #Payment section -->

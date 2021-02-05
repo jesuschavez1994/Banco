@@ -15,11 +15,11 @@ import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Utils } from '../../utils/utils';
 import { PriceRange, Filter } from '@interfaces/components-options/sidebar-list.options.interface';
-import { MatDialog } from '@angular/material/dialog';
-import { SuccessComponent } from '../../modals/success/success.component';
 import { PaymentProcessService } from '@services/payment-process/payment-process.service';
 import { DropdownOption } from '@interfaces/components-options/dropdown.options.interface';
 import { DropdownIconComponent } from '../../shared/dropdown-icon/dropdown-icon.component';
+import { ToastComponent } from '../../modals/toast/toast.component';
+import {HomeServiceService} from '../services/home-service.service';
 
 @Component({
   selector: 'app-business-detail',
@@ -32,13 +32,15 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('productCards') productCards: ProductsCardsComponent;
   @ViewChild('productDetail') productDetail: ProductDetailComponent;
   @ViewChild('sidebarList') sidebarList: SidebarListComponent;
+  @ViewChild('toastRef') toastRef: ToastComponent;
   // @ViewChild('dropdownIcon') dropdownIcon: DropdownIconComponent;
 
   // Components Inputs
   breadcrumb: BreadcrumbOptions[];
-  imgsBanners: BannerOptions = {
-    m: 'assets/img/test-img/banner.png'
-  };
+  imgsBanners: BannerOptions;
+
+// Navbar
+  userLog: boolean = false;
 
   // sidebar-list
   expandSidebar = true;
@@ -80,71 +82,45 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   showProducts = false;
   totalProducts: number;
   itemsPerPage = 16;
+  showShimmerProductsCards =  true;
 
   // SearchBar:
   preloadedValueSearch = '';
 
   // navbar
-  menuOptions: DropdownOption[] = [];
+  menuOptionsShopping: DropdownOption[] = [];
 
   // Variables
   StoreName = '';
 
+  // Toast
+  // dataToast: any = '';
+
   constructor(
+    /** */
+    private homeService: HomeServiceService,
+    /** */
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
     private storeService: StoreService,
     private paymentProcessService: PaymentProcessService,
     private utils: Utils,
-    public dialog: MatDialog,
     private dropdownIconComp: DropdownIconComponent
 
   ){
-    this.loadDataByParams();
+    // this.loadDataByParams();
   }
 
   ngOnInit() {
-
-
+    this.userLog = this.homeService.islog();
   }
+/********************************************************************************* */
+/********************************************************************************* */
 
   ngAfterViewInit(): void {
-    // this.productService.getFavoriteProducts(1).subscribe(
-    //   resp => {
-    //     console.log('getFavoriteProducts');
-    //     console.log(resp);
-    //   },
-    //   error => {
-    //     console.log('error');
-    //     console.log(error);
-    //   }
-    // );
-
-    // this.productService.addProductToFavorite(1, 134).subscribe(
-    //   resp => {
-    //     console.log('addProductToFavorite');
-    //     console.log(resp);
-    //   },
-    //   error => {
-    //     console.log('error');
-    //     console.log(error);
-    //   }
-    // );
-
-    // this.productService.removeProductFromFavorite(1, 134).subscribe(
-    //   resp => {
-    //     console.log('removeProductFromFavorite');
-    //     console.log(resp);
-    //   },
-    //   error => {
-    //     console.log('error');
-    //     console.log(error);
-    //   }
-    // );
-
+    this.loadDataByParams();
   }
-
 
   public loadDataByParams(){
 
@@ -261,6 +237,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             isFavorite: product.isFavorite ? product.isFavorite : false,
           };
 
+          this.scrollToElement(document.querySelector('#profile-name'));
+
         }, error => {
 
           console.log('Error loading products', error);
@@ -351,53 +329,85 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       }
 
 
+      // this.showShimmerProductsCards = true;
 
-      this.productService.getProductsByStore(idStore, page, filter).subscribe( resp => {
+      if(this.productCards) {
+        this.productCards.toggleShimmer();
+      }
 
-        const products = resp.data;
-        this.totalProducts = resp.total;
-        this.itemsPerPage = resp.per_page;
+      this.productService.getProductsByStore(idStore, page, filter).subscribe(
+        resp => {
 
-        this.productCards.products = products.map( product => {
+          // console.log('getProductsByStore');
+          // console.log(resp.data);
+          const products = resp.data;
+          this.totalProducts = resp.total;
+          this.itemsPerPage = resp.per_page;
 
-          let images = [];
+          if (products.length > 0) {
 
-          if (product.sync_bank) {
+            this.productCards.products = products.map( product => {
 
-            if (product.sync_bank.length === 0) {
+              let images = [];
 
-              images = product.images.map(image => {
-                return image.src;
-              });
+              if (product.sync_bank) {
 
-            }else {
-              images = product.sync_bank.map(syncBank => {
-                return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
-              });
-            }
+                if (product.sync_bank.length === 0) {
 
-          }else {
-            images = product.images.map(image => {
-              return image.src;
-            });
+                  images = product.images.map(image => {
+                    return image.src;
+                  });
+
+                }else {
+                  images = product.sync_bank.map(syncBank => {
+                    return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
+                  });
+                }
+
+              }else {
+                images = product.images.map(image => {
+                  return image.src;
+                });
+              }
+
+              return {
+                name: product.name,
+                description: product.description,
+                price: product.price,
+                stock: product.stock,
+                images, // product.images
+                id: product.id ? product.id : -1,
+                idStore: product.store_id ? product.store_id : -1,
+                isFavorite: product.isFavorite ? product.isFavorite : false,
+                };
+
+            } );
+
+            console.log('products loaded: ', this.productCards.products);
+
+            // this.showShimmerProductsCards = false;
+            this.productCards.toggleShimmer(false);
+            console.log('removing shimmer');
+
+          } else{
+            this.toastRef.open(
+              'Tienda sin productos disponibles',
+              { color: '#ffffff', background: '#900909c2'}
+
+            );
           }
 
-          return {
-            name: product.name,
-            description: product.description,
-            price: product.price,
-            stock: product.stock,
-            images, // product.images
-            id: product.id ? product.id : -1,
-            idStore: product.store_id ? product.store_id : -1,
-            isFavorite: product.isFavorite ? product.isFavorite : false,
-            };
+        },
+        error => {
+          this.toastRef.open(
+            'Error al cargar los productos, Recargue la página',
+            { color: '#ffffff', background: '#900909c2'}
 
-        } );
-
-        console.log('products loaded: ', this.productCards.products);
-
-      });
+          );
+          console.log('error al cargar productos');
+          console.log(error);
+        }
+      );
 
     }
 
@@ -408,29 +418,44 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     const idProduct = event.product.id;
     const quantity = event.quantity;
 
-    this.paymentProcessService.addProductToCart(idProduct, quantity).subscribe( resp => {
+    this.productDetail.disableButtonCart(true);
 
-      if (resp.success) {
+    this.paymentProcessService.addProductToCart(idProduct, quantity).subscribe(
+      resp => {
 
-        this.dialog.open(SuccessComponent, {
-          width: '250px',
-          data: { title: 'Producto agregado al carrito', message: resp.message}
-        });
+        if (resp.success) {
 
-        const products = resp.data;
+          const products = resp.data;
 
-        this.menuOptions = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
+          this.menuOptionsShopping = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
 
-      }else{
+          this.toastRef.open(
+            'Producto agregado al carrito'
+          );
 
-        this.dialog.open(SuccessComponent, {
-          width: '250px',
-          data: { title: 'Producto no agregado al carrito', message: resp.message }
-        });
+          this.productDetail.disableButtonCart();
 
+        }else{
+
+          this.toastRef.open(
+            'Producto no agregado al carrito',
+            { color: '#ffffff', background: '#900909c2'}
+
+          );
+
+          this.productDetail.disableButtonCart();
+
+        }
+
+      },
+      error => {
+        this.toastRef.open(
+          'Producto no agregado al carrito',
+          { color: '#ffffff', background: '#900909c2'}
+        );
+        this.productDetail.disableButtonCart();
       }
-
-    } );
+    );
 
   }
 
@@ -475,9 +500,40 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         this.StoreName = storeResp.name;
 
-        // this.imgsBanners = {
-        //   m: storeResp.banner_image[0]
-        // }
+        // console.log(storeResp);
+
+        if (storeResp.banner_image.length > 0) {
+
+          const storeBanners = storeResp.banner_image;
+
+          // console.log('storeBanners');
+          // console.log(storeBanners);
+
+          const sizes = Object.keys(storeBanners[0].src_size);
+
+          // this.imgsBanners = {
+          //   m: storeBanners[0].src_size.xl
+          // };
+
+          if (sizes.length > 1) {
+
+            this.imgsBanners = {
+              m: storeBanners[0].src_size.xl,
+              s: storeBanners[0].src_size.s
+            };
+
+          } else if (sizes.length === 1){
+            this.imgsBanners = {
+              m: storeBanners[0].src_size.xl
+            };
+          }
+
+          // console.log('this.imgsBanners');
+          // console.log(this.imgsBanners);
+
+
+        }
+
 
         this.setSidebarOptions(idStore, storeResp);
         this.setBreadcrumbOptions(idStore, storeResp);
@@ -617,7 +673,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     this.breadcrumb = [
       {
         title: 'inicio',
-        routerLink: ['/']
+        routerLink: ['/home']
       },
       {
         title: 'farmacias',
@@ -632,6 +688,15 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     };
   }
 
+  public scrollToElement(element) {
 
+    element.scrollIntoView(
+      {
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest'
+      }
+    );
+  }
 
 }

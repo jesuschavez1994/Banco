@@ -50,14 +50,20 @@
         word-break: break-word;
       }
 
-      .info {
-        font-size: 11px;
-        line-height: 17px;
+      .more-info{
+        display: flex;
+        flex-direction: column;
 
-        strong {
-          font-weight: 600;
+        .info {
+          font-size: 11px;
+          line-height: 17px;
+
+          strong {
+            font-weight: 600;
+          }
         }
       }
+
 
     }
 
@@ -68,6 +74,22 @@
 
   }
 
+}
+
+.list-item.expanded{
+  .item{
+    .content{
+      width: 100%;
+
+      .more-info{
+        flex-direction: row;
+        align-items: baseline;
+        // justify-content: space-between;
+        row-gap: 6px;
+        column-gap: 45px;
+      }
+    }
+  }
 }
 
 // flex-wrap: wrap; //

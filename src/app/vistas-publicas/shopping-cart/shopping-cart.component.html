@@ -4,75 +4,117 @@
 
     <h1 class="text-capitalize">Carrito de compra</h1>
 
-    <div class="tab-container">
+    <ng-container *ngIf="ordersLists.length > 0">
 
-      <ul class="tab-menu">
+      <div class="tab-container">
 
-        <li
-          class="tab-item"
-          [ngClass]="{'active': tabSelected === 1 || tabSelected === 3}"
-          (click)="filterByTab(1)"
-        >
-          pedidos
-        </li>
-
-        <li
-          class="tab-item"
-          [ngClass]="{'active': tabSelected === 2}"
-          (click)="filterByTab(2)"
-        >
-          compras
-        </li>
-
-      </ul>
-
-      <div class="tab-content" [ngClass]="{'justify--init': tabSelected === 3 }">
-
-        <!-- Order -> list, editor, e invoice -->
         <ng-container *ngIf="tabSelected === 1 || tabSelected === 2">
 
-          <!-- Order list by business -->
-          <div class="order-list">
-            <app-order-list
-              (selected)="selectedOrderList($event)"
-              [orders]="ordersLists">
-            </app-order-list>
-          </div>
+          <ul class="tab-menu">
 
-          <div class="detail-content">
+            <li
+              class="tab-item"
+              [ngClass]="{'active': tabSelected === 1 }"
+              (click)="filterByTab(1)"
+            >
+              pedidos
+            </li>
 
-            <!-- Order editor -->
-            <ng-container *ngIf="tabSelected === 1">
+            <li
+              class="tab-item"
+              [ngClass]="{'active': tabSelected === 2}"
+              (click)="filterByTab(2)"
+            >
+              compras
+            </li>
 
-              <app-order-editor
-                [orders]="ordersListSelected.orders"
-                (purchaseAction)="purchaseAction($event)">
-              </app-order-editor>
-
-            </ng-container>
-
-            <!-- invoice -->
-            <ng-container *ngIf="tabSelected === 2">
-
-              <app-invoice></app-invoice>
-
-            </ng-container>
-
-          </div>
+          </ul>
 
         </ng-container>
 
-        <ng-container *ngIf="tabSelected === 3">
+        <div class="tab-content" [ngClass]="{'justify--init': tabSelected === 3 }">
 
-          <div class="order-payment-forms">
-            <app-order-payment-forms></app-order-payment-forms>
-          </div>
+          <!-- Order -> list, editor, e invoice -->
+          <ng-container *ngIf="tabSelected === 1 || tabSelected === 2">
 
-        </ng-container>
+            <!-- Order list by business -->
+            <div class="order-list">
+              <app-order-list
+                (selected)="selectedOrderList($event)"
+                [orders]="ordersLists"
+              >
+              </app-order-list>
+            </div>
+
+            <div class="detail-content">
+
+              <!-- Order editor -->
+              <ng-container *ngIf="tabSelected === 1">
+
+                <app-order-editor
+                  [orders]="ordersListSelected.orders"
+                  (purchaseAction)="purchaseAction($event)">
+                </app-order-editor>
+
+              </ng-container>
+
+              <!-- invoice -->
+              <ng-container *ngIf="tabSelected === 2">
+
+                <app-invoice></app-invoice>
+
+              </ng-container>
+
+            </div>
+
+          </ng-container>
+
+          <ng-container *ngIf="tabSelected === 3">
+
+            <div class="order-payment-forms">
+              <app-order-payment-forms
+                [buttonDisabled]="buttonDisabledForm"
+                (currentStep)="backProcessForm($event)"
+                (submitForm)="formData($event)">
+              </app-order-payment-forms>
+            </div>
+
+          </ng-container>
+
+          <ng-container *ngIf="tabSelected === 4">
+
+            <ng-container *ngIf="showFormToPay()">
+
+              <div class="order-payment-forms">
+
+                <div class="card-option-pay-redirect">
+
+                  <form method="post" [action]="currentPaymentData.mallTransaction.url" class="form">
+
+                    <input type="hidden" name="token_ws" [value]="currentPaymentData.mallTransaction.token" />
+
+                    <button
+                      class="button button--full-width"
+                      type="submit"
+                    >
+                      Continuar con el tipo de pago seleccionado
+                    </button>
+
+                  </form>
+
+                </div>
+
+              </div>
+
+            </ng-container>
+
+          </ng-container>
+
+        </div>
 
       </div>
 
-    </div>
+    </ng-container>
 
   </section>
 

@@ -1,0 +1,18 @@
+.modal {
+    position: relative !important;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    display: block;
+    width: 100%;
+    min-width: 365px;
+    max-width: 365px;
+    height: 100%;
+    overflow: hidden;
+    outline: 0;
+    text-align: center;
+    @media (max-width: 425px) {
+        min-width: 100%;
+        max-width: 100%;
+    }
+}

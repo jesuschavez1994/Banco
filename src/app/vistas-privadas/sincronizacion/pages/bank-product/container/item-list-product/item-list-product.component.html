@@ -1,0 +1,89 @@
+<!-- 
+    <li class="col-md-12 item product" id="{{index}}">
+        <div    class="product-item-info card"
+                >
+                <i  class="material-icons position-absolute left-85 top-5 icon-gris" 
+                    name=" loop icon"
+                    title="sincronizar"
+                    [routerLink]="['/my-store/sync-this-product', MyProduct[index].id]"
+                    >
+                    loop
+                </i>
+                <span class="product-image-container" style="width:240px;">
+                    <span class="product-image-wrapper">
+                        <img    [src]="item.images[0].src_size.xl | imgProductLoad" 
+                                class="product-image-photo lazyload"   
+                                alt="{{item.name}}"
+                                style="display: block;"
+                                *ngIf="item.images.length >= 1"    
+                        >
+
+                        <img    src="assets/img/box.svg" 
+                                class="card-img-top" 
+                                alt="..." 
+                                *ngIf="item.images.length === 0"
+                        >
+                            
+                    </span>
+                </span>
+                <div class="card-body pb-0 pt-0">
+                    <p class="family-600 size-14 color-p" title="{{item.name}} ">
+                        {{item.name  }} 
+                     
+                    </p>
+        
+                    <p class="family-600 size-11 mb-0 detail-name card-text line" title="{{item.description}}">
+                        {{item.description | LimitarTexto:105 }} 
+                   
+                    </p>
+                </div>
+        </div>
+    </li> -->
+
+
+    <div class="products-container">
+
+        <ng-container *ngFor="let product of products | paginate: { id:'pagination', itemsPerPage: itemsPerPage, currentPage: p, totalItems: totalItems} ; let i = index">
+      
+          <article class="product">
+      
+            <div class="img">
+      
+              <img
+                [src]="product.images | imgFallback: 'box'"
+                [alt]="product.name"
+                onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
+              >
+              
+              <i  class="fas fa-sync-alt"
+                  [routerLink]="['/my-store/sync-this-product', MyProduct[i].id]"
+                  title="sincronizar"
+              ></i>
+    
+            </div>
+
+            <!-- ====== DETAIL PRODUCT ====== -->
+            <!-- ====== ====== ====== ====== -->
+    
+            <h3 class="name">
+              {{ product.name | excerpt: 66}}
+            </h3>
+    
+      
+          </article>
+      
+        </ng-container>
+    
+    </div>
+
+    <footer>
+        <pagination-controls
+          class="my-pagination"
+          id="pagination"
+          #paginationControls
+          previousLabel = "Anterior"
+          nextLabel = "Siguiente"
+          (pageChange)="pageChanged($event)"
+        >
+        </pagination-controls>
+      </footer>

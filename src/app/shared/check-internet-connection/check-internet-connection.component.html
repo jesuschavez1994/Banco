@@ -1,0 +1,32 @@
+<ng-container>
+
+    <section [ngClass]="{'contentAlert': !HiddenAlert, 'HiddenAlert': HiddenAlert}">
+
+        <div class="ToastAlert">
+            <div class="IconInner">
+                <div class="IconContainer">
+                    <svg width="100%" height="100%" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
+                        <path d="M12,2 C6.48,2 2,6.48 2,12 C2,17.52 6.48,22 12,22 C17.52,22 22,17.52 22,12 C22,6.48 17.52,2 12,2 Z M13,17 L11,17 L11,15 L13,15 L13,17 Z M13,13 L11,13 L11,7 L13,7 L13,13 Z" fill-rule="nonzero"></path>
+                      </svg>
+                </div>
+            </div>
+        </div>
+
+        <p class="textAlert"> There is no internet connection </p>
+
+        <button (click)="close()">
+            <div class="close">
+                <svg width="100%" height="100%" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
+                    <g stroke="none" stroke-width="1" fill-rule="evenodd">
+                        <polygon fill="none" opacity="0" points="2 2 22 2 22 22 2 22"></polygon>
+                        <polyline points="22 3.62398071 20.3760193 2 12 10.3760193 3.62398071 2 2 3.62398071 10.3760193 12 2 20.3760193 3.62398071 22 12 13.6239807 20.3760193 22 22 20.3760193 13.6239807 12"></polyline>
+                    </g>
+                </svg>
+            </div>
+        </button>
+
+    </section>
+    
+
+</ng-container>
+   

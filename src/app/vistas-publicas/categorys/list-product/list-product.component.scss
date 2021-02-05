@@ -1,0 +1,130 @@
+.main-container {
+    display: flex;
+    /* margin-bottom: 2%; */
+    font-family: 'Montserrat', sans-serif !important;
+    /*  @media(max-width: 1024px) {
+        width: calc(100% - 50px);
+    } */
+    .cty-header {
+        padding: 35px 0 15px 10px;
+        .cty-title {
+            text-transform: capitalize;
+            color: #1D1D1B;
+            display: inline-block;
+            font-size: 1.8rem;
+            font-weight: normal;
+            margin-right: 10px;
+            margin-bottom: 5px;
+        }
+        hr {
+            margin: 5px;
+        }
+        .cty-link {
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: lighter;
+            color: black;
+        }
+    }
+    main {
+        width: 100%;
+        .list-items {
+            ul {
+                padding: 0;
+                margin: 0;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: start;
+                /*  display: grid;
+                flex-wrap: wrap;
+                grid-template-columns: auto auto auto auto; */
+                @media (max-width: 1000px) {
+                    justify-content: center;
+                }
+            }
+            .item {
+                margin: 0;
+                @media(max-width: 551px) {
+                    margin: 0 auto;
+                }
+                padding: 14px;
+                display: inline-block;
+                width: 175px;
+                height: 365px;
+                min-width: 250px !important;
+                min-height: 365px !important;
+                max-height: 365px;
+                .card {
+                    display: inline-block;
+                    width: 80%;
+                    margin: 0;
+                    background-color: #fff;
+                    width: 100%;
+                    border: none;
+                    .material-icons {
+                        display: none;
+                    }
+                    &:hover {
+                        transform: scale(1.03);
+                        cursor: pointer;
+                        transition: all 0.3s;
+                    }
+                    i {
+                        z-index: 10;
+                    }
+                    .icon-gris {
+                        color: #aeaeb8 !important;
+                    }
+                    .product-image-container {
+                        display: block;
+                        max-width: 100%;
+                        img {
+                            width: 215px;
+                            height: 245px;
+                            margin-bottom: 5px;
+                        }
+                    }
+                    .card-body {
+                        color: black;
+                        font-weight: 600;
+                        width: 215px;
+                        padding: 12px 0 0 0;
+                        font-size: 12px;
+                        p {
+                            min-height: 45px;
+                            text-transform: capitalize;
+                            line-height: 15px;
+                            margin-bottom: 4px;
+                        }
+                        .price {
+                            font-size: 1.6em;
+                        }
+                    }
+                }
+            }
+        }
+        .pg-item {
+            margin: 15px auto;
+            text-align: center;
+            .pagination {
+                color: #007bff;
+                display: inline-flex;
+                width: auto;
+                max-width: 75%;
+                margin: 2rem auto;
+                @media(max-width: 768px) {
+                    max-width: 100%;
+                    .page-item.opt {
+                        display: none;
+                    }
+                }
+            }
+        }
+        .empty-disclaimer {
+            margin-top: 80px;
+            font-size: 1.4rem;
+            width: 80vw;
+            text-align: center;
+        }
+    }
+}

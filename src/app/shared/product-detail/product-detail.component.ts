@@ -16,6 +16,7 @@ export class ProductDetailComponent implements OnInit, OnChanges {
 
   buttonTitle = 'Añadir al carrito';
   quantityProduct = 0;
+  isDisableButtonCart = false;
 
   constructor(
   ) { }
@@ -71,6 +72,10 @@ export class ProductDetailComponent implements OnInit, OnChanges {
       isFavorite: productResp[`${atributtesNames[7]}`] ? true : false,
     };
 
+  }
+
+  public disableButtonCart( disable: boolean = false) {
+    this.isDisableButtonCart = disable;
   }
 
 }

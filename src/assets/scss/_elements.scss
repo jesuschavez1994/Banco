@@ -86,14 +86,24 @@ button:focus {
   }
 
   select,
-  input{
-    width: 100%;
+  input {
     border: 1px solid $color__border-gray--medium;
     border-radius: 5px;
     font-size: 13px;
     padding: 12px 9px;
     text-transform: capitalize;
 
+  }
+
+  select,
+  input:not(.radio-default) {
+    width: 100%;
+  }
+
+  input[type="radio"]{
+    &.radio-default:not(:checked)+label {
+      padding-left: 0px !important;
+    }
   }
 
   .input-container {
@@ -127,5 +137,20 @@ button:focus {
     font-size: 13px;
     padding: 12px 9px;
     text-transform: uppercase;
+
+    &.disabled {
+      opacity: 0.7;
+    }
   }
 }
+
+.button {
+  &.disabled {
+    opacity: 0.7;
+  }
+}
+
+.pointer-event--none{
+  pointer-events: none;
+}
+

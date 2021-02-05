@@ -6,6 +6,7 @@ import { PipesModule } from '../../pipes/pipes.module';
 import { SharedModule } from '../../shared/shared.module';
 import { PanelComponent } from './panel.component';
 import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
+import { SalesComponent } from '../sales/sales.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component'
     PanelComponent,
     MyAccountComponent,
     ShoppingCartComponent,
+    SalesComponent,
   ],
   imports: [
     CommonModule,

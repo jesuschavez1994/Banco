@@ -25,29 +25,49 @@ import { OrderPaymentFormsComponent } from './order-payment-forms/order-payment-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownButtonComponent } from './dropdown-button/dropdown-button.component';
 import { DropdownIconComponent } from './dropdown-icon/dropdown-icon.component';
+import { InvoiceBComponent } from './invoice-b/invoice-b.component';
+import { CardShimmerComponent } from './card-shimmer/card-shimmer.component';
+import { ToastComponent } from '../modals/toast/toast.component';
+import { BannerShimmerComponent } from './banner-shimmer/banner-shimmer.component';
+import { SidebarListShimmerComponent } from './sidebar-list-shimmer/sidebar-list-shimmer.component';
+import { PublicNavbarComponent } from "./public-navbar/public-navbar.component";
+import { SpinnerComponent} from './spinner/spinner/spinner.component';
+import { CheckInternetConnectionComponent } from "./check-internet-connection/check-internet-connection.component";
+import { SidebarHomeComponent } from "./sidebar-home/sidebar-home.component";
+import { SliderComponent } from "./slider/slider.component";
+import { NavOptionsComponent } from "./public-navbar/nav-options/nav-options.component";
+import { CategoryLinkComponent } from "./public-navbar/category-link/category-link.component";
+import { NavBrandComponent } from "./public-navbar/nav-brand/nav-brand.component";
+import { AvatarComponent } from "./public-navbar/avatar/avatar.component";
+import { ButtonShopComponent } from "./public-navbar/button-shop/button-shop.component";
+import { ModalRegisterComponent } from "./modal-register/modal-register.component";
+import { SearchComponent } from "./public-navbar/search/search.component";
+import { BtnActionComponent } from './btn-action/btn-action.component';
+
+
 
 @NgModule({
     declarations: [
-      NavbarComponent,
-      NavbarToHomeComponent,
-      CategoriasComponent,
-      NavbarstoreComponent,
-      SidebarMenuComponent,
-      SidebarListComponent,
-      BreadcrumbComponent,
-      SidebarListButtonComponent,
-      BannerComponent,
-      ProductsCardsComponent,
-      SearchBarComponent,
-      ImagePreviewGalleryComponent,
-      ProductDetailComponent,
-      QuantityCounterComponent,
-      OrderListComponent,
-      OrderEditorComponent,
-      InvoiceComponent,
-      OrderPaymentFormsComponent,
-      DropdownButtonComponent,
-      DropdownIconComponent,
+      NavbarComponent, NavbarToHomeComponent,
+      CategoriasComponent, NavbarstoreComponent,
+      SidebarMenuComponent, SidebarListComponent,
+      BreadcrumbComponent, SidebarListButtonComponent,
+      BannerComponent, ProductsCardsComponent,
+      SearchBarComponent, ImagePreviewGalleryComponent,
+      ProductDetailComponent, QuantityCounterComponent,
+      OrderListComponent, OrderEditorComponent,
+      InvoiceComponent, OrderPaymentFormsComponent,
+      DropdownButtonComponent, DropdownIconComponent,
+      InvoiceBComponent, CardShimmerComponent,
+      ToastComponent, BannerShimmerComponent,
+      SidebarListShimmerComponent,PublicNavbarComponent,
+      SpinnerComponent, CheckInternetConnectionComponent,
+      SidebarHomeComponent,SliderComponent,
+NavOptionsComponent,CategoryLinkComponent,
+NavBrandComponent,AvatarComponent,
+ButtonShopComponent,ModalRegisterComponent,
+ModalRegisterComponent,SearchComponent, BtnActionComponent,
+
     ],
     imports: [
       // APP_ROUTING,
@@ -57,6 +77,7 @@ import { DropdownIconComponent } from './dropdown-icon/dropdown-icon.component';
       FormsModule,
       ReactiveFormsModule,
       NgxPaginationModule,
+      // ComponentsModule
 
     ],
     exports: [
@@ -70,7 +91,16 @@ import { DropdownIconComponent } from './dropdown-icon/dropdown-icon.component';
       OrderListComponent, OrderEditorComponent,
       InvoiceComponent, OrderPaymentFormsComponent,
       DropdownButtonComponent, DropdownIconComponent,
+      InvoiceBComponent, CardShimmerComponent,
+      ToastComponent, BannerShimmerComponent,
+      SidebarListShimmerComponent, PublicNavbarComponent,
+      SpinnerComponent, CheckInternetConnectionComponent,
+      SidebarHomeComponent,SliderComponent,
+NavOptionsComponent,CategoryLinkComponent,
+NavBrandComponent,AvatarComponent,
+ButtonShopComponent,ModalRegisterComponent,
+ModalRegisterComponent,SearchComponent,
+
     ]
 })
-
-export class SharedModule { }
+export class SharedModule {}
