@@ -17,7 +17,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   @Input() debounce = 3000;
   /*********/
   // POR DEFECTO MUESTRA EL FILTRO
-  @Input() showFilter: boolean = true;
+  @Input() showFilter = true;
   /*********/
   @Output() sidebarExpand = new EventEmitter<boolean>();
   @Output() search = new EventEmitter<string | any>();
@@ -41,9 +41,11 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
 
   public textTosearch() {
     const searchInput = this.searchInput.nativeElement;
+    let selectFilter;
+
     /***** */
     if(this.showFilter){
-      const selectFilter = this.selectFilter.nativeElement;
+      selectFilter = this.selectFilter.nativeElement;
     }
     /******/
     let timeoutSearchInput;
@@ -58,14 +60,14 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
             value: searchInput.value,
           //  filter: selectFilter.value
           });
-    /***** */
-        if(this.showFilter){
-          this.search.emit({
-            value: searchInput.value,
-            filter: selectFilter.value
-          });
-        }
-    /******/
+          /***** */
+          if(this.showFilter){
+            this.search.emit({
+              value: searchInput.value,
+              filter: selectFilter.value
+            });
+          }
+          /******/
         }, this.debounce
 
       );
@@ -75,17 +77,17 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     searchInput.onkeypress = () => {
       clearTimeout(timeoutSearchInput);
     };
-      /***** */
-      if(this.showFilter){
-        selectFilter.onchange = () => {
-          this.search.emit({
-            value: searchInput.value,
-            filter: selectFilter.value
-          });
-        };
-      }
-  /******/
-   
+
+    /***** */
+    if(this.showFilter){
+      selectFilter.onchange = () => {
+        this.search.emit({
+          value: searchInput.value,
+          filter: selectFilter.value
+        });
+      };
+    }
+    /******/
 
   }
 
