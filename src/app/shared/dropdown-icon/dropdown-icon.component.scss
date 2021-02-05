@@ -1,210 +1,165 @@
 @import 'src/assets/scss/style.scss';
-
-.dropdown--custom{
-  display: inline-block;
-  position: relative;
-
-
-  .dd-button {
-    min-height: 70px;
+.dropdown--custom {
     display: inline-block;
-    border-radius: 4px;
-    cursor: pointer;
-    white-space: nowrap;
-    padding-left: 15px;
-    padding-right: 15px;
-
-    display: flex;
-    align-items: center;
-
     position: relative;
-
-    i {
-      font-size: 21px;
-      transition: all .3s;
-
-      &.empty{
-        color: $color__text-gray--medium;
-      }
-    }
-
-    .items-counter{
-      width: 22px;
-      height: 22px;
-      // background: #efefef;
-      background: $color__background-gray;
-      border-radius: 50%;
-
-      position: absolute;
-      top: 10px;
-      right: 0;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: all .3s;
-
-      p{
-        color: $color__background-black;
-        font-size: 10px;
-        font-weight: 700;
-      }
-
-      &.big{
-        width: 26px;
-        height: 26px;
-      }
-
-      .more-simbol{
+    .dd-button {
+        /* Porqué tanta altura??*/
+        min-height: 70px;
+        /*----------------------*/
+        display: inline-block;
+        border-radius: 4px;
+        cursor: pointer;
+        white-space: nowrap;
+        padding-left: 15px;
+        padding-right: 15px;
         display: flex;
         align-items: center;
-
-        position: absolute;
-        top: 2px;
-        right: 0px;
-
-        .segment{
-          width: 8px;
-          height: 2px;
-          background: $color__background-black;
-
-          &:last-child{
-            transform: rotate(90deg);
+        position: relative;
+        i {
+            font-size: 21px;
+            transition: all .3s;
+            &.empty {
+                color: $color__text-gray--medium;
+            }
+        }
+        .items-counter {
+            width: 22px;
+            height: 22px;
+            // background: #efefef;
+            background: $color__background-gray;
+            border-radius: 50%;
             position: absolute;
-          }
+            top: 10px;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all .3s;
+            p {
+                color: $color__background-black;
+                font-size: 10px;
+                font-weight: 700;
+            }
+            &.big {
+                width: 26px;
+                height: 26px;
+            }
+            .more-simbol {
+                display: flex;
+                align-items: center;
+                position: absolute;
+                top: 2px;
+                right: 0px;
+                .segment {
+                    width: 8px;
+                    height: 2px;
+                    background: $color__background-black;
+                    &:last-child {
+                        transform: rotate(90deg);
+                        position: absolute;
+                    }
+                }
+            }
         }
-      }
     }
-  }
-
-
-  .dd-input {
-    display: none;
-    transition: all .3s;
-
-  }
-
-  .dd-input + .dd-menu {
-    display: none;
-  }
-
-  // .dd-input:checked + .dd-menu {
-  //   display: block;
-  // }
-
-
-  .dd-menu {
-    max-height: 384px;
-    overflow: auto;
-    width: 240px;
-    position: absolute;
-    top: 100%;
-    border-radius: 4px;
-    padding: 0;
-    margin: 2px 0 0 0;
-    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
-    background-color: $color__background-white;
-    list-style-type: none;
-
-    &.left{
-      right: 0%;
+    .dd-input {
+        display: none;
+        transition: all .3s;
     }
-
-    &.expanded{
-      display: block !important;
+    .dd-input+.dd-menu {
+        display: none;
     }
-
-    li {
-      width: 100%;
-      cursor: pointer;
-      text-transform: capitalize;
-
-      display: flex;
-      justify-content: space-between;
-
-      &.divider{
+    // .dd-input:checked + .dd-menu {
+    //   display: block;
+    // }
+    .dd-menu {
+        max-height: 384px;
+        overflow: auto;
+        width: 240px;
+        position: absolute;
+        top: 100%;
+        border-radius: 4px;
         padding: 0;
-        border-bottom: 1px solid $color__background-gray--medium;
-      }
-
-      &.lookMoreOption{
-        &:hover {
-          background-color: $color__background-gray;
-          border-radius: 4px;
+        margin: 2px 0 0 0;
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+        background-color: $color__background-white;
+        list-style-type: none;
+        &.left {
+            right: 0%;
         }
-      }
-
-      .title{
-        padding: 10px 10px;
-        padding-left: 20px;
-
-        &:hover {
-          background-color: $color__background-gray;
-          border-radius: 4px;
+        &.expanded {
+            display: block !important;
         }
-      }
-
-      .icon-button{
-        min-width: fit-content;
-        padding: 10px 10px;
-        padding-right: 20px;
-        display: flex;
-        align-items: center;
-
-        i{
-          font-size: 17px;
+        li {
+            width: 100%;
+            cursor: pointer;
+            text-transform: capitalize;
+            display: flex;
+            justify-content: space-between;
+            &.divider {
+                padding: 0;
+                border-bottom: 1px solid $color__background-gray--medium;
+            }
+            &.lookMoreOption {
+                &:hover {
+                    background-color: $color__background-gray;
+                    border-radius: 4px;
+                }
+            }
+            .title {
+                padding: 10px 10px;
+                padding-left: 20px;
+                &:hover {
+                    background-color: $color__background-gray;
+                    border-radius: 4px;
+                }
+            }
+            .icon-button {
+                min-width: fit-content;
+                padding: 10px 10px;
+                padding-right: 20px;
+                display: flex;
+                align-items: center;
+                i {
+                    font-size: 17px;
+                }
+                &:hover {
+                    background-color: $color__background-gray;
+                    border-radius: 4px;
+                }
+            }
+            a {
+                color: $color__text-main;
+                display: block;
+                margin: -10px -20px;
+                padding: 10px 20px;
+                text-transform: capitalize;
+            }
         }
-
-        &:hover {
-          background-color: $color__background-gray;
-          border-radius: 4px;
+        &::-webkit-scrollbar {
+            width: 0.4em;
+            height: 0.8em;
         }
-      }
-
-      a {
-        color: $color__text-main;
-        display: block;
-        margin: -10px -20px;
-        padding: 10px 20px;
-        text-transform: capitalize;
-      }
-
-
+        &::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 1em;
+        }
+        &::-webkit-scrollbar-thumb:active {
+            background-color: #999999;
+        }
+        &::-webkit-scrollbar-thumb:hover {
+            background: #b3b3b3;
+            box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+        }
+        /* Estilos track de scroll */
+        &::-webkit-scrollbar-track {
+            background: #e1e1e1;
+            border-radius: 4px;
+            display: none;
+        }
+        &::-webkit-scrollbar-track:hover,
+        &::-webkit-scrollbar-track:active {
+            background: #d4d4d4;
+        }
     }
-
-    &::-webkit-scrollbar {
-      width: 0.4em;
-      height: 0.8em;
-
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #ccc;
-      border-radius: 1em;
-    }
-
-    &::-webkit-scrollbar-thumb:active {
-      background-color: #999999;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: #b3b3b3;
-      box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Estilos track de scroll */
-    &::-webkit-scrollbar-track {
-      background: #e1e1e1;
-      border-radius: 4px;
-      display: none;
-    }
-
-    &::-webkit-scrollbar-track:hover,
-    &::-webkit-scrollbar-track:active {
-      background: #d4d4d4;
-    }
-  }
-
-
-
 }
