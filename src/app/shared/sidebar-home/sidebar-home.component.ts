@@ -4,6 +4,7 @@ import { UsuarioService } from "@services/usuario/usuario.service";
 import { HomeServiceService } from "../../vistas-publicas/services/home-service.service";
 import {ModalRegisterComponent} from '@shared/modal-register/modal-register.component';
 import {MatDialog, MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DropdownOption, ClassIcon, ExtraButtonEmitter } from '@interfaces/components-options/dropdown.options.interface';
 
 @Component({
   selector: 'app-sidebar-home',
@@ -14,10 +15,36 @@ export class SidebarHomeComponent implements OnInit {
  @ViewChild('menuContainerFixed') menuContainerFixed: ElementRef;
  @ViewChild('configurationMenu') configurationMenu: ElementRef;
  @Input() auth: boolean;
+ @Input() storeAct: boolean | string;
+
           userId: number | string;
           userImg: any;
           userName: string;
           userEmail: string;
+
+          
+  // Button DropDown - cart
+  classIcon: ClassIcon = {
+    class: 'fas fa-shopping-cart',
+    color: '#F09207',
+    extraButton: {
+      name: 'delete',
+      class: 'fas fa-trash',
+      color: '#f32323'
+    }
+  };
+  // Button DropDown - favorite
+  classIconFavorite: ClassIcon = {
+    class: 'far fa-heart',
+    color: '#F09207',
+    extraButton: {
+      name: 'delete',
+      class: 'fas fa-trash',
+      color: '#f32323'
+    }
+  };
+  @Input() menuOptions: DropdownOption[] = [];
+  @Input() menuOptionsFavorite: DropdownOption[] = [];
   constructor( public authService: StoreService,
                 public userService: UsuarioService,
                 public homeService: HomeServiceService,

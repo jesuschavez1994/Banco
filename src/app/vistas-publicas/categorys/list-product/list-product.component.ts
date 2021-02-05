@@ -209,7 +209,7 @@ ngOndestroy(){
          // Fixed, idsProduct solo debe  aceptar numeros para que la alerta no surja
          if(this.idsProduct[1] != undefined){
            this.titleSubcat = this.dataCategory[this.idsProduct[0]-1].subcategories[this.idsProduct[1]-1].name;
-
+         
          }else{
           this.titleSubcat = this.dataCategory[this.idsProduct[0]-1].name;
 
