@@ -5,10 +5,10 @@
 
             <!-- btn Cart -->
             <!--<app-button-shop class="btn-shop"></app-button-shop> -->
-            <app-dropdown-icon *ngIf="auth" class="btn-shop" [classIcon]="classIcon" [menuOptions]="menuOptions"></app-dropdown-icon>
+            <app-dropdown-icon *ngIf="auth && !storeAct" class="btn-shop" [classIcon]="classIcon" [menuOptions]="menuOptions"></app-dropdown-icon>
             <!-- btn Cart -->
             <!-- favorite btn -->
-            <app-dropdown-icon *ngIf="auth" class="btn-shop" [classIcon]="classIconFavorite" [menuOptions]="menuOptionsFavorite"></app-dropdown-icon>
+            <app-dropdown-icon *ngIf="auth && !storeAct" class="btn-shop" [classIcon]="classIconFavorite" [menuOptions]="menuOptionsFavorite"></app-dropdown-icon>
 
             <!-- favorite btn -->
             <!-- btn config -->
@@ -27,8 +27,11 @@
                 </button>
             <!-- btn config -->
             <!-- btn perfil -->
-            <button class="btn btn-primary button fredoka" *ngIf="auth" id="inisiar-sesion" [routerLink]="['/account']">
+            <button class="btn btn-primary button fredoka" *ngIf="auth && !storeAct" id="inisiar-sesion" [routerLink]="['/account']">
                     Mi perfil
+                </button>
+            <button class="btn btn-primary button fredoka" *ngIf="storeAct && auth" id="inisiar-sesion" [routerLink]="['/my-store/contact']">
+                    Tienda
                 </button>
             <!-- btn perfil -->
             <!-- Avatar -->

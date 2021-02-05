@@ -134,6 +134,7 @@
     .responsive--icon {
         cursor: pointer;
         width: 45px;
+        max-height: 35px;
         padding: 8px 13px;
         display: none;
     }
@@ -210,6 +211,35 @@
                     display: block !important;
                     padding-left: 0px !important;
                 }
+            }
+        }
+    }
+}
+
+:host::ng-deep.dd-button {
+    /* Porqué tanta altura??*/
+    min-height: initial !important;
+    /*----------------------*/
+    border-radius: 0;
+    cursor: pointer;
+    white-space: nowrap;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    display: inherit;
+    i {
+        font-size: 21px;
+        transition: all .3s;
+        color: #1D1D1B !important;
+        &.empty,
+        &:hover {
+            color: #f09207 !important;
+        }
+        &.fa-shopping-cart {
+            font-size: 19px;
+            &::before {
+                position: relative;
+                top: 0;
+                left: -2px;
             }
         }
     }

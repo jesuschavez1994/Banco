@@ -49,7 +49,7 @@
                     </li>
 
 
-                    <li id="{{item}}" [ngClass]="{'active':  item == listaProductos.current_page}" (click)="getProductsPG($event.target.parentElement.parentElement,$event.target.id)" class="page-item " *ngFor="let item of pgOptions; let ind = index ">
+                    <li id="{{item}}" [ngClass]="{'active':  item == listaProductos.current_page}" (click)="getProductsPG($event.target.parentElement.parentElement,$event.target.id)" class="page-item opt" *ngFor="let item of pgOptions; let ind = index ">
 
                         <a id="{{item}}" class="page-link">{{ind+1}}</a>
 

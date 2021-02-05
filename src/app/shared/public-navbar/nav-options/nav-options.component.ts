@@ -9,6 +9,7 @@ import { DropdownOption, ClassIcon, ExtraButtonEmitter } from '@interfaces/compo
 })
 export class NavOptionsComponent implements OnInit {
   @Input() auth: boolean;
+  @Input() storeAct: boolean | string;
   constructor(private modal : MatDialog) { }
 
   // Button DropDown - cart
@@ -23,7 +24,7 @@ export class NavOptionsComponent implements OnInit {
   };
   // Button DropDown - favorite
   classIconFavorite: ClassIcon = {
-    class: 'fas fa-heart',
+    class: 'far fa-heart',
     color: '#F09207',
     extraButton: {
       name: 'delete',

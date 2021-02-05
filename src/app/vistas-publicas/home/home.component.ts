@@ -16,7 +16,7 @@ import { ModalErrComponent} from '@shared/modal-err/modal-err.component';
 export class HomeComponent implements OnInit {
   @ViewChild('modalRegister') modalRegister: ElementRef;
     userLog: boolean;
-    
+    storeLog: boolean | string;
 
   constructor(  private homeService: HomeServiceService,
                 
@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 // ATRIBUTOS
   homeComp: CategoriesHome[];
   requestReady: boolean= false;
-
+  
 
 
 
@@ -44,9 +44,11 @@ export class HomeComponent implements OnInit {
     // });
     this.spinner.show();
      this.userLog = this.homeService.islog();
+     this.storeLog= this.homeService.storeActive();
      console.log('loggin',this.userLog); 
      this.homeService.obtProducts().subscribe(
         data=>{
+        
           console.log('request', data);
           this.spinner.hide();
           this.requestReady=true;

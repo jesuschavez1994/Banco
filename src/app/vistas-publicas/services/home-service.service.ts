@@ -51,6 +51,14 @@ public logout() {
   });
 }
 
-  }    
+public storeActive() {
+  if(typeof(localStorage.getItem('storeId')) == 'string' ){
+    return localStorage.getItem('storeId');
+  }else{
+    return false;
+  }
+}
+
+}    
 
  
