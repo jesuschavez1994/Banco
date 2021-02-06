@@ -23,8 +23,9 @@ export class PlanDetailsComponent implements OnInit {
   selectedPlanDetails: OrderNumberCreation = JSON.parse(
     this.localStorage.getItem('planDetails')
   );
-  // We use the value on the localStorage as fallback.
+  // We use the values on the localStorage as fallback.
   createdOrderDetails = JSON.parse(this.localStorage.getItem('createdOrder'));
+  paymentId = parseInt(this.localStorage.getItem('paymentId'));
 
   constructor(
     public dialog: MatDialog,
@@ -54,13 +55,24 @@ export class PlanDetailsComponent implements OnInit {
         this.createdOrderDetails.order.id
       )
       .subscribe((serverResponse: Payment) => {
-        this.subscriptionDataService
-          .createWebpayPayment(serverResponse.id)
-          .subscribe((paymentCredentials: PaymentCredentials) => {
-            this.waitingResponse = false;
-            this.localStorage.setItem('settingsActualPage', 'payment-details');
-            this.openDialog(paymentCredentials.url, paymentCredentials.token);
-          });
+        // The server will let us know if the API call was done before, and, if it was, the ID of the created payment must be in the localStorage.
+        if (serverResponse.message === 'ya se incio el proceso de pago') {
+          this.subscriptionDataService
+            .createWebpayPayment(this.paymentId)
+            .subscribe((paymentCredentials: PaymentCredentials) => {
+              this.waitingResponse = false;
+              this.openDialog(paymentCredentials.url, paymentCredentials.token);
+            });
+        } else {
+          // We keep the paymentId in the localStorage in case of error or page refresh.
+          this.localStorage.setItem('paymentId', serverResponse.id.toString());
+          this.subscriptionDataService
+            .createWebpayPayment(serverResponse.id)
+            .subscribe((paymentCredentials: PaymentCredentials) => {
+              this.waitingResponse = false;
+              this.openDialog(paymentCredentials.url, paymentCredentials.token);
+            });
+        }
       });
   }
 

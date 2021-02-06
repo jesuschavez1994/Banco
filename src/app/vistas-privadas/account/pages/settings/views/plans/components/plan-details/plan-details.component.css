@@ -114,6 +114,12 @@
   margin-left: 30px;
 }
 
+.payment-methods .flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ---------- Different colors for each plan stylings ---------- */
 .payment-details .plan-name.basic {
   color: #24c8af;

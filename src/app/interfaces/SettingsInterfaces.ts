@@ -32,13 +32,13 @@ export interface CreatedOrder {
 }
 
 export interface Payment {
-  order_id: number;
-  type: string;
-  amount: number;
-  updated_at: string;
-  created_at: string;
-  // ID de la orden realizada
-  id: number; //Payment ID
+  order_id?: number;
+  type?: string;
+  amount?: number;
+  updated_at?: string;
+  created_at?: string;
+  id?: number; //Payment ID,
+  message?: string;
 }
 
 export interface WebpayPayment {
