@@ -40,7 +40,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   imgsBanners: BannerOptions;
 
 // Navbar
-  userLog: boolean = false;
+  userLog = false;
 
   // sidebar-list
   expandSidebar = true;
@@ -383,11 +383,10 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
             } );
 
-            console.log('products loaded: ', this.productCards.products);
+            // console.log('products loaded: ', this.productCards.products);
 
-            // this.showShimmerProductsCards = false;
             this.productCards.toggleShimmer(false);
-            console.log('removing shimmer');
+
 
           } else{
             this.toastRef.open(

@@ -185,7 +185,7 @@
       </ng-container>
 
       <!-- fabricantes -->
-      <ng-container *ngIf="factories">
+      <!-- <ng-container *ngIf="factories">
         <ul class="list">
           <h4 class="title">
             fabricantes
@@ -216,10 +216,10 @@
           </ng-container>
 
         </ul>
-      </ng-container>
+      </ng-container> -->
 
       <!-- Delivery -->
-      <ng-container *ngIf="delivery">
+      <!-- <ng-container *ngIf="delivery">
 
         <ul class="list">
 
@@ -252,10 +252,10 @@
           </ng-container>
 
         </ul>
-      </ng-container>
+      </ng-container> -->
 
       <!-- marcas -->
-      <ng-container *ngIf="marks">
+      <!-- <ng-container *ngIf="marks">
         <ul class="list">
           <h4 class="title">
             marca
@@ -286,54 +286,56 @@
           </ng-container>
 
         </ul>
+      </ng-container> -->
+
+
+
+      <!-- Probando -->
+      <ng-container *ngIf="optionsFilters">
+
+        <ng-container *ngFor="let list of optionsFilters">
+
+          <ul class="list">
+
+            <h4 class="title">
+              {{list.title}}
+            </h4>
+
+            <ng-container *ngFor="let option of list.options; index as inx">
+
+              <div (click)="selectOptionsFilter2(option, list)">
+
+                <li>
+
+                  <input [type]="list.type === 'multiple' ? 'radio' : 'checkbox'"
+                    id="{{list.title | strReplace}}-{{inx}}"
+                    name="{{list.title | strReplace}}-{{inx}}"
+                    [checked]="option.isSelected"
+                  >
+
+                  <label for="{{list.title | strReplace}}-{{inx}}">
+                    <a>
+                      {{option.name}} ({{option.totalFounds}})
+                    </a>
+                  </label>
+
+                </li>
+
+              </div>
+
+            </ng-container>
+
+          </ul>
+
+        </ng-container>
+
       </ng-container>
-
-
 
 
     </nav>
 
 
-    <!-- Probando -->
-    <ng-container *ngIf="filterrOptions">
 
-      <ng-container *ngFor="let list of filterrOptions">
-
-        <ul class="list">
-
-          <h4 class="title">
-            {{list.title}}
-          </h4>
-
-          <ng-container *ngFor="let option of list.options; index as inx">
-
-            <div (click)="selectOptionsFilter2(option, list)">
-
-              <li>
-
-                <input [type]="list.type === 'multiple' ? 'radio' : 'checkbox'"
-                  id="{{list.title | strReplace}}-{{inx}}"
-                  name="{{list.title | strReplace}}-{{inx}}"
-                  [checked]="option.isSelected"
-                >
-
-                <label for="{{list.title | strReplace}}-{{inx}}">
-                  <a>
-                    {{option.name}} ({{option.totalFounds}})
-                  </a>
-                </label>
-
-              </li>
-
-            </div>
-
-          </ng-container>
-
-        </ul>
-
-      </ng-container>
-
-    </ng-container>
 
   </aside>
 
