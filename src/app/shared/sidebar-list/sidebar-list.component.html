@@ -184,136 +184,31 @@
 
       </ng-container>
 
-      <!-- fabricantes -->
-      <!-- <ng-container *ngIf="factories">
-        <ul class="list">
-          <h4 class="title">
-            fabricantes
-          </h4>
-
-          <ng-container *ngFor="let factory of factories; index as inx">
-
-            <div (click)="selectOptionsFilter(factory.name, 'factoriesSelected', 'fabricantes')">
-
-              <li>
-
-                <input type="checkbox"
-                  id="factory-{{inx}}"
-                  name="factory-{{inx}}"
-                  [checked]="factoriesSelected.indexOf(factory.name)  !== -1"
-                >
-
-                <label for="factory-{{inx}}">
-                  <a>
-                    {{factory.name}} ({{factory.totalFounds}})
-                  </a>
-                </label>
-
-              </li>
-
-            </div>
-
-          </ng-container>
-
-        </ul>
-      </ng-container> -->
-
-      <!-- Delivery -->
-      <!-- <ng-container *ngIf="delivery">
-
-        <ul class="list">
-
-          <h4 class="title">
-            delivery
-          </h4>
-
-          <ng-container *ngFor="let delivery of delivery; index as inx">
-
-            <div (click)="selectOptionsFilter(delivery.name, 'deliverySelected', 'delivery', true)">
-
-              <li>
-
-                <input type="radio"
-                  id="delivery-{{inx}}"
-                  name="delivery-option"
-                  [checked]="deliverySelected.indexOf(delivery.name)  !== -1"
-                >
-
-                <label for="delivery-{{inx}}">
-                  <a>
-                    {{delivery.name}} ({{deliverySelected.indexOf(delivery.name)  !== -1}})
-                  </a>
-                </label>
-
-              </li>
-
-            </div>
-
-          </ng-container>
-
-        </ul>
-      </ng-container> -->
-
-      <!-- marcas -->
-      <!-- <ng-container *ngIf="marks">
-        <ul class="list">
-          <h4 class="title">
-            marca
-          </h4>
-
-          <ng-container *ngFor="let mark of marks; index as inx">
-
-            <div (click)="selectOptionsFilter(mark.name, 'marksSelected', 'marcas')">
-
-              <li>
-
-                <input type="checkbox"
-                  id="mark-{{inx}}"
-                  name="mark-{{inx}}"
-                  [checked]="marksSelected.indexOf(mark.name)  !== -1"
-                >
-
-                <label for="mark-{{inx}}">
-                  <a>
-                    {{mark.name}} ({{mark.totalFounds}})
-                  </a>
-                </label>
-
-              </li>
-
-            </div>
-
-          </ng-container>
-
-        </ul>
-      </ng-container> -->
-
-
-
       <!-- Probando -->
       <ng-container *ngIf="optionsFilters">
 
-        <ng-container *ngFor="let list of optionsFilters">
+        <ng-container *ngFor="let filter of optionsFilters">
+
 
           <ul class="list">
 
             <h4 class="title">
-              {{list.title}}
+              {{filter.title}}
             </h4>
 
-            <ng-container *ngFor="let option of list.options; index as inx">
+            <ng-container *ngFor="let option of getFilter(filter); index as inx">
 
-              <div (click)="selectOptionsFilter2(option, list)">
+              <div (click)="selectOptionsFilter2(option, filter)">
 
                 <li>
 
-                  <input [type]="list.type === 'multiple' ? 'radio' : 'checkbox'"
-                    id="{{list.title | strReplace}}-{{inx}}"
-                    name="{{list.title | strReplace}}-{{inx}}"
+                  <input [type]="filter.type === 'multiple' ? 'radio' : 'checkbox'"
+                    id="{{filter.title | strReplace}}-{{inx}}"
+                    name="{{filter.title | strReplace}}-{{inx}}"
                     [checked]="option.isSelected"
                   >
 
-                  <label for="{{list.title | strReplace}}-{{inx}}">
+                  <label for="{{filter.title | strReplace}}-{{inx}}">
                     <a>
                       {{option.name}} ({{option.totalFounds}})
                     </a>
@@ -327,6 +222,13 @@
 
           </ul>
 
+
+          <!-- <ng-container
+           [ngTemplateOutlet]="filterTemplate"
+           [ngTemplateOutletContext]="{filter: getFilter(filter)}"
+          >
+          </ng-container> -->
+
         </ng-container>
 
       </ng-container>
@@ -334,9 +236,43 @@
 
     </nav>
 
-
-
-
   </aside>
 
 </ng-container>
+
+<ng-template #filterTemplate let-filter='filter'>
+
+  <ul class="list">
+
+    <h4 class="title">
+      {{filter.title}}
+    </h4>
+
+    <ng-container *ngFor="let option of filter.options; index as inx">
+
+      <div (click)="selectOptionsFilter2(option, filter)">
+
+        <li>
+
+          <input [type]="filter.type === 'multiple' ? 'radio' : 'checkbox'"
+            id="{{filter.title | strReplace}}-{{inx}}"
+            name="{{filter.title | strReplace}}-{{inx}}"
+            [checked]="option.isSelected"
+          >
+
+          <label for="{{filter.title | strReplace}}-{{inx}}">
+            <a>
+              {{option.name}} ({{option.totalFounds}})
+            </a>
+          </label>
+
+        </li>
+
+      </div>
+
+    </ng-container>
+
+  </ul>
+
+</ng-template>
+

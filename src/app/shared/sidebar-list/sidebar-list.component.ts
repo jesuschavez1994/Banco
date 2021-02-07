@@ -64,7 +64,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     },
     {
       filterId: 2,
-      title: 'categorias3', // Titilo del listado de filtro
+      title: 'sub categorías', // Titilo del listado de filtro
       type: 'multiple', // Determina si es de opción multiple
       paramName: 'sub-categoria', // Determina el queryParam a agregar
       parentFilterId: 1, // Determinamos con el nombre el listado de filtro a vinculo con este listado de filtro
@@ -85,7 +85,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
         },
         {
           optionId: 3,
-          parentOptionId: 1,
+          parentOptionId: 2,
           name: 'labial3',
           totalFounds: 200,
           isSelected: false
@@ -583,7 +583,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     queryParams = {};
 
-     // Marca como check o no
+    // Marca como check o no
 
     console.log('option');
     console.log(option);
@@ -592,6 +592,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     console.log(list);
 
     if (list.type === 'multiple') {
+
       option.isSelected = option.isSelected ? false : true;
 
       if (list.parentFilterId) { // se ejecuta cuando la lista determina que sus opciones dependen de una lista padre
@@ -699,6 +700,62 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       [],
       navigationOptions
     );
+
+  }
+
+  public getFilter( filter ) {
+
+    console.log('getFilter');
+    console.log(filter);
+
+    if (filter.parentFilterId) {
+
+      console.log('filter.parentFilterId');
+      console.log(filter.parentFilterId);
+
+      const parentFilter = this.optionsFilters.find( optionsFilter => {
+        return optionsFilter.filterId === filter.parentFilterId;
+      });
+
+      console.log('parentFilter');
+      console.log(parentFilter);
+
+      const parentOption = parentFilter.options.find ( parentFilterOption => {
+        return parentFilterOption.isSelected;
+      });
+
+      console.log('parentOption');
+      console.log(parentOption);
+
+      // Si encuentra una opción del parent Filter seleccionada
+      // Si es undefined es porque todos son false, es decir no están seleccionadas
+      if (parentOption) {
+
+        const filterOptions = filter.options.filter(filterOption => {
+          return filterOption.parentOptionId === parentOption.optionId;
+        });
+
+
+        console.log('filterOptions');
+        console.log(filterOptions);
+
+        return filterOptions;
+
+      }else { // si no hay ninguna parentOption seleccionada mostrar las primeras con el mismo parent Option Id
+
+        const parentOptionId = filter.options[0].parentOptionId;
+
+        const filterOptionsByDefault = filter.options.filter(filterOption => {
+          return filterOption.parentOptionId === parentOptionId;
+        });
+
+        return filterOptionsByDefault;
+
+      }
+
+    }
+
+    return filter.options;
 
   }
 
