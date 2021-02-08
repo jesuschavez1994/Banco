@@ -21,7 +21,7 @@ export class PlanCardComponent implements OnInit {
   moreInfo = false;
   waitingResponse = false;
   // Variable to keep track of the user's selection
-  productBank = false;
+  justBasicPlan = false;
   productBankPrice: number;
   totalPrice: number;
   // Checkbox's logic required variables
@@ -41,7 +41,7 @@ export class PlanCardComponent implements OnInit {
 
   // Events that happen in the component -----------------
   showMore(): void {
-    this.productBank = true;
+    this.justBasicPlan = true;
     this.moreInfo = !this.moreInfo;
     this.totalPrice =
       this.planInfo.basicPrice +
@@ -58,14 +58,14 @@ export class PlanCardComponent implements OnInit {
     if (this.selectedCheckbox === checkboxIndex) {
       // In case the user checks the same checkbox again, we update the value accordingly.
       if (this.totalPrice === this.planInfo.basicPrice) {
-        this.productBank = true;
+        this.justBasicPlan = false;
         this.totalPrice = this.planInfo.basicPrice + productBankPrice;
       } else {
-        this.productBank = false;
-        this.totalPrice = this.productBankPrice = this.planInfo.basicPrice;
+        this.justBasicPlan = true;
+        this.totalPrice = this.planInfo.basicPrice;
       }
     } else {
-      this.productBank = true;
+      this.justBasicPlan = false;
       this.selectedCheckbox = checkboxIndex;
       this.totalPrice = this.planInfo.basicPrice + productBankPrice;
     }
@@ -80,39 +80,23 @@ export class PlanCardComponent implements OnInit {
       store_id: parseInt(this.localStorage.getItem('storeId')),
     };
 
-    // To avoid making the same API call many times, we check if the name or price of the selected plan has changed. If it hasn't, the API call is not made.
-    if (
-      this.localStorage.getItem('selectedPlanName') !==
-        this.planDetails.plan_name ||
-      this.localStorage.getItem('selectedPlanPrice') !==
-        this.planDetails.price.toString()
-    ) {
-      // We start the progress spinner, and the API call.
-      this.waitingResponse = true;
-      this.subscriptionDataService
-        .createOrderNumber(this.planDetails)
-        .subscribe((serverResponse: CreatedOrder) => {
-          // Setting the value on the localStorage, in case the page refresh and the payment process isn't finished yet.
-          this.localStorage.setItem(
-            'planDetails',
-            JSON.stringify(this.planDetails)
-          );
-          this.localStorage.setItem(
-            'createdOrder',
-            JSON.stringify(serverResponse)
-          );
-          this.waitingResponse = false;
-          window.scrollTo(0, 0);
-          this.router.navigate([
-            '/account',
-            'settings',
-            'plans',
-            'plan-details',
-          ]);
-        });
-    } else {
-      window.scrollTo(0, 0);
-      this.router.navigate(['/account', 'settings', 'plans', 'plan-details']);
-    }
+    // We start the progress spinner, and the API call.
+    this.waitingResponse = true;
+    this.subscriptionDataService
+      .createOrderNumber(this.planDetails)
+      .subscribe((serverResponse: CreatedOrder) => {
+        // Setting the value on the localStorage, in case the page refresh and the payment process isn't finished yet.
+        this.localStorage.setItem(
+          'planDetails',
+          JSON.stringify(this.planDetails)
+        );
+        this.localStorage.setItem(
+          'createdOrder',
+          JSON.stringify(serverResponse)
+        );
+        this.waitingResponse = false;
+        window.scrollTo(0, 0);
+        this.router.navigate(['/account', 'settings', 'plans', 'plan-details']);
+      });
   }
 }
