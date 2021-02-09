@@ -26,10 +26,6 @@ import {HomeServiceService} from '../services/home-service.service';
   styleUrls: ['./business-detail.component.scss']
 })
 export class BusinessDetailComponent implements OnInit, AfterViewInit {
-  
-  
- 
-  
 
   // Components Controllers
   @ViewChild('productCards') productCards: ProductsCardsComponent;
