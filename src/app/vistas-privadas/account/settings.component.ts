@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarMenuOptions } from '../../interfaces/components-options/sidebar-menu.options.interface';
-
+import { HomeServiceService } from '../../vistas-publicas/services/home-service.service'
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
+
+  userLog = false;
+
   menuOptions: SidebarMenuOptions[] = [
     {
       label: 'Mi cuenta',
@@ -22,7 +25,7 @@ export class SettingsComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(private homeService: HomeServiceService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {this.userLog = this.homeService.islog();}
 }
