@@ -26,6 +26,10 @@ import {HomeServiceService} from '../services/home-service.service';
   styleUrls: ['./business-detail.component.scss']
 })
 export class BusinessDetailComponent implements OnInit, AfterViewInit {
+  
+  
+ 
+  
 
   // Components Controllers
   @ViewChild('productCards') productCards: ProductsCardsComponent;
@@ -82,13 +86,12 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   showProducts = false;
   totalProducts: number;
   itemsPerPage = 16;
-  showShimmerProductsCards =  true;
 
   // SearchBar:
   preloadedValueSearch = '';
 
   // navbar
-  menuOptionsShopping: DropdownOption[] = [];
+  menuOptions: DropdownOption[] = [];
 
   // Variables
   StoreName = '';
@@ -330,12 +333,11 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         console.log('queryParamsAllowed: ', queryParamsAllowed);
       }
 
-
-      // this.showShimmerProductsCards = true;
-
-      if(this.productCards) {
+      if (this.productCards) {
         this.productCards.toggleShimmer();
       }
+
+
 
       this.productService.getProductsByStore(idStore, page, filter).subscribe(
         resp => {
@@ -387,9 +389,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
             console.log('products loaded: ', this.productCards.products);
 
-            // this.showShimmerProductsCards = false;
             this.productCards.toggleShimmer(false);
-            console.log('removing shimmer');
 
           } else{
             this.toastRef.open(
@@ -429,7 +429,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
           const products = resp.data;
 
-          this.menuOptionsShopping = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
+          this.menuOptions = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
 
           this.toastRef.open(
             'Producto agregado al carrito'

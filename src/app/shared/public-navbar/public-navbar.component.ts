@@ -9,7 +9,7 @@ import { DropdownOption, ClassIcon, ExtraButtonEmitter } from '@interfaces/compo
 export class PublicNavbarComponent implements OnInit {
   @Input() userLog: boolean;
   @Input() storeAct: boolean | string;
-  
+
   // Button DropDown - cart
   classIcon: ClassIcon = {
     class: 'fas fa-shopping-cart',
@@ -36,7 +36,6 @@ export class PublicNavbarComponent implements OnInit {
   constructor( ) { }
 
   ngOnInit(): void {
-    
-   
+
   }
 }

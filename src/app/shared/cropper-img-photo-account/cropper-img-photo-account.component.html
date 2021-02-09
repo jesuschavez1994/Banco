@@ -1,0 +1,28 @@
+<section>
+    <img
+        style="width: 263px; height: 263px;"
+        #imgBanner
+        [src]="currentImg  | imgFallback: 'avatar-hombre'" alt="banner"
+        onerror="if (this.src != 'assets/img/avatar.svg') this.src = 'assets/img/no-image-banner.jpg';"
+    />
+
+    <button (click)="isOpen = !isOpen" type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin"
+            matTooltip="Eitar Foto de perfil"
+            [ngClass]="{'camera': !isOpen || isOpen}"
+            >
+    </button>
+</section>
+
+<!-- This template displays the overlay content and is connected to the button -->
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="isOpen"
+    >
+
+    <app-dropzone-photo [ngClass]="{'expand-dropzone': isexpand}" 
+                        (HidenDropZone)="CloseEvent($event)">
+    </app-dropzone-photo>
+
+</ng-template>
+    

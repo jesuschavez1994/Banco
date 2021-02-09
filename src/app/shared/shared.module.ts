@@ -44,6 +44,10 @@ import { ModalRegisterComponent } from "./modal-register/modal-register.componen
 import { SearchComponent } from "./public-navbar/search/search.component";
 import { BtnActionComponent } from './btn-action/btn-action.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
+import { CropperImgPhotoAccountComponent } from './cropper-img-photo-account/cropper-img-photo-account.component';
+import { MaterialModule } from '../Angula-Material/material.module';
+import { DropzonePhotoComponent } from './cropper-img-photo-account/container/dropzone-photo/dropzone-photo.component';
+import {PrivateviewModule} from '../vistas-privadas/privateview.module';
 
 @NgModule({
     declarations: [
@@ -65,7 +69,9 @@ import { GoogleMapComponent } from './google-map/google-map.component';
       NavOptionsComponent, CategoryLinkComponent,
       NavBrandComponent, AvatarComponent,
       ButtonShopComponent, ModalRegisterComponent,
-      ModalRegisterComponent, SearchComponent, BtnActionComponent, GoogleMapComponent,
+      ModalRegisterComponent, SearchComponent,
+      BtnActionComponent, GoogleMapComponent,
+      CropperImgPhotoAccountComponent, DropzonePhotoComponent,
 
     ],
     imports: [
@@ -76,6 +82,8 @@ import { GoogleMapComponent } from './google-map/google-map.component';
       FormsModule,
       ReactiveFormsModule,
       NgxPaginationModule,
+      MaterialModule,
+      PrivateviewModule
       // ComponentsModule
 
     ],
@@ -99,6 +107,7 @@ import { GoogleMapComponent } from './google-map/google-map.component';
       NavBrandComponent, AvatarComponent,
       ButtonShopComponent, ModalRegisterComponent,
       ModalRegisterComponent, SearchComponent,
+      CropperImgPhotoAccountComponent
 
     ]
 })

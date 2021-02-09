@@ -1,9 +1,5 @@
-<app-navbarstore
-[fixed]="false"
-[menuOptionsShopping]="menuOptionsShopping"
-></app-navbarstore>
+<app-public-navbar [userLog]="userLog" [storeAct]="storeLog" [menuOptions]="menuOptions" [menuOptionsFavorite]=""></app-public-navbar>
 
-<!-- <app-public-navbar [userLog]="userLog" [storeAct]="storeLog" [menuOptions]="menuOptions" [menuOptionsFavorite]=""></app-public-navbar> -->
 
 <main class="page">
     <app-sidebar-home [storeAct]="storeLog" [auth]="userLog"></app-sidebar-home>

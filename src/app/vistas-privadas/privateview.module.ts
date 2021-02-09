@@ -236,6 +236,7 @@ import { ViewFormAccountUserComponent } from './AccountUser/pages/view-form-acco
     SynchronizedProductsTableComponent,
     TableroDeSincronizacionComponent,
     SearchStoreComponent,
+    ProgressBarComponent
   ],
 
   providers: [
