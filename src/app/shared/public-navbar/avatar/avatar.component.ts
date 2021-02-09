@@ -14,12 +14,14 @@ export class AvatarComponent implements OnInit {
   userName: string;
   userEmail: string;
   envApi= environment.url;
+
+  storeAct: boolean | string = false;
   constructor(private auth: StoreService, public homeService: HomeServiceService,) {
     this.imgUser();
   }
 
   ngOnInit(): void {
-
+    this.storeAct= this.homeService.storeActive();
   }
   imgUser(){
     if(this.auth){
