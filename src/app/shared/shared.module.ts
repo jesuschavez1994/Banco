@@ -83,7 +83,7 @@ import {PrivateviewModule} from '../vistas-privadas/privateview.module';
       ReactiveFormsModule,
       NgxPaginationModule,
       MaterialModule,
-      PrivateviewModule
+      
       // ComponentsModule
 
     ],
