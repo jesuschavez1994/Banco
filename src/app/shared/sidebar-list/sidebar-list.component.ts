@@ -44,7 +44,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   optionsFilters = [
     {
       filterId: 1,
-      title: 'categorias2',
+      title: 'categorías',
       type: 'single', // Determinamos que solo una opción puede ser seleccionada
       paramName: 'categoria',
       options: [
@@ -68,7 +68,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       type: 'multiple', // Determina si es de opción multiple
       paramName: 'sub-categoria', // Determina el queryParam a agregar
       parentFilterId: 1, // Determinamos con el nombre el listado de filtro a vinculo con este listado de filtro
-      options: [ // optiones disponebles a agregar
+      options: [ // opciones disponibles a agregar
         {
           optionId: 1,
           parentOptionId: 1, // El id identificador de la opción de la cual depende
@@ -92,7 +92,44 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
         },
       ]
     },
-
+    {
+      filterId: 1,
+      title: 'Precios',
+      type: 'single', // Determinamos que solo una opción puede ser seleccionada
+      paramName: 'price',
+      options: [
+        {
+          optionId: 1,
+          name: '$0 - $10,000',
+          totalFounds: 200,
+          isSelected: false
+        },
+        {
+          optionId: 2,
+          name: '$10,000 - $20,000',
+          totalFounds: 200,
+          isSelected: false
+        },
+        {
+          optionId: 3,
+          name: '$20,000 - $30,000',
+          totalFounds: 200,
+          isSelected: false
+        },
+        {
+          optionId: 3,
+          name: '$30,000 - $40,000',
+          totalFounds: 200,
+          isSelected: false
+        },
+        {
+          optionId: 3,
+          name: '$40,000 - $50,000',
+          totalFounds: 200,
+          isSelected: false
+        },
+      ]
+    },
   ];
 
   // // category
@@ -584,7 +621,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     queryParams = {};
 
     // Marca como check o no
-
     console.log('option');
     console.log(option);
 
@@ -597,15 +633,9 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
       if (list.parentFilterId) { // se ejecuta cuando la lista determina que sus opciones dependen de una lista padre
 
-        // console.log('list.parentFilterId');
-        // console.log(list.parentFilterId);
-
         // Obtenemos al listado de opciones de filtro padre el cual es vinculado con su titulo como
         // padre del la lista de filtrado de la opción seleccionada
         const parentOptionsFilter = this.optionsFilters.find( optionsFilter => optionsFilter.filterId === list.parentFilterId );
-
-        // console.log('parentOptionsFilter');
-        // console.log(parentOptionsFilter);
 
         if (parentOptionsFilter) {
 
@@ -613,8 +643,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
             parentFilterOption => parentFilterOption.optionId === option.parentOptionId
           );
 
-          // console.log('parentOption');
-          // console.log(parentOption);
 
           if (parentOption) { // Marcamos el parent option
 
@@ -629,14 +657,10 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
             }
 
             // Si todas las opciones est´n desmarcadas, desmarcamos al padre
-            // y eliminamos el query param del pdre e hijo
+            // y eliminamos el query param del padre e hijo
             if ( list.options.every( lOption => lOption.isSelected === false) ) {
+
               parentOption.isSelected = false;
-
-              // Eliminamos ambos atributos del queryParam
-              delete queryParams[list.paramName];
-
-              delete queryParams[parentOptionsFilter.paramName];
 
             } else { // obtenemos las opciones seleccionadas y las concatenamos para formar el queryParam
 
@@ -652,10 +676,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
                 const optionsSelectedNames = optionsSelected.map(optionsSelectedMap => {
                   return optionsSelectedMap.name;
                 });
-
-                queryParams[list.paramName] = optionsSelectedNames.join(); // concatenamos los valores en un string
-
-                queryParams[parentOptionsFilter.paramName] = parentOptionsFilter.title;
 
               }
 
@@ -698,7 +718,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
         });
 
-
       }
 
       queryParams[list.paramName] = option.name;
@@ -709,6 +728,73 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     navigationOptions = {
       relativeTo: this.route,
     };
+
+    this.optionsFilters.forEach( filter => {
+      // queryParams[]
+      if (filter.type === 'single') {
+
+        const optionSelected = filter.options.find( filterOption => {
+          return filterOption.isSelected;
+        });
+
+        if (optionSelected) {
+
+          queryParams[filter.paramName] = optionSelected.name;
+
+        } else {
+
+          delete queryParams[filter.paramName];
+
+        }
+
+      } else if (filter.type === 'multiple') {
+
+        const optionsSelected = filter.options.filter( filterOption => {
+         return filterOption.isSelected;
+        });
+
+        if (optionsSelected.length > 0) {
+
+          const valuesOfQueryParam = optionsSelected.map( optionSelected => {
+            return optionSelected.name;
+          });
+
+          queryParams[filter.paramName] = valuesOfQueryParam.join();
+
+          if (filter.parentFilterId) { // En caso de tener un filtrado padre, agregar el query param del padre
+
+            const parentFilter = this.optionsFilters.find( optionFilter => {
+              return optionFilter.filterId === filter.parentFilterId;
+            });
+
+            const parentOptionSelected = parentFilter.options.find( parentFilterFind => {
+              return parentFilterFind.isSelected;
+            });
+
+            if (parentOptionSelected) { // si existe una opcion del padre seleccionada, agrego el queryParam del padre
+
+              // agregamos el paramQuery del parentFilter
+              queryParams[parentFilter.paramName] = parentOptionSelected.name;
+
+            } else { // en caso contrario elimino el queryParam
+
+              delete queryParams[parentFilter.paramName];
+
+            }
+
+          }
+
+        }else {
+
+          delete queryParams[filter.paramName];
+
+        }
+
+      }
+
+    });
+
+    console.log(queryParams);
 
     if (Object.keys(queryParams).length > 0) {
       navigationOptions = {

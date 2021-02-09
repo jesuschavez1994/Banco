@@ -81,110 +81,6 @@
 
     <nav class="menu">
 
-      <!-- Categorias -->
-      <ng-container *ngIf="categories">
-
-        <ul class="list">
-
-          <h4 class="title">
-            Categorías
-          </h4>
-
-          <ng-container *ngFor="let category of categories">
-
-            <li
-
-              class="category"
-              (click)="selectCategory(category)"
-              [ngClass]="{'active': category.name == categorySelected.name}"
-            >
-              <a>{{category.name}}</a>
-            </li>
-          </ng-container>
-
-        </ul>
-
-      </ng-container>
-
-      <!-- SubCategorias -->
-      <ng-container *ngIf="currentCategory.subcategories">
-
-        <ul class="list">
-
-          <h4 class="title">
-              Subcategorías
-          </h4>
-
-          <ng-container *ngFor="let subcategory of currentCategory.subcategories">
-
-            <div (click)="selectSubCategories(subcategory)">
-
-              <li class="subCategory">
-
-                <input type="checkbox"
-                  class="subCategory-input"
-                  [id]="subcategory.id"
-                  [name]="subcategory.id"
-                  [checked]="subCategoriesSelected.indexOf(subcategory.name)  !== -1"
-                >
-
-                <label
-                  [for]="subcategory.id"
-                  >
-
-                  <a>{{subcategory.name}}</a>
-
-                </label>
-
-              </li>
-
-            </div>
-
-          </ng-container>
-
-        </ul>
-
-      </ng-container>
-
-
-      <!-- precios -->
-      <ng-container *ngIf="priceRanges">
-
-        <ul class="list">
-          <h4 class="title">
-              Precios
-          </h4>
-
-          <ng-container *ngFor="let range of priceRanges; index as inx">
-
-            <div (click)="selectPriceRange(range)">
-              <li>
-
-                <input type="radio"
-                  class="input--rango"
-                  id="rango-{{inx}}"
-                  name="rangos"
-                  [checked]="range.id === priceRangesSelected.id"
-                >
-
-                <label for="rango-{{inx}}">
-                    <a>
-                      {{range.min | currency: 'USD' : 'symbol' : '1.0-0'}} -
-                      {{range.max | currency: 'USD' : 'symbol' : '1.0-0'}} ({{range.totalFounds}})
-                    </a>
-                </label>
-
-              </li>
-
-            </div>
-
-          </ng-container>
-
-        </ul>
-
-      </ng-container>
-
-      <!-- Probando -->
       <ng-container *ngIf="optionsFilters">
 
         <ng-container *ngFor="let filter of optionsFilters">
@@ -222,13 +118,6 @@
 
           </ul>
 
-
-          <!-- <ng-container
-           [ngTemplateOutlet]="filterTemplate"
-           [ngTemplateOutletContext]="{filter: getFilter(filter)}"
-          >
-          </ng-container> -->
-
         </ng-container>
 
       </ng-container>
@@ -239,40 +128,3 @@
   </aside>
 
 </ng-container>
-
-<ng-template #filterTemplate let-filter='filter'>
-
-  <ul class="list">
-
-    <h4 class="title">
-      {{filter.title}}
-    </h4>
-
-    <ng-container *ngFor="let option of filter.options; index as inx">
-
-      <div (click)="selectOptionsFilter2(option, filter)">
-
-        <li>
-
-          <input [type]="filter.type === 'multiple' ? 'radio' : 'checkbox'"
-            id="{{filter.title | strReplace}}-{{inx}}"
-            name="{{filter.title | strReplace}}-{{inx}}"
-            [checked]="option.isSelected"
-          >
-
-          <label for="{{filter.title | strReplace}}-{{inx}}">
-            <a>
-              {{option.name}} ({{option.totalFounds}})
-            </a>
-          </label>
-
-        </li>
-
-      </div>
-
-    </ng-container>
-
-  </ul>
-
-</ng-template>
-
