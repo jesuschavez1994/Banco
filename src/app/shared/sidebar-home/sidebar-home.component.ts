@@ -6,7 +6,13 @@ import {ModalRegisterComponent} from '@shared/modal-register/modal-register.comp
 import {MatDialog, MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DropdownOption, ClassIcon, ExtraButtonEmitter } from '@interfaces/components-options/dropdown.options.interface';
 import { environment } from '../../../environments/environment';
+/******* */
+import { PaymentProcessService } from '@services/payment-process/payment-process.service';
+import { DropdownIconComponent } from '../dropdown-icon/dropdown-icon.component';
+import { ProductService } from '../../services/product/product.service';
+import { ToastComponent } from '../../modals/toast/toast.component';
 
+/******* */
 @Component({
   selector: 'app-sidebar-home',
   templateUrl: './sidebar-home.component.html',
@@ -15,6 +21,7 @@ import { environment } from '../../../environments/environment';
 export class SidebarHomeComponent implements OnInit {
  @ViewChild('menuContainerFixed') menuContainerFixed: ElementRef;
  @ViewChild('configurationMenu') configurationMenu: ElementRef;
+ @ViewChild('toastRef') toastRef: ToastComponent;
  @Input() auth: boolean;
  @Input() storeAct: boolean | string;
           envApi= environment.url;
@@ -49,10 +56,20 @@ export class SidebarHomeComponent implements OnInit {
   constructor( public authService: StoreService,
                 public userService: UsuarioService,
                 public homeService: HomeServiceService,
-                private modal : MatDialog) { }
+                private modal : MatDialog,
+                private paymentProcessService: PaymentProcessService,
+                private dropdownIconComp: DropdownIconComponent,
+                private productService: ProductService,) { }
 
   ngOnInit(): void {
     this.imgUser();
+    this.auth = this.homeService.islog();
+     this.storeAct= this.homeService.storeActive();
+    // Carga items dropdown
+    if(this.auth && !this.storeAct ){
+      this.loadProductCart();
+      this.loadFavoriteList()
+    }
 }
   @HostListener('window:scroll', ['$event'])
   public fixedMenu( $event: Event){
@@ -86,6 +103,116 @@ export class SidebarHomeComponent implements OnInit {
       );
     }
   }
+  
+  // BY: Christofer
+  public loadProductCart() {
+    this.paymentProcessService.getProductsFromCart().subscribe(
+      resp => {
+        const products = resp.data;
+        this.menuOptions = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
+
+      }
+    );
+  }
+  
+  public loadFavoriteList() {
+    this.productService.getFavoriteProducts().subscribe(
+      resp => {
+        // console.log('loadFavoriteList');
+        // console.log(resp);
+        this.menuOptionsFavorite = this.dropdownIconComp.loadOptionsWithFavoriteProductResp(resp);
+
+      }
+    );
+  }
+  public deleteProductFromFavorite(data) {
+    const idProductFav = data.option.data.productFavorite.id;
+
+    // console.log('idUser');
+    // console.log(idUser);
+
+    // console.log('idProductFav');
+    // console.log(idProductFav);
+
+    this.productService.removeProductFromFavorite(idProductFav).subscribe(
+      resp => {
+
+        if (resp.deleted) {
+
+          this.productService.getFavoriteProducts().subscribe(
+            favoriteProduct => {
+
+              this.menuOptionsFavorite = this.dropdownIconComp.loadOptionsWithFavoriteProductResp(favoriteProduct);
+
+            }
+          );
+
+          this.toastRef.open(
+            'Producto eliminado de favoritos'
+          );
+
+        }
+
+      },
+      error => {
+        console.log(error);
+        this.toastRef.open(
+          'Producto no eliminado de favoritos'
+        );
+      }
+    );
+
+  }
+  
+  public deleteProductFromCart(event: ExtraButtonEmitter) {
+
+    const idProduct = event.option.data.id;
+
+    this.paymentProcessService.deleteProductFromCart(idProduct).subscribe(
+
+      resp => {
+
+        this.menuOptions = [];
+
+        if (resp.data) {
+
+          if (resp.data.length > 0) {
+
+            resp.data.forEach( product => {
+
+              let option;
+
+              option = {
+                title: product.name,
+                typeEvent: 'routerLink',
+                eventValue: ['/panel/carrito-compras'],
+                data: product
+              };
+
+              this.menuOptions.push(option);
+            });
+
+          }
+
+        }
+
+        this.toastRef.open(
+          'Producto eliminado del carrito'
+        );
+
+      },
+      error => {
+        this.toastRef.open(
+          'Producto eliminado del carrito'
+        );
+      }
+
+    );
+
+  }
+
+
+
   logout(){
     this.homeService.logout();
     // window.location.reload();
