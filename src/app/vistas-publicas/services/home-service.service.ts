@@ -45,6 +45,7 @@ public logout() {
   return this.execQuery(url).subscribe( data => {
     this.idUser = null;
     localStorage.removeItem('token');
+    localStorage.removeItem('storeId');
     localStorage.removeItem('id');
     localStorage.removeItem('usuario');
     this.route.navigate(['/home']);

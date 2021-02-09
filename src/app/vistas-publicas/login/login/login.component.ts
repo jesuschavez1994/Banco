@@ -8,6 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ModalRecoverPasswordComponent} from '../container/modal-recover-password/modal-recover-password.component';
 import {ModalRegisterComponent} from '@shared/modal-register/modal-register.component';
 
+import {HomeServiceService} from '../../services/home-service.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,7 +25,10 @@ export class LoginComponent implements OnInit {
   ErrorMessage: string = '';
   OnError: boolean = false;
 
+  userLog: boolean;
+  storeLog: boolean | string;
   constructor(
+    private homeService: HomeServiceService,
     public usuarioServices: UsuarioService,
     public router: Router,
     public userStoreService: UserStoreService,
@@ -42,7 +46,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams
-      .subscribe(params => this.urlReturn = params.return || '/home');
+    .subscribe(params => this.urlReturn = params.return || '/home');
+    this.userLog = this.homeService.islog();
+    this.storeLog = this.homeService.storeActive();
   }
 
   loginRegister(){

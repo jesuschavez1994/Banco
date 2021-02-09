@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {HomeServiceService} from '../services/home-service.service';
 @Component({
   selector: 'app-page-under-construction',
   templateUrl: './page-under-construction.component.html',
@@ -24,10 +24,14 @@ export class PageUnderConstructionComponent implements OnInit {
 
 
   }];
+  userLog: boolean;
+  storeLog: boolean | string;
 
-  constructor() { }
+  constructor(private homeService: HomeServiceService,) { }
 
   ngOnInit(): void {
+    this.userLog = this.homeService.islog();
+     this.storeLog= this.homeService.storeActive();
   }
 
 }

@@ -18,7 +18,12 @@
     >
       Plan {{ selectedPlanDetails.plan_name | titlecase }}
     </h5>
-    <h5 class="total">
+    <h5
+      class="total"
+      [class.basic]="selectedPlanDetails.plan_name === 'basic'"
+      [class.standard]="selectedPlanDetails.plan_name === 'standard'"
+      [class.premium]="selectedPlanDetails.plan_name === 'premium'"
+    >
       <b>Total:&nbsp; &nbsp;</b>
       <span>${{ selectedPlanDetails.price | number }}</span>
     </h5>

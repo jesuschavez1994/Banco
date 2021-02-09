@@ -79,7 +79,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     };
 
     /***** */
-    if(this.showFilter){
+    if (this.showFilter){
       selectFilter.onchange = () => {
         this.search.emit({
           value: searchInput.value,

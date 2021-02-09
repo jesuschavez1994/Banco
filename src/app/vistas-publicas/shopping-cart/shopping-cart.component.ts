@@ -5,6 +5,7 @@ import { CurrentPaymentData } from '../../interfaces/components-options/shopping
 import { MatDialog } from '@angular/material/dialog';
 import { SuccessComponent } from '../../modals/success/success.component';
 import { ConfirmWebpayPlusComponent } from '../../modals/confirm-webpay-plus/confirm-webpay-plus.component';
+import {HomeServiceService} from '../services/home-service.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -12,7 +13,8 @@ import { ConfirmWebpayPlusComponent } from '../../modals/confirm-webpay-plus/con
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent implements OnInit {
-
+  userLog: boolean;
+  storeLog: boolean | string;
   taxPorcentage = 10;
   deliveryCost = 0;
 
@@ -180,7 +182,7 @@ export class ShoppingCartComponent implements OnInit {
 
   currentPaymentData: CurrentPaymentData = {};
 
-  constructor(
+  constructor(private homeService: HomeServiceService,
     private paymentService: PaymentProcessService,
     public dialog: MatDialog
   ){
@@ -188,7 +190,8 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.userLog = this.homeService.islog();
+    this.storeLog= this.homeService.storeActive();
     if (this.ordersLists) {
 
       if (this.ordersLists.length > 0) {

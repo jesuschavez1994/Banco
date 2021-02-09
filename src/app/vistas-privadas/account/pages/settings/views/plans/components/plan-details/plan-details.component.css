@@ -145,6 +145,18 @@
   color: #3673ff;
 }
 
+.basic {
+  color: #24c8af;
+}
+
+.standard {
+  color: #ff8647;
+}
+
+.premium {
+  color: #3673ff;
+}
+
 /* --------------------------- 
   Responsive media queries 
 ------------------------------ */

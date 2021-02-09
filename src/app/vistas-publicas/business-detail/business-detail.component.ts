@@ -20,13 +20,16 @@ import { DropdownOption } from '@interfaces/components-options/dropdown.options.
 import { DropdownIconComponent } from '../../shared/dropdown-icon/dropdown-icon.component';
 import { ToastComponent } from '../../modals/toast/toast.component';
 import {HomeServiceService} from '../services/home-service.service';
-
 @Component({
   selector: 'app-business-detail',
   templateUrl: './business-detail.component.html',
   styleUrls: ['./business-detail.component.scss']
 })
 export class BusinessDetailComponent implements OnInit, AfterViewInit {
+  
+  
+ 
+  
 
   // Components Controllers
   @ViewChild('productCards') productCards: ProductsCardsComponent;
@@ -41,6 +44,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
 // Navbar
   userLog: boolean = false;
+  storeLog: boolean | string;
 
   // sidebar-list
   expandSidebar = true;
@@ -114,6 +118,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.userLog = this.homeService.islog();
+    this.storeLog= this.homeService.storeActive();
+
   }
 /********************************************************************************* */
 /********************************************************************************* */

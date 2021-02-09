@@ -3,6 +3,7 @@ import { OrderListOptions } from '../../interfaces/components-options/order.opti
 import { PaymentProcessService } from '../../services/payment-process/payment-process.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastComponent } from '../../modals/toast/toast.component';
+import {HomeServiceService} from '../services/home-service.service';
 
 @Component({
   selector: 'app-sales',
@@ -10,7 +11,8 @@ import { ToastComponent } from '../../modals/toast/toast.component';
   styleUrls: ['./sales.component.scss']
 })
 export class SalesComponent implements OnInit {
-
+  userLog: boolean;
+  storeLog: boolean | string;
   taxPorcentage = 10;
   deliveryCost = 5;
 
@@ -120,12 +122,13 @@ export class SalesComponent implements OnInit {
 
 
 
-  constructor(
+  constructor(private homeService: HomeServiceService,
     private paymentService: PaymentProcessService,
   ) { }
 
   ngOnInit(): void {
-
+    this.userLog = this.homeService.islog();
+    this.storeLog= this.homeService.storeActive();
     this.ordersListSelected = this.ordersLists[0];
 
     console.log('salesComponent');

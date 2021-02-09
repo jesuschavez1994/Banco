@@ -34,7 +34,6 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
   @Output() extraButton = new EventEmitter<ExtraButtonEmitter>();
 
   isDropDownExpanded = false;
-
   constructor() { }
 
   ngOnInit(): void {
@@ -92,7 +91,6 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
           };
 
           menuOptions.push(option);
-
         });
 
       }
