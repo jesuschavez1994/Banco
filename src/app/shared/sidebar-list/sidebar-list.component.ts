@@ -597,15 +597,15 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
       if (list.parentFilterId) { // se ejecuta cuando la lista determina que sus opciones dependen de una lista padre
 
-        console.log('list.parentFilterId');
-        console.log(list.parentFilterId);
+        // console.log('list.parentFilterId');
+        // console.log(list.parentFilterId);
 
         // Obtenemos al listado de opciones de filtro padre el cual es vinculado con su titulo como
         // padre del la lista de filtrado de la opción seleccionada
         const parentOptionsFilter = this.optionsFilters.find( optionsFilter => optionsFilter.filterId === list.parentFilterId );
 
-        console.log('parentOptionsFilter');
-        console.log(parentOptionsFilter);
+        // console.log('parentOptionsFilter');
+        // console.log(parentOptionsFilter);
 
         if (parentOptionsFilter) {
 
@@ -613,10 +613,10 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
             parentFilterOption => parentFilterOption.optionId === option.parentOptionId
           );
 
-          console.log('parentOption');
-          console.log(parentOption);
+          // console.log('parentOption');
+          // console.log(parentOption);
 
-          if (parentOption) {
+          if (parentOption) { // Marcamos el parent option
 
             if (option.isSelected) {
               // Desmarcando todas las opciones del padre, porque los parent siempre serán de tipo single
@@ -626,13 +626,36 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
               parentOption.isSelected = true; // Marcamos la opción padre
 
-              queryParams[parentOptionsFilter.paramName] = parentOptionsFilter.title;
+            }
 
-            }else{
+            // Si todas las opciones est´n desmarcadas, desmarcamos al padre
+            // y eliminamos el query param del pdre e hijo
+            if ( list.options.every( lOption => lOption.isSelected === false) ) {
+              parentOption.isSelected = false;
 
-              if ( list.options.every( lOption => lOption.isSelected === false) ) {
-                parentOption.isSelected = false;
-                queryParams = {};
+              // Eliminamos ambos atributos del queryParam
+              delete queryParams[list.paramName];
+
+              delete queryParams[parentOptionsFilter.paramName];
+
+            } else { // obtenemos las opciones seleccionadas y las concatenamos para formar el queryParam
+
+              // Obtenemos todas las opciones de la lista seleccionadas
+              const optionsSelected = list.options.filter( lOption => {
+                return lOption.isSelected;
+              });
+
+
+              // si existen opciones seleccionadas, agregar esas opciones al queyParam junto a su parentFilter
+              if (optionsSelected.length > 0) {
+
+                const optionsSelectedNames = optionsSelected.map(optionsSelectedMap => {
+                  return optionsSelectedMap.name;
+                });
+
+                queryParams[list.paramName] = optionsSelectedNames.join(); // concatenamos los valores en un string
+
+                queryParams[parentOptionsFilter.paramName] = parentOptionsFilter.title;
 
               }
 
@@ -645,16 +668,16 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     }else if (list.type === 'single') {
 
-      // Desmarcando todas las opciones
+      // Desmarcando todas las opciones (parents o singles)
       list.options.forEach(listFilterOption => {
         listFilterOption.isSelected = false;
       });
 
       option.isSelected = option.isSelected ? false : true; // marcar o desmarcar 1 opción
 
-      // Obtenemos los listados con opciones de filtro
-      // que posean el mismo parentFilterId que el filter Id del listado que estamos evaluando
-      const optionsFiltersWithParents = this.optionsFilters.filter( optionsFilter => {
+      // Obtenemos los filtros que son hijos o subFiltros de este
+      // Es decir, que posean el mismo parentFilterId que el filter Id del listado que estamos evaluando
+      const subFilters = this.optionsFilters.filter( optionsFilter => {
 
         if (optionsFilter.parentFilterId) {
           return optionsFilter.parentFilterId === list.filterId;
@@ -664,26 +687,24 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
       });
 
-      // Si se encuentran filters
-      if ( optionsFiltersWithParents.length > 0 ) {
+      // Desmarcamos todas las opciones de los sub filters al cambiar de parentOption
+      if ( subFilters.length > 0 ) {
 
-        optionsFiltersWithParents.forEach(optionsFilterWithParents => {
-          const isEverySubOptionSelected = optionsFilterWithParents.options.every(
-            subFilterOption => subFilterOption.isSelected === false
-          );
+        subFilters.forEach( subFilter => {
+
+          subFilter.options.forEach( subFilterOption => {
+            subFilterOption.isSelected = false;
+          });
+
         });
 
 
       }
 
-    }
-
-    if (option.isSelected) {
       queryParams[list.paramName] = option.name;
 
-    }else{
-      queryParams = {};
     }
+
 
     navigationOptions = {
       relativeTo: this.route,
@@ -705,27 +726,27 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   public getFilter( filter ) {
 
-    console.log('getFilter');
-    console.log(filter);
+    // console.log('getFilter');
+    // console.log(filter);
 
     if (filter.parentFilterId) {
 
-      console.log('filter.parentFilterId');
-      console.log(filter.parentFilterId);
+      // console.log('filter.parentFilterId');
+      // console.log(filter.parentFilterId);
 
       const parentFilter = this.optionsFilters.find( optionsFilter => {
         return optionsFilter.filterId === filter.parentFilterId;
       });
 
-      console.log('parentFilter');
-      console.log(parentFilter);
+      // console.log('parentFilter');
+      // console.log(parentFilter);
 
       const parentOption = parentFilter.options.find ( parentFilterOption => {
         return parentFilterOption.isSelected;
       });
 
-      console.log('parentOption');
-      console.log(parentOption);
+      // console.log('parentOption');
+      // console.log(parentOption);
 
       // Si encuentra una opción del parent Filter seleccionada
       // Si es undefined es porque todos son false, es decir no están seleccionadas
@@ -735,9 +756,8 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
           return filterOption.parentOptionId === parentOption.optionId;
         });
 
-
-        console.log('filterOptions');
-        console.log(filterOptions);
+        // console.log('filterOptions');
+        // console.log(filterOptions);
 
         return filterOptions;
 
