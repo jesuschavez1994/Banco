@@ -36,7 +36,7 @@ export class HomeServiceService extends Service{
       return this.execQuery<CategoriesHome[]>('home/categories');
    }
    public obtUserData(id): Observable<UserPublic>{
-    console.log('get  list /home/categories');
+    
     return this.execQuery<UserPublic>('users/'+id);
  }
   

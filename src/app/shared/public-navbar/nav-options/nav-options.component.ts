@@ -52,8 +52,10 @@ export class NavOptionsComponent implements OnInit {
       }
     );
     // Carga items dropdown
-    this.loadProductCart();
-    this.loadFavoriteList()
+    if(this.auth && !this.storeAct ){
+      this.loadProductCart();
+      this.loadFavoriteList()
+    }
   }
 
   // BY: Christofer

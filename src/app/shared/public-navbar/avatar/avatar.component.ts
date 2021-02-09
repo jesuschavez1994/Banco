@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from '@services/store/store.service';
 import { HomeServiceService } from "../../../vistas-publicas/services/home-service.service";
+import { environment } from '../../../../environments/environment';
+
 @Component({
   selector: 'app-avatar',
   templateUrl: './avatar.component.html',
@@ -11,8 +13,8 @@ export class AvatarComponent implements OnInit {
   userImg: any;
   userName: string;
   userEmail: string;
-
-  constructor(private auth: StoreService, public homeService: HomeServiceService) {
+  envApi= environment.url;
+  constructor(private auth: StoreService, public homeService: HomeServiceService,) {
     this.imgUser();
   }
 
@@ -24,7 +26,7 @@ export class AvatarComponent implements OnInit {
       this.userId= localStorage.getItem('id');
       this.homeService.obtUserData(this.userId).subscribe(
         data=>{
-
+          
            this.userImg=data.image;
            this.userEmail= data.email;
            this.userName= data.name;

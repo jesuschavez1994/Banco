@@ -243,4 +243,42 @@
             }
         }
     }
+    .items-counter {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        position: absolute;
+        top: -5px !important;
+        left: 8px !important;
+        .more-simbol {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            top: 2px;
+            right: 0px;
+            .segment {
+                width: 8px;
+                height: 2px;
+                background: $color__background-black;
+                &:last-child {
+                    transform: rotate(90deg);
+                    position: absolute;
+                }
+            }
+        }
+    }
+}
+
+:host::ng-deep.dd-menu {
+    max-height: 384px;
+    overflow: auto;
+    width: 240px;
+    position: absolute;
+    top: 100%;
+    left: 0 !important;
+    border-radius: 4px;
+    padding: 0;
+    margin: 2px 0 0 0;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+    background-color: $color__background-white;
+    list-style-type: none;
 }

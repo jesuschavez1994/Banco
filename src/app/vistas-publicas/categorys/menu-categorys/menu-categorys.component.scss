@@ -38,6 +38,11 @@
                     }
                 }
                 .list-items {
+                    @media (min-width: 1024px) {
+                        &.md-shw {
+                            display: block !important;
+                        }
+                    }
                     padding: 0 !important;
                     ol {
                         padding: 0 !important;
