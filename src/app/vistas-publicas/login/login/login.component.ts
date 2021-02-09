@@ -4,6 +4,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UserStoreService } from '@services/user-store/user-store.service';
+import {MatDialog} from '@angular/material/dialog';
+import {ModalRecoverPasswordComponent} from '../container/modal-recover-password/modal-recover-password.component';
+import {ModalRegisterComponent} from '@shared/modal-register/modal-register.component';
 
 @Component({
   selector: 'app-login',
@@ -18,12 +21,15 @@ export class LoginComponent implements OnInit {
   email: string;
   token: string;
   urlReturn = '';
+  ErrorMessage: string = '';
+  OnError: boolean = false;
 
   constructor(
     public usuarioServices: UsuarioService,
     public router: Router,
     public userStoreService: UserStoreService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ){
 
     this.forma = new FormGroup({
@@ -52,6 +58,11 @@ export class LoginComponent implements OnInit {
     this.usuarioServices.login(usuario, this.forma.value.recuerdame).subscribe( (resp: any) => {
       console.log(this.forma.value.recuerdame);
       console.log('FFFF', resp);
+      if ( resp.mensaje){
+        console.log(resp.mensaje);
+        this.OnError = true;
+        this.ErrorMessage = resp.mensaje;
+      }
       this.guardarStorage(resp.remember_token, resp.user.id);
       console.log(resp);
       if (resp.user.role === 'store'){
@@ -63,10 +74,13 @@ export class LoginComponent implements OnInit {
       }
 
       if (resp.user.role === 'admin'){this.router.navigate(['admin']); }
-      if (resp.user.role === 'user'){ this.guardarStorage(resp.remember_token, resp.user.id); }
+      if (resp.user.role === 'user'){
+        this.guardarStorage(resp.remember_token, resp.user.id);
+        this.router.navigate(['account/setting-user']);
+       }
 
       console.log('You Are Going To: ', this.urlReturn);
-      this.router.navigateByUrl(this.urlReturn);
+      // this.router.navigateByUrl(this.urlReturn);
     });
 
   }
@@ -82,6 +96,25 @@ export class LoginComponent implements OnInit {
 
   guardarStorageStore(storeId: string){
     localStorage.setItem('storeId', storeId);
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ModalRecoverPasswordComponent, {
+      height: '250px',
+      width: '300px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openDialogRegister(): void {
+    const dialogRef = this.dialog.open(ModalRegisterComponent,
+      { width: 'auto',
+        height: 'auto',
+        panelClass: 'custom-modalbox'
+      } );
   }
 
 }

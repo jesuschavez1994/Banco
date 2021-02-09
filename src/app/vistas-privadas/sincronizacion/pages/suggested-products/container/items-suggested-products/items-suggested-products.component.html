@@ -8,7 +8,11 @@
 
 <section class="container-fluid mt-5">
     <div class="row">
-        <app-search-store   (searchEmitter)="handleSearch($event)" 
+        <app-search-store   (searchEmitter)="handleSearch($event)"
+                            [isExpanded]="expandSidebar"
+                            (sidebarExpand)="toogleSidebar($event)"
+                            [buttonSidebarList]="true" 
+                            [debounce]="1000"
                             class="width-100" 
                             [BuscarText]="this.textBuscador">
         </app-search-store>

@@ -32,11 +32,13 @@
         <section class="row" *ngIf="!addProductNew">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
-                <app-search-store   (searchEmitter)="handleSearch($event)" 
+                <app-search-store   (searchEmitter)="handleSearch($event)"
                                     [isExpanded]="expandSidebar"
-                                    (sidebarExpand)="toogleSidebar($event)" 
-                                    [buttonSidebarList]="true"
-                                    [debounce]="1000">
+                                    (sidebarExpand)="toogleSidebar($event)"
+                                    [buttonSidebarList]="true" 
+                                    [debounce]="1000"
+                                    class="width-100" 
+                                    [BuscarText]="this.textBuscador">
                 </app-search-store>
 
 

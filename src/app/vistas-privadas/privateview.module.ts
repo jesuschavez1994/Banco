@@ -117,6 +117,8 @@ import { DragDropZoneFileComponent } from './sincronizacion/pages/exportar-lista
 import { SizeFileComponent } from './sincronizacion/pages/exportar-lista-excel/container/size-file/size-file.component';
 import { ProgessBarFileExcelComponent } from './sincronizacion/pages/exportar-lista-excel/container/progess-bar-file-excel/progess-bar-file-excel.component';
 import { SettingsComponent } from './account/settings.component';
+import { FormAccountUserComponent } from './AccountUser/pages/settings/views/form-account-user/form-account-user.component';
+import { ViewFormAccountUserComponent } from './AccountUser/pages/view-form-account-user.component';
 
 @NgModule({
   entryComponents: [
@@ -190,6 +192,8 @@ import { SettingsComponent } from './account/settings.component';
     SizeFileComponent,
     ProgessBarFileExcelComponent,
     SettingsComponent,
+    FormAccountUserComponent,
+    ViewFormAccountUserComponent,
   ],
 
   imports: [

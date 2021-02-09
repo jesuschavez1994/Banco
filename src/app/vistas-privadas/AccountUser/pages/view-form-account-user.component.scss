@@ -1,0 +1,9 @@
+.page{
+    display: flex;
+}
+
+@media(max-width: 500px){
+    .page-wrapper{
+        margin-left: 5px;
+    }
+}

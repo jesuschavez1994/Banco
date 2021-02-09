@@ -24,6 +24,7 @@ import { SliderCategoryComponent } from './home/slider-category/slider-category.
 import { CategorysComponent } from './categorys/categorys.component';
 import { MenuCategorysComponent } from './categorys/menu-categorys/menu-categorys.component';
 import { ListProductComponent } from './categorys/list-product/list-product.component';
+import { ModalRecoverPasswordComponent } from './login/container/modal-recover-password/modal-recover-password.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { ListProductComponent } from './categorys/list-product/list-product.comp
     CategorysComponent,
     MenuCategorysComponent,
     ListProductComponent,
+    ModalRecoverPasswordComponent,
   ],
   imports: [
     CommonModule,

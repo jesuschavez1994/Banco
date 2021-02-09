@@ -43,8 +43,7 @@ import { ButtonShopComponent } from "./public-navbar/button-shop/button-shop.com
 import { ModalRegisterComponent } from "./modal-register/modal-register.component";
 import { SearchComponent } from "./public-navbar/search/search.component";
 import { BtnActionComponent } from './btn-action/btn-action.component';
-
-
+import { GoogleMapComponent } from './google-map/google-map.component';
 
 @NgModule({
     declarations: [
@@ -60,13 +59,13 @@ import { BtnActionComponent } from './btn-action/btn-action.component';
       DropdownButtonComponent, DropdownIconComponent,
       InvoiceBComponent, CardShimmerComponent,
       ToastComponent, BannerShimmerComponent,
-      SidebarListShimmerComponent,PublicNavbarComponent,
+      SidebarListShimmerComponent, PublicNavbarComponent,
       SpinnerComponent, CheckInternetConnectionComponent,
-      SidebarHomeComponent,SliderComponent,
-NavOptionsComponent,CategoryLinkComponent,
-NavBrandComponent,AvatarComponent,
-ButtonShopComponent,ModalRegisterComponent,
-ModalRegisterComponent,SearchComponent, BtnActionComponent,
+      SidebarHomeComponent, SliderComponent,
+      NavOptionsComponent, CategoryLinkComponent,
+      NavBrandComponent, AvatarComponent,
+      ButtonShopComponent, ModalRegisterComponent,
+      ModalRegisterComponent, SearchComponent, BtnActionComponent, GoogleMapComponent,
 
     ],
     imports: [
@@ -95,11 +94,11 @@ ModalRegisterComponent,SearchComponent, BtnActionComponent,
       ToastComponent, BannerShimmerComponent,
       SidebarListShimmerComponent, PublicNavbarComponent,
       SpinnerComponent, CheckInternetConnectionComponent,
-      SidebarHomeComponent,SliderComponent,
-NavOptionsComponent,CategoryLinkComponent,
-NavBrandComponent,AvatarComponent,
-ButtonShopComponent,ModalRegisterComponent,
-ModalRegisterComponent,SearchComponent,
+      SidebarHomeComponent, SliderComponent,
+      NavOptionsComponent, CategoryLinkComponent,
+      NavBrandComponent, AvatarComponent,
+      ButtonShopComponent, ModalRegisterComponent,
+      ModalRegisterComponent, SearchComponent,
 
     ]
 })

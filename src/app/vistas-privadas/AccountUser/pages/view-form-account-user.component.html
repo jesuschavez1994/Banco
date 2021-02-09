@@ -1,0 +1,23 @@
+<app-public-navbar [userLog]="userLog" [storeAct]="storeLog"></app-public-navbar>
+
+<div id="main-wrapper" class="page">
+
+    <app-sidebar-home class="aside-home" [auth]="userLog" [storeAct]="storeLog"></app-sidebar-home>
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    <div class="page-wrapper animated fadeIn">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            
+            <div class="container pt-4">
+                <div class="row">
+                    <app-form-account-user></app-form-account-user>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

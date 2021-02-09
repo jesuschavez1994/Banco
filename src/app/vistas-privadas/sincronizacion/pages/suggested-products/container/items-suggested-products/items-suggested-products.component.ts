@@ -39,12 +39,17 @@ interface EventID{
 
 export class ItemsSuggestedProductsComponent implements OnInit{
 
+
+
   imgsBanners: BannerOptions = {
     m: '.assets/img/Banner/Banner1.svg'
   };
 
   @Input() SetAllCheckbox: boolean;
   @Input() PalabraBuscador: ProductosLoads;
+  @Input() isExpanded = false;
+
+  expandSidebar = true;
 
   images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
 
@@ -237,6 +242,11 @@ export class ItemsSuggestedProductsComponent implements OnInit{
     }
     
   }
+
+    // Expand or contract sidebar-list on responsive mode
+    public toogleSidebar(event) {
+      this.expandSidebar = event;
+    }
 
 
 }

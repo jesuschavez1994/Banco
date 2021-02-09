@@ -65,7 +65,7 @@
     
                     <div class="form-group row">
                         <div class="col-md-12 links-recordar-olvidar">
-                            <div class="checkbox checkbox-primary pull-left p-t-0">
+                            <div class="checkbox checkbox-primary pull-left p-t-0 display-flex justify-content-space-around">
                                 <input  name="recuerdame" 
                                         id="checkbox-signup" 
                                         type="checkbox" 
@@ -79,13 +79,14 @@
                                             class="ml-2 family-500 recorder">
                                             Recordarme 
                                 </label>
+
+                                <a  id="to-recover" 
+                                    class="pull-right family-500 recorder"
+                                    (click)="openDialog()"> 
+                                    Olvidé mi contraseña
+                                </a> 
     
                             </div>
-    
-                            <a  id="to-recover" 
-                                class="pull-right family-500 recorder"> 
-                                Olvidé mi contraseña
-                            </a> 
                         </div>
                     </div>
     
@@ -107,13 +108,20 @@
                             <span class="family-500 recorder">
                                 ¿Aún no tienes cuenta?
                             </span> 
-                            <a routerLink="/register" class="family-700 black ml-2 fredoka">
+                            <a 
+                                class="family-700 black ml-2 fredoka" 
+                                (click)="openDialogRegister()">
                                 <small class="size-13">
                                     REGÍSTRATE AQUÍ
                                 </small>
                             </a>
     
                         </div>
+
+                        <div class="alert alert-danger mt-3 animated fadeIn fast" role="alert" *ngIf="OnError">
+                           {{ErrorMessage}}
+                        </div>
+
                     </div>
 
 

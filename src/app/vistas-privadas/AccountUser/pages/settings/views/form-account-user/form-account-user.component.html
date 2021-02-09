@@ -1,0 +1,197 @@
+
+<form [formGroup]="forma">
+    <div class="row">
+
+        <h2 class="OpenSans-700 pl-3 pb-3 h2-title">
+            Configuración de tu cuenta
+        </h2>
+
+        <div class="col-md-12">
+
+            <div class="form-group row mb-0 mt-4">
+                <div class="col-12">
+                  <h5 class="family-500 orange">Información de contacto</h5>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
+                  <mat-label class="OpenSans-600 size-12">
+                    Nombre de usuario
+                  </mat-label>
+
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Ingresa tú nombre de usuario"
+                    formControlName="username"
+                    [ngClass]="{
+                      'is-invalid':
+                        (!forma.controls['username'].valid ||
+                          forma.controls['username'].errors?.minlength) &&
+                        forma.controls['username'].touched,
+                      'is-valid': forma.controls['username'].valid
+                    }"
+                  />
+
+                  <mat-error
+                    *ngIf="forma.get('username').errors?.required"
+                    class="invalid-feedback"
+                  >
+                    Ingresa un nombre de usuario para mostrar que sea valido
+                  </mat-error>
+
+                  <mat-error
+                    *ngIf="forma.get('username').errors?.minlength"
+                    class="invalid-feedback"
+                  >
+                    Por lo menos 5 caracteres
+                  </mat-error>
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+                <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
+                  <mat-label class="OpenSans-600 size-12"> Correo </mat-label>
+                  <input
+                    class="form-control email-icon"
+                    type="email"
+                    placeholder="Correo electrónico"
+                    formControlName="email"
+                    disabled="true"
+                    [ngClass]="{
+                      'is-invalid':
+                        (!forma.controls['email'].valid ||
+                          forma.controls['email'].errors?.minlength) &&
+                        forma.controls['email'].touched,
+                      'is-valid': forma.controls['email'].valid
+                    }"
+                  />
+
+                  <mat-error
+                    *ngIf="forma.get('email').errors?.required"
+                    class="invalid-feedback"
+                  >
+                    Agrega una dirección de correo electrónico para poder
+                    iniciar sesión con tu dirección de correo electrónico.
+                  </mat-error>
+
+                  <mat-error
+                    *ngIf="forma.get('email').errors?.minlength"
+                    class="invalid-feedback"
+                  >
+                    Por lo menos 5 caracteres.
+                  </mat-error>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
+                  <mat-label class="OpenSans-600 size-12">
+                    Telefono
+                  </mat-label>
+                  <input
+                    class="form-control input"
+                    type="text"
+                    placeholder="Ingrese telefono"
+                    formControlName="phone"
+                    [ngClass]="{
+                      'is-invalid':
+                        (!forma.controls['phone'].valid ||
+                          forma.controls['phone'].errors?.minlength) &&
+                        forma.controls['phone'].touched,
+                      'is-valid': forma.controls['phone'].valid
+                    }"
+                  />
+
+                  <mat-error
+                    *ngIf="forma.get('phone').errors?.required"
+                    class="invalid-feedback"
+                  >
+                    Ingresa tu número teléfonico.
+                  </mat-error>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-12">
+                  <h5 class="family-500 orange">Contraseña</h5>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
+                  <mat-label class="OpenSans-600 size-12">
+                    Nueva contraseña
+                  </mat-label>
+                  <input
+                    class="form-control"
+                    type="password"
+                    placeholder="Contraseña"
+                    formControlName="password1"
+                    [ngClass]="{
+                      'is-invalid':
+                        (!forma.get('password1').valid ||
+                          forma.get('password1').errors?.minlength) &&
+                        forma.get('password1').touched,
+                      'is-valid': forma.get('password1').valid
+                    }"
+                  />
+
+                  <mat-error
+                    *ngIf="forma.get('password1').errors?.required"
+                    class="invalid-feedback"
+                  >
+                    Este campo es requerido
+                  </mat-error>
+
+                  <mat-error
+                    *ngIf="forma.get('password1').errors?.minlength"
+                    class="invalid-feedback"
+                  >
+                    La contraseña debe tener al menos 8 caracteres
+                  </mat-error>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
+                  <mat-label class="OpenSans-600 size-12">
+                    Repita contraseña
+                  </mat-label>
+                  <input
+                    class="form-control"
+                    type="password"
+                    placeholder="Confirma contraseña"
+                    formControlName="password2"
+                    [ngClass]="{
+                      'is-invalid':
+                        (!forma.get('password2').valid ||
+                          forma.get('password2').errors?.minlength) &&
+                        forma.get('password2').touched,
+                      'is-valid': forma.get('password2').valid
+                    }"
+                  />
+
+                  <mat-error
+                    *ngIf="forma.get('password2').errors?.required"
+                    class="invalid-feedback"
+                  >
+                    Este campo es requerido
+                  </mat-error>
+
+                  <mat-error
+                    *ngIf="forma.get('password2').errors?.minlength"
+                    class="invalid-feedback"
+                  >
+                    La contraseña debe tener al menos 8 caracteres
+                  </mat-error>
+                </div>
+            </div>
+
+        </div>
+                 
+    </div>
+</form>
+     

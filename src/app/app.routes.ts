@@ -42,6 +42,10 @@ import { EditProductBankComponent } from './vistas-privadas/Admin/pages/containe
 import { PageUnderConstructionComponent } from './vistas-publicas/page-under-construction/page-under-construction.component';
 import { SettingsComponent } from './vistas-privadas/account/settings.component';
 
+// FORm USER //
+import { ViewFormAccountUserComponent } from './vistas-privadas/AccountUser/pages/view-form-account-user.component';
+import { FormAccountUserComponent } from './vistas-privadas/AccountUser/pages/settings/views/form-account-user/form-account-user.component';
+
 const APP_ROUTES: Routes = [
 
     {path: 'home', component: HomeComponent},
@@ -49,7 +53,7 @@ const APP_ROUTES: Routes = [
     {
       path: 'categorys',
       component: CategorysComponent,
-  
+
       children: [
         // menu categorys vista predetermianda en categorys
         { path: '', component: MenuCategorysComponent },
@@ -79,7 +83,7 @@ const APP_ROUTES: Routes = [
       ],
     },
     { path: 'login', component: LoginComponent },
-  
+
     {
       path: 'page-under-construction',
       component: PageUnderConstructionComponent,
@@ -114,6 +118,7 @@ const APP_ROUTES: Routes = [
         component: RutStoreComponent,
     },
 
+    // STORE //
     {
       path: 'account',
       component: SettingsComponent,
@@ -131,6 +136,20 @@ const APP_ROUTES: Routes = [
           component: AccountComponent,
         },
       ],
+    },
+
+    // USER //
+
+    {
+      path: 'account',
+      component: ViewFormAccountUserComponent,
+      canActivate: [LoginGuardGuard],
+      children: [
+        {
+          path: 'setting-user',
+          component: FormAccountUserComponent
+        }
+      ]
     },
 
 
