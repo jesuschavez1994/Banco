@@ -37,5 +37,7 @@ export class PublicNavbarComponent implements OnInit {
   constructor(public homeService: HomeServiceService,) { }
 
   ngOnInit(): void {
+    this.userLog = this.homeService.islog();
+     this.storeAct= this.homeService.storeActive();
   }
 }
