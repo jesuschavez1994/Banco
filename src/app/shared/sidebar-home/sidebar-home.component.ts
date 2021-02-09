@@ -5,6 +5,7 @@ import { HomeServiceService } from "../../vistas-publicas/services/home-service.
 import {ModalRegisterComponent} from '@shared/modal-register/modal-register.component';
 import {MatDialog, MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DropdownOption, ClassIcon, ExtraButtonEmitter } from '@interfaces/components-options/dropdown.options.interface';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-sidebar-home',
@@ -16,7 +17,7 @@ export class SidebarHomeComponent implements OnInit {
  @ViewChild('configurationMenu') configurationMenu: ElementRef;
  @Input() auth: boolean;
  @Input() storeAct: boolean | string;
-
+          envApi= environment.url;
           userId: number | string;
           userImg: any;
           userName: string;

@@ -46,8 +46,10 @@ export class NavOptionsComponent implements OnInit {
   @ViewChild('toastRef') toastRef: ToastComponent;
   ngOnInit(): void {
     // Carga items dropdown
-    this.loadProductCart();
-    this.loadFavoriteList()
+    if(this.auth && !this.storeAct ){
+      this.loadProductCart();
+      this.loadFavoriteList()
+    }
   }
 
   // BY: Christofer
