@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import {
   Profile, SidebarListOptions, AnchorsMenu,
-  SelectedEmitter, Filter
+  SelectedEmitter, Filter, Option
 } from '@interfaces/components-options/sidebar-list.options.interface';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Utils } from '../../utils/utils';
@@ -281,8 +281,8 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   }
 
   public selectOptionsFilter2(
-    option,
-    list
+    option: Option,
+    list: Filter
 
   ){
 
@@ -291,22 +291,9 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     queryParams = {};
 
-    // Marca como check o no
-    // console.log('option')>
-    // console.log(option);
-
-    // console.log('list');
-    // console.log(list);
-
     if (list.type === 'multiple') {
 
-      // option.isSelected = option.isSelected ? false : true;
-      // option.isSelected = false;
-      if (option.isSelected) {
-        option.isSelected = false;
-      }else {
-        option.isSelected = true;
-      }
+      option.isSelected = option.isSelected ? false : true; // Marca como check o no
 
       if (list.parentFilterId) { // se ejecuta cuando la lista determina que sus opciones dependen de una lista padre
 
@@ -348,18 +335,16 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     }else if (list.type === 'single') {
 
-      // Desmarcando todas las opciones (parents o singles)
-      list.options.forEach(listFilterOption => {
-        listFilterOption.isSelected = false;
+      // Desmarcando todas las opciones (parents o singles) que no sean la opción a seleccionar
+      const filterOptionsDisallowed = list.options.filter( lOption => {
+        return lOption.optionId !== option.optionId;
       });
 
-      // option.isSelected = option.isSelected ? false : true; // marcar o desmarcar 1 opción
-      // option.isSelected = false;
-      if (option.isSelected) {
-        option.isSelected = false;
-      }else {
-        option.isSelected = true;
-      }
+      filterOptionsDisallowed.forEach(filterOptionDisallowed => {
+        filterOptionDisallowed.isSelected = false;
+      });
+
+      option.isSelected = option.isSelected ? false : true; // marcar o desmarcar 1 opción
 
       // Obtenemos los filtros que son hijos o subFiltros de este
       // Es decir, que posean el mismo parentFilterId que el filter Id del listado que estamos evaluando
@@ -372,9 +357,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
         return false;
 
       });
-
-      // console.log('subFilters');
-      // console.log(subFilters);
 
       // Desmarcamos todas las opciones de los sub filters del parentFilter correspondiente al cambiar de parentOption
       if ( subFilters.length > 0 ) {
@@ -392,7 +374,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       queryParams[list.paramName] = option.name;
 
     }
-
 
     navigationOptions = {
       relativeTo: this.route,
