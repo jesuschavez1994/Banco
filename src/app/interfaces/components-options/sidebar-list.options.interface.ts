@@ -24,18 +24,6 @@
 export interface SidebarListOptions {
   anchorsMenu: AnchorsMenu;
   profile: Profile;
-  categories: Category[];
-}
-
-export interface Category {
-  id: number;
-  name: string;
-  subcategories: Subcategory[];
-}
-
-export interface Subcategory {
-  id: number;
-  name: string;
 }
 
 export interface Profile {
@@ -60,27 +48,32 @@ export interface AnchorsMenu {
 
 // Filters
 export interface Filter {
-  id?: number;
-  name: string;
-  totalFounds?: number | string;
+  filterId?: number;
+  title: string;
+  type: string;
+  paramName: string;
+  parentFilterId?: number;
+  options: Option[];
 }
-export interface PriceRange {
-  id?: number;
-  min: number | string;
-  max: number | string;
-  totalFounds: number | string;
+
+export interface Option {
+  optionId?: number;
+  parentOptionId?: number;
+  name: string;
+  totalFounds: number;
+  isSelected?: boolean;
 }
 
 // Others
 
 export interface SelectedEmitter {
-  currentCategory: Category;
+  currentCategory;
   isSelectedCategory: boolean;
-  SelectedSubCategories?: Subcategory[];
+  SelectedSubCategories?;
 }
 
 // Activated Routes //
 
 export interface ActivatedRoutesParams{
-  url: string
+  url: string;
 }
