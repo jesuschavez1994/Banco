@@ -10,8 +10,8 @@ import { SearchStore } from '@models/search/search-store.model';
 import { SearchService } from '@services/Search/search.service';
 import {SearchStoreComponent} from '../../sincronizacion/components/search/container/search-store/search-store.component';
 import {
-  Category, Profile, SidebarListOptions, AnchorsMenu,
-  SelectedEmitter, Filter, PriceRange
+  Profile, SidebarListOptions, AnchorsMenu,
+  SelectedEmitter, Filter
 } from '@interfaces/components-options/sidebar-list.options.interface';
 
 import { AsideFiltrosComponent } from '../../shared/aside-filtros/aside-filtros.component';
@@ -36,7 +36,7 @@ export class MyStoreComponent implements OnInit {
   anchorsMenu: AnchorsMenu;
 
   breadcrumb: BreadcrumbOptions[];
-  categories: Category[] = [];
+  categories = [];
   MyProduct: DataProductDB[] = [];
 
   @ViewChild('sidebarList') sidebarList: AsideFiltrosComponent;

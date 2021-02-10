@@ -292,7 +292,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     queryParams = {};
 
     // Marca como check o no
-    // console.log('option');
+    // console.log('option')>
     // console.log(option);
 
     // console.log('list');
@@ -300,7 +300,13 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     if (list.type === 'multiple') {
 
-      option.isSelected = option.isSelected ? false : true;
+      // option.isSelected = option.isSelected ? false : true;
+      // option.isSelected = false;
+      if (option.isSelected) {
+        option.isSelected = false;
+      }else {
+        option.isSelected = true;
+      }
 
       if (list.parentFilterId) { // se ejecuta cuando la lista determina que sus opciones dependen de una lista padre
 
@@ -347,7 +353,13 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
         listFilterOption.isSelected = false;
       });
 
-      option.isSelected = option.isSelected ? false : true; // marcar o desmarcar 1 opción
+      // option.isSelected = option.isSelected ? false : true; // marcar o desmarcar 1 opción
+      // option.isSelected = false;
+      if (option.isSelected) {
+        option.isSelected = false;
+      }else {
+        option.isSelected = true;
+      }
 
       // Obtenemos los filtros que son hijos o subFiltros de este
       // Es decir, que posean el mismo parentFilterId que el filter Id del listado que estamos evaluando

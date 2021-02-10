@@ -7,14 +7,13 @@ import { ProductsCardsComponent } from '@shared/products-cards/products-cards.co
 import { ProductDetailComponent } from '@shared/product-detail/product-detail.component';
 import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component';
 import { StoreService } from '@services/store/store.service';
-import { AnchorsMenu, Profile, Category } from '@interfaces/components-options/sidebar-list.options.interface';
+import { AnchorsMenu, Profile } from '@interfaces/components-options/sidebar-list.options.interface';
 import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
 import { StoreResponse } from '@interfaces/store.interface';
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Utils } from '../../utils/utils';
-import { PriceRange, Filter } from '@interfaces/components-options/sidebar-list.options.interface';
 import { PaymentProcessService } from '@services/payment-process/payment-process.service';
 import { DropdownOption } from '@interfaces/components-options/dropdown.options.interface';
 import { DropdownIconComponent } from '../../shared/dropdown-icon/dropdown-icon.component';

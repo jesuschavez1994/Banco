@@ -4,8 +4,8 @@ import { FilstroStoreService } from '../../../services/FiltroStore/filstro-store
 import {Component, OnInit, Input, Output, EventEmitter,
         ElementRef, ViewChild, HostListener, AfterViewInit} from '@angular/core';
 import {
-  Category, Profile, SidebarListOptions, AnchorsMenu, ActivatedRoutesParams,
-  SelectedEmitter, Filter, PriceRange
+  Profile, SidebarListOptions, AnchorsMenu, ActivatedRoutesParams,
+  SelectedEmitter, Filter
 } from '@interfaces/components-options/sidebar-list.options.interface';
 import { ActivatedRoute, Router, NavigationEnd  } from '@angular/router';
 import 'rxjs/add/operator/filter';
@@ -17,7 +17,7 @@ import 'rxjs/add/operator/filter';
 export class AsideFiltrosComponent implements OnInit, AfterViewInit {
 
    // // category
-   currentCategory: Category;
+   currentCategory;
 
   // **** Input **** //
   @Input() isExpanded = false;
@@ -26,7 +26,7 @@ export class AsideFiltrosComponent implements OnInit, AfterViewInit {
   // @Input() RouterActivate: ActivatedRoutesParams;
 
   // filters
-  @Input() categories: Category[] = [];
+  @Input() categories = [];
   @Input() sidebarOptions: SidebarListOptions;
 
   // **** Output **** //
@@ -61,7 +61,7 @@ export class AsideFiltrosComponent implements OnInit, AfterViewInit {
     if (this.sidebarOptions) {
       this.anchorsMenu = this.sidebarOptions.anchorsMenu;
       this.profile = this.sidebarOptions.profile;
-      this.categories = this.sidebarOptions.categories;
+      // this.categories = this.sidebarOptions.categories;
     }
 
     this.currentCategory = this.categories[0];
