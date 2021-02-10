@@ -86,7 +86,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       ]
     },
     {
-      filterId: 1,
+      filterId: 3,
       title: 'Precios',
       type: 'single', // Determinamos que solo una opción puede ser seleccionada
       paramName: 'price',
@@ -305,23 +305,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
               parentOption.isSelected = false;
 
-            } else { // obtenemos las opciones seleccionadas y las concatenamos para formar el queryParam
-
-              // Obtenemos todas las opciones de la lista seleccionadas
-              const optionsSelected = list.options.filter( lOption => {
-                return lOption.isSelected;
-              });
-
-
-              // si existen opciones seleccionadas, agregar esas opciones al queyParam junto a su parentFilter
-              if (optionsSelected.length > 0) {
-
-                const optionsSelectedNames = optionsSelected.map(optionsSelectedMap => {
-                  return optionsSelectedMap.name;
-                });
-
-              }
-
             }
 
           }
@@ -349,6 +332,9 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
         return false;
 
       });
+
+      console.log('subFilters');
+      console.log(subFilters);
 
       // Desmarcamos todas las opciones de los sub filters al cambiar de parentOption
       if ( subFilters.length > 0 ) {
