@@ -67,7 +67,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
           parentOptionId: 1, // El id identificador de la opción de la cual depende
           name: 'labial', // nombre de la opción
           totalFounds: 200, // total de resultados a esperar con este filtro
-          isSelected: false // Representa el estado de la opción seleccionada o no
+          isSelected: false // Representa el estado de la opción seleccionada o no.
         },
         {
           optionId: 2,
