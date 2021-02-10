@@ -5,57 +5,69 @@
 
 <main class="page">
 
-    <ng-container *ngIf="anchorsMenu && profile && categories">
+  <!-- <ng-container *ngIf="anchorsMenu && profile"> -->
 
-        <app-sidebar-list #sidebarList [isExpanded]="expandSidebar" (sidebarExpand)="toogleSidebar($event)" [anchorsMenu]="anchorsMenu" [profile]="profile" [categories]="categories" [priceRanges]="priceRanges" [factories]="factories" [marks]="marks" [delivery]="delivery">
-        </app-sidebar-list>
+      <app-sidebar-list
+        #sidebarList
+        [isExpanded]="expandSidebar"
+        (sidebarExpand)="toogleSidebar($event)"
+        [anchorsMenu]="anchorsMenu" [profile]="profile"
+      >
+      </app-sidebar-list>
 
-    </ng-container>
-
-
-    <div class="column">
-
-        <section class="introduction-page">
-
-            <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
-
-            <app-banner [imgs]="imgsBanners"></app-banner>
+  <!-- </ng-container> -->
 
 
-        </section>
+  <div class="column">
 
-        <ng-container *ngIf="showProducts">
+      <section class="introduction-page">
 
-            <section class="products-infomation">
+          <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
 
-                <h1 class="profile-name" id="profile-name">
-                  {{StoreName}}
-                </h1>
+          <app-banner [imgs]="imgsBanners"></app-banner>
 
-                <app-product-detail #productDetail (clickButtonCart)="addProductToCart($event)">
-                </app-product-detail>
 
-                <app-search-bar [preloadedValue]="preloadedValueSearch" [debounce]="1000" [isExpanded]="expandSidebar" [buttonSidebarList]="true" (sidebarExpand)="toogleSidebar($event)" (search)="search($event)" [filterOptions]="filterOptions">
-                </app-search-bar>
+      </section>
 
-                <app-products-cards
-                  #productCards
-                  (selected)="goTodetailProduct($event)"
-                  (pagination)="paginationProducts($event)"
-                  [totalItems]="totalProducts"
-                  [itemsPerPage]="itemsPerPage"
-                  [showShimmer]="showShimmerProductsCards">
-                </app-products-cards>
+      <ng-container *ngIf="showProducts">
 
-            </section>
+          <section class="products-infomation">
 
-        </ng-container>
+              <h1 class="profile-name" id="profile-name">
+                {{StoreName}}
+              </h1>
 
-        <ng-container *ngIf="!showProducts">
-            <p>contact detail</p>
-        </ng-container>
+              <app-product-detail #productDetail (clickButtonCart)="addProductToCart($event)">
+              </app-product-detail>
 
-    </div>
+              <app-search-bar
+                [preloadedValue]="preloadedValueSearch"
+                [debounce]="1000"
+                [isExpanded]="expandSidebar"
+                [buttonSidebarList]="true"
+                (sidebarExpand)="toogleSidebar($event)"
+                (search)="search($event)"
+                [filterOptions]="filterOptions">
+              </app-search-bar>
+
+              <app-products-cards
+                #productCards
+                (selected)="goTodetailProduct($event)"
+                (pagination)="paginationProducts($event)"
+                [totalItems]="totalProducts"
+                [itemsPerPage]="itemsPerPage"
+                [showShimmer]="showShimmerProductsCards">
+              </app-products-cards>
+
+          </section>
+
+      </ng-container>
+
+      <ng-container *ngIf="!showProducts">
+          <p>contact detail</p>
+      </ng-container>
+
+  </div>
 
 </main>
 

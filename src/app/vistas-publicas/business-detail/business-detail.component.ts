@@ -39,43 +39,18 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   breadcrumb: BreadcrumbOptions[];
   imgsBanners: BannerOptions;
 
-// Navbar
+  // Navbar
   userLog = false;
 
   // sidebar-list
   expandSidebar = true;
   anchorsMenu: AnchorsMenu;
   profile: Profile;
-  categories: Category[];
-  priceRanges: PriceRange[] = [
-    { min: 0, max: 10000, totalFounds: 559 },
-    { min: 10000, max: 20000, totalFounds: 58 },
-    { min: 20000, max: 30000, totalFounds: 9 },
-    { min: 30000, max: 40000, totalFounds: 1 },
-    { min: 50000, max: 60000, totalFounds: 1 },
-  ];
+
   filterOptions: FilterOption[] = [
     {label: 'filtrar por', value: 0},
     {label: 'producto', value: 1},
     {label: 'Empresa', value: 'hola'},
-  ];
-  factories: Filter[] = [
-    {name: 'abbot', totalFounds: 1},
-    {name: 'anc', totalFounds: 36},
-    {name: 'andrómaatico', totalFounds: 1},
-    {name: 'aura vitalis', totalFounds: 38},
-    {name: 'bach', totalFounds: 7},
-  ];
-  delivery: Filter[] = [
-    { name: 'si', totalFounds: 579 },
-    { name: 'no', totalFounds: 274 },
-  ];
-  marks: Filter[] = [
-    { name: 'albaderm', totalFounds: 16 },
-    { name: 'Aquasolar', totalFounds: 3 },
-    { name: 'Arama', totalFounds: 8 },
-    { name: 'Bosque miel', totalFounds: 2 },
-    { name: 'Brota', totalFounds: 5 },
   ];
 
   // Products-cards
@@ -122,7 +97,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     this.loadDataByParams();
   }
 
-  public loadDataByParams(){
+  public loadDataByParams() {
 
     combineLatest([this.route.paramMap, this.route.queryParamMap])
     .pipe(
@@ -499,20 +474,11 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         this.StoreName = storeResp.name;
 
-        // console.log(storeResp);
-
         if (storeResp.banner_image.length > 0) {
 
           const storeBanners = storeResp.banner_image;
 
-          // console.log('storeBanners');
-          // console.log(storeBanners);
-
           const sizes = Object.keys(storeBanners[0].src_size);
-
-          // this.imgsBanners = {
-          //   m: storeBanners[0].src_size.xl
-          // };
 
           if (sizes.length > 1) {
 
@@ -527,10 +493,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             };
           }
 
-          // console.log('this.imgsBanners');
-          // console.log(this.imgsBanners);
-
-
         }
 
 
@@ -544,7 +506,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   // Sidebar-list
-  public setSidebarOptions(idStore: number, storeResp: StoreResponse){
+  public setSidebarOptions(idStore: number, storeResp: StoreResponse) {
 
     this.anchorsMenu = {
       productLink: `/business-detail/${idStore}/products`,
@@ -561,105 +523,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       img: 'assets/img/no-image-banner.jpg', // la base de datos no tiene el dato
       isVerified: storeResp.certification == 'true' ? true : false
     };
-
-    this.categories = [
-      {
-        id: 1,
-        name: 'Cosmeticos',
-
-        subcategories: [
-          {
-            id: 1,
-            name: 'Dolor inflamación',
-
-          },
-          {
-            id: 2,
-            name: 'Belleza Higiene',
-
-          },
-          {
-            id: 3,
-            name: 'Dieta & Fitness',
-
-          },
-          {
-            id: 4,
-            name: 'Salud y vitaminas',
-
-          },
-          {
-            id: 5,
-            name: 'Vida sexual',
-
-          },
-          {
-            id: 6,
-            name: 'Ortopedia',
-
-          },
-          {
-            id: 7,
-            name: 'Homeopatia & natural',
-
-          },
-          {
-            id: 8,
-            name: 'Mascotas & veterinaria',
-
-          }
-        ]
-      },
-      {
-        id: 2,
-        name: 'Medicamentos2',
-
-        subcategories: [
-          {
-            id: 1,
-            name: 'Dolor & inflamación2',
-
-          },
-          {
-            id: 2,
-            name: 'Belleza & Higiene2',
-
-          },
-          {
-            id: 3,
-            name: 'Dieta & Fitness2',
-
-          },
-          {
-            id: 4,
-            name: 'Salud y vitaminas2',
-
-          },
-          {
-            id: 5,
-            name: 'Vida sexual2',
-
-          },
-          {
-            id: 6,
-            name: 'Ortopedia2',
-
-          },
-          {
-            id: 7,
-            name: 'Homeopatia & natural2',
-
-          },
-          {
-            id: 8,
-            name: 'Mascotas & veterinaria2',
-
-          }
-        ]
-      },
-    ];
-
-    // console.log(storeResp);
 
   }
 
