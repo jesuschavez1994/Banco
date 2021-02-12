@@ -154,7 +154,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   }
 
   public initFilter(isLocalFilter: boolean = this.isLocalFilter) {
-    console.log('initFilter');
+
     this.isLocalFilter = true;
 
     // Asignamos a los identificadores únicos sus valores únicos de los filtros
@@ -175,9 +175,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       });
 
     });
-
-    console.log('initFilter');
-    console.log(this.optionsFilters);
 
   }
 
@@ -205,7 +202,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   public toggleSidebarList(event) {
     this.isExpanded = event;
     this.sidebarExpand.emit(this.isExpanded);
-    console.log('isExpanded', event);
 
   }
 
@@ -234,34 +230,21 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   public getQueryParams() {
     this.route.queryParamMap.subscribe( queryParam => {
 
-      // this.loadOptionsFilter( queryParam );
-      console.log('queryParam');
-      console.log(queryParam);
+      this.loadOptionsFilter( queryParam );
 
     });
 
-    console.log('this.route.queryParamMap');
-    console.log(this.route.queryParamMap);
 
   }
 
   // // Standard Filter
   public loadOptionsFilter( queryParam: ParamMap ){
 
-    console.log('queryParam');
-    console.log(queryParam);
-    // this.loadOptionsFilter( queryParam );
     const queryKeys = queryParam.keys;
-
-    console.log('queryKeys');
-    console.log(queryKeys);
 
     if (queryKeys.length > 0) {
 
       queryKeys.forEach( queryKey => {
-        console.log('queryKeys.forEach');
-        console.log(queryKey);
-        console.log(queryParam.get(queryKey));
 
         const filterMatched = this.optionsFilters.find( opFilter => {
           return opFilter.paramName === queryKey;
@@ -279,8 +262,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
             });
 
             if (optionMatched) {
-              console.log('selectOptionsFilter2 - single');
-              this.selectOptionsFilter2( optionMatched, filterMatched, false);
+              this.markOption( optionMatched, filterMatched, false);
             }
 
 
@@ -298,8 +280,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
                 });
 
                 if (optionMatched) {
-                  console.log('selectOptionsFilter2 - multiple');
-                  this.selectOptionsFilter2( optionMatched, filterMatched, false);
+                  this.markOption( optionMatched, filterMatched, false);
                 }
 
               });
@@ -312,125 +293,21 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     }
 
-    this.initFilter();
-
-
   }
 
 
   public selectOptionsFilter2(
     option: Option,
-    list: Filter,
-    toggleOption: boolean = true,
-    selectTheOption: boolean = true
+    list: Filter
   ){
 
     let navigationOptions;
     let queryParams;
 
-    queryParams = {};
+    // seleccionamos las opciones de filtro y creamos el queryParam
+    queryParams = this.markOption( option, list );
 
-    if (list.type === 'multiple') {
-
-      if (toggleOption) {
-
-        option.isSelected = option.isSelected ? false : true; // Marca como check o no
-
-      }else {
-
-        option.isSelected = selectTheOption; // Marca como check o no
-
-      }
-
-      if (list.parentFilterId) { // se ejecuta cuando la lista determina que sus opciones dependen de una lista padre
-
-        // Obtenemos al listado de opciones de filtro padre el cual es vinculado con su titulo como
-        // padre del la lista de filtrado de la opción seleccionada
-        const parentOptionsFilter = this.optionsFilters.find( optionsFilter => optionsFilter.filterId === list.parentFilterId );
-
-        if (parentOptionsFilter) {
-
-          const parentOption = parentOptionsFilter.options.find(
-          parentFilterOption => parentFilterOption.optionId === option.parentOptionId
-          );
-
-
-          if (parentOption) { // Marcamos el parent option
-
-            if (option.isSelected) {
-              // Desmarcando todas las opciones del padre, porque los parent siempre serán de tipo single
-              parentOptionsFilter.options.forEach(parentFilterOption => {
-              parentFilterOption.isSelected = false;
-              });
-
-              parentOption.isSelected = true; // Marcamos la opción padre
-
-            }
-
-            // Si todas las opciones est´n desmarcadas, desmarcamos al padre
-            // y eliminamos el query param del padre e hijo
-            if ( list.options.every( lOption => lOption.isSelected === false) ) {
-
-              parentOption.isSelected = false;
-
-            }
-
-          }
-        }
-
-      }
-
-    }else if (list.type === 'single') {
-
-        // Desmarcando todas las opciones (parents o singles) que no sean la opción a seleccionar
-        const filterOptionsDisallowed = list.options.filter( lOption => {
-            return lOption.optionId !== option.optionId;
-        });
-
-        filterOptionsDisallowed.forEach(filterOptionDisallowed => {
-            filterOptionDisallowed.isSelected = false;
-        });
-
-        console.log('toggleOption');
-        console.log(toggleOption);
-        if (toggleOption) {
-
-          option.isSelected = option.isSelected ? false : true; // Marca como check o no 1 opción
-
-        }else {
-
-          option.isSelected = selectTheOption; // Marca como check o no 1 opción
-
-        }
-
-        // Obtenemos los filtros que son hijos o subFiltros de este
-        // Es decir, que posean el mismo parentFilterId que el filter Id del listado que estamos evaluando
-        const subFilters = this.optionsFilters.filter( optionsFilter => {
-
-            if (optionsFilter.parentFilterId) {
-            return optionsFilter.parentFilterId === list.filterId;
-            }
-
-            return false;
-
-        });
-
-        // Desmarcamos todas las opciones de los sub filters del parentFilter correspondiente al cambiar de parentOption
-        if ( subFilters.length > 0 ) {
-
-            subFilters.forEach( subFilter => {
-
-            subFilter.options.forEach( subFilterOption => {
-                subFilterOption.isSelected = false;
-            });
-
-            });
-
-        }
-
-        queryParams[list.paramName] = option.name;
-
-    }
+    // Navigation With Filters
 
     navigationOptions = {
       relativeTo: this.route,
@@ -572,8 +449,117 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   }
 
-  public selectOptionFilter(type: 'single' | 'multiple') {
+  public markOption(
+    option: Option,
+    list: Filter,
+    toggleOption: boolean = true,
+    selectTheOption: boolean = true
+  ){
 
+    let queryParams;
+    queryParams = {};
+
+    if (list.type === 'multiple') {
+
+      if (toggleOption) {
+
+        option.isSelected = option.isSelected ? false : true; // Marca como check o no
+
+      }else {
+
+        option.isSelected = selectTheOption; // Marca como check o no
+
+      }
+
+      if (list.parentFilterId) { // se ejecuta cuando la lista determina que sus opciones dependen de una lista padre
+
+        // Obtenemos al listado de opciones de filtro padre el cual es vinculado con su titulo como
+        // padre del la lista de filtrado de la opción seleccionada
+        const parentOptionsFilter = this.optionsFilters.find( optionsFilter => optionsFilter.filterId === list.parentFilterId );
+
+        if (parentOptionsFilter) {
+
+          const parentOption = parentOptionsFilter.options.find(
+          parentFilterOption => parentFilterOption.optionId === option.parentOptionId
+          );
+
+
+          if (parentOption) { // Marcamos el parent option
+
+            if (option.isSelected) {
+              // Desmarcando todas las opciones del padre, porque los parent siempre serán de tipo single
+              parentOptionsFilter.options.forEach(parentFilterOption => {
+              parentFilterOption.isSelected = false;
+              });
+
+              parentOption.isSelected = true; // Marcamos la opción padre
+
+            }
+
+            // Si todas las opciones est´n desmarcadas, desmarcamos al padre
+            // y eliminamos el query param del padre e hijo
+            if ( list.options.every( lOption => lOption.isSelected === false) ) {
+
+              parentOption.isSelected = false;
+
+            }
+
+          }
+        }
+
+      }
+
+    } else if (list.type === 'single') {
+
+      // Desmarcando todas las opciones (parents o singles) que no sean la opción a seleccionar
+      const filterOptionsDisallowed = list.options.filter( lOption => {
+          return lOption.optionId !== option.optionId;
+      });
+
+      filterOptionsDisallowed.forEach(filterOptionDisallowed => {
+          filterOptionDisallowed.isSelected = false;
+      });
+
+      if (toggleOption) {
+
+        option.isSelected = option.isSelected ? false : true; // Marca como check o no 1 opción
+
+      }else {
+
+        option.isSelected = selectTheOption; // Marca como check o no 1 opción
+
+      }
+
+      // Obtenemos los filtros que son hijos o subFiltros de este
+      // Es decir, que posean el mismo parentFilterId que el filter Id del listado que estamos evaluando
+      const subFilters = this.optionsFilters.filter( optionsFilter => {
+
+        if (optionsFilter.parentFilterId) {
+        return optionsFilter.parentFilterId === list.filterId;
+        }
+
+        return false;
+
+      });
+
+      // Desmarcamos todas las opciones de los sub filters del parentFilter correspondiente al cambiar de parentOption
+      if ( subFilters.length > 0 ) {
+
+        subFilters.forEach( subFilter => {
+
+          subFilter.options.forEach( subFilterOption => {
+            subFilterOption.isSelected = false;
+          });
+
+        });
+
+      }
+
+      queryParams[list.paramName] = option.name;
+
+    }
+
+    return queryParams;
   }
 
 }
