@@ -86,7 +86,7 @@
                   [class.basic]="planInfo.name === 'basic'"
                   [class.standard]="planInfo.name === 'standard'"
                   [class.premium]="planInfo.name === 'premium'"
-                  *ngIf="index < 2"
+                  *ngIf="i < 2"
                   >1-{{ productBankDetails.amountOfPictures }}</span
                 >
                 <span
@@ -94,7 +94,7 @@
                   [class.basic]="planInfo.name === 'basic'"
                   [class.standard]="planInfo.name === 'standard'"
                   [class.premium]="planInfo.name === 'premium'"
-                  *ngIf="index >= 2"
+                  *ngIf="i >= 2"
                   >{{ productBankDetails.amountOfPictures }}</span
                 >
                 fotos del banco de productos.
