@@ -18,14 +18,14 @@
     >
       Plan {{ selectedPlanDetails.plan_name | titlecase }}
     </h5>
-    <h5
-      class="total"
-      [class.basic]="selectedPlanDetails.plan_name === 'basic'"
-      [class.standard]="selectedPlanDetails.plan_name === 'standard'"
-      [class.premium]="selectedPlanDetails.plan_name === 'premium'"
-    >
+    <h5 class="total">
       <b>Total:&nbsp; &nbsp;</b>
-      <span>${{ selectedPlanDetails.price | number }}</span>
+      <span
+        [class.basic]="selectedPlanDetails.plan_name === 'basic'"
+        [class.standard]="selectedPlanDetails.plan_name === 'standard'"
+        [class.premium]="selectedPlanDetails.plan_name === 'premium'"
+        >${{ selectedPlanDetails.price | number }}</span
+      >
     </h5>
 
     <p class="text">
@@ -46,7 +46,7 @@
             alt="webpay-banner"
           />
           <p>
-            Tarjeta de Débito
+            Tarjeta de Débito ó Crédito
             <br />
             (Redcompra Webpay)
           </p>
