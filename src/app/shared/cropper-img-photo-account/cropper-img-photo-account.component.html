@@ -1,9 +1,18 @@
 <section>
+    
     <img
-        style="width: 263px; height: 263px;"
+        style="width: 263px; height: 263px; border: dashed 2px #979797; padding: 10px;"
         #imgBanner
-        [src]="currentImg  | imgFallback: 'avatar-hombre'" alt="banner"
-        onerror="if (this.src != 'assets/img/avatar.svg') this.src = 'assets/img/no-image-banner.jpg';"
+        *ngIf="!ShowNewImgCrop"
+        [src]="currentImg  | imgFallback: 'avatar-hombre'" alt="avatar-user"
+        onerror="if (this.src != 'assets/img/avatar-hombre.jpg') this.src = 'assets/img/avatar-hombre.jpg';"
+    />
+
+    <img
+        style="width: 263px; height: 263px; border: dashed 2px #979797; padding: 7px;"
+        #imgBanner
+        *ngIf="ShowNewImgCrop"
+        [src]="ImgNew" alt="avatar-user"
     />
 
     <button (click)="isOpen = !isOpen" type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin"
@@ -21,7 +30,9 @@
     >
 
     <app-dropzone-photo [ngClass]="{'expand-dropzone': isexpand}" 
-                        (HidenDropZone)="CloseEvent($event)">
+                        (HidenDropZone)="CloseEvent($event)"
+                        (ImagenCropped)="ShowImage($event)"
+                        (SaveSuccesFullImage)="succesFull($event)">
     </app-dropzone-photo>
 
 </ng-template>

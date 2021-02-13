@@ -48,6 +48,10 @@ import { CropperImgPhotoAccountComponent } from './cropper-img-photo-account/cro
 import { MaterialModule } from '../Angula-Material/material.module';
 import { DropzonePhotoComponent } from './cropper-img-photo-account/container/dropzone-photo/dropzone-photo.component';
 import {PrivateviewModule} from '../vistas-privadas/privateview.module';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { FooterCropperComponent } from './cropper-img-photo-account/container/footer-cropper/footer-cropper.component';
+import { FileUpImgDropzonComponent } from './cropper-img-photo-account/container/file-up-img-dropzon/file-up-img-dropzon.component';
+
 
 @NgModule({
     declarations: [
@@ -71,7 +75,7 @@ import {PrivateviewModule} from '../vistas-privadas/privateview.module';
       ButtonShopComponent, ModalRegisterComponent,
       ModalRegisterComponent, SearchComponent,
       BtnActionComponent, GoogleMapComponent,
-      CropperImgPhotoAccountComponent, DropzonePhotoComponent,
+      CropperImgPhotoAccountComponent, DropzonePhotoComponent, FooterCropperComponent, FileUpImgDropzonComponent,
 
     ],
     imports: [
@@ -83,6 +87,7 @@ import {PrivateviewModule} from '../vistas-privadas/privateview.module';
       ReactiveFormsModule,
       NgxPaginationModule,
       MaterialModule,
+      ImageCropperModule
       
       // ComponentsModule
 

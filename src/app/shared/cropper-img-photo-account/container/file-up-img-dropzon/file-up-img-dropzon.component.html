@@ -1,0 +1,24 @@
+<h2> Editar foto de Perfil </h2>
+<h3>Tamaño recomendado 280px 280px pixeles</h3>
+<h3>Formato de archivo soportado: PNG, JPG, GIF</h3>
+                  
+                      
+<div class="content-label" *ngIf="showInput">
+    <label for="fileDropref">
+
+        <input  type="file" 
+                #fileDropref 
+                id="fileDropref"
+                accept="image/*" 
+                multiple 
+                (change)="fileBrowseHandler($event)"
+                title="Haz clic o suelta para anexar tu archivo"
+        >
+
+        <div>
+            <img src="assets/img/iconos/icons-main/icons/upload.svg">
+            Click or drag here to upload
+        </div>
+
+    </label>
+</div>

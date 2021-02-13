@@ -1,0 +1,19 @@
+<footer *ngIf="!spinner && !AlertSucces">
+
+    <div>
+        <button (click)="save()">
+            Configurar como foto de Perfil
+        </button>
+    </div>
+    
+    <section>
+        <button (click)="cambiarImg()">
+            Cambiar foto
+        </button>
+    </section>
+
+    <mat-error class="invalid-feedback" *ngIf="ErrorAlert">
+        !Ha ocurrido un error, Revise su conexión a internet!
+    </mat-error>
+
+</footer>

@@ -19,7 +19,8 @@ export class SliderCategoryComponent implements OnInit {
   constructor(private render: Renderer2, private route: Router, ) { }
   
   ngOnInit(): void {
-    this.listCategory= this._cat.products;
+    this.listCategory = this._cat.products;
+    console.log('ListCategorys', this.listCategory)
   }
   scrollRight(value){
 

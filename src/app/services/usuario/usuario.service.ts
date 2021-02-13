@@ -102,12 +102,12 @@ export class UsuarioService extends Service {
     return this.postQuery(url, usuario, this.useApiUrl);
   }
 
-  subirArchivo(archivo: any, userId: string) {
+  UploadFile(archivo: any, userId: string) {
     return this.postQuery(`users/${userId}/images`, archivo);
   }
 
-  cambiarImagen(archivo: any, userId: string) {
-    return this.subirArchivo(archivo, userId);
+  ImagenPerfil(archivo: any, userId: string) {
+    return this.UploadFile(archivo, userId);
   }
 
   datosUserImages(userId: string) {

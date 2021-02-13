@@ -1,0 +1,59 @@
+@import 'src/assets/scss/style.scss';
+
+h3{
+    font-size: 12px;
+    font-weight: 500;
+    color: #38424c;
+}
+
+.content-label {
+
+    display: flex;
+    justify-content: center;
+
+    label{
+      color: black;
+      font-weight: 600;
+      font-family:$fontFamily__monserrat;
+      width:70%;
+      min-height: 76px;
+      margin-top: 3%;
+      padding: 8px 16px;
+      background: #f7f7f7;
+      border: 2px dashed #bec0c2;
+      display: flex;
+      position: relative;
+      
+
+      input[type="file"]{
+        opacity: 0;
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+
+      div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        img{
+          width: 24px;
+        }
+
+      }
+      div span{
+        font-weight: 600;
+        font-family:$fontFamily__monserrat;
+        color:rgb(0, 162, 255);
+        padding-right: 5px;
+      }
+    }
+
+}
