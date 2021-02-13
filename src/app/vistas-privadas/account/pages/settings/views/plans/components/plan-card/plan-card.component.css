@@ -255,7 +255,7 @@ h5 {
 
 .more-info > div.price small {
   line-height: 1;
-  margin-left: 1rem;
+  margin: 0rem 1rem;
 }
 
 .total {

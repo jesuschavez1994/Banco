@@ -33,12 +33,14 @@
 
 @media screen and (max-width: 757px) {
   .content-wrapper {
+    margin-top: 20px;
     padding: 0px 200px 0px 65px;
   }
 }
 
 @media screen and (max-width: 485px) {
   .content-wrapper {
+    margin-top: 20px;
     padding: 0px 20px 0px 15px;
   }
 }
