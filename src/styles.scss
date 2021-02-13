@@ -417,6 +417,10 @@ $BancoDeProductos-theme: mat-light-theme(
   justify-content: space-around;
 }
 
+.justify-content-flex-start{
+  justify-content: flex-start;
+}
+
 .justufy-content-flex-end {
   justify-content: flex-end;
 }
