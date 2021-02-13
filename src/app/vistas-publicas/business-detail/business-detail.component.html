@@ -5,20 +5,15 @@
 
 <main class="page">
 
-  <!-- <ng-container *ngIf="anchorsMenu && profile"> -->
-    <!-- [filters]="sidebarFilters" -->
-    <app-sidebar-list
-      #sidebarList
-      [isExpanded]="expandSidebar"
-      (sidebarExpand)="toogleSidebar($event)"
-      [anchorsMenu]="anchorsMenu" [profile]="profile"
-      [filters]="sidebarFilters"
-      (selected)="viewQueryFiltersSidebar($event)"
-    >
-    </app-sidebar-list>
-
-  <!-- </ng-container> -->
-
+  <!-- [filters]="sidebarFilters" -->
+  <app-sidebar-list
+    #sidebarList
+    [isExpanded]="expandSidebar"
+    (sidebarExpand)="toogleSidebar($event)"
+    [anchorsMenu]="anchorsMenu" [profile]="profile"
+    [filters]="sidebarFilters"
+  >
+  </app-sidebar-list>
 
   <div class="column">
 

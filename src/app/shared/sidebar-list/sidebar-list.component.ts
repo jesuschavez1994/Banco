@@ -277,8 +277,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
           let queryValue;
           queryValue = queryParam.get(queryKey);
-          console.log('loadOptionsFilter');
-          console.log(queryValue);
 
           if (filterMatched.type === 'single') {
 
@@ -287,8 +285,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
             });
 
             if (optionMatched) {
-              console.log('optionMatched');
-              console.log(optionMatched);
+
               const queryParams = this.markOption( optionMatched, filterMatched, false);
 
               this.selected.emit(
@@ -315,12 +312,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
                 if (optionMatched) {
                   const queryParams = this.markOption( optionMatched, filterMatched, false);
-
-                  this.selected.emit(
-                    {
-                      queryParams
-                    }
-                  );
 
                 }
 

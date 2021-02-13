@@ -149,9 +149,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   // dataToast: any = '';
 
   constructor(
-    /** */
     private homeService: HomeServiceService,
-    /** */
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
@@ -160,9 +158,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     private utils: Utils,
     private dropdownIconComp: DropdownIconComponent
 
-  ){
-    // this.loadDataByParams();
-  }
+  ){}
 
   ngOnInit() {
     this.userLog = this.homeService.islog();
@@ -170,8 +166,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.loadDataByParams();
-    console.log('ngAfterViewInit');
-    console.log(this.sidebarList);
   }
 
   public loadDataByParams() {
@@ -707,11 +701,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
     this.sidebarList.loadOptionsFilter( queryParam ); // seleccionamos las opciones filtradas por url
 
-  }
-
-  public viewQueryFiltersSidebar(queryParam){
-    console.log('viewQueryFiltersSidebar');
-    console.log(queryParam);
   }
 
   // Expand or contract sidebar-list on responsive mode
