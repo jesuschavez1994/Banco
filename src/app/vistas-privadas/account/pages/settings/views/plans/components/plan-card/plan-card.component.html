@@ -71,14 +71,14 @@
             <li
               *ngFor="
                 let productBankDetails of planInfo.productBank;
-                index as i
+                let index = i
               "
             >
               <mat-checkbox
-                [checked]="selectedCheckbox === i"
+                [checked]="selectedCheckbox === index"
                 class="checkbox"
                 [value]="productBankDetails.price"
-                (change)="updatePrice(i, productBankDetails.price)"
+                (change)="updatePrice(index, productBankDetails.price)"
               ></mat-checkbox>
               <p>
                 <span
