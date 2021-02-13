@@ -41,7 +41,6 @@ export class PlanCardComponent implements OnInit {
 
   // Events that happen in the component -----------------
   showMore(): void {
-    this.justBasicPlan = true;
     this.moreInfo = !this.moreInfo;
     this.totalPrice =
       this.planInfo.basicPrice +
