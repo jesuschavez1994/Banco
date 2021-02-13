@@ -81,47 +81,49 @@
 
     <nav class="menu">
 
-      <ng-container *ngIf="optionsFilters">
+      <ng-container *ngIf="filters">
 
-        <ng-container *ngFor="let filter of optionsFilters">
+        <ng-container *ngIf="filters.length > 0">
 
+          <ng-container *ngFor="let filter of filters">
 
-          <ul class="list">
+            <ul class="list">
 
-            <h4 class="title">
-              {{filter.title}}
-            </h4>
+              <h4 class="title">
+                {{filter.title}}
+              </h4>
 
-            <ng-container *ngFor="let option of getFilter(filter); index as inx">
+              <ng-container *ngFor="let option of getFilter(filter); index as inx">
 
-              <div (click)="selectOptionsFilter2(option, filter)">
+                <div (click)="selectOptionsFilter2(option, filter)">
 
-                <li>
+                  <li>
 
-                  <input [type]="filter.type === 'multiple' ? 'radio' : 'checkbox'"
-                    id="{{filter.title | strReplace}}-{{inx}}"
-                    name="{{filter.title | strReplace}}-{{inx}}"
-                    [checked]="option.isSelected"
-                  >
+                    <input [type]="filter.type === 'multiple' ? 'radio' : 'checkbox'"
+                      id="{{filter.title | strReplace}}-{{inx}}"
+                      name="{{filter.title | strReplace}}-{{inx}}"
+                      [checked]="option.isSelected"
+                    >
 
-                  <label for="{{filter.title | strReplace}}-{{inx}}">
-                    <a>
-                      {{option.name}} ({{option.totalFounds}})
-                    </a>
-                  </label>
+                    <label for="{{filter.title | strReplace}}-{{inx}}">
+                      <a>
+                        {{option.name}} ({{option.totalFounds}})
+                      </a>
+                    </label>
 
-                </li>
+                  </li>
 
-              </div>
+                </div>
 
-            </ng-container>
+              </ng-container>
 
-          </ul>
+            </ul>
+
+          </ng-container>
 
         </ng-container>
 
       </ng-container>
-
 
     </nav>
 

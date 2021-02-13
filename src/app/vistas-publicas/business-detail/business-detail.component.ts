@@ -7,7 +7,7 @@ import { ProductsCardsComponent } from '@shared/products-cards/products-cards.co
 import { ProductDetailComponent } from '@shared/product-detail/product-detail.component';
 import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component';
 import { StoreService } from '@services/store/store.service';
-import { AnchorsMenu, Profile } from '@interfaces/components-options/sidebar-list.options.interface';
+import { AnchorsMenu, Filter, Profile } from '@interfaces/components-options/sidebar-list.options.interface';
 import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
 import { StoreResponse } from '@interfaces/store.interface';
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface';
@@ -45,11 +45,83 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   expandSidebar = true;
   anchorsMenu: AnchorsMenu;
   profile: Profile;
-
-  filterOptions: FilterOption[] = [
-    {label: 'filtrar por', value: 0},
-    {label: 'producto', value: 1},
-    {label: 'Empresa', value: 'hola'},
+  sidebarFilters: Filter[] = [
+    // {
+    //   title: 'categorías',
+    //   type: 'single',
+    //   paramName: 'categoria',
+    //   options: [
+    //     {
+    //       name: 'Cosmeticos',
+    //       totalFounds: 200,
+    //     },
+    //     {
+    //       name: 'Alimentos',
+    //       totalFounds: 200,
+    //     },
+    //   ]
+    // },
+    // {
+    //   title: 'sub categorías',
+    //   type: 'multiple',
+    //   paramName: 'sub-categoria',
+    //   parentFilterId: 1,
+    //   options: [
+    //     {
+    //       parentOptionId: 1,
+    //       name: 'labial',
+    //       totalFounds: 200,
+    //     },
+    //     {
+    //       parentOptionId: 1,
+    //       name: 'labia2',
+    //       totalFounds: 200,
+    //     },
+    //     {
+    //       parentOptionId: 2,
+    //       name: 'labial3',
+    //       totalFounds: 200,
+    //     },
+    //   ]
+    // },
+    // {
+    //   // filterId: 3,
+    //   title: 'Precios',
+    //   type: 'single', // Determinamos que solo una opción puede ser seleccionada
+    //   paramName: 'price',
+    //   options: [
+    //     {
+    //       // optionId: 1,
+    //       name: '$0 - $10,000',
+    //       totalFounds: 200,
+    //       // isSelected: false
+    //     },
+    //     {
+    //       // optionId: 2,
+    //       name: '$10,000 - $20,000',
+    //       totalFounds: 200,
+    //       // isSelected: false
+    //     },
+    //     {
+    //       // optionId: 3,
+    //       name: '$20,000 - $30,000',
+    //       totalFounds: 200,
+    //       // isSelected: false
+    //     },
+    //     {
+    //       // optionId: 3,
+    //       name: '$30,000 - $40,000',
+    //       totalFounds: 200,
+    //       // isSelected: false
+    //     },
+    //     {
+    //       // optionId: 3,
+    //       name: '$40,000 - $50,000',
+    //       totalFounds: 200,
+    //       // isSelected: false
+    //     },
+    //   ]
+    // },
   ];
 
   // Products-cards
@@ -60,12 +132,18 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   // SearchBar:
   preloadedValueSearch = '';
+  searchBarFilter: FilterOption[] = [
+    {label: 'filtrar por', value: 0},
+    {label: 'producto', value: 1},
+    {label: 'Empresa', value: 'hola'},
+  ];
 
   // navbar
   menuOptionsShopping: DropdownOption[] = [];
 
   // Variables
-  StoreName = '';
+  storeData: StoreResponse;
+  changedStoreData = true;
 
   // Toast
   // dataToast: any = '';
@@ -89,11 +167,11 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.userLog = this.homeService.islog();
   }
-/********************************************************************************* */
-/********************************************************************************* */
 
   ngAfterViewInit(): void {
     this.loadDataByParams();
+    console.log('ngAfterViewInit');
+    console.log(this.sidebarList);
   }
 
   public loadDataByParams() {
@@ -121,7 +199,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
       }
 
-      this.loadDataStore(params);
+      this.loadDataStore(params, queryParam);
 
       this.loadProductDetail(params);
 
@@ -463,7 +541,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   // Store
-  public loadDataStore(params){
+  public loadDataStore(params, queryParam: ParamMap){
 
     if ( params.has('idStore') ) {
 
@@ -471,7 +549,19 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
       this.storeService.getStoreById(idStore).subscribe( storeResp => {
 
-        this.StoreName = storeResp.name;
+        if (this.storeData) {
+
+          if (this.storeData.id !== storeResp.id) {
+            this.changedStoreData = true;
+
+          }else {
+            this.changedStoreData = false;
+
+          }
+
+        }else {
+          this.storeData = storeResp; // guardamos de forma global los datos de la tienda
+        }
 
         if (storeResp.banner_image.length > 0) {
 
@@ -495,7 +585,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         }
 
 
-        this.setSidebarOptions(idStore, storeResp);
+        this.setSidebarOptions(idStore, storeResp, queryParam);
         this.setBreadcrumbOptions(idStore, storeResp);
 
       });
@@ -505,7 +595,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   // Sidebar-list
-  public setSidebarOptions(idStore: number, storeResp: StoreResponse) {
+  public setSidebarOptions(idStore: number, storeResp: StoreResponse, queryParam: ParamMap) {
 
     this.anchorsMenu = {
       productLink: `/business-detail/${idStore}/products`,
@@ -523,6 +613,105 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       isVerified: storeResp.certification == 'true' ? true : false
     };
 
+    const sidebarFilters = [
+      {
+        filterId: 1,
+        title: 'categorías',
+        type: 'single',
+        paramName: 'categoria',
+        options: [
+          {
+            optionId: 1,
+            name: 'Cosmeticos',
+            totalFounds: 200,
+          },
+          {
+            optionId: 2,
+            name: 'Alimentos',
+            totalFounds: 200,
+          },
+        ]
+      },
+      {
+        filterId: 2,
+        title: 'sub categorías',
+        type: 'multiple',
+        paramName: 'sub-categoria',
+        parentFilterId: 1,
+        options: [
+          {
+            optionId: 1,
+            parentOptionId: 1,
+            name: 'labial',
+            totalFounds: 200,
+          },
+          {
+            optionId: 2,
+            parentOptionId: 1,
+            name: 'labia2',
+            totalFounds: 200,
+          },
+          {
+            optionId: 3,
+            parentOptionId: 2,
+            name: 'labial3',
+            totalFounds: 200,
+          },
+        ]
+      },
+      {
+        filterId: 3,
+        title: 'Precios',
+        type: 'single', // Determinamos que solo una opción puede ser seleccionada
+        paramName: 'price',
+        options: [
+          {
+            optionId: 1,
+            name: '$0 - $10,000',
+            totalFounds: 200,
+            // isSelected: false
+          },
+          {
+            optionId: 2,
+            name: '$10,000 - $20,000',
+            totalFounds: 200,
+            // isSelected: false
+          },
+          {
+            optionId: 3,
+            name: '$20,000 - $30,000',
+            totalFounds: 200,
+            // isSelected: false
+          },
+          {
+            optionId: 4,
+            name: '$30,000 - $40,000',
+            totalFounds: 200,
+            // isSelected: false
+          },
+          {
+            optionId: 5,
+            name: '$40,000 - $50,000',
+            totalFounds: 200,
+            // isSelected: false
+          },
+        ]
+      },
+    ];
+
+    // Evitamos que con cada cambio de la url se carguen las mismas opciones
+    // de filtro, solo se sobre escriben las opciones cundo es una tienda diferente
+    if (this.changedStoreData) {
+      this.sidebarFilters = this.sidebarList.setFilters(sidebarFilters); // retornamos los filters con el formato correcto para el component
+    }
+
+    this.sidebarList.loadOptionsFilter( queryParam ); // seleccionamos las opciones filtradas por url
+
+  }
+
+  public viewQueryFiltersSidebar(queryParam){
+    console.log('viewQueryFiltersSidebar');
+    console.log(queryParam);
   }
 
   // Expand or contract sidebar-list on responsive mode

@@ -34,99 +34,98 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   @Input() profile: Profile;
 
   // Selected Filters
-  @Input() optionsFilters: Filter[] = [
-    {
-      // filterId: 1,
-      title: 'categorías',
-      type: 'single', // Determinamos que solo una opción puede ser seleccionada
-      paramName: 'categoria',
-      options: [
-        {
-          // optionId: 1,
-          name: 'Cosmeticos',
-          totalFounds: 200,
-          // isSelected: false
-        },
-        {
-          // optionId: 2,
-          name: 'Alimentos',
-          totalFounds: 200,
-          // isSelected: false
-        },
-      ]
-    },
-    {
-      // filterId: 2,
-      title: 'sub categorías', // Titilo del listado de filtro
-      type: 'multiple', // Determina si es de opción multiple
-      paramName: 'sub-categoria', // Determina el queryParam a agregar
-      parentFilterId: 1, // Determinamos con el nombre el listado de filtro a vinculo con este listado de filtro
-      options: [ // opciones disponibles a agregar
-        {
-          // optionId: 1,
-          parentOptionId: 1, // El id identificador de la opción de la cual depende
-          name: 'labial', // nombre de la opción
-          totalFounds: 200, // total de resultados a esperar con este filtro
-          // isSelected: false // Representa el estado de la opción seleccionada o no.
-        },
-        {
-          // optionId: 2,
-          parentOptionId: 1,
-          name: 'labia2',
-          totalFounds: 200,
-          // isSelected: false
-        },
-        {
-          // optionId: 3,
-          parentOptionId: 2,
-          name: 'labial3',
-          totalFounds: 200,
-          // isSelected: false
-        },
-      ]
-    },
-    {
-      // filterId: 3,
-      title: 'Precios',
-      type: 'single', // Determinamos que solo una opción puede ser seleccionada
-      paramName: 'price',
-      options: [
-        {
-          // optionId: 1,
-          name: '$0 - $10,000',
-          totalFounds: 200,
-          // isSelected: false
-        },
-        {
-          // optionId: 2,
-          name: '$10,000 - $20,000',
-          totalFounds: 200,
-          // isSelected: false
-        },
-        {
-          // optionId: 3,
-          name: '$20,000 - $30,000',
-          totalFounds: 200,
-          // isSelected: false
-        },
-        {
-          // optionId: 3,
-          name: '$30,000 - $40,000',
-          totalFounds: 200,
-          // isSelected: false
-        },
-        {
-          // optionId: 3,
-          name: '$40,000 - $50,000',
-          totalFounds: 200,
-          // isSelected: false
-        },
-      ]
-    },
+  @Input() filters: Filter[] = [
+    // {
+    //   // filterId: 1,
+    //   title: 'categorías',
+    //   type: 'single', // Determinamos que solo una opción puede ser seleccionada
+    //   paramName: 'categoria',
+    //   options: [
+    //     {
+    //       // optionId: 1,
+    //       name: 'Cosmeticos',
+    //       totalFounds: 200,
+    //       // isSelected: false
+    //     },
+    //     {
+    //       // optionId: 2,
+    //       name: 'Alimentos',
+    //       totalFounds: 200,
+    //       // isSelected: false
+    //     },
+    //   ]
+    // },
+    // {
+    //   // filterId: 2,
+    //   title: 'sub categorías', // Titilo del listado de filtro
+    //   type: 'multiple', // Determina si es de opción multiple
+    //   paramName: 'sub-categoria', // Determina el queryParam a agregar
+    //   parentFilterId: 1, // Determinamos con el nombre el listado de filtro a vinculo con este listado de filtro
+    //   options: [ // opciones disponibles a agregar
+    //     {
+    //       // optionId: 1,
+    //       parentOptionId: 1, // El id identificador de la opción de la cual depende
+    //       name: 'labial', // nombre de la opción
+    //       totalFounds: 200, // total de resultados a esperar con este filtro
+    //       // isSelected: false // Representa el estado de la opción seleccionada o no.
+    //     },
+    //     {
+    //       // optionId: 2,
+    //       parentOptionId: 1,
+    //       name: 'labia2',
+    //       totalFounds: 200,
+    //       // isSelected: false
+    //     },
+    //     {
+    //       // optionId: 3,
+    //       parentOptionId: 2,
+    //       name: 'labial3',
+    //       totalFounds: 200,
+    //       // isSelected: false
+    //     },
+    //   ]
+    // },
+    // {
+    //   // filterId: 3,
+    //   title: 'Precios',
+    //   type: 'single', // Determinamos que solo una opción puede ser seleccionada
+    //   paramName: 'price',
+    //   options: [
+    //     {
+    //       // optionId: 1,
+    //       name: '$0 - $10,000',
+    //       totalFounds: 200,
+    //       // isSelected: false
+    //     },
+    //     {
+    //       // optionId: 2,
+    //       name: '$10,000 - $20,000',
+    //       totalFounds: 200,
+    //       // isSelected: false
+    //     },
+    //     {
+    //       // optionId: 3,
+    //       name: '$20,000 - $30,000',
+    //       totalFounds: 200,
+    //       // isSelected: false
+    //     },
+    //     {
+    //       // optionId: 3,
+    //       name: '$30,000 - $40,000',
+    //       totalFounds: 200,
+    //       // isSelected: false
+    //     },
+    //     {
+    //       // optionId: 3,
+    //       name: '$40,000 - $50,000',
+    //       totalFounds: 200,
+    //       // isSelected: false
+    //     },
+    //   ]
+    // },
   ];
 
   @Input() isLocalFilter = false;
-
 
   constructor(
     private route: ActivatedRoute,
@@ -153,20 +152,19 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   }
 
-  public initFilter(isLocalFilter: boolean = this.isLocalFilter) {
-
-    this.isLocalFilter = true;
+  // isLocalFilter: boolean = this.isLocalFilter
+  public initFilter() {
 
     // Asignamos a los identificadores únicos sus valores únicos de los filtros
-    this.optionsFilters.forEach( (optionFilter, index) => {
+    this.filters.forEach( (optionFilter, index) => {
 
-      if (this.isLocalFilter) {
+      if (!optionFilter.filterId) {
         optionFilter.filterId = index += 1;
       }
 
       optionFilter.options.forEach( (optionOfFilter, inx) => {
 
-        if (this.isLocalFilter) {
+        if (!optionOfFilter.optionId) {
           optionOfFilter.optionId = inx += 1;
         }
 
@@ -176,6 +174,30 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     });
 
+  }
+
+  public setFilters(filters: Filter[] ) {
+    // Asignamos a los identificadores únicos sus valores únicos de los filtros
+    filters.forEach( (optionFilter, index) => {
+
+      if (!optionFilter.filterId) {
+        optionFilter.filterId = index += 1;
+      }
+
+      optionFilter.options.forEach( (optionOfFilter, inx) => {
+
+        if (!optionOfFilter.optionId) {
+          optionOfFilter.optionId = inx += 1;
+        }
+
+        optionOfFilter.isSelected = false;
+
+      });
+
+    });
+
+    this.filters = filters;
+    return filters;
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -230,15 +252,14 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   public getQueryParams() {
     this.route.queryParamMap.subscribe( queryParam => {
 
-      this.loadOptionsFilter( queryParam );
+      // this.loadOptionsFilter( queryParam );
 
     });
-
 
   }
 
   // // Standard Filter
-  public loadOptionsFilter( queryParam: ParamMap ){
+  public loadOptionsFilter( queryParam: ParamMap){
 
     const queryKeys = queryParam.keys;
 
@@ -246,7 +267,9 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
       queryKeys.forEach( queryKey => {
 
-        const filterMatched = this.optionsFilters.find( opFilter => {
+        let filterMatched;
+
+        filterMatched = this.filters.find( opFilter => {
           return opFilter.paramName === queryKey;
         });
 
@@ -254,6 +277,8 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
           let queryValue;
           queryValue = queryParam.get(queryKey);
+          console.log('loadOptionsFilter');
+          console.log(queryValue);
 
           if (filterMatched.type === 'single') {
 
@@ -262,7 +287,16 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
             });
 
             if (optionMatched) {
-              this.markOption( optionMatched, filterMatched, false);
+              console.log('optionMatched');
+              console.log(optionMatched);
+              const queryParams = this.markOption( optionMatched, filterMatched, false);
+
+              this.selected.emit(
+                {
+                  queryParams
+                }
+              );
+
             }
 
 
@@ -280,7 +314,14 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
                 });
 
                 if (optionMatched) {
-                  this.markOption( optionMatched, filterMatched, false);
+                  const queryParams = this.markOption( optionMatched, filterMatched, false);
+
+                  this.selected.emit(
+                    {
+                      queryParams
+                    }
+                  );
+
                 }
 
               });
@@ -296,16 +337,13 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   }
 
 
-  public selectOptionsFilter2(
-    option: Option,
-    list: Filter
-  ){
+  public selectOptionsFilter2( option: Option, filter: Filter ){
 
     let navigationOptions;
     let queryParams;
 
     // seleccionamos las opciones de filtro y creamos el queryParam
-    queryParams = this.markOption( option, list );
+    queryParams = this.markOption( option, filter );
 
     // Navigation With Filters
 
@@ -313,27 +351,27 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       relativeTo: this.route,
     };
 
-    this.optionsFilters.forEach( filter => {
+    this.filters.forEach( filterFor => {
       // queryParams[]
-      if (filter.type === 'single') {
+      if (filterFor.type === 'single') {
 
-        const optionSelected = filter.options.find( filterOption => {
+        const optionSelected = filterFor.options.find( filterOption => {
           return filterOption.isSelected;
         });
 
         if (optionSelected) {
 
-          queryParams[filter.paramName] = optionSelected.name;
+          queryParams[filterFor.paramName] = optionSelected.name;
 
         } else {
 
-          delete queryParams[filter.paramName];
+          delete queryParams[filterFor.paramName];
 
         }
 
-      } else if (filter.type === 'multiple') {
+      } else if (filterFor.type === 'multiple') {
 
-        const optionsSelected = filter.options.filter( filterOption => {
+        const optionsSelected = filterFor.options.filter( filterOption => {
          return filterOption.isSelected;
         });
 
@@ -343,12 +381,12 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
             return optionSelected.name;
           });
 
-          queryParams[filter.paramName] = valuesOfQueryParam.join();
+          queryParams[filterFor.paramName] = valuesOfQueryParam.join();
 
-          if (filter.parentFilterId) { // En caso de tener un filtrado padre, agregar el query param del padre
+          if (filterFor.parentFilterId) { // En caso de tener un filtrado padre, agregar el query param del padre
 
-            const parentFilter = this.optionsFilters.find( optionFilter => {
-              return optionFilter.filterId === filter.parentFilterId;
+            const parentFilter = this.filters.find( optionFilter => {
+              return optionFilter.filterId === filterFor.parentFilterId;
             });
 
             const parentOptionSelected = parentFilter.options.find( parentFilterFind => {
@@ -370,7 +408,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
         }else {
 
-          delete queryParams[filter.paramName];
+          delete queryParams[filterFor.paramName];
 
         }
 
@@ -392,19 +430,26 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       navigationOptions
     );
 
+    this.selected.emit(
+      {
+        queryParams
+      }
+    );
+
   }
 
   public getFilter( filter ) {
 
     // console.log('getFilter');
     // console.log(filter);
+    // console.log(this.filters);
 
     if (filter.parentFilterId) {
 
       // console.log('filter.parentFilterId');
       // console.log(filter.parentFilterId);
 
-      const parentFilter = this.optionsFilters.find( optionsFilter => {
+      const parentFilter = this.filters.find( optionsFilter => {
         return optionsFilter.filterId === filter.parentFilterId;
       });
 
@@ -450,8 +495,8 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   }
 
   public markOption(
-    option: Option,
-    list: Filter,
+    optionSelected: Option,
+    filterSelected: Filter,
     toggleOption: boolean = true,
     selectTheOption: boolean = true
   ){
@@ -459,34 +504,38 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     let queryParams;
     queryParams = {};
 
-    if (list.type === 'multiple') {
+    // const optionMatched = filterSelected.options.find( filterMatchedOption => {
+    //   return filterMatchedOption.name === queryValue;
+    // });
+
+    if (filterSelected.type === 'multiple') {
 
       if (toggleOption) {
 
-        option.isSelected = option.isSelected ? false : true; // Marca como check o no
+        optionSelected.isSelected = optionSelected.isSelected ? false : true; // Marca como check o no
 
       }else {
 
-        option.isSelected = selectTheOption; // Marca como check o no
+        optionSelected.isSelected = selectTheOption; // Marca como check o no
 
       }
 
-      if (list.parentFilterId) { // se ejecuta cuando la lista determina que sus opciones dependen de una lista padre
+      if (filterSelected.parentFilterId) { // se ejecuta cuando la lista determina que sus opciones dependen de una lista padre
 
         // Obtenemos al listado de opciones de filtro padre el cual es vinculado con su titulo como
         // padre del la lista de filtrado de la opción seleccionada
-        const parentOptionsFilter = this.optionsFilters.find( optionsFilter => optionsFilter.filterId === list.parentFilterId );
+        const parentOptionsFilter = this.filters.find( optionsFilter => optionsFilter.filterId === filterSelected.parentFilterId );
 
         if (parentOptionsFilter) {
 
           const parentOption = parentOptionsFilter.options.find(
-          parentFilterOption => parentFilterOption.optionId === option.parentOptionId
+          parentFilterOption => parentFilterOption.optionId === optionSelected.parentOptionId
           );
 
 
           if (parentOption) { // Marcamos el parent option
 
-            if (option.isSelected) {
+            if (optionSelected.isSelected) {
               // Desmarcando todas las opciones del padre, porque los parent siempre serán de tipo single
               parentOptionsFilter.options.forEach(parentFilterOption => {
               parentFilterOption.isSelected = false;
@@ -498,7 +547,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
             // Si todas las opciones est´n desmarcadas, desmarcamos al padre
             // y eliminamos el query param del padre e hijo
-            if ( list.options.every( lOption => lOption.isSelected === false) ) {
+            if ( filterSelected.options.every( lOption => lOption.isSelected === false) ) {
 
               parentOption.isSelected = false;
 
@@ -509,33 +558,33 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
       }
 
-    } else if (list.type === 'single') {
+    } else if (filterSelected.type === 'single') {
 
       // Desmarcando todas las opciones (parents o singles) que no sean la opción a seleccionar
-      const filterOptionsDisallowed = list.options.filter( lOption => {
-          return lOption.optionId !== option.optionId;
+      const filterOptionsDisallowed = filterSelected.options.filter( lOption => {
+        return lOption.optionId !== optionSelected.optionId;
       });
 
       filterOptionsDisallowed.forEach(filterOptionDisallowed => {
-          filterOptionDisallowed.isSelected = false;
+        filterOptionDisallowed.isSelected = false;
       });
 
       if (toggleOption) {
 
-        option.isSelected = option.isSelected ? false : true; // Marca como check o no 1 opción
+        optionSelected.isSelected = optionSelected.isSelected ? false : true; // Marca como check o no 1 opción
 
       }else {
 
-        option.isSelected = selectTheOption; // Marca como check o no 1 opción
+        optionSelected.isSelected = selectTheOption; // Marca como check o no 1 opción
 
       }
 
       // Obtenemos los filtros que son hijos o subFiltros de este
       // Es decir, que posean el mismo parentFilterId que el filter Id del listado que estamos evaluando
-      const subFilters = this.optionsFilters.filter( optionsFilter => {
+      const subFilters = this.filters.filter( optionsFilter => {
 
         if (optionsFilter.parentFilterId) {
-        return optionsFilter.parentFilterId === list.filterId;
+        return optionsFilter.parentFilterId === filterSelected.filterId;
         }
 
         return false;
@@ -555,7 +604,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
       }
 
-      queryParams[list.paramName] = option.name;
+      queryParams[filterSelected.paramName] = optionSelected.name;
 
     }
 
