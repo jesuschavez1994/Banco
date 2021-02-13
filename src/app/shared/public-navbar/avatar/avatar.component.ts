@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from '@services/store/store.service';
 import { HomeServiceService } from "../../../vistas-publicas/services/home-service.service";
-import { environment } from '../../../../environments/environment';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-avatar',

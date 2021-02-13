@@ -90,7 +90,6 @@ export class PhotoUserEditComponent implements OnInit {
     });
   }
 
-
   GetAvatar(){
     this.usuarioService.datosUserImages(localStorage.getItem('id')).subscribe( (Response: any) => {
       console.log('avatar', Response);

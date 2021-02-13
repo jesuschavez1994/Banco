@@ -67,6 +67,10 @@ $custom-typography: mat-typography-config( $font-family: "Montserrat, sans-serif
     width: 40% !important;
 }
 
+.width-45 {
+    width: 45% !important;
+}
+
 .width-50 {
     width: 50% !important;
 }
@@ -2364,13 +2368,13 @@ form p:last-child {
 
 @media (min-width: 1024px) {
     .page-wrapper {
-        margin-left: 240px;
+        margin-left: 40px;
     }
 }
 
 @media (max-width: 1023px) {
     .page-wrapper {
-        margin-left: 70px;
+        margin-left: 40px;
         -webkit-transition: 0.2s ease-in;
         -o-transition: 0.2s ease-in;
         transition: 0.2s ease-in;
@@ -2384,7 +2388,7 @@ form p:last-child {
 
 @media (min-width: 768px) {
     .mini-sidebar .page-wrapper {
-        margin-left: 70px;
+        margin-left: 30px;
     }
     .flex-wrap {
         -ms-flex-wrap: nowrap !important;
