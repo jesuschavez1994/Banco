@@ -256,6 +256,7 @@ h5 {
 .more-info > div.price small {
   line-height: 1;
   margin: 0rem 1rem;
+  font-size: 0.6rem;
 }
 
 .total {
@@ -276,7 +277,7 @@ h5 {
 }
 
 .sync h5 {
-  font-size: 1.1em;
+  font-size: 0.9rem;
   font-weight: 300;
   margin-bottom: 0.5em;
   text-align: center;
