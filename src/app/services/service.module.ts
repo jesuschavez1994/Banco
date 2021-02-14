@@ -9,6 +9,7 @@ import { InterceptorService } from './Interceotores/interceptor.service';
 import { ProductLoadingComponent } from '../vistas-privadas/product-loading/product-loading.component';
 import { ProductService } from './product/product.service';
 import { SincronizacionService } from './sincronizacion/sincronizacion.service';
+import { VerifyTokenGuard } from './guards/verify-token.guard';
 
 @NgModule({
   declarations: [],
@@ -21,6 +22,7 @@ import { SincronizacionService } from './sincronizacion/sincronizacion.service';
     ProductLoadingComponent,
     SincronizacionService,
     ProductService,
+    VerifyTokenGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

@@ -34,6 +34,7 @@ import { SettingsComponent } from './vistas-privadas/account/settings.component'
 // FORm USER //
 import { ViewFormAccountUserComponent } from './vistas-privadas/AccountUser/pages/view-form-account-user.component';
 import { FormAccountUserComponent } from './vistas-privadas/AccountUser/pages/settings/views/form-account-user/form-account-user.component';
+import { VerifyTokenGuard } from './services/guards/verify-token.guard';
 
 export const APP_ROUTES: Routes = [
   {
@@ -52,7 +53,7 @@ export const APP_ROUTES: Routes = [
     loadChildren: () =>
       import('./vistas-publicas/panel/panel.module').then((m) => m.PanelModule),
     // canLoad: [ LoginGuardGuard ],
-    canActivate: [LoginGuardGuard],
+    canActivate: [LoginGuardGuard, VerifyTokenGuard],
   },
   {
     path: 'business-detail/:idStore', // Se obtiene el id de la tienda para mostrar su listo productos
@@ -69,7 +70,7 @@ export const APP_ROUTES: Routes = [
   {
     path: 'account',
     component: SettingsComponent,
-    canActivate: [LoginGuardGuard],
+    canActivate: [LoginGuardGuard, VerifyTokenGuard],
     children: [
       {
         path: 'settings',
@@ -90,7 +91,7 @@ export const APP_ROUTES: Routes = [
   {
     path: 'account',
     component: ViewFormAccountUserComponent,
-    canActivate: [LoginGuardGuard],
+    canActivate: [LoginGuardGuard, VerifyTokenGuard],
     children: [
       {
         path: 'setting-user',
@@ -104,7 +105,7 @@ export const APP_ROUTES: Routes = [
   {
     path: 'my-store',
     component: MyStoreComponent,
-    canActivate: [LoginGuardGuard],
+    canActivate: [LoginGuardGuard, VerifyTokenGuard],
     children: [
       {
         path: 'contact',
