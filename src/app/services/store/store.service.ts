@@ -63,6 +63,28 @@ export class StoreService extends Service{
     this.token = token;
   }
 
+  renuevaToken(userId: string){
+    let url = `/api/users/${userId}/refresh_token`;
+    return  this.execQuery(url)
+           .map( (resp: any) => {
+              this.token = resp.remenber_token;
+              localStorage.setItem('token', this.token);
+              console.log('Token renovado');
+              return true;
+          })
+          .catch( err => {
+            console.log(err);
+            this.router.navigate(['/login']);
+            swal({
+              text: 'No se pudo renovar Token',
+              icon: 'warning',
+              dangerMode: true,
+            });
+
+            return Observable.throw(err);
+          })
+  }
+
   async crearStore(user: Usuario){
 
     const url = 'signup';
