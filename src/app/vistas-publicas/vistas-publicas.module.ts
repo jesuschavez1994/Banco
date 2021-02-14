@@ -58,7 +58,7 @@ const modules = [
   PipesModule,
   // ShoppingCartModule,
   NgxSpinnerModule,
-  VistasPublicasRoutingModule,
+  //VistasPublicasRoutingModule,
 ];
 /* 
   If need that this module exports something, put those modules/components here.
