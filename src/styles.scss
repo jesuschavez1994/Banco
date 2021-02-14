@@ -1,3 +1,6 @@
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700");
 /* 
   Customizing Angular Material's typography.
@@ -417,7 +420,7 @@ $BancoDeProductos-theme: mat-light-theme(
   justify-content: space-around;
 }
 
-.justify-content-flex-start{
+.justify-content-flex-start {
   justify-content: flex-start;
 }
 
