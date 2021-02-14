@@ -6,7 +6,7 @@ import { Routes } from '@angular/router';
 import { LoginGuardGuard } from '@services/guards/login-guard.guard';
 import { VerifyTokenGuard } from '@services/guards/verify-token.guard';
 /* 
-  Components us
+  Components used in the views.
 */
 import { AccountComponent } from './account/pages/settings/views/my-account/account.component';
 import { ContactComponent } from './contact/contact.component';
@@ -48,6 +48,7 @@ export const ROUTES: Routes = [
       },
     ],
   },
+
   // Christopher Views
   {
     path: 'panel',
@@ -60,9 +61,7 @@ export const ROUTES: Routes = [
   },
 
   // Christopher Views //
-
   { path: 'store-registration', component: FormDataNegocioComponent },
-
   { path: 'rut-store', component: RutStoreComponent },
 
   // STORE //
@@ -86,7 +85,6 @@ export const ROUTES: Routes = [
   },
 
   // USER //
-
   {
     path: 'account',
     component: ViewFormAccountUserComponent,
@@ -100,7 +98,6 @@ export const ROUTES: Routes = [
   },
 
   // VISTAS ADMINISTRATIVAS DEL STORE //
-
   {
     path: 'my-store',
     component: MyStoreComponent,
