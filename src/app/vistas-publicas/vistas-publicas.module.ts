@@ -52,13 +52,11 @@ const modules = [
   ReactiveFormsModule,
   FormsModule,
   SharedModule,
-  // APP_ROUTING,
   ComponentsModule,
   PanelModule,
   PipesModule,
   // ShoppingCartModule,
   NgxSpinnerModule,
-  VistasPublicasRoutingModule,
 ];
 /* 
   If need that this module exports something, put those modules/components here.
