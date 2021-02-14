@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { APP_ROUTING } from '../app.routes';
+// import { APP_ROUTING } from '../app.routes';
+import { AppRoutingModule } from '../app-routing.module';
 // Importamos los formularios de registros //
 import { FormDataUsuarioComponent } from './form-data-usuario/form-data-usuario.component';
 import { FormDataNegocioComponent } from './form-data-negocio/form-data-negocio.component';
@@ -11,28 +12,28 @@ import { RutStoreComponent } from './rut-store/rut-store.component';
 import { ButtomGoogleRegisterComponent } from './buttom-google-register/buttom-google-register.component';
 import { MaterialModule } from '../Angula-Material/material.module';
 
-
-
-
-
 @NgModule({
   // tslint:disable-next-line: max-line-length
-  declarations: [FormDataUsuarioComponent,
+  declarations: [
+    FormDataUsuarioComponent,
     FormDataNegocioComponent,
     RutStoreComponent,
-    ButtomGoogleRegisterComponent, ],
+    ButtomGoogleRegisterComponent,
+  ],
   imports: [
+    AppRoutingModule,
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
     FormsModule,
-    APP_ROUTING,
+    // APP_ROUTING,
     ComponentsModule,
-    SharedModule
+    SharedModule,
   ],
   exports: [
     FormDataUsuarioComponent,
     FormDataNegocioComponent,
-    RutStoreComponent]
+    RutStoreComponent,
+  ],
 })
-export class FormularioRegisterModule { }
+export class FormularioRegisterModule {}
