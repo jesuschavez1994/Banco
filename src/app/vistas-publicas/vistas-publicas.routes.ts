@@ -3,9 +3,6 @@ import { Routes } from '@angular/router';
   Components used in the routes.
 */
 import { HomeComponent } from './home/home.component';
-import { CategorysComponent } from './categorys/categorys.component';
-import { MenuCategorysComponent } from './categorys/menu-categorys/menu-categorys.component';
-import { ListProductComponent } from './categorys/list-product/list-product.component';
 import { RegisterComponent } from './Registers/Usuario/register.component';
 import { LoginComponent } from './login/login/login.component';
 import { PageUnderConstructionComponent } from './page-under-construction/page-under-construction.component';
@@ -16,25 +13,10 @@ export const ROUTES: Routes = [
   { path: 'register', component: RegisterComponent },
   {
     path: 'categories',
-    component: CategorysComponent,
-
-    children: [
-      // menu categorys vista predetermianda en categorys
-      { path: '', component: MenuCategorysComponent },
-      // ruta donde se muestra categorys por nombre o id
-      { path: ':categories/products', component: ListProductComponent },
-      {
-        // ruta donde se muestra subcategorys por nombre o id
-        path: ':categories/:subcategories/products',
-        component: ListProductComponent,
-      },
-      {
-        // ruta donde se muestra subcategorys por nombre o id más
-        // posicion de páginacion
-        path: ':categories/:subcategories/products?page=:page',
-        component: ListProductComponent,
-      },
-    ],
+    loadChildren: () =>
+      import('./categorys/categories.module').then(
+        (module) => module.CategoriesModule
+      ),
   },
   {
     path: 'login',
