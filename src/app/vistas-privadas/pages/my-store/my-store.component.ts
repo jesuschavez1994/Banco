@@ -134,7 +134,7 @@ public setSidebarOptions(storeResp: StoreResponse){
 
   this.profile = {
     name: storeResp.name,
-    instagram: { // la base de datos no tiene el dato
+    contact: { // la base de datos no tiene el dato
       url: '',
       name: '@medicalbackground'
     },

@@ -48,8 +48,8 @@
             </h2>
 
             <div class="instagram">
-              <!-- <a [href]="profile.instagram.url"> -->
-                {{profile.instagram.name}}
+              <!-- <a [href]="profile.contact.url"> -->
+                {{profile.contact.name}}
               <!-- </a> -->
             </div>
 
@@ -61,14 +61,14 @@
 
           <li
             [routerLink]="anchorsMenu.productLink"
-            #productsOptionMenu
+            [ngClass]="{'active': productOptionMenu}"
           >
             <a>productos</a>
           </li>
 
           <li
             [routerLink]="anchorsMenu.contactLink"
-            #contactoOptionMenu
+            [ngClass]="{'active': contactOptionMenu}"
           >
             <a>contacto</a>
           </li>

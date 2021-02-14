@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, Pipe } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Pipe, OnChanges, SimpleChanges } from '@angular/core';
 import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
 import { ProductService } from '@services/product/product.service';
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface';
@@ -166,6 +166,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.loadDataByParams();
+
   }
 
   public loadDataByParams() {
@@ -579,8 +580,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         }
 
 
-        this.setSidebarOptions(idStore, storeResp, queryParam);
-        this.setBreadcrumbOptions(idStore, storeResp);
+        this.setSidebarOptions(storeResp, queryParam);
+        this.setBreadcrumbOptions(storeResp);
 
       });
 
@@ -589,7 +590,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   // Sidebar-list
-  public setSidebarOptions(idStore: number, storeResp: StoreResponse, queryParam: ParamMap) {
+  public setSidebarOptions(storeResp: StoreResponse, queryParam: ParamMap) {
+
+    const idStore = storeResp.id;
 
     this.anchorsMenu = {
       productLink: `/business-detail/${idStore}/products`,
@@ -597,12 +600,40 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       wordToMatch: `products`
     };
 
+    let contactStore;
+    contactStore = { // la base de datos no tiene el dato
+      url: '',
+      name: 'sin dato de contacto'
+    };
+
+    const mainContactSocialKey = ['facebook', 'instagram', 'twitter'];
+    const mainContactKey = ['email_1', 'email_2', 'phone_1', 'phone_2'];
+
+    // buscamos entre las posibles propiedades alguna propiedad la cual no tenga null y en el orden de los elementos
+    const isSomeContactSocial = mainContactSocialKey.find( contactKey => {
+      return storeResp.social[contactKey];
+    });
+
+    const isSomeContact = mainContactKey.find( contactKey => {
+      return storeResp.contact[contactKey];
+    });
+
+    if (isSomeContactSocial) { // si encuentra algún dato de contacto de redes sociales ese se mostrará
+      contactStore = { // la base de datos no tiene el dato
+        url: isSomeContactSocial,
+        name: `@${storeResp.name}` // coloco el nombre porque el back no devuelve el nombre de la cuenta de instagram
+      };
+
+    } else if (isSomeContact) { // sino mostrara algún dato de contacto común y si ninguna condición se cumple, sera ''
+      contactStore = contactStore = { // la base de datos no tiene el dato
+        url: '',
+        name: isSomeContact
+      };
+    }
+
     this.profile = {
       name: storeResp.name,
-      instagram: { // la base de datos no tiene el dato
-        url: '',
-        name: '@medicalbackground'
-      },
+      contact: contactStore,
       img: 'assets/img/no-image-banner.jpg', // la base de datos no tiene el dato
       isVerified: storeResp.certification == 'true' ? true : false
     };
@@ -708,7 +739,10 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     this.expandSidebar = event;
   }
 
-  public setBreadcrumbOptions(idStore: number, storeResp: StoreResponse){
+  public setBreadcrumbOptions(storeResp: StoreResponse){
+
+    const idStore = storeResp.id;
+
     this.breadcrumb = [
       {
         title: 'inicio',

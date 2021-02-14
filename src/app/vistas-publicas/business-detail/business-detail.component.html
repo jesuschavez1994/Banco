@@ -6,14 +6,23 @@
 <main class="page">
 
   <!-- [filters]="sidebarFilters" -->
-  <app-sidebar-list
-    #sidebarList
-    [isExpanded]="expandSidebar"
-    (sidebarExpand)="toogleSidebar($event)"
-    [anchorsMenu]="anchorsMenu" [profile]="profile"
-    [filters]="sidebarFilters"
-  >
-  </app-sidebar-list>
+  <!-- <ng-container *ngIf="anchorsMenu && profile">
+
+    <ng-container *ngIf="sidebarFilters"> -->
+
+      <app-sidebar-list
+
+        [isExpanded]="expandSidebar"
+        (sidebarExpand)="toogleSidebar($event)"
+        [anchorsMenu]="anchorsMenu" [profile]="profile"
+        [filters]="sidebarFilters"
+        #sidebarList
+      >
+      </app-sidebar-list>
+
+    <!-- </ng-container>
+
+  </ng-container> -->
 
   <div class="column">
 

@@ -18,8 +18,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   // Elements
   @ViewChild('sidebarList') sidebarList: ElementRef;
-  @ViewChild('productsOptionMenu') productsOptionMenu: ElementRef;
-  @ViewChild('contactoOptionMenu') contactoOptionMenu: ElementRef;
 
   // Inputs
   @Input() isExpanded = false;
@@ -127,6 +125,9 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   @Input() isLocalFilter = false;
 
+  productOptionMenu = false;
+  contactOptionMenu = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -140,15 +141,12 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       this.profile = this.sidebarOptions.profile;
     }
 
-
     this.initFilter();
-
 
   }
 
   ngAfterViewInit(): void {
     this.routerLinkActive();
-    this.getQueryParams();
 
   }
 
@@ -229,32 +227,26 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   public routerLinkActive() {
 
-    if (this.productsOptionMenu){
-      this.productsOptionMenu.nativeElement.classList.remove('active');
-      this.contactoOptionMenu.nativeElement.classList.remove('active');
+    // if (this.productsOptionMenu){
+      this.productOptionMenu = false;
+      this.contactOptionMenu = false;
+      // this.productOptionMenu.nativeElement.classList.remove('active');
+      // this.contactOptionMenu.nativeElement.classList.remove('active');
 
       this.route.paramMap.subscribe(params => {
-
+        console.log('routerLinkActive');
+        console.log(this.anchorsMenu.wordToMatch);
         if ((params.has('show') && params.get('show') === this.anchorsMenu.wordToMatch)) {
-          this.productsOptionMenu.nativeElement.classList.add('active');
-
+          // this.productOptionMenu.nativeElement.classList.add('active');
+          this.productOptionMenu = true;
         } else {
-          this.contactoOptionMenu.nativeElement.classList.add('active');
-
+          // this.contactOptionMenu.nativeElement.classList.add('active');
+          this.contactOptionMenu = true;
         }
 
       });
-    }
+    // }
 
-
-  }
-
-  public getQueryParams() {
-    this.route.queryParamMap.subscribe( queryParam => {
-
-      // this.loadOptionsFilter( queryParam );
-
-    });
 
   }
 

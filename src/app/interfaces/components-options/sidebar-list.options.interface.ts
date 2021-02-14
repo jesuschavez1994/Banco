@@ -28,12 +28,12 @@ export interface SidebarListOptions {
 
 export interface Profile {
   name: string;
-  instagram: Instagram;
+  contact: Contact;
   img: string;
   isVerified: boolean;
 }
 
-export interface Instagram {
+export interface Contact {
   url: string;
   name: string;
 }
