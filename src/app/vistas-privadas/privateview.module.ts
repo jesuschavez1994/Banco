@@ -4,7 +4,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { ContactComponent } from './contact/contact.component';
 import { ComponentsModule } from '../components/components.module';
-// import { APP_ROUTING } from '../app.routes';
 import { AppRoutingModule } from '../app-routing.module';
 import { ContactInformationEditComponent } from './components/contact-information-edit/contact-information-edit.component';
 import { ContactInformationComponent } from './components/contact-information/contact-information.component';
@@ -75,19 +74,14 @@ import { ModalAddCategoriasAndSubcategoriasComponent } from './product-loading/c
 // tslint:disable-next-line: max-line-length
 import { ModalDeleteProductComponent } from './components/view-products-loads/container/modal-delete-product/modal-delete-product.component';
 import { NavbarSincronizacionComponent } from './shared/navbar-sincronizacion/navbar-sincronizacion.component';
-import { ExportarListaExcelComponent } from './sincronizacion/pages/exportar-lista-excel/exportar-lista-excel.component';
-import { SuggestedProductsComponent } from './sincronizacion/pages/suggested-products/suggested-products.component';
-import { SincronizacionViewsComponent } from './sincronizacion/components/sincronizacion-views/sincronizacion-views.component';
 import { ItemsSuggestedProductsComponent } from './sincronizacion/pages/suggested-products/container/items-suggested-products/items-suggested-products.component';
 import { NoSuggestedProductsComponent } from './sincronizacion/pages/suggested-products/container/no-suggested-products/no-suggested-products.component';
-import { SynchronizedProductsComponent } from './sincronizacion/pages/synchronized-products/synchronized-products.component';
 import { NoSynchronizedProductsComponent } from './sincronizacion/pages/synchronized-products/container/no-synchronized-products/no-synchronized-products.component';
 import { SpreadSheetsModule } from '@grapecity/spread-sheets-angular';
 import { TableComponent } from './sincronizacion/pages/exportar-lista-excel/container/table/table.component';
 import { SynchronizedProductsTableComponent } from './sincronizacion/pages/synchronized-products/container/synchronized-products-table/synchronized-products-table.component';
 import { DialogSynchronizedComponent } from './sincronizacion/pages/synchronized-products/container/dialog-synchronized/dialog-synchronized.component';
 import { TableroDeSincronizacionComponent } from './sincronizacion/pages/synchronized-products/container/tablero-de-sincronizacion/tablero-de-sincronizacion.component';
-import { BankProductComponent } from './sincronizacion/pages/bank-product/bank-product.component';
 import { ItemListProductComponent } from './sincronizacion/pages/bank-product/container/item-list-product/item-list-product.component';
 
 // CARRUSEL //
@@ -155,18 +149,13 @@ const components = [
   ModalAddCategoriasAndSubcategoriasComponent,
   ModalDeleteProductComponent,
   NavbarSincronizacionComponent,
-  ExportarListaExcelComponent,
-  SuggestedProductsComponent,
-  SincronizacionViewsComponent,
   ItemsSuggestedProductsComponent,
   NoSuggestedProductsComponent,
-  SynchronizedProductsComponent,
   NoSynchronizedProductsComponent,
   TableComponent,
   SynchronizedProductsTableComponent,
   DialogSynchronizedComponent,
   TableroDeSincronizacionComponent,
-  BankProductComponent,
   ItemListProductComponent,
   LoadBanckProductComponent,
   FormBanckProductAdminComponent,
