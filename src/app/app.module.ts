@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Rutas //
-import { APP_ROUTING } from './app.routes';
+// import { APP_ROUTING } from './app.routes';
 
 // Modulos Personalizados//
 import { PagesModule } from './pages/pages.module';
@@ -67,23 +67,18 @@ export class MyHammerConfig extends HammerGestureConfig {
   } as any;
 }
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    SuccessComponent,
-    ConfirmWebpayPlusComponent,
-  ],
+  declarations: [AppComponent, SuccessComponent, ConfirmWebpayPlusComponent],
   imports: [
     CommonModule,
     BrowserModule,
     ImageCropperModule,
-    // AppRoutingModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     PipesModule,
     ConnectionServiceModule,
-    APP_ROUTING,
+    // APP_ROUTING,
     RouterModule,
     PagesModule,
     SharedModule,
@@ -106,8 +101,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
-
+    MatButtonModule,
   ],
 
   providers: [
