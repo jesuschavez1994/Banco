@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { NavbarComponent } from './navbar/navbar.component';
-// import { APP_ROUTING } from '../app.routes';
 import { NavbarToHomeComponent } from './navbar-to-home/navbar-to-home.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { NavbarstoreComponent } from './header/navbarstore.component';
@@ -100,22 +99,24 @@ const components = [
   FooterCropperComponent,
   FileUpImgDropzonComponent,
 ];
+/* 
+  Modules go here.
+*/
+const modules = [
+  RouterModule,
+  PipesModule,
+  CommonModule,
+  FormsModule,
+  ReactiveFormsModule,
+  NgxPaginationModule,
+  MaterialModule,
+  ImageCropperModule,
+  // ComponentsModule
+];
 
 @NgModule({
   declarations: [...components],
-  imports: [
-    // APP_ROUTING,
-    RouterModule,
-    PipesModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgxPaginationModule,
-    MaterialModule,
-    ImageCropperModule,
-
-    // ComponentsModule
-  ],
-  exports: [...components],
+  imports: [...modules],
+  exports: [...components, ...modules],
 })
 export class SharedModule {}
