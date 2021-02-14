@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-
 /* 
   Services
 */
@@ -134,7 +133,11 @@ export const ROUTES: Routes = [
       },
       {
         path: 'sincronizacion',
-        component: SincronizacionViewsComponent,
+        loadChildren: () =>
+          import('./sincronizacion/sincronizacion.module').then(
+            (module) => module.SincronizacionModule
+          ),
+        /*         component: SincronizacionViewsComponent,
         children: [
           {
             path: 'exportar-lista-excel',
@@ -156,7 +159,7 @@ export const ROUTES: Routes = [
             path: 'bank-product',
             component: BankProductComponent,
           },
-        ],
+        ], */
       },
 
       { path: '**', pathMatch: 'full', redirectTo: 'contact' },
