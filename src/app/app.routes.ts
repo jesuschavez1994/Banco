@@ -46,112 +46,107 @@ import { SettingsComponent } from './vistas-privadas/account/settings.component'
 import { ViewFormAccountUserComponent } from './vistas-privadas/AccountUser/pages/view-form-account-user.component';
 import { FormAccountUserComponent } from './vistas-privadas/AccountUser/pages/settings/views/form-account-user/form-account-user.component';
 
-const APP_ROUTES: Routes = [
+export const APP_ROUTES: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'register', component: RegisterComponent },
+  {
+    path: 'categorys',
+    component: CategorysComponent,
 
-    {path: 'home', component: HomeComponent},
-    {path: 'register', component: RegisterComponent},
-    {
-      path: 'categorys',
-      component: CategorysComponent,
+    children: [
+      // menu categorys vista predetermianda en categorys
+      { path: '', component: MenuCategorysComponent },
+      // ruta donde se muestra categorys por nombre o id
+      { path: ':categories/products', component: ListProductComponent },
+      {
+        // ruta donde se muestra subcategorys por nombre o id
+        path: ':categories/:subcategories/products',
+        component: ListProductComponent,
+      },
+      {
+        // ruta donde se muestra subcategorys por nombre o id más
+        // posicion de páginacion
+        path: ':categories/:subcategories/products?page=:page',
+        component: ListProductComponent,
+      },
+    ],
+  },
+  {
+    path: 'admin',
+    component: LoadBanckProductComponent,
+    children: [
+      {
+        path: 'edit-bank-admin/:id',
+        component: EditProductBankComponent,
+      },
+    ],
+  },
+  { path: 'login', component: LoginComponent },
 
-      children: [
-        // menu categorys vista predetermianda en categorys
-        { path: '', component: MenuCategorysComponent },
-        // ruta donde se muestra categorys por nombre o id
-        { path: ':categories/products', component: ListProductComponent },
-        {
-          // ruta donde se muestra subcategorys por nombre o id
-          path: ':categories/:subcategories/products',
-          component: ListProductComponent,
-        },
-        {
-          // ruta donde se muestra subcategorys por nombre o id más
-          // posicion de páginacion
-          path: ':categories/:subcategories/products?page=:page',
-          component: ListProductComponent,
-        },
-      ],
-    },
-    {
-      path: 'admin',
-      component: LoadBanckProductComponent,
-      children: [
-        {
-          path: 'edit-bank-admin/:id',
-          component: EditProductBankComponent,
-        },
-      ],
-    },
-    { path: 'login', component: LoginComponent },
+  {
+    path: 'page-under-construction',
+    component: PageUnderConstructionComponent,
+  },
+  // Christopher Views
+  {
+    path: 'panel',
+    loadChildren: () =>
+      import('./vistas-publicas/panel/panel.module').then((m) => m.PanelModule),
+    // canLoad: [ LoginGuardGuard ],
+    canActivate: [LoginGuardGuard],
+  },
+  {
+    path: 'business-detail/:idStore', // Se obtiene el id de la tienda para mostrar su listo productos
+    component: BusinessDetailComponent,
+  },
+  {
+    path: 'business-detail/:idStore/:show', // Se obtiene el id de la tienda para mostrar su listo productos
+    component: BusinessDetailComponent,
+  },
+  {
+    path: 'business-detail/:idStore/:show/:idProduct', // Se obtiene el id de la tienda para mostrar su listo productos
+    component: BusinessDetailComponent,
+  },
 
-    {
-      path: 'page-under-construction',
-      component: PageUnderConstructionComponent,
-    },
-    // Christopher Views
-    {
-      path: 'panel',
-      loadChildren: () => import('./vistas-publicas/panel/panel.module').then( m => m.PanelModule),
-      // canLoad: [ LoginGuardGuard ],
-      canActivate: [ LoginGuardGuard ],
-    },
-    {
-      path: 'business-detail/:idStore', // Se obtiene el id de la tienda para mostrar su listo productos
-      component: BusinessDetailComponent
-    },
-    {
-      path: 'business-detail/:idStore/:show', // Se obtiene el id de la tienda para mostrar su listo productos
-      component: BusinessDetailComponent,
-    },
-    {
-      path: 'business-detail/:idStore/:show/:idProduct', // Se obtiene el id de la tienda para mostrar su listo productos
-      component: BusinessDetailComponent,
-    },
+  // Christopher Views //
 
-    // Christopher Views //
+  { path: 'store-registration', component: FormDataNegocioComponent },
 
-    {   path: 'store-registration',
-        component: FormDataNegocioComponent,
-    },
+  { path: 'rut-store', component: RutStoreComponent },
 
-    {   path: 'rut-store',
-        component: RutStoreComponent,
-    },
+  // STORE //
+  {
+    path: 'account',
+    component: SettingsComponent,
+    canActivate: [LoginGuardGuard],
+    children: [
+      {
+        path: 'settings',
+        loadChildren: () =>
+          import(
+            './vistas-privadas/account/pages/settings/account-settings.module'
+          ).then((module) => module.AccountSettingsModule),
+      },
+      {
+        path: 'form-account',
+        component: AccountComponent,
+      },
+    ],
+  },
 
-    // STORE //
-    {
-      path: 'account',
-      component: SettingsComponent,
-      canActivate: [LoginGuardGuard],
-      children: [
-        {
-          path: 'settings',
-          loadChildren: () =>
-            import(
-              './vistas-privadas/account/pages/settings/account-settings.module'
-            ).then((module) => module.AccountSettingsModule),
-        },
-        {
-          path: 'form-account',
-          component: AccountComponent,
-        },
-      ],
-    },
+  // USER //
 
-    // USER //
-
-    {
-      path: 'account',
-      component: ViewFormAccountUserComponent,
-      canActivate: [LoginGuardGuard],
-      children: [
-        {
-          path: 'setting-user',
-          component: FormAccountUserComponent
-        }
-      ]
-    },
-
+  {
+    path: 'account',
+    component: ViewFormAccountUserComponent,
+    canActivate: [LoginGuardGuard],
+    children: [
+      {
+        path: 'setting-user',
+        component: FormAccountUserComponent,
+      },
+    ],
+  },
 
   // VISTAS ADMINISTRATIVAS DEL STORE //
 
@@ -220,7 +215,7 @@ const APP_ROUTES: Routes = [
     ],
   },
 
-  { path: '**', pathMatch: 'full', redirectTo: 'page-under-construction' }
+  { path: '**', pathMatch: 'full', redirectTo: 'page-under-construction' },
 ];
 
-export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES, { useHash: true });
+// export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES, { useHash: true });
