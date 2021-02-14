@@ -19,6 +19,7 @@
   scroll-behavior: smooth;
 }
 
+
 .main-area {
   grid-area: content;
   position: relative;

@@ -1,5 +1,4 @@
-<div id="main-wrapper">
-  <!-- <app-navbarstore id="header"></app-navbarstore> -->
+
   <!-- ============================================================== -->
   <!-- Page wrapper  -->
   <!-- ============================================================== -->
@@ -13,12 +12,6 @@
      
       <div class="container pt-4">
         <div class="row">
-          <app-card-shimmer-form-configuration
-            class="col-md-6 animated fadeIn"
-            *ngIf="card_shimmer"
-          >
-          </app-card-shimmer-form-configuration>
-
           <!-- ============================================================== -->
           <!-- Formulario de Configuración  -->
           <!-- ============================================================== -->
@@ -27,17 +20,14 @@
             (ngSubmit)="ActualizarDatosUser(forma.value)"
             novalidate="novalidate"
             class="col-md-6"
-            *ngIf="!this.card_shimmer"
           >
             <div class="row">
-              <h2 class="OpenSans-700 pl-3 pb-3 h2-title">
-                Configuración de tu cuenta
-              </h2>
+              <h2 class="OpenSans-700 pl-3 pb-3 h2-title"> Configuración de tu cuenta </h2>
 
               <div class="col-md-12">
                 <div class="form-group row mb-0 mt-4">
                   <div class="col-12">
-                    <h5 class="family-500 orange">Información de contacto</h5>
+                    <h5 class="family-500 orange" style = "font-size: 22px;">Información de contacto</h5>
                   </div>
                 </div>
 
@@ -298,7 +288,7 @@
           <!-- ============================================================== -->
           <!-- SUBIDA DEL AVATAR DEL USUARIO  -->
           <!-- ============================================================== -->
-          <section class="col-md-4 pr-0">
+          <section class="col-md-6 pr-0 display-flex justify-content-center">
             <app-cropper-img-photo-account></app-cropper-img-photo-account>
           </section>
           <!-- ============================================================== -->
@@ -318,4 +308,4 @@
   <!-- ============================================================== -->
   <!-- End Page wrapper  -->
   <!-- ============================================================== -->
-</div>
+

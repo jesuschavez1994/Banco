@@ -119,7 +119,7 @@ import { ProgessBarFileExcelComponent } from './sincronizacion/pages/exportar-li
 import { SettingsComponent } from './account/settings.component';
 import { FormAccountUserComponent } from './AccountUser/pages/settings/views/form-account-user/form-account-user.component';
 import { ViewFormAccountUserComponent } from './AccountUser/pages/view-form-account-user.component';
-import { FooterButtonFormAccountComponent } from './AccountUser/pages/settings/view/components/footer-button-form-account/footer-button-form-account.component';
+import { FooterButtonFormAccountComponent } from './AccountUser/pages/settings/views/components/footer-button-form-account/footer-button-form-account.component';
 
 @NgModule({
   entryComponents: [
