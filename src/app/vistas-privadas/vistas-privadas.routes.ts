@@ -8,8 +8,8 @@ import { VerifyTokenGuard } from '@services/guards/verify-token.guard';
   Components used in the views.
 */
 import { AccountComponent } from './account/pages/settings/views/my-account/account.component';
-import { ContactComponent } from './contact/contact.component';
-import { ContactInformationEditComponent } from './components/contact-information-edit/contact-information-edit.component';
+// import { ContactComponent } from './contact/contact.component';
+// import { ContactInformationEditComponent } from './components/contact-information-edit/contact-information-edit.component';
 import { RutStoreComponent } from '../form-register/rut-store/rut-store.component';
 import { FormDataNegocioComponent } from '../form-register/form-data-negocio/form-data-negocio.component';
 import { ProductLoadingComponent } from './product-loading/product-loading.component';

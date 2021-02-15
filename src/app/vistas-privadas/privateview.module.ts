@@ -2,14 +2,14 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
-import { ContactComponent } from './contact/contact.component';
+// import { ContactComponent } from './contact/contact.component';
 import { ComponentsModule } from '../components/components.module';
 import { AppRoutingModule } from '../app-routing.module';
-import { ContactInformationEditComponent } from './components/contact-information-edit/contact-information-edit.component';
-import { ContactInformationComponent } from './components/contact-information/contact-information.component';
+// import { ContactInformationEditComponent } from './components/contact-information-edit//* contact-information-edit.component';
+// import { ContactInformationComponent } from './components/contact-information/contact-information.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MapaComponent } from './components/mapa/mapa.component';
-import { MapEditarComponent } from './components/map-editar/map-editar.component';
+/* import { MapaComponent } from './components/mapa/mapa.component';
+import { MapEditarComponent } from './components/map-editar/map-editar.component'; */
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { PipesModule } from '@pipes/pipes.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,19 +19,19 @@ import { MaterialModule } from '@Angula-Material/material.module';
 
 // Mapa //
 import { AgmCoreModule } from '@agm/core';
-
+/* 
 import { ContactDescriptionEditComponent } from './components/contact-description-edit/contact-description-edit.component';
-import { ContactDescriptionComponent } from './components/contact-description/contact-description.component';
+import { ContactDescriptionComponent } from './components/contact-description/contact-description.component'; */
 import { PhotoUserEditComponent } from './components/photo-user-edit/photo-user-edit.component';
 import { PhotoUserComponent } from './components/photo-user/photo-user.component';
 
 import { CardShimmerFormConfigurationComponent } from '@Cards-Shimmer/card-shimmer-form-configuration/card-shimmer-form-configuration.component';
 import { CardShimmerPhotoUserEditComponent } from '@Cards-Shimmer/card-shimmer-photo-user-edit/card-shimmer-photo-user-edit.component';
-import { CardShimmerTableInformacionComponent } from '@Cards-Shimmer/card-shimmer-table-informacion/card-shimmer-table-informacion.component';
+/* import { CardShimmerTableInformacionComponent } from '@Cards-Shimmer/card-shimmer-table-informacion/card-shimmer-table-informacion.component';
 import { CardShimmerTitleStoreComponent } from '@Cards-Shimmer/card-shimmer-title-store/card-shimmer-title-store.component';
-import { ScheduleStoreComponent } from './components/schedule-store/schedule-store.component';
+import { ScheduleStoreComponent } from './components/schedule-store/schedule-store.component'; */
 import { ComponentsComponent } from './components/components.component';
-import { SheduleStoreEditComponent } from './components/shedule-store-edit/shedule-store-edit.component';
+/* import { SheduleStoreEditComponent } from './components/shedule-store-edit/shedule-store-edit.component'; */
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
@@ -90,6 +90,7 @@ import { FooterButtonFormAccountComponent } from './AccountUser/pages/settings/v
 import { VistasPrivadasRoutingModule } from './vistas-privadas-routing.module';
 import { VistasPrivadasSharedModule } from './shared/vistas-privadas-shared.module';
 import { SearchModule } from './sincronizacion/components/search/search.module';
+import { MyStoreComponentsModule } from './my-store/components/my-store-components.module';
 
 /* 
   Components go here.
@@ -98,22 +99,22 @@ const components = [
   AccountComponent,
   DashboardComponent,
   ProductLoadComponent,
-  ContactComponent,
-  ContactInformationEditComponent,
-  ContactInformationComponent,
-  MapaComponent,
-  MapEditarComponent,
-  ContactDescriptionEditComponent,
-  ContactDescriptionComponent,
+  // ContactComponent,
+  // ContactInformationEditComponent,
+  // ContactInformationComponent,
+  // MapaComponent,
+  // MapEditarComponent,
+  // ContactDescriptionEditComponent,
+  // ContactDescriptionComponent,
   PhotoUserEditComponent,
   PhotoUserComponent,
   CardShimmerFormConfigurationComponent,
   CardShimmerPhotoUserEditComponent,
-  CardShimmerTableInformacionComponent,
-  CardShimmerTitleStoreComponent,
-  ScheduleStoreComponent,
+  // CardShimmerTableInformacionComponent,
+  // CardShimmerTitleStoreComponent,
+  // ScheduleStoreComponent,
   ComponentsComponent,
-  SheduleStoreEditComponent,
+  // SheduleStoreEditComponent,
   ProductLoadingComponent,
   ViewProductsLoadsComponent,
   ProductLoadingSmartComponent,
@@ -161,6 +162,7 @@ const modules = [
   NgbModule,
   NgxSpinnerModule,
   VistasPrivadasSharedModule,
+  MyStoreComponentsModule,
 ];
 /* 
   If it's needed that this module exports modules/components, put them here.
@@ -174,8 +176,8 @@ const exportStuff = [
 
 @NgModule({
   entryComponents: [
-    MapEditarComponent,
-    ContactDescriptionEditComponent,
+    // MapEditarComponent,
+    // ContactDescriptionEditComponent,
     ModalAddCategoriasAndSubcategoriasComponent,
   ],
   declarations: [...components],
