@@ -13,7 +13,7 @@ import { ContactInformationEditComponent } from './components/contact-informatio
 import { RutStoreComponent } from '../form-register/rut-store/rut-store.component';
 import { FormDataNegocioComponent } from '../form-register/form-data-negocio/form-data-negocio.component';
 import { ProductLoadingComponent } from './product-loading/product-loading.component';
-import { MyStoreComponent } from './pages/my-store/my-store.component';
+import { MyStoreComponent } from './my-store/my-store.component';
 import { ProductLoadingSmartComponent } from './product-loading/container/product-loading-smart/product-loading-smart.component';
 import { LoadProductComponent } from './LoadProduct/load-product/load-product.component';
 import { ViewProductsLoadsComponent } from './components/view-products-loads/view-products-loads.component';

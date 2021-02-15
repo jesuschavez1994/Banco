@@ -36,7 +36,7 @@ import { SheduleStoreEditComponent } from './components/shedule-store-edit/shedu
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { ProductLoadingComponent } from './product-loading/product-loading.component';
-import { MyStoreComponent } from './pages/my-store/my-store.component';
+import { MyStoreComponent } from './my-store/my-store.component';
 
 // PAGINATION //
 
