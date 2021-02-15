@@ -22,7 +22,6 @@ import { AgmCoreModule } from '@agm/core';
 
 import { ContactDescriptionEditComponent } from './components/contact-description-edit/contact-description-edit.component';
 import { ContactDescriptionComponent } from './components/contact-description/contact-description.component';
-import { AsideComponent } from './shared/aside/aside.component';
 import { PhotoUserEditComponent } from './components/photo-user-edit/photo-user-edit.component';
 import { PhotoUserComponent } from './components/photo-user/photo-user.component';
 
@@ -71,14 +70,9 @@ import { AccountComponent } from '../vistas-privadas/account/pages/settings/view
 import { ProductLoadingSmartComponent } from './product-loading/container/product-loading-smart/product-loading-smart.component';
 import { LoadProductComponent } from './LoadProduct/load-product/load-product.component';
 import { ModalAddCategoriasAndSubcategoriasComponent } from './product-loading/container/modals/modal-add-categorias-and-subcategorias/modal-add-categorias-and-subcategorias.component';
-// tslint:disable-next-line: max-line-length
 import { ModalDeleteProductComponent } from './components/view-products-loads/container/modal-delete-product/modal-delete-product.component';
-import { NavbarSincronizacionComponent } from './shared/navbar-sincronizacion/navbar-sincronizacion.component';
-import { ItemsSuggestedProductsComponent } from './sincronizacion/pages/suggested-products/container/items-suggested-products/items-suggested-products.component';
-import { NoSuggestedProductsComponent } from './sincronizacion/pages/suggested-products/container/no-suggested-products/no-suggested-products.component';
 import { NoSynchronizedProductsComponent } from './sincronizacion/pages/synchronized-products/container/no-synchronized-products/no-synchronized-products.component';
 import { SpreadSheetsModule } from '@grapecity/spread-sheets-angular';
-import { TableComponent } from './sincronizacion/pages/exportar-lista-excel/container/table/table.component';
 import { SynchronizedProductsTableComponent } from './sincronizacion/pages/synchronized-products/container/synchronized-products-table/synchronized-products-table.component';
 import { DialogSynchronizedComponent } from './sincronizacion/pages/synchronized-products/container/dialog-synchronized/dialog-synchronized.component';
 import { TableroDeSincronizacionComponent } from './sincronizacion/pages/synchronized-products/container/tablero-de-sincronizacion/tablero-de-sincronizacion.component';
@@ -88,34 +82,19 @@ import { ItemListProductComponent } from './sincronizacion/pages/bank-product/co
 
 import { LoadBanckProductComponent } from './Admin/pages/load-banck-product/load-banck-product.component';
 import { FormBanckProductAdminComponent } from './Admin/pages/load-banck-product/container/form-banck-product-admin/form-banck-product-admin.component';
-import { FormBanckProductSyncComponent } from './sincronizacion/components/form-banck-product-sync/form-banck-product-sync.component';
 import { EditProdutcComponent } from './components/edit-produtc/edit-produtc.component';
-import { EditSincronizacionComponent } from './sincronizacion/components/edit-sincronizacion/edit-sincronizacion.component';
 import { EditProductNoDisponibleComponent } from './components/edit-product-no-disponible/edit-product-no-disponible.component';
-import { SearchComponent } from './sincronizacion/components/search/search.component';
-import { DesincronizarComponent } from './sincronizacion/components/desincronizar/desincronizar.component';
-import { AsideFiltrosComponent } from './shared/aside-filtros/aside-filtros.component';
-import { CarouselSuggestedComponent } from './sincronizacion/pages/suggested-products/container/carousel-suggested/carousel-suggested.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CatalogoBankProductComponent } from './Admin/pages/container/catalogo-bank-product/catalogo-bank-product.component';
 import { EditProductBankComponent } from './Admin/pages/container/edit-product-bank/edit-product-bank.component';
-import { ProductsCardsStoreComponent } from './shared/products-cards-store/products-cards-store/products-cards-store.component';
-import { SearchStoreComponent } from './sincronizacion/components/search/container/search-store/search-store.component';
-import { BannerEditComponent } from './shared/banner-edit/banner-edit.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { CropperImgBannerComponent } from './shared/banner-edit/container/cropper-img-banner/cropper-img-banner.component';
-import { ErrorFailedMessageComponent } from './shared/banner-edit/container/error-failed-message/error-failed-message.component';
-import { ProgressBarComponent } from './shared/banner-edit/container/progress-bar/progress-bar.component';
-import { DropZoneComponent } from './shared/banner-edit/container/drop-zone/drop-zone.component';
-import { DragDropZoneFileComponent } from './sincronizacion/pages/exportar-lista-excel/container/drag-drop-zone-file/drag-drop-zone-file.component';
-import { SizeFileComponent } from './sincronizacion/pages/exportar-lista-excel/container/size-file/size-file.component';
-import { ProgessBarFileExcelComponent } from './sincronizacion/pages/exportar-lista-excel/container/progess-bar-file-excel/progess-bar-file-excel.component';
 import { SettingsComponent } from './account/settings.component';
 import { FormAccountUserComponent } from './AccountUser/pages/settings/views/form-account-user/form-account-user.component';
 import { ViewFormAccountUserComponent } from './AccountUser/pages/view-form-account-user.component';
 import { FooterButtonFormAccountComponent } from './AccountUser/pages/settings/views/components/footer-button-form-account/footer-button-form-account.component';
 
 import { VistasPrivadasRoutingModule } from './vistas-privadas-routing.module';
+import { VistasPrivadasSharedModule } from './shared/vistas-privadas-shared.module';
 
 /* 
   Components go here.
@@ -131,7 +110,6 @@ const components = [
   MapEditarComponent,
   ContactDescriptionEditComponent,
   ContactDescriptionComponent,
-  AsideComponent,
   PhotoUserEditComponent,
   PhotoUserComponent,
   CardShimmerFormConfigurationComponent,
@@ -148,37 +126,17 @@ const components = [
   LoadProductComponent,
   ModalAddCategoriasAndSubcategoriasComponent,
   ModalDeleteProductComponent,
-  NavbarSincronizacionComponent,
-  ItemsSuggestedProductsComponent,
-  NoSuggestedProductsComponent,
   NoSynchronizedProductsComponent,
-  TableComponent,
   SynchronizedProductsTableComponent,
   DialogSynchronizedComponent,
   TableroDeSincronizacionComponent,
   ItemListProductComponent,
   LoadBanckProductComponent,
   FormBanckProductAdminComponent,
-  FormBanckProductSyncComponent,
   EditProdutcComponent,
-  EditSincronizacionComponent,
   EditProductNoDisponibleComponent,
-  SearchComponent,
-  DesincronizarComponent,
-  AsideFiltrosComponent,
-  CarouselSuggestedComponent,
   CatalogoBankProductComponent,
   EditProductBankComponent,
-  ProductsCardsStoreComponent,
-  SearchStoreComponent,
-  BannerEditComponent,
-  CropperImgBannerComponent,
-  ErrorFailedMessageComponent,
-  ProgressBarComponent,
-  DropZoneComponent,
-  DragDropZoneFileComponent,
-  SizeFileComponent,
-  ProgessBarFileExcelComponent,
   SettingsComponent,
   FormAccountUserComponent,
   ViewFormAccountUserComponent,
@@ -210,27 +168,20 @@ const modules = [
   NzTimePickerModule,
   FormsModule,
   ReactiveFormsModule,
-  AgmCoreModule.forRoot({
-    apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14',
-  }),
   NgbModule,
   NgxSpinnerModule,
+  VistasPrivadasSharedModule,
 ];
 /* 
   If it's needed that this module exports modules/components, put them here.
 */
 const exportStuff = [
   PhotoUserEditComponent,
-  SearchComponent,
   PhotoUserComponent,
   CardShimmerFormConfigurationComponent,
   ModalAddCategoriasAndSubcategoriasComponent,
-  NavbarSincronizacionComponent,
-  TableComponent,
   SynchronizedProductsTableComponent,
   TableroDeSincronizacionComponent,
-  SearchStoreComponent,
-  ProgressBarComponent,
 ];
 
 @NgModule({
@@ -240,7 +191,12 @@ const exportStuff = [
     ModalAddCategoriasAndSubcategoriasComponent,
   ],
   declarations: [...components],
-  imports: [...modules],
+  imports: [
+    ...modules,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14',
+    }),
+  ],
   exports: [...exportStuff],
 
   providers: [
