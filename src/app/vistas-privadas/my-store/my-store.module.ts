@@ -19,22 +19,24 @@ import { MapaComponent } from './components/mapa/mapa.component';
 import { MyStoreComponent } from './my-store.component';
 import { ScheduleStoreComponent } from './components/schedule-store/schedule-store.component';
 import { SheduleStoreEditComponent } from './components/shedule-store-edit/shedule-store-edit.component';
+
+import { MyStoreComponentsModule } from './components/my-store-components.module';
 /* 
   Components go here.
 */
 const components = [
   ContactComponent,
-  CardShimmerTableInformacionComponent,
-  CardShimmerTitleStoreComponent,
-  ContactDescriptionComponent,
-  ContactDescriptionEditComponent,
-  ContactInformationComponent,
-  ContactInformationEditComponent,
-  MapEditarComponent,
-  MapaComponent,
+  // CardShimmerTableInformacionComponent,
+  // CardShimmerTitleStoreComponent,
+  // ContactDescriptionComponent,
+  // ContactDescriptionEditComponent,
+  // ContactInformationComponent,
+  // ContactInformationEditComponent,
+  // MapEditarComponent,
+  // MapaComponent,
   MyStoreComponent,
-  ScheduleStoreComponent,
-  SheduleStoreEditComponent,
+  // ScheduleStoreComponent,
+  // SheduleStoreEditComponent,
 ];
 /* 
   Modules go here.
@@ -44,13 +46,14 @@ const modules = [
   MyStoreRoutingModule,
   SharedModule,
   VistasPrivadasSharedModule,
+  MyStoreComponentsModule,
 ];
 /* 
   If need that this module exports something, put those modules/components here.
 */
 const exportStuff = [];
 @NgModule({
-  entryComponents: [MapEditarComponent, ContactDescriptionEditComponent],
+  // entryComponents: [MapEditarComponent, ContactDescriptionEditComponent],
   declarations: [...components],
   imports: [
     ...modules,

@@ -8,7 +8,7 @@ import { VerifyTokenGuard } from '@services/guards/verify-token.guard';
 /* 
   Components used in the views.
 */
-import { ContactComponent } from '../contact/contact.component';
+import { ContactComponent } from './pages/contact/contact.component';
 import { ProductLoadingComponent } from '../product-loading/product-loading.component';
 import { MyStoreComponent } from './my-store.component';
 import { LoadProductComponent } from '../LoadProduct/load-product/load-product.component';
