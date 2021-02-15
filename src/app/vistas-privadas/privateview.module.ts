@@ -36,7 +36,6 @@ import { SheduleStoreEditComponent } from './components/shedule-store-edit/shedu
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { ProductLoadingComponent } from './product-loading/product-loading.component';
-import { MyStoreComponent } from './my-store/my-store.component';
 
 // PAGINATION //
 
@@ -71,12 +70,7 @@ import { ProductLoadingSmartComponent } from './product-loading/container/produc
 import { LoadProductComponent } from './LoadProduct/load-product/load-product.component';
 import { ModalAddCategoriasAndSubcategoriasComponent } from './product-loading/container/modals/modal-add-categorias-and-subcategorias/modal-add-categorias-and-subcategorias.component';
 import { ModalDeleteProductComponent } from './components/view-products-loads/container/modal-delete-product/modal-delete-product.component';
-import { NoSynchronizedProductsComponent } from './sincronizacion/pages/synchronized-products/container/no-synchronized-products/no-synchronized-products.component';
 import { SpreadSheetsModule } from '@grapecity/spread-sheets-angular';
-import { SynchronizedProductsTableComponent } from './sincronizacion/pages/synchronized-products/container/synchronized-products-table/synchronized-products-table.component';
-import { DialogSynchronizedComponent } from './sincronizacion/pages/synchronized-products/container/dialog-synchronized/dialog-synchronized.component';
-import { TableroDeSincronizacionComponent } from './sincronizacion/pages/synchronized-products/container/tablero-de-sincronizacion/tablero-de-sincronizacion.component';
-import { ItemListProductComponent } from './sincronizacion/pages/bank-product/container/item-list-product/item-list-product.component';
 
 // CARRUSEL //
 
