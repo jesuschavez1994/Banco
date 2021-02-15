@@ -1,0 +1,36 @@
+
+<form   [formGroup]="forma" 
+        (ngSubmit)="formEditMapa()" 
+        novalidate="novalidate">
+
+    <mat-form-field class="example-form-field">
+        <input  matInput 
+                type="text" 
+                placeholder="Titulo" 
+                formControlName="titulo"
+        >
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field">
+        <textarea   rows="3" 
+                    matInput 
+                    placeholder="Dirección" 
+                    formControlName="desc"></textarea>
+    </mat-form-field>
+
+    <button (click)="guardarCambios()" 
+            mat-raised-button 
+            color="primary" 
+            class="mr-3">
+            Editar
+    </button>
+
+    <button (click)="onNoClick()" 
+            type="button" 
+            mat-raised-button 
+            color="warn">
+            Cancelar
+    </button>
+
+</form>
+

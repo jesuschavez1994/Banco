@@ -1,0 +1,39 @@
+.article-card-shimmer {
+    &__img {
+      width: 100%;
+      height: 25px;
+    }
+    &__text {
+      margin: 0 3px;
+      margin-top:0px;
+      margin-bottom: 8px;
+      display: flex;
+      flex-flow: column nowrap;
+    }
+    &__category {
+      width: 30%;
+      height: 12px;
+    }
+    &__title {
+      width: 60%;
+      height: 18px;
+      margin-top: 15px;
+    }
+    &__details {
+      margin-top: 30px;
+      width: 90%;
+      height: 100px;
+    }
+}
+
+
+.grid {
+    display: grid;
+    @media (min-width: 768px) {
+        grid-template-columns: 1fr 1fr;
+    }
+    @media (min-width: 1024px) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    grid-gap: 20px;
+  }

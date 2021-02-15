@@ -1,0 +1,43 @@
+<mat-card>
+    <mat-card-title class="orange family-400 mb-4">Ubicación geográfica</mat-card-title>
+    <agm-map    (mapClick)="agregarMarcadores($event)" 
+                [latitude]="latitud" 
+                [longitude]="longitud"
+                [zoom]="8">
+
+        <agm-marker *ngFor="let marcador of marcadores; let i = index" 
+                    [latitude]="marcador.lat" 
+                    [longitude]="marcador.lng">
+
+                <agm-info-window>
+                    <strong class="family-600">{{marcador.titulo}}</strong>
+                    <p>
+                        {{marcador.desc}}
+                    </p>
+                    <p>
+                      <strong>Latitud:</strong> 
+                      <span class="size-12">{{marcador.lat}}</span> 
+                    </p>
+                    <p>
+                        <strong>Longitud:</strong> 
+                        <span class="size-12">{{marcador.lng}}</span>
+                    </p>
+                    <div>
+
+                        <button (click)="editarMarcador( marcador )" 
+                                mat-raised-button color="primary" 
+                                class="mr-3">
+                                Editar
+                        </button>
+
+                        <button (click)="borrarMarcador(i)" 
+                                mat-raised-button 
+                                color="warn">
+                                Borrar
+                        </button>
+                    </div>
+                </agm-info-window>
+
+        </agm-marker>
+    </agm-map>
+</mat-card>
