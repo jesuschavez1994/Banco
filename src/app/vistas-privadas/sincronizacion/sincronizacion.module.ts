@@ -12,7 +12,6 @@ import { EditSincronizacionComponent } from './components/edit-sincronizacion/ed
 import { ExportarListaExcelComponent } from './pages/exportar-lista-excel/exportar-lista-excel.component';
 import { FormBanckProductSyncComponent } from './components/form-banck-product-sync/form-banck-product-sync.component';
 import { SearchModule } from './components/search/search.module';
-import { SuggestedProductsComponent } from './pages/suggested-products/suggested-products.component';
 import { SincronizacionViewsComponent } from './components/sincronizacion-views/sincronizacion-views.component';
 import { SynchronizedProductsComponent } from './pages/synchronized-products/synchronized-products.component';
 /* 
