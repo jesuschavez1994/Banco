@@ -1,10 +1,29 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { MyStoreRoutingModule } from './my-store-routing.module';
+import { SharedModule } from '@shared/shared.module';
+import { VistasPrivadasSharedModule } from '../shared/vistas-privadas-shared.module';
 
+import { MyStoreComponent } from './my-store.component';
+/* 
+  Components go here.
+*/
+const components = [MyStoreComponent];
+/* 
+  Modules go here.
+*/
+const modules = [
+  MyStoreRoutingModule,
+  SharedModule,
+  VistasPrivadasSharedModule,
+];
+/* 
+  If need that this module exports something, put those modules/components here.
+*/
+const exportStuff = [];
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, MyStoreRoutingModule],
+  declarations: [...components],
+  imports: [...modules],
+  exports: [],
 })
 export class MyStoreModule {}

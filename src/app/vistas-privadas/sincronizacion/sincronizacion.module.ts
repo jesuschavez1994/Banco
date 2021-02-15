@@ -4,37 +4,36 @@ import { SincronizacionRoutingModule } from './sincronizacion-routing.module';
 import { SharedModule } from '@shared/shared.module';
 import { VistasPrivadasSharedModule } from '../shared/vistas-privadas-shared.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { BankProductModule } from './pages/bank-product/bank-product.module';
+import { ExportarListaExcelModule } from './pages/exportar-lista-excel/exportar-lista-excel.module';
+import { SearchModule } from './components/search/search.module';
 import { SuggestedProductsModule } from './pages/suggested-products/suggested-products.module';
-
-import { BankProductComponent } from './pages/bank-product/bank-product.component';
+import { SynchronizedProductsModule } from './pages/synchronized-products/synchronized-products.module';
+import { SincronizacionViewsComponent } from './components/sincronizacion-views/sincronizacion-views.component';
 import { DesincronizarComponent } from './components/desincronizar/desincronizar.component';
 import { EditSincronizacionComponent } from './components/edit-sincronizacion/edit-sincronizacion.component';
-import { ExportarListaExcelComponent } from './pages/exportar-lista-excel/exportar-lista-excel.component';
 import { FormBanckProductSyncComponent } from './components/form-banck-product-sync/form-banck-product-sync.component';
-import { SearchModule } from './components/search/search.module';
-import { SincronizacionViewsComponent } from './components/sincronizacion-views/sincronizacion-views.component';
-import { SynchronizedProductsComponent } from './pages/synchronized-products/synchronized-products.component';
 /* 
   Components go here.
 */
 const components = [
-  BankProductComponent,
   DesincronizarComponent,
   EditSincronizacionComponent,
-  ExportarListaExcelComponent,
   FormBanckProductSyncComponent,
   SincronizacionViewsComponent,
-  SynchronizedProductsComponent,
 ];
 /* 
   Modules go here.
 */
 const modules = [
+  BankProductModule,
+  ExportarListaExcelModule,
   NgxSpinnerModule,
   SincronizacionRoutingModule,
   SearchModule,
   SharedModule,
   SuggestedProductsModule,
+  SynchronizedProductsModule,
   VistasPrivadasSharedModule,
 ];
 /* 

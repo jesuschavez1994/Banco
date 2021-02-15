@@ -95,6 +95,7 @@ import { FooterButtonFormAccountComponent } from './AccountUser/pages/settings/v
 
 import { VistasPrivadasRoutingModule } from './vistas-privadas-routing.module';
 import { VistasPrivadasSharedModule } from './shared/vistas-privadas-shared.module';
+import { SearchModule } from './sincronizacion/components/search/search.module';
 
 /* 
   Components go here.
@@ -120,17 +121,11 @@ const components = [
   ComponentsComponent,
   SheduleStoreEditComponent,
   ProductLoadingComponent,
-  MyStoreComponent,
   ViewProductsLoadsComponent,
   ProductLoadingSmartComponent,
   LoadProductComponent,
   ModalAddCategoriasAndSubcategoriasComponent,
   ModalDeleteProductComponent,
-  NoSynchronizedProductsComponent,
-  SynchronizedProductsTableComponent,
-  DialogSynchronizedComponent,
-  TableroDeSincronizacionComponent,
-  ItemListProductComponent,
   LoadBanckProductComponent,
   FormBanckProductAdminComponent,
   EditProdutcComponent,
@@ -153,6 +148,7 @@ const modules = [
   SpreadSheetsModule,
   MaterialModule,
   NgxPaginationModule,
+  SearchModule,
   SharedModule,
   PipesModule,
   ImageCropperModule,
@@ -180,8 +176,6 @@ const exportStuff = [
   PhotoUserComponent,
   CardShimmerFormConfigurationComponent,
   ModalAddCategoriasAndSubcategoriasComponent,
-  SynchronizedProductsTableComponent,
-  TableroDeSincronizacionComponent,
 ];
 
 @NgModule({
