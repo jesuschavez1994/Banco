@@ -19,16 +19,13 @@ import { DropdownOption } from '@interfaces/components-options/dropdown.options.
 import { DropdownIconComponent } from '../../shared/dropdown-icon/dropdown-icon.component';
 import { ToastComponent } from '../../modals/toast/toast.component';
 import {HomeServiceService} from '../services/home-service.service';
+
 @Component({
   selector: 'app-business-detail',
   templateUrl: './business-detail.component.html',
   styleUrls: ['./business-detail.component.scss']
 })
 export class BusinessDetailComponent implements OnInit, AfterViewInit {
-
-
-
-
 
   // Components Controllers
   @ViewChild('productCards') productCards: ProductsCardsComponent;
@@ -131,6 +128,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   showProducts = false;
   totalProducts: number;
   itemsPerPage = 16;
+  showShimmerProductsCards =  true;
 
   // SearchBar:
   preloadedValueSearch = '';
@@ -141,7 +139,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   ];
 
   // navbar
-  menuOptions: DropdownOption[] = [];
+  menuOptionsShopping: DropdownOption[] = [];
 
   // Variables
   storeData: StoreResponse;
@@ -164,8 +162,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.userLog = this.homeService.islog();
-    this.storeLog= this.homeService.storeActive();
-
   }
 
   ngAfterViewInit(): void {
@@ -379,11 +375,12 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         console.log('queryParamsAllowed: ', queryParamsAllowed);
       }
 
-      if (this.productCards) {
+
+      // this.showShimmerProductsCards = true;
+
+      if(this.productCards) {
         this.productCards.toggleShimmer();
       }
-
-
 
       this.productService.getProductsByStore(idStore, page, filter).subscribe(
         resp => {
@@ -437,6 +434,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
             this.productCards.toggleShimmer(false);
 
+
           } else{
             this.toastRef.open(
               'Tienda sin productos disponibles',
@@ -475,7 +473,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
           const products = resp.data;
 
-          this.menuOptions = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
+          this.menuOptionsShopping = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
 
           this.toastRef.open(
             'Producto agregado al carrito'
