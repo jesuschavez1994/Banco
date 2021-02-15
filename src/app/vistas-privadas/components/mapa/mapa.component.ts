@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+/* import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Marcador } from '@classes/marcador.class';
 import { GoogleMapsAPIWrapper } from '@agm/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -84,3 +84,4 @@ export class MapaComponent implements OnInit {
 
 }
 
+ */

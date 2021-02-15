@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/* import { Component, OnInit } from '@angular/core';
 declare let $: any;
 @Component({
   selector: 'app-shedule-store-edit',
@@ -16,3 +16,4 @@ export class SheduleStoreEditComponent implements OnInit {
 }
 
 
+ */

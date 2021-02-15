@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+/* import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { UserStoreService } from '@services/user-store/user-store.service';
 import { InformationEditStore } from '@models/InformationEditStore.model';
@@ -54,3 +54,4 @@ export class ContactInformationEditComponent implements OnInit {
 
 
 }
+ */

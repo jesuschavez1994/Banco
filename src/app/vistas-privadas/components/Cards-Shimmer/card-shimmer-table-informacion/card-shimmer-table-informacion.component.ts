@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/* import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-card-shimmer-table-informacion',
@@ -13,3 +13,4 @@ export class CardShimmerTableInformacionComponent implements OnInit {
   }
 
 }
+ */

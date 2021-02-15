@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/* import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { Description } from '@classes/descriptionStore.class';
 import { UserStoreService } from '@services/user-store/user-store.service';
@@ -41,3 +41,4 @@ export class ContactDescriptionComponent implements OnInit {
   }
 
 }
+ */

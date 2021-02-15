@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+/* import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 
@@ -40,3 +40,4 @@ export class MapEditarComponent implements OnInit {
   }
 
 }
+ */

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef  } from '@angular/core';
+/* import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef  } from '@angular/core';
 import { StoreService } from '@services/store/store.service';
 
 @Component({
@@ -51,3 +51,4 @@ export class ScheduleStoreComponent implements OnInit {
   }
 
 }
+ */
