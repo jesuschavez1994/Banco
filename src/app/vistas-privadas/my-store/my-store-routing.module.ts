@@ -23,7 +23,6 @@ const routes: Routes = [
   {
     path: '',
     component: MyStoreComponent,
-    canActivate: [LoginGuardGuard, VerifyTokenGuard],
     children: [
       {
         path: 'contact',

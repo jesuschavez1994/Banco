@@ -103,6 +103,7 @@ export const ROUTES: Routes = [
       import('./my-store/my-store.module').then(
         (module) => module.MyStoreModule
       ),
+    canActivate: [LoginGuardGuard, VerifyTokenGuard],
     /*     component: MyStoreComponent,
     canActivate: [LoginGuardGuard, VerifyTokenGuard],
     children: [
