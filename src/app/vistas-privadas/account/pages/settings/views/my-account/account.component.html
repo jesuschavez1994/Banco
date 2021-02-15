@@ -1,24 +1,14 @@
-<div id="main-wrapper">
-  <!-- <app-navbarstore id="header"></app-navbarstore> -->
+
   <!-- ============================================================== -->
   <!-- Page wrapper  -->
   <!-- ============================================================== -->
   <div class="page-wrapper animated fadeIn">
-
-    
     <!-- ============================================================== -->
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
-     
       <div class="container pt-4">
         <div class="row">
-          <app-card-shimmer-form-configuration
-            class="col-md-6 animated fadeIn"
-            *ngIf="card_shimmer"
-          >
-          </app-card-shimmer-form-configuration>
-
           <!-- ============================================================== -->
           <!-- Formulario de Configuración  -->
           <!-- ============================================================== -->
@@ -27,17 +17,14 @@
             (ngSubmit)="ActualizarDatosUser(forma.value)"
             novalidate="novalidate"
             class="col-md-6"
-            *ngIf="!this.card_shimmer"
           >
             <div class="row">
-              <h2 class="OpenSans-700 pl-3 pb-3 h2-title">
-                Configuración de tu cuenta
-              </h2>
+              <h2 class="OpenSans-700 pl-3 pb-3 h2-title"> Configuración de tu cuenta </h2>
 
               <div class="col-md-12">
                 <div class="form-group row mb-0 mt-4">
                   <div class="col-12">
-                    <h5 class="family-500 orange">Información de contacto</h5>
+                    <h5 class="family-500 orange" style = "font-size: 22px;">Información de contacto</h5>
                   </div>
                 </div>
 
@@ -271,28 +258,6 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="form-group row mb-0 mt-4">
-                  <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-8">
-                    <h5 class="family-500 orange">Desactivar mi cuenta</h5>
-
-                    <p class="size-14">
-                      Si desactivas tu cuenta ya no podrás acceder a tu tienda,
-                      ni iniciar sesión en founduss. Si quieres desactivar es´ta
-                      cuenta, está no se eliminaráapp-categorias,
-                      <span class="family-500 orange">
-                        para eliminar tu cuenta ponte en contacto con nuestro
-                        equipo de ayuda
-                      </span>
-                    </p>
-                  </div>
-                  <button
-                    type="submit"
-                    class="btn btn-outline-primary btn-block fredoka mt-4 col-6 button"
-                  >
-                    Desactivar cuenta
-                  </button>
-                </div>
               </div>
             </div>
             <footer
@@ -319,9 +284,8 @@
           <!-- ============================================================== -->
           <!-- SUBIDA DEL AVATAR DEL USUARIO  -->
           <!-- ============================================================== -->
-          <section class="col-md-4 pr-0">
-            <app-photo-user-edit></app-photo-user-edit>
-            <app-photo-user></app-photo-user>
+          <section class="col-md-6 pr-0 display-flex justify-content-center">
+            <app-cropper-img-photo-account></app-cropper-img-photo-account>
           </section>
           <!-- ============================================================== -->
           <!-- End SUBIDA DEL AVATAR DEL USUARIO -->
@@ -340,4 +304,4 @@
   <!-- ============================================================== -->
   <!-- End Page wrapper  -->
   <!-- ============================================================== -->
-</div>
+

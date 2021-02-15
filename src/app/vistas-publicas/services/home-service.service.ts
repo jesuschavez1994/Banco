@@ -36,7 +36,7 @@ export class HomeServiceService extends Service{
       return this.execQuery<CategoriesHome[]>('home/categories');
    }
    public obtUserData(id): Observable<UserPublic>{
-    console.log('get  list /home/categories');
+    
     return this.execQuery<UserPublic>('users/'+id);
  }
   
@@ -45,6 +45,7 @@ public logout() {
   return this.execQuery(url).subscribe( data => {
     this.idUser = null;
     localStorage.removeItem('token');
+    localStorage.removeItem('storeId');
     localStorage.removeItem('id');
     localStorage.removeItem('usuario');
     this.route.navigate(['/home']);

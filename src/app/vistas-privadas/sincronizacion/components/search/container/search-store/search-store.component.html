@@ -12,9 +12,10 @@
 
     <!-- === BOTÓN AGREGAR NUEVO PRODUCTO ====-->
      <!-- ====================================-->
-     <div class="filter" *ngIf="this.BotonActivated === '/my-store/product-catalogue'">
+     <div class="filter">
         <button class="btn btn-primary button fredoka" 
             type="button"
+            *ngIf="this.BotonActivated == '/my-store/product-catalogue'"
             id="addProduct"
             (click)="addNewProduct()"
             [routerLink]="['/my-store/load-product']"     
@@ -23,11 +24,11 @@
         </button>
     </div>
 
-    <button type="button" 
+    <!-- <button type="button" 
             class="mr-3 sincronizar-button" 
             *ngIf="this.BotonActivated === '/my-store/sincronizacion/suggested-products'">
             Sincronizar 
-    </button>
+    </button> -->
 
     <form class="searcher">
         <i><img src="assets/img/icons/loupe.svg"></i>

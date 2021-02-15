@@ -4,7 +4,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { ContactComponent } from './contact/contact.component';
 import { ComponentsModule } from '../components/components.module';
-import { APP_ROUTING } from '../app.routes';
+// import { APP_ROUTING } from '../app.routes';
+import { AppRoutingModule } from '../app-routing.module';
 import { ContactInformationEditComponent } from './components/contact-information-edit/contact-information-edit.component';
 import { ContactInformationComponent } from './components/contact-information/contact-information.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -102,7 +103,6 @@ import { DesincronizarComponent } from './sincronizacion/components/desincroniza
 import { AsideFiltrosComponent } from './shared/aside-filtros/aside-filtros.component';
 import { CarouselSuggestedComponent } from './sincronizacion/pages/suggested-products/container/carousel-suggested/carousel-suggested.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { AppRoutingModule } from '../app-routing.module';
 import { CatalogoBankProductComponent } from './Admin/pages/container/catalogo-bank-product/catalogo-bank-product.component';
 import { EditProductBankComponent } from './Admin/pages/container/edit-product-bank/edit-product-bank.component';
 import { ProductsCardsStoreComponent } from './shared/products-cards-store/products-cards-store/products-cards-store.component';
@@ -117,6 +117,9 @@ import { DragDropZoneFileComponent } from './sincronizacion/pages/exportar-lista
 import { SizeFileComponent } from './sincronizacion/pages/exportar-lista-excel/container/size-file/size-file.component';
 import { ProgessBarFileExcelComponent } from './sincronizacion/pages/exportar-lista-excel/container/progess-bar-file-excel/progess-bar-file-excel.component';
 import { SettingsComponent } from './account/settings.component';
+import { FormAccountUserComponent } from './AccountUser/pages/settings/views/form-account-user/form-account-user.component';
+import { ViewFormAccountUserComponent } from './AccountUser/pages/view-form-account-user.component';
+import { FooterButtonFormAccountComponent } from './AccountUser/pages/settings/views/components/footer-button-form-account/footer-button-form-account.component';
 
 @NgModule({
   entryComponents: [
@@ -190,6 +193,9 @@ import { SettingsComponent } from './account/settings.component';
     SizeFileComponent,
     ProgessBarFileExcelComponent,
     SettingsComponent,
+    FormAccountUserComponent,
+    ViewFormAccountUserComponent,
+    FooterButtonFormAccountComponent,
   ],
 
   imports: [
@@ -232,6 +238,7 @@ import { SettingsComponent } from './account/settings.component';
     SynchronizedProductsTableComponent,
     TableroDeSincronizacionComponent,
     SearchStoreComponent,
+    ProgressBarComponent,
   ],
 
   providers: [

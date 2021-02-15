@@ -1,0 +1,19 @@
+form{
+    .row{
+        h2{
+            color: #0e1318;
+            font-size: 2.1rem;
+            letter-spacing: -0.05rem;
+        }
+
+        .col-md-12{
+            .map{
+                iframe{
+                    margin-top: 20px;
+                    width:100%;
+                    height: 350px;
+                }
+            }
+        }
+    }
+}

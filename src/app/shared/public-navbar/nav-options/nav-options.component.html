@@ -5,10 +5,10 @@
 
             <!-- btn Cart -->
             <!--<app-button-shop class="btn-shop"></app-button-shop> -->
-            <app-dropdown-icon *ngIf="auth && !storeAct" class="btn-shop" [classIcon]="classIcon" [menuOptions]="menuOptions"></app-dropdown-icon>
+            <app-dropdown-icon *ngIf="auth && !storeAct" class="btn-shop" (extraButton)="deleteProductFromCart($event)" [classIcon]="classIcon" [menuOptions]="menuOptions"></app-dropdown-icon>
             <!-- btn Cart -->
             <!-- favorite btn -->
-            <app-dropdown-icon *ngIf="auth && !storeAct" class="btn-shop" [classIcon]="classIconFavorite" [menuOptions]="menuOptionsFavorite"></app-dropdown-icon>
+            <app-dropdown-icon *ngIf="auth && !storeAct" class="btn-shop" (extraButton)="deleteProductFromFavorite($event)" [classIcon]="classIconFavorite" [menuOptions]="menuOptionsFavorite"></app-dropdown-icon>
 
             <!-- favorite btn -->
             <!-- btn config -->
@@ -18,7 +18,6 @@
                         <path fill-rule="evenodd" d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z"/>
                       </svg>
             </a> -->
-
             <button class="fredoka  no-auth-btn" *ngIf="!auth" [routerLink]="['/login']">
                     Ingresa
                 </button>
@@ -27,7 +26,7 @@
                 </button>
             <!-- btn config -->
             <!-- btn perfil -->
-            <button class="btn btn-primary button fredoka" *ngIf="auth && !storeAct" id="inisiar-sesion" [routerLink]="['/account']">
+            <button class="btn btn-primary button fredoka" *ngIf="auth && !storeAct" id="inisiar-sesion" [routerLink]="['/account/setting-user']">
                     Mi perfil
                 </button>
             <button class="btn btn-primary button fredoka" *ngIf="storeAct && auth" id="inisiar-sesion" [routerLink]="['/my-store/contact']">
@@ -42,4 +41,6 @@
     </nav>
 
 </div>
+<app-toast #toastRef></app-toast>
+
 <!-- User Options -->

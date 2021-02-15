@@ -16,7 +16,7 @@
     </div>
 
     <!-- NG IF PARA OCULTAR O MOSTRAR EL FILTRO POR DEFECTO MOSTRADO -->
-    <div *ngIf="showFilter" class="filter">
+    <div [ngClass]="{'d-none': !showFilter}" class="filter">
 
       <select #selectFilter>
 

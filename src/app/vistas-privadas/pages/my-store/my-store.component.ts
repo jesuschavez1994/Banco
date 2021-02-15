@@ -13,6 +13,7 @@ import {
   Profile, SidebarListOptions, AnchorsMenu,
   SelectedEmitter, Filter
 } from '@interfaces/components-options/sidebar-list.options.interface';
+import {HomeServiceService} from '../../../vistas-publicas/services/home-service.service';
 
 import { AsideFiltrosComponent } from '../../shared/aside-filtros/aside-filtros.component';
 import { DataProductDB, ProductosLoads } from '@interfaces/InterfaceProducto';
@@ -41,6 +42,10 @@ export class MyStoreComponent implements OnInit {
 
   @ViewChild('sidebarList') sidebarList: AsideFiltrosComponent;
 
+  userLog: boolean;
+  storeLog: boolean | string;
+
+
 
   imgsBanners: Srcsize = {
       xl: 'assets/img/Banner/Banner1.svg',
@@ -53,12 +58,19 @@ export class MyStoreComponent implements OnInit {
                 private router: Router,
                 public storeService: StoreService,
                 private _searchService: SearchService,
-                private userStoreService: UserStoreService) {}
+                private homeService: HomeServiceService,
+                private userStoreService: UserStoreService,
+                
+              ) {}
 
   ngOnInit() {
+    
+     this.userLog = this.homeService.islog();
+     this.storeLog= this.homeService.storeActive();
     this.loadDataStore();
     this.VeriquedBanner();
-  }
+   
+   }
 
   ngAfterViewInit(){
   }

@@ -3,10 +3,10 @@
 <!-- ============================================================== -->
 <li class="item navbar-collapse avat " *ngIf="userImg != undefined">
     <a class=" p-0 dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span *ngIf="(userImg.length > 0) && (userImg != undefined)">
-            <img src="{{userImg[0].src}}" alt="user" class="m-0 responsive--icon profile-pic" />
-        </span>
-        <span *ngIf="(userImg.length === 0) && (userImg != undefined)">
+        <span *ngIf="(userImg.length > 0)">
+            <img src="{{envApi+'/'+ userImg[0].src}}" alt="user" class="m-0 responsive--icon profile-pic" />
+        </span> 
+        <span *ngIf="(userImg.length == 0) || (userImg == undefined)">
             <img src="assets/img/avatar.svg" alt="user" class="m-0 responsive--icon profile-pic" />
         </span>
         
@@ -17,9 +17,9 @@
                 <div class="dw-user-box display-flex align-items-center" align="center">
                     <div class="u-img">
                         <span *ngIf="(userImg.length > 0) && (userImg != undefined)">
-                            <img src="{{userImg[0].src}}" alt="user" class="m-0 responsive--icon profile-pic" />
+                            <img src="{{envApi+'/'+userImg[0].src}}" alt="user" class="m-0 responsive--icon profile-pic" />
                         </span>
-                        <span *ngIf="(userImg.length === 0) && (userImg != undefined)">
+                        <span *ngIf="(userImg.length === 0) || (userImg == undefined)">
                             <img src="assets/img/avatar.svg" alt="user" class="m-0 responsive--icon profile-pic" />
                         </span>
                     </div>
@@ -42,7 +42,7 @@
                 </a>
             </li>
             <li class="nav-item" routerLinkActive="active">
-                <a class="a-menu-user nav-link OpenSans-400" [routerLink]="['/account']">
+                <a class="a-menu-user nav-link OpenSans-400" [routerLink]="['/account', storeAct ? 'form-account':'setting-user' ]">
 
                     <img class="mr-2" src="../../../assets/img/iconos/icons-main/icons/gear.svg" alt="" width="18" height="18" title="Configuración"> Configuración de tu cuenta
 

@@ -19,19 +19,15 @@ export class HomeComponent implements OnInit {
     storeLog: boolean | string;
 
   constructor(  private homeService: HomeServiceService,
-                
-                private spinner : NgxSpinnerService,
-                private modal : MatDialog,) { 
+
+                private spinner: NgxSpinnerService,
+                private modal: MatDialog) {
 
 
                 }
 // ATRIBUTOS
   homeComp: CategoriesHome[];
-  requestReady: boolean= false;
-  
-
-
-
+  requestReady = false;
 // METODOS
   ngOnInit() {
     console.log('on init ');
@@ -43,24 +39,23 @@ export class HomeComponent implements OnInit {
     //   console.log('ITEM', this.itemProductos);
     // });
     this.spinner.show();
-     this.userLog = this.homeService.islog();
-     this.storeLog= this.homeService.storeActive();
-     console.log('loggin',this.userLog); 
-     this.homeService.obtProducts().subscribe(
-        data=>{
-        
-          console.log('request', data);
-          this.spinner.hide();
-          this.requestReady=true;
-          this.homeComp = data;
-        },
-         err=>{
-           console.log('err');
+    this.userLog = this.homeService.islog();
+    this.storeLog = this.homeService.storeActive();
+    console.log('loggin', this.userLog);
+    this.homeService.obtProducts().subscribe(
+      data => {
+        console.log('request', data);
+        this.spinner.hide();
+        this.requestReady = true;
+        this.homeComp = data;
+      },
+         err => {
+          console.log('err');
           this.spinner.hide();
           this.openDialog('Ha ocurrido un error en la carga de productos, vuelva a intentar')
       });
     }
-  openDialog(mensaje:string): void {
+  openDialog(mensaje: string): void {
     const dialogRef = this.modal.open(ModalErrComponent, {
       data: {title: 'Oops!', description: mensaje}
     });

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ElementRef, ViewChild, AfterViewInit, OnChanges } from '@angular/core';
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface';
 
 @Component({
@@ -58,7 +58,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
 
           this.search.emit({
             value: searchInput.value,
-          //  filter: selectFilter.value
+            filter: this.selectFilter.nativeElement
           });
           /***** */
           if(this.showFilter){
@@ -79,7 +79,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     };
 
     /***** */
-    if(this.showFilter){
+    if (this.showFilter){
       selectFilter.onchange = () => {
         this.search.emit({
           value: searchInput.value,

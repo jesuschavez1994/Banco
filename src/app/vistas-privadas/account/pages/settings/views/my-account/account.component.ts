@@ -18,7 +18,7 @@ import { DataUsuarioAccount } from '@interfaces/usuario/usuario';
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.css'],
+  styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent implements OnInit {
   isOpen = false;
@@ -28,8 +28,6 @@ export class AccountComponent implements OnInit {
   usuario: Usuario;
   token: string;
   datosUsuario: DataUsuarioAccount;
-  // tslint:disable-next-line: variable-name
-  card_shimmer = true;
   // tslint:disable-next-line: member-ordering
 
   constructor(
@@ -75,7 +73,6 @@ export class AccountComponent implements OnInit {
       this.forma.get('name').setValue(this.datosUsuario.name);
       this.forma.get('email').setValue(this.datosUsuario.email);
       this.forma.get('phone').setValue(this.datosUsuario.phone);
-      this.card_shimmer = false;
     });
   }
 

@@ -1,0 +1,56 @@
+@import 'src/assets/scss/style.scss';
+
+footer{
+
+    div{
+
+        background: linear-gradient(180deg,#fff 0,#f0f0f0);
+        border: 1px solid $color_dashed-gray;
+        color: #4d525b;
+        font-size: 14px;
+        line-height: 1.43;
+        padding: 6px 13px;
+        margin-bottom: 7px;
+
+        button{
+            background: none;
+            border: 0;
+            color: inherit;
+            cursor: pointer;
+            font-family: $fontFamily__monserrat;
+            line-height: normal;
+            padding: 0;
+            text-align: inherit;
+            border-radius: 0;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+    }
+
+    section{
+
+        button{
+            background: none;
+            border: 0;
+            color: #007fed;
+            cursor: pointer;
+            font-family: $fontFamily__monserrat;
+            line-height: normal;
+            padding: 0;
+            text-align: inherit;
+            border-radius: 0;
+            display: inline-block;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+    }
+
+    .invalid-feedback{
+        display: block !important;
+        margin-top: 0 !important;
+        font-size: 90% !important;
+        font-weight: 500;
+    }
+           
+}

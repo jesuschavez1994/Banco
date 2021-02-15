@@ -31,7 +31,6 @@ export class SubscriptionService {
 
   private apiBaseURL = URL_SERVICIOS;
   private userId = this.localStorage.getItem('id');
-  private orderId = this.localStorage.getItem('createdOrderID');
   private token = this.localStorage.getItem('token');
 
   // We add the corresponding headers to the request
@@ -70,8 +69,8 @@ export class SubscriptionService {
       .pipe(catchError(this.handleError));
   }
 
-  getVoucherDetails() {
-    const url = `${this.apiBaseURL}/api/users/${this.userId}/orders/${this.orderId}/payments`;
+  getVoucherDetails(orderId: string) {
+    const url = `${this.apiBaseURL}/api/users/${this.userId}/orders/${orderId}/payments`;
 
     return this.httpService
       .get(url, this.httpOptions)

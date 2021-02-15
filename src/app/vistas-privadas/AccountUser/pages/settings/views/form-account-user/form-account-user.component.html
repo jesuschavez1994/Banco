@@ -1,0 +1,219 @@
+
+<form [formGroup]="forma">
+  <div class="row">
+
+    <h2 class="OpenSans-700 pl-3 pb-3 h2-title">
+      Configuración de tu cuenta
+    </h2>
+
+    <div class="col-md-12">
+      <div class="form-group row mb-0 mt-4">
+        <div class="col-12">
+          <h5 class="family-500 orange" style = "font-size: 22px;">Información de contacto</h5>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
+          <mat-label class="OpenSans-600 size-12">
+            Nombre de usuario
+          </mat-label>
+
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Ingresa tú nombre de usuario"
+            formControlName="username"
+            [ngClass]="{
+              'is-invalid':
+              (!forma.controls['username'].valid ||
+              forma.controls['username'].errors?.minlength) &&
+              forma.controls['username'].touched,
+              'is-valid': forma.controls['username'].valid
+            }"
+          />
+
+          <mat-error
+            *ngIf="forma.get('username').errors?.required"
+            class="invalid-feedback"
+          >
+            Ingresa un nombre de usuario para mostrar que sea valido
+          </mat-error>
+
+          <mat-error
+            *ngIf="forma.get('username').errors?.minlength"
+            class="invalid-feedback"
+          >
+            Por lo menos 5 caracteres
+          </mat-error>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
+          <mat-label class="OpenSans-600 size-12"> Correo </mat-label>
+          <input
+            class="form-control email-icon"
+            type="email"
+            placeholder="Correo electrónico"
+            formControlName="email"
+            disabled="true"
+            [ngClass]="{
+              'is-invalid':
+              (!forma.controls['email'].valid ||
+              forma.controls['email'].errors?.minlength) &&
+              forma.controls['email'].touched,
+              'is-valid': forma.controls['email'].valid
+            }"
+          />
+
+          <mat-error
+            *ngIf="forma.get('email').errors?.required"
+            class="invalid-feedback"
+          >
+            Agrega una dirección de correo electrónico para poder
+            iniciar sesión con tu dirección de correo electrónico.
+          </mat-error>
+
+          <mat-error
+            *ngIf="forma.get('email').errors?.minlength"
+            class="invalid-feedback"
+          >
+            Por lo menos 5 caracteres.
+          </mat-error>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
+          <mat-label class="OpenSans-600 size-12">
+            Telefono
+          </mat-label>
+          <input
+            class="form-control input"
+            type="text"
+            placeholder="Ingrese telefono"
+            formControlName="phone"
+            [ngClass]="{
+              'is-invalid':
+              (!forma.controls['phone'].valid ||
+              forma.controls['phone'].errors?.minlength) &&
+              forma.controls['phone'].touched,
+              'is-valid': forma.controls['phone'].valid
+            }"
+          />
+
+          <mat-error
+            *ngIf="forma.get('phone').errors?.required"
+            class="invalid-feedback"
+          >
+            Ingresa tu número teléfonico.
+          </mat-error>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-12">
+          <h5 class="family-500 orange" style = "font-size: 22px;">Contraseña</h5>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
+          <mat-label class="OpenSans-600 size-12">
+            Nueva contraseña
+          </mat-label>
+          <input
+            class="form-control"
+            type="password"
+            placeholder="Contraseña"
+            formControlName="password1"
+            [ngClass]="{
+              'is-invalid':
+              (!forma.get('password1').valid ||
+              forma.get('password1').errors?.minlength) &&
+              forma.get('password1').touched,
+              'is-valid': forma.get('password1').valid
+            }"
+          />
+
+          <mat-error
+            *ngIf="forma.get('password1').errors?.required"
+            class="invalid-feedback"
+          >
+            Este campo es requerido
+          </mat-error>
+
+          <mat-error
+            *ngIf="forma.get('password1').errors?.minlength"
+            class="invalid-feedback"
+          >
+            La contraseña debe tener al menos 8 caracteres
+          </mat-error>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
+          <mat-label class="OpenSans-600 size-12">
+            Repita contraseña
+          </mat-label>
+          <input
+            class="form-control"
+            type="password"
+            placeholder="Confirma contraseña"
+            formControlName="password2"
+            [ngClass]="{
+              'is-invalid':
+              (!forma.get('password2').valid ||
+              forma.get('password2').errors?.minlength) &&
+              forma.get('password2').touched,
+              'is-valid': forma.get('password2').valid
+            }"
+          />
+
+          <mat-error
+            *ngIf="forma.get('password2').errors?.required"
+            class="invalid-feedback"
+          >
+            Este campo es requerido
+          </mat-error>
+
+          <mat-error
+            *ngIf="forma.get('password2').errors?.minlength"
+            class="invalid-feedback"
+          >
+            La contraseña debe tener al menos 8 caracteres
+          </mat-error>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
+          <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15712.645162131!2d-69.29967315!3d10.085867200000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e875d7e35e71cfb%3A0x298a7ddc3d27e065!2sPARQUE%20DEL%20ESTE!5e0!3m2!1ses-419!2sve!4v1609695798598!5m2!1ses-419!2sve" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 mt-4">
+        <div class="form-group row">
+          <div class="col-md-12">
+            <p>Servicios que usas para iniciar sesión en founduss</p>
+
+            <div class="display-flex align-items-center">
+              <i class="fas fa-trash-alt mr-4"></i>
+              <img
+                src="assets/img/LoginIconos/Google.svg"
+                width="7%"
+              />
+              <span class="pl-1">Google</span>
+            </div>
+          </div>
+        </div> 
+      </div>
+    
+    </div>         
+  </div>
+</form>
+     

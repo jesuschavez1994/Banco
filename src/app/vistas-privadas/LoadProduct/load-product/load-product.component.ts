@@ -38,6 +38,7 @@ export class LoadProductComponent implements OnInit {
   StoreName = '';
   // sidebar-list
   expandSidebar = true;
+  textBuscador: any;
 
   marks         = [];
   subcategories = [];
@@ -77,7 +78,16 @@ export class LoadProductComponent implements OnInit {
               private spinnerService: NgxSpinnerService,
               private filtroService: FilstroStoreService,
               private renderer: Renderer2,
-              private _searchService: SearchService) { }
+              private _searchService: SearchService) 
+              
+              {
+
+                this.route.params.subscribe(params => {
+                  console.log('query', params);
+                  this.textBuscador = params.id;
+                })
+
+               }
 
   ngOnInit() {
     this.getData(this.page);

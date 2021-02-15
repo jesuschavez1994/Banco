@@ -33,11 +33,8 @@ export class SearchStoreComponent implements OnInit {
               {
                 router.events.filter(event => event instanceof NavigationEnd)
                   .subscribe(event => {
-                  console.log(event['url']);
+                  console.log('BotonActivated', event['url']);
                   this.BotonActivated = this.router.routerState.snapshot.url;
-                  if ( this.BotonActivated === '/my-store/product-catalogue'){
-                    this.addBotonEvent = true;
-                  }
                 });
               }
 

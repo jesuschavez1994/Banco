@@ -114,6 +114,12 @@
   margin-left: 30px;
 }
 
+.payment-methods .flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ---------- Different colors for each plan stylings ---------- */
 .payment-details .plan-name.basic {
   color: #24c8af;
@@ -136,6 +142,18 @@
 }
 
 .payment-details h5 > span.premium {
+  color: #3673ff;
+}
+
+.basic {
+  color: #24c8af;
+}
+
+.standard {
+  color: #ff8647;
+}
+
+.premium {
   color: #3673ff;
 }
 

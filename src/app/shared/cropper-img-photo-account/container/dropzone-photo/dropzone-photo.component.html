@@ -1,0 +1,75 @@
+<div    class="dropzone min-dropzone" 
+        #dropzone 
+        [ngClass]="{'expand-dropzone': (isexpand && this.ErrorImageFailed === false) }">
+                   
+        <span   class="x-close" 
+                (click)="Close()">
+                <img src="assets/img/iconos/icons-main/icons/x.svg">
+        </span>
+
+        
+                    
+        <app-file-up-img-dropzon
+                            *ngIf="!state" 
+                            [showInput]="showInput" 
+                            (FileUpload)="fileBrowseHandler($event)"
+        ></app-file-up-img-dropzon>
+
+        <header *ngIf="!showInput && !AlertSucces">
+
+            <div>
+                <button [ngClass]="{'arrows-angle-contract': containWithinAspectRatio,
+                        'fullscreen': !containWithinAspectRatio}" 
+                        (click)="toggleContainWithinAspectRatio()" 
+                        title="{{containWithinAspectRatio ? 'Contraer' : 'Expandir' }}">
+                </button>
+                <button (click)="flipHorizontal()" class="arrow-left-right" title="Dar vuelta Horizontalmente"></button>
+                <button (click)="flipVertical()" class="arrow-down-up" title="Dar vuelta verticalmente"></button>
+                <button (click)="zoomOut()" class="zoomOut" title="Disminuir Zoom"></button>
+                <button (click)="zoomIn()" class="zoomIn" title="Aumentar Zoom"></button> 
+            </div>
+               
+        </header>
+
+        <div [ngClass]="{cropper: !spinner, 'load': spinner}">
+            <image-cropper
+                class="image-cropper"
+                *ngIf="!showInput && !spinner && !AlertSucces"
+                [imageChangedEvent]="imageChangedEvent"
+                [maintainAspectRatio]="true"
+                [aspectRatio]="1 / 1"
+                format="jpg"
+                (imageCropped)="imageCropped($event)"
+                (imageLoaded)="imageLoaded()"
+                (cropperReady)="cropperReady()"
+                (loadImageFailed)="loadImageFailed()"
+                [imageQuality]="100"
+                [containWithinAspectRatio]="containWithinAspectRatio"
+                [transform]="transform"
+                [maintainAspectRatio]="true"
+                [onlyScaleDown]="false"
+            ></image-cropper>
+
+            <ng-container *ngIf="spinner && !ErrorAlert">
+                <app-spinner></app-spinner>
+                <span class="mt-4 family-400">Procesando tú foto</span>
+            </ng-container>
+
+            <ng-container>
+            <div class="alert alert-success mt-4" role="alert" *ngIf="AlertSucces">
+                Se actualizo correctamente tú foto de perfil
+            </div>
+        </ng-container>
+
+        </div>
+
+        
+            
+
+        <app-footer-cropper 
+                        *ngIf="showFooter && !showInput"
+                        [SaveImage]="croppedImage"
+                        (CambiarImg)="StateCambiarImg($event)"
+                        (stateSippner)="stateSpinner($event)"
+        ></app-footer-cropper>
+</div>

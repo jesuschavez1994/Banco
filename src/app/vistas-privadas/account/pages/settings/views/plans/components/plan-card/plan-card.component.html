@@ -36,7 +36,7 @@
 
     <div class="price">
       <small class="plan-type">Plan básico</small>
-      <h5 [class.gray]="productBank">${{ planInfo.basicPrice | number }}</h5>
+      <h5>${{ planInfo.basicPrice | number }}</h5>
       <small class="renew">Mensual</small>
     </div>
 
@@ -50,12 +50,15 @@
         <!-- Price additional info -->
         <div class="price">
           <small class="plan-type">Banco de productos</small>
-          <h5 [class.gray]="!productBank">
-            {{ productBankPrice | number }}
-          </h5>
+          <h5 [class.gray]="justBasicPlan">${{ productBankPrice | number }}</h5>
           <small class="renew">De por vida</small>
 
-          <p class="total">
+          <p
+            class="total"
+            [class.basic]="planInfo.name === 'basic'"
+            [class.standard]="planInfo.name === 'standard'"
+            [class.premium]="planInfo.name === 'premium'"
+          >
             <b>Total: &nbsp;</b><span>${{ totalPrice | number }}</span>
           </p>
         </div>
@@ -83,7 +86,16 @@
                   [class.basic]="planInfo.name === 'basic'"
                   [class.standard]="planInfo.name === 'standard'"
                   [class.premium]="planInfo.name === 'premium'"
+                  *ngIf="i < 2"
                   >1-{{ productBankDetails.amountOfPictures }}</span
+                >
+                <span
+                  class="amount"
+                  [class.basic]="planInfo.name === 'basic'"
+                  [class.standard]="planInfo.name === 'standard'"
+                  [class.premium]="planInfo.name === 'premium'"
+                  *ngIf="i >= 2"
+                  >{{ productBankDetails.amountOfPictures }}</span
                 >
                 fotos del banco de productos.
               </p>

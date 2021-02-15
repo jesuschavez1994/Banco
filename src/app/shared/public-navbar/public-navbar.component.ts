@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input , ViewChild} from '@angular/core';
 import { DropdownOption, ClassIcon, ExtraButtonEmitter } from '@interfaces/components-options/dropdown.options.interface';
+import { HomeServiceService } from "../../vistas-publicas/services/home-service.service";
 
 @Component({
   selector: 'app-public-navbar',
@@ -9,7 +10,7 @@ import { DropdownOption, ClassIcon, ExtraButtonEmitter } from '@interfaces/compo
 export class PublicNavbarComponent implements OnInit {
   @Input() userLog: boolean;
   @Input() storeAct: boolean | string;
-  
+
   // Button DropDown - cart
   classIcon: ClassIcon = {
     class: 'fas fa-shopping-cart',
@@ -32,9 +33,11 @@ export class PublicNavbarComponent implements OnInit {
   };
   @Input() menuOptions: DropdownOption[] = [];
   @Input() menuOptionsFavorite: DropdownOption[] = [];
-  constructor() { }
+
+  constructor(public homeService: HomeServiceService,) { }
 
   ngOnInit(): void {
+    this.userLog = this.homeService.islog();
+     this.storeAct= this.homeService.storeActive();
   }
-
 }

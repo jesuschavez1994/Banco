@@ -1,0 +1,34 @@
+.page{
+    display: flex;
+    .page-wrapper{
+        width: 100%;
+        .container-fluid{
+            .container{
+
+                .disabled-account{
+                    background: #F09207;
+                }
+
+                footer{
+                    .save{
+                        background: #F09207; 
+                    }
+                }
+
+                .col-md-6{
+
+                    section{
+                        display: flex;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 500px){
+    .page-wrapper{
+        margin-left: 0px;
+    }
+}
