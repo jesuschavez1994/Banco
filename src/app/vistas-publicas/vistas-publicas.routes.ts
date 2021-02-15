@@ -7,9 +7,10 @@ import { RegisterComponent } from './Registers/Usuario/register.component';
 import { LoginComponent } from './login/login/login.component';
 import { PageUnderConstructionComponent } from './page-under-construction/page-under-construction.component';
 import { BusinessDetailComponent } from './business-detail/business-detail.component';
+import { VerifyTokenGuard } from '@services/guards/verify-token.guard';
 
 export const ROUTES: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, canActivate: [ VerifyTokenGuard ] },
   { path: 'register', component: RegisterComponent },
   {
     path: 'categories',
