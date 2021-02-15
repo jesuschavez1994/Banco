@@ -99,7 +99,11 @@ export const ROUTES: Routes = [
   // VISTAS ADMINISTRATIVAS DEL STORE //
   {
     path: 'my-store',
-    component: MyStoreComponent,
+    loadChildren: () =>
+      import('./my-store/my-store.module').then(
+        (module) => module.MyStoreModule
+      ),
+    /*     component: MyStoreComponent,
     canActivate: [LoginGuardGuard, VerifyTokenGuard],
     children: [
       {
@@ -137,32 +141,9 @@ export const ROUTES: Routes = [
           import('./sincronizacion/sincronizacion.module').then(
             (module) => module.SincronizacionModule
           ),
-        /*         component: SincronizacionViewsComponent,
-        children: [
-          {
-            path: 'exportar-lista-excel',
-            component: ExportarListaExcelComponent,
-          },
-          {
-            path: 'suggested-products',
-            component: SuggestedProductsComponent,
-          },
-          {
-            path: 'suggested-products-list/:id/:list',
-            component: SuggestedProductsComponent,
-          },
-          {
-            path: 'synchronized-products',
-            component: SynchronizedProductsComponent,
-          },
-          {
-            path: 'bank-product',
-            component: BankProductComponent,
-          },
-        ], */
       },
 
       { path: '**', pathMatch: 'full', redirectTo: 'contact' },
-    ],
+    ], */
   },
 ];
