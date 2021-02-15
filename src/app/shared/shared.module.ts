@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NavbarToHomeComponent } from './navbar-to-home/navbar-to-home.component';
 import { CategoriasComponent } from './categorias/categorias.component';
@@ -108,6 +109,7 @@ const modules = [
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
+  NgxSpinnerModule,
   NgxPaginationModule,
   MaterialModule,
   ImageCropperModule,
