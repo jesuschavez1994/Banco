@@ -23,8 +23,8 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
   ngOnInit(): void {
     this.currentImg = this.imgs[0];
     this.currentImg = `${URL}${this.currentImg}`;
-    console.log('this.currentImg - ngOnInit');
-    console.log(this.currentImg);
+    // console.log('this.currentImg - ngOnInit');
+    // console.log(this.currentImg);
 
   }
 
@@ -34,8 +34,8 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
 
   ngOnChanges(): void {
     this.currentImg = `${URL}${this.currentImg}`;
-    console.log('this.currentImg - ngOnChanges');
-    console.log(this.currentImg);
+    // console.log('this.currentImg - ngOnChanges');
+    // console.log(this.currentImg);
   }
 
   public selectImg( imgSelected ) {
@@ -43,15 +43,15 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
     this.currentImg = `${URL}${imgSelected}`;
     this.imageZoom();
 
-    console.log('this.currentImg -  selectImg');
-    console.log(this.currentImg);
+    // console.log('this.currentImg -  selectImg');
+    // console.log(this.currentImg);
   }
 
   public imageZoom() {
 
     // this.currentImg = `${URL}${this.currentImg}`;
-    console.log('this.currentImg - imageZoom');
-    console.log(this.currentImg);
+    // console.log('this.currentImg - imageZoom');
+    // console.log(this.currentImg);
 
     const image = this.imageContainer.nativeElement;
     const zoom = this.zoomContainer.nativeElement;
@@ -81,8 +81,8 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
     const preloadImage = url => {
       let img = new Image();
       img.src = `${URL}`;
-      console.log('preloadImage');
-      console.log(img.src);
+      // console.log('preloadImage');
+      // console.log(img.src);
     };
 
     preloadImage(img.hires);
@@ -189,9 +189,9 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
       zoomImage.style.left = `${zoomLeft}px`;
       zoomImage.style.top = `${zoomTop - 150}px`;
 
-      console.log('ZoomImage zoomLeft and top');
-      console.log(zoomImage.style.left);
-      console.log( zoomImage.style.top);
+      // console.log('ZoomImage zoomLeft and top');
+      // console.log(zoomImage.style.left);
+      // console.log( zoomImage.style.top);
     };
 
     image.addEventListener('mouseover', enterImage);
@@ -214,8 +214,8 @@ export class ImagePreviewGalleryComponent implements OnInit, AfterViewInit, OnCh
       zoom.style.transform = `scale(${zoomLevel})`;
     });
 
-    console.log('this.currentImg -  selectImg');
-    console.log(this.currentImg);
+    // console.log('this.currentImg -  selectImg');
+    // console.log(this.currentImg);
 
 
   }

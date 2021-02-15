@@ -235,7 +235,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
       this.route.paramMap.subscribe(params => {
         console.log('routerLinkActive');
-        console.log(this.anchorsMenu.wordToMatch);
+        // console.log(this.anchorsMenu.wordToMatch);
         if ((params.has('show') && params.get('show') === this.anchorsMenu.wordToMatch)) {
           // this.productOptionMenu.nativeElement.classList.add('active');
           this.productOptionMenu = true;

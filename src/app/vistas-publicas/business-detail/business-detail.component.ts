@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit, Pipe, OnChanges, SimpleCha
 import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
 import { ProductService } from '@services/product/product.service';
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router, Params } from '@angular/router';
 import { ProductsCardsComponent } from '@shared/products-cards/products-cards.component';
 import { ProductDetailComponent } from '@shared/product-detail/product-detail.component';
 import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component';
@@ -143,7 +143,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   // Variables
   storeData: StoreResponse;
-  changedStoreData = true;
+  wasChangedStoreData = true;
+  queryParam: ParamMap;
+  wasChangedQueryParam = true;
 
   // Toast
   // dataToast: any = '';
@@ -194,21 +196,110 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
       }
 
+      // Para evitar que el listado de productos se recargue en cada momento que la url detecte un cambio
+      if (this.queryParam) {
+
+        if (this.queryParam !== queryParam) {
+          this.wasChangedQueryParam = true;
+          this.queryParam = queryParam;
+        }else {
+          this.wasChangedQueryParam = false;
+
+        }
+
+      }else {
+        this.queryParam = queryParam; // guardamos de forma global los datos de la tienda
+      }
+
       this.loadDataStore(params, queryParam);
 
       this.loadProductDetail(params);
-
-      this.loadProductsCards(params, queryParam);
 
       this.preloadValueSearch(queryParam);
     });
 
   }
 
+  // Store
+  public loadDataStore(params, queryParam: ParamMap){
+
+    if ( params.has('idStore') ) {
+
+      const idStore =  parseInt(params.get('idStore'));
+
+      this.storeService.getStoreById(idStore).subscribe( storeResp => {
+
+        // Gestionamos el valor de wasChangedStoreData
+        // El cual sera ula variable que determinara
+        // si los datos de la tienda cambiaron o no
+        console.log('loadDataStore -this.storeData:');
+
+
+        if (this.storeData) {
+          // console.log(this.storeData.id);
+          // console.log(storeResp.id);
+          if (this.storeData.id !== storeResp.id) {
+            this.wasChangedStoreData = true;
+            this.storeData = storeResp;
+
+          }else {
+            this.wasChangedStoreData = false;
+
+          }
+
+        }else {
+          this.storeData = storeResp; // guardamos de forma global los datos de la tienda
+          // console.log('this.storeData undefined');
+        }
+
+        if (storeResp.banner_image.length > 0) {
+
+          const storeBanners = storeResp.banner_image;
+
+          const sizes = Object.keys(storeBanners[0].src_size);
+
+          if (sizes.length > 1) {
+
+            this.imgsBanners = {
+              m: storeBanners[0].src_size.xl,
+              s: storeBanners[0].src_size.s
+            };
+
+          } else if (sizes.length === 1){
+            this.imgsBanners = {
+              m: storeBanners[0].src_size.xl
+            };
+          }
+
+        }
+
+        // Evitamos que la página carguen los mismos datos
+        // cuando la tienda sigue siendo la misma.
+        // solo permite actualizar los datos cuando la tienda es cambiada
+        if (this.wasChangedStoreData) {
+          this.setSidebarOptions(storeResp, queryParam);
+          this.setBreadcrumbOptions(storeResp);
+
+          if (this.wasChangedQueryParam) {
+            console.log(this.storeData.id);
+            console.log(storeResp.id);
+          }
+
+          this.loadProductsCards(params, queryParam);
+
+        }
+
+
+      });
+
+    }
+
+  }
+
   // Products
 
   /**
-   * @description Al hacer click sobre un card de producto se dispara esta función a casusa del evento (selected).
+   * @description Al hacer click sobre un card de producto se dispara esta función a causá del evento (selected).
    * De esta manera, manipulamos la siguiente acción la cual modifica el :idStore y :idProduct de la ruta business-detail
    * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christpherdallar1234@matiz.com.ve
    * @date 13/12/2020
@@ -535,60 +626,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     this.preloadedValueSearch = queryParams.has('name') ? queryParams.get('name') : '';
   }
 
-  // Store
-  public loadDataStore(params, queryParam: ParamMap){
-
-    if ( params.has('idStore') ) {
-
-      const idStore =  parseInt(params.get('idStore'));
-
-      this.storeService.getStoreById(idStore).subscribe( storeResp => {
-
-        if (this.storeData) {
-
-          if (this.storeData.id !== storeResp.id) {
-            this.changedStoreData = true;
-
-          }else {
-            this.changedStoreData = false;
-
-          }
-
-        }else {
-          this.storeData = storeResp; // guardamos de forma global los datos de la tienda
-        }
-
-        if (storeResp.banner_image.length > 0) {
-
-          const storeBanners = storeResp.banner_image;
-
-          const sizes = Object.keys(storeBanners[0].src_size);
-
-          if (sizes.length > 1) {
-
-            this.imgsBanners = {
-              m: storeBanners[0].src_size.xl,
-              s: storeBanners[0].src_size.s
-            };
-
-          } else if (sizes.length === 1){
-            this.imgsBanners = {
-              m: storeBanners[0].src_size.xl
-            };
-          }
-
-        }
-
-
-        this.setSidebarOptions(storeResp, queryParam);
-        this.setBreadcrumbOptions(storeResp);
-
-      });
-
-    }
-
-  }
-
   // Sidebar-list
   public setSidebarOptions(storeResp: StoreResponse, queryParam: ParamMap) {
 
@@ -726,9 +763,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
     // Evitamos que con cada cambio de la url se carguen las mismas opciones
     // de filtro, solo se sobre escriben las opciones cundo es una tienda diferente
-    if (this.changedStoreData) {
-      this.sidebarFilters = this.sidebarList.setFilters(sidebarFilters); // retornamos los filters con el formato correcto para el component
-    }
+
+    this.sidebarFilters = this.sidebarList.setFilters(sidebarFilters); // retornamos los filters con el formato correcto para el component
+
 
     this.sidebarList.loadOptionsFilter( queryParam ); // seleccionamos las opciones filtradas por url
 
