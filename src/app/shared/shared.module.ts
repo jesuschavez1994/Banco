@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-/* Modules is here */ 
+/* Modules is here */
 import { PipesModule } from '../pipes/pipes.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MaterialModule } from '../Angula-Material/material.module';
@@ -114,6 +115,7 @@ const modules = [
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
+  NgxSpinnerModule,
   NgxPaginationModule,
   MaterialModule,
   ImageCropperModule,
