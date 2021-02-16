@@ -81,7 +81,7 @@ import { SearchModule } from './sincronizacion/components/search/search.module'
   Components go here.
 */
 const components = [
-  SettingsComponent,
+  // SettingsComponent,
   DashboardComponent,
   ProductLoadComponent,
   PhotoUserEditComponent,

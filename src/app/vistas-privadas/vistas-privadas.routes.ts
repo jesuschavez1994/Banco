@@ -9,7 +9,6 @@ import { VerifyTokenGuard } from '@services/guards/verify-token.guard'
 */
 import { RutStoreComponent } from '../form-register/rut-store/rut-store.component'
 import { FormDataNegocioComponent } from '../form-register/form-data-negocio/form-data-negocio.component'
-import { SettingsComponent } from './account/settings.component'
 
 // FORM USER //
 import { ViewFormAccountUserComponent } from './AccountUser/pages/view-form-account-user.component'
@@ -41,17 +40,9 @@ export const ROUTES: Routes = [
   // STORE //
   {
     path: 'account',
-    component: SettingsComponent,
+    loadChildren: () =>
+      import('./account/account.module').then((module) => module.AccountModule),
     canActivate: [LoginGuardGuard, VerifyTokenGuard],
-    children: [
-      {
-        path: 'settings',
-        loadChildren: () =>
-          import('./account/pages/settings/account-settings.module').then(
-            (module) => module.AccountSettingsModule
-          ),
-      },
-    ],
   },
 
   // USER //
