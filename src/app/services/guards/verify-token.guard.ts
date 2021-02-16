@@ -18,11 +18,20 @@ export class VerifyTokenGuard implements CanActivate {
   canActivate(): Promise<boolean> | boolean {
     console.log('Verifica Token')
 
+    console.log('Verifica Token', this.auth.token)
+
     let token = this.auth.token
-    let payload = JSON.parse(atob(token.split('.')[1]))
-    let expirado = this.expirado(payload.exp)
+
+    if (this.auth.token) {
+      var payload = JSON.parse(atob(token.split('.')[1]))
+
+      var expirado = this.expirado(payload.exp)
+
+      return this.verificaRenueva(payload.exp)
+    }
 
     if (expirado) {
+      this.logout()
       this.router.navigate(['/login'])
       console.log('Token Expirado')
       return false
@@ -30,7 +39,15 @@ export class VerifyTokenGuard implements CanActivate {
 
     console.log('Payload', payload)
 
-    return this.verificaRenueva(payload.exp)
+    return true
+  }
+
+  logout() {
+    this.auth.token = ''
+    localStorage.removeItem('token')
+    localStorage.removeItem('storeId')
+    localStorage.removeItem('id')
+    localStorage.removeItem('usuario')
   }
 
   expirado(fechaExp: number) {
@@ -53,11 +70,17 @@ export class VerifyTokenGuard implements CanActivate {
       console.log(tokenExp)
       console.log(ahora)
 
+      console.log('tokenExp', tokenExp)
+      console.log('ahora', ahora)
+      console.log('Get Time', ahora.getTime())
+      console.log('Token Expira', tokenExp.getTime())
+
       if (tokenExp.getTime() > ahora.getTime()) {
         resolve(true)
       } else {
         this.auth.renuevaToken(localStorage.getItem('id')).subscribe(
           () => {
+            console.log('Token renovado')
             resolve(true)
           },
           () => {

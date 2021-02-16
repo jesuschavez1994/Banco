@@ -64,12 +64,13 @@ export class StoreService extends Service{
   }
 
   renuevaToken(userId: string){
-    let url = `/api/users/${userId}/refresh_token`;
+    let url = `users/${userId}/refresh_token`;
     return  this.execQuery(url)
            .map( (resp: any) => {
-              this.token = resp.remenber_token;
+             console.log('Solicitud renovar Token', resp)
+              this.token = resp.remember_token;
               localStorage.setItem('token', this.token);
-              console.log('Token renovado');
+              console.log('Token renovado', this.token);
               return true;
           })
           .catch( err => {
