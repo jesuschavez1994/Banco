@@ -8,27 +8,9 @@ import { VerifyTokenGuard } from '@services/guards/verify-token.guard';
   Components used in the views.
 */
 import { AccountComponent } from './account/pages/settings/views/my-account/account.component';
-// import { ContactComponent } from './contact/contact.component';
-// import { ContactInformationEditComponent } from './components/contact-information-edit/contact-information-edit.component';
 import { RutStoreComponent } from '../form-register/rut-store/rut-store.component';
 import { FormDataNegocioComponent } from '../form-register/form-data-negocio/form-data-negocio.component';
-import { ProductLoadingComponent } from './product-loading/product-loading.component';
-import { MyStoreComponent } from './my-store/my-store.component';
-import { ProductLoadingSmartComponent } from './product-loading/container/product-loading-smart/product-loading-smart.component';
-import { LoadProductComponent } from './LoadProduct/load-product/load-product.component';
-import { ViewProductsLoadsComponent } from './components/view-products-loads/view-products-loads.component';
-import { ExportarListaExcelComponent } from './sincronizacion/pages/exportar-lista-excel/exportar-lista-excel.component';
-import { SuggestedProductsComponent } from './sincronizacion/pages/suggested-products/suggested-products.component';
-import { SincronizacionViewsComponent } from './sincronizacion/components/sincronizacion-views/sincronizacion-views.component';
-// tslint:disable-next-line: max-line-length
-import { SynchronizedProductsComponent } from './sincronizacion/pages/synchronized-products/synchronized-products.component';
-import { BankProductComponent } from './sincronizacion/pages/bank-product/bank-product.component';
 import { LoadBanckProductComponent } from './Admin/pages/load-banck-product/load-banck-product.component';
-import { FormBanckProductSyncComponent } from './sincronizacion/components/form-banck-product-sync/form-banck-product-sync.component';
-import { EditProdutcComponent } from './components/edit-produtc/edit-produtc.component';
-import { EditSincronizacionComponent } from './sincronizacion/components/edit-sincronizacion/edit-sincronizacion.component';
-import { EditProductNoDisponibleComponent } from './components/edit-product-no-disponible/edit-product-no-disponible.component';
-import { DesincronizarComponent } from './sincronizacion/components/desincronizar/desincronizar.component';
 import { EditProductBankComponent } from './Admin/pages/container/edit-product-bank/edit-product-bank.component';
 import { SettingsComponent } from './account/settings.component';
 
@@ -104,47 +86,5 @@ export const ROUTES: Routes = [
         (module) => module.MyStoreModule
       ),
     canActivate: [LoginGuardGuard, VerifyTokenGuard],
-    /*     component: MyStoreComponent,
-    canActivate: [LoginGuardGuard, VerifyTokenGuard],
-    children: [
-      {
-        path: 'contact',
-        component: ContactComponent,
-      },
-      { path: 'product-catalogue', component: LoadProductComponent },
-      {
-        path: 'load-product',
-        component: ProductLoadingComponent,
-      },
-      {
-        path: 'sync-this-product/:id',
-        component: FormBanckProductSyncComponent,
-      },
-      {
-        path: 'edit-product-sync/:id',
-        component: EditSincronizacionComponent,
-      },
-      {
-        path: 'desincronizar/:id',
-        component: DesincronizarComponent,
-      },
-      {
-        path: 'edit/:id',
-        component: EditProdutcComponent,
-      },
-      {
-        path: 'edit-product/:id',
-        component: EditProductNoDisponibleComponent,
-      },
-      {
-        path: 'sincronizacion',
-        loadChildren: () =>
-          import('./sincronizacion/sincronizacion.module').then(
-            (module) => module.SincronizacionModule
-          ),
-      },
-
-      { path: '**', pathMatch: 'full', redirectTo: 'contact' },
-    ], */
   },
 ];
