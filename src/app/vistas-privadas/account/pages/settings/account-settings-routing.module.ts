@@ -10,36 +10,30 @@ import { SettingsComponent } from './settings.component'
 
 const routes: Routes = [
   {
-    path: '',
-    component: SettingsComponent,
+    path: 'plans',
+    component: PlansComponent,
+    data: { title: 'Founduss | Planes' },
     children: [
       {
-        path: 'plans',
-        component: PlansComponent,
-        data: { title: 'Founduss | Planes' },
-        children: [
-          {
-            path: 'choose-plan',
-            component: PlansShowcaseComponent,
-            data: { animation: 'isLeft', title: 'Founduss | Planes' },
-          },
-          {
-            path: 'plan-details',
-            component: PlanDetailsComponent,
-            data: { animation: 'isLeft', title: 'Founduss | Planes' },
-          },
-          {
-            path: 'voucher',
-            component: PaymentDetailsComponent,
-            data: { animation: 'isLeft', title: 'Founduss | Planes' },
-          },
-        ],
+        path: 'choose-plan',
+        component: PlansShowcaseComponent,
+        data: { animation: 'isLeft', title: 'Founduss | Planes' },
       },
       {
-        path: 'form-account',
-        component: AccountComponent,
+        path: 'plan-details',
+        component: PlanDetailsComponent,
+        data: { animation: 'isLeft', title: 'Founduss | Planes' },
+      },
+      {
+        path: 'voucher',
+        component: PaymentDetailsComponent,
+        data: { animation: 'isLeft', title: 'Founduss | Planes' },
       },
     ],
+  },
+  {
+    path: 'form-account',
+    component: AccountComponent,
   },
 ]
 
