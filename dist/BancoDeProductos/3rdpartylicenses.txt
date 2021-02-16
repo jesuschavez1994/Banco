@@ -82,9 +82,6 @@ THE SOFTWARE.
 @angular/common
 MIT
 
-@angular/compiler
-MIT
-
 @angular/core
 MIT
 
@@ -120,9 +117,6 @@ THE SOFTWARE.
 
 
 @angular/platform-browser
-MIT
-
-@angular/platform-browser-dynamic
 MIT
 
 @angular/router
