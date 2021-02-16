@@ -81,7 +81,7 @@ import { SearchModule } from './sincronizacion/components/search/search.module'
   Components go here.
 */
 const components = [
-  // AccountComponent,
+  SettingsComponent,
   DashboardComponent,
   ProductLoadComponent,
   PhotoUserEditComponent,
@@ -95,13 +95,8 @@ const components = [
   LoadProductComponent,
   ModalAddCategoriasAndSubcategoriasComponent,
   ModalDeleteProductComponent,
-  // LoadBanckProductComponent,
-  // FormBanckProductAdminComponent,
   EditProdutcComponent,
   EditProductNoDisponibleComponent,
-  // CatalogoBankProductComponent,
-  // EditProductBankComponent,
-  SettingsComponent,
   FormAccountUserComponent,
   ViewFormAccountUserComponent,
   FooterButtonFormAccountComponent,
@@ -110,7 +105,7 @@ const components = [
   Modules go here.
 */
 const modules = [
-  AdminModule,
+  // AdminModule,
   MyStoreModule,
   VistasPrivadasRoutingModule,
   NgxDropzoneModule,
