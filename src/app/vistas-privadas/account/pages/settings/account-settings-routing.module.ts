@@ -11,25 +11,8 @@ import { SettingsComponent } from './settings.component'
 const routes: Routes = [
   {
     path: 'plans',
-    component: PlansComponent,
-    data: { title: 'Founduss | Planes' },
-    children: [
-      {
-        path: 'choose-plan',
-        component: PlansShowcaseComponent,
-        data: { animation: 'isLeft', title: 'Founduss | Planes' },
-      },
-      {
-        path: 'plan-details',
-        component: PlanDetailsComponent,
-        data: { animation: 'isLeft', title: 'Founduss | Planes' },
-      },
-      {
-        path: 'voucher',
-        component: PaymentDetailsComponent,
-        data: { animation: 'isLeft', title: 'Founduss | Planes' },
-      },
-    ],
+    loadChildren: () =>
+      import('./views/plans/plans.module').then((module) => module.PlansModule),
   },
   {
     path: 'form-account',
