@@ -18,6 +18,7 @@ import { FormAccountUserComponent } from './AccountUser/pages/settings/views/for
 export const ROUTES: Routes = [
   {
     path: 'admin',
+    pathMatch: 'full',
     loadChildren: () =>
       import('./Admin/admin.module').then((module) => module.AdminModule),
   },
