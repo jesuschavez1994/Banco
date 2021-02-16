@@ -8,17 +8,9 @@ import { SharedModule } from '@shared/shared.module';
 import { VistasPrivadasSharedModule } from '../shared/vistas-privadas-shared.module';
 
 import { ContactComponent } from './pages/contact/contact.component';
-import { CardShimmerTableInformacionComponent } from './components/cards-shimmer/card-shimmer-table-informacion/card-shimmer-table-informacion.component';
-import { CardShimmerTitleStoreComponent } from './components/cards-shimmer/card-shimmer-title-store/card-shimmer-title-store.component';
-import { ContactDescriptionComponent } from './components/contact-description/contact-description.component';
 import { ContactDescriptionEditComponent } from './components/contact-description-edit/contact-description-edit.component';
-import { ContactInformationComponent } from './components/contact-information/contact-information.component';
-import { ContactInformationEditComponent } from './components/contact-information-edit/contact-information-edit.component';
 import { MapEditarComponent } from './components/map-editar/map-editar.component';
-import { MapaComponent } from './components/mapa/mapa.component';
 import { MyStoreComponent } from './my-store.component';
-import { ScheduleStoreComponent } from './components/schedule-store/schedule-store.component';
-import { SheduleStoreEditComponent } from './components/shedule-store-edit/shedule-store-edit.component';
 
 import { MyStoreComponentsModule } from './components/my-store-components.module';
 /* 
@@ -26,34 +18,26 @@ import { MyStoreComponentsModule } from './components/my-store-components.module
 */
 const components = [
   ContactComponent,
-  // CardShimmerTableInformacionComponent,
-  // CardShimmerTitleStoreComponent,
-  // ContactDescriptionComponent,
-  // ContactDescriptionEditComponent,
-  // ContactInformationComponent,
-  // ContactInformationEditComponent,
-  // MapEditarComponent,
-  // MapaComponent,
+  ContactDescriptionEditComponent,
+  MapEditarComponent,
   MyStoreComponent,
-  // ScheduleStoreComponent,
-  // SheduleStoreEditComponent,
 ];
 /* 
   Modules go here.
 */
 const modules = [
   NzTimePickerModule,
+  MyStoreComponentsModule,
   MyStoreRoutingModule,
   SharedModule,
   VistasPrivadasSharedModule,
-  MyStoreComponentsModule,
 ];
 /* 
   If need that this module exports something, put those modules/components here.
 */
 const exportStuff = [];
 @NgModule({
-  // entryComponents: [MapEditarComponent, ContactDescriptionEditComponent],
+  entryComponents: [MapEditarComponent, ContactDescriptionEditComponent],
   declarations: [...components],
   imports: [
     ...modules,

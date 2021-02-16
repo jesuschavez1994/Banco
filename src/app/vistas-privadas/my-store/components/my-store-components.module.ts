@@ -22,10 +22,10 @@ const components = [
   CardShimmerTableInformacionComponent,
   CardShimmerTitleStoreComponent,
   ContactDescriptionComponent,
-  ContactDescriptionEditComponent,
+  // ContactDescriptionEditComponent,
   ContactInformationComponent,
   ContactInformationEditComponent,
-  MapEditarComponent,
+  // MapEditarComponent,
   MapaComponent,
   ScheduleStoreComponent,
   SheduleStoreEditComponent,
@@ -36,7 +36,6 @@ const components = [
 const modules = [NzTimePickerModule, SharedModule, VistasPrivadasSharedModule];
 
 @NgModule({
-  entryComponents: [MapEditarComponent, ContactDescriptionEditComponent],
   declarations: [...components],
   imports: [
     ...modules,
