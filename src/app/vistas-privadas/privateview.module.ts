@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { NgModule } from '@angular/core'
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { SharedModule } from '../shared/shared.module'
 import { ComponentsModule } from '../components/components.module'
@@ -60,13 +60,9 @@ import { SpreadSheetsModule } from '@grapecity/spread-sheets-angular'
 
 // CARRUSEL //
 
-import { LoadBanckProductComponent } from './Admin/pages/load-banck-product/load-banck-product.component'
-import { FormBanckProductAdminComponent } from './Admin/pages/load-banck-product/container/form-banck-product-admin/form-banck-product-admin.component'
 import { EditProdutcComponent } from './components/edit-produtc/edit-produtc.component'
 import { EditProductNoDisponibleComponent } from './components/edit-product-no-disponible/edit-product-no-disponible.component'
 import { NgxSpinnerModule } from 'ngx-spinner'
-import { CatalogoBankProductComponent } from './Admin/pages/container/catalogo-bank-product/catalogo-bank-product.component'
-import { EditProductBankComponent } from './Admin/pages/container/edit-product-bank/edit-product-bank.component'
 import { NgxDropzoneModule } from 'ngx-dropzone'
 import { SettingsComponent } from './account/settings.component'
 import { FormAccountUserComponent } from './AccountUser/pages/settings/views/form-account-user/form-account-user.component'
@@ -85,7 +81,7 @@ import { SearchModule } from './sincronizacion/components/search/search.module'
   Components go here.
 */
 const components = [
-  AccountComponent,
+  // AccountComponent,
   DashboardComponent,
   ProductLoadComponent,
   PhotoUserEditComponent,

@@ -7,11 +7,8 @@ import { VerifyTokenGuard } from '@services/guards/verify-token.guard'
 /* 
   Components used in the views.
 */
-import { AccountComponent } from './account/pages/settings/views/my-account/account.component'
 import { RutStoreComponent } from '../form-register/rut-store/rut-store.component'
 import { FormDataNegocioComponent } from '../form-register/form-data-negocio/form-data-negocio.component'
-import { LoadBanckProductComponent } from './Admin/pages/load-banck-product/load-banck-product.component'
-import { EditProductBankComponent } from './Admin/pages/container/edit-product-bank/edit-product-bank.component'
 import { SettingsComponent } from './account/settings.component'
 
 // FORM USER //
@@ -52,10 +49,6 @@ export const ROUTES: Routes = [
           import('./account/pages/settings/account-settings.module').then(
             (module) => module.AccountSettingsModule
           ),
-      },
-      {
-        path: 'form-account',
-        component: AccountComponent,
       },
     ],
   },
