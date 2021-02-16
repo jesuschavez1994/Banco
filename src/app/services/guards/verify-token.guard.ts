@@ -27,7 +27,7 @@ export class VerifyTokenGuard implements CanActivate {
 
     console.log('Payload', payload);
 
-    return true;
+    return this.verificaRenueva( payload.exp );
 
   }
 
@@ -41,6 +41,35 @@ export class VerifyTokenGuard implements CanActivate {
       return false;
     }
 
+  }
+
+  verificaRenueva( fechaExp: number ): Promise<boolean>  {
+
+    return new Promise( (resolve, reject) => {
+
+      let tokenExp = new Date( fechaExp * 1000 );
+      let ahora = new Date();
+
+      ahora.setTime( ahora.getTime() + ( 1 * 60 * 60 * 1000 ) );
+
+      console.log( tokenExp );
+      console.log( ahora );
+
+      if ( tokenExp.getTime() > ahora.getTime() ) {
+        resolve(true);
+      } else {
+
+        this.auth.renuevaToken(localStorage.getItem('id'))
+              .subscribe( () => {
+                resolve(true);
+              }, () => {
+                this.router.navigate(['/login']);
+                reject(false);
+              });
+
+      }
+
+    });
 
   }
   
