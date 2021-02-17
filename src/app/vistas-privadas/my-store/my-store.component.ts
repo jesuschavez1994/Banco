@@ -14,13 +14,13 @@ import { SearchStore } from '@models/search/search-store.model';
 import { SearchService } from '@services/Search/search.service';
 import { SearchStoreComponent } from '../sincronizacion/components/search/container/search-store/search-store.component';
 import {
-  Category,
+  // Category,
   Profile,
   SidebarListOptions,
   AnchorsMenu,
   SelectedEmitter,
   Filter,
-  PriceRange,
+  // PriceRange,
 } from '@interfaces/components-options/sidebar-list.options.interface';
 import { HomeServiceService } from '../../vistas-publicas/services/home-service.service';
 
@@ -44,7 +44,7 @@ export class MyStoreComponent implements OnInit {
   anchorsMenu: AnchorsMenu;
 
   breadcrumb: BreadcrumbOptions[];
-  categories: Category[] = [];
+  categories: any[] = [];
   MyProduct: DataProductDB[] = [];
 
   @ViewChild('sidebarList') sidebarList: AsideFiltrosComponent;
@@ -148,7 +148,7 @@ export class MyStoreComponent implements OnInit {
 
     this.profile = {
       name: storeResp.name,
-      instagram: {
+      contact: {
         // la base de datos no tiene el dato
         url: '',
         name: '@medicalbackground',
