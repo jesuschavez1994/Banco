@@ -1,0 +1,19 @@
+@import 'src/assets/scss/style.scss';
+
+.page{
+  display: flex;
+  padding-right: 27px;
+
+  .column{
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 999px){
+  .page{
+    padding-right: 27px;
+    padding-left: 27px;
+
+  }
+}

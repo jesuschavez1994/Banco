@@ -1,0 +1,16 @@
+export { ImagenPipe } from './avatar-default/imagen.pipe';
+export { ProductoPipe } from './producto.pipe';
+export { BoxDefaultPipe } from './box/box-default.pipe';
+export { ImgProductLoadPipe } from './imagenLoad/img-product-load.pipe';
+export { ExcerptPipe } from './excerpt/excerpt.pipe';
+export { ImgFallbackPipe } from './img-fallback/img-fallback.pipe';
+export { StrReplacePipe } from './strReplace/str-replace.pipe';
+export { FilterPipe } from './filter/filter.pipe';
+export { ExcludeMacthesPipe } from './excludeMacthes/exclude-macthes.pipe';
+export { CapitalizadoPipe } from './capitalizado/capitalizado.pipe';
+export { LimitarTextoPipe } from './limitar-texto/limitar-texto.pipe';
+export { LimitarNameProductoPipe } from './limitar-name-producto/limitar-name-producto.pipe';
+export { PreviewGalleryPipe } from './preview-gallery/preview-gallery.pipe';
+export {EditProductPipe} from './edir-product/edit-produt.pipe';
+export { SeacrhPipe } from './search/seacrh.pipe';
+export { stringResponsive } from "./pipeResponsive/stringResponsive.pipe";

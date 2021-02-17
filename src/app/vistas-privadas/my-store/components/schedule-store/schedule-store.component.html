@@ -1,0 +1,10 @@
+<table class="table table-borderless">
+    <tbody *ngFor="let apertura of schedules[0]; let i = index">
+      <tr>
+        <th class="family-400" scope="row">{{apertura.day}}</th>
+        <td>
+          {{apertura.open}} - {{apertura.close}}
+        </td>
+      </tr>
+    </tbody>
+</table>
