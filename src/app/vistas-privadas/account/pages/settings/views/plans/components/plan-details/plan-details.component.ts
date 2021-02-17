@@ -8,8 +8,9 @@ import {
   Payment,
   PaymentCredentials,
 } from '@interfaces/SettingsInterfaces'
+import { SafeStyle } from '@angular/platform-browser'
 
-import { switchMap, map } from 'rxjs/operators'
+import { switchMap } from 'rxjs/operators'
 
 @Component({
   selector: 'app-plan-details',
@@ -26,6 +27,8 @@ export class PlanDetailsComponent implements OnInit {
   createdOrderDetails = JSON.parse(this.localStorage.getItem('createdOrder'))
   paymentId = parseInt(this.localStorage.getItem('paymentId'))
   paymentCredentials: PaymentCredentials
+  // Plan color style
+  planColor: SafeStyle
 
   constructor(
     public dialog: MatDialog,
@@ -41,6 +44,21 @@ export class PlanDetailsComponent implements OnInit {
     this.selectedPlanDetails = JSON.parse(
       this.localStorage.getItem('planDetails')
     )
+
+    // Logic for changing the cards colors according to each plan
+    switch (this.selectedPlanDetails.plan_name) {
+      case 'basic':
+        this.planColor = `#24c8af`
+        break
+
+      case 'standard':
+        this.planColor = `#ff8647`
+        break
+
+      case 'premium':
+        this.planColor = `#3673ff`
+        break
+    }
   }
 
   // Events that happen in the component -----------------

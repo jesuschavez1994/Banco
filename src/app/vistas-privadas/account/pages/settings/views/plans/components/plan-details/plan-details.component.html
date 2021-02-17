@@ -10,20 +10,12 @@
 
   <!-- Payment details -->
   <div class="payment-details animated fadeIn">
-    <h5
-      class="plan-name"
-      [class.basic]="selectedPlanDetails.plan_name === 'Basic'"
-      [class.standard]="selectedPlanDetails.plan_name === 'Standard'"
-      [class.premium]="selectedPlanDetails.plan_name === 'Premium'"
-    >
+    <h5 class="plan-name" [style.color]="planColor">
       Plan {{ selectedPlanDetails.plan_name | titlecase }}
     </h5>
     <h5 class="total">
       <b>Total:&nbsp; &nbsp;</b>
-      <span
-        [class.basic]="selectedPlanDetails.plan_name === 'basic'"
-        [class.standard]="selectedPlanDetails.plan_name === 'standard'"
-        [class.premium]="selectedPlanDetails.plan_name === 'premium'"
+      <span [style.color]="planColor"
         >${{ selectedPlanDetails.price | number }}</span
       >
     </h5>
