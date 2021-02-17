@@ -70,6 +70,7 @@ export const ROUTES: Routes = [
     path: 'account',
     component: ViewFormAccountUserComponent,
     canActivate: [LoginGuardGuard, VerifyTokenGuard],
+    data: { title: 'Founduss | settings' },
     children: [
       {
         path: 'setting-user',

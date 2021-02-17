@@ -30,7 +30,12 @@ export class VerifyTokenGuard implements CanActivate {
     
 
     if ( expirado ) {
-      this.logout();
+      
+      this.auth.token = '';
+      localStorage.removeItem('token');
+      localStorage.removeItem('storeId');
+      localStorage.removeItem('id');
+
       this.router.navigate(['/login']);
       console.log('Token Expirado');
       return false;
@@ -42,13 +47,6 @@ export class VerifyTokenGuard implements CanActivate {
 
   }
 
-  logout(){
-    this.auth.token = '';
-    localStorage.removeItem('token');
-    localStorage.removeItem('storeId');
-    localStorage.removeItem('id');
-    localStorage.removeItem('usuario');
-  }
 
   expirado( fechaExp: number ) {
 
