@@ -1,33 +1,34 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { StoreService } from '../store/store.service';
-import { Router } from '@angular/router';
-
+import { Injectable } from '@angular/core'
+import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router'
+import { Observable } from 'rxjs'
+import { StoreService } from '../store/store.service'
+import { Router } from '@angular/router'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VerifyTokenGuard implements CanActivate {
-
-  constructor(public auth: StoreService, public router: Router){}
+  constructor(public auth: StoreService, public router: Router) {}
 
   canActivate(): Promise<boolean> | boolean {
+    console.log('Verifica Token')
 
-    console.log('Verifica Token', this.auth.token);
+    console.log('Verifica Token', this.auth.token)
 
-    let token = this.auth.token;
+    let token = this.auth.token
 
-    if(this.auth.token){
+    if (this.auth.token) {
+      var payload = JSON.parse(atob(token.split('.')[1]))
 
-      var payload = JSON.parse(atob(token.split('.')[1]));
+      var expirado = this.expirado(payload.exp)
 
-      var expirado = this.expirado( payload.exp );
-
-      return this.verificaRenueva( payload.exp );
-
+      return this.verificaRenueva(payload.exp)
     }
-    
 
     if ( expirado ) {
       
@@ -41,56 +42,51 @@ export class VerifyTokenGuard implements CanActivate {
       return false;
     }
 
-    console.log('Payload', payload);
+    console.log('Payload', payload)
 
     return true
-
   }
 
 
-  expirado( fechaExp: number ) {
+  expirado(fechaExp: number) {
+    let ahora = new Date().getTime() / 1000
 
-    let ahora = new Date().getTime() / 1000;
-
-    if ( fechaExp < ahora ) {
-      return true;
-    }else {
-      return false;
+    if (fechaExp < ahora) {
+      return true
+    } else {
+      return false
     }
-
   }
 
-  verificaRenueva( fechaExp: number ): Promise<boolean>  {
+  verificaRenueva(fechaExp: number): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      let tokenExp = new Date(fechaExp * 1000)
+      let ahora = new Date()
 
-    return new Promise( (resolve, reject) => {
+      ahora.setTime(ahora.getTime() + 1 * 60 * 60 * 1000)
 
-      let tokenExp = new Date( fechaExp * 1000 );
-      let ahora = new Date();
+      console.log(tokenExp)
+      console.log(ahora)
 
-      ahora.setTime( ahora.getTime() + ( 1 * 60 * 60 * 1000 ) );
-
-      console.log('tokenExp',  tokenExp );
-      console.log('ahora', ahora );
+      console.log('tokenExp', tokenExp)
+      console.log('ahora', ahora)
       console.log('Get Time', ahora.getTime())
       console.log('Token Expira', tokenExp.getTime())
 
-      if ( tokenExp.getTime() > ahora.getTime() ) {
-        resolve(true);
+      if (tokenExp.getTime() > ahora.getTime()) {
+        resolve(true)
       } else {
-
-        this.auth.renuevaToken(localStorage.getItem('id'))
-              .subscribe( () => {
-                console.log('Token renovado')
-                resolve(true);
-              }, () => {
-                this.router.navigate(['/login']);
-                reject(false);
-              });
-
+        this.auth.renuevaToken(localStorage.getItem('id')).subscribe(
+          () => {
+            console.log('Token renovado')
+            resolve(true)
+          },
+          () => {
+            this.router.navigate(['/login'])
+            reject(false)
+          }
+        )
       }
-
-    });
-
+    })
   }
-  
 }

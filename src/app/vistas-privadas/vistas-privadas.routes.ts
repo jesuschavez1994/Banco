@@ -1,33 +1,25 @@
-import { Routes } from '@angular/router';
+import { Routes } from '@angular/router'
 /* 
   Services
 */
-import { LoginGuardGuard } from '@services/guards/login-guard.guard';
-import { VerifyTokenGuard } from '@services/guards/verify-token.guard';
+import { LoginGuardGuard } from '@services/guards/login-guard.guard'
+import { VerifyTokenGuard } from '@services/guards/verify-token.guard'
 /* 
   Components used in the views.
 */
-import { AccountComponent } from './account/pages/settings/views/my-account/account.component';
-import { RutStoreComponent } from '../form-register/rut-store/rut-store.component';
-import { FormDataNegocioComponent } from '../form-register/form-data-negocio/form-data-negocio.component';
-import { LoadBanckProductComponent } from './Admin/pages/load-banck-product/load-banck-product.component';
-import { EditProductBankComponent } from './Admin/pages/container/edit-product-bank/edit-product-bank.component';
-import { SettingsComponent } from './account/settings.component';
+import { RutStoreComponent } from '../form-register/rut-store/rut-store.component'
+import { FormDataNegocioComponent } from '../form-register/form-data-negocio/form-data-negocio.component'
 
 // FORM USER //
-import { ViewFormAccountUserComponent } from './AccountUser/pages/view-form-account-user.component';
-import { FormAccountUserComponent } from './AccountUser/pages/settings/views/form-account-user/form-account-user.component';
+import { ViewFormAccountUserComponent } from './AccountUser/pages/view-form-account-user.component'
+import { FormAccountUserComponent } from './AccountUser/pages/settings/views/form-account-user/form-account-user.component'
 
 export const ROUTES: Routes = [
   {
     path: 'admin',
-    component: LoadBanckProductComponent,
-    children: [
-      {
-        path: 'edit-bank-admin/:id',
-        component: EditProductBankComponent,
-      },
-    ],
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./Admin/admin.module').then((module) => module.AdminModule),
   },
 
   // Christopher Views
@@ -48,21 +40,9 @@ export const ROUTES: Routes = [
   // STORE //
   {
     path: 'account',
-    component: SettingsComponent,
+    loadChildren: () =>
+      import('./account/account.module').then((module) => module.AccountModule),
     canActivate: [LoginGuardGuard, VerifyTokenGuard],
-    children: [
-      {
-        path: 'settings',
-        loadChildren: () =>
-          import('./account/pages/settings/account-settings.module').then(
-            (module) => module.AccountSettingsModule
-          ),
-      },
-      {
-        path: 'form-account',
-        component: AccountComponent,
-      },
-    ],
   },
 
   // USER //
@@ -88,4 +68,4 @@ export const ROUTES: Routes = [
       ),
     canActivate: [LoginGuardGuard, VerifyTokenGuard],
   },
-];
+]
