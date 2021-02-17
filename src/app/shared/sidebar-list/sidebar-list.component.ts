@@ -235,10 +235,19 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
       this.route.paramMap.subscribe(params => {
         console.log('routerLinkActive');
-        console.log(this.anchorsMenu.wordToMatch);
-        if ((params.has('show') && params.get('show') === this.anchorsMenu.wordToMatch)) {
-          // this.productOptionMenu.nativeElement.classList.add('active');
-          this.productOptionMenu = true;
+        // console.log(this.anchorsMenu.wordToMatch); // esto es undefined hay que arreglar
+
+        if ((params.has('show') )) {
+
+          if (this.anchorsMenu) {
+
+            if (params.get('show') === this.anchorsMenu.wordToMatch) {
+              // this.productOptionMenu.nativeElement.classList.add('active');
+              this.productOptionMenu = true;
+            }
+
+          }
+
         } else {
           // this.contactOptionMenu.nativeElement.classList.add('active');
           this.contactOptionMenu = true;
