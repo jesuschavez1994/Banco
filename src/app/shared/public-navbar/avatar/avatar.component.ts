@@ -18,10 +18,12 @@ export class AvatarComponent implements OnInit {
   storeAct: boolean | string = false;
   constructor(private auth: StoreService, public homeService: HomeServiceService,) {
     this.imgUser();
+    
   }
 
   ngOnInit(): void {
     this.storeAct= this.homeService.storeActive();
+    console.log('storeAct', this.storeAct);
   }
   imgUser(){
     if(this.auth){
