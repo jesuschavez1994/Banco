@@ -14,7 +14,6 @@ export const ROUTES: Routes = [
     path: 'home',
     loadChildren: () =>
       import('./home/home.module').then((module) => module.HomeModule),
-    // component: HomeComponent,
     canActivate: [VerifyTokenGuard],
   },
   { path: 'register', component: RegisterComponent },
