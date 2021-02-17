@@ -1,18 +1,22 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core'
 
-import { AgmCoreModule } from '@agm/core';
-import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { AgmCoreModule } from '@agm/core'
+import { NzTimePickerModule } from 'ng-zorro-antd/time-picker'
 
-import { MyStoreRoutingModule } from './my-store-routing.module';
-import { SharedModule } from '@shared/shared.module';
-import { VistasPrivadasSharedModule } from '../shared/vistas-privadas-shared.module';
+import { MyStoreRoutingModule } from './my-store-routing.module'
+import { SharedModule } from '@shared/shared.module'
+import { VistasPrivadasSharedModule } from '../shared/vistas-privadas-shared.module'
 
-import { ContactComponent } from './pages/contact/contact.component';
-import { ContactDescriptionEditComponent } from './components/contact-description-edit/contact-description-edit.component';
-import { MapEditarComponent } from './components/map-editar/map-editar.component';
-import { MyStoreComponent } from './my-store.component';
+import { ContactComponent } from './pages/contact/contact.component'
+import { ContactDescriptionEditComponent } from './components/contact-description-edit/contact-description-edit.component'
+import { MapEditarComponent } from './components/map-editar/map-editar.component'
+import { MyStoreComponent } from './my-store.component'
 
-import { MyStoreComponentsModule } from './components/my-store-components.module';
+import { MyStoreComponentsModule } from './components/my-store-components.module'
+/* 
+  Feature modules 
+*/
+import { ChildRoutesModule } from './child-routes.module'
 /* 
   Components go here.
 */
@@ -21,7 +25,7 @@ const components = [
   ContactDescriptionEditComponent,
   MapEditarComponent,
   MyStoreComponent,
-];
+]
 /* 
   Modules go here.
 */
@@ -31,11 +35,11 @@ const modules = [
   MyStoreRoutingModule,
   SharedModule,
   VistasPrivadasSharedModule,
-];
+]
 /* 
   If need that this module exports something, put those modules/components here.
 */
-const exportStuff = [];
+const exportStuff = []
 @NgModule({
   entryComponents: [MapEditarComponent, ContactDescriptionEditComponent],
   declarations: [...components],

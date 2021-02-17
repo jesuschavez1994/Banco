@@ -1,22 +1,18 @@
-<mat-card
-  class="card"
-  [class.basic]="planInfo.name === 'basic'"
-  [class.standard]="planInfo.name === 'standard'"
-  [class.premium]="planInfo.name === 'premium'"
-  [class.show]="moreInfo"
->
-  <mat-card-header class="card-title" mat-card-image>
+<mat-card class="card" [class.show]="moreInfo">
+  <mat-card-header
+    class="card-title"
+    [style.background]="planColor"
+    mat-card-image
+  >
     <h4>{{ planInfo.name | titlecase }}</h4>
-    <i class="fas fa-caret-down fa-2x arrow"></i>
+    <i class="fas fa-caret-down fa-2x arrow" [style.color]="planColor"></i>
   </mat-card-header>
 
   <div
     class="band"
     mat-card-image
     *ngIf="planInfo.adquired"
-    [class.basic]="planInfo.name === 'basic'"
-    [class.standard]="planInfo.name === 'standard'"
-    [class.premium]="planInfo.name === 'premium'"
+    [style.color]="planColor"
   >
     <small> Plan actual </small>
   </div>
@@ -53,13 +49,9 @@
           <h5 [class.gray]="justBasicPlan">${{ productBankPrice | number }}</h5>
           <small class="renew">De por vida</small>
 
-          <p
-            class="total"
-            [class.basic]="planInfo.name === 'basic'"
-            [class.standard]="planInfo.name === 'standard'"
-            [class.premium]="planInfo.name === 'premium'"
-          >
-            <b>Total: &nbsp;</b><span>${{ totalPrice | number }}</span>
+          <p class="total">
+            <b>Total: &nbsp;</b
+            ><span [style.color]="planColor">${{ totalPrice | number }}</span>
           </p>
         </div>
         <!-- #Price additional info -->
@@ -81,29 +73,21 @@
                 (change)="updatePrice(i, productBankDetails.price)"
               ></mat-checkbox>
               <p>
-                <span
-                  class="amount"
-                  [class.basic]="planInfo.name === 'basic'"
-                  [class.standard]="planInfo.name === 'standard'"
-                  [class.premium]="planInfo.name === 'premium'"
-                  *ngIf="i < 2"
+                <span class="amount" [style.color]="planColor" *ngIf="i < 2"
                   >1-{{ productBankDetails.amountOfPictures }}</span
                 >
-                <span
-                  class="amount"
-                  [class.basic]="planInfo.name === 'basic'"
-                  [class.standard]="planInfo.name === 'standard'"
-                  [class.premium]="planInfo.name === 'premium'"
-                  *ngIf="i >= 2"
-                  >{{ productBankDetails.amountOfPictures }}</span
-                >
+                <span class="amount" [style.color]="planColor" *ngIf="i >= 2">{{
+                  productBankDetails.amountOfPictures
+                }}</span>
                 fotos del banco de productos.
               </p>
             </li>
           </ul>
 
           <button class="btn get-now" (click)="getOrderNumber()" mat-button>
-            <b *ngIf="!waitingResponse">Adquirir ahora</b>
+            <b *ngIf="!waitingResponse" [style.color]="planColor"
+              >Adquirir ahora</b
+            >
             <mat-spinner *ngIf="waitingResponse" [diameter]="30"></mat-spinner>
           </button>
         </div>

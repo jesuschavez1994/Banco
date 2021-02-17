@@ -2448,6 +2448,11 @@ form p:last-child {
   ============================================================== */
 
 @media (max-width: 767px) {
+
+  .page-wrapper{
+    padding-top: 0px !important;
+  }
+
   .container-fluid {
     padding: 25px 15px 25px 15px;
   }

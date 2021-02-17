@@ -12,7 +12,7 @@ const routes: Routes = [
 
     children: [
       // menu categorys vista predetermianda en categorys
-      { path: '', component: MenuCategorysComponent },
+      { path: '', component: MenuCategorysComponent, data: { title: 'Founduss | categorías' }, },
       // ruta donde se muestra categorys por nombre o id
       { path: ':categories/products', component: ListProductComponent },
       {
