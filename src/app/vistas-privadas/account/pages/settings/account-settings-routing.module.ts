@@ -15,7 +15,7 @@ const routes: Routes = [
       import('./views/plans/plans.module').then((module) => module.PlansModule),
   },
   {
-    path: 'form-account',
+    path: 'store-edit',
     component: AccountComponent,
   },
 ]

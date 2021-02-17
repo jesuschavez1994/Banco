@@ -41,7 +41,7 @@ export const ROUTES: Routes = [
   {
     path: 'account',
     loadChildren: () =>
-      import('./account/account.module').then((module) => module.AccountModule),
+    import('./account/account.module').then((module) => module.AccountModule),
     canActivate: [LoginGuardGuard, VerifyTokenGuard],
   },
 
@@ -50,11 +50,12 @@ export const ROUTES: Routes = [
     path: 'account',
     component: ViewFormAccountUserComponent,
     canActivate: [LoginGuardGuard, VerifyTokenGuard],
-    data: { title: 'Founduss | settings' },
+    
     children: [
       {
         path: 'setting-user',
         component: FormAccountUserComponent,
+        data: { title: 'Founduss | settings' },
       },
     ],
   },

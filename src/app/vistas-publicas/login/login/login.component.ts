@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
             .subscribe((StoreResponse: any) => {
               console.log('StoreResponse', StoreResponse)
               this.guardarStorageStore(StoreResponse['0'].social.store_id)
-              this.router.navigate(['account/settings/form-account'])
+              this.router.navigate(['account/settings/store-edit'])
             })
         }
 
