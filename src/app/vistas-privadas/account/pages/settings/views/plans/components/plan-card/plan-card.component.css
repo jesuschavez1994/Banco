@@ -58,43 +58,6 @@ h5 {
   top: 65%;
 }
 
-/* Colors for each plan ---------------------------------*/
-.card.basic .card-title {
-  background: #24c8af;
-}
-
-.card.basic .card-title .arrow {
-  color: #24c8af;
-}
-
-.card.basic .sync .btn {
-  color: #24c8af;
-}
-
-.card.standard .card-title {
-  background: #ff8647;
-}
-
-.card.standard .card-title .arrow {
-  color: #ff8647;
-}
-
-.card.standard .sync .btn {
-  color: #ff8647;
-}
-
-.card.premium .card-title {
-  background: #3673ff;
-}
-
-.card.premium .card-title .arrow {
-  color: #3673ff;
-}
-
-.card.premium .sync .btn {
-  color: #3673ff;
-}
-
 /* .card-title::after {
   content: " ";
   position: absolute;
@@ -159,7 +122,7 @@ h5 {
 }
 
 .card-body ul.bonuses li::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 25%;
   top: 18px;
@@ -192,8 +155,8 @@ h5 {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
   grid-template-areas:
-    "plan-type price"
-    "... renew";
+    'plan-type price'
+    '... renew';
   align-items: center;
 }
 
@@ -246,9 +209,9 @@ h5 {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
   grid-template-areas:
-    "plan-type price"
-    "... renew"
-    "... total";
+    'plan-type price'
+    '... renew'
+    '... total';
   align-items: center;
   padding: 0em 1em;
 }
@@ -288,7 +251,7 @@ h5 {
   display: grid;
   grid-template-columns: 50px auto;
   grid-template-rows: 40px;
-  grid-template-areas: "checkbox text";
+  grid-template-areas: 'checkbox text';
 }
 
 .sync ul li p span.amount {
