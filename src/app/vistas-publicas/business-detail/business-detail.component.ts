@@ -129,6 +129,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   totalProducts: number;
   itemsPerPage = 16;
   showShimmerProductsCards =  true;
+  wasFirstLoadedProducts = false;
 
   // SearchBar:
   preloadedValueSearch = '';
@@ -196,19 +197,37 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
       }
 
-      // Para evitar que el listado de productos se recargue en cada momento que la url detecte un cambio
+      // Para detectar si los valores de queryParam han cambiado o no
+      // y poder crear validaciones, como evitar que el listado de productos
+      // se actualice si solo se cambio el id del producto a detallar
+      console.log('QUERY PARAMS - this.storeData:');
+
       if (this.queryParam) {
+
+        console.log('loadDataByParams - this.queryParam');
+        console.log(this.queryParam);
+        console.log(queryParam);
+
+        // if ( this.queryParam.keys.length > 0) {
 
         if (this.queryParam !== queryParam) {
           this.wasChangedQueryParam = true;
           this.queryParam = queryParam;
-        }else {
+
+        } else {
           this.wasChangedQueryParam = false;
 
         }
 
+        // } else {
+        //   this.wasChangedQueryParam = false;
+
+        // }
+
+
       }else {
         this.queryParam = queryParam; // guardamos de forma global los datos de la tienda
+        console.log('this.queryParam - undefined');
       }
 
       this.loadDataStore(params, queryParam);
@@ -232,7 +251,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         // Gestionamos el valor de wasChangedStoreData
         // El cual sera ula variable que determinara
         // si los datos de la tienda cambiaron o no
-        console.log('loadDataStore -this.storeData:');
+        // console.log('loadDataStore -this.storeData:');
 
 
         if (this.storeData) {
@@ -273,6 +292,15 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         }
 
+        console.log('wasChangedStoreData');
+        console.log(this.wasChangedStoreData);
+
+        console.log('wasFirstLoadedProducts');
+        console.log(this.wasFirstLoadedProducts);
+
+        console.log('wasChangedQueryParam');
+        console.log(this.wasChangedQueryParam);
+
         // Evitamos que la página carguen los mismos datos
         // cuando la tienda sigue siendo la misma.
         // solo permite actualizar los datos cuando la tienda es cambiada
@@ -280,12 +308,34 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
           this.setSidebarOptions(storeResp, queryParam);
           this.setBreadcrumbOptions(storeResp);
 
-          if (this.wasChangedQueryParam) {
-            console.log(this.storeData.id);
-            console.log(storeResp.id);
+          if (this.wasFirstLoadedProducts) {
+
+            // if (this.wasChangedQueryParam) {
+            this.loadProductsCards(params, queryParam);
+
+            // }
+
+
+          } else {
+            this.loadProductsCards(params, queryParam);
+            this.wasFirstLoadedProducts = true;
           }
 
-          this.loadProductsCards(params, queryParam);
+
+
+        } else {
+
+            if (this.wasFirstLoadedProducts) {
+
+                if (this.wasChangedQueryParam) {
+                  this.loadProductsCards(params, queryParam);
+
+                }
+
+            } else {
+                this.loadProductsCards(params, queryParam);
+                this.wasFirstLoadedProducts = true;
+            }
 
         }
 
