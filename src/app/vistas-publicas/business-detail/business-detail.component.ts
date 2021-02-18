@@ -391,7 +391,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       this.productService.getProductByStore(idStore, idProduct).subscribe(
         product => {
 
-          this.setTitle(product.name);
+          this.setTitle(product.name + '' + ' | Founduss ');
 
           let images = [];
 
@@ -542,7 +542,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
             this.productCards.products = products.map( product => {
 
-              this.setTitle(product.name);
+              this.setTitle(product.name + '' + ' | Founduss ');
 
               let images = [];
 

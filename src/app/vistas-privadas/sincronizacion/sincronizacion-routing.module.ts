@@ -17,10 +17,12 @@ const routes: Routes = [
       {
         path: 'exportar-lista-excel',
         component: ExportarListaExcelComponent,
+        data: { title: 'Founduss | Stock de productos' } 
       },
       {
         path: 'suggested-products',
         component: SuggestedProductsComponent,
+        data: { title: 'Founduss | Productos sugeridos' } 
       },
       {
         path: 'suggested-products-list/:id/:list',
@@ -29,10 +31,12 @@ const routes: Routes = [
       {
         path: 'synchronized-products',
         component: SynchronizedProductsComponent,
+        data: { title: 'Founduss | Productos sincronizados' } 
       },
       {
         path: 'bank-product',
         component: BankProductComponent,
+        data: { title: 'Founduss | Banco de productos' } 
       },
     ],
   },

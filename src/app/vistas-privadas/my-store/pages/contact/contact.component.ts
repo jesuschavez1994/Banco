@@ -10,7 +10,7 @@ import { StoreService } from '@services/store/store.service';
 import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
 import { ActivatedRoute, Params } from '@angular/router';
 import { StoreResponse } from '@interfaces/store.interface';
-
+import { Title } from '@angular/platform-browser';
 
 declare let $: any;
 
@@ -151,7 +151,8 @@ export class ContactComponent implements OnInit {
               public snackBar: MatSnackBar,
               config: NgbTimepickerConfig,
               private activateRoute: ActivatedRoute,
-              private userStoreService: UserStoreService) {
+              private userStoreService: UserStoreService,
+              private titleService: Title) {
 
 
     config.seconds = false;
@@ -377,6 +378,7 @@ export class ContactComponent implements OnInit {
   async traerIdStore(){
     await this.userStoreServices.getStoreAccountEdit(localStorage.getItem('id')).subscribe( data => {
      this.dataStore = data;
+     this.setTitle('Founduss | ' + ' ' + this.dataStore[0].name);
      this.cardShimmerInputs = false;
      this.title = true;
    });
@@ -485,6 +487,10 @@ export class ContactComponent implements OnInit {
           return  this.Day[index].isChecked = 'Cerrado';
       }
     }
+  }
+
+  public setTitle(newTitle: string) {
+    this.titleService.setTitle(newTitle);
   }
 }
 

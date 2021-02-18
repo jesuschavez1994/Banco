@@ -15,7 +15,10 @@ const childRoutes: Routes = [
     path: 'contact',
     component: ContactComponent,
   },
-  { path: 'product-catalogue', component: LoadProductComponent },
+  { path: 'product-catalogue',
+    component: LoadProductComponent,
+    data: { title: 'Founduss | Catálogo de Productos' } 
+  },
   {
     path: 'load-product',
     component: ProductLoadingComponent,
