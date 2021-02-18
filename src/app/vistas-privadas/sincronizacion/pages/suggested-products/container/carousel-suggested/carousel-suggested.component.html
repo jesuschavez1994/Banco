@@ -14,7 +14,7 @@
       class="item-grid card card-block"
       id="iterador{{ iterador }}"
       cols="5"
-      rowHeight="2:1.5"
+      [rowHeight]="rowHeight"
     >
       <mat-grid-tile>
         <article *ngIf="suggestion.images.length > 0">
@@ -34,10 +34,10 @@
         </span>
       </mat-grid-tile>
       <mat-grid-tile>
-        <span *ngIf="suggestion.marks.length > 0">
+        <span class="family-500" *ngIf="suggestion.marks.length > 0">
           {{ suggestion.marks[0].name }}
         </span>
-        <span *ngIf="suggestion.marks.length === 0">
+        <span class="family-500" *ngIf="suggestion.marks.length === 0">
           No se ha definido la marca
         </span>
       </mat-grid-tile>
@@ -48,10 +48,10 @@
         {{ suggestion.description | LimitarTexto: 100 }}
       </mat-grid-tile>
       <mat-grid-tile>
-        <span *ngIf="suggestion.factories.length > 0">
+        <span class="family-500" *ngIf="suggestion.factories.length > 0">
           {{ suggestion.factories[0].name }}
         </span>
-        <span *ngIf="suggestion.factories === 0">
+        <span class="family-500" *ngIf="suggestion.factories === 0">
           No se ha definido el fabricante
         </span>
       </mat-grid-tile>

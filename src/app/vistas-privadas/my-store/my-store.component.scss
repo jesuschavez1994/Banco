@@ -1,19 +1,25 @@
 @import 'src/assets/scss/style.scss';
 
-.page{
+.page {
   display: flex;
   padding-right: 27px;
 
-  .column{
+  .column {
     width: 100%;
     overflow: hidden;
   }
 }
 
-@media screen and (max-width: 999px){
-  .page{
+@media only screen and (min-width: 465px) {
+  .page {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
+
+@media screen and (min-width: 999px) {
+  .page {
     padding-right: 27px;
     padding-left: 27px;
-
   }
 }
