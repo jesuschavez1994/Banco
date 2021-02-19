@@ -13,11 +13,11 @@ export class EmptyShoppingCartGuard implements CanActivate {
     private paymentService: PaymentProcessService,
   ){}
 
-  canActivate( next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean>{
+  canActivate( next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> | boolean{
     console.log('EmptyShoppingCartGuard');
 
     console.log('existProduct');
-    console.log(this.existProductsFromCart(state));
+    // console.log(this.existProductsFromCart(state));
 
     // if (!existProduct) {
     //   console.log('Bloqueado por el EmptyShoppingCartGuard');
@@ -67,6 +67,8 @@ export class EmptyShoppingCartGuard implements CanActivate {
         // return false;
         reject(false);
       });
+
+      reject(false);
 
     });
 
