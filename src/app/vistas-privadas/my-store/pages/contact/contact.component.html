@@ -253,7 +253,8 @@
                         nzFormat="HH:mm"
                         class="mr-3"
                         formControlName="open{{ i }}"
-                        (nzOpenChange)="log($event, i, item.dia)"
+                        (ngModelChange)="log($event, i, item.dia)"
+                        
                       >
                       </nz-time-picker>
                     </div>
@@ -264,7 +265,8 @@
                         [(ngModel)]="item.selectCloseHour"
                         nzFormat="HH:mm"
                         formControlName="close{{ i }}"
-                        (nzOpenChange)="log($event, i, item.dia)"
+                        (ngModelChange)="log($event, i, item.dia)"
+                        
                       >
                       </nz-time-picker>
                     </div>

@@ -247,136 +247,6 @@ export class ContactComponent implements OnInit {
       console.log(this.TimeSelect.length);
     }
 
-    console.log('ccc', this.dias);
-
-    // Calculamos los indices de los dias//
-    function IndexArray(dias){
-      // tslint:disable-next-line: prefer-const
-      let index = [];
-      // tslint:disable-next-line: one-variable-per-declaration
-      let lunes = false, martes = false,  miercoles = false, jueves = false, viernes = false, sabado = false, domingo = false;
-
-      // tslint:disable-next-line: prefer-for-of
-      for (let i = 0; i < dias.length; i++){
-
-        switch (dias[i]){
-          case 'Lunes':
-            if (lunes === false){
-              console.log('LUNES', dias.lastIndexOf('Lunes'));
-              if (dias.lastIndexOf('Lunes') !== -1 ){
-                index.push(dias.lastIndexOf('Lunes'));
-                lunes = true;
-              }else{ return; }
-            }
-          // tslint:disable-next-line: align
-          break;
-          // tslint:disable-next-line: no-switch-case-fall-through
-          case 'Martes':
-            if (martes === false){
-              console.log('MARTES', dias.lastIndexOf('Martes'));
-              if (dias.lastIndexOf('Martes') !== -1){
-                index.push(dias.lastIndexOf('Martes'));
-                martes = true;
-              }else{ return; }
-            }
-          // tslint:disable-next-line: align
-          break;
-          // tslint:disable-next-line: no-switch-case-fall-through
-          case 'Miercoles':
-            if (miercoles === false){
-              console.log('Miercoles', dias.lastIndexOf('Miercoles'));
-              if (dias.lastIndexOf('Miercoles') !== -1){
-                index.push(dias.lastIndexOf('Miercoles'));
-                miercoles = true;
-              }else{ return; }
-            }
-          // tslint:disable-next-line: align
-          break;
-          // tslint:disable-next-line: no-switch-case-fall-through
-          case 'Jueves':
-            if (jueves === false){
-              console.log('Jueves', dias.lastIndexOf('Jueves'));
-              if (dias.lastIndexOf('Jueves') !== -1){
-                index.push(dias.lastIndexOf('Jueves'));
-                jueves = true;
-              }else{ return; }
-            }
-          // tslint:disable-next-line: align
-          break;
-          // tslint:disable-next-line: no-switch-case-fall-through
-          case 'Viernes':
-            if (viernes === false){
-              console.log('Viernes', dias.lastIndexOf('Viernes'));
-              if (dias.lastIndexOf('Viernes') !== -1){
-                index.push(dias.lastIndexOf('Viernes'));
-                viernes = true;
-              }else{ return; }
-            }
-          // tslint:disable-next-line: align
-          break;
-          // tslint:disable-next-line: no-switch-case-fall-through
-          case 'Sabado':
-            if (sabado === false){
-              console.log('Sabado', dias.lastIndexOf('Viernes'));
-              if (dias.lastIndexOf('Sabado') !== -1){
-                index.push(dias.lastIndexOf('Sabado'));
-                sabado = true;
-              }else{ return; }
-            }
-          // tslint:disable-next-line: align
-          break;
-          // tslint:disable-next-line: no-switch-case-fall-through
-          case 'Domingo':
-            if (domingo === false){
-              console.log('Domingo', dias.lastIndexOf('Domingo'));
-              if (dias.lastIndexOf('Domingo') !== -1){
-                index.push(dias.lastIndexOf('Domingo'));
-                domingo = true;
-              }else{ return; }
-            }
-          // tslint:disable-next-line: align
-          break;
-        }
-      }
-      return [index];
-      // End Function //
-    }
-
-    // tslint:disable-next-line: prefer-const
-    let indice = IndexArray(this.dias);
-
-    function dayLaborables(arr, myArray){
-       // tslint:disable-next-line: prefer-const
-      let c = [];
-      // tslint:disable-next-line: prefer-for-of
-      for (let i = 0; i < arr.length; i++){
-        setTimeout(() => {
-          c.push(myArray[arr[i]]);
-        }, 100);
-        console.log('LAboral', c.push(myArray[arr[i]]));
-      }
-      return [c];
-    }
-
-    const Schedules = dayLaborables(indice[0], this.TimeSelect);
-
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < Schedules[0].length; i++){
-      if  (Schedules[0][i] !== 'undefined'){
-        this.SchedulesEnd.push(Schedules[0][i]);
-        console.log('Shedules', this.SchedulesEnd);
-      }
-    }
-
-    // tslint:disable-next-line: only-arrow-functions
-    this.quitarValueUndefined = this.SchedulesEnd.filter(function(dato){
-      // tslint:disable-next-line: triple-equals
-      return dato != undefined;
-    });
-
-    console.log('Sin Undefined', this.quitarValueUndefined);
-
-    this.SendSchedule();
   }
 
   async traerIdStore(){
@@ -456,14 +326,19 @@ export class ContactComponent implements OnInit {
 
   atrasHorario(){}
 
-  log(time: Date, i, day: string) {
-    this.schedule.get('open' + i).valueChanges.subscribe( openSelect => {
-      this.schedule.get('close' + i).valueChanges.subscribe( closeSelet => {
-        this.TimeSelect.push({open: openSelect.toTimeString().slice(0, 8), close: closeSelet.toTimeString().slice(0, 8), day});
-        console.log(this.TimeSelect);
-        return this.TimeSelect;
-      });
-    });
+  // log(time: Date, i, day: string) {
+  //   this.schedule.get('open' + i).valueChanges.subscribe( openSelect => {
+  //     this.schedule.get('close' + i).valueChanges.subscribe( closeSelet => {
+  //       this.TimeSelect.push({open: openSelect.toTimeString().slice(0, 8), close: closeSelet.toTimeString().slice(0, 8), day});
+  //       console.log(this.TimeSelect);
+  //       return this.TimeSelect;
+  //     });
+  //   });
+  // }
+
+  log(value: Date, i: any, day: string): void {
+    console.log(value);
+    console.log('i', i, 'day', day)
   }
 
   addNewHour(index){
