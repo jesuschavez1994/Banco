@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarMenuOptions } from '@interfaces/components-options/sidebar-menu.options.interface';
-import {HomeServiceService} from '../services/home-service.service';
+// import {HomeServiceService} from '@services/home-service.service';
+import { HomeServiceService } from '../services/home-service.service';
 
 @Component({
   selector: 'app-panel',
@@ -31,11 +32,11 @@ export class PanelComponent implements OnInit {
     },
   ];
 
-  constructor(private homeService: HomeServiceService,) { }
+  constructor(private homeService: HomeServiceService) { }
 
   ngOnInit(): void {
     this.userLog = this.homeService.islog();
-    this.storeLog= this.homeService.storeActive();
+    this.storeLog = this.homeService.storeActive();
   }
 
 }

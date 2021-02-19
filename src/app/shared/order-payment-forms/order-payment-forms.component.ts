@@ -12,12 +12,16 @@ export class OrderPaymentFormsComponent implements OnInit {
   step = 1;
   isAllowedSecondStep = false;
   regions = [
-    {id: 1, label: 'hola'}
+    {id: 1, label: 'region1'}
+  ];
+
+  communes = [
+    {id: 1, label: 'comuna1'}
   ];
 
   form = new FormGroup({
     region: new FormControl('', [Validators.required, MyValidators.existInArray(this.regions.map( r => r.id ) )]),
-    comuna: new FormControl('', [Validators.required, MyValidators.existInArray(this.regions.map( r => r.id ) )]),
+    comuna: new FormControl('', [Validators.required, MyValidators.existInArray(this.communes.map( r => r.id ) )]),
     direccion: new FormControl('', [Validators.required, Validators.minLength(10)]),
     hospedaje: new FormControl('', [Validators.required, Validators.minLength(6)]),
     telefono: new FormControl('', [
@@ -200,5 +204,20 @@ export class OrderPaymentFormsComponent implements OnInit {
     this.currentStep.emit(this.step);
   }
 
+  public loadDataOfSelects() {
+
+    // aquí cargamos las opciones del select
+
+  }
+
+  public preLoadContactData() {
+
+    // pre cargar datos de cada campo de contacto del usuario
+
+    // Y con la api order_contact creamos una nueva dirección en donde el recibirá el paquete
+    // así no tendrá que ser igual la dirección de contact del usuario con la de donde quiere que llegue
+    // el paquete.
+
+  }
 
 }
