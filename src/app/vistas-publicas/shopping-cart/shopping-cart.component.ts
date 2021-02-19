@@ -183,7 +183,8 @@ export class ShoppingCartComponent implements OnInit {
 
   currentPaymentData: CurrentPaymentData = {};
 
-  constructor(private homeService: HomeServiceService,
+  constructor(
+    private homeService: HomeServiceService,
     private paymentService: PaymentProcessService,
     public dialog: MatDialog
   ){
@@ -191,8 +192,10 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.userLog = this.homeService.islog();
-    this.storeLog= this.homeService.storeActive();
+    this.storeLog = this.homeService.storeActive();
+
     if (this.ordersLists) {
 
       if (this.ordersLists.length > 0) {
@@ -201,6 +204,12 @@ export class ShoppingCartComponent implements OnInit {
 
     }
 
+    this.loadProductsFromCart();
+
+  }
+
+
+  public loadProductsFromCart() {
     console.log('ShoppingCartComponent');
 
     this.paymentService.getProductsFromCart().subscribe(resp => {
@@ -274,10 +283,8 @@ export class ShoppingCartComponent implements OnInit {
     // Para registrar los productos en el carrito que coincidan con el id de tienda, permitiendo así.
     // Crear un pedido por cada tienda.
     // Lo ideal sería tener ambas opciones, pagar todo y pagar solo productos de la tienda.
-    // Si el back actua de esta manera igual, sería bueno borrar el listado de pedidos al venir al carrito de compras
+    // Si el back actuá de esta manera igual, sería bueno borrar el listado de pedidos al venir al carrito de compras
     // y se carga el carrito de compras, con los productos aún no pagados.
-
-
   }
 
   public filterByTab(tabNumber){
