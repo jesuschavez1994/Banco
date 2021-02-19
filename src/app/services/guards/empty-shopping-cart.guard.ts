@@ -14,44 +14,23 @@ export class EmptyShoppingCartGuard implements CanActivate {
   ){}
 
   canActivate( next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+
     console.log('EmptyShoppingCartGuard');
 
-    console.log('existProduct');
+    return this.hasProductsFromCart().then( resp => true ).catch(error => {
 
-    return new Promise( (resolve, reject) => {
-
-      this.paymentService.getProductsFromCart().subscribe( resp => {
-
-        if (resp.data) {
-
-          if (resp.data.length > 0 ) {
-
-            console.log('Paso por el EmptyShoppingCartGuard');
-            resolve(true);
-
-          }
-
-          console.log('Bloqueado por el EmptyShoppingCartGuard');
-          reject(false);
-
+      this.router.navigate(['/home'], {
+        queryParams: {
+          return: state.url
         }
-
-        console.log('Bloqueado por el EmptyShoppingCartGuard');
-        reject(false);
-
-      }, error => {
-
-        reject(false);
-
       });
 
-      //
-      // reject(false);
-    }).then(r => true).catch(res => false);
+      return false;
+    });
 
   }
 
-  private isEmptyProductCart(): Promise<boolean> {
+  private hasProductsFromCart(): Promise<boolean> {
     return new Promise( (resolve, reject) => {
 
       this.paymentService.getProductsFromCart().subscribe( resp => {
@@ -83,48 +62,3 @@ export class EmptyShoppingCartGuard implements CanActivate {
   }
 
 }
-
-
-// this.paymentService.getProductsFromCart().subscribe(resp => {
-
-//   if (resp.data) {
-
-//     if (resp.data.length > 0 ) {
-
-//       console.log('Paso por el EmptyShoppingCartGuard');
-//       return true;
-
-//     }else{
-
-//       console.log('Bloqueado por el EmptyShoppingCartGuard');
-
-//       // this.router.navigate(['/login'], {
-//       //   queryParams: {
-//       //     return: state.url
-//       //   }
-//       // });
-
-//       throw error;
-//       return false;
-//     }
-
-//   }else {
-
-//     console.log('Bloqueado por el EmptyShoppingCartGuard');
-
-//     // this.router.navigate(['/login'], {
-//     //   queryParams: {
-//     //     return: state.url
-//     //   }
-//     // });
-
-//     throw error;
-//     return false;
-//   }
-
-// }, errorResp => {
-
-//   throw error;
-//   return false;
-
-// });
