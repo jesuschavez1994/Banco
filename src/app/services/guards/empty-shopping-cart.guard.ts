@@ -13,59 +13,74 @@ export class EmptyShoppingCartGuard implements CanActivate {
     private paymentService: PaymentProcessService,
   ){}
 
-  async canActivate( next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate( next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     console.log('EmptyShoppingCartGuard');
 
     console.log('existProduct');
-    const isEmptyShoppingCart = await this.paymentService.getProductsFromCart().subscribe(resp => {
 
-      return false;
-      // if (resp.data) {
+    return new Promise( (resolve, reject) => {
 
-      //   if (resp.data.length > 0 ) {
+      this.paymentService.getProductsFromCart().subscribe( resp => {
 
-      //     console.log('Paso por el EmptyShoppingCartGuard');
-      //     return true;
+        if (resp.data) {
 
-      //   }else{
+          if (resp.data.length > 0 ) {
 
-      //     console.log('Bloqueado por el EmptyShoppingCartGuard');
-      //     // return false;
-      //     const error = new Error();
-      //     error.message = 'block';
-      //     throw error;
+            console.log('Paso por el EmptyShoppingCartGuard');
+            resolve(true);
 
-      //   }
+          }
 
-      // }else {
+          console.log('Bloqueado por el EmptyShoppingCartGuard');
+          reject(false);
 
-      //   console.log('Bloqueado por el EmptyShoppingCartGuard');
-      //   // return false;
-      //   const error = new Error();
-      //   error.message = 'block';
-      //   throw error;
+        }
 
-      // }
+        console.log('Bloqueado por el EmptyShoppingCartGuard');
+        reject(false);
 
-    }, () => {
-      console.log('Bloqueado por el EmptyShoppingCartGuard');
-      // return false;
-      const error = new Error();
-      error.message = 'block';
-      throw error;
+      }, error => {
 
-    });
+        reject(false);
 
-    console.log(isEmptyShoppingCart);
+      });
 
-    return true;
+      //
+      // reject(false);
+    }).then(r => true).catch(res => false);
 
   }
 
-  // private existProductsFromCart(state: RouterStateSnapshot): Promise<boolean> {
+  private isEmptyProductCart(): Promise<boolean> {
+    return new Promise( (resolve, reject) => {
 
+      this.paymentService.getProductsFromCart().subscribe( resp => {
 
-  // }
+        if (resp.data) {
+
+          if (resp.data.length > 0 ) {
+
+            console.log('Paso por el EmptyShoppingCartGuard');
+            resolve(true);
+
+          }
+
+          console.log('Bloqueado por el EmptyShoppingCartGuard');
+          reject(false);
+
+        }
+
+        console.log('Bloqueado por el EmptyShoppingCartGuard');
+        reject(false);
+
+      }, error => {
+
+        reject(false);
+
+      });
+
+    });
+  }
 
 }
 
