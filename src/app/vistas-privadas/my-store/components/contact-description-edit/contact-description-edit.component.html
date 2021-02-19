@@ -8,7 +8,8 @@
             <div class="col-12">
                   <input     class="form-control"
                               type="text"
-                              [(ngModel)]="data.social_reason"
+                              #termino
+                              (keyup)="capturaText(termino)"
                               placeholder="Nombre comercial"
                               formControlName="social_reason"
                               [ngClass]="{'is-invalid':  (!forma.controls['social_reason'].valid || forma.controls['social_reason'].errors?.minlength)&& forma.controls['social_reason'].touched, 'is-valid': forma.controls['social_reason'].valid }" 
@@ -31,7 +32,7 @@
                   <input     class="form-control"
                               type="text"
                               placeholder="Rut"
-                              [(ngModel)]="data.rut"
+                              
                               formControlName="rut"
                               [ngClass]="{'is-invalid':  (!forma.controls['rut'].valid || forma.controls['rut'].errors?.minlength)&& forma.controls['rut'].touched, 'is-valid': forma.controls['rut'].valid }" 
                   >
@@ -53,7 +54,7 @@
             <div class="col-12">
                   <input class="form-control"
                         type="text"
-                        [(ngModel)]="data.name"
+                        
                         placeholder="Razón social"
                         formControlName="name"
                         [ngClass]="{'is-invalid':  (!forma.controls['name'].valid || forma.controls['name'].errors?.minlength)&& forma.controls['name'].touched, 'is-valid': forma.controls['name'].valid }" 
@@ -76,7 +77,6 @@
 
                   <textarea   class="form-control"
                               type="text"
-                              [(ngModel)]="data.description"
                               placeholder="Indique la descripción"
                               formControlName="description"></textarea>
                   

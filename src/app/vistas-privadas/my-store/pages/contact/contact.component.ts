@@ -163,15 +163,15 @@ export class ContactComponent implements OnInit {
       rut: new FormControl('', [Validators.required, Validators.minLength(5)]),
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
       description: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      email_1: new FormControl('' , [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
-      email_2: new FormControl('' , [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
-      phone_1: new FormControl('', [Validators.required, Validators.minLength(10)]),
-      phone_2: new FormControl('', [Validators.required, Validators.minLength(10)]),
-      webside: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      direction: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      facebook: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      instagram: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      twitter: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      email_1: new FormControl('' , [ Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
+      email_2: new FormControl('' , [ Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
+      phone_1: new FormControl('', [ Validators.minLength(10)]),
+      phone_2: new FormControl('', [ Validators.minLength(10)]),
+      webside: new FormControl('', [ Validators.minLength(5)]),
+      direction: new FormControl('', [ Validators.minLength(5)]),
+      facebook: new FormControl('', [ Validators.minLength(5)]),
+      instagram: new FormControl('', [ Validators.minLength(5)]),
+      twitter: new FormControl('', [ Validators.minLength(5)]),
       address_latitude: new FormControl(),
       address_longitude: new FormControl(),
     });
@@ -218,6 +218,10 @@ export class ContactComponent implements OnInit {
     }, error => {
       this.BannerVerifiqued = 'assets/img/no-image-banner.JPG';
     });
+  }
+
+  SocialReason(event: string){
+    console.log(event);
   }
 
   SendSchedule(){

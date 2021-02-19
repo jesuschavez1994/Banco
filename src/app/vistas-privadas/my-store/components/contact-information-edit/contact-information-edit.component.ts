@@ -35,6 +35,10 @@ export class ContactInformationEditComponent implements OnInit {
 
   }
 
+  ValueCampo(text: string){
+    console.log(text);
+  }
+
   editInformationContact(){}
 
   async traerdata(){
@@ -44,9 +48,60 @@ export class ContactInformationEditComponent implements OnInit {
       // tslint:disable-next-line: no-string-literal
       this.dataStoreEdit.push(resp.contact);
       this.redesSociales.push(resp.social);
+
+      
+
       this.title = true;
-      console.log('información de contacto', this.dataStoreEdit);
-      // this.guardarStorage( this.dataStoreEdit );
+      console.log('información de contacto', this.dataStoreEdit[0]);
+      console.log('Redes', this.redesSociales)
+      
+      if ( this.dataStoreEdit[0].email_1 === null){
+        this.forma.get('email_1').setValue('');
+      }else{
+        this.forma.get('email_1').setValue(this.dataStoreEdit[0].email_1);
+      }
+
+      if(this.dataStoreEdit[0].email_2 === null){
+        this.forma.get('email_2').setValue('');
+      }else{
+        this.forma.get('email_2').setValue(this.dataStoreEdit[0].email_2);
+      }
+
+      if(this.dataStoreEdit[0].phone_1 === null){
+        this.forma.get('direction').setValue('');
+      }else{
+        this.forma.get('direction').setValue(this.dataStoreEdit[0].direction);
+      }
+
+      if(this.dataStoreEdit[0].phone_1 === null){
+        this.forma.get('phone_1').setValue('');
+      }else{
+        this.forma.get('phone_1').setValue(this.dataStoreEdit[0].phone_1);
+      }
+
+      if(this.dataStoreEdit[0].phone_2 === null){
+        this.forma.get('phone_2').setValue('');
+      }else{
+        this.forma.get('phone_2').setValue(this.dataStoreEdit[0].phone_2);
+      }
+
+      if(this.dataStoreEdit[0].webside === null){
+        this.forma.get('webside').setValue('');
+      }else{
+        this.forma.get('webside').setValue(this.dataStoreEdit[0].webside);
+      }
+
+      if(this.redesSociales[0].instagram === null){
+        this.forma.get('instagram').setValue('');
+      }else{
+        this.forma.get('instagram').setValue(this.redesSociales[0].instagram);
+      }
+
+      if(this.redesSociales[0].twitter === null){
+        this.forma.get('twitter').setValue('');
+      }else{
+        this.forma.get('twitter').setValue(this.redesSociales[0].twitter);
+      }
 
     });
   }

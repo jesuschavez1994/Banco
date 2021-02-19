@@ -39,6 +39,7 @@ export const ROUTES: Routes = [
     path: 'business-detail/:idStore/:show', // Se obtiene el id de la tienda para mostrar su listo productos
     component: BusinessDetailComponent,
     canActivate: [VerifyTokenGuard],
+    
   },
   {
     path: 'business-detail/:idStore/:show/:idProduct', // Se obtiene el id de la tienda para mostrar su listo productos
