@@ -19,6 +19,7 @@ import { DropdownOption } from '@interfaces/components-options/dropdown.options.
 import { DropdownIconComponent } from '../../shared/dropdown-icon/dropdown-icon.component';
 import { ToastComponent } from '../../modals/toast/toast.component';
 import {HomeServiceService} from '../services/home-service.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-business-detail',
@@ -38,8 +39,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   breadcrumb: BreadcrumbOptions[];
   imgsBanners: BannerOptions;
 
-  // Navbar
-  userLog = false;
+  userLog: boolean;
+  storeLog: boolean | string;
+
 
   // sidebar-list
   expandSidebar = true;
@@ -159,12 +161,14 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     private storeService: StoreService,
     private paymentProcessService: PaymentProcessService,
     private utils: Utils,
-    private dropdownIconComp: DropdownIconComponent
+    private dropdownIconComp: DropdownIconComponent,
+    private titleService: Title
 
   ){}
 
   ngOnInit() {
     this.userLog = this.homeService.islog();
+    this.storeLog = this.homeService.storeActive();
   }
 
   ngAfterViewInit(): void {
@@ -387,6 +391,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       this.productService.getProductByStore(idStore, idProduct).subscribe(
         product => {
 
+          this.setTitle(product.name);
+
           let images = [];
 
           if (product.sync_bank) {
@@ -535,6 +541,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
           if (products.length > 0) {
 
             this.productCards.products = products.map( product => {
+
+              this.setTitle(product.name);
 
               let images = [];
 
@@ -857,6 +865,10 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         inline: 'nearest'
       }
     );
+  }
+
+  public setTitle(newTitle: string) {
+    this.titleService.setTitle(newTitle);
   }
 
 }

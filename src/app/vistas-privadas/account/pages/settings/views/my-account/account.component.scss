@@ -2,8 +2,9 @@ form{
   .row{
       h2{
           color: #0e1318;
-          font-size: 2.1rem;
+          font-size: 1.5rem;
           letter-spacing: -0.05rem;
+          font-weight: bold;
       }
 
       .col-md-12{
@@ -15,6 +16,19 @@ form{
               }
           }
       }
+  }
+  
+  h5{
+    font-size: .99rem;
+    font-weight: 400;
+  }
+
+  footer{
+    display: flex;
+    justify-content: flex-start;
+    button{
+      font-size: .85rem;
+    }
   }
 }
 
@@ -62,5 +76,44 @@ form{
   font-weight: 400;
   color: black;
   line-height: 1.6;
+}
+
+@media(max-width: 450px){
+
+  section{
+    padding-left: 0;
+    margin-bottom: 10px;
+    app-cropper-img-photo-account{
+      order: 1;
+    }
+  }
+
+  form{
+    order: 2;
+    .row{
+      h2{
+          color: #0e1318;
+          font-size: 1.1rem;
+          letter-spacing: -0.05rem;
+          font-weight: 600;
+          padding-bottom: 0px !important;
+      }
+  
+    }
+
+    footer{
+      display: flex;
+      justify-content: space-around;
+
+      button{
+        font-size: .5rem;
+      }
+    }
+  }
+
+  h5{
+    font-size: .85rem;
+    font-weight: 600;
+  }
 }
 
