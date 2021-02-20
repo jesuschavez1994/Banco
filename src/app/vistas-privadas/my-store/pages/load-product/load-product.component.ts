@@ -16,8 +16,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 // tslint:disable-next-line: import-spacing
 import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { FilstroStoreService } from '../../../services/FiltroStore/filstro-store.service';
-import { ProductsCardsStoreComponent } from '../../shared/products-cards-store/products-cards-store/products-cards-store.component';
+import { FilstroStoreService } from '../../../../services/FiltroStore/filstro-store.service';
+import { ProductsCardsStoreComponent } from '../../../shared/products-cards-store/products-cards-store/products-cards-store.component';
 import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
 import { StoreResponse } from '@interfaces/store.interface';
 import { SearchStore } from '@models/search/search-store.model';
@@ -25,7 +25,7 @@ import { SearchService } from '@services/Search/search.service';
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface';
 
 import * as Hammer from 'hammerjs';
-import { MyStoreComponent } from '../../my-store/my-store.component';
+import { MyStoreComponent } from '../../my-store.component';
 
 @Component({
   selector: 'app-load-product',

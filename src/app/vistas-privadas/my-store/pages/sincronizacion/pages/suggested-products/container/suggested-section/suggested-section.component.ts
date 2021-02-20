@@ -105,8 +105,6 @@ export class SuggestedSectionComponent implements OnInit {
 
   SelectCheckBox(e: any, i: string) {
     // console.log(e.checked)
-    console.log('Item to sync details')
-    console.log(this.productToSyncReference)
 
     if (e.checked) {
       document.getElementById(i).style.filter =
@@ -160,8 +158,6 @@ export class SuggestedSectionComponent implements OnInit {
 
   // Logic for modeling the data of the product we need to sync, in case that bulk sync is choosen.
   getSuggestedProductDetails(eventValues: EventID) {
-    console.log('Suggested products details gotten by events')
-    console.log(eventValues)
     this.productToSyncReference = {
       bank_id: parseInt(eventValues.idsuggested),
       product_id: parseInt(eventValues.idproducto),

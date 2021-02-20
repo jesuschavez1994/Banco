@@ -37,8 +37,8 @@ export class SearchStoreComponent implements OnInit, OnChanges {
   @Input() BuscarText: any
   @Input() debounce = 3000
   @Input() bulkSync: ProductToSync[]
-    // POR DEFECTO MUESTRA EL FILTRO
-    @Input() showFilter = true;
+  // POR DEFECTO MUESTRA EL FILTRO
+  @Input() showFilter = true
 
   // SALIDAS //
   @Output() sidebarExpand = new EventEmitter<boolean>()
@@ -70,13 +70,12 @@ export class SearchStoreComponent implements OnInit, OnChanges {
     })
   }
 
-    ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges) {
     for (const propName in changes) {
       if (changes.hasOwnProperty(propName)) {
         let change = changes[propName]
         switch (propName) {
           case 'bulkSync': {
-            console.log(`bulkSync changed to:`, change.currentValue)
             this.disableSyncButton(change.currentValue)
           }
         }
@@ -107,11 +106,11 @@ export class SearchStoreComponent implements OnInit, OnChanges {
   // API calls handler methods ------------------
   sendBulkData() {
     let payload = {
-      syncs: this.bulkSync
+      syncs: this.bulkSync,
     }
-    console.log('Data to send to the server')
 
     let stringPayload = JSON.stringify(payload)
+    console.log('Data to send to the server')
     console.log(stringPayload)
     this._sincronizacionService
       .bulkProductsSync(
@@ -119,9 +118,6 @@ export class SearchStoreComponent implements OnInit, OnChanges {
         localStorage.getItem('storeId'),
         stringPayload
       )
-      .subscribe((response) => {
-        console.log('Respuesta del servidor')
-        console.log(response)
-      })
+      .subscribe((response) => {})
   }
 }

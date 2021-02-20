@@ -51,9 +51,8 @@ import { LyImageCropperModule } from '@alyle/ui/image-cropper'
 import { MinimaLight, MinimaDark } from '@alyle/ui/themes/minima'
 import { ProductLoadComponent } from './components/product-load/product-load/product-load.component'
 import { ViewProductsLoadsComponent } from './components/view-products-loads/view-products-loads.component'
-import { AccountComponent } from '../vistas-privadas/account/pages/settings/views/my-account/account.component'
 import { ProductLoadingSmartComponent } from './product-loading/container/product-loading-smart/product-loading-smart.component'
-import { LoadProductComponent } from './LoadProduct/load-product/load-product.component'
+import { LoadProductComponent } from './my-store/pages/load-product/load-product.component'
 import { ModalAddCategoriasAndSubcategoriasComponent } from './product-loading/container/modals/modal-add-categorias-and-subcategorias/modal-add-categorias-and-subcategorias.component'
 import { ModalDeleteProductComponent } from './components/view-products-loads/container/modal-delete-product/modal-delete-product.component'
 import { SpreadSheetsModule } from '@grapecity/spread-sheets-angular'
@@ -64,14 +63,12 @@ import { EditProdutcComponent } from './components/edit-produtc/edit-produtc.com
 import { EditProductNoDisponibleComponent } from './components/edit-product-no-disponible/edit-product-no-disponible.component'
 import { NgxSpinnerModule } from 'ngx-spinner'
 import { NgxDropzoneModule } from 'ngx-dropzone'
-import { SettingsComponent } from './account/settings.component'
 import { FormAccountUserComponent } from './AccountUser/pages/settings/views/form-account-user/form-account-user.component'
 import { ViewFormAccountUserComponent } from './AccountUser/pages/view-form-account-user.component'
 import { FooterButtonFormAccountComponent } from './AccountUser/pages/settings/views/components/footer-button-form-account/footer-button-form-account.component'
 
 // Feature modlues
 import { MyStoreModule } from './my-store/my-store.module'
-import { AdminModule } from './Admin/admin.module'
 
 import { VistasPrivadasRoutingModule } from './vistas-privadas-routing.module'
 import { VistasPrivadasSharedModule } from './shared/vistas-privadas-shared.module'
@@ -92,7 +89,7 @@ const components = [
   ProductLoadingComponent,
   ViewProductsLoadsComponent,
   ProductLoadingSmartComponent,
-  LoadProductComponent,
+  // LoadProductComponent,
   ModalAddCategoriasAndSubcategoriasComponent,
   ModalDeleteProductComponent,
   EditProdutcComponent,

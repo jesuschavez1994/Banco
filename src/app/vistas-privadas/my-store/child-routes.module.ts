@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router'
 
 import { ContactComponent } from './pages/contact/contact.component'
 import { ProductLoadingComponent } from '../product-loading/product-loading.component'
-import { LoadProductComponent } from '../LoadProduct/load-product/load-product.component'
 import { FormBanckProductSyncComponent } from './pages/sincronizacion/components/form-banck-product-sync/form-banck-product-sync.component'
 import { EditProdutcComponent } from '../components/edit-produtc/edit-produtc.component'
 import { EditSincronizacionComponent } from './pages/sincronizacion/components/edit-sincronizacion/edit-sincronizacion.component'
@@ -15,7 +14,9 @@ const childRoutes: Routes = [
     path: 'contact',
     component: ContactComponent,
   },
-  { path: 'product-catalogue', component: LoadProductComponent },
+  { path: 'product-catalogue', 
+loadChildren: () => import('./pages/load-product/load-product.module').then(module => module.LoadProductModule)
+ },
   {
     path: 'load-product',
     component: ProductLoadingComponent,
