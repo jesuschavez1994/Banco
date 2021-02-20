@@ -56,7 +56,6 @@
                 <app-contact-description-edit
                   *ngIf="editarDescripcion"
                   class="animated fadeIn"
-                  (SocialReason)="SocialReason($event)"
                   [forma]="forma"
                 >
                 </app-contact-description-edit>
@@ -149,7 +148,7 @@
                   Editar
                 </button>
 
-                <app-schedule-store></app-schedule-store>
+                <app-schedule-store (ShedulesStore)="ShedulesStore($event)" *ngIf="showShedule"></app-schedule-store>
                 <app-shedule-store-edit></app-shedule-store-edit>
               </div>
 
@@ -212,6 +211,7 @@
           class="close"
           data-dismiss="modal"
           aria-label="Close"
+          (click)="showShedule = true"
         >
           <span aria-hidden="true">&times;</span>
         </button>
@@ -229,9 +229,11 @@
                 {{ item.dia }}
               </label>
 
-              <mat-slide-toggle class="ml-2" (change)="toogle($event, i)">
-                {{ item.isChecked }}
-              </mat-slide-toggle>
+              <form [formGroup]="MatSlide">
+                <mat-slide-toggle class="ml-2" (change)="toogle($event, i)" formControlName="slide{{i}}">
+                  {{ item.isChecked }}
+                </mat-slide-toggle>
+            </form>
               <div class="display-flex justify-content-around width-100">
                 <div
                   class="width-100 display-flex pl-4 flex-direction-column"
@@ -250,11 +252,11 @@
 
                       <nz-time-picker
                         [(ngModel)]="item.selectOpenHour"
-                        nzFormat="HH:mm"
+                        nzFormat="HH:mm a"
                         class="mr-3"
+                        id="NzTimePickerOpen{{i}}"
                         formControlName="open{{ i }}"
-                        (ngModelChange)="log($event, i, item.dia)"
-                        
+                        [nzUse12Hours]="true"
                       >
                       </nz-time-picker>
                     </div>
@@ -263,14 +265,14 @@
                       <label class="family-400 size-12"> Cierra a las </label>
                       <nz-time-picker
                         [(ngModel)]="item.selectCloseHour"
-                        nzFormat="HH:mm"
+                        nzFormat="HH:mm a"
                         formControlName="close{{ i }}"
-                        (ngModelChange)="log($event, i, item.dia)"
-                        
+                        [nzUse12Hours]="true"
+                        id="NzTimePickerClse{{i}}"
                       >
                       </nz-time-picker>
                     </div>
-
+<!-- 
                     <button
                       mat-button
                       color="primary"
@@ -279,7 +281,7 @@
                       (click)="addNewHour(i)"
                     >
                       Añadir horario
-                    </button>
+                    </button> -->
                     <!-- <input type="submit" id="submit{{i}}" class="hidden" /> -->
                   </form>
 
@@ -325,7 +327,7 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="showShedule = true">
           Cerrar
         </button>
 

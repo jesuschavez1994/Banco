@@ -16,18 +16,11 @@ export class ContactDescriptionEditComponent implements OnInit {
   usuario: Usuario;
   dataStore: any[] = [];
   dataStoreEdit: any;
-  @Output() SocialReason = new EventEmitter<string>();
+  @Output() nameStore = new EventEmitter<string>();
 
   constructor(public userStoreServices: UserStoreService) { 
 
     this.usuario = this.toObject;
-
-    // this.forma = new FormGroup({
-    //   social_reason: new FormControl('' , [Validators.required]),
-    //   rut: new FormControl('' , [Validators.required]),
-    //   name: new FormControl('', [Validators.required]),
-    //   description: new FormControl('', [Validators.required]),
-    // });
 
    }
 
@@ -59,7 +52,7 @@ export class ContactDescriptionEditComponent implements OnInit {
       this.forma.get('rut').setValue(this.dataStoreEdit.rut);
       this.forma.get('name').setValue(this.dataStoreEdit.name);
       this.forma.get('description').setValue(this.dataStoreEdit.description);
-
+      this.nameStore.emit(this.dataStoreEdit.name)
       // this.guardarStorage( this.dataStoreEdit );
 
     });

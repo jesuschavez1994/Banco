@@ -66,7 +66,7 @@ export class UserStoreService {
 
   ActualizarDataStore(userId: string, id: string, data: DataStore){
     const url = `/api/users/${userId}/stores/${id}`;
-    return this.putQuery(url, data).subscribe();
+    return this.putQuery(url, data);
   }
 
   getDataStore(userId: string, id: string){

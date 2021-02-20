@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter  } from '@angular/core';
 import { StoreService } from '@services/store/store.service';
 
 @Component({
@@ -8,6 +8,8 @@ import { StoreService } from '@services/store/store.service';
   styleUrls: ['./schedule-store.component.css']
 })
 export class ScheduleStoreComponent implements OnInit {
+
+  @Output() ShedulesStore = new EventEmitter<any>();
 
   Day = [
     {
@@ -46,6 +48,7 @@ export class ScheduleStoreComponent implements OnInit {
         console.log('GET', response);
         this.schedules.push(response);
         console.log('Horario', this.schedules);
+        this.ShedulesStore.emit(response);
         this.changeDetector.markForCheck();
     });
   }

@@ -4,7 +4,7 @@ export class DataStore {
         // tslint:disable-next-line: variable-name
         public social_reason?: string,
         public rut?: string,
-        public name?: string,
+        public name?: any,
         public description?: string,
         // tslint:disable-next-line: variable-name
         public email_1?: string,
@@ -30,7 +30,7 @@ export class DataStore {
 
 export class Shedules {
     constructor(
-        public schedules?: any[],
+        public schedules?: any,
     ){}
 }
 
