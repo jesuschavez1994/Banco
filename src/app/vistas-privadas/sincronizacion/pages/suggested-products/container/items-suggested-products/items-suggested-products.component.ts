@@ -216,7 +216,7 @@ export class ItemsSuggestedProductsComponent implements OnInit {
       console.log('Bulk array update')
       console.log(this.bulkSync)
     } else {
-      // Deleting the product from bulk
+      // Deleting the product from bulk.
       this.bulkSync = this.bulkSync.filter(
         (element) => element.bank_id !== this.productToSyncReference.bank_id
       )
