@@ -11,6 +11,7 @@ import { BannerOptions } from '@interfaces/components-options/banner.options.int
 import { NgxSpinnerService } from 'ngx-spinner'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { SyncProductsDataService } from '../../../../services/sync-products-data.service'
+import { FilterOption } from '@interfaces/components-options/search-bar.options.interface'
 
 export interface ICarouselItem {
   bank_id: number
@@ -19,12 +20,6 @@ export interface ICarouselItem {
   images: []
   name: string
   marginLeft?: number
-}
-
-interface EventID {
-  idsuggested: string
-  idproducto: string
-  productName?: string
 }
 
 interface ProductToSync {
@@ -83,6 +78,12 @@ export class ItemsSuggestedProductsComponent implements OnInit {
 
   productToSyncReference: ProductToSync
   bulkSync: Array<ProductToSync> = []
+
+  filterOptions: FilterOption[] = [
+    {label: 'filtrar por', value: 0},
+    {label: 'producto', value: 1},
+    {label: 'Empresa', value: 'hola'},
+  ];
 
   public currentPosition = 0
 
