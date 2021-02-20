@@ -1,8 +1,15 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core'
-import { Datum } from '../../../../../../interfaces/sincronizacion'
-import { map } from 'rxjs/operators'
-import { SincronizacionService } from '../../../../../../services/sincronizacion/sincronizacion.service'
+import { Datum } from '@interfaces/sincronizacion'
+import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
+
+import { SyncProductsDataService } from '../../../../services/sync-products-data.service'
+
+interface SuggestedProductDetails {
+  bank_id: number
+  product_id: number
+  name: string
+}
 
 @Component({
   selector: 'app-carousel-suggested',
@@ -12,15 +19,20 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 export class CarouselSuggestedComponent implements OnInit {
   @Input() item: Datum
   @Output() idSugerencia: EventEmitter<any>
+  @Output() suggestedProductDetails: EventEmitter<any>
   currentPosition = 0
   // Used in responsiveness of Angular Material
   rowHeight = '2:1.5'
 
+  productDetails: SuggestedProductDetails
+
   constructor(
     public sincronizacion: SincronizacionService,
-    private breakPointObserver: BreakpointObserver
+    private breakPointObserver: BreakpointObserver,
+    private _syncProductsDataService: SyncProductsDataService
   ) {
     this.idSugerencia = new EventEmitter()
+    this.suggestedProductDetails = new EventEmitter()
   }
 
   ngOnInit(): void {
@@ -45,7 +57,7 @@ export class CarouselSuggestedComponent implements OnInit {
           this.rowHeight = '2:4'
         }
         if (result.breakpoints[Breakpoints.Small]) {
-          this.rowHeight = '2:1.5'
+          this.rowHeight = '2:3'
         }
         if (result.breakpoints[Breakpoints.Medium]) {
           this.rowHeight = '2:2'
@@ -54,6 +66,18 @@ export class CarouselSuggestedComponent implements OnInit {
           this.rowHeight = '2:2'
         }
       })
+
+    /*     this.productDetails = {
+      bank_id: this.item.data[0].bank_id,
+      product_id: this.item.product_id,
+      name: this.item.data[0].name,
+    } */
+
+    this.suggestedProductDetails.emit({
+      idsuggested: this.item.data[0].bank_id,
+      idproducto: this.item.product_id,
+      productName: this.item.data[0].name,
+    })
   }
 
   setCurrentPosition(position: number) {
@@ -79,6 +103,13 @@ export class CarouselSuggestedComponent implements OnInit {
     this.currentPosition = nextPosition
 
     console.log('currentPosition', this.currentPosition)
+
+    // We send the pertinent data to the parent component, since from there it'll be modeled
+    this.suggestedProductDetails.emit({
+      idsuggested: this.item.data[this.currentPosition].bank_id,
+      idproducto: this.item.product_id,
+      productName: this.item.data[this.currentPosition].name,
+    })
   }
 
   setBack() {
@@ -93,6 +124,13 @@ export class CarouselSuggestedComponent implements OnInit {
     }
     this.item.data.find((i) => i.id === 0).marginLeft = finalPercentage
     this.currentPosition = backPosition
+
+    // We send the pertinent data to the parent component, since from there it'll be modeled
+    this.suggestedProductDetails.emit({
+      idsuggested: this.item.data[this.currentPosition].bank_id,
+      idproducto: this.item.product_id,
+      productName: this.item.data[this.currentPosition].name,
+    })
   }
 
   // SINCRONIZACION //

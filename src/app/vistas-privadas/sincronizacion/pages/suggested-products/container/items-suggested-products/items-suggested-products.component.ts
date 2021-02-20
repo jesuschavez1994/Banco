@@ -1,28 +1,16 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  Renderer2,
-  ElementRef,
-  ViewChild,
-  ViewChildren,
-  QueryList,
-} from '@angular/core'
-import { StoreService } from '../../../../../../services/store/store.service'
+import { Component, Input, OnInit } from '@angular/core'
+import { StoreService } from '@services/store/store.service'
 import { ActivatedRoute, Params, Router } from '@angular/router'
 import { Descripcion } from '@interfaces/sincronizacion'
 import { Total, Suggestion, Datum } from '@interfaces/sincronizacion'
-import { SincronizacionService } from '../../../../../../services/sincronizacion/sincronizacion.service'
-import { SincronizarElProducto } from '@models/sincronizacion/documentExcel.model'
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms'
-import { Sugerir } from '../../../../../../models/sincronizacion/sugerir'
+import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service'
+import { FormGroup, FormControl } from '@angular/forms'
 import { ProductosLoads } from '@interfaces/InterfaceProducto'
-import { BehaviorSubject } from 'rxjs'
-import { Termino } from '../../../../../../models/buscador.model'
+import { Termino } from '@models/buscador.model'
 import { BannerOptions } from '@interfaces/components-options/banner.options.interface'
 import { NgxSpinnerService } from 'ngx-spinner'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
+import { SyncProductsDataService } from '../../../../services/sync-products-data.service'
 
 export interface ICarouselItem {
   bank_id: number
@@ -36,12 +24,21 @@ export interface ICarouselItem {
 interface EventID {
   idsuggested: string
   idproducto: string
+  productName?: string
+}
+
+interface ProductToSync {
+  bank_id: number
+  product_id: number
+  name: string
+  checkedState?: boolean
 }
 
 @Component({
   selector: 'app-items-suggested-products',
   templateUrl: './items-suggested-products.component.html',
   styleUrls: ['./items-suggested-products.component.css'],
+  providers: [SyncProductsDataService],
 })
 export class ItemsSuggestedProductsComponent implements OnInit {
   imgsBanners: BannerOptions = {
@@ -53,8 +50,6 @@ export class ItemsSuggestedProductsComponent implements OnInit {
   @Input() isExpanded = false
 
   expandSidebar = true
-
-  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`)
 
   // pagesActual = 69;
   forma: FormGroup
@@ -86,6 +81,9 @@ export class ItemsSuggestedProductsComponent implements OnInit {
   headingRowHeight = '5:1'
   innerRowHeight = '2:1.5'
 
+  productToSyncReference: ProductToSync
+  bulkSync: Array<ProductToSync> = []
+
   public currentPosition = 0
 
   constructor(
@@ -93,11 +91,9 @@ export class ItemsSuggestedProductsComponent implements OnInit {
     public sincronizacion: SincronizacionService,
     private route: ActivatedRoute,
     private router: Router,
-    private renderer: Renderer2,
-    private el: ElementRef,
     private spinnerService: NgxSpinnerService,
     public snackBar: MatSnackBar,
-    private breakPointObserver: BreakpointObserver
+    private _syncProductsDataService: SyncProductsDataService
   ) {
     this.route.params.subscribe((params) => {
       console.log('query', params)
@@ -120,59 +116,10 @@ export class ItemsSuggestedProductsComponent implements OnInit {
       this.page = parseInt(params.page, 10) || 1
       this.getData(this.page)
     })
-
-    // Checking the device's breakpoint
-    this.breakPointObserver
-      .observe([
-        Breakpoints.XSmall,
-        Breakpoints.Small,
-        Breakpoints.Medium,
-        Breakpoints.Large,
-        Breakpoints.XLarge,
-      ])
-      .subscribe((result) => {
-        if (result.breakpoints[Breakpoints.XSmall]) {
-          this.headingRowHeight = '2:3'
-          this.innerRowHeight = '2:4'
-          console.log('XSmall')
-        }
-        if (result.breakpoints[Breakpoints.Small]) {
-          this.headingRowHeight = '2:2'
-          this.innerRowHeight = '2:4'
-          console.log('SMall')
-        }
-        if (result.breakpoints[Breakpoints.Medium]) {
-          this.headingRowHeight = '5:1'
-          this.innerRowHeight = '2:1.5'
-          console.log('Medium')
-        }
-        if (result.breakpoints[Breakpoints.Large]) {
-          this.headingRowHeight = '4:1'
-          this.innerRowHeight = '2:2'
-          console.log('Large')
-        }
-      })
   }
 
   spinner(): void {
     this.spinnerService.show()
-  }
-
-  SelectCheckBox(e: any, i: string) {
-    // console.log(e.checked)
-
-    if (e.checked) {
-      document.getElementById(i).style.filter =
-        'grayscale(5%) brightness(90%) opacity(100%)'
-      document.getElementById(i).style.filter =
-        '-webkit-filter: grayscale(5%) brightness(90%) opacity(100%)'
-      document.getElementById(i).style.filter =
-        '-moz-filter: grayscale(5%) brightness(90%) opacity(100%)'
-      document.getElementById(i).style.background = '#f4f4f4'
-    } else {
-      document.getElementById(i).style.background = 'none'
-      document.getElementById(i).style.filter = 'none'
-    }
   }
 
   pageChanged(page: number) {
@@ -204,30 +151,6 @@ export class ItemsSuggestedProductsComponent implements OnInit {
         this.spinnerService.hide()
 
         this.scrollTop()
-      })
-  }
-
-  formSincronizacion() {}
-
-  // SINCRONIZACION //
-  sincronizar(value: EventID) {
-    // console.log('id', value)
-
-    const BankId = new Sugerir(value.idsuggested)
-    this.sincronizacion
-      .productSyncrhonized(
-        localStorage.getItem('id'),
-        localStorage.getItem('storeId'),
-        value.idproducto,
-        BankId
-      )
-      .subscribe((resp) => {
-        // console.log(resp)
-        this.snackBar.open(
-          '¡Su producto ha sido sincronizado exitosamente!',
-          'cerrar',
-          { duration: 4000 }
-        )
       })
   }
 
@@ -278,5 +201,27 @@ export class ItemsSuggestedProductsComponent implements OnInit {
   // Expand or contract sidebar-list on responsive mode
   public toogleSidebar(event) {
     this.expandSidebar = event
+  }
+
+  updateBulkArray(eventValues: ProductToSync) {
+    this.productToSyncReference = {
+      bank_id: eventValues.bank_id,
+      product_id: eventValues.product_id,
+      name: eventValues.name,
+    }
+
+    if (eventValues.checkedState) {
+      // Updating the bulk array
+      this.bulkSync.push(this.productToSyncReference)
+      console.log('Bulk array update')
+      console.log(this.bulkSync)
+    } else {
+      // Deleting the product from bulk
+      this.bulkSync = this.bulkSync.filter(
+        (element) => element.bank_id !== this.productToSyncReference.bank_id
+      )
+      console.log('Filtered array')
+      console.log(this.bulkSync)
+    }
   }
 }
