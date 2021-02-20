@@ -27,6 +27,8 @@ import {HomeServiceService} from '../services/home-service.service';
 })
 export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
+  readonly pageName = 'business-detail';
+
   // Components Controllers
   @ViewChild('productCards') productCards: ProductsCardsComponent;
   @ViewChild('productDetail') productDetail: ProductDetailComponent;
@@ -253,7 +255,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         // si los datos de la tienda cambiaron o no
         // console.log('loadDataStore -this.storeData:');
 
-
         if (this.storeData) {
           // console.log(this.storeData.id);
           // console.log(storeResp.id);
@@ -292,15 +293,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         }
 
-        console.log('wasChangedStoreData');
-        console.log(this.wasChangedStoreData);
-
-        console.log('wasFirstLoadedProducts');
-        console.log(this.wasFirstLoadedProducts);
-
-        console.log('wasChangedQueryParam');
-        console.log(this.wasChangedQueryParam);
-
         // Evitamos que la página carguen los mismos datos
         // cuando la tienda sigue siendo la misma.
         // solo permite actualizar los datos cuando la tienda es cambiada
@@ -310,11 +302,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
           if (this.wasFirstLoadedProducts) {
 
-            // if (this.wasChangedQueryParam) {
             this.loadProductsCards(params, queryParam);
-
-            // }
-
 
           } else {
             this.loadProductsCards(params, queryParam);
@@ -325,20 +313,19 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         } else {
 
-            if (this.wasFirstLoadedProducts) {
+          if (this.wasFirstLoadedProducts) {
 
-                if (this.wasChangedQueryParam) {
-                  this.loadProductsCards(params, queryParam);
+            if (this.wasChangedQueryParam) {
+              this.loadProductsCards(params, queryParam);
 
-                }
-
-            } else {
-                this.loadProductsCards(params, queryParam);
-                this.wasFirstLoadedProducts = true;
             }
 
-        }
+          } else {
+            this.loadProductsCards(params, queryParam);
+            this.wasFirstLoadedProducts = true;
+          }
 
+        }
 
       });
 
@@ -386,59 +373,72 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
       this.productService.getProductByStore(idStore, idProduct).subscribe(
         product => {
+            // console.log('getProductByStore product', product);
+            if (product) {
 
-          let images = [];
+                let images = [];
 
-          if (product.sync_bank) {
+                if (product.sync_bank) {
 
-            if (product.sync_bank.length === 0) {
+                if (product.sync_bank.length === 0) {
 
-              images = product.images.map(image => {
-                return image.src;
-              });
+                    images = product.images.map(image => {
+                    return image.src;
+                    });
 
-            }else {
-              images = product.sync_bank.map(syncBank => {
-                return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
-              });
+                }else {
+                    images = product.sync_bank.map(syncBank => {
+                    return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
+                    });
+                }
+
+                }else {
+                images = product.images.map(image => {
+                    return image.src;
+                });
+                }
+
+                this.productDetail.selectedProduct =  {
+                name: product.name,
+                description: product.description,
+                price: product.price,
+                stock: product.stock,
+                images, // product.images
+                id: product.id ? product.id : -1,
+                idStore: product.store_id ? product.store_id : -1,
+                isFavorite: product.isFavorite ? product.isFavorite : false,
+                };
+
+                this.scrollToElement(document.querySelector('#profile-name'));
+
+            } else {
+
+              this.errorLoadProductDetail(idStore);
+
             }
-
-          }else {
-            images = product.images.map(image => {
-              return image.src;
-            });
-          }
-
-          // Antes
-          // const images = product.images.map(image => {
-          //   return image.src;
-          // });
-
-          this.productDetail.selectedProduct =  {
-            name: product.name,
-            description: product.description,
-            price: product.price,
-            stock: product.stock,
-            images, // product.images
-            id: product.id ? product.id : -1,
-            idStore: product.store_id ? product.store_id : -1,
-            isFavorite: product.isFavorite ? product.isFavorite : false,
-          };
-
-          this.scrollToElement(document.querySelector('#profile-name'));
 
         }, error => {
 
-          console.log('Error loading products', error);
-          this.productDetail.selectedProduct = null;
+          // console.log('getProductByStore error', error);
+          this.errorLoadProductDetail(idStore);
 
-        }, () => {
-          // console.log('products loaded');
         }
+
       );
 
     }
 
+
+  }
+
+  public errorLoadProductDetail(idStore) {
+
+    this.toastRef.open(
+      'El producto a detallar no existe en la tienda',
+      { color: '#ffffff', background: '#900909c2'}
+    );
+
+    this.productDetail.selectedProduct = null;
 
   }
 
