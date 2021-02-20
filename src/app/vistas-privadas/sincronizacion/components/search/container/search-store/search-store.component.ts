@@ -68,26 +68,20 @@ export class SearchStoreComponent implements OnInit, OnChanges {
     })
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // We keep track of changes on the input property
-    if (changes.bulkSync) {
-      this.disableSyncButton(this.bulkSync)
-    }
-  }
-
-  /*   ngOnChanges(changes: SimpleChanges) {
+    ngOnChanges(changes: SimpleChanges) {
     for (const propName in changes) {
       if (changes.hasOwnProperty(propName)) {
         let change = changes[propName]
         switch (propName) {
-          case 'pageSize': {
-            console.log(`pageSize changed to:`, change.currentValue)
+          case 'bulkSync': {
+            console.log(`bulkSync changed to:`, change.currentValue)
+            this.disableSyncButton(change.currentValue)
           }
         }
       }
     }
   }
- */
+
   public addNewProduct() {
     this.addProductNew = true
   }
@@ -110,14 +104,18 @@ export class SearchStoreComponent implements OnInit, OnChanges {
 
   // API calls handler methods ------------------
   sendBulkData() {
+    let payload = {
+      syncs: this.bulkSync
+    }
     console.log('Data to send to the server')
-    console.log(this.bulkSync)
+    console.log(payload)
+
 
     this._sincronizacionService
       .bulkProductsSync(
         localStorage.getItem('id'),
         localStorage.getItem('storeId'),
-        this.bulkSync
+        payload
       )
       .subscribe((response) => {
         console.log('Respuesta del servidor')

@@ -1,4 +1,4 @@
-<button class="prev" (click)="setBack()">&#10094;</button>
+<button class="prev" (click)="setBack()" [disabled]="!checkboxState">&#10094;</button>
 <div class="scrolling-wrapper row flex-row flex-nowrap">
   <div
     *ngFor="
@@ -58,7 +58,7 @@
     </mat-grid-list>
   </div>
 </div>
-<button class="next" (click)="setNext()">&#10095;</button>
+<button class="next" (click)="setNext()"     [disabled]="!checkboxState">&#10095;</button>
 
 <div
   class="input-group col-md-12 display-flex justify-content-flex-end pr-0 mt-3"
@@ -67,6 +67,7 @@
     type="submit"
     class="btn btn-primary button fredoka"
     (click)="sincronizar()"
+    [disabled]="checkboxState"
   >
     Sincronizar
   </button>

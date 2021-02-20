@@ -79,6 +79,7 @@
       <!-- ========= AGREGAMOS EL CARRUSEL DE LAS SUGERENCIAS =============-->
       <app-carousel-suggested
         [item]="item.suggestion"
+        [checkboxState]="isProductChecked"
         (idSugerencia)="sincronizar($event)"
         (suggestedProductDetails)="getSuggestedProductDetails($event)"
       >

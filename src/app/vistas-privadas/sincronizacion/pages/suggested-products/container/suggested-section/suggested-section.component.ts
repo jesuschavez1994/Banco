@@ -51,6 +51,8 @@ export class SuggestedSectionComponent implements OnInit {
   headingRowHeight = '5:1'
   innerRowHeight = '2:1.5'
 
+  isProductChecked = false
+
   productToSyncReference: ProductToSync
 
   constructor(
@@ -115,23 +117,14 @@ export class SuggestedSectionComponent implements OnInit {
         '-moz-filter: grayscale(5%) brightness(90%) opacity(100%)'
       document.getElementById(i).style.background = '#f4f4f4'
 
-      // Updating the bulk array
-      // this.bulkSync.push(this.productToSyncReference)
-      // console.log('Bulk array update')
-      // console.log(this.bulkSync)
+      this.isProductChecked = true
       this.productToSyncReference.checkedState = true
       this.actualProduct.emit(this.productToSyncReference)
     } else {
       document.getElementById(i).style.background = 'none'
       document.getElementById(i).style.filter = 'none'
 
-      // Deleting the product from bulk
-      // this.bulkSync = this.bulkSync.filter(
-      //   (element) => element.bank_id !== this.productToSyncReference.bank_id
-      // )
-
-      // console.log('Filtered array')
-      // console.log(this.bulkSync)
+      this.isProductChecked = false
       this.productToSyncReference.checkedState = false
       this.actualProduct.emit(this.productToSyncReference)
     }

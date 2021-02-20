@@ -18,6 +18,7 @@ interface SuggestedProductDetails {
 })
 export class CarouselSuggestedComponent implements OnInit {
   @Input() item: Datum
+  @Input() checkboxState: boolean
   @Output() idSugerencia: EventEmitter<any>
   @Output() suggestedProductDetails: EventEmitter<any>
   currentPosition = 0
@@ -67,12 +68,7 @@ export class CarouselSuggestedComponent implements OnInit {
         }
       })
 
-    /*     this.productDetails = {
-      bank_id: this.item.data[0].bank_id,
-      product_id: this.item.product_id,
-      name: this.item.data[0].name,
-    } */
-
+      // Updating the component's initial state
     this.suggestedProductDetails.emit({
       idsuggested: this.item.data[0].bank_id,
       idproducto: this.item.product_id,

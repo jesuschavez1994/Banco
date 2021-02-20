@@ -212,16 +212,16 @@ export class ItemsSuggestedProductsComponent implements OnInit {
 
     if (eventValues.checkedState) {
       // Updating the bulk array
-      this.bulkSync.push(this.productToSyncReference)
-      console.log('Bulk array update')
-      console.log(this.bulkSync)
+      let updatedArray: ProductToSync[]
+      updatedArray = [...this.bulkSync, this.productToSyncReference]
+     
+      this.bulkSync = updatedArray;
+
     } else {
       // Deleting the product from bulk.
       this.bulkSync = this.bulkSync.filter(
         (element) => element.bank_id !== this.productToSyncReference.bank_id
       )
-      console.log('Filtered array')
-      console.log(this.bulkSync)
     }
   }
 }
