@@ -3,7 +3,7 @@
   [ngClass]="{ 'search-engine--wrap': buttonSidebarList }"
 >
   <ng-container *ngIf="buttonSidebarList">
-    <div class="btn-toogle-sidebar-list mr-0">
+    <div class="btn-toogle-sidebar-list mx-2">
       <app-sidebar-list-button
         [expand]="isExpanded"
         (isExpanded)="toggleSidebarList($event)"
@@ -27,7 +27,7 @@
     </div> -->
 
   <button
-    type="button"
+    type="button mx-2"
     class="mr-3 sincronizar-button"
     (click)="sendBulkData()"
     mat-button
@@ -36,7 +36,7 @@
     Sincronizar
   </button>
 
-  <form class="searcher">
+  <form class="searcher"  [ngClass]="{'w-100':showFilter != true}">
     <i><img src="assets/img/icons/loupe.svg" /></i>
     <input
       type="search"
@@ -46,4 +46,17 @@
       [(ngModel)]="BuscarText"
     />
   </form>
+
+   <!-- NG IF PARA OCULTAR O MOSTRAR EL FILTRO POR DEFECTO MOSTRADO -->
+   <div [ngClass]="{'d-none': !showFilter}" class="filter">
+
+    <select #selectFilter>
+
+    <ng-container *ngFor="let option of filterOptions">
+      <option [value]="option.value">{{option.label}}</option>
+    </ng-container>
+
+  </select>
+
+  </div>
 </div>

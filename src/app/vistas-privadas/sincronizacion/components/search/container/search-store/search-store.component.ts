@@ -37,6 +37,8 @@ export class SearchStoreComponent implements OnInit, OnChanges {
   @Input() BuscarText: any
   @Input() debounce = 3000
   @Input() bulkSync: ProductToSync[]
+    // POR DEFECTO MUESTRA EL FILTRO
+    @Input() showFilter = true;
 
   // SALIDAS //
   @Output() sidebarExpand = new EventEmitter<boolean>()
@@ -45,6 +47,8 @@ export class SearchStoreComponent implements OnInit, OnChanges {
   BotonActivated: string
   addBotonEvent: boolean = false
   cantSync = true
+
+  public search = new FormControl('')
 
   constructor(
     private router: Router,
@@ -59,12 +63,10 @@ export class SearchStoreComponent implements OnInit, OnChanges {
       })
   }
 
-  public search = new FormControl('')
-
   ngOnInit(): void {
-    this.search.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
-      this.searchEmitter.emit(value)
-      console.log('search', value)
+    this.search.valueChanges.pipe(debounceTime(500)).subscribe((searchTerm) => {
+      this.searchEmitter.emit(searchTerm)
+      console.log('search', searchTerm)
     })
   }
 
@@ -108,14 +110,14 @@ export class SearchStoreComponent implements OnInit, OnChanges {
       syncs: this.bulkSync
     }
     console.log('Data to send to the server')
-    console.log(payload)
 
-
+    let stringPayload = JSON.stringify(payload)
+    console.log(stringPayload)
     this._sincronizacionService
       .bulkProductsSync(
         localStorage.getItem('id'),
         localStorage.getItem('storeId'),
-        payload
+        stringPayload
       )
       .subscribe((response) => {
         console.log('Respuesta del servidor')
