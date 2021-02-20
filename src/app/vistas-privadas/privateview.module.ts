@@ -75,7 +75,7 @@ import { AdminModule } from './Admin/admin.module'
 
 import { VistasPrivadasRoutingModule } from './vistas-privadas-routing.module'
 import { VistasPrivadasSharedModule } from './shared/vistas-privadas-shared.module'
-import { SearchModule } from './sincronizacion/components/search/search.module'
+import { SearchModule } from './my-store/pages/sincronizacion/components/search/search.module'
 
 /* 
   Components go here.

@@ -42,7 +42,7 @@ a{
     box-sizing: border-box;
     padding: 10px;
     width:70%;
-    background-image: url(../../../../../assets/img/sincronizacion/excel.svg);
+    background-image: url(../../../../../../../assets/img/sincronizacion/excel.svg);
     padding-right: calc(1.5em + .75rem);
     padding-left: calc(1em + .75rem);
     background-position: right calc(.375em + .1875rem) center !important;

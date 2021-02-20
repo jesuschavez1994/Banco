@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
-import { VistasPrivadasSharedModule } from '../../../shared/vistas-privadas-shared.module';
+import { VistasPrivadasSharedModule } from '../../../../../shared/vistas-privadas-shared.module';
 import { SearchModule } from '../../components/search/search.module';
 
 import { BankProductComponent } from './bank-product.component';

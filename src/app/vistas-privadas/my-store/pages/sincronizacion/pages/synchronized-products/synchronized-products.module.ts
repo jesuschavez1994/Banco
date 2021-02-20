@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
-import { VistasPrivadasSharedModule } from '../../../shared/vistas-privadas-shared.module';
+import { VistasPrivadasSharedModule } from '../../../../../shared/vistas-privadas-shared.module';
 
 import { DialogSynchronizedComponent } from './container/dialog-synchronized/dialog-synchronized.component';
 import { NoSynchronizedProductsComponent } from './container/no-synchronized-products/no-synchronized-products.component';

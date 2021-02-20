@@ -6,7 +6,7 @@ import { StoreService } from '@services/store/store.service';
 import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import { SincronizacionService } from '../../../../services/sincronizacion/sincronizacion.service';
+import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 class Sincronizacion {

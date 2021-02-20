@@ -1,8 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { StoreService } from '../../../../../../services/store/store.service';
-import { ProductosLoads, DataProductDB } from '../../../../../../interfaces/InterfaceProducto';
-import { SincronizacionService } from '../../../../../../services/sincronizacion/sincronizacion.service';
-import { ListProductSyncAnNoSync, DataListProductSyncAnNoSync } from '../../../../../../interfaces/table-product-sync-and-no-sync/ListProductSyncAndNosync';
+import { StoreService } from '@services/store/store.service';
+import { ProductosLoads, DataProductDB } from '@interfaces/InterfaceProducto';
+import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service';
+import { ListProductSyncAnNoSync, DataListProductSyncAnNoSync } from '@interfaces/table-product-sync-and-no-sync/ListProductSyncAndNosync';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
 

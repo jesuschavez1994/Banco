@@ -11,7 +11,7 @@ import {
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms'
 import { debounceTime } from 'rxjs/operators'
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface'
-import { AsideFiltrosComponent } from '../../../../../shared/aside-filtros/aside-filtros.component'
+import { AsideFiltrosComponent } from '../../../../../../../shared/aside-filtros/aside-filtros.component'
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router'
 import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service'
 

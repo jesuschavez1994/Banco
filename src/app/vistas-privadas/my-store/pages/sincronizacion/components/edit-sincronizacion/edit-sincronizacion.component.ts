@@ -7,7 +7,7 @@ import { StoreService } from '@services/store/store.service';
 import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
 import { EditProductStore } from '@interfaces/interfaceEditProductStore';
-import { SincronizacionService } from '../../../../services/sincronizacion/sincronizacion.service';
+import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import {MatSnackBar} from '@angular/material/snack-bar';
 

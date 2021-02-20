@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { SincronizacionRoutingModule } from './sincronizacion-routing.module';
 import { SharedModule } from '@shared/shared.module';
-import { VistasPrivadasSharedModule } from '../shared/vistas-privadas-shared.module';
+import { VistasPrivadasSharedModule } from '../../../shared/vistas-privadas-shared.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BankProductModule } from './pages/bank-product/bank-product.module';
 import { ExportarListaExcelModule } from './pages/exportar-lista-excel/exportar-lista-excel.module';

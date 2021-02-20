@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service';
 import { ProductosLoads,  DataProductDB} from '@interfaces/InterfaceProducto';
 import {  ActivatedRoute, Params, Router} from '@angular/router';
-import { Descripcion } from '../../../../interfaces/sincronizacion';
+import { Descripcion } from '@interfaces/sincronizacion';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ItemListProductComponent } from './container/item-list-product/item-list-product.component';
 

@@ -12,7 +12,7 @@ import {
 import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
 import { SearchStore } from '@models/search/search-store.model';
 import { SearchService } from '@services/Search/search.service';
-import { SearchStoreComponent } from '../sincronizacion/components/search/container/search-store/search-store.component';
+import { SearchStoreComponent } from './pages/sincronizacion/components/search/container/search-store/search-store.component';
 import {
   // Category,
   Profile,

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SharedModule } from '@shared/shared.module';
-import { VistasPrivadasSharedModule } from '../../../shared/vistas-privadas-shared.module';
+import { VistasPrivadasSharedModule } from '../../../../../shared/vistas-privadas-shared.module';
 
 import { SearchComponent } from './search.component';
 import { SearchStoreComponent } from './container/search-store/search-store.component';

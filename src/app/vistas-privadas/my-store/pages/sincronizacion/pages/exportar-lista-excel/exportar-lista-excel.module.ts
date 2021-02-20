@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
-import { VistasPrivadasSharedModule } from '../../../shared/vistas-privadas-shared.module';
+import { VistasPrivadasSharedModule } from '../../../../../shared/vistas-privadas-shared.module';
 
 import { DragDropZoneFileComponent } from './container/drag-drop-zone-file/drag-drop-zone-file.component';
 import { ExportarListaExcelComponent } from './exportar-lista-excel.component';

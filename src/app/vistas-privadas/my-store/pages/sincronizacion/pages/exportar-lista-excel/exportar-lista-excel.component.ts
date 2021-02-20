@@ -2,10 +2,10 @@ import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, Output, 
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { MyValidators } from '@utils/validators';
 import { DocumentExcel } from '@models/sincronizacion/documentExcel.model';
-import { SincronizacionService } from '../../../../services/sincronizacion/sincronizacion.service';
-import { FileUploadModel } from '../../../../interfaces/UploadFiles';
+import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service';
+import { FileUploadModel } from '@interfaces/UploadFiles';
 import { HttpErrorResponse, HttpEventType, HttpRequest } from '@angular/common/http';
-import { URL_SERVICIOS } from '../../../../config/config';
+import { URL_SERVICIOS } from '../../../../../../config/config';
 import { NgxSpinnerService } from "ngx-spinner";
 
 
