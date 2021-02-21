@@ -343,6 +343,29 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       relativeTo: this.route,
     };
 
+    // Retorna los valores del value concatenados o el valor de name.
+    // Si existe value lo retorna, sino retorna el name.
+    function getOptionSelectedValue(optionSelected: Option){
+
+      const keyValue = 'value';
+
+      if (optionSelected[keyValue]) {
+
+        let optionSelectedValue;
+        optionSelectedValue = optionSelected[keyValue];
+
+        if (Array.isArray(optionSelectedValue)) {
+          optionSelectedValue = optionSelectedValue.join();
+        }
+
+        return optionSelectedValue;
+
+      }
+
+      return optionSelected.name;
+
+    }
+
     this.filters.forEach( filterFor => {
       // queryParams[]
       if (filterFor.type === 'single') {
@@ -353,7 +376,19 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
         if (optionSelected) {
 
-          queryParams[filterFor.paramName] = optionSelected.name;
+          // if (optionSelected.value) {
+
+          //   let optionSelectedValue;
+          //   optionSelectedValue = optionSelected.value;
+
+          //   if (Array.isArray(optionSelectedValue)) {
+          //     optionSelectedValue = optionSelectedValue.join();
+          //   }
+
+          // }
+
+          // queryParams[filterFor.paramName] = optionSelected.name;
+          queryParams[filterFor.paramName] = getOptionSelectedValue(optionSelected);
 
         } else {
 
@@ -370,7 +405,24 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
         if (optionsSelected.length > 0) {
 
           const valuesOfQueryParam = optionsSelected.map( optionSelected => {
-            return optionSelected.name;
+
+            // if (optionSelected.value) {
+
+            //   let optionSelectedValue;
+            //   optionSelectedValue = optionSelected.value;
+
+            //   if (Array.isArray(optionSelectedValue)) {
+            //     optionSelectedValue = optionSelectedValue.join();
+            //   }
+
+            //   return optionSelectedValue;
+            // }
+
+            // Si existe value significa que el valor a colocar en el query param es el value y no el name
+            // return optionSelected.name;
+
+            return getOptionSelectedValue(optionSelected);
+
           });
 
           queryParams[filterFor.paramName] = valuesOfQueryParam.join();
@@ -388,7 +440,9 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
             if (parentOptionSelected) { // si existe una opcion del padre seleccionada, agrego el queryParam del padre
 
               // agregamos el paramQuery del parentFilter
-              queryParams[parentFilter.paramName] = parentOptionSelected.name;
+              // queryParams[parentFilter.paramName] = parentOptionSelected.name;
+
+              queryParams[parentFilter.paramName] = getOptionSelectedValue(parentOptionSelected);
 
             } else { // en caso contrario elimino el queryParam
 

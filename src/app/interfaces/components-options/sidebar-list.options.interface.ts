@@ -60,6 +60,7 @@ export interface Option {
   optionId?: number;
   parentOptionId?: number;
   name: string;
+  value?: any[] | any;
   totalFounds: number;
   isSelected?: boolean;
 }

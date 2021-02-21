@@ -661,7 +661,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       isVerified: storeResp.certification == 'true' ? true : false
     };
 
-    const sidebarFilters = [
+    const sidebarFilters: Filter[] = [
       {
         filterId: 1,
         title: 'categorías',
@@ -716,30 +716,35 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
           {
             optionId: 1,
             name: '$0 - $10,000',
+            value: [0, 10000],
             totalFounds: 200,
             // isSelected: false
           },
           {
             optionId: 2,
             name: '$10,000 - $20,000',
+            value: [10000, 20000],
             totalFounds: 200,
             // isSelected: false
           },
           {
             optionId: 3,
             name: '$20,000 - $30,000',
+            value: [20000, 30000],
             totalFounds: 200,
             // isSelected: false
           },
           {
             optionId: 4,
             name: '$30,000 - $40,000',
+            value: [30000, 40000],
             totalFounds: 200,
             // isSelected: false
           },
           {
             optionId: 5,
             name: '$40,000 - $50,000',
+            value: [40000, 50000],
             totalFounds: 200,
             // isSelected: false
           },
@@ -786,13 +791,16 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   public scrollToElement(element) {
 
-    element.scrollIntoView(
-      {
-        behavior: 'smooth',
-        block: 'start',
-        inline: 'nearest'
-      }
-    );
+    if (element) {
+      element.scrollIntoView(
+        {
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest'
+        }
+      );
+    }
+
   }
 
 }
