@@ -73,7 +73,7 @@ export class MyStoreComponent implements OnInit {
   ngOnInit() {
     this.userLog = this.homeService.islog()
     this.storeLog = this.homeService.storeActive()
-    // this.loadDataStore();
+    this.loadDataStore()
     this.VeriquedBanner()
   }
 

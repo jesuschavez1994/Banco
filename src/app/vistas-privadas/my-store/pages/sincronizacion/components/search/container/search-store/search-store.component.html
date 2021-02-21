@@ -15,7 +15,7 @@
   <!-- === BOTÓN AGREGAR NUEVO PRODUCTO ====-->
   <!-- ====================================-->
   <button
-    class="btn btn-primary mx-3"
+    class="btn agg-product mx-3"
     type="button"
     *ngIf="hasRoute('my-store/product-catalogue')"
     id="addProduct"
@@ -28,7 +28,7 @@
 
   <button
     type="button"
-    class="mx-3 sincronizar-button"
+    class="mx-3 btn sincronizar-button"
     (click)="sendBulkData()"
     mat-button
     [disabled]="cantSync"
@@ -37,7 +37,7 @@
     Sincronizar
   </button>
 
-  <form class="searcher" [ngClass]="{ 'w-100': showFilter !== true }">
+  <form class="searcher ml-auto" [ngClass]="{ 'w-100': showFilter !== true }">
     <i><img src="assets/img/icons/loupe.svg" /></i>
     <input
       type="search"
