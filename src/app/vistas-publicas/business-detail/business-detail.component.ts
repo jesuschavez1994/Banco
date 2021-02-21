@@ -378,45 +378,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             // console.log('getProductByStore product', product);
             if (product) {
 
-              // let images = [];
-
-              // if (product.sync_bank) {
-
-              //   if (product.sync_bank.length === 0) {
-
-              //     images = product.images.map(image => {
-              //     return image.src;
-              //     });
-
-              //   }else {
-              //     // images = product.sync_bank.map(syncBank => {
-              //     //   return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
-              //     // });
-              //     images = product.sync_bank.map(syncBank => {
-              //       return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
-              //     });
-              //   }
-
-              // } else {
-              //   images = product.images.map(image => {
-              //     return image.src;
-              //   });
-              // }
-
-
               const productFormatead = this.productModel.productsCardsComponent.formatProductResp(product);
               this.productDetail.selectedProduct = productFormatead[0]; // el método devuelve un array así que obtengo el primer elemento
-
-              // this.productDetail.selectedProduct =  {
-              // name: product.name,
-              // description: product.description,
-              // price: product.price,
-              // stock: product.stock,
-              // images, // product.images
-              // id: product.id ? product.id : -1,
-              // idStore: product.store_id ? product.store_id : -1,
-              // isFavorite: product.isFavorite ? product.isFavorite : false,
-              // };
 
               this.scrollToElement(document.querySelector('#profile-name'));
 
