@@ -204,15 +204,13 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       // Para detectar si los valores de queryParam han cambiado o no
       // y poder crear validaciones, como evitar que el listado de productos
       // se actualice si solo se cambio el id del producto a detallar
-      console.log('QUERY PARAMS - this.storeData:');
+      // console.log('QUERY PARAMS - this.storeData:');
 
       if (this.queryParam) {
 
-        console.log('loadDataByParams - this.queryParam');
-        console.log(this.queryParam);
-        console.log(queryParam);
-
-        // if ( this.queryParam.keys.length > 0) {
+        // console.log('loadDataByParams - this.queryParam');
+        // console.log(this.queryParam);
+        // console.log(queryParam);
 
         if (this.queryParam !== queryParam) {
           this.wasChangedQueryParam = true;
@@ -223,15 +221,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         }
 
-        // } else {
-        //   this.wasChangedQueryParam = false;
-
-        // }
-
-
       }else {
         this.queryParam = queryParam; // guardamos de forma global los datos de la tienda
-        console.log('this.queryParam - undefined');
+        // console.log('this.queryParam - undefined');
       }
 
       this.loadDataStore(params, queryParam);
@@ -375,19 +367,19 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
       this.productService.getProductByStore(idStore, idProduct).subscribe(
         product => {
-            // console.log('getProductByStore product', product);
-            if (product) {
+          // console.log('getProductByStore product', product);
+          if (product) {
 
-              const productFormatead = this.productModel.productsCardsComponent.formatProductResp(product);
-              this.productDetail.selectedProduct = productFormatead[0]; // el método devuelve un array así que obtengo el primer elemento
+            const productFormatead = this.productModel.productsCardsComponent.formatProductResp(product);
+            this.productDetail.selectedProduct = productFormatead[0]; // el método devuelve un array así que obtengo el primer elemento
 
-              this.scrollToElement(document.querySelector('#profile-name'));
+            this.scrollToElement(document.querySelector('#profile-name'));
 
-            } else {
+          } else {
 
-              this.errorLoadProductDetail();
+            this.errorLoadProductDetail();
 
-            }
+          }
 
         }, error => {
 
@@ -430,7 +422,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       let filter;
       filter = {};
 
-      // console.log('queryParams Key: ', queryParams.keys);
+      console.log('queryParams Key: ', queryParams.keys);
 
       const keysQueryParams = queryParams.keys;
 
@@ -447,18 +439,18 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
               // name: 'l',
               break;
 
-            case 'marks':
-              queryParamsAllowed.marks = this.utils.stringToArray(queryParams.get('marks'));
+            case 'marcas':
+              queryParamsAllowed.marks = this.utils.stringToArray(queryParams.get('marcas'));
               // marks: ['generica', 'ALBENZA', 'XANAX', 'gillete'],
               break;
 
-            case 'category':
-              queryParamsAllowed.categories = this.utils.stringToArray(queryParams.get('category'));
+            case 'categoria':
+              queryParamsAllowed.categories = this.utils.stringToArray(queryParams.get('categoria'));
               // categories: ['Cosmeticos', 'infantil'],
               break;
 
-            case 'subcategories':
-              queryParamsAllowed.subcategories = this.utils.stringToArray(queryParams.get('subcategories'));
+            case 'sub-categorias':
+              queryParamsAllowed.subcategories = this.utils.stringToArray(queryParams.get('sub-categorias'));
               // subcategories: ['Cutis', 'Analgesicos'],
 
               break;
@@ -468,8 +460,10 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
               // factories: ['gerber', 'polar'],
               break;
 
-            case 'price':
-              queryParamsAllowed.price = this.utils.stringToArray(queryParams.get('price'), true);
+            case 'precios':
+              console.log('queryParams.get(precios)');
+              console.log(queryParams.get('precios'));
+              queryParamsAllowed.price = this.utils.stringToArray(queryParams.get('precios'), true);
               // queryParams.get('price').split(',');
               // price: [1, 284],
               break;
@@ -690,7 +684,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         filterId: 2,
         title: 'sub categorías',
         type: 'multiple',
-        paramName: 'sub-categoria',
+        paramName: 'sub-categorias',
         parentFilterId: 1,
         options: [
           {
@@ -717,7 +711,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         filterId: 3,
         title: 'Precios',
         type: 'single', // Determinamos que solo una opción puede ser seleccionada
-        paramName: 'price',
+        paramName: 'precios',
         options: [
           {
             optionId: 1,
