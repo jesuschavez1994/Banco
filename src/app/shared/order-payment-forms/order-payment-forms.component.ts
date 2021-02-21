@@ -18,10 +18,11 @@ export class OrderPaymentFormsComponent implements OnInit {
   communes = [
     {id: 1, label: 'comuna1'}
   ];
-
+  // .map( r => r.id )
+  // .map( r => r.id )
   form = new FormGroup({
-    region: new FormControl('', [Validators.required, MyValidators.existInArray(this.regions.map( r => r.id ) )]),
-    comuna: new FormControl('', [Validators.required, MyValidators.existInArray(this.communes.map( r => r.id ) )]),
+    region: new FormControl('', [Validators.required, MyValidators.existInArray(this.regions)]),
+    comuna: new FormControl('', [Validators.required, MyValidators.existInArray(this.communes)]),
     direccion: new FormControl('', [Validators.required, Validators.minLength(10)]),
     hospedaje: new FormControl('', [Validators.required, Validators.minLength(6)]),
     telefono: new FormControl('', [

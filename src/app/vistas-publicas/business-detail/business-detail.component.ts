@@ -19,6 +19,7 @@ import { DropdownOption } from '@interfaces/components-options/dropdown.options.
 import { DropdownIconComponent } from '../../shared/dropdown-icon/dropdown-icon.component';
 import { ToastComponent } from '../../modals/toast/toast.component';
 import {HomeServiceService} from '../services/home-service.service';
+import { ProductModel } from '@app/models/product.model';
 
 @Component({
   selector: 'app-business-detail',
@@ -161,7 +162,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     private storeService: StoreService,
     private paymentProcessService: PaymentProcessService,
     private utils: Utils,
-    private dropdownIconComp: DropdownIconComponent
+    private dropdownIconComp: DropdownIconComponent,
+    private productModel: ProductModel,
 
   ){}
 
@@ -376,51 +378,53 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             // console.log('getProductByStore product', product);
             if (product) {
 
-                let images = [];
+              let images = [];
 
-                if (product.sync_bank) {
+              if (product.sync_bank) {
 
                 if (product.sync_bank.length === 0) {
 
-                    images = product.images.map(image => {
-                    return image.src;
-                    });
+                  images = product.images.map(image => {
+                  return image.src;
+                  });
 
                 }else {
-                    images = product.sync_bank.map(syncBank => {
+                  // images = product.sync_bank.map(syncBank => {
+                  //   return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
+                  // });
+                  images = product.sync_bank.map(syncBank => {
                     return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
-                    });
+                  });
                 }
 
-                }else {
+              } else {
                 images = product.images.map(image => {
-                    return image.src;
+                  return image.src;
                 });
-                }
+              }
 
-                this.productDetail.selectedProduct =  {
-                name: product.name,
-                description: product.description,
-                price: product.price,
-                stock: product.stock,
-                images, // product.images
-                id: product.id ? product.id : -1,
-                idStore: product.store_id ? product.store_id : -1,
-                isFavorite: product.isFavorite ? product.isFavorite : false,
-                };
+              this.productDetail.selectedProduct =  {
+              name: product.name,
+              description: product.description,
+              price: product.price,
+              stock: product.stock,
+              images, // product.images
+              id: product.id ? product.id : -1,
+              idStore: product.store_id ? product.store_id : -1,
+              isFavorite: product.isFavorite ? product.isFavorite : false,
+              };
 
-                this.scrollToElement(document.querySelector('#profile-name'));
+              this.scrollToElement(document.querySelector('#profile-name'));
 
             } else {
 
-              this.errorLoadProductDetail(idStore);
+              this.errorLoadProductDetail();
 
             }
 
         }, error => {
 
-          // console.log('getProductByStore error', error);
-          this.errorLoadProductDetail(idStore);
+          this.errorLoadProductDetail();
 
         }
 
@@ -431,14 +435,19 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   }
 
-  public errorLoadProductDetail(idStore) {
+  public errorLoadProductDetail() {
 
     this.toastRef.open(
       'El producto a detallar no existe en la tienda',
       { color: '#ffffff', background: '#900909c2'}
     );
 
-    this.productDetail.selectedProduct = null;
+    if (this.productDetail) {
+      if (this.productDetail.selectedProduct) {
+        this.productDetail.selectedProduct = null;
+      }
+
+    }
 
   }
 
@@ -533,45 +542,55 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
           this.itemsPerPage = resp.per_page;
 
           if (products.length > 0) {
+            console.log(this.productModel);
+            console.log(this.productModel.productsCardsComponent);
+            this.productCards.products = this.productModel.productsCardsComponent.formatProductResp(products);
+            //  formatProductResp(products: ProductInterface[]);
+            // = products.map( product => {
 
-            this.productCards.products = products.map( product => {
+            //   let images = [];
 
-              let images = [];
+            //   if (product.sync_bank) {
 
-              if (product.sync_bank) {
+            //     if (product.sync_bank.length === 0) {
 
-                if (product.sync_bank.length === 0) {
+            //       images = product.images.map(image => {
+            //         return image.src;
+            //       });
 
-                  images = product.images.map(image => {
-                    return image.src;
-                  });
+            //     }else {
+            //       const syncBankImages = product.sync_bank.map(syncBank => {
+            //         return syncBank.images;
+            //       });
 
-                }else {
-                  images = product.sync_bank.map(syncBank => {
-                    return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
-                  });
-                }
+            //       images = syncBankImages.map(syncBankImage => {
+            //         return syncBankImage.map(syBankImage => {
+            //           return syBankImage.src;
+            //         });
+            //       });
 
-              }else {
-                images = product.images.map(image => {
-                  return image.src;
-                });
-              }
+            //     }
 
-              return {
-                name: product.name,
-                description: product.description,
-                price: product.price,
-                stock: product.stock,
-                images, // product.images
-                id: product.id ? product.id : -1,
-                idStore: product.store_id ? product.store_id : -1,
-                isFavorite: product.isFavorite ? product.isFavorite : false,
-                };
+            //   }else {
+            //     images = product.images.map(image => {
+            //       return image.src;
+            //     });
+            //   }
 
-            } );
+            //   return {
+            //     name: product.name,
+            //     description: product.description,
+            //     price: product.price,
+            //     stock: product.stock,
+            //     images, // product.images
+            //     id: product.id ? product.id : -1,
+            //     idStore: product.store_id ? product.store_id : -1,
+            //     isFavorite: product.isFavorite ? product.isFavorite : false,
+            //     };
 
-            // console.log('products loaded: ', this.productCards.products);
+            // } );
+
+            console.log('products loaded: ', this.productCards.products);
 
             this.productCards.toggleShimmer(false);
 
