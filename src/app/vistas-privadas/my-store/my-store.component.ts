@@ -8,6 +8,7 @@ import {
   Srcsize,
 } from '@interfaces/store.interface'
 import { SearchService } from '@services/Search/search.service'
+import { MyStoreService } from './services/my-store.service'
 
 import {
   // Category,
@@ -61,8 +62,13 @@ export class MyStoreComponent implements OnInit {
     public storeService: StoreService,
     private _searchService: SearchService,
     private homeService: HomeServiceService,
-    private userStoreService: UserStoreService
-  ) {}
+    private userStoreService: UserStoreService,
+    private _myStoreService: MyStoreService
+  ) {
+    _myStoreService.sidebarExpanded$.subscribe(
+      (sidebarState) => (this.expandSidebar = sidebarState)
+    )
+  }
 
   ngOnInit() {
     this.userLog = this.homeService.islog()
@@ -96,7 +102,7 @@ export class MyStoreComponent implements OnInit {
       )
   }
 
-  /*   public setBreadcrumbOptions(idStore: string, storeResp: StoreResponse) {
+  public setBreadcrumbOptions(idStore: string, storeResp: StoreResponse) {
     this.breadcrumb = [
       {
         title: 'inicio',
@@ -112,7 +118,7 @@ export class MyStoreComponent implements OnInit {
       title: `${storeResp.name}`,
       routerLink: [`/business-detail/${idStore}`],
     }
-  } */
+  }
 
   // Expand or contract sidebar-list on responsive mode
   public toogleSidebar(event) {
@@ -121,26 +127,26 @@ export class MyStoreComponent implements OnInit {
   }
 
   // Store
-  /*  public loadDataStore() {
+  public loadDataStore() {
     this.storeService
       .getStoreById(localStorage.getItem('storeId'))
       .subscribe((storeResp) => {
-        this.StoreName = storeResp.name;
-        console.log('store', storeResp);
-        this.setBreadcrumbOptions(localStorage.getItem('storeId'), storeResp);
-        this.setSidebarOptions(storeResp);
-      });
-  } */
+        this.StoreName = storeResp.name
+        console.log('store', storeResp)
+        this.setBreadcrumbOptions(localStorage.getItem('storeId'), storeResp)
+        this.setSidebarOptions(storeResp)
+      })
+  }
 
   // CATEGORIAS Y SUBCATEGORIAS DEL FILTRO //
 
-  /* public setSidebarOptions(storeResp: StoreResponse) {
+  public setSidebarOptions(storeResp: StoreResponse) {
     this.anchorsMenu = {
       productLink: `/product-catalogue`,
       contactLink: `contact'`,
       wordToMatch: `products`,
       synchronizationLink: `/my-store/sincronizacion/exportar-lista-excel`,
-    };
+    }
 
     this.profile = {
       name: storeResp.name,
@@ -151,7 +157,7 @@ export class MyStoreComponent implements OnInit {
       },
       img: 'assets/img/no-image-banner.jpg', // la base de datos no tiene el dato
       isVerified: storeResp.certification == 'true' ? true : false,
-    };
+    }
 
     this.categories = [
       {
@@ -232,6 +238,6 @@ export class MyStoreComponent implements OnInit {
           },
         ],
       },
-    ];
-  } */
+    ]
+  }
 }

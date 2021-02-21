@@ -5,9 +5,16 @@
   [storeAct]="storeLog"
 ></app-public-navbar>
 <main class="page">
-  <!--     <ng-container>
-        <app-aside-filtros #sidebarList [isExpanded]="expandSidebar" (sidebarExpand)="toogleSidebar($event)" [categories]="categories" [anchorsMenu]="anchorsMenu" [profile]="profile"></app-aside-filtros>
-    </ng-container> -->
+  <ng-container>
+    <app-aside-filtros
+      #sidebarList
+      [isExpanded]="expandSidebar"
+      (sidebarExpand)="toogleSidebar($event)"
+      [categories]="categories"
+      [anchorsMenu]="anchorsMenu"
+      [profile]="profile"
+    ></app-aside-filtros>
+  </ng-container>
 
   <div class="column">
     <section class="introduction-page">

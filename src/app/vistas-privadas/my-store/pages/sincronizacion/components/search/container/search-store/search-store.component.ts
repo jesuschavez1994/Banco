@@ -11,6 +11,7 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms'
 import { debounceTime } from 'rxjs/operators'
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface'
 import { Router } from '@angular/router'
+import { MyStoreService } from '../../../../../../services/my-store.service'
 import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
@@ -51,8 +52,13 @@ export class SearchStoreComponent implements OnInit, OnChanges {
   constructor(
     private _router: Router,
     private _sincronizacionService: SincronizacionService,
-    public snackBar: MatSnackBar
-  ) {}
+    public snackBar: MatSnackBar,
+    private _myStoreService: MyStoreService
+  ) {
+    _myStoreService.sidebarExpanded$.subscribe(
+      (sidebarState) => (this.isExpanded = sidebarState)
+    )
+  }
 
   ngOnInit(): void {
     this.search.valueChanges.pipe(debounceTime(500)).subscribe((searchTerm) => {
@@ -82,8 +88,7 @@ export class SearchStoreComponent implements OnInit, OnChanges {
    * Check if the router url contains the specified route.
    *
    * @param {string} routeForCheck
-   * @returns
-   * @memberof ThisComponent
+   * @returns {boolean} boolean
    */
   hasRoute(routeForCheck: string) {
     return this._router.url.includes(routeForCheck)
@@ -93,6 +98,7 @@ export class SearchStoreComponent implements OnInit, OnChanges {
   public toggleSidebarList(event) {
     this.isExpanded = event
     this.sidebarExpand.emit(this.isExpanded)
+    this._myStoreService.expandSidebar(event)
     console.log('event search', event)
   }
 

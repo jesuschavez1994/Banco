@@ -22,6 +22,8 @@ import {
 } from '@interfaces/components-options/sidebar-list.options.interface'
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router'
 import 'rxjs/add/operator/filter'
+import { MyStoreService } from '../../my-store/services/my-store.service'
+
 @Component({
   selector: 'app-aside-filtros',
   templateUrl: './aside-filtros.component.html',
@@ -60,7 +62,8 @@ export class AsideFiltrosComponent implements OnInit, AfterViewInit {
     public _productLoadingService: ProductLoadingService,
     public filtroService: FilstroStoreService,
     private router: Router,
-    private _router: Router
+    private _router: Router,
+    private _myStoreService: MyStoreService
   ) {
     router.events
       .filter((event) => event instanceof NavigationEnd)
@@ -105,6 +108,7 @@ export class AsideFiltrosComponent implements OnInit, AfterViewInit {
   public toggleSidebarList(event?: any) {
     this.isExpanded = event
     // console.log('isExpanded', event);
+    this._myStoreService.expandSidebar(event)
     return this.sidebarExpand.emit(this.isExpanded)
   }
 

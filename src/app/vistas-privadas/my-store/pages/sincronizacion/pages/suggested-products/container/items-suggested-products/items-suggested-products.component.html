@@ -2,17 +2,6 @@
   <p style="font-size: 20px; color: white">Cargando...</p>
 </ngx-spinner>
 
-<ng-container>
-  <app-aside-filtros
-    #sidebarList
-    [isExpanded]="expandSidebar"
-    (sidebarExpand)="toogleSidebar($event)"
-    [categories]="categories"
-    [anchorsMenu]="anchorsMenu"
-    [profile]="profile"
-  ></app-aside-filtros>
-</ng-container>
-
 <app-no-suggested-products
   *ngIf="MyProduct.length === undefined"
 ></app-no-suggested-products>

@@ -48,11 +48,11 @@
   </form>
 
   <!-- NG IF PARA OCULTAR O MOSTRAR EL FILTRO POR DEFECTO MOSTRADO -->
-  <div [ngClass]="{ 'd-none': !showFilter }" class="filter">
+  <!-- <div [ngClass]="{ 'd-none': !showFilter }" class="filter">
     <select #selectFilter>
       <ng-container *ngFor="let option of filterOptions">
         <option [value]="option.value">{{ option.label }}</option>
       </ng-container>
     </select>
-  </div>
+  </div> -->
 </div>

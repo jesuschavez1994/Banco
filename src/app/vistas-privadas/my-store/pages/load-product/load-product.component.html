@@ -24,17 +24,6 @@
   (window:scroll)="doSomethingOnWindowScroll($event)"
   #main
 >
-  <ng-container>
-    <app-aside-filtros
-      #sidebarList
-      [isExpanded]="expandSidebar"
-      (sidebarExpand)="toogleSidebar($event)"
-      [categories]="categories"
-      [anchorsMenu]="anchorsMenu"
-      [profile]="profile"
-    ></app-aside-filtros>
-  </ng-container>
-
   <div class="container-fluid">
     <section class="row" *ngIf="!addProductNew">
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">

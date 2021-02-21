@@ -22,6 +22,7 @@ import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.opt
 import { StoreResponse } from '@interfaces/store.interface'
 import { SearchStore } from '@models/search/search-store.model'
 import { SearchService } from '@services/Search/search.service'
+import { MyStoreService } from '../../services/my-store.service'
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface'
 
 import * as Hammer from 'hammerjs'
@@ -97,7 +98,8 @@ export class LoadProductComponent implements OnInit {
     private spinnerService: NgxSpinnerService,
     private filtroService: FilstroStoreService,
     private renderer: Renderer2,
-    private _searchService: SearchService
+    private _searchService: SearchService,
+    private _myStoreService: MyStoreService
   ) {
     this.route.params.subscribe((params) => {
       console.log('query', params)
@@ -255,7 +257,8 @@ export class LoadProductComponent implements OnInit {
 
   public toggleSidebarList(event) {
     this.isExpanded = event
-    this.sidebarExpand.emit(this.isExpanded)
+    // this._myStoreService.expandSidebar(event)
+    // this.sidebarExpand.emit(this.isExpanded)
   }
 
   // Expand or contract sidebar-list on responsive mode

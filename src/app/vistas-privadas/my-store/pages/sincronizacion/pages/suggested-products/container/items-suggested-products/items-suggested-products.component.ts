@@ -16,8 +16,13 @@ import { FilterOption } from '@interfaces/components-options/search-bar.options.
 import { StoreResponse } from '@interfaces/store.interface'
 import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface'
 import {
+  // Category,
   Profile,
+  SidebarListOptions,
   AnchorsMenu,
+  SelectedEmitter,
+  Filter,
+  // PriceRange,
 } from '@interfaces/components-options/sidebar-list.options.interface'
 
 export interface ICarouselItem {
@@ -51,7 +56,7 @@ export class ItemsSuggestedProductsComponent implements OnInit {
   @Input() PalabraBuscador: ProductosLoads
   @Input() isExpanded = false
 
-  expandSidebar = false
+  expandSidebar = true
 
   // pagesActual = 69;
   forma: FormGroup
@@ -119,8 +124,6 @@ export class ItemsSuggestedProductsComponent implements OnInit {
     this.forma = new FormGroup({
       banck_id: new FormControl(''),
     })
-
-    this.loadStoreData()
   }
 
   ngOnInit() {
@@ -243,20 +246,17 @@ export class ItemsSuggestedProductsComponent implements OnInit {
   }
 
   // Updating the sidebar options
-  loadStoreData() {
+  loadDataStore() {
     this.storeService
       .getStoreById(localStorage.getItem('storeId'))
-      .subscribe((storeResponse) => {
-        this.storeName = storeResponse.name
-        this.setBreadcrumbOptions(
-          localStorage.getItem('storeId'),
-          storeResponse
-        )
-        this.setSidebarOptions(storeResponse)
+      .subscribe((storeResp) => {
+        this.storeName = storeResp.name
+        this.setBreadcrumbOptions(localStorage.getItem('storeId'), storeResp)
+        this.setSidebarOptions(storeResp)
       })
   }
 
-  setBreadcrumbOptions(idStore: string, storeResp: StoreResponse) {
+  public setBreadcrumbOptions(idStore: string, storeResp: StoreResponse) {
     this.breadcrumb = [
       {
         title: 'inicio',
