@@ -37,7 +37,7 @@ export class CarouselSuggestedComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('ITEM CAROUSEL', this.item.data)
+    // console.log('ITEM CAROUSEL', this.item.data)
 
     this.item.data.map((i, index) => {
       i.id = index
@@ -68,7 +68,7 @@ export class CarouselSuggestedComponent implements OnInit {
         }
       })
 
-      // Updating the component's initial state
+    // Updating the component's initial state
     this.suggestedProductDetails.emit({
       idsuggested: this.item.data[0].bank_id,
       idproducto: this.item.product_id,

@@ -6,14 +6,13 @@ import {
   Output,
   EventEmitter,
   Input,
-  ViewChild,
 } from '@angular/core'
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms'
 import { debounceTime } from 'rxjs/operators'
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface'
-import { AsideFiltrosComponent } from '../../../../../../../shared/aside-filtros/aside-filtros.component'
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router'
+import { Router } from '@angular/router'
 import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 interface ProductToSync {
   bank_id: number
@@ -34,7 +33,6 @@ export class SearchStoreComponent implements OnInit, OnChanges {
   @Input() isExpanded = false
   @Input() buttonSidebarList = false
   @Input() filterOptions: FilterOption[]
-  @Input() BuscarText: any
   @Input() debounce = 3000
   @Input() bulkSync: ProductToSync[]
   // POR DEFECTO MUESTRA EL FILTRO
@@ -51,17 +49,10 @@ export class SearchStoreComponent implements OnInit, OnChanges {
   public search = new FormControl('')
 
   constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private _sincronizacionService: SincronizacionService
-  ) {
-    router.events
-      .filter((event) => event instanceof NavigationEnd)
-      .subscribe((event) => {
-        console.log('BotonActivated', event['url'])
-        this.BotonActivated = this.router.routerState.snapshot.url
-      })
-  }
+    private _router: Router,
+    private _sincronizacionService: SincronizacionService,
+    public snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.search.valueChanges.pipe(debounceTime(500)).subscribe((searchTerm) => {
@@ -87,6 +78,17 @@ export class SearchStoreComponent implements OnInit, OnChanges {
     this.addProductNew = true
   }
 
+  /**
+   * Check if the router url contains the specified route.
+   *
+   * @param {string} routeForCheck
+   * @returns
+   * @memberof ThisComponent
+   */
+  hasRoute(routeForCheck: string) {
+    return this._router.url.includes(routeForCheck)
+  }
+
   // Events that happen in the component ----------
   public toggleSidebarList(event) {
     this.isExpanded = event
@@ -95,7 +97,6 @@ export class SearchStoreComponent implements OnInit, OnChanges {
   }
 
   disableSyncButton(bulkData: Array<ProductToSync>): void {
-    console.log('Entramos en disableSyncButton')
     if (bulkData.length > 0) {
       this.cantSync = false
     } else {
@@ -118,6 +119,12 @@ export class SearchStoreComponent implements OnInit, OnChanges {
         localStorage.getItem('storeId'),
         stringPayload
       )
-      .subscribe((response) => {})
+      .subscribe((response) => {
+        this.snackBar.open(
+          '¡Sus productos han sido sincronizado exitosamente!',
+          'cerrar',
+          { duration: 4000 }
+        )
+      })
   }
 }

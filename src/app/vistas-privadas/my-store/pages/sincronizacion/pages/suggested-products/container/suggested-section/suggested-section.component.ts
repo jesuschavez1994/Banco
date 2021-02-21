@@ -1,13 +1,11 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'
 import { StoreService } from '@services/store/store.service'
-import { Descripcion } from '@interfaces/sincronizacion'
 import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service'
 import { Sugerir } from '@models/sincronizacion/sugerir'
 import { BannerOptions } from '@interfaces/components-options/banner.options.interface'
 import { NgxSpinnerService } from 'ngx-spinner'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
-import { SyncProductsDataService } from '../../../../services/sync-products-data.service'
 
 export interface ICarouselItem {
   bank_id: number
@@ -79,12 +77,10 @@ export class SuggestedSectionComponent implements OnInit {
         if (result.breakpoints[Breakpoints.XSmall]) {
           this.headingRowHeight = '2:3'
           this.innerRowHeight = '2:4'
-          console.log('XSmall')
         }
         if (result.breakpoints[Breakpoints.Small]) {
           this.headingRowHeight = '2:2'
           this.innerRowHeight = '2:3'
-          console.log('SMall')
         }
         if (result.breakpoints[Breakpoints.Medium]) {
           this.headingRowHeight = '5:1'
@@ -141,7 +137,6 @@ export class SuggestedSectionComponent implements OnInit {
         BankId
       )
       .subscribe((resp) => {
-        // console.log(resp)
         this.snackBar.open(
           '¡Su producto ha sido sincronizado exitosamente!',
           'cerrar',

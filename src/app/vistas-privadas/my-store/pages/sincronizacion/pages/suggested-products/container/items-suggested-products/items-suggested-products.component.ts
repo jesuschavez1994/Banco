@@ -78,12 +78,13 @@ export class ItemsSuggestedProductsComponent implements OnInit {
 
   productToSyncReference: ProductToSync
   bulkSync: Array<ProductToSync> = []
+  useFilter = false
 
   filterOptions: FilterOption[] = [
-    {label: 'filtrar por', value: 0},
-    {label: 'producto', value: 1},
-    {label: 'Empresa', value: 'hola'},
-  ];
+    { label: 'filtrar por', value: 0 },
+    { label: 'producto', value: 1 },
+    { label: 'Empresa', value: 'hola' },
+  ]
 
   public currentPosition = 0
 
@@ -97,7 +98,7 @@ export class ItemsSuggestedProductsComponent implements OnInit {
     private _syncProductsDataService: SyncProductsDataService
   ) {
     this.route.params.subscribe((params) => {
-      console.log('query', params)
+      // console.log('query', params)
       this.textBuscador = params.id
     })
 
@@ -215,9 +216,8 @@ export class ItemsSuggestedProductsComponent implements OnInit {
       // Updating the bulk array
       let updatedArray: ProductToSync[]
       updatedArray = [...this.bulkSync, this.productToSyncReference]
-     
-      this.bulkSync = updatedArray;
 
+      this.bulkSync = updatedArray
     } else {
       // Deleting the product from bulk.
       this.bulkSync = this.bulkSync.filter(
