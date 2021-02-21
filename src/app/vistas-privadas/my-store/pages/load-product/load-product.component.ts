@@ -26,6 +26,10 @@ import { FilterOption } from '@interfaces/components-options/search-bar.options.
 
 import * as Hammer from 'hammerjs'
 import { MyStoreComponent } from '../../my-store.component'
+import {
+  Profile,
+  AnchorsMenu,
+} from '@interfaces/components-options/sidebar-list.options.interface'
 
 @Component({
   selector: 'app-load-product',
@@ -43,7 +47,6 @@ export class LoadProductComponent implements OnInit {
   productCardsStore: ProductsCardsStoreComponent
   @ViewChild('MyStoreComponent') estadoAside: MyStoreComponent
 
-  breadcrumb: BreadcrumbOptions[]
   StoreName = ''
   // sidebar-list
   expandSidebar = true
@@ -55,7 +58,6 @@ export class LoadProductComponent implements OnInit {
   price = []
   delivery = ''
   recipes = []
-  categories = []
 
   imgsBanners: BannerOptions = {
     m: 'assets/img/Banner/Banner1.svg',
@@ -80,6 +82,13 @@ export class LoadProductComponent implements OnInit {
     { label: 'producto', value: 1 },
     { label: 'Empresa', value: 'hola' },
   ]
+
+  // Sidebar related properties
+  profile: Profile
+  storeName = ''
+  anchorsMenu: AnchorsMenu
+  breadcrumb: BreadcrumbOptions[]
+  categories: any[] = []
 
   constructor(
     public storeService: StoreService,
@@ -273,5 +282,138 @@ export class LoadProductComponent implements OnInit {
     if (event.direction === 8) {
       this.renderer.removeAttribute(this.main.nativeElement, 'touch-action')
     }
+  }
+
+  // Updating the sidebar options
+  loadStoreData() {
+    this.storeService
+      .getStoreById(localStorage.getItem('storeId'))
+      .subscribe((storeResponse) => {
+        this.storeName = storeResponse.name
+        this.setBreadcrumbOptions(
+          localStorage.getItem('storeId'),
+          storeResponse
+        )
+        this.setSidebarOptions(storeResponse)
+      })
+  }
+
+  setBreadcrumbOptions(idStore: string, storeResp: StoreResponse) {
+    this.breadcrumb = [
+      {
+        title: 'inicio',
+        routerLink: ['/'],
+      },
+      {
+        title: 'farmacias',
+        routerLink: [`/farmacias`],
+      },
+    ]
+
+    this.breadcrumb[2] = {
+      title: `${storeResp.name}`,
+      routerLink: [`/business-detail/${idStore}`],
+    }
+  }
+
+  setSidebarOptions(storeResp: StoreResponse) {
+    this.anchorsMenu = {
+      productLink: `/product-catalogue`,
+      contactLink: `contact'`,
+      wordToMatch: `products`,
+      synchronizationLink: `/my-store/sincronizacion/exportar-lista-excel`,
+    }
+
+    this.profile = {
+      name: storeResp.name,
+      contact: {
+        // la base de datos no tiene el dato
+        url: '',
+        name: '@medicalbackground',
+      },
+      img: 'assets/img/no-image-banner.jpg', // la base de datos no tiene el dato
+      isVerified: storeResp.certification == 'true' ? true : false,
+    }
+
+    this.categories = [
+      {
+        id: 1,
+        name: 'Cosmeticos',
+
+        subcategories: [
+          {
+            id: 1,
+            name: 'Dolor inflamación',
+          },
+          {
+            id: 2,
+            name: 'Belleza Higiene',
+          },
+          {
+            id: 3,
+            name: 'Dieta & Fitness',
+          },
+          {
+            id: 4,
+            name: 'Salud y vitaminas',
+          },
+          {
+            id: 5,
+            name: 'Vida sexual',
+          },
+          {
+            id: 6,
+            name: 'Ortopedia',
+          },
+          {
+            id: 7,
+            name: 'Homeopatia & natural',
+          },
+          {
+            id: 8,
+            name: 'Mascotas & veterinaria',
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: 'Medicamentos2',
+
+        subcategories: [
+          {
+            id: 1,
+            name: 'Dolor & inflamación2',
+          },
+          {
+            id: 2,
+            name: 'Belleza & Higiene2',
+          },
+          {
+            id: 3,
+            name: 'Dieta & Fitness2',
+          },
+          {
+            id: 4,
+            name: 'Salud y vitaminas2',
+          },
+          {
+            id: 5,
+            name: 'Vida sexual2',
+          },
+          {
+            id: 6,
+            name: 'Ortopedia2',
+          },
+          {
+            id: 7,
+            name: 'Homeopatia & natural2',
+          },
+          {
+            id: 8,
+            name: 'Mascotas & veterinaria2',
+          },
+        ],
+      },
+    ]
   }
 }

@@ -40,13 +40,13 @@ export class SearchStoreComponent implements OnInit, OnChanges {
 
   // SALIDAS //
   @Output() sidebarExpand = new EventEmitter<boolean>()
-  @Output() public searchEmitter = new EventEmitter<string>()
+  @Output() searchEmitter = new EventEmitter<string>()
 
   BotonActivated: string
   addBotonEvent: boolean = false
   cantSync = true
 
-  public search = new FormControl('')
+  search = new FormControl('')
 
   constructor(
     private _router: Router,

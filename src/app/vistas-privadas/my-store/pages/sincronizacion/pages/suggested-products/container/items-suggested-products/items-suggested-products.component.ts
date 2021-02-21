@@ -13,6 +13,13 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { SyncProductsDataService } from '../../../../services/sync-products-data.service'
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface'
 
+import { StoreResponse } from '@interfaces/store.interface'
+import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface'
+import {
+  Profile,
+  AnchorsMenu,
+} from '@interfaces/components-options/sidebar-list.options.interface'
+
 export interface ICarouselItem {
   bank_id: number
   description: string
@@ -44,7 +51,7 @@ export class ItemsSuggestedProductsComponent implements OnInit {
   @Input() PalabraBuscador: ProductosLoads
   @Input() isExpanded = false
 
-  expandSidebar = true
+  expandSidebar = false
 
   // pagesActual = 69;
   forma: FormGroup
@@ -53,16 +60,16 @@ export class ItemsSuggestedProductsComponent implements OnInit {
   palabra: any
   suggestedShow = false
   idProductoToSync: any
-  scroll: boolean = false
+  scroll = false
 
   // tslint:disable-next-line: variable-name
   last_Page_Pagination: number
   // tslint:disable-next-line: no-inferrable-types
-  totalProductAPI: number = 0
+  totalProductAPI = 0
   Sugerenccias: any[]
   // tslint:disable-next-line: no-inferrable-types
-  page: number = 1
-  filtro_valor: string = ''
+  page = 1
+  filtro_valor = ''
   busqueda = false
   textBuscador: any
 
@@ -86,7 +93,14 @@ export class ItemsSuggestedProductsComponent implements OnInit {
     { label: 'Empresa', value: 'hola' },
   ]
 
-  public currentPosition = 0
+  // Sidebar related properties
+  profile: Profile
+  storeName = ''
+  anchorsMenu: AnchorsMenu
+  breadcrumb: BreadcrumbOptions[]
+  categories: any[] = []
+
+  currentPosition = 0
 
   constructor(
     public storeService: StoreService,
@@ -105,6 +119,8 @@ export class ItemsSuggestedProductsComponent implements OnInit {
     this.forma = new FormGroup({
       banck_id: new FormControl(''),
     })
+
+    this.loadStoreData()
   }
 
   ngOnInit() {
@@ -224,5 +240,138 @@ export class ItemsSuggestedProductsComponent implements OnInit {
         (element) => element.bank_id !== this.productToSyncReference.bank_id
       )
     }
+  }
+
+  // Updating the sidebar options
+  loadStoreData() {
+    this.storeService
+      .getStoreById(localStorage.getItem('storeId'))
+      .subscribe((storeResponse) => {
+        this.storeName = storeResponse.name
+        this.setBreadcrumbOptions(
+          localStorage.getItem('storeId'),
+          storeResponse
+        )
+        this.setSidebarOptions(storeResponse)
+      })
+  }
+
+  setBreadcrumbOptions(idStore: string, storeResp: StoreResponse) {
+    this.breadcrumb = [
+      {
+        title: 'inicio',
+        routerLink: ['/'],
+      },
+      {
+        title: 'farmacias',
+        routerLink: [`/farmacias`],
+      },
+    ]
+
+    this.breadcrumb[2] = {
+      title: `${storeResp.name}`,
+      routerLink: [`/business-detail/${idStore}`],
+    }
+  }
+
+  setSidebarOptions(storeResp: StoreResponse) {
+    this.anchorsMenu = {
+      productLink: `/product-catalogue`,
+      contactLink: `contact'`,
+      wordToMatch: `products`,
+      synchronizationLink: `/my-store/sincronizacion/exportar-lista-excel`,
+    }
+
+    this.profile = {
+      name: storeResp.name,
+      contact: {
+        // la base de datos no tiene el dato
+        url: '',
+        name: '@medicalbackground',
+      },
+      img: 'assets/img/no-image-banner.jpg', // la base de datos no tiene el dato
+      isVerified: storeResp.certification == 'true' ? true : false,
+    }
+
+    this.categories = [
+      {
+        id: 1,
+        name: 'Cosmeticos',
+
+        subcategories: [
+          {
+            id: 1,
+            name: 'Dolor inflamación',
+          },
+          {
+            id: 2,
+            name: 'Belleza Higiene',
+          },
+          {
+            id: 3,
+            name: 'Dieta & Fitness',
+          },
+          {
+            id: 4,
+            name: 'Salud y vitaminas',
+          },
+          {
+            id: 5,
+            name: 'Vida sexual',
+          },
+          {
+            id: 6,
+            name: 'Ortopedia',
+          },
+          {
+            id: 7,
+            name: 'Homeopatia & natural',
+          },
+          {
+            id: 8,
+            name: 'Mascotas & veterinaria',
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: 'Medicamentos2',
+
+        subcategories: [
+          {
+            id: 1,
+            name: 'Dolor & inflamación2',
+          },
+          {
+            id: 2,
+            name: 'Belleza & Higiene2',
+          },
+          {
+            id: 3,
+            name: 'Dieta & Fitness2',
+          },
+          {
+            id: 4,
+            name: 'Salud y vitaminas2',
+          },
+          {
+            id: 5,
+            name: 'Vida sexual2',
+          },
+          {
+            id: 6,
+            name: 'Ortopedia2',
+          },
+          {
+            id: 7,
+            name: 'Homeopatia & natural2',
+          },
+          {
+            id: 8,
+            name: 'Mascotas & veterinaria2',
+          },
+        ],
+      },
+    ]
   }
 }

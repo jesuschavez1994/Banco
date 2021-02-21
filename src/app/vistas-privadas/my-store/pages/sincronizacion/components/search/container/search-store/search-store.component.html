@@ -2,7 +2,7 @@
   class="search-engine"
   [ngClass]="{ 'search-engine--wrap': buttonSidebarList }"
 >
-  <ng-container *ngIf="buttonSidebarList">
+  <ng-container *ngIf="hasRoute('my-store/product-catalogue')">
     <div class="btn-toogle-sidebar-list mx-2">
       <app-sidebar-list-button
         [expand]="isExpanded"

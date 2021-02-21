@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core'
 import { NgxSpinnerModule } from 'ngx-spinner'
 import { SharedModule } from '@shared/shared.module'
 import { SearchModule } from '../../components/search/search.module'
+import { VistasPrivadasSharedModule } from '../../../../../shared/vistas-privadas-shared.module'
 
 import { CarouselSuggestedComponent } from './container/carousel-suggested/carousel-suggested.component'
 import { ItemsSuggestedProductsComponent } from './container/items-suggested-products/items-suggested-products.component'
@@ -23,7 +24,12 @@ const components = [
 /* 
   Modules go here.
 */
-const modules = [SearchModule, NgxSpinnerModule, SharedModule]
+const modules = [
+  SearchModule,
+  NgxSpinnerModule,
+  SharedModule,
+  VistasPrivadasSharedModule,
+]
 
 @NgModule({
   declarations: [...components],

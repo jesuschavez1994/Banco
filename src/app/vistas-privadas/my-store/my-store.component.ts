@@ -1,18 +1,14 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ActivatedRoutesParams } from '@interfaces/components-options/sidebar-list.options.interface';
-import { StoreService } from '@services/store/store.service';
-import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
+import { Component, OnInit, ViewChild, Input } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
+import { StoreService } from '@services/store/store.service'
+import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface'
 import {
   StoreResponse,
   Bannerimage,
   Srcsize,
-} from '@interfaces/store.interface';
-import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
-import { SearchStore } from '@models/search/search-store.model';
-import { SearchService } from '@services/Search/search.service';
-import { SearchStoreComponent } from './pages/sincronizacion/components/search/container/search-store/search-store.component';
+} from '@interfaces/store.interface'
+import { SearchService } from '@services/Search/search.service'
+
 import {
   // Category,
   Profile,
@@ -21,12 +17,12 @@ import {
   SelectedEmitter,
   Filter,
   // PriceRange,
-} from '@interfaces/components-options/sidebar-list.options.interface';
-import { HomeServiceService } from '../../vistas-publicas/services/home-service.service';
+} from '@interfaces/components-options/sidebar-list.options.interface'
+import { HomeServiceService } from '../../vistas-publicas/services/home-service.service'
 
-import { AsideFiltrosComponent } from '../shared/aside-filtros/aside-filtros.component';
-import { DataProductDB, ProductosLoads } from '@interfaces/InterfaceProducto';
-import { UserStoreService } from '../../services/user-store/user-store.service';
+import { AsideFiltrosComponent } from '../shared/aside-filtros/aside-filtros.component'
+import { DataProductDB, ProductosLoads } from '@interfaces/InterfaceProducto'
+import { UserStoreService } from '../../services/user-store/user-store.service'
 
 @Component({
   selector: 'app-my-store',
@@ -34,30 +30,30 @@ import { UserStoreService } from '../../services/user-store/user-store.service';
   styleUrls: ['./my-store.component.scss'],
 })
 export class MyStoreComponent implements OnInit {
-  expandSidebar = true;
-  StoreName = '';
-  BannerVerifiqued: any;
-  VerifiquedSuccesfull = false;
-  Onerror = false;
+  expandSidebar = true
+  StoreName = ''
+  BannerVerifiqued: any
+  VerifiquedSuccesfull = false
+  Onerror = false
 
-  profile: Profile;
-  anchorsMenu: AnchorsMenu;
+  profile: Profile
+  anchorsMenu: AnchorsMenu
 
-  breadcrumb: BreadcrumbOptions[];
-  categories: any[] = [];
-  MyProduct: DataProductDB[] = [];
+  breadcrumb: BreadcrumbOptions[]
+  categories: any[] = []
+  MyProduct: DataProductDB[] = []
 
-  @ViewChild('sidebarList') sidebarList: AsideFiltrosComponent;
+  @ViewChild('sidebarList') sidebarList: AsideFiltrosComponent
 
-  userLog: boolean;
-  storeLog: boolean | string;
+  userLog: boolean
+  storeLog: boolean | string
 
   imgsBanners: Srcsize = {
     xl: 'assets/img/Banner/Banner1.svg',
     l: 'assets/img/Banner/Banner1.svg',
     m: 'assets/img/Banner/Banner1.svg',
     s: 'assets/img/Banner/Banner1.svg',
-  };
+  }
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -69,10 +65,10 @@ export class MyStoreComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userLog = this.homeService.islog();
-    this.storeLog = this.homeService.storeActive();
-    this.loadDataStore();
-    this.VeriquedBanner();
+    this.userLog = this.homeService.islog()
+    this.storeLog = this.homeService.storeActive()
+    // this.loadDataStore();
+    this.VeriquedBanner()
   }
 
   ngAfterViewInit() {}
@@ -83,24 +79,24 @@ export class MyStoreComponent implements OnInit {
       .getDataStore(localStorage.getItem('id'), localStorage.getItem('storeId'))
       .subscribe(
         (resp: StoreResponse) => {
-          console.log('Banner verifiqued', resp);
+          console.log('Banner verifiqued', resp)
 
           if (resp.banner_image.length === 0) {
-            this.BannerVerifiqued = this.imgsBanners;
+            this.BannerVerifiqued = this.imgsBanners
           } else {
-            this.BannerVerifiqued = resp.banner_image[0].src_size;
+            this.BannerVerifiqued = resp.banner_image[0].src_size
           }
-          this.VerifiquedSuccesfull = true;
+          this.VerifiquedSuccesfull = true
         },
         (error) => {
-          this.BannerVerifiqued = 'assets/img/no-image-banner.JPG';
-          this.VerifiquedSuccesfull = true;
-          this.Onerror = true;
+          this.BannerVerifiqued = 'assets/img/no-image-banner.JPG'
+          this.VerifiquedSuccesfull = true
+          this.Onerror = true
         }
-      );
+      )
   }
 
-  public setBreadcrumbOptions(idStore: string, storeResp: StoreResponse) {
+  /*   public setBreadcrumbOptions(idStore: string, storeResp: StoreResponse) {
     this.breadcrumb = [
       {
         title: 'inicio',
@@ -110,22 +106,22 @@ export class MyStoreComponent implements OnInit {
         title: 'farmacias',
         routerLink: [`/farmacias`],
       },
-    ];
+    ]
 
     this.breadcrumb[2] = {
       title: `${storeResp.name}`,
       routerLink: [`/business-detail/${idStore}`],
-    };
-  }
+    }
+  } */
 
   // Expand or contract sidebar-list on responsive mode
   public toogleSidebar(event) {
-    console.log('toggle', event);
-    this.expandSidebar = event;
+    console.log('toggle', event)
+    this.expandSidebar = event
   }
 
   // Store
-  public loadDataStore() {
+  /*  public loadDataStore() {
     this.storeService
       .getStoreById(localStorage.getItem('storeId'))
       .subscribe((storeResp) => {
@@ -134,11 +130,11 @@ export class MyStoreComponent implements OnInit {
         this.setBreadcrumbOptions(localStorage.getItem('storeId'), storeResp);
         this.setSidebarOptions(storeResp);
       });
-  }
+  } */
 
   // CATEGORIAS Y SUBCATEGORIAS DEL FILTRO //
 
-  public setSidebarOptions(storeResp: StoreResponse) {
+  /* public setSidebarOptions(storeResp: StoreResponse) {
     this.anchorsMenu = {
       productLink: `/product-catalogue`,
       contactLink: `contact'`,
@@ -237,5 +233,5 @@ export class MyStoreComponent implements OnInit {
         ],
       },
     ];
-  }
+  } */
 }
