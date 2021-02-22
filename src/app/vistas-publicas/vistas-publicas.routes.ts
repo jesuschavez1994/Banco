@@ -7,7 +7,7 @@ import { RegisterComponent } from './Registers/Usuario/register.component'
 import { LoginComponent } from './login/login/login.component'
 import { PageUnderConstructionComponent } from './page-under-construction/page-under-construction.component'
 import { BusinessDetailComponent } from './business-detail/business-detail.component'
-import { VerifyTokenGuard } from '@services/guards/verify-token.guard';
+import { VerifyTokenGuard } from '@services/guards/verify-token.guard'
 
 export const ROUTES: Routes = [
   {
@@ -15,6 +15,13 @@ export const ROUTES: Routes = [
     loadChildren: () =>
       import('./home/home.module').then((module) => module.HomeModule),
     canActivate: [VerifyTokenGuard],
+  },
+  {
+    path: 'search-results',
+    loadChildren: () =>
+      import('./search-results/search-results.module').then(
+        (module) => module.SearchResultsModule
+      ),
   },
   { path: 'register', component: RegisterComponent },
   {
@@ -28,7 +35,7 @@ export const ROUTES: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    data: { title: 'Founduss | Iniciar sesión' },
+    data: { title: 'Iniciar sesión | Founduss' },
   },
   {
     path: 'business-detail/:idStore', // Se obtiene el id de la tienda para mostrar su listo productos

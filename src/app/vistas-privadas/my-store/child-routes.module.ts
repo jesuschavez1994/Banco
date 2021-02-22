@@ -3,22 +3,20 @@ import { Routes, RouterModule } from '@angular/router'
 
 import { ContactComponent } from './pages/contact/contact.component'
 import { ProductLoadingComponent } from '../product-loading/product-loading.component'
-import { LoadProductComponent } from '../LoadProduct/load-product/load-product.component'
-import { FormBanckProductSyncComponent } from '../sincronizacion/components/form-banck-product-sync/form-banck-product-sync.component'
+import { FormBanckProductSyncComponent } from './pages/sincronizacion/components/form-banck-product-sync/form-banck-product-sync.component'
 import { EditProdutcComponent } from '../components/edit-produtc/edit-produtc.component'
-import { EditSincronizacionComponent } from '../sincronizacion/components/edit-sincronizacion/edit-sincronizacion.component'
+import { EditSincronizacionComponent } from './pages/sincronizacion/components/edit-sincronizacion/edit-sincronizacion.component'
 import { EditProductNoDisponibleComponent } from '../components/edit-product-no-disponible/edit-product-no-disponible.component'
-import { DesincronizarComponent } from '../sincronizacion/components/desincronizar/desincronizar.component'
+import { DesincronizarComponent } from './pages/sincronizacion/components/desincronizar/desincronizar.component'
 
 const childRoutes: Routes = [
   {
     path: 'contact',
     component: ContactComponent,
   },
-  { path: 'product-catalogue',
-    component: LoadProductComponent,
-    data: { title: 'Founduss | Catálogo de Productos' } 
-  },
+  { path: 'product-catalogue', 
+loadChildren: () => import('./pages/load-product/load-product.module').then(module => module.LoadProductModule)
+ },
   {
     path: 'load-product',
     component: ProductLoadingComponent,
@@ -46,7 +44,7 @@ const childRoutes: Routes = [
   {
     path: 'sincronizacion',
     loadChildren: () =>
-      import('../sincronizacion/sincronizacion.module').then(
+      import('./pages/sincronizacion/sincronizacion.module').then(
         (module) => module.SincronizacionModule
       ),
   },

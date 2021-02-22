@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    data: { title: 'Founduss | Inicio' },
+    data: { title: 'Inicio | Founduss' },
   },
 ]
 

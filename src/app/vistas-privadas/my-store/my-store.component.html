@@ -1,30 +1,38 @@
 <!-- <app-navbarstore id="header" [fixed]="false"></app-navbarstore> -->
 
-<app-public-navbar [userLog]="userLog" [storeAct]="storeLog"></app-public-navbar>
+<app-public-navbar
+  [userLog]="userLog"
+  [storeAct]="storeLog"
+></app-public-navbar>
 <main class="page">
+  <ng-container>
+    <app-aside-filtros
+      #sidebarList
+      [isExpanded]="expandSidebar"
+      (sidebarExpand)="toogleSidebar($event)"
+      [categories]="categories"
+      [anchorsMenu]="anchorsMenu"
+      [profile]="profile"
+    ></app-aside-filtros>
+  </ng-container>
 
-    <ng-container>
-        <app-aside-filtros #sidebarList [isExpanded]="expandSidebar" (sidebarExpand)="toogleSidebar($event)" [categories]="categories" [anchorsMenu]="anchorsMenu" [profile]="profile"></app-aside-filtros>
-    </ng-container>
+  <div class="column">
+    <section class="introduction-page">
+      <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
 
-    <div class="column">
+      <app-banner-edit
+        [imgs]="BannerVerifiqued"
+        *ngIf="VerifiquedSuccesfull"
+        [Onerror]="Onerror"
+      >
+      </app-banner-edit>
+    </section>
 
-        <section class="introduction-page">
+    <!-- <app-banner [imgs]="imgsBanners"></app-banner> -->
 
-            <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
-
-            <app-banner-edit    [imgs]="BannerVerifiqued" 
-                                *ngIf="VerifiquedSuccesfull"
-                                [Onerror]="Onerror">
-            </app-banner-edit>
-
-        </section>   
-
-        <!-- <app-banner [imgs]="imgsBanners"></app-banner> -->
-
-        <!-- ==== BUSCADOR DE PRODUCTOS DE LA TIENDA ==== -->
-        <!--=============================================-->
-        <!-- <app-search 
+    <!-- ==== BUSCADOR DE PRODUCTOS DE LA TIENDA ==== -->
+    <!--=============================================-->
+    <!-- <app-search 
                             [isExpanded]="expandSidebar"
                             (sidebarExpand)="toogleSidebar($event)" 
                             (searchEmitter)="handleSearch($event)"
@@ -34,7 +42,7 @@
                 >
                 </app-search> -->
 
-        <!-- <app-search 
+    <!-- <app-search 
                             [isExpanded]="expandSidebar"
                             (sidebarExpand)="toogleSidebar($event)" 
                             [buttonSidebarList]="true"
@@ -42,10 +50,9 @@
                 >
                 </app-search> -->
 
-        <!--=============================================-->
-        <!--=============================================-->
+    <!--=============================================-->
+    <!--=============================================-->
 
-        <router-outlet></router-outlet>
-    </div>
-
+    <router-outlet></router-outlet>
+  </div>
 </main>

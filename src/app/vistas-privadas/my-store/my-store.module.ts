@@ -13,10 +13,7 @@ import { MapEditarComponent } from './components/map-editar/map-editar.component
 import { MyStoreComponent } from './my-store.component'
 
 import { MyStoreComponentsModule } from './components/my-store-components.module'
-/* 
-  Feature modules 
-*/
-import { ChildRoutesModule } from './child-routes.module'
+
 /* 
   Components go here.
 */
