@@ -1,1 +1,23 @@
-<p>search-results works!</p>
+<app-public-navbar></app-public-navbar>
+
+<main class="page">
+  <app-sidebar-list
+    [isExpanded]="expandSidebar"
+    (sidebarExpand)="toogleSidebar($event)"
+    [filters]="sidebarFilters"
+    #sidebarList
+  >
+  </app-sidebar-list>
+
+  <section class="products-info">
+    <app-products-cards
+      #productCards
+      (selected)="goToProductDetails($event)"
+      (pagination)="paginationProducts($event)"
+      [totalItems]="totalProducts"
+      [itemsPerPage]="itemsPerPage"
+      [showShimmer]="showShimmeringCards"
+    >
+    </app-products-cards>
+  </section>
+</main>

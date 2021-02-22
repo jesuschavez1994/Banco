@@ -9,13 +9,6 @@ const routes: Routes = [
     component: HomeComponent,
     data: { title: 'Inicio | Founduss' },
   },
-  {
-    path: 'search-results',
-    loadChildren: () =>
-      import('../search-results/search-results.module').then(
-        (module) => module.SearchResultsModule
-      ),
-  },
 ]
 
 @NgModule({
