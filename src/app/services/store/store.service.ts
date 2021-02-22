@@ -16,7 +16,7 @@ import { DesactivarLoadingAction } from '../../shared/ui.accions';
 import { Store } from '@ngrx/store';
 import { Usuario } from 'src/app/models/usuario.model';
 import { Service } from '@services/service.service';
-import { StoreResponse } from '@interfaces/store.interface';
+import { CategoryProductStoreResp, StoreResponse } from '@interfaces/store.interface';
 import { Observable } from 'rxjs';
 
 
@@ -213,8 +213,21 @@ export class StoreService extends Service{
   }
 
   // -----
-  getStoreById(idStore: any): Observable<StoreResponse> {
+  public getStoreById(idStore: any): Observable<StoreResponse> {
     return this.execQuery<StoreResponse>(`stores/${idStore}`);
+
+  }
+
+  /**
+   * @description Obtenemos las categorías de productos relacionados con una tienda especifica
+   * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christopher<@>matiz.com.ve
+   * @date 22/02/2021
+   * @param {number} idStore
+   * @returns {*}  {Observable<CategoryProductStoreResp>}
+   * @memberof StoreService
+   */
+  public getCategoriesProducts(idStore: number): Observable<CategoryProductStoreResp> {
+    return this.execQuery<CategoryProductStoreResp>(`stores/${idStore}/categories`);
 
   }
 

@@ -16,13 +16,15 @@ const routes: Routes = [
     children: [
       {
         path: 'exportar-lista-excel',
-        data: { title: 'Exportar Excel | Founduss' },
+        data: { title: "Exportar Excel | Founduss" },
         component: ExportarListaExcelComponent,
+        data: { title: "Founduss | Stock de productos" } 
       },
       {
         path: 'suggested-products',
-        data: { title: 'Productos sugeridos | Founduss' },
+        data: { title: "Productos sugeridos | Founduss" },
         component: SuggestedProductsComponent,
+        data: { title: "Founduss | Productos sugeridos" } 
       },
       {
         path: 'suggested-products-list/:id/:list',
@@ -30,13 +32,15 @@ const routes: Routes = [
       },
       {
         path: 'synchronized-products',
-        data: { title: 'Sincronizaciones | Founduss' },
+        data: { title: "Sincronizaciones | Founduss" },
         component: SynchronizedProductsComponent,
+        data: { title: "Founduss | Productos sincronizados" } 
       },
       {
         path: 'bank-product',
-        data: { title: 'Banco de productos | Founduss' },
+        data: { title: "Banco de productos | Founduss" },
         component: BankProductComponent,
+        data: { title: "Founduss | Banco de productos" } 
       },
     ],
   },

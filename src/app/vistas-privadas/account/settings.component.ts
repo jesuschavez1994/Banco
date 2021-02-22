@@ -13,7 +13,7 @@ export class SettingsComponent implements OnInit {
     {
       label: 'Mi cuenta',
       iconClass: 'fas fa-cog',
-      routerLink: ['/account/settings/form-account'],
+      routerLink: ['/account/settings/store-edit'],
       // isActive: false,
     },
     {

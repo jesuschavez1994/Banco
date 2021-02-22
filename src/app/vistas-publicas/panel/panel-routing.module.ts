@@ -4,6 +4,7 @@ import { PanelComponent } from './panel.component';
 import { MyAccountComponent } from '../my-account/my-account.component';
 import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
 import { SalesComponent } from '../sales/sales.component';
+import { EmptyShoppingCartGuard } from '@services/guards/empty-shopping-cart.guard';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
       {
         path: 'carrito-compras',
         component: ShoppingCartComponent,
+        canActivate: [EmptyShoppingCartGuard]
       },
       {
         path: 'cuenta',
