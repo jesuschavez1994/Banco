@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core'
 import {
   AnchorsMenu,
   Filter,
@@ -7,12 +7,26 @@ import {
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface'
 import { ActivatedRoute, ParamMap, Router, Params } from '@angular/router'
 
+import { ProductsCardsComponent } from '@shared/products-cards/products-cards.component'
+import { ProductDetailComponent } from '@shared/product-detail/product-detail.component'
+import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component'
+import { ToastComponent } from '../../modals/toast/toast.component'
+
+import { SearchService } from '@services/Search/search.service'
+import { switchMap } from 'rxjs/operators'
+
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss'],
 })
-export class SearchResultsComponent implements OnInit {
+export class SearchResultsComponent implements OnInit, AfterViewInit {
+  // Components Controllers
+  @ViewChild('productCards') productCards: ProductsCardsComponent
+  @ViewChild('productDetail') productDetail: ProductDetailComponent
+  @ViewChild('sidebarList') sidebarList: SidebarListComponent
+  @ViewChild('toastRef') toastRef: ToastComponent
+
   // Sidebar related parameters
   expandSidebar = true
   sidebarFilters: Filter[] = [
@@ -104,14 +118,46 @@ export class SearchResultsComponent implements OnInit {
   // Product's cards related parameters
   totalProducts: number
   itemsPerPage = 16
-  showShimmeringCards: boolean
+  showShimmeringCards = true
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    public _searchService: SearchService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.sidebarFilters = this.sidebarList.setFilters(this.sidebarFilters)
+  }
+
+  ngAfterViewInit(): void {
+    this.route.queryParamMap
+      .pipe(
+        switchMap((queryParams: ParamMap) => {
+          let globalSearchPayload = {
+            name: queryParams.has('name') ? queryParams.get('name') : '',
+          }
+
+          return this._searchService.globalProductSearch(globalSearchPayload)
+        })
+      )
+      .subscribe((productsData: any) => {
+        if (this.productCards) {
+          this.productCards.toggleShimmer()
+        }
+
+        this.totalProducts = productsData.total
+        this.itemsPerPage = productsData.per_page
+
+        let productsRawData = productsData.data
+        this.addProductsData(productsRawData)
+      })
+  }
 
   // Handlers for events that heppen in the component ----------------
-  toogleSidebar($event) {}
+  toogleSidebar(event) {
+    this.expandSidebar = event
+  }
 
   paginationProducts(page: number) {
     this.router.navigate([], {
@@ -129,6 +175,52 @@ export class SearchResultsComponent implements OnInit {
         'products',
         product.id,
       ])
+    }
+  }
+
+  addProductsData(productsRawData: any) {
+    console.log('Products raw data:')
+    console.log(productsRawData.length)
+    if (productsRawData.length > 0) {
+      this.productCards.products = productsRawData.map((product) => {
+        let images = []
+
+        if (product.sync_bank) {
+          if (product.sync_bank.length === 0) {
+            images = product.images.map((image) => {
+              return image.src
+            })
+          } else {
+            images = product.sync_bank.map((syncBank) => {
+              return syncBank.images[0].src_size.xl
+                ? syncBank.images[0].src_size.xl
+                : ''
+            })
+          }
+        } else {
+          images = product.images.map((image) => {
+            return image.src
+          })
+        }
+
+        return {
+          name: product.name,
+          description: product.description,
+          price: product.price,
+          stock: product.stock,
+          images, // product.images
+          id: product.id ? product.id : -1,
+          idStore: product.store_id ? product.store_id : -1,
+          isFavorite: product.isFavorite ? product.isFavorite : false,
+        }
+      })
+
+      this.productCards.toggleShimmer(false)
+    } else {
+      this.toastRef.open('No hay productos que coincidan con la búsqueda.', {
+        color: '#ffffff',
+        background: '#900909c2',
+      })
     }
   }
 }
