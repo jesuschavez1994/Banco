@@ -15,22 +15,20 @@
   <!-- === BOTÓN AGREGAR NUEVO PRODUCTO ====-->
   <!-- ====================================-->
   <button
-    class="btn agg-product mx-3"
+    class="btn add-btn mx-3"
     type="button"
     *ngIf="hasRoute('my-store/product-catalogue')"
     id="addProduct"
     (click)="addNewProduct()"
     [routerLink]="['/my-store/load-product']"
-    mat-button
   >
     + Agregar producto
   </button>
 
   <button
     type="button"
-    class="mx-3 btn sincronizar-button"
+    class="mx-3 sincronizar-button"
     (click)="sendBulkData()"
-    mat-button
     [disabled]="cantSync"
     *ngIf="hasRoute('/my-store/sincronizacion/suggested-products')"
   >

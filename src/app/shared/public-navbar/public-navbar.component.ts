@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  ViewChild,
-  SimpleChange,
-} from '@angular/core'
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core'
 import {
   DropdownOption,
   ClassIcon,
@@ -12,14 +6,14 @@ import {
 } from '@interfaces/components-options/dropdown.options.interface'
 import { SearchService } from '@services/Search/search.service'
 import { HomeServiceService } from '../../vistas-publicas/services/home-service.service'
-import { Router, ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute, ParamMap } from '@angular/router'
 
 @Component({
   selector: 'app-public-navbar',
   templateUrl: './public-navbar.component.html',
   styleUrls: ['./public-navbar.component.scss'],
 })
-export class PublicNavbarComponent implements OnInit {
+export class PublicNavbarComponent implements OnInit, AfterViewInit {
   @Input() userLog: boolean
   @Input() storeAct: boolean | string
 
@@ -46,6 +40,8 @@ export class PublicNavbarComponent implements OnInit {
   @Input() menuOptions: DropdownOption[] = []
   @Input() menuOptionsFavorite: DropdownOption[] = []
 
+  preloadedSearchValue = ''
+
   constructor(
     public homeService: HomeServiceService,
     public _searchService: SearchService,
@@ -56,6 +52,12 @@ export class PublicNavbarComponent implements OnInit {
   ngOnInit(): void {
     this.userLog = this.homeService.islog()
     this.storeAct = this.homeService.storeActive()
+  }
+
+  ngAfterViewInit(): void {
+    this.route.paramMap.subscribe((queryParams) =>
+      this.preloadSearchValue(queryParams)
+    )
   }
 
   // Handlers for events that happen in the component ----------------------
@@ -70,19 +72,15 @@ export class PublicNavbarComponent implements OnInit {
         console.log('Global product search data: ')
         console.log(productsData)
 
-        this.router.navigate([], {
-          relativeTo: this.route,
+        this.router.navigate(['search-results'], {
           queryParams: searchTerm !== '' ? { name: searchTerm } : {},
         })
       })
   }
 
-  public search(ToSearch) {
-    console.log(ToSearch.value)
-
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: ToSearch.value !== '' ? { name: ToSearch.value } : {},
-    })
+  preloadSearchValue(queryParams: ParamMap) {
+    this.preloadedSearchValue = queryParams.has('name')
+      ? queryParams.get('name')
+      : ''
   }
 }

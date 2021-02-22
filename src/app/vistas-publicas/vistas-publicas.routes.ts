@@ -16,6 +16,13 @@ export const ROUTES: Routes = [
       import('./home/home.module').then((module) => module.HomeModule),
     canActivate: [VerifyTokenGuard],
   },
+  {
+    path: 'search-results',
+    loadChildren: () =>
+      import('./search-results/search-results.module').then(
+        (module) => module.SearchResultsModule
+      ),
+  },
   { path: 'register', component: RegisterComponent },
   {
     path: 'categories',
