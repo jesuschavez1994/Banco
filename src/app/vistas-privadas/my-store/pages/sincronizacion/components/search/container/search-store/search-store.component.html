@@ -15,7 +15,7 @@
   <!-- === BOTÓN AGREGAR NUEVO PRODUCTO ====-->
   <!-- ====================================-->
   <button
-    class="btn add-btn mx-3"
+    class="btn add-btn mx-3 ml-auto"
     type="button"
     *ngIf="hasRoute('my-store/product-catalogue')"
     id="addProduct"
@@ -27,7 +27,7 @@
 
   <button
     type="button"
-    class="mx-3 sincronizar-button"
+    class="mx-3 sincronizar-button ml-auto"
     (click)="sendBulkData()"
     [disabled]="cantSync"
     *ngIf="hasRoute('/my-store/sincronizacion/suggested-products')"
