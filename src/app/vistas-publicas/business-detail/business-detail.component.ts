@@ -101,6 +101,13 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     this.loadDataByParams();
   }
 
+  /**
+   * @description Verifica los cambios en la url obtiene los params y query params al mismo tiempo
+   * y ejecuta todas las funciones que utilicen estos argumentos
+   * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christopher<@>matiz.com.ve
+   * @date 22/02/2021
+   * @memberof BusinessDetailComponent
+   */
   public loadDataByParams() {
     combineLatest([this.route.paramMap, this.route.queryParamMap])
       .pipe(
@@ -121,17 +128,12 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
           this.showProducts = false;
         }
 
-      // Para detectar si los valores de queryParam han cambiado o no
-      // y poder crear validaciones, como evitar que el listado de productos
-      // se actualice si solo se cambio el id del producto a detallar
-      // console.log('QUERY PARAMS - this.storeData:');
+        // Para detectar si los valores de queryParam han cambiado o no
+        // y poder crear validaciones, como evitar que el listado de productos
+        // se actualice si solo se cambio el id del producto a detallar
+        // console.log('QUERY PARAMS - this.storeData:');
 
         if (this.queryParam) {
-          // console.log('loadDataByParams - this.queryParam')
-          // console.log(this.queryParam)
-          // console.log(queryParam)
-
-          // if ( this.queryParam.keys.length > 0) {
 
           if (this.queryParam !== queryParam) {
             this.wasChangedQueryParam = true;
@@ -140,13 +142,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             this.wasChangedQueryParam = false;
           }
 
-          // } else {
-          //   this.wasChangedQueryParam = false;
-
-          // }
         } else {
           this.queryParam = queryParam; // guardamos de forma global los datos de la tienda
-          // console.log('this.queryParam - undefined')
+
         }
 
         this.loadDataStore(params, queryParam);
