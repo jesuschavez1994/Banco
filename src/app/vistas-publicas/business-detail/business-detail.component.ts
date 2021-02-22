@@ -51,84 +51,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   expandSidebar = true;
   anchorsMenu: AnchorsMenu;
   profile: Profile;
-  sidebarFilters: Filter[] = [
-    // {
-    //   title: 'categorías',
-    //   type: 'single',
-    //   paramName: 'categoria',
-    //   options: [
-    //     {
-    //       name: 'Cosmeticos',
-    //       totalFounds: 200,
-    //     },
-    //     {
-    //       name: 'Alimentos',
-    //       totalFounds: 200,
-    //     },
-    //   ]
-    // },
-    // {
-    //   title: 'sub categorías',
-    //   type: 'multiple',
-    //   paramName: 'sub-categoria',
-    //   parentFilterId: 1,
-    //   options: [
-    //     {
-    //       parentOptionId: 1,
-    //       name: 'labial',
-    //       totalFounds: 200,
-    //     },
-    //     {
-    //       parentOptionId: 1,
-    //       name: 'labia2',
-    //       totalFounds: 200,
-    //     },
-    //     {
-    //       parentOptionId: 2,
-    //       name: 'labial3',
-    //       totalFounds: 200,
-    //     },
-    //   ]
-    // },
-    // {
-    //   // filterId: 3,
-    //   title: 'Precios',
-    //   type: 'single', // Determinamos que solo una opción puede ser seleccionada
-    //   paramName: 'price',
-    //   options: [
-    //     {
-    //       // optionId: 1,
-    //       name: '$0 - $10,000',
-    //       totalFounds: 200,
-    //       // isSelected: false
-    //     },
-    //     {
-    //       // optionId: 2,
-    //       name: '$10,000 - $20,000',
-    //       totalFounds: 200,
-    //       // isSelected: false
-    //     },
-    //     {
-    //       // optionId: 3,
-    //       name: '$20,000 - $30,000',
-    //       totalFounds: 200,
-    //       // isSelected: false
-    //     },
-    //     {
-    //       // optionId: 3,
-    //       name: '$30,000 - $40,000',
-    //       totalFounds: 200,
-    //       // isSelected: false
-    //     },
-    //     {
-    //       // optionId: 3,
-    //       name: '$40,000 - $50,000',
-    //       totalFounds: 200,
-    //       // isSelected: false
-    //     },
-    //   ]
-    // },
-  ];
+  sidebarFilters: Filter[] = [];
 
   // Products-cards
   showProducts = false;
@@ -512,9 +435,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
             // Formateamos la respuesta del back y retornamos el formato correcto para el componente
             this.productCards.products = this.productModel.productsCardsComponent.formatProductResp(products);
-            if (this.storeData) {
-
-            }
 
             this.setTitle(`${this.storeData.name} | Founduss `);
             console.log('products loaded: ', this.productCards.products);
@@ -671,6 +591,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       isVerified: storeResp.certification == 'true' ? true : false
     };
 
+    // Obtenemos las categorías de los productos vinculados a una tienda
     this.storeService.getCategoriesProducts(idStore).subscribe( resp => {
 
       let sidebarListFilters: Filter[];
@@ -691,11 +612,13 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       // Llenamos las opciones de categoria y las opciones de sub-categorías, todas vinculadas mediante su id
       categoriesResp.forEach( categoryResp => {
 
-        categoryOptions.push({
-          optionId: categoryResp.id,
-          name: categoryResp.name,
-          totalFounds: 200,
-        });
+        categoryOptions.push(
+            {
+                optionId: categoryResp.id,
+                name: categoryResp.name,
+                totalFounds: 200,
+            }
+        );
 
         categoryResp.subcategories.forEach( subcategoryResp => {
           subCategoryOptions.push(
@@ -728,45 +651,34 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       };
 
       const priceFilter = {
-        // filterId: 3,
         title: 'Precios',
         type: 'single', // Determinamos que solo una opción puede ser seleccionada
         paramName: 'precios',
         options: [
           {
-            // optionId: 1,
             name: '$0 - $10,000',
             value: [0, 10000],
             totalFounds: 200,
-            // isSelected: false
           },
           {
-            // optionId: 2,
             name: '$10,000 - $20,000',
             value: [10000, 20000],
             totalFounds: 200,
-            // isSelected: false
           },
           {
-            // optionId: 3,
             name: '$20,000 - $30,000',
             value: [20000, 30000],
             totalFounds: 200,
-            // isSelected: false
           },
           {
-            // optionId: 4,
             name: '$30,000 - $40,000',
             value: [30000, 40000],
             totalFounds: 200,
-            // isSelected: false
           },
           {
-            // optionId: 5,
             name: '$40,000 - $50,000',
             value: [40000, 50000],
             totalFounds: 200,
-            // isSelected: false
           },
         ]
       };
