@@ -21,6 +21,7 @@ import { ToastComponent } from '../../modals/toast/toast.component';
 import {HomeServiceService} from '../services/home-service.service';
 import { ProductModel } from '@app/models/product.model';
 import { Title } from '@angular/platform-browser';
+import { Option } from '../../interfaces/components-options/sidebar-list.options.interface';
 
 @Component({
   selector: 'app-business-detail',
@@ -670,104 +671,119 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       isVerified: storeResp.certification == 'true' ? true : false
     };
 
-    const sidebarFilters: Filter[] = [
-      {
+    this.storeService.getCategoriesProducts(idStore).subscribe( resp => {
+
+      let sidebarListFilters: Filter[];
+      sidebarListFilters = [];
+
+      const respKeys = Object.keys(resp);
+
+      const categoriesResp = respKeys.map(respKey => {
+        return resp[respKey];
+      });
+
+      let categoryOptions: Option[];
+      let subCategoryOptions: Option[];
+
+      categoryOptions = [];
+      subCategoryOptions = [];
+
+      // Llenamos las opciones de categoria y las opciones de sub-categorías, todas vinculadas mediante su id
+      categoriesResp.forEach( categoryResp => {
+
+        categoryOptions.push({
+          optionId: categoryResp.id,
+          name: categoryResp.name,
+          totalFounds: 200,
+        });
+
+        categoryResp.subcategories.forEach( subcategoryResp => {
+          subCategoryOptions.push(
+            {
+              optionId: subcategoryResp.id,
+              parentOptionId: subcategoryResp.category_id,
+              name: subcategoryResp.name,
+              totalFounds: 200,
+            },
+          );
+        });
+
+      });
+
+      const categoryFilter = {
         filterId: 1,
         title: 'categorías',
         type: 'single',
         paramName: 'categoria',
-        options: [
-          {
-            optionId: 1,
-            name: 'Cosmeticos',
-            totalFounds: 200,
-          },
-          {
-            optionId: 2,
-            name: 'Alimentos',
-            totalFounds: 200,
-          },
-        ]
-      },
-      {
+        options: categoryOptions,
+      };
+
+      const subCategoryFilter =  {
         filterId: 2,
         title: 'sub categorías',
         type: 'multiple',
         paramName: 'sub-categorias',
         parentFilterId: 1,
-        options: [
-          {
-            optionId: 1,
-            parentOptionId: 1,
-            name: 'labial',
-            totalFounds: 200,
-          },
-          {
-            optionId: 2,
-            parentOptionId: 1,
-            name: 'labia2',
-            totalFounds: 200,
-          },
-          {
-            optionId: 3,
-            parentOptionId: 2,
-            name: 'labial3',
-            totalFounds: 200,
-          },
-        ]
-      },
-      {
-        filterId: 3,
+        options: subCategoryOptions
+      };
+
+      const priceFilter = {
+        // filterId: 3,
         title: 'Precios',
         type: 'single', // Determinamos que solo una opción puede ser seleccionada
         paramName: 'precios',
         options: [
           {
-            optionId: 1,
+            // optionId: 1,
             name: '$0 - $10,000',
             value: [0, 10000],
             totalFounds: 200,
             // isSelected: false
           },
           {
-            optionId: 2,
+            // optionId: 2,
             name: '$10,000 - $20,000',
             value: [10000, 20000],
             totalFounds: 200,
             // isSelected: false
           },
           {
-            optionId: 3,
+            // optionId: 3,
             name: '$20,000 - $30,000',
             value: [20000, 30000],
             totalFounds: 200,
             // isSelected: false
           },
           {
-            optionId: 4,
+            // optionId: 4,
             name: '$30,000 - $40,000',
             value: [30000, 40000],
             totalFounds: 200,
             // isSelected: false
           },
           {
-            optionId: 5,
+            // optionId: 5,
             name: '$40,000 - $50,000',
             value: [40000, 50000],
             totalFounds: 200,
             // isSelected: false
           },
         ]
-      },
-    ];
+      };
 
-    // Evitamos que con cada cambio de la url se carguen las mismas opciones
-    // de filtro, solo se sobre escriben las opciones cundo es una tienda diferente
+      // Agregamos todos los filtros
+      sidebarListFilters.push(
+        categoryFilter,
+        subCategoryFilter,
+        priceFilter
+      );
 
-    this.sidebarFilters = this.sidebarList.setFilters(sidebarFilters); // retornamos los filters con el formato correcto para el component
+      // retornamos los filters con el formato correcto para el component
+      this.sidebarFilters = this.sidebarList.setFilters(sidebarListFilters);
 
+      this.sidebarList.loadOptionsFilter( queryParam ); // seleccionamos las opciones filtradas por url
 
-    this.sidebarList.loadOptionsFilter( queryParam ); // seleccionamos las opciones filtradas por url
+    });
 
   }
 

@@ -173,7 +173,16 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   }
 
-  public setFilters(filters: Filter[] ) {
+  /**
+   * @description La función retorna el listado de filters con sus identificadores únicos sobre escritos
+   * de forma correcta o los agrega en caso de no tenerlos
+   * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christopher<@>matiz.com.ve
+   * @date 22/02/2021
+   * @param {Filter[]} filters
+   * @returns {*}  Filter[]
+   * @memberof SidebarListComponent
+   */
+  public setFilters(filters: Filter[] ): Filter[] {
     // Asignamos a los identificadores únicos sus valores únicos de los filtros
     filters.forEach( (optionFilter, index) => {
 

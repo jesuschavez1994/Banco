@@ -100,7 +100,7 @@ export class MyStoreComponent implements OnInit {
       );
   }
 
-  public setBreadcrumbOptions(idStore: string, storeResp: StoreResponse) {
+  public setBreadcrumbOptions(idStore: number, storeResp: StoreResponse) {
     this.breadcrumb = [
       {
         title: 'inicio',
@@ -126,12 +126,14 @@ export class MyStoreComponent implements OnInit {
 
   // Store
   public loadDataStore() {
+    // tslint:disable-next-line: radix
+    const storeId = parseInt(localStorage.getItem('storeId'));
     this.storeService
-      .getStoreById(localStorage.getItem('storeId'))
+      .getStoreById(storeId)
       .subscribe((storeResp) => {
         this.StoreName = storeResp.name;
         console.log('store', storeResp);
-        this.setBreadcrumbOptions(localStorage.getItem('storeId'), storeResp);
+        this.setBreadcrumbOptions(storeId, storeResp);
         this.setSidebarOptions(storeResp);
       });
   }
