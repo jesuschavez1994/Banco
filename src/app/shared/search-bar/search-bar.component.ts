@@ -9,6 +9,7 @@ import {
   AfterViewInit,
   OnChanges,
 } from '@angular/core'
+import { Router, ActivatedRoute, ParamMap } from '@angular/router'
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface'
 import { FormControl } from '@angular/forms'
 import { debounceTime } from 'rxjs/operators'
@@ -38,8 +39,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   // Created these variables to implement Angular's reactive forms
   @Output() searchEmitter = new EventEmitter<string>()
   searchForm = new FormControl()
+  preloadedSearchValue = ''
 
-  constructor() {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.searchForm.valueChanges
@@ -52,6 +54,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.textTosearch()
+    this.route.paramMap.subscribe((queryParams) =>
+      this.preloadSearchValue(queryParams)
+    )
   }
 
   public toggleSidebarList(event) {
@@ -101,5 +106,13 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
       }
     }
     /******/
+  }
+
+  preloadSearchValue(queryParams: ParamMap) {
+    this.preloadedSearchValue = queryParams.has('name')
+      ? queryParams.get('name')
+      : ''
+
+    this.searchForm.setValue(this.preloadedSearchValue)
   }
 }
