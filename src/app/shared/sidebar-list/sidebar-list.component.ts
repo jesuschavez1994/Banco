@@ -150,7 +150,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   }
 
-  // isLocalFilter: boolean = this.isLocalFilter
   public initFilter() {
 
     // Asignamos a los identificadores únicos sus valores únicos de los filtros
@@ -303,11 +302,9 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
           if (filterMatched.type === 'single') {
 
             const optionMatched = filterMatched.options.find( filterMatchedOption => {
-              //// if (filterMatchedOption.value) {
-              //   return filterMatchedOption.value === queryValue;
-              // }
-              // return filterMatchedOption.name === queryValue;
+
               return isSameValue(filterMatchedOption, queryValue);
+
             });
 
             if (optionMatched) {
@@ -333,12 +330,9 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
               queryValues.forEach(queryValueForEach => {
 
                 const optionMatched = filterMatched.options.find( filterMatchedOption => {
-                  //// if (filterMatchedOption.value) {
-                  //   return filterMatchedOption.value === queryValueForEach;
-                  // }
-                  // return filterMatchedOption.name === queryValueForEach;
 
                   return isSameValue(filterMatchedOption, queryValueForEach);
+
                 });
 
                 if (optionMatched) {
@@ -373,11 +367,8 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       relativeTo: this.route,
     };
 
-    // Retorna los valores del value concatenados o el valor de name.
-    // Si existe value lo retorna, sino retorna el name.
-
     this.filters.forEach( filterFor => {
-      // queryParams[]
+
       if (filterFor.type === 'single') {
 
         const optionSelected = filterFor.options.find( filterOption => {
@@ -386,18 +377,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
         if (optionSelected) {
 
-          // if (optionSelected.value) {
-
-          //   let optionSelectedValue;
-          //   optionSelectedValue = optionSelected.value;
-
-          //   if (Array.isArray(optionSelectedValue)) {
-          //     optionSelectedValue = optionSelectedValue.join();
-          //   }
-
-          // }
-
-          // queryParams[filterFor.paramName] = optionSelected.name;
           queryParams[filterFor.paramName] = this.getOptionSelectedValue(optionSelected);
 
         } else {
@@ -415,18 +394,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
         if (optionsSelected.length > 0) {
 
           const valuesOfQueryParam = optionsSelected.map( optionSelected => {
-
-            // if (optionSelected.value) {
-
-            //   let optionSelectedValue;
-            //   optionSelectedValue = optionSelected.value;
-
-            //   if (Array.isArray(optionSelectedValue)) {
-            //     optionSelectedValue = optionSelectedValue.join();
-            //   }
-
-            //   return optionSelectedValue;
-            // }
 
             return this.getOptionSelectedValue(optionSelected);
 
@@ -447,8 +414,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
             if (parentOptionSelected) { // si existe una opcion del padre seleccionada, agrego el queryParam del padre
 
               // agregamos el paramQuery del parentFilter
-              // queryParams[parentFilter.paramName] = parentOptionSelected.name;
-
               queryParams[parentFilter.paramName] = this.getOptionSelectedValue(parentOptionSelected);
 
             } else { // en caso contrario elimino el queryParam
@@ -557,10 +522,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     let queryParams;
     queryParams = {};
 
-    // const optionMatched = filterSelected.options.find( filterMatchedOption => {
-    //   return filterMatchedOption.name === queryValue;
-    // });
-
     if (filterSelected.type === 'multiple') {
 
       if (toggleOption) {
@@ -657,7 +618,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
       }
 
-      // queryParams[filterSelected.paramName] = optionSelected.name;
       queryParams[filterSelected.paramName] = this.getOptionSelectedValue(optionSelected);
 
     }
