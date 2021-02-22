@@ -1,23 +1,27 @@
 <app-public-navbar></app-public-navbar>
 
 <main class="page">
-  <app-sidebar-list
-    [isExpanded]="expandSidebar"
-    (sidebarExpand)="toogleSidebar($event)"
-    [filters]="sidebarFilters"
-    #sidebarList
-  >
-  </app-sidebar-list>
-
-  <section class="products-info">
-    <app-products-cards
-      #productCards
-      (selected)="goToProductDetails($event)"
-      (pagination)="paginationProducts($event)"
-      [totalItems]="totalProducts"
-      [itemsPerPage]="itemsPerPage"
-      [showShimmer]="showShimmeringCards"
+  <div class="column">
+    <app-sidebar-list
+      [isExpanded]="expandSidebar"
+      (sidebarExpand)="toogleSidebar($event)"
+      [filters]="sidebarFilters"
+      #sidebarList
     >
-    </app-products-cards>
-  </section>
+    </app-sidebar-list>
+
+    <section class="products-info">
+      <app-products-cards
+        #productCards
+        (selected)="goToProductDetails($event)"
+        (pagination)="paginationProducts($event)"
+        [totalItems]="totalProducts"
+        [itemsPerPage]="itemsPerPage"
+        [showShimmer]="showShimmeringCards"
+      >
+      </app-products-cards>
+    </section>
+  </div>
 </main>
+
+<app-toast #toastRef></app-toast>
