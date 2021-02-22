@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: 'store-edit',
     component: AccountComponent,
-    data: { title: 'Founduss | setting' },
+    data: { title: 'Editar tienda | Founduss' },
   },
 ]
 
