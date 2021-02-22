@@ -19,6 +19,7 @@ import { DropdownOption } from '@interfaces/components-options/dropdown.options.
 import { DropdownIconComponent } from '../../shared/dropdown-icon/dropdown-icon.component';
 import { ToastComponent } from '../../modals/toast/toast.component';
 import {HomeServiceService} from '../services/home-service.service';
+import { ProductModel } from '@app/models/product.model';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -27,6 +28,8 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./business-detail.component.scss']
 })
 export class BusinessDetailComponent implements OnInit, AfterViewInit {
+
+  readonly pageName = 'business-detail';
 
   // Components Controllers
   @ViewChild('productCards') productCards: ProductsCardsComponent;
@@ -162,6 +165,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     private paymentProcessService: PaymentProcessService,
     private utils: Utils,
     private dropdownIconComp: DropdownIconComponent,
+    private productModel: ProductModel,
     private titleService: Title
 
   ){}
@@ -204,15 +208,13 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       // Para detectar si los valores de queryParam han cambiado o no
       // y poder crear validaciones, como evitar que el listado de productos
       // se actualice si solo se cambio el id del producto a detallar
-      console.log('QUERY PARAMS - this.storeData:');
+      // console.log('QUERY PARAMS - this.storeData:');
 
       if (this.queryParam) {
 
-        console.log('loadDataByParams - this.queryParam');
-        console.log(this.queryParam);
-        console.log(queryParam);
-
-        // if ( this.queryParam.keys.length > 0) {
+        // console.log('loadDataByParams - this.queryParam');
+        // console.log(this.queryParam);
+        // console.log(queryParam);
 
         if (this.queryParam !== queryParam) {
           this.wasChangedQueryParam = true;
@@ -223,15 +225,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         }
 
-        // } else {
-        //   this.wasChangedQueryParam = false;
-
-        // }
-
-
       }else {
         this.queryParam = queryParam; // guardamos de forma global los datos de la tienda
-        console.log('this.queryParam - undefined');
+        // console.log('this.queryParam - undefined');
       }
 
       this.loadDataStore(params, queryParam);
@@ -256,7 +252,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         // El cual sera ula variable que determinara
         // si los datos de la tienda cambiaron o no
         // console.log('loadDataStore -this.storeData:');
-
 
         if (this.storeData) {
           // console.log(this.storeData.id);
@@ -296,15 +291,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         }
 
-        console.log('wasChangedStoreData');
-        console.log(this.wasChangedStoreData);
-
-        console.log('wasFirstLoadedProducts');
-        console.log(this.wasFirstLoadedProducts);
-
-        console.log('wasChangedQueryParam');
-        console.log(this.wasChangedQueryParam);
-
         // Evitamos que la página carguen los mismos datos
         // cuando la tienda sigue siendo la misma.
         // solo permite actualizar los datos cuando la tienda es cambiada
@@ -314,11 +300,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
           if (this.wasFirstLoadedProducts) {
 
-            // if (this.wasChangedQueryParam) {
             this.loadProductsCards(params, queryParam);
-
-            // }
-
 
           } else {
             this.loadProductsCards(params, queryParam);
@@ -329,20 +311,19 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         } else {
 
-            if (this.wasFirstLoadedProducts) {
+          if (this.wasFirstLoadedProducts) {
 
-                if (this.wasChangedQueryParam) {
-                  this.loadProductsCards(params, queryParam);
+            if (this.wasChangedQueryParam) {
+              this.loadProductsCards(params, queryParam);
 
-                }
-
-            } else {
-                this.loadProductsCards(params, queryParam);
-                this.wasFirstLoadedProducts = true;
             }
 
-        }
+          } else {
+            this.loadProductsCards(params, queryParam);
+            this.wasFirstLoadedProducts = true;
+          }
 
+        }
 
       });
 
@@ -370,7 +351,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * @description En caso de que existan los parametros :idStore y idProduct, se realiza la petición a la base de datos
+   * @description En caso de que existan los parámetros :idStore y idProduct, se realiza la petición a la base de datos
    * para obtener el producto especifico que coincida con ambos datos y asignamos los datos del producto recibido
    * a la variable que carga el detalle del producto en el Input del componente product-detail.
    * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christpherdallar1234@matiz.com.ve
@@ -390,61 +371,47 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
       this.productService.getProductByStore(idStore, idProduct).subscribe(
         product => {
+          // console.log('getProductByStore product', product);
+          if (product) {
 
-          this.setTitle(product.name + '' + ' | Founduss ');
+            const productFormatead = this.productModel.productsCardsComponent.formatProductResp(product);
+            this.productDetail.selectedProduct = productFormatead[0]; // el método devuelve un array así que obtengo el primer elemento
 
-          let images = [];
+            this.setTitle(product.name + '' + ' | Founduss ');
+            this.scrollToElement(document.querySelector('#profile-name'));
 
-          if (product.sync_bank) {
+          } else {
 
-            if (product.sync_bank.length === 0) {
+            this.errorLoadProductDetail();
 
-              images = product.images.map(image => {
-                return image.src;
-              });
-
-            }else {
-              images = product.sync_bank.map(syncBank => {
-                return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
-              });
-            }
-
-          }else {
-            images = product.images.map(image => {
-              return image.src;
-            });
           }
-
-          // Antes
-          // const images = product.images.map(image => {
-          //   return image.src;
-          // });
-
-          this.productDetail.selectedProduct =  {
-            name: product.name,
-            description: product.description,
-            price: product.price,
-            stock: product.stock,
-            images, // product.images
-            id: product.id ? product.id : -1,
-            idStore: product.store_id ? product.store_id : -1,
-            isFavorite: product.isFavorite ? product.isFavorite : false,
-          };
-
-          this.scrollToElement(document.querySelector('#profile-name'));
 
         }, error => {
 
-          console.log('Error loading products', error);
-          this.productDetail.selectedProduct = null;
+          this.errorLoadProductDetail();
 
-        }, () => {
-          // console.log('products loaded');
         }
+
       );
 
     }
 
+
+  }
+
+  public errorLoadProductDetail() {
+
+    this.toastRef.open(
+      'El producto a detallar no existe en la tienda',
+      { color: '#ffffff', background: '#900909c2'}
+    );
+
+    if (this.productDetail) {
+      if (this.productDetail.selectedProduct) {
+        this.productDetail.selectedProduct = null;
+      }
+
+    }
 
   }
 
@@ -460,7 +427,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       let filter;
       filter = {};
 
-      // console.log('queryParams Key: ', queryParams.keys);
+      console.log('queryParams Key: ', queryParams.keys);
 
       const keysQueryParams = queryParams.keys;
 
@@ -477,18 +444,18 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
               // name: 'l',
               break;
 
-            case 'marks':
-              queryParamsAllowed.marks = this.utils.stringToArray(queryParams.get('marks'));
+            case 'marcas':
+              queryParamsAllowed.marks = this.utils.stringToArray(queryParams.get('marcas'));
               // marks: ['generica', 'ALBENZA', 'XANAX', 'gillete'],
               break;
 
-            case 'category':
-              queryParamsAllowed.categories = this.utils.stringToArray(queryParams.get('category'));
+            case 'categoria':
+              queryParamsAllowed.categories = this.utils.stringToArray(queryParams.get('categoria'));
               // categories: ['Cosmeticos', 'infantil'],
               break;
 
-            case 'subcategories':
-              queryParamsAllowed.subcategories = this.utils.stringToArray(queryParams.get('subcategories'));
+            case 'sub-categorias':
+              queryParamsAllowed.subcategories = this.utils.stringToArray(queryParams.get('sub-categorias'));
               // subcategories: ['Cutis', 'Analgesicos'],
 
               break;
@@ -498,8 +465,10 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
               // factories: ['gerber', 'polar'],
               break;
 
-            case 'price':
-              queryParamsAllowed.price = this.utils.stringToArray(queryParams.get('price'), true);
+            case 'precios':
+              console.log('queryParams.get(precios)');
+              console.log(queryParams.get('precios'));
+              queryParamsAllowed.price = this.utils.stringToArray(queryParams.get('precios'), true);
               // queryParams.get('price').split(',');
               // price: [1, 284],
               break;
@@ -540,46 +509,14 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
           if (products.length > 0) {
 
-            this.productCards.products = products.map( product => {
+            // Formateamos la respuesta del back y retornamos el formato correcto para el componente
+            this.productCards.products = this.productModel.productsCardsComponent.formatProductResp(products);
+            if (this.storeData) {
 
-              this.setTitle(product.name + '' + ' | Founduss ');
+            }
 
-              let images = [];
-
-              if (product.sync_bank) {
-
-                if (product.sync_bank.length === 0) {
-
-                  images = product.images.map(image => {
-                    return image.src;
-                  });
-
-                }else {
-                  images = product.sync_bank.map(syncBank => {
-                    return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
-                  });
-                }
-
-              }else {
-                images = product.images.map(image => {
-                  return image.src;
-                });
-              }
-
-              return {
-                name: product.name,
-                description: product.description,
-                price: product.price,
-                stock: product.stock,
-                images, // product.images
-                id: product.id ? product.id : -1,
-                idStore: product.store_id ? product.store_id : -1,
-                isFavorite: product.isFavorite ? product.isFavorite : false,
-                };
-
-            } );
-
-            // console.log('products loaded: ', this.productCards.products);
+            this.setTitle(`${this.storeData.name} | Founduss `);
+            console.log('products loaded: ', this.productCards.products);
 
             this.productCards.toggleShimmer(false);
 
@@ -733,7 +670,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       isVerified: storeResp.certification == 'true' ? true : false
     };
 
-    const sidebarFilters = [
+    const sidebarFilters: Filter[] = [
       {
         filterId: 1,
         title: 'categorías',
@@ -756,7 +693,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         filterId: 2,
         title: 'sub categorías',
         type: 'multiple',
-        paramName: 'sub-categoria',
+        paramName: 'sub-categorias',
         parentFilterId: 1,
         options: [
           {
@@ -783,35 +720,40 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         filterId: 3,
         title: 'Precios',
         type: 'single', // Determinamos que solo una opción puede ser seleccionada
-        paramName: 'price',
+        paramName: 'precios',
         options: [
           {
             optionId: 1,
             name: '$0 - $10,000',
+            value: [0, 10000],
             totalFounds: 200,
             // isSelected: false
           },
           {
             optionId: 2,
             name: '$10,000 - $20,000',
+            value: [10000, 20000],
             totalFounds: 200,
             // isSelected: false
           },
           {
             optionId: 3,
             name: '$20,000 - $30,000',
+            value: [20000, 30000],
             totalFounds: 200,
             // isSelected: false
           },
           {
             optionId: 4,
             name: '$30,000 - $40,000',
+            value: [30000, 40000],
             totalFounds: 200,
             // isSelected: false
           },
           {
             optionId: 5,
             name: '$40,000 - $50,000',
+            value: [40000, 50000],
             totalFounds: 200,
             // isSelected: false
           },
@@ -858,13 +800,16 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   public scrollToElement(element) {
 
-    element.scrollIntoView(
-      {
-        behavior: 'smooth',
-        block: 'start',
-        inline: 'nearest'
-      }
-    );
+    if (element) {
+      element.scrollIntoView(
+        {
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest'
+        }
+      );
+    }
+
   }
 
   public setTitle(newTitle: string) {

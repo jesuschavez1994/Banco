@@ -123,4 +123,8 @@ export class UsuarioService extends Service {
       return null;
     }
   }
+
+  public getContact(userId: number) {
+    return this.execQuery(`users/${userId}/contact`);
+  }
 }

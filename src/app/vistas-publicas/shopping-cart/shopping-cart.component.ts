@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { SuccessComponent } from '../../modals/success/success.component';
 import { ConfirmWebpayPlusComponent } from '../../modals/confirm-webpay-plus/confirm-webpay-plus.component';
 import {HomeServiceService} from '../services/home-service.service';
+import { RecipientContactOfOrder } from '../../models/payment-process';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -15,7 +16,7 @@ import {HomeServiceService} from '../services/home-service.service';
 export class ShoppingCartComponent implements OnInit {
   userLog: boolean;
   storeLog: boolean | string;
-  taxPorcentage = 10;
+  taxPercentage = 10;
   deliveryCost = 0;
 
   tabSelected: 1 | 2 | 3 | 4 = 1;
@@ -38,7 +39,7 @@ export class ShoppingCartComponent implements OnInit {
   //         images: [],
   //         id: 1,
   //         idStore: 1,
-  //         // taxPorcentageByProduct: this.taxPorcentage,
+  //         // taxPercentageByProduct: this.taxPercentage,
   //         hasDelivery: true,
   //         deliveryCost: this.deliveryCost,
   //       },
@@ -51,7 +52,7 @@ export class ShoppingCartComponent implements OnInit {
   //         images: [],
   //         id: 2,
   //         idStore: 1,
-  //         // taxPorcentageByProduct: this.taxPorcentage,
+  //         // taxPercentageByProduct: this.taxPercentage,
   //         hasDelivery: false,
   //         deliveryCost: this.deliveryCost,
   //       },
@@ -64,7 +65,7 @@ export class ShoppingCartComponent implements OnInit {
   //         images: [],
   //         id: 3,
   //         idStore: 1,
-  //         // taxPorcentageByProduct: this.taxPorcentage,
+  //         // taxPercentageByProduct: this.taxPercentage,
   //         hasDelivery: false,
   //         deliveryCost: this.deliveryCost,
   //       },
@@ -90,7 +91,7 @@ export class ShoppingCartComponent implements OnInit {
   //         images: [],
   //         id: 1,
   //         idStore: 1,
-  //         // taxPorcentageByProduct: this.taxPorcentage,
+  //         // taxPercentageByProduct: this.taxPercentage,
   //         hasDelivery: true,
   //         deliveryCost: this.deliveryCost,
   //       },
@@ -103,7 +104,7 @@ export class ShoppingCartComponent implements OnInit {
   //         images: [],
   //         id: 2,
   //         idStore: 1,
-  //         // taxPorcentageByProduct: this.taxPorcentage,
+  //         // taxPercentageByProduct: this.taxPercentage,
   //         hasDelivery: false,
   //         deliveryCost: this.deliveryCost,
   //       },
@@ -116,7 +117,7 @@ export class ShoppingCartComponent implements OnInit {
   //         images: [],
   //         id: 3,
   //         idStore: 1,
-  //         // taxPorcentageByProduct: this.taxPorcentage,
+  //         // taxPercentageByProduct: this.taxPercentage,
   //         hasDelivery: false,
   //         deliveryCost: this.deliveryCost,
   //       },
@@ -139,7 +140,7 @@ export class ShoppingCartComponent implements OnInit {
   //         images: [''],
   //         id: 1,
   //         idStore: 1,
-  //         // taxPorcentageByProduct: this.taxPorcentage,
+  //         // taxPercentageByProduct: this.taxPercentage,
   //         hasDelivery: true,
   //         deliveryCost: this.deliveryCost,
   //       },
@@ -152,7 +153,7 @@ export class ShoppingCartComponent implements OnInit {
   //         images: [''],
   //         id: 2,
   //         idStore: 1,
-  //         // taxPorcentageByProduct: this.taxPorcentage,
+  //         // taxPercentageByProduct: this.taxPercentage,
   //         hasDelivery: false,
   //         deliveryCost: this.deliveryCost,
   //       },
@@ -165,7 +166,7 @@ export class ShoppingCartComponent implements OnInit {
   //         images: [''],
   //         id: 3,
   //         idStore: 1,
-  //         // taxPorcentageByProduct: this.taxPorcentage,
+  //         // taxPercentageByProduct: this.taxPercentage,
   //         hasDelivery: false,
   //         deliveryCost: this.deliveryCost,
   //       },
@@ -182,7 +183,8 @@ export class ShoppingCartComponent implements OnInit {
 
   currentPaymentData: CurrentPaymentData = {};
 
-  constructor(private homeService: HomeServiceService,
+  constructor(
+    private homeService: HomeServiceService,
     private paymentService: PaymentProcessService,
     public dialog: MatDialog
   ){
@@ -190,8 +192,10 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.userLog = this.homeService.islog();
-    this.storeLog= this.homeService.storeActive();
+    this.storeLog = this.homeService.storeActive();
+
     if (this.ordersLists) {
 
       if (this.ordersLists.length > 0) {
@@ -200,6 +204,12 @@ export class ShoppingCartComponent implements OnInit {
 
     }
 
+    this.loadProductsFromCart();
+
+  }
+
+
+  public loadProductsFromCart() {
     console.log('ShoppingCartComponent');
 
     this.paymentService.getProductsFromCart().subscribe(resp => {
@@ -234,7 +244,7 @@ export class ShoppingCartComponent implements OnInit {
                 images: [],
                 id: productOfCartMap.id,
                 idStore: productOfCartMap.attributes.store.store_id,
-                // taxPorcentageByProduct: this.taxPorcentage,
+                // taxPercentageByProduct: this.taxPercentage,
                 hasDelivery: false,
                 deliveryCost: this.deliveryCost,
               };
@@ -273,10 +283,8 @@ export class ShoppingCartComponent implements OnInit {
     // Para registrar los productos en el carrito que coincidan con el id de tienda, permitiendo así.
     // Crear un pedido por cada tienda.
     // Lo ideal sería tener ambas opciones, pagar todo y pagar solo productos de la tienda.
-    // Si el back actua de esta manera igual, sería bueno borrar el listado de pedidos al venir al carrito de compras
+    // Si el back actuá de esta manera igual, sería bueno borrar el listado de pedidos al venir al carrito de compras
     // y se carga el carrito de compras, con los productos aún no pagados.
-
-
   }
 
   public filterByTab(tabNumber){
@@ -335,13 +343,43 @@ export class ShoppingCartComponent implements OnInit {
 
   public formData(event) {
 
+    console.log('formData');
+    console.log(event);
+
     if (this.currentPaymentData.order){
 
       if (Object.keys(this.currentPaymentData.order).length > 0) {
 
         this.buttonDisabledForm = true;
 
-        this.paymentService.addPaymentToOrder(this.currentPaymentData.order.id).subscribe(
+        const orderId = this.currentPaymentData.order.id;
+        const recipientContact = new RecipientContactOfOrder(
+          {
+            commune_id: 1,
+            direction: '',
+            house: 1,
+            phone: 1,
+            rut: 1,
+            address_latitude: 1,
+            address_longitude: 1
+          }
+        );
+
+        console.log('RecipientContactOfOrder');
+        console.log(recipientContact);
+
+        //Agregamos los datos del destinatario y su dirección de destino del producto
+        // this.paymentService.addRecipientContactToOrder(orderId, recipientContact).subscribe(
+        //   resp => {
+
+
+
+        //   }, error => {
+
+        //   }
+        // );
+
+        this.paymentService.addPaymentToOrder(orderId).subscribe(
 
           resp => {
             console.log(resp);

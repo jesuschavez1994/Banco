@@ -149,4 +149,33 @@ export class PaymentProcessService extends Service {
     return this.execQuery(`webpayplus/mallReturnUrl`);
   }
 
+  // Payment
+  /**
+   * @description Agregamos la dirección y datos de contacto de la persona a obtener el producto.
+   * Estos datos son adjuntados a la order
+   * creada
+   * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christopher<@>matiz.com.ve
+   * @date 18/02/2021
+   * @returns {*}
+   * @memberof PaymentProcessService
+   */
+  public addRecipientContactToOrder(idOrder: number, data) {
+    this.setIdUser();
+    return this.postQuery(`users/${this.idUser}/orders/${idOrder}/order_contact`, {});
+  }
+
+  // Demography
+
+  public getRegions() {
+    return this.execQuery(`regions`);
+  }
+
+  public getRegion(idRegion: number) {
+    return this.execQuery(`regions/${idRegion}`);
+  }
+
+  public getCommunesOfRegion(idRegion: number) {
+    return this.execQuery(`regions/${idRegion}/communes`);
+  }
+
 }

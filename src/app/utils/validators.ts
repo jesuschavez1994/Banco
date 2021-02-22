@@ -66,7 +66,10 @@ export class MyValidators {
 
       const value = control.value;
 
-      if (options.indexOf(value) === -1) {
+      const isThereInOptions = options.find( option => option === value );
+
+      // if (options.indexOf(value) === -1) {
+      if (isThereInOptions) {
         return {
           existIn: true
         };
