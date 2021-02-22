@@ -72,18 +72,18 @@ export class StoreService extends Service{
               localStorage.setItem('token', this.token);
               console.log('Token renovado', this.token);
               return true;
-          })
-          .catch( err => {
-            console.log(err);
-            this.router.navigate(['/login']);
-            swal({
-              text: 'No se pudo renovar Token',
-              icon: 'warning',
-              dangerMode: true,
-            });
+            })
+            .catch( err => {
+              console.log(err);
+              this.router.navigate(['/login']);
+              swal({
+                text: 'No se pudo renovar Token, inicie su sesiòn de nuevo',
+                icon: 'warning',
+                dangerMode: true,
+              });
 
-            return Observable.throw(err);
-          })
+              return Observable.throw(err);
+            })
   }
 
   async crearStore(user: Usuario){

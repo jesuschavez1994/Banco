@@ -14,6 +14,58 @@
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
+// Plans color themes
+$plan-basic: (
+  50: #e5f8f5,
+  100: #bdefe7,
+  200: #92e4d7,
+  300: #66d9c7,
+  400: #45d0bb,
+  500: #24c8af,
+  600: #20c2a8,
+  700: #1bbb9f,
+  800: #16b496,
+  900: #0da786,
+  A100: #d5fff5,
+  A200: #a2ffe9,
+  A400: #6fffdd,
+  A700: #56ffd7,
+);
+
+$plan-standard: (
+  50: #fff0e9,
+  100: #ffdbc8,
+  200: #ffc3a3,
+  300: #ffaa7e,
+  400: #ff9863,
+  500: #ff8647,
+  600: #ff7e40,
+  700: #ff7337,
+  800: #ff692f,
+  900: #ff5620,
+  A100: #ffffff,
+  A200: #ffffff,
+  A400: #ffdacf,
+  A700: #ffc6b6,
+);
+
+$plan-premium: (
+  50: #e7eeff,
+  100: #c3d5ff,
+  200: #9bb9ff,
+  300: #729dff,
+  400: #5488ff,
+  500: #3673ff,
+  600: #306bff,
+  700: #2960ff,
+  800: #2256ff,
+  900: #1643ff,
+  A100: #ffffff,
+  A200: #fcfcff,
+  A400: #c9d2ff,
+  A700: #afbcff,
+);
+
 $custom-typography: mat-typography-config(
   $font-family: "Montserrat, sans-serif",
 );
@@ -2369,7 +2421,7 @@ form p:last-child {
 
 @media (max-width: 1023px) {
   .page-wrapper {
-    margin-left: 40px;
+    margin-left: 10px;
     -webkit-transition: 0.2s ease-in;
     -o-transition: 0.2s ease-in;
     transition: 0.2s ease-in;
@@ -2396,6 +2448,11 @@ form p:last-child {
   ============================================================== */
 
 @media (max-width: 767px) {
+
+  .page-wrapper{
+    padding-top: 0px !important;
+  }
+
   .container-fluid {
     padding: 25px 15px 25px 15px;
   }

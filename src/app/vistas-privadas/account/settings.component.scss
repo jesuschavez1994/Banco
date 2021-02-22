@@ -7,3 +7,13 @@
     }
  
 }
+
+@media( max-width: 999px){
+    .page{
+        display: flex;
+        app-sidebar-menu{
+            padding-top: 0px;
+        }
+     
+    }
+}

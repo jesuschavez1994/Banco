@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { SidebarMenuOptions } from '@interfaces/components-options/sidebar-menu.options.interface';
+import { Component, OnInit } from '@angular/core'
+import { SidebarMenuOptions } from '@interfaces/components-options/sidebar-menu.options.interface'
 import { HomeServiceService } from '../../vistas-publicas/services/home-service.service'
 @Component({
   selector: 'app-settings',
@@ -7,25 +7,26 @@ import { HomeServiceService } from '../../vistas-publicas/services/home-service.
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-
-  userLog = false;
+  userLog = false
 
   menuOptions: SidebarMenuOptions[] = [
     {
       label: 'Mi cuenta',
       iconClass: 'fas fa-cog',
-      routerLink: ['/account/form-account'],
+      routerLink: ['/account/settings/form-account'],
       // isActive: false,
     },
     {
-      label: 'planes',
+      label: 'Planes',
       iconClass: 'fas fa-handshake',
       routerLink: ['/account/settings/plans/choose-plan'],
       // isActive: false,
     },
-  ];
+  ]
 
   constructor(private homeService: HomeServiceService) {}
 
-  ngOnInit(): void {this.userLog = this.homeService.islog();}
+  ngOnInit(): void {
+    this.userLog = this.homeService.islog()
+  }
 }

@@ -7,14 +7,17 @@ Se crea éste archivo con la finalidad de explicar en qué consiste el método d
   <summary>Tabla de contenidos</summary>
   <ol>
     <li>
-      <a href="#lazy-loading">¿Qué es "lazy-loading"?</a>
+      <a href="#lazy-loading">¿Qué es "lazy-load"?</a>
 			<ul>
 				<li>
 				<a href="#ejemplo">Ejemplo de aplicabilidad</a>
 				</li>
 			</ul>
     <li>
-      <a href="#how-to">¿Cómo aplicar "lazy-loading"?</a>
+      <a href="#how-to">¿Cómo aplicar "lazy-load"?</a>
+    </li>
+        <li>
+      <a href="#how-to">Consideraciones</a>
     </li>
   </ol>
 </details>
@@ -61,9 +64,7 @@ export class AccountSettingsRoutingModule {}
 ```
 
 <br />
-En este caso, dado que nos estamos refiriendo a un módulo específico para rutas hijas, el parámetro "path" en dicho archivo se deja en blanco, ya que a dicha ruta se hace referencia en el módulo de rutas principal.
-<br />
-Ahora, en el módulo de rutas en el cual vayamos a añadir las rutas deseadas sólo debemos hacer lo siguiente para aplicar el lazy-loading:
+En este caso, dado que nos estamos usando a un módulo específico para rutas hijas, el parámetro "path" en dicho archivo se deja en blanco, ya que a dicha ruta se hace referencia en el módulo encargado de cargar el módulo de rutas hijas, en el cual sólo debemos hacer lo siguiente para aplicar el lazy-load:
 <br />
 <br />
 
@@ -71,9 +72,17 @@ Ahora, en el módulo de rutas en el cual vayamos a añadir las rutas deseadas s�
 {
   path: 'user-area',
   loadChildren: () =>
- 	import('./direccion-del-modulo-a-importar').then((module) => module.UserModule,
+ 	import('./direccion-del-modulo-a-importar/user.module').then((module) => module.UserModule,
 }
 ```
 
 <br />
 Ya con esto, la próxima vez que compilemos el proyecto se notará los trozos (chunks) referentes a cada módulo ser generados aparte.
+<br />
+<br />
+
+## Consideraciones
+
+- Los módulos de características (o feature modules, como se pueden encontrar en inglés) a los cuáles se les vaya a aplicar la técnica deben ser módulos independientes, es decir, su módulo principal **sólo** debe ser importado mediante el _loadChildren_.
+- Extendiendo lo dicho anteriormente, si se le va a aplicar lazy load a un módulo, ni dicho módulo, ni su módulo de rutas deben ser importados en otros módulos.
+- Es importante tener cuidado con la propiedad _pathMatch_. Si la ruta en la cual estamos aplicando el lazy load es una ruta base, por ejemplo, _/#/users_, se debe especificar el _pathMatch:_ **full** para que la ruta se pueda activar.

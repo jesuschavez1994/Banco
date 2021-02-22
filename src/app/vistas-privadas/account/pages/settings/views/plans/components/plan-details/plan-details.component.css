@@ -56,9 +56,9 @@
   grid-template-columns: 30px auto;
   grid-template-rows: auto;
   grid-template-areas:
-    "title title"
-    "checkbox content"
-    "... note";
+    'title title'
+    'checkbox content'
+    '... note';
 }
 
 .payment-methods .webpay-banner .title {
@@ -82,7 +82,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
-  grid-template-areas: "image text";
+  grid-template-areas: 'image text';
   align-content: center;
   justify-items: center;
 }
@@ -118,43 +118,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* ---------- Different colors for each plan stylings ---------- */
-.payment-details .plan-name.basic {
-  color: #24c8af;
-}
-
-.payment-details h5 > span.basic {
-  color: #24c8af;
-}
-
-.payment-details .plan-name.standard {
-  color: #ff8647;
-}
-
-.payment-details h5 > span.standard {
-  color: #ff8647;
-}
-
-.payment-details .plan-name.premium {
-  color: #3673ff;
-}
-
-.payment-details h5 > span.premium {
-  color: #3673ff;
-}
-
-.basic {
-  color: #24c8af;
-}
-
-.standard {
-  color: #ff8647;
-}
-
-.premium {
-  color: #3673ff;
 }
 
 /* --------------------------- 

@@ -12,8 +12,17 @@ button:focus {outline: none !important; outline: none !important; }
     overflow-x: hidden;
 }
 
+h5{
+    font-weight: 500 !important;
+    font-size: 25px;
+}
+
 .well {
     margin: 5px 0;
+}
+
+.map iframe{
+    width: 100%;
 }
 
 .m-top-50 {

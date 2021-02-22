@@ -9,20 +9,21 @@
                 <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
                         <input  class="form-control email-icon"
                                 type="email"
-                                [ngModel]="data.email_1"
                                 placeholder="Correo electrónico"
                                 formControlName="email_1"
-                                [ngClass]="{'is-invalid':  (!forma.controls['email_1'].valid || forma.controls['email_1'].errors?.minlength)&& forma.controls['email_1'].touched, 'is-valid': forma.controls['email_1'].valid }"
+                                [ngClass]="{
+                                        'is-invalid':  (!forma.controls['email_1'].valid || forma.controls['email_1'].errors?.minlength)&& forma.controls['email_1'].touched
+                                }"
                         
                         >
-                        <div    *ngIf="forma.get('email_1').errors?.required"  
+                        <!-- <div    *ngIf="forma.get('email_1').errors?.required && data.email_1 != null"  
                                 class="invalid-feedback">
-                                Este campo es requeridoemail
+                                Este campo es requerido email
                         </div>
                         <div   *ngIf="forma.get('email_1').errors?.pattern"  
                                 class="invalid-feedback">
                                 No posee la forma de un correo: example@gmail.com
-                        </div>
+                        </div> -->
                 </div>
         </div>
 
@@ -30,20 +31,19 @@
                 <div class="col-11 col-sm-10 col-md-12 col-lg-10 col-xl-10">
                         <input  class="form-control email-icon"
                                 type="email"
-                                [ngModel]="data.email_2"
                                 placeholder="Correo electrónico"
                                 formControlName="email_2"
-                                [ngClass]="{'is-invalid':  (!forma.controls['email_2'].valid || forma.controls['email_2'].errors?.minlength)&& forma.controls['email_2'].touched, 'is-valid': forma.controls['email_2'].valid }"
+                                [ngClass]="{'is-invalid':  (!forma.controls['email_2'].valid || forma.controls['email_2'].errors?.minlength)&& forma.controls['email_2'].touched }"
                         
                         >
-                        <div    *ngIf="forma.get('email_2').errors?.required"  
+                        <!-- <div    *ngIf="forma.get('email_2').errors?.required"  
                                 class="invalid-feedback">
                                 Este campo es requeridoemail
                         </div>
                         <div   *ngIf="forma.get('email_2').errors?.pattern"  
                                 class="invalid-feedback">
                                 No posee la forma de un correo: example@gmail.com
-                        </div>
+                        </div> -->
                 </div>
         </div>
 
@@ -54,9 +54,8 @@
                         <input  class="form-control"
                                 type="phone"
                                 placeholder="Ingrese teléfono"
-                                [ngModel]="data.phone_1"
                                 formControlName="phone_1"
-                                [ngClass]="{'is-invalid':  (!forma.controls['phone_1'].valid || forma.controls['phone_1'].errors?.minlength)&& forma.controls['phone_1'].touched, 'is-valid': forma.controls['phone_1'].valid }"
+                                [ngClass]="{'is-invalid':  (!forma.controls['phone_1'].valid || forma.controls['phone_1'].errors?.minlength)&& forma.controls['phone_1'].touched }"
                         
                         >
 
@@ -79,20 +78,19 @@
                         <input  class="form-control"
                                 type="phone"
                                 placeholder="Ingrese teléfono"
-                                [ngModel]="data.phone_2"
                                 formControlName="phone_2"
-                                [ngClass]="{'is-invalid':  (!forma.controls['phone_2'].valid || forma.controls['phone_2'].errors?.minlength)&& forma.controls['phone_2'].touched, 'is-valid': forma.controls['phone_2'].valid }"
+                                [ngClass]="{'is-invalid':  (!forma.controls['phone_2'].valid || forma.controls['phone_2'].errors?.minlength)&& forma.controls['phone_2'].touched}"
                        
                         >
 
-                        <div    *ngIf="forma.get('phone_2').errors?.required"  
+                        <!-- <div    *ngIf="forma.get('phone_2').errors?.required"  
                                 class="invalid-feedback">
                                 Este campo es requerido
                         </div>
                         <div   *ngIf="forma.get('phone_2').errors?.pattern"  
                                 class="invalid-feedback">
                                 No posee la forma de un correo: example@gmail.com
-                        </div>
+                        </div> -->
 
                 </div>
 
@@ -104,16 +102,15 @@
                         <input  class="form-control"
                                 type="phone"
                                 placeholder="Página web"
-                                [ngModel]="data.webside"
                                 formControlName="webside"
-                                [ngClass]="{'is-invalid':  (!forma.controls['webside'].valid || forma.controls['webside'].errors?.minlength)&& forma.controls['webside'].touched, 'is-valid': forma.controls['webside'].valid }"
+                                [ngClass]="{'is-invalid':  (!forma.controls['webside'].valid || forma.controls['webside'].errors?.minlength)&& forma.controls['webside'].touched }"
                         
                         >
 
-                        <div    *ngIf="forma.get('webside').errors?.required"  
+                        <!-- <div    *ngIf="forma.get('webside').errors?.required"  
                                 class="invalid-feedback">
                                 Este campo es requerido
-                        </div>
+                        </div> -->
 
                 </div>
 
@@ -125,16 +122,15 @@
                         <input  class="form-control"
                                 type="phone"
                                 placeholder="Dirección"
-                                [ngModel]="data.direction"
                                 formControlName="direction"
-                                [ngClass]="{'is-invalid':  (!forma.controls['direction'].valid || forma.controls['direction'].errors?.minlength)&& forma.controls['direction'].touched, 'is-valid': forma.controls['direction'].valid }"
+                                [ngClass]="{'is-invalid':  (!forma.controls['direction'].valid || forma.controls['direction'].errors?.minlength)&& forma.controls['direction'].touched}"
                                 
                         >
 
-                        <div    *ngIf="forma.get('direction').errors?.required"  
+                        <!-- <div    *ngIf="forma.get('direction').errors?.required"  
                                 class="invalid-feedback">
                                 Este campo es requerido
-                        </div>
+                        </div> -->
 
                 </div>
 
@@ -155,16 +151,15 @@
                                 <input  class="form-control facebook-icon"
                                         type="phone"
                                         placeholder="Link de Facebook"
-                                        [ngModel]="redes.facebook"
                                         formControlName="facebook"
-                                        [ngClass]="{'is-invalid':  (!forma.controls['facebook'].valid || forma.controls['facebook'].errors?.minlength)&& forma.controls['facebook'].touched, 'is-valid': forma.controls['facebook'].valid }"
+                                        [ngClass]="{'is-invalid':  (!forma.controls['facebook'].valid || forma.controls['facebook'].errors?.minlength)&& forma.controls['facebook'].touched }"
                                         
                                 >
         
-                                <div    *ngIf="forma.get('facebook').errors?.required"  
+                                <!-- <div    *ngIf="forma.get('facebook').errors?.required"  
                                         class="invalid-feedback">
                                         Este campo es requerido
-                                </div>
+                                </div> -->
         
                         </div>
         
@@ -176,16 +171,15 @@
                                 <input  class="form-control instagram-icon"
                                         type="phone"
                                         placeholder="Link de Instagram"
-                                        [ngModel]="redes.instagram"
                                         formControlName="instagram"
-                                        [ngClass]="{'is-invalid':  (!forma.controls['instagram'].valid || forma.controls['instagram'].errors?.minlength)&& forma.controls['instagram'].touched, 'is-valid': forma.controls['instagram'].valid }"
+                                        [ngClass]="{'is-invalid':  (!forma.controls['instagram'].valid || forma.controls['instagram'].errors?.minlength)&& forma.controls['instagram'].touched }"
                                         
                                 >
         
-                                <div    *ngIf="forma.get('instagram').errors?.required"  
+                                <!-- <div    *ngIf="forma.get('instagram').errors?.required"  
                                         class="invalid-feedback">
                                         Este campo es requerido
-                                </div>
+                                </div> -->
         
                         </div>
         
@@ -196,16 +190,15 @@
                                 <input  class="form-control twitter-icon"
                                         type="phone"
                                         placeholder="Link de Twitter"
-                                        [ngModel]="redes.twitter"
                                         formControlName="twitter"
-                                        [ngClass]="{'is-invalid':  (!forma.controls['twitter'].valid || forma.controls['twitter'].errors?.minlength)&& forma.controls['twitter'].touched, 'is-valid': forma.controls['twitter'].valid }"
+                                        [ngClass]="{'is-invalid':  (!forma.controls['twitter'].valid || forma.controls['twitter'].errors?.minlength)&& forma.controls['twitter'].touched }"
                                 
                                 >
-        
+<!--         
                                 <div    *ngIf="forma.get('twitter').errors?.required"  
                                         class="invalid-feedback">
                                         Este campo es requerido
-                                </div>
+                                </div> -->
                         </div>
                 </div>
         </section>

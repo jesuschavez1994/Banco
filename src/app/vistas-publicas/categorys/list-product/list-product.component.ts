@@ -13,6 +13,7 @@ import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.opt
 } from '@interfaces/components-options/sidebar-list.options.interface';
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface';
 import { Category } from '@interfaces/categorys';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-list-product',
@@ -28,6 +29,7 @@ export class ListProductComponent implements OnInit {
                 private rutaActiva: ActivatedRoute,
                 public spinner: NgxSpinnerService,
                 private modal : MatDialog,
+                private titleService: Title
                 ) {
 
       console.log('Constructor list product');
@@ -72,6 +74,7 @@ export class ListProductComponent implements OnInit {
   expandSidebar = true;
   anchorsMenu: AnchorsMenu;
   profile: Profile;
+  value: string
 
     // PROPIEDADES DE COMPONENTE
 
@@ -177,11 +180,22 @@ ngOndestroy(){
          // brinda error tslint desconosco la razón, pero funciona
          // Fixed, idsProduct solo debe  aceptar numeros para que la alerta no surja
          if(this.idsProduct[1] != undefined){
-           this.titleSubcat = this.dataCategory[this.idsProduct[0]-1].subcategories[this.idsProduct[1]-1].name;
+
+          this.titleSubcat = this.dataCategory[this.idsProduct[0]-1].subcategories[this.idsProduct[1]-1].name;
+
+          // Capitalizamos el nombre de la Categoria //
+          this.value = this.titleSubcat.toLocaleLowerCase();
+          let descripcion = this.value.split(' ');
+
+          for ( const i in descripcion){
+            descripcion[i] = descripcion[i][0].toUpperCase() + descripcion[i].substr(1);
+          }
+
+           this.setTitle('Founduss | ' + ' ' + descripcion.join(' '));
 
          }else{
           this.titleSubcat = this.dataCategory[this.idsProduct[0]-1].name;
-
+          this.setTitle(this.titleSubcat);
          }
          this.spinner.hide();
          },
@@ -328,4 +342,9 @@ ngOndestroy(){
     console.log('route',idStore,idProduct);
     this.router.navigate(['business-detail',idStore,'products',idProduct]);
   }
+
+  public setTitle(newTitle: string) {
+    this.titleService.setTitle(newTitle);
+  }
+
 }

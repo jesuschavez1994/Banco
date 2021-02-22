@@ -20,6 +20,7 @@ import { DropdownIconComponent } from '../../shared/dropdown-icon/dropdown-icon.
 import { ToastComponent } from '../../modals/toast/toast.component';
 import {HomeServiceService} from '../services/home-service.service';
 import { ProductModel } from '@app/models/product.model';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-business-detail',
@@ -41,8 +42,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   breadcrumb: BreadcrumbOptions[];
   imgsBanners: BannerOptions;
 
-  // Navbar
-  userLog = false;
+  userLog: boolean;
+  storeLog: boolean | string;
+
 
   // sidebar-list
   expandSidebar = true;
@@ -164,11 +166,13 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     private utils: Utils,
     private dropdownIconComp: DropdownIconComponent,
     private productModel: ProductModel,
+    private titleService: Title
 
   ){}
 
   ngOnInit() {
     this.userLog = this.homeService.islog();
+    this.storeLog = this.homeService.storeActive();
   }
 
   ngAfterViewInit(): void {
@@ -373,6 +377,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             const productFormatead = this.productModel.productsCardsComponent.formatProductResp(product);
             this.productDetail.selectedProduct = productFormatead[0]; // el método devuelve un array así que obtengo el primer elemento
 
+            this.setTitle(product.name + '' + ' | Founduss ');
             this.scrollToElement(document.querySelector('#profile-name'));
 
           } else {
@@ -506,7 +511,11 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
             // Formateamos la respuesta del back y retornamos el formato correcto para el componente
             this.productCards.products = this.productModel.productsCardsComponent.formatProductResp(products);
+            if (this.storeData) {
 
+            }
+
+            this.setTitle(`${this.storeData.name} | Founduss `);
             console.log('products loaded: ', this.productCards.products);
 
             this.productCards.toggleShimmer(false);
@@ -801,6 +810,10 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       );
     }
 
+  }
+
+  public setTitle(newTitle: string) {
+    this.titleService.setTitle(newTitle);
   }
 
 }
