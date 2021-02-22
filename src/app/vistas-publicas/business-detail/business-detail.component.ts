@@ -1,52 +1,62 @@
-import { Component, OnInit, ViewChild, AfterViewInit, Pipe, OnChanges, SimpleChanges } from '@angular/core';
-import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
-import { ProductService } from '@services/product/product.service';
-import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface';
-import { ActivatedRoute, ParamMap, Router, Params } from '@angular/router';
-import { ProductsCardsComponent } from '@shared/products-cards/products-cards.component';
-import { ProductDetailComponent } from '@shared/product-detail/product-detail.component';
-import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component';
-import { StoreService } from '@services/store/store.service';
-import { AnchorsMenu, Filter, Profile } from '@interfaces/components-options/sidebar-list.options.interface';
-import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
-import { StoreResponse } from '@interfaces/store.interface';
-import { FilterOption } from '@interfaces/components-options/search-bar.options.interface';
-import { combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Utils } from '../../utils/utils';
-import { PaymentProcessService } from '@services/payment-process/payment-process.service';
-import { DropdownOption } from '@interfaces/components-options/dropdown.options.interface';
-import { DropdownIconComponent } from '../../shared/dropdown-icon/dropdown-icon.component';
-import { ToastComponent } from '../../modals/toast/toast.component';
-import {HomeServiceService} from '../services/home-service.service';
-import { Title } from '@angular/platform-browser';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  Pipe,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core'
+import { BannerOptions } from '@interfaces/components-options/banner.options.interface'
+import { ProductService } from '@services/product/product.service'
+import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface'
+import { ActivatedRoute, ParamMap, Router, Params } from '@angular/router'
+import { ProductsCardsComponent } from '@shared/products-cards/products-cards.component'
+import { ProductDetailComponent } from '@shared/product-detail/product-detail.component'
+import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component'
+import { StoreService } from '@services/store/store.service'
+import {
+  AnchorsMenu,
+  Filter,
+  Profile,
+} from '@interfaces/components-options/sidebar-list.options.interface'
+import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface'
+import { StoreResponse } from '@interfaces/store.interface'
+import { FilterOption } from '@interfaces/components-options/search-bar.options.interface'
+import { combineLatest } from 'rxjs'
+import { map } from 'rxjs/operators'
+import { Utils } from '../../utils/utils'
+import { PaymentProcessService } from '@services/payment-process/payment-process.service'
+import { DropdownOption } from '@interfaces/components-options/dropdown.options.interface'
+import { DropdownIconComponent } from '../../shared/dropdown-icon/dropdown-icon.component'
+import { ToastComponent } from '../../modals/toast/toast.component'
+import { HomeServiceService } from '../services/home-service.service'
+import { Title } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-business-detail',
   templateUrl: './business-detail.component.html',
-  styleUrls: ['./business-detail.component.scss']
+  styleUrls: ['./business-detail.component.scss'],
 })
 export class BusinessDetailComponent implements OnInit, AfterViewInit {
-
   // Components Controllers
-  @ViewChild('productCards') productCards: ProductsCardsComponent;
-  @ViewChild('productDetail') productDetail: ProductDetailComponent;
-  @ViewChild('sidebarList') sidebarList: SidebarListComponent;
-  @ViewChild('toastRef') toastRef: ToastComponent;
+  @ViewChild('productCards') productCards: ProductsCardsComponent
+  @ViewChild('productDetail') productDetail: ProductDetailComponent
+  @ViewChild('sidebarList') sidebarList: SidebarListComponent
+  @ViewChild('toastRef') toastRef: ToastComponent
   // @ViewChild('dropdownIcon') dropdownIcon: DropdownIconComponent;
 
   // Components Inputs
-  breadcrumb: BreadcrumbOptions[];
-  imgsBanners: BannerOptions;
+  breadcrumb: BreadcrumbOptions[]
+  imgsBanners: BannerOptions
 
-  userLog: boolean;
-  storeLog: boolean | string;
-
+  userLog: boolean
+  storeLog: boolean | string
 
   // sidebar-list
-  expandSidebar = true;
-  anchorsMenu: AnchorsMenu;
-  profile: Profile;
+  expandSidebar = true
+  anchorsMenu: AnchorsMenu
+  profile: Profile
   sidebarFilters: Filter[] = [
     // {
     //   title: 'categorías',
@@ -124,31 +134,31 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     //     },
     //   ]
     // },
-  ];
+  ]
 
   // Products-cards
-  showProducts = false;
-  totalProducts: number;
-  itemsPerPage = 16;
-  showShimmerProductsCards =  true;
-  wasFirstLoadedProducts = false;
+  showProducts = false
+  totalProducts: number
+  itemsPerPage = 16
+  showShimmerProductsCards = true
+  wasFirstLoadedProducts = false
 
   // SearchBar:
-  preloadedValueSearch = '';
+  preloadedValueSearch = ''
   searchBarFilter: FilterOption[] = [
-    {label: 'filtrar por', value: 0},
-    {label: 'producto', value: 1},
-    {label: 'Empresa', value: 'hola'},
-  ];
+    { label: 'filtrar por', value: 0 },
+    { label: 'producto', value: 1 },
+    { label: 'Empresa', value: 'hola' },
+  ]
 
   // navbar
-  menuOptionsShopping: DropdownOption[] = [];
+  menuOptionsShopping: DropdownOption[] = []
 
   // Variables
-  storeData: StoreResponse;
-  wasChangedStoreData = true;
-  queryParam: ParamMap;
-  wasChangedQueryParam = true;
+  storeData: StoreResponse
+  wasChangedStoreData = true
+  queryParam: ParamMap
+  wasChangedQueryParam = true
 
   // Toast
   // dataToast: any = '';
@@ -163,191 +173,152 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     private utils: Utils,
     private dropdownIconComp: DropdownIconComponent,
     private titleService: Title
-
-  ){}
+  ) {}
 
   ngOnInit() {
-    this.userLog = this.homeService.islog();
-    this.storeLog = this.homeService.storeActive();
+    this.userLog = this.homeService.islog()
+    this.storeLog = this.homeService.storeActive()
   }
 
   ngAfterViewInit(): void {
-    this.loadDataByParams();
-
+    this.loadDataByParams()
   }
 
   public loadDataByParams() {
-
     combineLatest([this.route.paramMap, this.route.queryParamMap])
-    .pipe(
-      map(([params, queryParam]) => {
+      .pipe(
+        map(([params, queryParam]) => {
+          return {
+            params,
+            queryParam,
+          }
+        })
+      )
+      .subscribe((data) => {
+        const params = data.params
+        const queryParam = data.queryParam
 
-        return {
-          params,
-          queryParam
-        };
-
-      })
-    )
-    .subscribe(data => {
-      const params = data.params;
-      const queryParam = data.queryParam;
-
-      if ( params.has('show') && params.get('show') === 'products' ){
-        this.showProducts = true;
-
-      }else {
-        this.showProducts = false;
-
-      }
-
-      // Para detectar si los valores de queryParam han cambiado o no
-      // y poder crear validaciones, como evitar que el listado de productos
-      // se actualice si solo se cambio el id del producto a detallar
-      console.log('QUERY PARAMS - this.storeData:');
-
-      if (this.queryParam) {
-
-        console.log('loadDataByParams - this.queryParam');
-        console.log(this.queryParam);
-        console.log(queryParam);
-
-        // if ( this.queryParam.keys.length > 0) {
-
-        if (this.queryParam !== queryParam) {
-          this.wasChangedQueryParam = true;
-          this.queryParam = queryParam;
-
+        if (params.has('show') && params.get('show') === 'products') {
+          this.showProducts = true
         } else {
-          this.wasChangedQueryParam = false;
-
+          this.showProducts = false
         }
 
-        // } else {
-        //   this.wasChangedQueryParam = false;
+        // Para detectar si los valores de queryParam han cambiado o no
+        // y poder crear validaciones, como evitar que el listado de productos
+        // se actualice si solo se cambio el id del producto a detallar
+        console.log('QUERY PARAMS - this.storeData:')
 
-        // }
+        if (this.queryParam) {
+          console.log('loadDataByParams - this.queryParam')
+          console.log(this.queryParam)
+          console.log(queryParam)
 
+          // if ( this.queryParam.keys.length > 0) {
 
-      }else {
-        this.queryParam = queryParam; // guardamos de forma global los datos de la tienda
-        console.log('this.queryParam - undefined');
-      }
+          if (this.queryParam !== queryParam) {
+            this.wasChangedQueryParam = true
+            this.queryParam = queryParam
+          } else {
+            this.wasChangedQueryParam = false
+          }
 
-      this.loadDataStore(params, queryParam);
+          // } else {
+          //   this.wasChangedQueryParam = false;
 
-      this.loadProductDetail(params);
+          // }
+        } else {
+          this.queryParam = queryParam // guardamos de forma global los datos de la tienda
+          console.log('this.queryParam - undefined')
+        }
 
-      this.preloadValueSearch(queryParam);
-    });
+        this.loadDataStore(params, queryParam)
 
+        this.loadProductDetail(params)
+
+        this.preloadValueSearch(queryParam)
+      })
   }
 
   // Store
-  public loadDataStore(params, queryParam: ParamMap){
+  public loadDataStore(params, queryParam: ParamMap) {
+    if (params.has('idStore')) {
+      const idStore = parseInt(params.get('idStore'))
 
-    if ( params.has('idStore') ) {
-
-      const idStore =  parseInt(params.get('idStore'));
-
-      this.storeService.getStoreById(idStore).subscribe( storeResp => {
-
+      this.storeService.getStoreById(idStore).subscribe((storeResp) => {
         // Gestionamos el valor de wasChangedStoreData
         // El cual sera ula variable que determinara
         // si los datos de la tienda cambiaron o no
         // console.log('loadDataStore -this.storeData:');
 
-
         if (this.storeData) {
           // console.log(this.storeData.id);
           // console.log(storeResp.id);
           if (this.storeData.id !== storeResp.id) {
-            this.wasChangedStoreData = true;
-            this.storeData = storeResp;
-
-          }else {
-            this.wasChangedStoreData = false;
-
+            this.wasChangedStoreData = true
+            this.storeData = storeResp
+          } else {
+            this.wasChangedStoreData = false
           }
-
-        }else {
-          this.storeData = storeResp; // guardamos de forma global los datos de la tienda
+        } else {
+          this.storeData = storeResp // guardamos de forma global los datos de la tienda
           // console.log('this.storeData undefined');
         }
 
         if (storeResp.banner_image.length > 0) {
+          const storeBanners = storeResp.banner_image
 
-          const storeBanners = storeResp.banner_image;
-
-          const sizes = Object.keys(storeBanners[0].src_size);
+          const sizes = Object.keys(storeBanners[0].src_size)
 
           if (sizes.length > 1) {
-
             this.imgsBanners = {
               m: storeBanners[0].src_size.xl,
-              s: storeBanners[0].src_size.s
-            };
-
-          } else if (sizes.length === 1){
+              s: storeBanners[0].src_size.s,
+            }
+          } else if (sizes.length === 1) {
             this.imgsBanners = {
-              m: storeBanners[0].src_size.xl
-            };
+              m: storeBanners[0].src_size.xl,
+            }
           }
-
         }
 
-        console.log('wasChangedStoreData');
-        console.log(this.wasChangedStoreData);
+        console.log('wasChangedStoreData')
+        console.log(this.wasChangedStoreData)
 
-        console.log('wasFirstLoadedProducts');
-        console.log(this.wasFirstLoadedProducts);
+        console.log('wasFirstLoadedProducts')
+        console.log(this.wasFirstLoadedProducts)
 
-        console.log('wasChangedQueryParam');
-        console.log(this.wasChangedQueryParam);
+        console.log('wasChangedQueryParam')
+        console.log(this.wasChangedQueryParam)
 
         // Evitamos que la página carguen los mismos datos
         // cuando la tienda sigue siendo la misma.
         // solo permite actualizar los datos cuando la tienda es cambiada
         if (this.wasChangedStoreData) {
-          this.setSidebarOptions(storeResp, queryParam);
-          this.setBreadcrumbOptions(storeResp);
+          this.setSidebarOptions(storeResp, queryParam)
+          this.setBreadcrumbOptions(storeResp)
 
           if (this.wasFirstLoadedProducts) {
-
             // if (this.wasChangedQueryParam) {
-            this.loadProductsCards(params, queryParam);
+            this.loadProductsCards(params, queryParam)
 
             // }
-
-
           } else {
-            this.loadProductsCards(params, queryParam);
-            this.wasFirstLoadedProducts = true;
+            this.loadProductsCards(params, queryParam)
+            this.wasFirstLoadedProducts = true
           }
-
-
-
         } else {
-
-            if (this.wasFirstLoadedProducts) {
-
-                if (this.wasChangedQueryParam) {
-                  this.loadProductsCards(params, queryParam);
-
-                }
-
-            } else {
-                this.loadProductsCards(params, queryParam);
-                this.wasFirstLoadedProducts = true;
+          if (this.wasFirstLoadedProducts) {
+            if (this.wasChangedQueryParam) {
+              this.loadProductsCards(params, queryParam)
             }
-
+          } else {
+            this.loadProductsCards(params, queryParam)
+            this.wasFirstLoadedProducts = true
+          }
         }
-
-
-      });
-
+      })
     }
-
   }
 
   // Products
@@ -361,12 +332,14 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
    * @memberof BusinessDetailComponent
    */
   public goTodetailProduct(product: ProductsCardsOptions) {
-
-    if (product.id > -1 && product.idStore > -1){
-      this.router.navigate( ['/business-detail', product.idStore, 'products', product.id] );
-
+    if (product.id > -1 && product.idStore > -1) {
+      this.router.navigate([
+        '/business-detail',
+        product.idStore,
+        'products',
+        product.id,
+      ])
     }
-
   }
 
   /**
@@ -378,41 +351,37 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
    * @memberof BusinessDetailComponent
    */
   public loadProductDetail(params) {
-
     if (
-      (params.has('show') && params.get('show') === 'products')
-      && params.has('idStore')
-      && params.has('idProduct')
+      params.has('show') &&
+      params.get('show') === 'products' &&
+      params.has('idStore') &&
+      params.has('idProduct')
     ) {
-
-      const idStore = parseInt( params.get('idStore') );
-      const idProduct = parseInt( params.get('idProduct') );
+      const idStore = parseInt(params.get('idStore'))
+      const idProduct = parseInt(params.get('idProduct'))
 
       this.productService.getProductByStore(idStore, idProduct).subscribe(
-        product => {
+        (product) => {
+          this.setTitle(product.name)
 
-          this.setTitle(product.name);
-
-          let images = [];
+          let images = []
 
           if (product.sync_bank) {
-
             if (product.sync_bank.length === 0) {
-
-              images = product.images.map(image => {
-                return image.src;
-              });
-
-            }else {
-              images = product.sync_bank.map(syncBank => {
-                return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
-              });
+              images = product.images.map((image) => {
+                return image.src
+              })
+            } else {
+              images = product.sync_bank.map((syncBank) => {
+                return syncBank.images[0].src_size.xl
+                  ? syncBank.images[0].src_size.xl
+                  : ''
+              })
             }
-
-          }else {
-            images = product.images.map(image => {
-              return image.src;
-            });
+          } else {
+            images = product.images.map((image) => {
+              return image.src
+            })
           }
 
           // Antes
@@ -420,7 +389,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
           //   return image.src;
           // });
 
-          this.productDetail.selectedProduct =  {
+          this.productDetail.selectedProduct = {
             name: product.name,
             description: product.description,
             price: product.price,
@@ -429,141 +398,142 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             id: product.id ? product.id : -1,
             idStore: product.store_id ? product.store_id : -1,
             isFavorite: product.isFavorite ? product.isFavorite : false,
-          };
+          }
 
-          this.scrollToElement(document.querySelector('#profile-name'));
-
-        }, error => {
-
-          console.log('Error loading products', error);
-          this.productDetail.selectedProduct = null;
-
-        }, () => {
+          this.scrollToElement(document.querySelector('#profile-name'))
+        },
+        (error) => {
+          console.log('Error loading products', error)
+          this.productDetail.selectedProduct = null
+        },
+        () => {
           // console.log('products loaded');
         }
-      );
-
+      )
     }
-
-
   }
 
   public loadProductsCards(params: ParamMap, queryParams: ParamMap) {
-
     if (params.has('idStore')) {
-
       // tslint:disable-next-line: radix
-      const idStore = parseInt( params.get('idStore') );
+      const idStore = parseInt(params.get('idStore'))
       // tslint:disable-next-line: radix
-      const page = queryParams.has('page') ? parseInt( queryParams.get('page') ) : 1;
+      const page = queryParams.has('page')
+        ? parseInt(queryParams.get('page'))
+        : 1
 
-      let filter;
-      filter = {};
+      let filter
+      filter = {}
 
       // console.log('queryParams Key: ', queryParams.keys);
 
-      const keysQueryParams = queryParams.keys;
+      const keysQueryParams = queryParams.keys
 
-      if (keysQueryParams.length > 0){
+      if (keysQueryParams.length > 0) {
+        let queryParamsAllowed
+        queryParamsAllowed = {}
 
-        let queryParamsAllowed;
-        queryParamsAllowed = {};
-
-        keysQueryParams.forEach(key => {
-
+        keysQueryParams.forEach((key) => {
           switch (key) {
             case 'name':
-              queryParamsAllowed.name = queryParams.get('name');
+              queryParamsAllowed.name = queryParams.get('name')
               // name: 'l',
-              break;
+              break
 
             case 'marks':
-              queryParamsAllowed.marks = this.utils.stringToArray(queryParams.get('marks'));
+              queryParamsAllowed.marks = this.utils.stringToArray(
+                queryParams.get('marks')
+              )
               // marks: ['generica', 'ALBENZA', 'XANAX', 'gillete'],
-              break;
+              break
 
             case 'category':
-              queryParamsAllowed.categories = this.utils.stringToArray(queryParams.get('category'));
+              queryParamsAllowed.categories = this.utils.stringToArray(
+                queryParams.get('category')
+              )
               // categories: ['Cosmeticos', 'infantil'],
-              break;
+              break
 
             case 'subcategories':
-              queryParamsAllowed.subcategories = this.utils.stringToArray(queryParams.get('subcategories'));
+              queryParamsAllowed.subcategories = this.utils.stringToArray(
+                queryParams.get('subcategories')
+              )
               // subcategories: ['Cutis', 'Analgesicos'],
 
-              break;
+              break
 
             case 'fabricantes':
-              queryParamsAllowed.factories = this.utils.stringToArray(queryParams.get('fabricantes'));
+              queryParamsAllowed.factories = this.utils.stringToArray(
+                queryParams.get('fabricantes')
+              )
               // factories: ['gerber', 'polar'],
-              break;
+              break
 
             case 'price':
-              queryParamsAllowed.price = this.utils.stringToArray(queryParams.get('price'), true);
+              queryParamsAllowed.price = this.utils.stringToArray(
+                queryParams.get('price'),
+                true
+              )
               // queryParams.get('price').split(',');
               // price: [1, 284],
-              break;
+              break
 
             case 'delivery':
-              queryParamsAllowed.delivery = queryParams.get('delivery') == 'si' ? true : false;
+              queryParamsAllowed.delivery =
+                queryParams.get('delivery') == 'si' ? true : false
               // delivery: true,
-              break;
+              break
 
             case 'recipes':
-              queryParamsAllowed.recipes = this.utils.stringToArray(queryParams.get('recipes'));
+              queryParamsAllowed.recipes = this.utils.stringToArray(
+                queryParams.get('recipes')
+              )
               // recipes: ['morado', 'polar']
-              break;
+              break
           }
+        })
 
-        });
+        filter = queryParamsAllowed
 
-        filter = queryParamsAllowed;
-
-        console.log('queryParamsAllowed: ', queryParamsAllowed);
+        console.log('queryParamsAllowed: ', queryParamsAllowed)
       }
-
 
       // this.showShimmerProductsCards = true;
 
-      if(this.productCards) {
-        this.productCards.toggleShimmer();
+      if (this.productCards) {
+        this.productCards.toggleShimmer()
       }
 
       this.productService.getProductsByStore(idStore, page, filter).subscribe(
-        resp => {
-
+        (resp) => {
           // console.log('getProductsByStore');
           // console.log(resp.data);
-          const products = resp.data;
-          this.totalProducts = resp.total;
-          this.itemsPerPage = resp.per_page;
+          const products = resp.data
+          this.totalProducts = resp.total
+          this.itemsPerPage = resp.per_page
 
           if (products.length > 0) {
+            this.productCards.products = products.map((product) => {
+              this.setTitle(product.name)
 
-            this.productCards.products = products.map( product => {
-
-              this.setTitle(product.name);
-
-              let images = [];
+              let images = []
 
               if (product.sync_bank) {
-
                 if (product.sync_bank.length === 0) {
-
-                  images = product.images.map(image => {
-                    return image.src;
-                  });
-
-                }else {
-                  images = product.sync_bank.map(syncBank => {
-                    return syncBank.images[0].src_size.xl ? syncBank.images[0].src_size.xl : '';
-                  });
+                  images = product.images.map((image) => {
+                    return image.src
+                  })
+                } else {
+                  images = product.sync_bank.map((syncBank) => {
+                    return syncBank.images[0].src_size.xl
+                      ? syncBank.images[0].src_size.xl
+                      : ''
+                  })
                 }
-
-              }else {
-                images = product.images.map(image => {
-                  return image.src;
-                });
+              } else {
+                images = product.images.map((image) => {
+                  return image.src
+                })
               }
 
               return {
@@ -575,163 +545,144 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
                 id: product.id ? product.id : -1,
                 idStore: product.store_id ? product.store_id : -1,
                 isFavorite: product.isFavorite ? product.isFavorite : false,
-                };
-
-            } );
+              }
+            })
 
             // console.log('products loaded: ', this.productCards.products);
 
-            this.productCards.toggleShimmer(false);
-
-
-          } else{
-            this.toastRef.open(
-              'Tienda sin productos disponibles',
-              { color: '#ffffff', background: '#900909c2'}
-
-            );
+            this.productCards.toggleShimmer(false)
+          } else {
+            this.toastRef.open('Tienda sin productos disponibles', {
+              color: '#ffffff',
+              background: '#900909c2',
+            })
           }
-
         },
-        error => {
+        (error) => {
           this.toastRef.open(
             'Error al cargar los productos, Recargue la página',
-            { color: '#ffffff', background: '#900909c2'}
-
-          );
-          console.log('error al cargar productos');
-          console.log(error);
+            { color: '#ffffff', background: '#900909c2' }
+          )
+          console.log('error al cargar productos')
+          console.log(error)
         }
-      );
-
+      )
     }
-
   }
 
-  public addProductToCart( event ) {
+  public addProductToCart(event) {
+    const idProduct = event.product.id
+    const quantity = event.quantity
 
-    const idProduct = event.product.id;
-    const quantity = event.quantity;
-
-    this.productDetail.disableButtonCart(true);
+    this.productDetail.disableButtonCart(true)
 
     this.paymentProcessService.addProductToCart(idProduct, quantity).subscribe(
-      resp => {
-
+      (resp) => {
         if (resp.success) {
+          const products = resp.data
 
-          const products = resp.data;
+          this.menuOptionsShopping = this.dropdownIconComp.loadOptionsWithProductsCartResp(
+            products
+          )
 
-          this.menuOptionsShopping = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
+          this.toastRef.open('Producto agregado al carrito')
 
-          this.toastRef.open(
-            'Producto agregado al carrito'
-          );
+          this.productDetail.disableButtonCart()
+        } else {
+          this.toastRef.open('Producto no agregado al carrito', {
+            color: '#ffffff',
+            background: '#900909c2',
+          })
 
-          this.productDetail.disableButtonCart();
-
-        }else{
-
-          this.toastRef.open(
-            'Producto no agregado al carrito',
-            { color: '#ffffff', background: '#900909c2'}
-
-          );
-
-          this.productDetail.disableButtonCart();
-
+          this.productDetail.disableButtonCart()
         }
-
       },
-      error => {
-        this.toastRef.open(
-          'Producto no agregado al carrito',
-          { color: '#ffffff', background: '#900909c2'}
-        );
-        this.productDetail.disableButtonCart();
+      (error) => {
+        this.toastRef.open('Producto no agregado al carrito', {
+          color: '#ffffff',
+          background: '#900909c2',
+        })
+        this.productDetail.disableButtonCart()
       }
-    );
-
+    )
   }
 
   // Esto se puede declarar en el componente e invocar aquí a través del ViewChild
-  public paginationProducts(page: number){
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this.route,
-        queryParams: {page},
-        queryParamsHandling: 'merge',
-      }
-    );
+  public paginationProducts(page: number) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { page },
+      queryParamsHandling: 'merge',
+    })
   }
 
   // Search-bar
-  public search(ToSearch){
-    console.log(ToSearch.value);
+  public search(ToSearch) {
+    console.log(ToSearch.value)
 
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this.route,
-        queryParams: ToSearch.value !== '' ? { name: ToSearch.value } : {},
-      }
-    );
-
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: ToSearch.value !== '' ? { name: ToSearch.value } : {},
+    })
   }
 
-  public preloadValueSearch(queryParams: ParamMap){
-    this.preloadedValueSearch = queryParams.has('name') ? queryParams.get('name') : '';
+  public preloadValueSearch(queryParams: ParamMap) {
+    this.preloadedValueSearch = queryParams.has('name')
+      ? queryParams.get('name')
+      : ''
   }
 
   // Sidebar-list
   public setSidebarOptions(storeResp: StoreResponse, queryParam: ParamMap) {
-
-    const idStore = storeResp.id;
+    const idStore = storeResp.id
 
     this.anchorsMenu = {
       productLink: `/business-detail/${idStore}/products`,
       contactLink: `/business-detail/${idStore}`,
-      wordToMatch: `products`
-    };
+      wordToMatch: `products`,
+    }
 
-    let contactStore;
-    contactStore = { // la base de datos no tiene el dato
+    let contactStore
+    contactStore = {
+      // la base de datos no tiene el dato
       url: '',
-      name: 'sin dato de contacto'
-    };
+      name: 'sin dato de contacto',
+    }
 
-    const mainContactSocialKey = ['facebook', 'instagram', 'twitter'];
-    const mainContactKey = ['email_1', 'email_2', 'phone_1', 'phone_2'];
+    const mainContactSocialKey = ['facebook', 'instagram', 'twitter']
+    const mainContactKey = ['email_1', 'email_2', 'phone_1', 'phone_2']
 
     // buscamos entre las posibles propiedades alguna propiedad la cual no tenga null y en el orden de los elementos
-    const isSomeContactSocial = mainContactSocialKey.find( contactKey => {
-      return storeResp.social[contactKey];
-    });
+    const isSomeContactSocial = mainContactSocialKey.find((contactKey) => {
+      return storeResp.social[contactKey]
+    })
 
-    const isSomeContact = mainContactKey.find( contactKey => {
-      return storeResp.contact[contactKey];
-    });
+    const isSomeContact = mainContactKey.find((contactKey) => {
+      return storeResp.contact[contactKey]
+    })
 
-    if (isSomeContactSocial) { // si encuentra algún dato de contacto de redes sociales ese se mostrará
-      contactStore = { // la base de datos no tiene el dato
+    if (isSomeContactSocial) {
+      // si encuentra algún dato de contacto de redes sociales ese se mostrará
+      contactStore = {
+        // la base de datos no tiene el dato
         url: isSomeContactSocial,
-        name: `@${storeResp.name}` // coloco el nombre porque el back no devuelve el nombre de la cuenta de instagram
-      };
-
-    } else if (isSomeContact) { // sino mostrara algún dato de contacto común y si ninguna condición se cumple, sera ''
-      contactStore = contactStore = { // la base de datos no tiene el dato
+        name: `@${storeResp.name}`, // coloco el nombre porque el back no devuelve el nombre de la cuenta de instagram
+      }
+    } else if (isSomeContact) {
+      // sino mostrara algún dato de contacto común y si ninguna condición se cumple, sera ''
+      contactStore = contactStore = {
+        // la base de datos no tiene el dato
         url: '',
-        name: isSomeContact
-      };
+        name: isSomeContact,
+      }
     }
 
     this.profile = {
       name: storeResp.name,
       contact: contactStore,
       img: 'assets/img/no-image-banner.jpg', // la base de datos no tiene el dato
-      isVerified: storeResp.certification == 'true' ? true : false
-    };
+      isVerified: storeResp.certification == 'true' ? true : false,
+    }
 
     const sidebarFilters = [
       {
@@ -750,7 +701,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             name: 'Alimentos',
             totalFounds: 200,
           },
-        ]
+        ],
       },
       {
         filterId: 2,
@@ -777,7 +728,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             name: 'labial3',
             totalFounds: 200,
           },
-        ]
+        ],
       },
       {
         filterId: 3,
@@ -815,60 +766,52 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             totalFounds: 200,
             // isSelected: false
           },
-        ]
+        ],
       },
-    ];
+    ]
 
     // Evitamos que con cada cambio de la url se carguen las mismas opciones
     // de filtro, solo se sobre escriben las opciones cundo es una tienda diferente
 
-    this.sidebarFilters = this.sidebarList.setFilters(sidebarFilters); // retornamos los filters con el formato correcto para el component
+    this.sidebarFilters = this.sidebarList.setFilters(sidebarFilters) // retornamos los filters con el formato correcto para el component
 
-
-    this.sidebarList.loadOptionsFilter( queryParam ); // seleccionamos las opciones filtradas por url
-
+    this.sidebarList.loadOptionsFilter(queryParam) // seleccionamos las opciones filtradas por url
   }
 
   // Expand or contract sidebar-list on responsive mode
   public toogleSidebar(event) {
-    this.expandSidebar = event;
+    this.expandSidebar = event
   }
 
-  public setBreadcrumbOptions(storeResp: StoreResponse){
-
-    const idStore = storeResp.id;
+  public setBreadcrumbOptions(storeResp: StoreResponse) {
+    const idStore = storeResp.id
 
     this.breadcrumb = [
       {
         title: 'inicio',
-        routerLink: ['/home']
+        routerLink: ['/home'],
       },
       {
         title: 'farmacias',
-        routerLink: [`/farmacias`]
+        routerLink: [`/farmacias`],
       },
-
-    ];
+    ]
 
     this.breadcrumb[2] = {
       title: `${storeResp.name}`,
-      routerLink: [`/business-detail/${idStore}`]
-    };
+      routerLink: [`/business-detail/${idStore}`],
+    }
   }
 
   public scrollToElement(element) {
-
-    element.scrollIntoView(
-      {
-        behavior: 'smooth',
-        block: 'start',
-        inline: 'nearest'
-      }
-    );
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest',
+    })
   }
 
   public setTitle(newTitle: string) {
-    this.titleService.setTitle(newTitle);
+    this.titleService.setTitle(newTitle)
   }
-
 }
