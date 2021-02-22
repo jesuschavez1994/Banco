@@ -15,17 +15,17 @@ const routes: Routes = [
       {
         path: 'choose-plan',
         component: PlansShowcaseComponent,
-        data: { animation: 'isLeft', title: 'Founduss | Planes' },
+        data: { animation: 'isLeft', title: 'Planes | Founduss' },
       },
       {
         path: 'plan-details',
         component: PlanDetailsComponent,
-        data: { animation: 'isLeft', title: 'Founduss | Planes' },
+        data: { animation: 'isLeft', title: 'Detalles del plan | Founduss' },
       },
       {
         path: 'voucher',
         component: PaymentDetailsComponent,
-        data: { animation: 'isLeft', title: 'Founduss | Planes' },
+        data: { animation: 'isLeft', title: 'Voucher | Founduss' },
       },
     ],
   },

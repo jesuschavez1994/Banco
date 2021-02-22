@@ -5,6 +5,7 @@ import { SharedModule } from '../Module.index'
 
 import { HomeComponent } from './home.component'
 import { SliderCategoryComponent } from './slider-category/slider-category.component'
+
 /* 
   Components go here.
 */

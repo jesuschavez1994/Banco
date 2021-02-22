@@ -26,7 +26,7 @@ import { Option } from '../../interfaces/components-options/sidebar-list.options
 @Component({
   selector: 'app-business-detail',
   templateUrl: './business-detail.component.html',
-  styleUrls: ['./business-detail.component.scss']
+  styleUrls: ['./business-detail.component.scss'],
 })
 export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
@@ -46,7 +46,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   userLog: boolean;
   storeLog: boolean | string;
 
-
   // sidebar-list
   expandSidebar = true;
   anchorsMenu: AnchorsMenu;
@@ -57,15 +56,15 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   showProducts = false;
   totalProducts: number;
   itemsPerPage = 16;
-  showShimmerProductsCards =  true;
+  showShimmerProductsCards = true;
   wasFirstLoadedProducts = false;
 
   // SearchBar:
   preloadedValueSearch = '';
   searchBarFilter: FilterOption[] = [
-    {label: 'filtrar por', value: 0},
-    {label: 'producto', value: 1},
-    {label: 'Empresa', value: 'hola'},
+    { label: 'filtrar por', value: 0 },
+    { label: 'producto', value: 1 },
+    { label: 'Empresa', value: 'hola' },
   ];
 
   // navbar
@@ -91,8 +90,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     private dropdownIconComp: DropdownIconComponent,
     private productModel: ProductModel,
     private titleService: Title
-
-  ){}
+  ) {}
 
   ngOnInit() {
     this.userLog = this.homeService.islog();
@@ -101,77 +99,70 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.loadDataByParams();
-
   }
 
   public loadDataByParams() {
-
     combineLatest([this.route.paramMap, this.route.queryParamMap])
-    .pipe(
-      map(([params, queryParam]) => {
+      .pipe(
+        map(([params, queryParam]) => {
+          return {
+            params,
+            queryParam,
+          };
+        })
+      )
+      .subscribe((data) => {
+        const params = data.params;
+        const queryParam = data.queryParam;
 
-        return {
-          params,
-          queryParam
-        };
-
-      })
-    )
-    .subscribe(data => {
-      const params = data.params;
-      const queryParam = data.queryParam;
-
-      if ( params.has('show') && params.get('show') === 'products' ){
-        this.showProducts = true;
-
-      }else {
-        this.showProducts = false;
-
-      }
+        if (params.has('show') && params.get('show') === 'products') {
+          this.showProducts = true;
+        } else {
+          this.showProducts = false;
+        }
 
       // Para detectar si los valores de queryParam han cambiado o no
       // y poder crear validaciones, como evitar que el listado de productos
       // se actualice si solo se cambio el id del producto a detallar
       // console.log('QUERY PARAMS - this.storeData:');
 
-      if (this.queryParam) {
+        if (this.queryParam) {
+          // console.log('loadDataByParams - this.queryParam')
+          // console.log(this.queryParam)
+          // console.log(queryParam)
 
-        // console.log('loadDataByParams - this.queryParam');
-        // console.log(this.queryParam);
-        // console.log(queryParam);
+          // if ( this.queryParam.keys.length > 0) {
 
-        if (this.queryParam !== queryParam) {
-          this.wasChangedQueryParam = true;
-          this.queryParam = queryParam;
+          if (this.queryParam !== queryParam) {
+            this.wasChangedQueryParam = true;
+            this.queryParam = queryParam;
+          } else {
+            this.wasChangedQueryParam = false;
+          }
 
+          // } else {
+          //   this.wasChangedQueryParam = false;
+
+          // }
         } else {
-          this.wasChangedQueryParam = false;
-
+          this.queryParam = queryParam; // guardamos de forma global los datos de la tienda
+          // console.log('this.queryParam - undefined')
         }
 
-      }else {
-        this.queryParam = queryParam; // guardamos de forma global los datos de la tienda
-        // console.log('this.queryParam - undefined');
-      }
+        this.loadDataStore(params, queryParam);
 
-      this.loadDataStore(params, queryParam);
+        this.loadProductDetail(params);
 
-      this.loadProductDetail(params);
-
-      this.preloadValueSearch(queryParam);
-    });
-
+        this.preloadValueSearch(queryParam);
+      });
   }
 
   // Store
-  public loadDataStore(params, queryParam: ParamMap){
+  public loadDataStore(params, queryParam: ParamMap) {
+    if (params.has('idStore')) {
+      const idStore = parseInt(params.get('idStore'));
 
-    if ( params.has('idStore') ) {
-
-      const idStore =  parseInt(params.get('idStore'));
-
-      this.storeService.getStoreById(idStore).subscribe( storeResp => {
-
+      this.storeService.getStoreById(idStore).subscribe((storeResp) => {
         // Gestionamos el valor de wasChangedStoreData
         // El cual sera ula variable que determinara
         // si los datos de la tienda cambiaron o no
@@ -183,36 +174,29 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
           if (this.storeData.id !== storeResp.id) {
             this.wasChangedStoreData = true;
             this.storeData = storeResp;
-
-          }else {
+          } else {
             this.wasChangedStoreData = false;
-
           }
-
-        }else {
+        } else {
           this.storeData = storeResp; // guardamos de forma global los datos de la tienda
           // console.log('this.storeData undefined');
         }
 
         if (storeResp.banner_image.length > 0) {
-
           const storeBanners = storeResp.banner_image;
 
           const sizes = Object.keys(storeBanners[0].src_size);
 
           if (sizes.length > 1) {
-
             this.imgsBanners = {
               m: storeBanners[0].src_size.xl,
-              s: storeBanners[0].src_size.s
+              s: storeBanners[0].src_size.s,
             };
-
-          } else if (sizes.length === 1){
+          } else if (sizes.length === 1) {
             this.imgsBanners = {
-              m: storeBanners[0].src_size.xl
+              m: storeBanners[0].src_size.xl,
             };
           }
-
         }
 
         // Evitamos que la página carguen los mismos datos
@@ -230,9 +214,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             this.loadProductsCards(params, queryParam);
             this.wasFirstLoadedProducts = true;
           }
-
-
-
         } else {
 
           if (this.wasFirstLoadedProducts) {
@@ -252,7 +233,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       });
 
     }
-
   }
 
   // Products
@@ -266,12 +246,14 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
    * @memberof BusinessDetailComponent
    */
   public goTodetailProduct(product: ProductsCardsOptions) {
-
-    if (product.id > -1 && product.idStore > -1){
-      this.router.navigate( ['/business-detail', product.idStore, 'products', product.id] );
-
+    if (product.id > -1 && product.idStore > -1) {
+      this.router.navigate([
+        '/business-detail',
+        product.idStore,
+        'products',
+        product.id,
+      ]);
     }
-
   }
 
   /**
@@ -283,15 +265,14 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
    * @memberof BusinessDetailComponent
    */
   public loadProductDetail(params) {
-
     if (
-      (params.has('show') && params.get('show') === 'products')
-      && params.has('idStore')
-      && params.has('idProduct')
+      params.has('show') &&
+      params.get('show') === 'products' &&
+      params.has('idStore') &&
+      params.has('idProduct')
     ) {
-
-      const idStore = parseInt( params.get('idStore') );
-      const idProduct = parseInt( params.get('idProduct') );
+      const idStore = parseInt(params.get('idStore'));
+      const idProduct = parseInt(params.get('idProduct'));
 
       this.productService.getProductByStore(idStore, idProduct).subscribe(
         product => {
@@ -319,8 +300,6 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       );
 
     }
-
-
   }
 
   public errorLoadProductDetail() {
@@ -340,13 +319,11 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   public loadProductsCards(params: ParamMap, queryParams: ParamMap) {
-
     if (params.has('idStore')) {
-
       // tslint:disable-next-line: radix
-      const idStore = parseInt( params.get('idStore') );
+      const idStore = parseInt(params.get('idStore'));
       // tslint:disable-next-line: radix
-      const page = queryParams.has('page') ? parseInt( queryParams.get('page') ) : 1;
+      const page = queryParams.has('page') ? parseInt(queryParams.get('page')) : 1;
 
       let filter;
       filter = {};
@@ -355,13 +332,11 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
       const keysQueryParams = queryParams.keys;
 
-      if (keysQueryParams.length > 0){
-
+      if (keysQueryParams.length > 0) {
         let queryParamsAllowed;
         queryParamsAllowed = {};
 
-        keysQueryParams.forEach(key => {
-
+        keysQueryParams.forEach((key) => {
           switch (key) {
             case 'name':
               queryParamsAllowed.name = queryParams.get('name');
@@ -385,29 +360,33 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
               break;
 
             case 'fabricantes':
-              queryParamsAllowed.factories = this.utils.stringToArray(queryParams.get('fabricantes'));
+              queryParamsAllowed.factories = this.utils.stringToArray(
+                queryParams.get('fabricantes')
+              );
               // factories: ['gerber', 'polar'],
               break;
 
             case 'precios':
-              console.log('queryParams.get(precios)');
-              console.log(queryParams.get('precios'));
+              // console.log('queryParams.get(precios)');
+              // console.log(queryParams.get('precios'));
               queryParamsAllowed.price = this.utils.stringToArray(queryParams.get('precios'), true);
               // queryParams.get('price').split(',');
               // price: [1, 284],
               break;
 
             case 'delivery':
-              queryParamsAllowed.delivery = queryParams.get('delivery') == 'si' ? true : false;
+              queryParamsAllowed.delivery =
+                queryParams.get('delivery') == 'si' ? true : false;
               // delivery: true,
               break;
 
             case 'recipes':
-              queryParamsAllowed.recipes = this.utils.stringToArray(queryParams.get('recipes'));
+              queryParamsAllowed.recipes = this.utils.stringToArray(
+                queryParams.get('recipes')
+              );
               // recipes: ['morado', 'polar']
               break;
           }
-
         });
 
         filter = queryParamsAllowed;
@@ -415,16 +394,14 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         console.log('queryParamsAllowed: ', queryParamsAllowed);
       }
 
-
       // this.showShimmerProductsCards = true;
 
-      if(this.productCards) {
+      if (this.productCards) {
         this.productCards.toggleShimmer();
       }
 
       this.productService.getProductsByStore(idStore, page, filter).subscribe(
-        resp => {
-
+        (resp) => {
           // console.log('getProductsByStore');
           // console.log(resp.data);
           const products = resp.data;
@@ -440,147 +417,129 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             console.log('products loaded: ', this.productCards.products);
 
             this.productCards.toggleShimmer(false);
-
-
-          } else{
-            this.toastRef.open(
-              'Tienda sin productos disponibles',
-              { color: '#ffffff', background: '#900909c2'}
-
-            );
+          } else {
+            this.toastRef.open('Tienda sin productos disponibles', {
+              color: '#ffffff',
+              background: '#900909c2',
+            });
           }
-
         },
-        error => {
+        (error) => {
           this.toastRef.open(
             'Error al cargar los productos, Recargue la página',
-            { color: '#ffffff', background: '#900909c2'}
-
+            { color: '#ffffff', background: '#900909c2' }
           );
           console.log('error al cargar productos');
           console.log(error);
         }
       );
-
     }
-
   }
 
-  public addProductToCart( event ) {
-
+  public addProductToCart(event) {
     const idProduct = event.product.id;
     const quantity = event.quantity;
 
     this.productDetail.disableButtonCart(true);
 
     this.paymentProcessService.addProductToCart(idProduct, quantity).subscribe(
-      resp => {
-
+      (resp) => {
         if (resp.success) {
-
           const products = resp.data;
 
-          this.menuOptionsShopping = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
-
-          this.toastRef.open(
-            'Producto agregado al carrito'
+          this.menuOptionsShopping = this.dropdownIconComp.loadOptionsWithProductsCartResp(
+            products
           );
 
-          this.productDetail.disableButtonCart();
-
-        }else{
-
-          this.toastRef.open(
-            'Producto no agregado al carrito',
-            { color: '#ffffff', background: '#900909c2'}
-
-          );
+          this.toastRef.open('Producto agregado al carrito');
 
           this.productDetail.disableButtonCart();
+        } else {
+          this.toastRef.open('Producto no agregado al carrito', {
+            color: '#ffffff',
+            background: '#900909c2',
+          });
 
+          this.productDetail.disableButtonCart();
         }
-
       },
-      error => {
-        this.toastRef.open(
-          'Producto no agregado al carrito',
-          { color: '#ffffff', background: '#900909c2'}
-        );
+      (error) => {
+        this.toastRef.open('Producto no agregado al carrito', {
+          color: '#ffffff',
+          background: '#900909c2',
+        });
         this.productDetail.disableButtonCart();
       }
     );
-
   }
 
   // Esto se puede declarar en el componente e invocar aquí a través del ViewChild
-  public paginationProducts(page: number){
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this.route,
-        queryParams: {page},
-        queryParamsHandling: 'merge',
-      }
-    );
+  public paginationProducts(page: number) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { page },
+      queryParamsHandling: 'merge',
+    });
   }
 
   // Search-bar
-  public search(ToSearch){
+  public search(ToSearch) {
     console.log(ToSearch.value);
 
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this.route,
-        queryParams: ToSearch.value !== '' ? { name: ToSearch.value } : {},
-      }
-    );
-
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: ToSearch.value !== '' ? { name: ToSearch.value } : {},
+    });
   }
 
-  public preloadValueSearch(queryParams: ParamMap){
-    this.preloadedValueSearch = queryParams.has('name') ? queryParams.get('name') : '';
+  public preloadValueSearch(queryParams: ParamMap) {
+    this.preloadedValueSearch = queryParams.has('name')
+      ? queryParams.get('name')
+      : '';
   }
 
   // Sidebar-list
   public setSidebarOptions(storeResp: StoreResponse, queryParam: ParamMap) {
-
     const idStore = storeResp.id;
 
     this.anchorsMenu = {
       productLink: `/business-detail/${idStore}/products`,
       contactLink: `/business-detail/${idStore}`,
-      wordToMatch: `products`
+      wordToMatch: `products`,
     };
 
     let contactStore;
-    contactStore = { // la base de datos no tiene el dato
+    contactStore = {
+      // la base de datos no tiene el dato
       url: '',
-      name: 'sin dato de contacto'
+      name: 'sin dato de contacto',
     };
 
     const mainContactSocialKey = ['facebook', 'instagram', 'twitter'];
     const mainContactKey = ['email_1', 'email_2', 'phone_1', 'phone_2'];
 
     // buscamos entre las posibles propiedades alguna propiedad la cual no tenga null y en el orden de los elementos
-    const isSomeContactSocial = mainContactSocialKey.find( contactKey => {
+    const isSomeContactSocial = mainContactSocialKey.find((contactKey) => {
       return storeResp.social[contactKey];
     });
 
-    const isSomeContact = mainContactKey.find( contactKey => {
+    const isSomeContact = mainContactKey.find((contactKey) => {
       return storeResp.contact[contactKey];
     });
 
-    if (isSomeContactSocial) { // si encuentra algún dato de contacto de redes sociales ese se mostrará
-      contactStore = { // la base de datos no tiene el dato
+    if (isSomeContactSocial) {
+      // si encuentra algún dato de contacto de redes sociales ese se mostrará
+      contactStore = {
+        // la base de datos no tiene el dato
         url: isSomeContactSocial,
-        name: `@${storeResp.name}` // coloco el nombre porque el back no devuelve el nombre de la cuenta de instagram
+        name: `@${storeResp.name}`, // coloco el nombre porque el back no devuelve el nombre de la cuenta de instagram
       };
-
-    } else if (isSomeContact) { // sino mostrara algún dato de contacto común y si ninguna condición se cumple, sera ''
-      contactStore = contactStore = { // la base de datos no tiene el dato
+    } else if (isSomeContact) {
+      // sino mostrara algún dato de contacto común y si ninguna condición se cumple, sera ''
+      contactStore = contactStore = {
+        // la base de datos no tiene el dato
         url: '',
-        name: isSomeContact
+        name: isSomeContact,
       };
     }
 
@@ -588,7 +547,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       name: storeResp.name,
       contact: contactStore,
       img: 'assets/img/no-image-banner.jpg', // la base de datos no tiene el dato
-      isVerified: storeResp.certification == 'true' ? true : false
+      isVerified: storeResp.certification == 'true' ? true : false,
     };
 
     // Obtenemos las categorías de los productos vinculados a una tienda
@@ -697,6 +656,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
     });
 
+    this.sidebarList.loadOptionsFilter(queryParam); // seleccionamos las opciones filtradas por url
   }
 
   // Expand or contract sidebar-list on responsive mode
@@ -704,25 +664,23 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     this.expandSidebar = event;
   }
 
-  public setBreadcrumbOptions(storeResp: StoreResponse){
-
+  public setBreadcrumbOptions(storeResp: StoreResponse) {
     const idStore = storeResp.id;
 
     this.breadcrumb = [
       {
         title: 'inicio',
-        routerLink: ['/home']
+        routerLink: ['/home'],
       },
       {
         title: 'farmacias',
-        routerLink: [`/farmacias`]
+        routerLink: [`/farmacias`],
       },
-
     ];
 
     this.breadcrumb[2] = {
       title: `${storeResp.name}`,
-      routerLink: [`/business-detail/${idStore}`]
+      routerLink: [`/business-detail/${idStore}`],
     };
   }
 
@@ -743,5 +701,4 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   public setTitle(newTitle: string) {
     this.titleService.setTitle(newTitle);
   }
-
 }

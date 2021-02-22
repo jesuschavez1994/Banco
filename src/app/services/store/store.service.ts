@@ -213,7 +213,7 @@ export class StoreService extends Service{
   }
 
   // -----
-  public getStoreById(idStore: number): Observable<StoreResponse> {
+  public getStoreById(idStore: any): Observable<StoreResponse> {
     return this.execQuery<StoreResponse>(`stores/${idStore}`);
 
   }

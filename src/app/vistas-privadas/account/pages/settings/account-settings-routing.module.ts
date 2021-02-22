@@ -11,13 +11,14 @@ import { SettingsComponent } from './settings.component'
 const routes: Routes = [
   {
     path: 'plans',
+    component: SettingsComponent,
     loadChildren: () =>
       import('./views/plans/plans.module').then((module) => module.PlansModule),
   },
   {
     path: 'store-edit',
     component: AccountComponent,
-    data: { title: 'Founduss | setting' },
+    data: { title: 'Editar tienda | Founduss' },
   },
 ]
 

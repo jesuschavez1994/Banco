@@ -1,0 +1,118 @@
+@import 'src/assets/scss/style.scss';
+
+.page {
+  display: flex;
+
+  .products-infomation {
+    .profile-name {
+      font-size: $font__size--head;
+      padding: 26px 0px;
+    }
+
+    .product-detail {
+      border-bottom: 2px solid $color__border-gray--medium;
+      margin-bottom: 33px;
+      padding-right: 29px;
+      padding-bottom: 23px;
+
+      display: flex;
+      justify-content: flex-end;
+
+      .main-img {
+        width: 40%;
+      }
+
+      .content {
+        // width: 86.3%;
+        width: 57%;
+
+        .name {
+          font-size: 19px;
+          font-weight: 500;
+          line-height: 25px;
+          margin-bottom: 23px;
+        }
+
+        .description {
+          color: $color__text-gray--dark;
+          font-size: 14px;
+          line-height: 18px;
+        }
+
+        .shopping-cart {
+          margin-top: 30px;
+
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-between;
+
+          .cost {
+            font-size: 29px;
+            font-weight: 600;
+
+            margin-bottom: 18px;
+            margin-top: 0px;
+          }
+
+          .quantity {
+            padding: 0px 0px;
+            margin-bottom: 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            label {
+              font-size: $font__size--small + 1;
+              font-weight: bold;
+            }
+
+            .counter {
+              margin-left: 10px;
+
+              display: flex;
+              align-items: center;
+
+              .control {
+                color: $color__text-orange;
+                cursor: pointer;
+                font-size: $font__size--medium;
+                font-weight: bold;
+                margin-left: 5px;
+                margin-right: 5px;
+
+                position: relative;
+
+                .segment {
+                  min-width: 11px;
+                  min-height: 2px;
+                  background: $color__text-orange;
+
+                  &.vertical {
+                    transform: rotate(90deg);
+
+                    position: absolute;
+                    top: 0;
+                  }
+                }
+              }
+
+              .number {
+                max-width: 35px;
+                height: 33px;
+                border: $color__background-gray--dark 1px solid;
+                text-align: center;
+              }
+
+              [type='number']::-webkit-inner-spin-button,
+              [type='number']::-webkit-outer-spin-butto {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

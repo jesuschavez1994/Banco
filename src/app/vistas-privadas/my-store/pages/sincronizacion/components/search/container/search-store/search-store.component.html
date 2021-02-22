@@ -1,0 +1,56 @@
+<div
+  class="search-engine"
+  [ngClass]="{ 'search-engine--wrap': buttonSidebarList }"
+>
+  <ng-container *ngIf="hasRoute('my-store/product-catalogue')">
+    <div class="btn-toogle-sidebar-list mx-2">
+      <app-sidebar-list-button
+        [expand]="isExpanded"
+        (isExpanded)="toggleSidebarList($event)"
+      >
+      </app-sidebar-list-button>
+    </div>
+  </ng-container>
+
+  <!-- === BOTÓN AGREGAR NUEVO PRODUCTO ====-->
+  <!-- ====================================-->
+  <button
+    class="btn add-btn mx-3 ml-auto"
+    type="button"
+    *ngIf="hasRoute('my-store/product-catalogue')"
+    id="addProduct"
+    (click)="addNewProduct()"
+    [routerLink]="['/my-store/load-product']"
+  >
+    + Agregar producto
+  </button>
+
+  <button
+    type="button"
+    class="mx-3 sincronizar-button ml-auto"
+    (click)="sendBulkData()"
+    [disabled]="cantSync"
+    *ngIf="hasRoute('/my-store/sincronizacion/suggested-products')"
+  >
+    Sincronizar
+  </button>
+
+  <form class="searcher ml-auto">
+    <i><img src="assets/img/icons/loupe.svg" /></i>
+    <input
+      type="search"
+      placeholder="Buscar producto..."
+      aria-label="Search"
+      [formControl]="search"
+    />
+  </form>
+
+  <!-- NG IF PARA OCULTAR O MOSTRAR EL FILTRO POR DEFECTO MOSTRADO -->
+  <!-- <div [ngClass]="{ 'd-none': !showFilter }" class="filter">
+    <select #selectFilter>
+      <ng-container *ngFor="let option of filterOptions">
+        <option [value]="option.value">{{ option.label }}</option>
+      </ng-container>
+    </select>
+  </div> -->
+</div>

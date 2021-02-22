@@ -1,0 +1,75 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, .45)">
+  <p style="font-size: 20px; color: white">Cargando...</p>
+</ngx-spinner>
+
+<app-no-suggested-products
+  *ngIf="MyProduct.length === undefined"
+></app-no-suggested-products>
+
+<section class="container-fluid mt-5">
+  <div class="row">
+    <app-search-store
+      (searchEmitter)="handleSearch($event)"
+      (sidebarExpand)="toogleSidebar($event)"
+      [isExpanded]="expandSidebar"
+      [buttonSidebarList]="true"
+      [debounce]="1000"
+      class="width-100"
+      [bulkSync]="bulkSync"
+      [filterOptions]="filterOptions"
+      [showFilter]="useFilter"
+    >
+    </app-search-store>
+  </div>
+</section>
+
+<div layout="”row”" layout-wrap="wrap">
+  <section
+    class="mt-5 mb-5 col-md-12 display-flex pb-1 position-relative"
+    [ngClass]="{
+      'no-aviable':
+        item.suggestion === null || item.suggestion.data.length === 0
+    }"
+    *ngFor="
+      let item of MyProduct
+        | paginate
+          : {
+              itemsPerPage: 28,
+              currentPage: page,
+              totalItems: totalProductAPI
+            };
+      let i = index
+    "
+    id="{{ i }}"
+  >
+    <app-suggested-section
+      [item]="item"
+      [i]="i"
+      class="width-100"
+      (actualProduct)="updateBulkArray($event)"
+    ></app-suggested-section>
+  </section>
+
+  <span class="ir-arriba icon-arrow-up2" (click)="scrollDown()" *ngIf="!scroll">
+    <i class="figure material-icons" name="camera"> keyboard_arrow_down </i>
+  </span>
+
+  <span class="ir-arriba icon-arrow-up2" (click)="scrollTop()" *ngIf="scroll">
+    <i class="figure material-icons" name="camera"> keyboard_arrow_up </i>
+  </span>
+</div>
+
+<!-- PAGINACIÓN -->
+<footer class="col-md-11" *ngIf="showFooterPaginations">
+  <pagination-controls
+    previousLabel="Anterior"
+    nextLabel="Siguiente"
+    maxSize="1"
+    directionLinks="true"
+    screenReaderPaginationLabel="Pagination"
+    screenReaderPageLabel="page"
+    screenReaderCurrentLabel="You're on page"
+    (pageChange)="pageChanged($event)"
+  >
+  </pagination-controls>
+</footer>
