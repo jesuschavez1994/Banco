@@ -1,31 +1,35 @@
-<div class="search-engine" [ngClass]="{'search-engine--wrap': buttonSidebarList}">
-
-    <ng-container *ngIf="buttonSidebarList">
-
-        <div class="btn-toogle-sidebar-list">
-            <app-sidebar-list-button [expand]="isExpanded" (isExpanded)="toggleSidebarList($event)">
-            </app-sidebar-list-button>
-        </div>
-
-    </ng-container>
-
-    <!-- NG CLASS PARA OCUPAR TODO ESPACIO DISPONIBLE -->
-    <div class="searcher" [ngClass]="{'w-100':showFilter != true}">
-        <i><img src="assets/img/icons/loupe.svg"></i>
-        <input [value]="preloadedValue" #searchInput type="search" placeholder="Busca un producto en esta tienda">
+<div
+  class="search-engine"
+  [ngClass]="{ 'search-engine--wrap': buttonSidebarList }"
+>
+  <ng-container *ngIf="buttonSidebarList">
+    <div class="btn-toogle-sidebar-list">
+      <app-sidebar-list-button
+        [expand]="isExpanded"
+        (isExpanded)="toggleSidebarList($event)"
+      >
+      </app-sidebar-list-button>
     </div>
+  </ng-container>
 
-    <!-- NG IF PARA OCULTAR O MOSTRAR EL FILTRO POR DEFECTO MOSTRADO -->
-    <div [ngClass]="{'d-none': !showFilter}" class="filter">
+  <!-- NG CLASS PARA OCUPAR TODO ESPACIO DISPONIBLE -->
+  <div class="searcher" [ngClass]="{ 'w-100': showFilter != true }">
+    <i><img src="assets/img/icons/loupe.svg" /></i>
+    <input
+      [value]="preloadedValue"
+      #searchInput
+      type="search"
+      placeholder="Busca un producto en esta tienda"
+      [formControl]="searchForm"
+    />
+  </div>
 
-      <select #selectFilter>
-
+  <!-- NG IF PARA OCULTAR O MOSTRAR EL FILTRO POR DEFECTO MOSTRADO -->
+  <div [ngClass]="{ 'd-none': !showFilter }" class="filter">
+    <select #selectFilter>
       <ng-container *ngFor="let option of filterOptions">
-        <option [value]="option.value">{{option.label}}</option>
+        <option [value]="option.value">{{ option.label }}</option>
       </ng-container>
-
     </select>
-
-    </div>
-
+  </div>
 </div>
