@@ -105,3 +105,31 @@ export interface SrcSize {
   m: string;
   s: string;
 }
+
+//
+export interface CategoryProductStoreResp {
+  '0': CategoryProductStore;
+  '120': CategoryProductStore;
+}
+
+export interface CategoryProductStore {
+  id: number;
+  name: string;
+  creator: string;
+  user_creator_id?: any;
+  store_creator_id?: any;
+  created_at?: any;
+  updated_at?: any;
+  subcategories: SubcategoryProductStore[];
+}
+
+export interface SubcategoryProductStore {
+  id: number;
+  name: string;
+  category_id: number;
+  creator: string;
+  user_creator_id?: any;
+  store_creator_id?: any;
+  created_at?: any;
+  updated_at?: any;
+}
