@@ -3,7 +3,7 @@
 <main class="page">
   <app-sidebar-list
     [isExpanded]="expandSidebar"
-    (sidebarExpand)="toogleSidebar($event)"
+    (sidebarExpand)="toggleSidebar($event)"
     [filters]="sidebarFilters"
     #sidebarList
   >
@@ -11,6 +11,13 @@
 
   <div class="column">
     <ng-container>
+      <div class="toggler my-3">
+        <app-sidebar-list-button
+          (isExpanded)="toggleSidebar($event)"
+          [expand]="expandSidebar"
+        ></app-sidebar-list-button>
+      </div>
+
       <section class="products-info">
         <app-products-cards
           #productCards
