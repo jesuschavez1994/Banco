@@ -1,132 +1,99 @@
 <!-- <ng-container *ngIf="profile && anchorsMenu"> -->
 
-  <aside class="aside"
-    #sidebarList
-    [ngClass]="{'aside--expanded': isExpanded}">
+<aside class="aside" #sidebarList [ngClass]="{ 'aside--expanded': isExpanded }">
+  <div class="btn-toogle">
+    <app-sidebar-list-button
+      [expand]="isExpanded"
+      (isExpanded)="toggleSidebarList($event)"
+      class="btn-toogle"
+    >
+    </app-sidebar-list-button>
+  </div>
 
-    <div class="btn-toogle">
-
-      <app-sidebar-list-button
-        [expand]="isExpanded"
-        (isExpanded)="toggleSidebarList($event)"
-        class="btn-toogle"
-      >
-      </app-sidebar-list-button>
-
-    </div>
-
-    <div class="business-info">
-
-      <ng-container *ngIf="profile && anchorsMenu">
-
-        <div class="business-perfil">
-
-          <div class="profile-img">
-            <img
-              [src]="profile.img | imgFallback"
-              onerror="if (this.src != 'assets/img/no-image-banner.jpg') this.src = 'assets/img/no-image-banner.jpg';"
-              alt="medicalback"
-            >
-          </div>
-
-          <div class="profile-data">
-
-            <h2 class="name">
-
-              {{profile.name}}
-
-              <ng-container *ngIf="profile.isVerified">
-                <span class="simbol-verifiqued">
-                  <img
-                    [src]="'assets/img/no-image-banner.jpg' | imgFallback"
-                    alt="cuenta verificada"
-                    onerror="if (this.src != 'assets/img/no-image-banner.jpg') this.src = 'assets/img/no-image-banner.jpg';"
-                  >
-                </span>
-              </ng-container>
-
-            </h2>
-
-            <div class="instagram">
-              <!-- <a [href]="profile.contact.url"> -->
-                {{profile.contact.name}}
-              <!-- </a> -->
-            </div>
-
-          </div>
-
+  <div class="business-info" *ngIf="profile && anchorsMenu">
+    <ng-container *ngIf="profile && anchorsMenu">
+      <div class="business-perfil">
+        <div class="profile-img">
+          <img
+            [src]="profile.img | imgFallback"
+            onerror="if (this.src != 'assets/img/no-image-banner.jpg') this.src = 'assets/img/no-image-banner.jpg';"
+            alt="medicalback"
+          />
         </div>
 
-        <ul class="options">
+        <div class="profile-data">
+          <h2 class="name">
+            {{ profile.name }}
 
-          <li
-            [routerLink]="anchorsMenu.productLink"
-            [ngClass]="{'active': productOptionMenu}"
-          >
-            <a>productos</a>
-          </li>
+            <ng-container *ngIf="profile.isVerified">
+              <span class="simbol-verifiqued">
+                <img
+                  [src]="'assets/img/no-image-banner.jpg' | imgFallback"
+                  alt="cuenta verificada"
+                  onerror="if (this.src != 'assets/img/no-image-banner.jpg') this.src = 'assets/img/no-image-banner.jpg';"
+                />
+              </span>
+            </ng-container>
+          </h2>
 
-          <li
-            [routerLink]="anchorsMenu.contactLink"
-            [ngClass]="{'active': contactOptionMenu}"
-          >
-            <a>contacto</a>
-          </li>
+          <div class="instagram">
+            <!-- <a [href]="profile.contact.url"> -->
+            {{ profile.contact.name }}
+            <!-- </a> -->
+          </div>
+        </div>
+      </div>
 
-        </ul>
+      <ul class="options">
+        <li
+          [routerLink]="anchorsMenu.productLink"
+          [ngClass]="{ active: productOptionMenu }"
+        >
+          <a>productos</a>
+        </li>
 
-      </ng-container>
+        <li
+          [routerLink]="anchorsMenu.contactLink"
+          [ngClass]="{ active: contactOptionMenu }"
+        >
+          <a>contacto</a>
+        </li>
+      </ul>
+    </ng-container>
+  </div>
 
-    </div>
+  <nav class="menu">
+    <ng-container *ngIf="filters">
+      <ng-container *ngIf="filters.length > 0">
+        <ng-container *ngFor="let filter of filters">
+          <ul class="list">
+            <h4 class="title">
+              {{ filter.title }}
+            </h4>
 
-    <nav class="menu">
+            <ng-container
+              *ngFor="let option of getFilter(filter); index as inx"
+            >
+              <div (click)="selectOptionsFilter2(option, filter)">
+                <li>
+                  <input
+                    [type]="filter.type === 'multiple' ? 'radio' : 'checkbox'"
+                    id="{{ filter.title | strReplace }}-{{ inx }}"
+                    name="{{ filter.title | strReplace }}-{{ inx }}"
+                    [checked]="option.isSelected"
+                  />
 
-      <ng-container *ngIf="filters">
-
-        <ng-container *ngIf="filters.length > 0">
-
-          <ng-container *ngFor="let filter of filters">
-
-            <ul class="list">
-
-              <h4 class="title">
-                {{filter.title}}
-              </h4>
-
-              <ng-container *ngFor="let option of getFilter(filter); index as inx">
-
-                <div (click)="selectOptionsFilter2(option, filter)">
-
-                  <li>
-
-                    <input [type]="filter.type === 'multiple' ? 'radio' : 'checkbox'"
-                      id="{{filter.title | strReplace}}-{{inx}}"
-                      name="{{filter.title | strReplace}}-{{inx}}"
-                      [checked]="option.isSelected"
-                    >
-
-                    <label for="{{filter.title | strReplace}}-{{inx}}">
-                      <a>
-                        {{option.name}} ({{option.totalFounds}})
-                      </a>
-                    </label>
-
-                  </li>
-
-                </div>
-
-              </ng-container>
-
-            </ul>
-
-          </ng-container>
-
+                  <label for="{{ filter.title | strReplace }}-{{ inx }}">
+                    <a> {{ option.name }} ({{ option.totalFounds }}) </a>
+                  </label>
+                </li>
+              </div>
+            </ng-container>
+          </ul>
         </ng-container>
-
       </ng-container>
-
-    </nav>
-
-  </aside>
+    </ng-container>
+  </nav>
+</aside>
 
 <!-- </ng-container> -->
