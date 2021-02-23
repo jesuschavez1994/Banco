@@ -1,16 +1,16 @@
-import { Component, OnInit, Inject } from '@angular/core'
-import { MatDialog } from '@angular/material/dialog'
-import { BROWSER_STORAGE } from '@app/browserStorage'
-import { RedirectionModalComponent } from '../redirection-modal/redirection-modal.component'
-import { SubscriptionService } from '@services/subscription/subscription.service'
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { BROWSER_STORAGE } from '@app/browserStorage';
+import { RedirectionModalComponent } from '../redirection-modal/redirection-modal.component';
+import { SubscriptionService } from '@services/subscription/subscription.service';
 import {
   OrderNumberCreation,
   Payment,
   PaymentCredentials,
-} from '@interfaces/SettingsInterfaces'
-import { SafeStyle } from '@angular/platform-browser'
+} from '@interfaces/SettingsInterfaces';
+import { SafeStyle } from '@angular/platform-browser';
 
-import { switchMap } from 'rxjs/operators'
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-plan-details',
@@ -18,17 +18,18 @@ import { switchMap } from 'rxjs/operators'
   styleUrls: ['./plan-details.component.css'],
 })
 export class PlanDetailsComponent implements OnInit {
-  waitingResponse = false
-  webpayDebitCard = false
+  waitingResponse = false;
+  webpayDebitCard = false;
   selectedPlanDetails: OrderNumberCreation = JSON.parse(
     this.localStorage.getItem('planDetails')
-  )
+  );
   // We use the values on the localStorage as fallback.
-  createdOrderDetails = JSON.parse(this.localStorage.getItem('createdOrder'))
-  paymentId = parseInt(this.localStorage.getItem('paymentId'))
-  paymentCredentials: PaymentCredentials
+  createdOrderDetails = JSON.parse(this.localStorage.getItem('createdOrder'));
+  paymentId = parseInt(this.localStorage.getItem('paymentId'));
+  paymentCredentials: PaymentCredentials;
   // Plan color style
-  planColor: SafeStyle
+  planColor: SafeStyle;
+  materialColor: string;
 
   constructor(
     public dialog: MatDialog,
@@ -39,25 +40,28 @@ export class PlanDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.createdOrderDetails = JSON.parse(
       this.localStorage.getItem('createdOrder')
-    )
+    );
 
     this.selectedPlanDetails = JSON.parse(
       this.localStorage.getItem('planDetails')
-    )
+    );
 
     // Logic for changing the cards colors according to each plan
     switch (this.selectedPlanDetails.plan_name) {
       case 'basic':
-        this.planColor = `#24c8af`
-        break
+        this.planColor = `#24c8af`;
+        this.materialColor = 'primary';
+        break;
 
       case 'standard':
-        this.planColor = `#ff8647`
-        break
+        this.planColor = `#ff8647`;
+        this.materialColor = 'accent';
+        break;
 
       case 'premium':
-        this.planColor = `#3673ff`
-        break
+        this.planColor = `#3673ff`;
+        this.materialColor = 'warn';
+        break;
     }
   }
 
@@ -66,7 +70,7 @@ export class PlanDetailsComponent implements OnInit {
   // API calls handler methods-------------------------------
   createPayment(): void {
     // We start the spinner.
-    this.waitingResponse = true
+    this.waitingResponse = true;
     this.subscriptionDataService
       .paymentCreation(
         this.createdOrderDetails.order.user_id,
@@ -78,26 +82,29 @@ export class PlanDetailsComponent implements OnInit {
           if (paymentDetails.message === 'ya se incio el proceso de pago') {
             return this.subscriptionDataService.createWebpayPayment(
               this.paymentId
-            )
+            );
           } else {
             // We keep the paymentId in the localStorage in case of error or page refresh.
-            this.localStorage.setItem('paymentId', paymentDetails.id.toString())
+            this.localStorage.setItem(
+              'paymentId',
+              paymentDetails.id.toString()
+            );
             return this.subscriptionDataService.createWebpayPayment(
               paymentDetails.id
-            )
+            );
           }
         })
       )
       .subscribe((paymentCredentials: PaymentCredentials) => {
-        console.log(paymentCredentials)
-        this.openDialog(paymentCredentials.url, paymentCredentials.token)
-      })
+        console.log(paymentCredentials);
+        this.openDialog(paymentCredentials.url, paymentCredentials.token);
+      });
   }
 
   openDialog(url: string, token: string): void {
     const dialogRef = this.dialog.open(RedirectionModalComponent, {
       disableClose: true,
       data: { url: url, token: token },
-    })
+    });
   }
 }
