@@ -134,11 +134,18 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
     this.route.queryParamMap
       .pipe(
         switchMap((queryParams: ParamMap) => {
+          const page = queryParams.has('page')
+            ? parseInt(queryParams.get('page'))
+            : 1
+
           let globalSearchPayload = {
             name: queryParams.has('name') ? queryParams.get('name') : '',
           }
 
-          return this._searchService.globalProductSearch(globalSearchPayload)
+          return this._searchService.globalProductSearch(
+            globalSearchPayload,
+            page
+          )
         })
       )
       .subscribe((productsData: any) => {
@@ -159,7 +166,7 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
     this.expandSidebar = event
   }
 
-  paginationProducts(page: number) {
+  productsPagination(page: number) {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { page },

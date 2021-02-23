@@ -48,7 +48,6 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
       .pipe(debounceTime(500))
       .subscribe((searchTerm) => {
         this.searchEmitter.emit(searchTerm)
-        console.log('Term to search from search bar:', searchTerm)
       })
   }
 

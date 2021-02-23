@@ -56,8 +56,10 @@ export class PublicNavbarComponent implements OnInit, AfterViewInit {
 
   // Handlers for events that happen in the component ----------------------
   handleSearch(searchTerm: string) {
-    this.router.navigate(['search-results'], {
-      queryParams: searchTerm !== '' ? { name: searchTerm } : {},
-    })
+    if (searchTerm !== '') {
+      this.router.navigate(['search-results'], {
+        queryParams: searchTerm !== '' ? { name: searchTerm } : {},
+      })
+    }
   }
 }
