@@ -6,6 +6,7 @@ import {
 } from '@interfaces/components-options/sidebar-list.options.interface'
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface'
 import { ActivatedRoute, ParamMap, Router, Params } from '@angular/router'
+import { Title } from '@angular/platform-browser'
 
 import { ProductsCardsComponent } from '@shared/products-cards/products-cards.component'
 import { ProductDetailComponent } from '@shared/product-detail/product-detail.component'
@@ -123,7 +124,8 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    public _searchService: SearchService
+    public _searchService: SearchService,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
@@ -138,8 +140,19 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
             ? parseInt(queryParams.get('page'))
             : 1
 
+          // We do a quick null check to update the title accordingly. Since de backend accepts the 'name'
+          // value as null, no actions are taken.
+          this.setNewTitle(`Buscar: ${queryParams.get('name')} | Founduss`)
+
           let globalSearchPayload = {
             name: queryParams.has('name') ? queryParams.get('name') : '',
+            marks: queryParams.has('marks') ? queryParams.get('marks') : '',
+            subcategories: queryParams.has('subcategories')
+              ? queryParams.get('subcategories')
+              : '',
+            factories: queryParams.has('factories')
+              ? queryParams.get('factories')
+              : '',
           }
 
           return this._searchService.globalProductSearch(
@@ -162,7 +175,7 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   }
 
   // Handlers for events that heppen in the component ----------------
-  toogleSidebar(event) {
+  toggleSidebar(event) {
     this.expandSidebar = event
   }
 
@@ -229,5 +242,9 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
         background: '#900909c2',
       })
     }
+  }
+
+  setNewTitle(newTitle: string) {
+    this.titleService.setTitle(newTitle)
   }
 }
