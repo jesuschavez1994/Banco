@@ -197,7 +197,7 @@ export class MyStoreComponent implements OnInit {
       },
       {
         anchorName: 'Ventas',
-        anchorLink: ``,
+        anchorLink: `/my-store/ventas`,
         wordToMatch: `products`,
       },
     ]

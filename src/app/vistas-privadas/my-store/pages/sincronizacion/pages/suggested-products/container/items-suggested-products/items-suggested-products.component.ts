@@ -279,18 +279,22 @@ export class ItemsSuggestedProductsComponent implements OnInit {
       {
         anchorName: 'Contacto',
         anchorLink: `/my-store/contact`,
+        wordToMatch: `products`,
       },
       {
         anchorName: 'Productos',
         anchorLink: `/my-store/product-catalogue`,
+        wordToMatch: `products`,
       },
       {
         anchorName: 'Sincronización',
         anchorLink: `/my-store/sincronizacion/exportar-lista-excel`,
+        wordToMatch: `products`,
       },
       {
         anchorName: 'Ventas',
-        anchorLink: ``,
+        anchorLink: `/my-store/ventas`,
+        wordToMatch: `products`,
       },
     ]
 
