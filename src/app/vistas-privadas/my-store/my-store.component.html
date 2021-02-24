@@ -6,14 +6,16 @@
 ></app-public-navbar>
 <main class="page">
   <ng-container>
-    <app-aside-filtros
-      #sidebarList
+    <app-sidebar-list
+
       [isExpanded]="expandSidebar"
       (sidebarExpand)="toogleSidebar($event)"
-      [categories]="categories"
-      [anchorsMenu]="anchorsMenu"
+      [anchorsMenu]="anchorsMenu" 
       [profile]="profile"
-    ></app-aside-filtros>
+      [filters]="sidebarFilters"
+      #sidebarList
+  >
+  </app-sidebar-list>
   </ng-container>
 
   <div class="column">
