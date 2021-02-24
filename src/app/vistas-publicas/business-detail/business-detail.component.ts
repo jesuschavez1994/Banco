@@ -20,6 +20,7 @@ import {
   Filter,
   Profile,
 } from '@interfaces/components-options/sidebar-list.options.interface'
+import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service'
 import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface'
 import { StoreResponse } from '@interfaces/store.interface'
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface'
@@ -100,7 +101,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     private utils: Utils,
     private dropdownIconComp: DropdownIconComponent,
     private productModel: ProductModel,
-    private titleService: Title
+    private titleService: Title,
+    private _sidebarListService: SidebarListService
   ) {}
 
   ngOnInit() {
@@ -512,6 +514,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         anchorLink: `/business-detail/${idStore}`,
       },
     ]
+    this._sidebarListService.setAnchors(this.anchorsMenu)
 
     let contactStore
     contactStore = {

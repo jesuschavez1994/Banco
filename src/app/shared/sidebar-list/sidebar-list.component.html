@@ -44,9 +44,9 @@
         </div>
       </div>
 
-      <ul class="options" *ngIf="anchorsMenu">
+      <ul class="options" *ngIf="anchorsMenuData">
         <li
-          *ngFor="let anchor of anchorsMenu"
+          *ngFor="let anchor of anchorsMenuData"
           [routerLink]="anchor.anchorLink"
           [ngClass]="{ active: productOptionMenu }"
         >
