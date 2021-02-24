@@ -37,6 +37,7 @@ export class AsideFiltrosComponent implements OnInit, AfterViewInit {
   @Input() isExpanded = false
   @Input() anchorsMenu: AnchorsMenu
   @Input() profile: Profile
+  @Input() idStore: number;
   // @Input() RouterActivate: ActivatedRoutesParams;
 
   // filters

@@ -10,7 +10,7 @@
     </app-sidebar-list-button>
   </div>
 
-  <div class="business-info" *ngIf="profile && anchorsMenu">
+  <div class="business-info">
     <ng-container *ngIf="profile && anchorsMenu">
       <div class="business-perfil">
         <div class="profile-img">
@@ -44,19 +44,13 @@
         </div>
       </div>
 
-      <ul class="options">
+      <ul class="options" *ngIf="anchorsMenu">
         <li
-          [routerLink]="anchorsMenu.productLink"
+          *ngFor="let anchor of anchorsMenu"
+          [routerLink]="anchor.anchorLink"
           [ngClass]="{ active: productOptionMenu }"
         >
-          <a>productos</a>
-        </li>
-
-        <li
-          [routerLink]="anchorsMenu.contactLink"
-          [ngClass]="{ active: contactOptionMenu }"
-        >
-          <a>contacto</a>
+          <a>{{ anchor.anchorName }}</a>
         </li>
       </ul>
     </ng-container>

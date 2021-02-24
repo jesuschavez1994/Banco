@@ -14,7 +14,7 @@ const childRoutes: Routes = [
     path: 'contact',
     component: ContactComponent,
   },
-  { path: 'product-catalogue', 
+  { path: 'product-catalogue/:idStore',  // Se obtiene el id de la tienda para mostrar su listo productos
 loadChildren: () => import('./pages/load-product/load-product.module').then(module => module.LoadProductModule)
  },
   {

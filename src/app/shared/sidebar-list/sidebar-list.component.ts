@@ -145,6 +145,8 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.sidebarOptions);
+
     if (this.sidebarOptions) {
       this.anchorsMenu = this.sidebarOptions.anchorsMenu;
       this.profile = this.sidebarOptions.profile;
@@ -588,5 +590,15 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     }
 
     return optionSelected.name;
+  }
+
+  /**
+   * Check if the router url contains the specified route.
+   *
+   * @param {string} routeForCheck
+   * @returns {boolean} boolean
+   */
+  hasRoute(routeForCheck: string): boolean {
+    return this.router.url.includes(routeForCheck);
   }
 }
