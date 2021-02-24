@@ -48,7 +48,7 @@
         <li
           *ngFor="let anchor of anchorsMenuData"
           [routerLink]="anchor.anchorLink"
-          [ngClass]="{ active: productOptionMenu }"
+          routerLinkActive="active"
         >
           <a>{{ anchor.anchorName }}</a>
         </li>
