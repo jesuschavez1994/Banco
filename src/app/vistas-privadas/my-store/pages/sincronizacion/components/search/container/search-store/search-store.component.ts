@@ -90,7 +90,7 @@ export class SearchStoreComponent implements OnInit, OnChanges {
    * @param {string} routeForCheck
    * @returns {boolean} boolean
    */
-  hasRoute(routeForCheck: string) {
+  hasRoute(routeForCheck: string): boolean {
     return this._router.url.includes(routeForCheck)
   }
 

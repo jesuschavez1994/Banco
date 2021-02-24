@@ -9,8 +9,8 @@ import {
 } from '@interfaces/store.interface'
 import { SearchService } from '@services/Search/search.service'
 import { MyStoreService } from './services/my-store.service'
-import { combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { combineLatest } from 'rxjs'
+import { map } from 'rxjs/operators'
 
 import {
   // Category,
@@ -23,10 +23,10 @@ import {
 } from '@interfaces/components-options/sidebar-list.options.interface'
 import { HomeServiceService } from '../../vistas-publicas/services/home-service.service'
 
-import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component';
+import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component'
 import { DataProductDB, ProductosLoads } from '@interfaces/InterfaceProducto'
 import { UserStoreService } from '../../services/user-store/user-store.service'
-import { Option } from '@interfaces/components-options/sidebar-list.options.interface';
+import { Option } from '@interfaces/components-options/sidebar-list.options.interface'
 
 @Component({
   selector: 'app-my-store',
@@ -41,21 +41,21 @@ export class MyStoreComponent implements OnInit {
   Onerror = false
 
   profile: Profile
-  anchorsMenu: AnchorsMenu
+  anchorsMenu: AnchorsMenu[] = []
 
   breadcrumb: BreadcrumbOptions[]
   categories: any[] = []
   MyProduct: DataProductDB[] = []
-  idStore: number;
-  sidebarFilters: Filter[] = [];
+  idStore: number
+  sidebarFilters: Filter[] = []
 
   // Variables
-  storeData: StoreResponse;
-  wasChangedStoreData = true;
-  queryParam: ParamMap;
-  wasChangedQueryParam = true;
-  showShimmerProductsCards = true;
- 
+  storeData: StoreResponse
+  wasChangedStoreData = true
+  queryParam: ParamMap
+  wasChangedQueryParam = true
+  showShimmerProductsCards = true
+
   @ViewChild('sidebarList') sidebarList: SidebarListComponent
 
   userLog: boolean
@@ -83,7 +83,7 @@ export class MyStoreComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadDataByParams();
+    this.loadDataByParams()
     this.userLog = this.homeService.islog()
     this.storeLog = this.homeService.storeActive()
     this.VeriquedBanner()
@@ -96,17 +96,16 @@ export class MyStoreComponent implements OnInit {
           return {
             params,
             queryParam,
-          };
+          }
         })
       )
       .subscribe((data) => {
-        const params = data.params;
-        const queryParam = data.queryParam;
-        console.log('params', params);
+        const params = data.params
+        const queryParam = data.queryParam
+        console.log('params', params)
 
-        this.loadDataStore(params, queryParam);
-
-      });
+        this.loadDataStore(params, queryParam)
+      })
   }
 
   ngAfterViewInit() {}
@@ -134,22 +133,19 @@ export class MyStoreComponent implements OnInit {
       )
   }
 
-
   // Expand or contract sidebar-list on responsive mode
   public toogleSidebar(event) {
     console.log('toggle', event)
     this.expandSidebar = event
   }
 
- 
-
-
   public loadDataStore(params, queryParam: ParamMap) {
-   
-      const idStore = parseInt(params.get('idStore'));
-      console.log('IdStore', idStore);
+    const idStore = parseInt(params.get('idStore'))
+    console.log('IdStore', idStore)
 
-      this.storeService.getStoreById(localStorage.getItem('storeId')).subscribe((storeResp) => {
+    this.storeService
+      .getStoreById(localStorage.getItem('storeId'))
+      .subscribe((storeResp) => {
         // Gestionamos el valor de wasChangedStoreData
         // El cual sera ula variable que determinara
         // si los datos de la tienda cambiaron o no
@@ -159,62 +155,73 @@ export class MyStoreComponent implements OnInit {
           // console.log(this.storeData.id);
           // console.log(storeResp.id);
           if (this.storeData.id !== storeResp.id) {
-            this.wasChangedStoreData = true;
-            this.storeData = storeResp;
+            this.wasChangedStoreData = true
+            this.storeData = storeResp
           } else {
-            this.wasChangedStoreData = false;
+            this.wasChangedStoreData = false
           }
         } else {
-          this.storeData = storeResp; // guardamos de forma global los datos de la tienda
+          this.storeData = storeResp // guardamos de forma global los datos de la tienda
           // console.log('this.storeData undefined');
         }
-
-        
 
         // Evitamos que la página carguen los mismos datos
         // cuando la tienda sigue siendo la misma.
         // solo permite actualizar los datos cuando la tienda es cambiada
         if (this.wasChangedStoreData) {
-          this.setSidebarOptions(storeResp, queryParam);
-          this.setBreadcrumbOptions(storeResp);
-
-          
+          this.setSidebarOptions(storeResp, queryParam)
+          this.setBreadcrumbOptions(storeResp)
         }
-
-      });
-
-    
+      })
   }
 
-  public setSidebarOptions(storeResp: StoreResponse, queryParam: ParamMap){
+  public setSidebarOptions(storeResp: StoreResponse, queryParam: ParamMap) {
     const id = localStorage.getItem('storeId')
-    this.anchorsMenu = {
+    this.anchorsMenu = [
+      {
+        anchorName: 'Contacto',
+        anchorLink: `/my-store/contact`,
+      },
+      {
+        anchorName: 'Productos',
+        anchorLink: `/my-store/product-catalogue/${id}`,
+      },
+      {
+        anchorName: 'Sincronización',
+        anchorLink: `/my-store/sincronizacion/exportar-lista-excel`,
+      },
+      {
+        anchorName: 'Ventas',
+        anchorLink: ``,
+      },
+    ]
+    /*    this.anchorsMenu = {
       productLink: `/my-store/product-catalogue/${id}`,
       contactLink: `contact'`,
       wordToMatch: `products`,
       synchronizationLink: `/my-store/sincronizacion/exportar-lista-excel`,
-    }
+    } */
 
-    const idStore = storeResp.id;
+    const idStore = storeResp.id
 
-    let contactStore;
+    let contactStore
     contactStore = {
       // la base de datos no tiene el dato
       url: '',
       name: 'sin dato de contacto',
-    };
+    }
 
-    const mainContactSocialKey = ['facebook', 'instagram', 'twitter'];
-    const mainContactKey = ['email_1', 'email_2', 'phone_1', 'phone_2'];
+    const mainContactSocialKey = ['facebook', 'instagram', 'twitter']
+    const mainContactKey = ['email_1', 'email_2', 'phone_1', 'phone_2']
 
     // buscamos entre las posibles propiedades alguna propiedad la cual no tenga null y en el orden de los elementos
     const isSomeContactSocial = mainContactSocialKey.find((contactKey) => {
-      return storeResp.social[contactKey];
-    });
+      return storeResp.social[contactKey]
+    })
 
     const isSomeContact = mainContactKey.find((contactKey) => {
-      return storeResp.contact[contactKey];
-    });
+      return storeResp.contact[contactKey]
+    })
 
     if (isSomeContactSocial) {
       // si encuentra algún dato de contacto de redes sociales ese se mostrará
@@ -222,14 +229,14 @@ export class MyStoreComponent implements OnInit {
         // la base de datos no tiene el dato
         url: isSomeContactSocial,
         name: `@${storeResp.name}`, // coloco el nombre porque el back no devuelve el nombre de la cuenta de instagram
-      };
+      }
     } else if (isSomeContact) {
       // sino mostrara algún dato de contacto común y si ninguna condición se cumple, sera ''
       contactStore = contactStore = {
         // la base de datos no tiene el dato
         url: '',
         name: isSomeContact,
-      };
+      }
     }
 
     this.profile = {
@@ -237,49 +244,42 @@ export class MyStoreComponent implements OnInit {
       contact: contactStore,
       img: 'assets/img/no-image-banner.jpg', // la base de datos no tiene el dato
       isVerified: storeResp.certification == 'true' ? true : false,
-    };
+    }
 
     // Obtenemos las categorías de los productos vinculados a una tienda
-    this.storeService.getCategoriesProducts(idStore).subscribe( resp => {
+    this.storeService.getCategoriesProducts(idStore).subscribe((resp) => {
+      let sidebarListFilters: Filter[]
+      sidebarListFilters = []
 
-      let sidebarListFilters: Filter[];
-      sidebarListFilters = [];
+      const respKeys = Object.keys(resp)
 
-      const respKeys = Object.keys(resp);
+      const categoriesResp = respKeys.map((respKey) => {
+        return resp[respKey]
+      })
 
-      const categoriesResp = respKeys.map(respKey => {
-        return resp[respKey];
-      });
+      let categoryOptions: Option[]
+      let subCategoryOptions: Option[]
 
-      let categoryOptions: Option[];
-      let subCategoryOptions: Option[];
-
-      categoryOptions = [];
-      subCategoryOptions = [];
+      categoryOptions = []
+      subCategoryOptions = []
 
       // Llenamos las opciones de categoria y las opciones de sub-categorías, todas vinculadas mediante su id
-      categoriesResp.forEach( categoryResp => {
+      categoriesResp.forEach((categoryResp) => {
+        categoryOptions.push({
+          optionId: categoryResp.id,
+          name: categoryResp.name,
+          totalFounds: 200,
+        })
 
-        categoryOptions.push(
-            {
-                optionId: categoryResp.id,
-                name: categoryResp.name,
-                totalFounds: 200,
-            }
-        );
-
-        categoryResp.subcategories.forEach( subcategoryResp => {
-          subCategoryOptions.push(
-            {
-              optionId: subcategoryResp.id,
-              parentOptionId: subcategoryResp.category_id,
-              name: subcategoryResp.name,
-              totalFounds: 200,
-            },
-          );
-        });
-
-      });
+        categoryResp.subcategories.forEach((subcategoryResp) => {
+          subCategoryOptions.push({
+            optionId: subcategoryResp.id,
+            parentOptionId: subcategoryResp.category_id,
+            name: subcategoryResp.name,
+            totalFounds: 200,
+          })
+        })
+      })
 
       const categoryFilter = {
         filterId: 1,
@@ -287,16 +287,16 @@ export class MyStoreComponent implements OnInit {
         type: 'single',
         paramName: 'categoria',
         options: categoryOptions,
-      };
+      }
 
-      const subCategoryFilter =  {
+      const subCategoryFilter = {
         filterId: 2,
         title: 'sub categorías',
         type: 'multiple',
         paramName: 'sub-categorias',
         parentFilterId: 1,
-        options: subCategoryOptions
-      };
+        options: subCategoryOptions,
+      }
 
       const priceFilter = {
         title: 'Precios',
@@ -328,29 +328,23 @@ export class MyStoreComponent implements OnInit {
             value: [40000, 50000],
             totalFounds: 200,
           },
-        ]
-      };
+        ],
+      }
 
       // Agregamos todos los filtros
-      sidebarListFilters.push(
-        categoryFilter,
-        subCategoryFilter,
-        priceFilter
-      );
+      sidebarListFilters.push(categoryFilter, subCategoryFilter, priceFilter)
 
       // retornamos los filters con el formato correcto para el component
-      this.sidebarFilters = this.sidebarList.setFilters(sidebarListFilters);
+      this.sidebarFilters = this.sidebarList.setFilters(sidebarListFilters)
 
-      this.sidebarList.loadOptionsFilter( queryParam ); // seleccionamos las opciones filtradas por url
+      this.sidebarList.loadOptionsFilter(queryParam) // seleccionamos las opciones filtradas por url
+    })
 
-    });
-
-    this.sidebarList.loadOptionsFilter(queryParam); // seleccionamos las opciones filtradas por url
-
+    this.sidebarList.loadOptionsFilter(queryParam) // seleccionamos las opciones filtradas por url
   }
 
   public setBreadcrumbOptions(storeResp: StoreResponse) {
-    const idStore = storeResp.id;
+    const idStore = storeResp.id
 
     this.breadcrumb = [
       {
@@ -361,12 +355,21 @@ export class MyStoreComponent implements OnInit {
         title: 'farmacias',
         routerLink: [`/farmacias`],
       },
-    ];
+    ]
 
     this.breadcrumb[2] = {
       title: `${storeResp.name}`,
       routerLink: [`/business-detail/${idStore}`],
-    };
+    }
   }
- 
+
+  /**
+   * Check if the router url contains the specified route.
+   *
+   * @param {string} routeForCheck
+   * @returns {boolean} boolean
+   */
+  hasRoute(routeForCheck: string): boolean {
+    return this.router.url.includes(routeForCheck)
+  }
 }

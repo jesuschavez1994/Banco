@@ -101,7 +101,7 @@ export class ItemsSuggestedProductsComponent implements OnInit {
   // Sidebar related properties
   profile: Profile
   storeName = ''
-  anchorsMenu: AnchorsMenu
+  anchorsMenu: AnchorsMenu[] = []
   breadcrumb: BreadcrumbOptions[]
   categories: any[] = []
 
@@ -275,12 +275,24 @@ export class ItemsSuggestedProductsComponent implements OnInit {
   }
 
   setSidebarOptions(storeResp: StoreResponse) {
-    this.anchorsMenu = {
-      productLink: `/product-catalogue`,
-      contactLink: `contact'`,
-      wordToMatch: `products`,
-      synchronizationLink: `/my-store/sincronizacion/exportar-lista-excel`,
-    }
+    this.anchorsMenu = [
+      {
+        anchorName: 'Contacto',
+        anchorLink: `/my-store/contact`,
+      },
+      {
+        anchorName: 'Productos',
+        anchorLink: `/my-store/product-catalogue`,
+      },
+      {
+        anchorName: 'Sincronización',
+        anchorLink: `/my-store/sincronizacion/exportar-lista-excel`,
+      },
+      {
+        anchorName: 'Ventas',
+        anchorLink: ``,
+      },
+    ]
 
     this.profile = {
       name: storeResp.name,
