@@ -113,7 +113,7 @@ export class LoadProductComponent implements OnInit {
   // Sidebar related properties
   profile: Profile
   storeName = ''
-  anchorsMenu: AnchorsMenu
+  anchorsMenu: AnchorsMenu[] = []
   breadcrumb: BreadcrumbOptions[]
   categories: any[] = []
 
@@ -148,8 +148,7 @@ export class LoadProductComponent implements OnInit {
       // this.getData(this.page)
     })
 
-    // Eliminamos los enlaces de la sidebar.
-    this._sidebarListService.setAnchors([])
+    this.loadAnchorsMenuData()
   }
 
   public loadDataByParams() {
@@ -813,4 +812,28 @@ export class LoadProductComponent implements OnInit {
   //     },
   //   ]
   // }
+  loadAnchorsMenuData() {
+    const id = localStorage.getItem('storeId')
+    this.anchorsMenu = [
+      {
+        anchorName: 'Contacto',
+        anchorLink: `/my-store/contact`,
+      },
+      {
+        anchorName: 'Productos',
+        anchorLink: `/my-store/product-catalogue/${id}`,
+      },
+      {
+        anchorName: 'Sincronización',
+        anchorLink: `/my-store/sincronizacion/exportar-lista-excel`,
+      },
+      {
+        anchorName: 'Ventas',
+        anchorLink: ``,
+      },
+    ]
+
+    // Eliminamos los enlaces de la sidebar.
+    this._sidebarListService.setAnchors(this.anchorsMenu)
+  }
 }

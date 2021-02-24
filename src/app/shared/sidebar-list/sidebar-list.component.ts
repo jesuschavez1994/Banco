@@ -248,7 +248,9 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
       if (params.has('show')) {
         if (this.anchorsMenu) {
-          if (params.get('show') === this.anchorsMenu.wordToMatch) {
+          // TODO: Mejorar esta implementacion, dado que ahora anchorsMenu se sustituyo por
+          //  anchorsMenuData, que es un array de objetos.
+          if (params.get('show') === this.anchorsMenuData[0].wordToMatch) {
             // this.productOptionMenu.nativeElement.classList.add('active');
             this.productOptionMenu = true
           }
@@ -605,10 +607,16 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   /**
    * Check if the router url contains the specified route.
    *
-   * @param {string} routeForCheck
    * @returns {boolean} boolean
    */
-  hasRoute(routeForCheck: string): boolean {
-    return this.router.url.includes(routeForCheck)
+  hasRoute(): boolean {
+    if (
+      this.router.url.includes('/my-store/contact') ||
+      this.router.url.includes('/my-store/sincronizacion/')
+    ) {
+      return true
+    } else {
+      return false
+    }
   }
 }

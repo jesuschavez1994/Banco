@@ -508,10 +508,12 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       {
         anchorName: 'Productos',
         anchorLink: `/business-detail/${idStore}/products`,
+        wordToMatch: `products`,
       },
       {
         anchorName: 'Contacto',
         anchorLink: `/business-detail/${idStore}`,
+        wordToMatch: `products`,
       },
     ]
     this._sidebarListService.setAnchors(this.anchorsMenu)

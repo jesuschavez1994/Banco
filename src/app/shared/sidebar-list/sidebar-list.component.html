@@ -56,7 +56,7 @@
     </ng-container>
   </div>
 
-  <nav class="menu" *ngIf="!hasRoute('/my-store/contact')">
+  <nav class="menu" *ngIf="!hasRoute()">
     <ng-container *ngIf="filters">
       <ng-container *ngIf="filters.length > 0">
         <ng-container *ngFor="let filter of filters">
