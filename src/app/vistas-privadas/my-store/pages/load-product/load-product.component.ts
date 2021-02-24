@@ -834,11 +834,10 @@ export class LoadProductComponent implements OnInit {
         anchorLink: `/my-store/sincronizacion/exportar-lista-excel`,
         wordToMatch: `products`,
       },
-      {
-        anchorName: 'Ventas',
-        anchorLink: `/my-store/ventas`,
-        wordToMatch: `products`,
-      },
+      // {
+      //   anchorName: 'Ventas',
+      //   anchorLink: `/my-store/ventas`,
+      // },
     ]
 
     // Eliminamos los enlaces de la sidebar.

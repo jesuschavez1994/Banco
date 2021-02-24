@@ -291,11 +291,10 @@ export class ItemsSuggestedProductsComponent implements OnInit {
         anchorLink: `/my-store/sincronizacion/exportar-lista-excel`,
         wordToMatch: `products`,
       },
-      {
-        anchorName: 'Ventas',
-        anchorLink: `/my-store/ventas`,
-        wordToMatch: `products`,
-      },
+      // {
+      //   anchorName: 'Ventas',
+      //   anchorLink: ``,
+      // },
     ]
 
     this.profile = {
