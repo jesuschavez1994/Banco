@@ -22,7 +22,6 @@ export class ProductsCardsComponent implements OnInit {
 
   constructor(
 
-
   ) { }
 
   ngOnInit(): void {

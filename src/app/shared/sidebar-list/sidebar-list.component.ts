@@ -136,6 +136,8 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
+    console.log(this.sidebarOptions);
+
     if (this.sidebarOptions) {
       this.anchorsMenu = this.sidebarOptions.anchorsMenu;
       this.profile = this.sidebarOptions.profile;
