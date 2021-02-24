@@ -195,11 +195,11 @@ export class MyStoreComponent implements OnInit {
         anchorLink: `/my-store/sincronizacion/exportar-lista-excel`,
         wordToMatch: `products`,
       },
-      {
-        anchorName: 'Ventas',
-        anchorLink: ``,
-        wordToMatch: `products`,
-      },
+      // {
+      //   anchorName: 'Ventas',
+      //   anchorLink: ``,
+      //   wordToMatch: `products`,
+      // },
     ]
 
     this._sidebarListService.setAnchors(this.anchorsMenu)

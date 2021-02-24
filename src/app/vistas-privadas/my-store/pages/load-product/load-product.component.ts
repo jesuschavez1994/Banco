@@ -827,10 +827,10 @@ export class LoadProductComponent implements OnInit {
         anchorName: 'Sincronización',
         anchorLink: `/my-store/sincronizacion/exportar-lista-excel`,
       },
-      {
-        anchorName: 'Ventas',
-        anchorLink: ``,
-      },
+      // {
+      //   anchorName: 'Ventas',
+      //   anchorLink: `/my-store/ventas`,
+      // },
     ]
 
     // Eliminamos los enlaces de la sidebar.

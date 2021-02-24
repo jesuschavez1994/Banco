@@ -288,10 +288,10 @@ export class ItemsSuggestedProductsComponent implements OnInit {
         anchorName: 'Sincronización',
         anchorLink: `/my-store/sincronizacion/exportar-lista-excel`,
       },
-      {
-        anchorName: 'Ventas',
-        anchorLink: ``,
-      },
+      // {
+      //   anchorName: 'Ventas',
+      //   anchorLink: ``,
+      // },
     ]
 
     this.profile = {
