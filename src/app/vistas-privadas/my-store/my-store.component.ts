@@ -22,6 +22,7 @@ import {
   // PriceRange,
 } from '@interfaces/components-options/sidebar-list.options.interface'
 import { HomeServiceService } from '../../vistas-publicas/services/home-service.service'
+import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service'
 
 import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component'
 import { DataProductDB, ProductosLoads } from '@interfaces/InterfaceProducto'
@@ -75,7 +76,8 @@ export class MyStoreComponent implements OnInit {
     private _searchService: SearchService,
     private homeService: HomeServiceService,
     private userStoreService: UserStoreService,
-    private _myStoreService: MyStoreService
+    private _myStoreService: MyStoreService,
+    private _sidebarListService: SidebarListService
   ) {
     _myStoreService.sidebarExpanded$.subscribe(
       (sidebarState) => (this.expandSidebar = sidebarState)
@@ -195,12 +197,8 @@ export class MyStoreComponent implements OnInit {
         anchorLink: ``,
       },
     ]
-    /*    this.anchorsMenu = {
-      productLink: `/my-store/product-catalogue/${id}`,
-      contactLink: `contact'`,
-      wordToMatch: `products`,
-      synchronizationLink: `/my-store/sincronizacion/exportar-lista-excel`,
-    } */
+
+    this._sidebarListService.setAnchors(this.anchorsMenu)
 
     const idStore = storeResp.id
 

@@ -19,6 +19,7 @@ import {
 } from '@interfaces/components-options/sidebar-list.options.interface';
 import { ActivatedRoute, Router, ParamMap, Params } from '@angular/router';
 import { Utils } from '../../utils/utils';
+import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service';
 
 @Component({
   selector: 'app-sidebar-list',
@@ -137,12 +138,21 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   productOptionMenu = false;
   contactOptionMenu = false;
+  // Anchor menu parameters
+  anchorsMenuData: AnchorsMenu[];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private utils: Utils
-  ) {}
+    private utils: Utils,
+    private _sidebarListService: SidebarListService
+  ) {
+    _sidebarListService.anchorsMenuData$.subscribe(
+      (anchorsData: AnchorsMenu[]) => {
+        this.anchorsMenuData = anchorsData;
+      }
+    );
+  }
 
   ngOnInit(): void {
     console.log(this.sidebarOptions);

@@ -5,17 +5,16 @@
   [storeAct]="storeLog"
 ></app-public-navbar>
 <main class="page">
-  <ng-container>
+  <ng-container *ngIf="!hasRoute('/my-store/contact')">
     <app-sidebar-list
-
       [isExpanded]="expandSidebar"
       (sidebarExpand)="toogleSidebar($event)"
-      [anchorsMenu]="anchorsMenu" 
+      [anchorsMenu]="anchorsMenu"
       [profile]="profile"
       [filters]="sidebarFilters"
       #sidebarList
-  >
-  </app-sidebar-list>
+    >
+    </app-sidebar-list>
   </ng-container>
 
   <div class="column">
