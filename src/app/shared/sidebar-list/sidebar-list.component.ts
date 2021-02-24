@@ -16,6 +16,7 @@ import {
   SelectedEmitter,
   Filter,
   Option,
+  SidebarSections,
 } from '@interfaces/components-options/sidebar-list.options.interface'
 import { ActivatedRoute, Router, ParamMap, Params } from '@angular/router'
 import { Utils } from '../../utils/utils'
@@ -140,6 +141,8 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   contactOptionMenu = false
   // Anchor menu parameters
   anchorsMenuData: AnchorsMenu[]
+  // Sections required to show
+  requiredSections: SidebarSections
 
   constructor(
     private route: ActivatedRoute,
@@ -150,6 +153,12 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     _sidebarListService.anchorsMenuData$.subscribe(
       (anchorsData: AnchorsMenu[]) => {
         this.anchorsMenuData = anchorsData
+      }
+    )
+
+    _sidebarListService.sectionsToShow$.subscribe(
+      (sectionsData: SidebarSections) => {
+        this.requiredSections = sectionsData
       }
     )
   }

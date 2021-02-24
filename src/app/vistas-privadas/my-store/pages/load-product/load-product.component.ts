@@ -28,7 +28,10 @@ import { Utils } from '../../../../utils/utils'
 import { ProductService } from '@services/product/product.service'
 import { ProducStoretModel } from '@app/models/produc-store.model'
 import { ToastComponent } from '../../../../modals/toast/toast.component'
-import { Option } from '@interfaces/components-options/sidebar-list.options.interface'
+import {
+  Option,
+  SidebarSections,
+} from '@interfaces/components-options/sidebar-list.options.interface'
 import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component'
 import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service'
 
@@ -114,6 +117,7 @@ export class LoadProductComponent implements OnInit {
   profile: Profile
   storeName = ''
   anchorsMenu: AnchorsMenu[] = []
+  sidebarSections: SidebarSections
   breadcrumb: BreadcrumbOptions[]
   categories: any[] = []
 
@@ -125,7 +129,6 @@ export class LoadProductComponent implements OnInit {
     private filtroService: FilstroStoreService,
     private renderer: Renderer2,
     private _searchService: SearchService,
-    private _myStoreService: MyStoreService,
     private utils: Utils,
     private productService: ProductService,
     private productModel: ProducStoretModel,
@@ -148,6 +151,7 @@ export class LoadProductComponent implements OnInit {
       // this.getData(this.page)
     })
 
+    this.setSidebarSections()
     this.loadAnchorsMenuData()
   }
 
@@ -839,5 +843,15 @@ export class LoadProductComponent implements OnInit {
 
     // Eliminamos los enlaces de la sidebar.
     this._sidebarListService.setAnchors(this.anchorsMenu)
+  }
+
+  private setSidebarSections() {
+    this.sidebarSections = {
+      bussinessProfile: true,
+      anchorOptions: true,
+      filters: true,
+    }
+
+    this._sidebarListService.setRequiredSections(this.sidebarSections)
   }
 }

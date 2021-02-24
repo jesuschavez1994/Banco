@@ -12,7 +12,7 @@
 
   <div class="business-info">
     <ng-container *ngIf="profile && anchorsMenu">
-      <div class="business-perfil">
+      <div class="business-perfil" *ngIf="requiredSections.bussinessProfile">
         <div class="profile-img">
           <img
             [src]="profile.img | imgFallback"
@@ -57,7 +57,7 @@
     </ng-container>
   </div>
 
-  <nav class="menu" *ngIf="!hasRoute()">
+  <nav class="menu" *ngIf="requiredSections.filters">
     <ng-container *ngIf="filters">
       <ng-container *ngIf="filters.length > 0">
         <ng-container *ngFor="let filter of filters">

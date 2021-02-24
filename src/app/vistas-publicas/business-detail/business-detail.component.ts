@@ -34,7 +34,10 @@ import { ToastComponent } from '../../modals/toast/toast.component'
 import { HomeServiceService } from '../services/home-service.service'
 import { ProductModel } from '@app/models/product.model'
 import { Title } from '@angular/platform-browser'
-import { Option } from '../../interfaces/components-options/sidebar-list.options.interface'
+import {
+  Option,
+  SidebarSections,
+} from '../../interfaces/components-options/sidebar-list.options.interface'
 
 @Component({
   selector: 'app-business-detail',
@@ -63,6 +66,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   anchorsMenu: AnchorsMenu[] = []
   profile: Profile
   sidebarFilters: Filter[] = []
+  sidebarSections: SidebarSections
 
   // Products-cards
   showProducts = false
@@ -108,6 +112,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.userLog = this.homeService.islog()
     this.storeLog = this.homeService.storeActive()
+    this.setSidebarSections()
   }
 
   ngAfterViewInit(): void {
@@ -694,5 +699,15 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   public setTitle(newTitle: string) {
     this.titleService.setTitle(newTitle)
+  }
+
+  private setSidebarSections() {
+    this.sidebarSections = {
+      bussinessProfile: true,
+      anchorOptions: true,
+      filters: true,
+    }
+
+    this._sidebarListService.setRequiredSections(this.sidebarSections)
   }
 }
