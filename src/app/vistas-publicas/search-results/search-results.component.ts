@@ -1,20 +1,20 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core'
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import {
   AnchorsMenu,
   Filter,
   Profile,
-} from '@interfaces/components-options/sidebar-list.options.interface'
-import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface'
-import { ActivatedRoute, ParamMap, Router, Params } from '@angular/router'
-import { Title } from '@angular/platform-browser'
+} from '@interfaces/components-options/sidebar-list.options.interface';
+import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface';
+import { ActivatedRoute, ParamMap, Router, Params } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
-import { ProductsCardsComponent } from '@shared/products-cards/products-cards.component'
-import { ProductDetailComponent } from '@shared/product-detail/product-detail.component'
-import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component'
-import { ToastComponent } from '../../modals/toast/toast.component'
+import { ProductsCardsComponent } from '@shared/products-cards/products-cards.component';
+import { ProductDetailComponent } from '@shared/product-detail/product-detail.component';
+import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component';
+import { ToastComponent } from '../../modals/toast/toast.component';
 
-import { SearchService } from '@services/Search/search.service'
-import { switchMap } from 'rxjs/operators'
+import { SearchService } from '@services/Search/search.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-results',
@@ -23,13 +23,13 @@ import { switchMap } from 'rxjs/operators'
 })
 export class SearchResultsComponent implements OnInit, AfterViewInit {
   // Components Controllers
-  @ViewChild('productCards') productCards: ProductsCardsComponent
-  @ViewChild('productDetail') productDetail: ProductDetailComponent
-  @ViewChild('sidebarList') sidebarList: SidebarListComponent
-  @ViewChild('toastRef') toastRef: ToastComponent
+  @ViewChild('productCards') productCards: ProductsCardsComponent;
+  @ViewChild('productDetail') productDetail: ProductDetailComponent;
+  @ViewChild('sidebarList') sidebarList: SidebarListComponent;
+  @ViewChild('toastRef') toastRef: ToastComponent;
 
   // Sidebar related parameters
-  expandSidebar = true
+  expandSidebar = true;
   sidebarFilters: Filter[] = [
     {
       filterId: 1,
@@ -114,12 +114,12 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
         },
       ],
     },
-  ]
+  ];
 
   // Product's cards related parameters
-  totalProducts: number
-  itemsPerPage = 16
-  showShimmeringCards = true
+  totalProducts: number;
+  itemsPerPage = 16;
+  showShimmeringCards = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -129,20 +129,59 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.sidebarFilters = this.sidebarList.setFilters(this.sidebarFilters)
+    this.sidebarFilters = this.sidebarList.setFilters(this.sidebarFilters);
   }
 
   ngAfterViewInit(): void {
+    // This function triggers all the fecth and modeling of the data that goes
+    // on the products cards.
+    this.getQueryParamsData();
+  }
+
+  // Handlers for events that happen in the component ----------------
+  toggleSidebar(event) {
+    this.expandSidebar = event;
+  }
+
+  productsPagination(page: number) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { page },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  goToProductDetails(product: ProductsCardsOptions) {
+    if (product.id > -1 && product.idStore > -1) {
+      this.router.navigate([
+        '/business-detail',
+        product.idStore,
+        'products',
+        product.id,
+      ]);
+    }
+  }
+
+  /**
+   * Chequea los query params de la ruta a la cual se está redirigiendo y usa éstos parámetros
+   * para construir los filtros que son necesarios para realizar la consulta a la base de datos. Al
+   * suscribirse, retorna la
+   * información en bruto de los productos.
+   * @author Jacinto Acosta.
+   * @date 23/02/2021
+   * @memberof SearchResultsComponent
+   */
+  getQueryParamsData() {
     this.route.queryParamMap
       .pipe(
         switchMap((queryParams: ParamMap) => {
           const page = queryParams.has('page')
             ? parseInt(queryParams.get('page'))
-            : 1
+            : 1;
 
           // We do a quick null check to update the title accordingly. Since de backend accepts the 'name'
           // value as null, no actions are taken.
-          this.setNewTitle(`Buscar: ${queryParams.get('name')} | Founduss`)
+          this.setNewTitle(`Buscar: ${queryParams.get('name')} | Founduss`);
 
           let globalSearchPayload = {
             name: queryParams.has('name') ? queryParams.get('name') : '',
@@ -153,74 +192,63 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
             factories: queryParams.has('factories')
               ? queryParams.get('factories')
               : '',
-          }
+          };
 
           return this._searchService.globalProductSearch(
             globalSearchPayload,
             page
-          )
+          );
         })
       )
       .subscribe((productsData: any) => {
-        if (this.productCards) {
-          this.productCards.toggleShimmer()
-        }
-
-        this.totalProducts = productsData.total
-        this.itemsPerPage = productsData.per_page
-
-        let productsRawData = productsData.data
-        this.addProductsData(productsRawData)
-      })
+        this.fetchProductsData(productsData);
+      });
   }
 
-  // Handlers for events that heppen in the component ----------------
-  toggleSidebar(event) {
-    this.expandSidebar = event
-  }
-
-  productsPagination(page: number) {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { page },
-      queryParamsHandling: 'merge',
-    })
-  }
-
-  goToProductDetails(product: ProductsCardsOptions) {
-    if (product.id > -1 && product.idStore > -1) {
-      this.router.navigate([
-        '/business-detail',
-        product.idStore,
-        'products',
-        product.id,
-      ])
+  /**
+   * Discrimina la información en bruto de los productos de todos los demas parámetros.
+   * Proporciona información necesaria para la paginación y además activa la animación de carga
+   * de las cartas de productos.
+   * @author Jacinto Acosta.
+   * @params { object } productsData
+   * @date 23/02/2021
+   * @memberof SearchResultsComponent
+   */
+  fetchProductsData(productsData: any) {
+    if (this.productCards) {
+      this.productCards.toggleShimmer();
     }
+
+    this.totalProducts = productsData.total;
+    this.itemsPerPage = productsData.per_page;
+
+    let productsRawData = productsData.data;
+    this.addProductsDataToCards(productsRawData);
   }
 
-  addProductsData(productsRawData: any) {
-    console.log('Products raw data:')
-    console.log(productsRawData.length)
+  addProductsDataToCards(productsRawData: any) {
+    console.log('Products raw data:');
+    console.log(productsRawData.length);
     if (productsRawData.length > 0) {
       this.productCards.products = productsRawData.map((product) => {
-        let images = []
+        let images = [];
 
         if (product.sync_bank) {
           if (product.sync_bank.length === 0) {
             images = product.images.map((image) => {
-              return image.src
-            })
+              return image.src;
+            });
           } else {
             images = product.sync_bank.map((syncBank) => {
               return syncBank.images[0].src_size.xl
                 ? syncBank.images[0].src_size.xl
-                : ''
-            })
+                : '';
+            });
           }
         } else {
           images = product.images.map((image) => {
-            return image.src
-          })
+            return image.src;
+          });
         }
 
         return {
@@ -232,19 +260,19 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
           id: product.id ? product.id : -1,
           idStore: product.store_id ? product.store_id : -1,
           isFavorite: product.isFavorite ? product.isFavorite : false,
-        }
-      })
+        };
+      });
 
-      this.productCards.toggleShimmer(false)
+      this.productCards.toggleShimmer(false);
     } else {
       this.toastRef.open('No hay productos que coincidan con la búsqueda.', {
         color: '#ffffff',
         background: '#900909c2',
-      })
+      });
     }
   }
 
   setNewTitle(newTitle: string) {
-    this.titleService.setTitle(newTitle)
+    this.titleService.setTitle(newTitle);
   }
 }
