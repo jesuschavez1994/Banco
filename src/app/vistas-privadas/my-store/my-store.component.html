@@ -5,7 +5,7 @@
   [storeAct]="storeLog"
 ></app-public-navbar>
 <main class="page">
-  <ng-container *ngIf="!hasRoute('/my-store/contact')">
+  <ng-container>
     <app-sidebar-list
       [isExpanded]="expandSidebar"
       (sidebarExpand)="toogleSidebar($event)"
