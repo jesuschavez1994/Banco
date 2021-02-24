@@ -7,6 +7,7 @@ import {
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface';
 import { ActivatedRoute, ParamMap, Router, Params } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { Option } from '@interfaces/components-options/sidebar-list.options.interface';
 
 import { ProductsCardsComponent } from '@shared/products-cards/products-cards.component';
 import { ProductDetailComponent } from '@shared/product-detail/product-detail.component';
@@ -30,7 +31,8 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
 
   // Sidebar related parameters
   expandSidebar = true;
-  sidebarFilters: Filter[] = [
+  sidebarFilters: Filter[] = [];
+  /*   sidebarFilters: Filter[] = [
     {
       filterId: 1,
       title: 'categorías',
@@ -114,7 +116,57 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
         },
       ],
     },
-  ];
+  ]; */
+
+  categoryFilter = {
+    filterId: 1,
+    title: 'categorías',
+    type: 'single',
+    paramName: 'categoria',
+    options: Option,
+  };
+
+  subCategoryFilter = {
+    filterId: 2,
+    title: 'sub categorías',
+    type: 'multiple',
+    paramName: 'sub-categorias',
+    parentFilterId: 1,
+    options: Option,
+  };
+
+  priceFilter: Filter = {
+    title: 'Precios',
+    type: 'single', // Determinamos que solo una opción puede ser seleccionada
+    paramName: 'precios',
+    options: [
+      {
+        name: '$0 - $10,000',
+        value: [0, 10000],
+        totalFounds: 200,
+      },
+      {
+        name: '$10,000 - $20,000',
+        value: [10000, 20000],
+        totalFounds: 200,
+      },
+      {
+        name: '$20,000 - $30,000',
+        value: [20000, 30000],
+        totalFounds: 200,
+      },
+      {
+        name: '$30,000 - $40,000',
+        value: [30000, 40000],
+        totalFounds: 200,
+      },
+      {
+        name: '$40,000 - $50,000',
+        value: [40000, 50000],
+        totalFounds: 200,
+      },
+    ],
+  };
 
   // Product's cards related parameters
   totalProducts: number;
