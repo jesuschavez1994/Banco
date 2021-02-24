@@ -6,38 +6,38 @@ import {
   Pipe,
   OnChanges,
   SimpleChanges,
-} from '@angular/core'
-import { BannerOptions } from '@interfaces/components-options/banner.options.interface'
-import { ProductService } from '@services/product/product.service'
-import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface'
-import { ActivatedRoute, ParamMap, Router, Params } from '@angular/router'
-import { ProductsCardsComponent } from '@shared/products-cards/products-cards.component'
-import { ProductDetailComponent } from '@shared/product-detail/product-detail.component'
-import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component'
-import { StoreService } from '@services/store/store.service'
+} from '@angular/core';
+import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
+import { ProductService } from '@services/product/product.service';
+import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface';
+import { ActivatedRoute, ParamMap, Router, Params } from '@angular/router';
+import { ProductsCardsComponent } from '@shared/products-cards/products-cards.component';
+import { ProductDetailComponent } from '@shared/product-detail/product-detail.component';
+import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component';
+import { StoreService } from '@services/store/store.service';
 import {
   AnchorsMenu,
   Filter,
   Profile,
-} from '@interfaces/components-options/sidebar-list.options.interface'
-import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service'
-import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface'
-import { StoreResponse } from '@interfaces/store.interface'
-import { FilterOption } from '@interfaces/components-options/search-bar.options.interface'
-import { combineLatest } from 'rxjs'
-import { map } from 'rxjs/operators'
-import { Utils } from '../../utils/utils'
-import { PaymentProcessService } from '@services/payment-process/payment-process.service'
-import { DropdownOption } from '@interfaces/components-options/dropdown.options.interface'
-import { DropdownIconComponent } from '../../shared/dropdown-icon/dropdown-icon.component'
-import { ToastComponent } from '../../modals/toast/toast.component'
-import { HomeServiceService } from '../services/home-service.service'
-import { ProductModel } from '@app/models/product.model'
-import { Title } from '@angular/platform-browser'
+} from '@interfaces/components-options/sidebar-list.options.interface';
+import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service';
+import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
+import { StoreResponse } from '@interfaces/store.interface';
+import { FilterOption } from '@interfaces/components-options/search-bar.options.interface';
+import { combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Utils } from '../../utils/utils';
+import { PaymentProcessService } from '@services/payment-process/payment-process.service';
+import { DropdownOption } from '@interfaces/components-options/dropdown.options.interface';
+import { DropdownIconComponent } from '../../shared/dropdown-icon/dropdown-icon.component';
+import { ToastComponent } from '../../modals/toast/toast.component';
+import { HomeServiceService } from '../services/home-service.service';
+import { ProductModel } from '@app/models/product.model';
+import { Title } from '@angular/platform-browser';
 import {
   Option,
   SidebarSections,
-} from '../../interfaces/components-options/sidebar-list.options.interface'
+} from '../../interfaces/components-options/sidebar-list.options.interface';
 
 @Component({
   selector: 'app-business-detail',
@@ -45,52 +45,52 @@ import {
   styleUrls: ['./business-detail.component.scss'],
 })
 export class BusinessDetailComponent implements OnInit, AfterViewInit {
-  readonly pageName = 'business-detail'
+  readonly pageName = 'business-detail';
 
   // Components Controllers
-  @ViewChild('productCards') productCards: ProductsCardsComponent
-  @ViewChild('productDetail') productDetail: ProductDetailComponent
-  @ViewChild('sidebarList') sidebarList: SidebarListComponent
-  @ViewChild('toastRef') toastRef: ToastComponent
+  @ViewChild('productCards') productCards: ProductsCardsComponent;
+  @ViewChild('productDetail') productDetail: ProductDetailComponent;
+  @ViewChild('sidebarList') sidebarList: SidebarListComponent;
+  @ViewChild('toastRef') toastRef: ToastComponent;
   // @ViewChild('dropdownIcon') dropdownIcon: DropdownIconComponent;
 
   // Components Inputs
-  breadcrumb: BreadcrumbOptions[]
-  imgsBanners: BannerOptions
+  breadcrumb: BreadcrumbOptions[];
+  imgsBanners: BannerOptions;
 
-  userLog: boolean
-  storeLog: boolean | string
+  userLog: boolean;
+  storeLog: boolean | string;
 
   // sidebar-list
-  expandSidebar = true
-  anchorsMenu: AnchorsMenu[] = []
-  profile: Profile
-  sidebarFilters: Filter[] = []
-  sidebarSections: SidebarSections
+  expandSidebar = true;
+  anchorsMenu: AnchorsMenu[] = [];
+  profile: Profile;
+  sidebarFilters: Filter[] = [];
+  sidebarSections: SidebarSections;
 
   // Products-cards
-  showProducts = false
-  totalProducts: number
-  itemsPerPage = 16
-  showShimmerProductsCards = true
-  wasFirstLoadedProducts = false
+  showProducts = false;
+  totalProducts: number;
+  itemsPerPage = 16;
+  showShimmerProductsCards = true;
+  wasFirstLoadedProducts = false;
 
   // SearchBar:
-  preloadedValueSearch = ''
+  preloadedValueSearch = '';
   searchBarFilter: FilterOption[] = [
     { label: 'filtrar por', value: 0 },
     { label: 'producto', value: 1 },
     { label: 'Empresa', value: 'hola' },
-  ]
+  ];
 
   // navbar
-  menuOptionsShopping: DropdownOption[] = []
+  menuOptionsShopping: DropdownOption[] = [];
 
   // Variables
-  storeData: StoreResponse
-  wasChangedStoreData = true
-  queryParam: ParamMap
-  wasChangedQueryParam = true
+  storeData: StoreResponse;
+  wasChangedStoreData = true;
+  queryParam: ParamMap;
+  wasChangedQueryParam = true;
 
   // Toast
   // dataToast: any = '';
@@ -110,13 +110,13 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.userLog = this.homeService.islog()
-    this.storeLog = this.homeService.storeActive()
-    this.setSidebarSections()
+    this.userLog = this.homeService.islog();
+    this.storeLog = this.homeService.storeActive();
+    this.setSidebarSections();
   }
 
   ngAfterViewInit(): void {
-    this.loadDataByParams()
+    this.loadDataByParams();
   }
 
   /**
@@ -133,17 +133,17 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
           return {
             params,
             queryParam,
-          }
+          };
         })
       )
       .subscribe((data) => {
-        const params = data.params
-        const queryParam = data.queryParam
+        const params = data.params;
+        const queryParam = data.queryParam;
 
         if (params.has('show') && params.get('show') === 'products') {
-          this.showProducts = true
+          this.showProducts = true;
         } else {
-          this.showProducts = false
+          this.showProducts = false;
         }
 
         // Para detectar si los valores de queryParam han cambiado o no
@@ -153,27 +153,27 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         if (this.queryParam) {
           if (this.queryParam !== queryParam) {
-            this.wasChangedQueryParam = true
-            this.queryParam = queryParam
+            this.wasChangedQueryParam = true;
+            this.queryParam = queryParam;
           } else {
-            this.wasChangedQueryParam = false
+            this.wasChangedQueryParam = false;
           }
         } else {
-          this.queryParam = queryParam // guardamos de forma global los datos de la tienda
+          this.queryParam = queryParam; // guardamos de forma global los datos de la tienda
         }
 
-        this.loadDataStore(params, queryParam)
+        this.loadDataStore(params, queryParam);
 
-        this.loadProductDetail(params)
+        this.loadProductDetail(params);
 
-        this.preloadValueSearch(queryParam)
-      })
+        this.preloadValueSearch(queryParam);
+      });
   }
 
   // Store
   public loadDataStore(params, queryParam: ParamMap) {
     if (params.has('idStore')) {
-      const idStore = parseInt(params.get('idStore'))
+      const idStore = parseInt(params.get('idStore'));
 
       this.storeService.getStoreById(idStore).subscribe((storeResp) => {
         // Gestionamos el valor de wasChangedStoreData
@@ -185,30 +185,30 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
           // console.log(this.storeData.id);
           // console.log(storeResp.id);
           if (this.storeData.id !== storeResp.id) {
-            this.wasChangedStoreData = true
-            this.storeData = storeResp
+            this.wasChangedStoreData = true;
+            this.storeData = storeResp;
           } else {
-            this.wasChangedStoreData = false
+            this.wasChangedStoreData = false;
           }
         } else {
-          this.storeData = storeResp // guardamos de forma global los datos de la tienda
+          this.storeData = storeResp; // guardamos de forma global los datos de la tienda
           // console.log('this.storeData undefined');
         }
 
         if (storeResp.banner_image.length > 0) {
-          const storeBanners = storeResp.banner_image
+          const storeBanners = storeResp.banner_image;
 
-          const sizes = Object.keys(storeBanners[0].src_size)
+          const sizes = Object.keys(storeBanners[0].src_size);
 
           if (sizes.length > 1) {
             this.imgsBanners = {
               m: storeBanners[0].src_size.xl,
               s: storeBanners[0].src_size.s,
-            }
+            };
           } else if (sizes.length === 1) {
             this.imgsBanners = {
               m: storeBanners[0].src_size.xl,
-            }
+            };
           }
         }
 
@@ -216,26 +216,26 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         // cuando la tienda sigue siendo la misma.
         // solo permite actualizar los datos cuando la tienda es cambiada
         if (this.wasChangedStoreData) {
-          this.setSidebarOptions(storeResp, queryParam)
-          this.setBreadcrumbOptions(storeResp)
+          this.setSidebarOptions(storeResp, queryParam);
+          this.setBreadcrumbOptions(storeResp);
 
           if (this.wasFirstLoadedProducts) {
-            this.loadProductsCards(params, queryParam)
+            this.loadProductsCards(params, queryParam);
           } else {
-            this.loadProductsCards(params, queryParam)
-            this.wasFirstLoadedProducts = true
+            this.loadProductsCards(params, queryParam);
+            this.wasFirstLoadedProducts = true;
           }
         } else {
           if (this.wasFirstLoadedProducts) {
             if (this.wasChangedQueryParam) {
-              this.loadProductsCards(params, queryParam)
+              this.loadProductsCards(params, queryParam);
             }
           } else {
-            this.loadProductsCards(params, queryParam)
-            this.wasFirstLoadedProducts = true
+            this.loadProductsCards(params, queryParam);
+            this.wasFirstLoadedProducts = true;
           }
         }
-      })
+      });
     }
   }
 
@@ -256,7 +256,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         product.idStore,
         'products',
         product.id,
-      ])
+      ]);
     }
   }
 
@@ -275,8 +275,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       params.has('idStore') &&
       params.has('idProduct')
     ) {
-      const idStore = parseInt(params.get('idStore'))
-      const idProduct = parseInt(params.get('idProduct'))
+      const idStore = parseInt(params.get('idStore'));
+      const idProduct = parseInt(params.get('idProduct'));
 
       this.productService.getProductByStore(idStore, idProduct).subscribe(
         (product) => {
@@ -284,19 +284,19 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
           if (product) {
             const productFormatead = this.productModel.productsCardsComponent.formatProductResp(
               product
-            )
-            this.productDetail.selectedProduct = productFormatead[0] // el método devuelve un array así que obtengo el primer elemento
+            );
+            this.productDetail.selectedProduct = productFormatead[0]; // el método devuelve un array así que obtengo el primer elemento
 
-            this.setTitle(product.name + '' + ' | Founduss ')
-            this.scrollToElement(document.querySelector('#profile-name'))
+            this.setTitle(product.name + '' + ' | Founduss ');
+            this.scrollToElement(document.querySelector('#profile-name'));
           } else {
-            this.errorLoadProductDetail()
+            this.errorLoadProductDetail();
           }
         },
         (error) => {
-          this.errorLoadProductDetail()
+          this.errorLoadProductDetail();
         }
-      )
+      );
     }
   }
 
@@ -304,11 +304,11 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     this.toastRef.open('El producto a detallar no existe en la tienda', {
       color: '#ffffff',
       background: '#900909c2',
-    })
+    });
 
     if (this.productDetail) {
       if (this.productDetail.selectedProduct) {
-        this.productDetail.selectedProduct = null
+        this.productDetail.selectedProduct = null;
       }
     }
   }
@@ -316,58 +316,58 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   public loadProductsCards(params: ParamMap, queryParams: ParamMap) {
     if (params.has('idStore')) {
       // tslint:disable-next-line: radix
-      const idStore = parseInt(params.get('idStore'))
+      const idStore = parseInt(params.get('idStore'));
       // tslint:disable-next-line: radix
       const page = queryParams.has('page')
         ? parseInt(queryParams.get('page'))
-        : 1
+        : 1;
 
-      let filter
-      filter = {}
+      let filter;
+      filter = {};
 
-      console.log('queryParams Key: ', queryParams.keys)
+      console.log('queryParams Key: ', queryParams.keys);
 
-      const keysQueryParams = queryParams.keys
+      const keysQueryParams = queryParams.keys;
 
       if (keysQueryParams.length > 0) {
-        let queryParamsAllowed
-        queryParamsAllowed = {}
+        let queryParamsAllowed;
+        queryParamsAllowed = {};
 
         keysQueryParams.forEach((key) => {
           switch (key) {
             case 'name':
-              queryParamsAllowed.name = queryParams.get('name')
+              queryParamsAllowed.name = queryParams.get('name');
               // name: 'l',
-              break
+              break;
 
             case 'marcas':
               queryParamsAllowed.marks = this.utils.stringToArray(
                 queryParams.get('marcas')
-              )
+              );
               // marks: ['generica', 'ALBENZA', 'XANAX', 'gillete'],
-              break
+              break;
 
             case 'categoria':
               queryParamsAllowed.categories = this.utils.stringToArray(
                 queryParams.get('categoria')
-              )
+              );
               // categories: ['Cosmeticos', 'infantil'],
-              break
+              break;
 
             case 'sub-categorias':
               queryParamsAllowed.subcategories = this.utils.stringToArray(
                 queryParams.get('sub-categorias')
-              )
+              );
               // subcategories: ['Cutis', 'Analgesicos'],
 
-              break
+              break;
 
             case 'fabricantes':
               queryParamsAllowed.factories = this.utils.stringToArray(
                 queryParams.get('fabricantes')
-              )
+              );
               // factories: ['gerber', 'polar'],
-              break
+              break;
 
             case 'precios':
               // console.log('queryParams.get(precios)');
@@ -375,109 +375,109 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
               queryParamsAllowed.price = this.utils.stringToArray(
                 queryParams.get('precios'),
                 true
-              )
+              );
               // queryParams.get('price').split(',');
               // price: [1, 284],
-              break
+              break;
 
             case 'delivery':
               queryParamsAllowed.delivery =
-                queryParams.get('delivery') == 'si' ? true : false
+                queryParams.get('delivery') == 'si' ? true : false;
               // delivery: true,
-              break
+              break;
 
             case 'recipes':
               queryParamsAllowed.recipes = this.utils.stringToArray(
                 queryParams.get('recipes')
-              )
+              );
               // recipes: ['morado', 'polar']
-              break
+              break;
           }
-        })
+        });
 
-        filter = queryParamsAllowed
+        filter = queryParamsAllowed;
 
-        console.log('queryParamsAllowed: ', queryParamsAllowed)
+        console.log('queryParamsAllowed: ', queryParamsAllowed);
       }
 
       // this.showShimmerProductsCards = true;
 
       if (this.productCards) {
-        this.productCards.toggleShimmer()
+        this.productCards.toggleShimmer();
       }
 
       this.productService.getProductsByStore(idStore, page, filter).subscribe(
         (resp) => {
           // console.log('getProductsByStore');
           // console.log(resp.data);
-          const products = resp.data
-          this.totalProducts = resp.total
-          this.itemsPerPage = resp.per_page
+          const products = resp.data;
+          this.totalProducts = resp.total;
+          this.itemsPerPage = resp.per_page;
 
           if (products.length > 0) {
             // Formateamos la respuesta del back y retornamos el formato correcto para el componente
             this.productCards.products = this.productModel.productsCardsComponent.formatProductResp(
               products
-            )
+            );
 
-            this.setTitle(`${this.storeData.name} | Founduss `)
-            console.log('products loaded: ', this.productCards.products)
+            this.setTitle(`${this.storeData.name} | Founduss `);
+            console.log('products loaded: ', this.productCards.products);
 
-            this.productCards.toggleShimmer(false)
+            this.productCards.toggleShimmer(false);
           } else {
             this.toastRef.open('Tienda sin productos disponibles', {
               color: '#ffffff',
               background: '#900909c2',
-            })
+            });
           }
         },
         (error) => {
           this.toastRef.open(
             'Error al cargar los productos, Recargue la página',
             { color: '#ffffff', background: '#900909c2' }
-          )
-          console.log('error al cargar productos')
-          console.log(error)
+          );
+          console.log('error al cargar productos');
+          console.log(error);
         }
-      )
+      );
     }
   }
 
   public addProductToCart(event) {
-    const idProduct = event.product.id
-    const quantity = event.quantity
+    const idProduct = event.product.id;
+    const quantity = event.quantity;
 
-    this.productDetail.disableButtonCart(true)
+    this.productDetail.disableButtonCart(true);
 
     this.paymentProcessService.addProductToCart(idProduct, quantity).subscribe(
       (resp) => {
         if (resp.success) {
-          const products = resp.data
+          const products = resp.data;
 
           this.menuOptionsShopping = this.dropdownIconComp.loadOptionsWithProductsCartResp(
             products
-          )
+          );
 
-          this.toastRef.open('Producto agregado al carrito')
+          this.toastRef.open('Producto agregado al carrito');
 
-          this.productDetail.disableButtonCart()
+          this.productDetail.disableButtonCart();
         } else {
           this.toastRef.open('Producto no agregado al carrito', {
             color: '#ffffff',
             background: '#900909c2',
-          })
+          });
 
-          this.productDetail.disableButtonCart()
+          this.productDetail.disableButtonCart();
         }
       },
       (error) => {
         this.toastRef.open('Producto no agregado al carrito', {
           color: '#ffffff',
           background: '#900909c2',
-        })
-        this.productDetail.disableButtonCart()
+        });
+        this.productDetail.disableButtonCart();
       }
-    )
+    );
   }
 
   // Esto se puede declarar en el componente e invocar aquí a través del ViewChild
@@ -486,28 +486,28 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       relativeTo: this.route,
       queryParams: { page },
       queryParamsHandling: 'merge',
-    })
+    });
   }
 
   // Search-bar
   public search(ToSearch) {
-    console.log(ToSearch.value)
+    console.log(ToSearch.value);
 
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: ToSearch.value !== '' ? { name: ToSearch.value } : {},
-    })
+    });
   }
 
   public preloadValueSearch(queryParams: ParamMap) {
     this.preloadedValueSearch = queryParams.has('name')
       ? queryParams.get('name')
-      : ''
+      : '';
   }
 
   // Sidebar-list
   public setSidebarOptions(storeResp: StoreResponse, queryParam: ParamMap) {
-    const idStore = storeResp.id
+    const idStore = storeResp.id;
 
     this.anchorsMenu = [
       {
@@ -520,27 +520,27 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         anchorLink: `/business-detail/${idStore}`,
         wordToMatch: `products`,
       },
-    ]
-    this._sidebarListService.setAnchors(this.anchorsMenu)
+    ];
+    this._sidebarListService.setAnchors(this.anchorsMenu);
 
-    let contactStore
+    let contactStore;
     contactStore = {
       // la base de datos no tiene el dato
       url: '',
       name: 'sin dato de contacto',
-    }
+    };
 
-    const mainContactSocialKey = ['facebook', 'instagram', 'twitter']
-    const mainContactKey = ['email_1', 'email_2', 'phone_1', 'phone_2']
+    const mainContactSocialKey = ['facebook', 'instagram', 'twitter'];
+    const mainContactKey = ['email_1', 'email_2', 'phone_1', 'phone_2'];
 
     // buscamos entre las posibles propiedades alguna propiedad la cual no tenga null y en el orden de los elementos
     const isSomeContactSocial = mainContactSocialKey.find((contactKey) => {
-      return storeResp.social[contactKey]
-    })
+      return storeResp.social[contactKey];
+    });
 
     const isSomeContact = mainContactKey.find((contactKey) => {
-      return storeResp.contact[contactKey]
-    })
+      return storeResp.contact[contactKey];
+    });
 
     if (isSomeContactSocial) {
       // si encuentra algún dato de contacto de redes sociales ese se mostrará
@@ -548,14 +548,14 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         // la base de datos no tiene el dato
         url: isSomeContactSocial,
         name: `@${storeResp.name}`, // coloco el nombre porque el back no devuelve el nombre de la cuenta de instagram
-      }
+      };
     } else if (isSomeContact) {
       // sino mostrara algún dato de contacto común y si ninguna condición se cumple, sera ''
       contactStore = contactStore = {
         // la base de datos no tiene el dato
         url: '',
         name: isSomeContact,
-      }
+      };
     }
 
     this.profile = {
@@ -563,24 +563,24 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       contact: contactStore,
       img: 'assets/img/no-image-banner.jpg', // la base de datos no tiene el dato
       isVerified: storeResp.certification == 'true' ? true : false,
-    }
+    };
 
     // Obtenemos las categorías de los productos vinculados a una tienda
     this.storeService.getCategoriesProducts(idStore).subscribe((resp) => {
-      let sidebarListFilters: Filter[]
-      sidebarListFilters = []
+      let sidebarListFilters: Filter[];
+      sidebarListFilters = [];
 
-      const respKeys = Object.keys(resp)
+      const respKeys = Object.keys(resp);
 
       const categoriesResp = respKeys.map((respKey) => {
-        return resp[respKey]
-      })
+        return resp[respKey];
+      });
 
-      let categoryOptions: Option[]
-      let subCategoryOptions: Option[]
+      let categoryOptions: Option[];
+      let subCategoryOptions: Option[];
 
-      categoryOptions = []
-      subCategoryOptions = []
+      categoryOptions = [];
+      subCategoryOptions = [];
 
       // Llenamos las opciones de categoria y las opciones de sub-categorías, todas vinculadas mediante su id
       categoriesResp.forEach((categoryResp) => {
@@ -588,7 +588,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
           optionId: categoryResp.id,
           name: categoryResp.name,
           totalFounds: 200,
-        })
+        });
 
         categoryResp.subcategories.forEach((subcategoryResp) => {
           subCategoryOptions.push({
@@ -596,9 +596,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             parentOptionId: subcategoryResp.category_id,
             name: subcategoryResp.name,
             totalFounds: 200,
-          })
-        })
-      })
+          });
+        });
+      });
 
       const categoryFilter = {
         filterId: 1,
@@ -606,7 +606,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         type: 'single',
         paramName: 'categoria',
         options: categoryOptions,
-      }
+      };
 
       const subCategoryFilter = {
         filterId: 2,
@@ -615,9 +615,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         paramName: 'sub-categorias',
         parentFilterId: 1,
         options: subCategoryOptions,
-      }
+      };
 
-      const priceFilter = {
+      const priceFilter: Filter = {
         title: 'Precios',
         type: 'single', // Determinamos que solo una opción puede ser seleccionada
         paramName: 'precios',
@@ -648,27 +648,27 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             totalFounds: 200,
           },
         ],
-      }
+      };
 
       // Agregamos todos los filtros
-      sidebarListFilters.push(categoryFilter, subCategoryFilter, priceFilter)
+      sidebarListFilters.push(categoryFilter, subCategoryFilter, priceFilter);
 
       // retornamos los filters con el formato correcto para el component
-      this.sidebarFilters = this.sidebarList.setFilters(sidebarListFilters)
+      this.sidebarFilters = this.sidebarList.setFilters(sidebarListFilters);
 
-      this.sidebarList.loadOptionsFilter(queryParam) // seleccionamos las opciones filtradas por url
-    })
+      this.sidebarList.loadOptionsFilter(queryParam); // seleccionamos las opciones filtradas por url
+    });
 
-    this.sidebarList.loadOptionsFilter(queryParam) // seleccionamos las opciones filtradas por url
+    this.sidebarList.loadOptionsFilter(queryParam); // seleccionamos las opciones filtradas por url
   }
 
   // Expand or contract sidebar-list on responsive mode
   public toogleSidebar(event) {
-    this.expandSidebar = event
+    this.expandSidebar = event;
   }
 
   public setBreadcrumbOptions(storeResp: StoreResponse) {
-    const idStore = storeResp.id
+    const idStore = storeResp.id;
 
     this.breadcrumb = [
       {
@@ -679,12 +679,12 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         title: 'farmacias',
         routerLink: [`/farmacias`],
       },
-    ]
+    ];
 
     this.breadcrumb[2] = {
       title: `${storeResp.name}`,
       routerLink: [`/business-detail/${idStore}`],
-    }
+    };
   }
 
   public scrollToElement(element) {
@@ -693,12 +693,12 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         behavior: 'smooth',
         block: 'start',
         inline: 'nearest',
-      })
+      });
     }
   }
 
   public setTitle(newTitle: string) {
-    this.titleService.setTitle(newTitle)
+    this.titleService.setTitle(newTitle);
   }
 
   private setSidebarSections() {
@@ -706,8 +706,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       bussinessProfile: true,
       anchorOptions: true,
       filters: true,
-    }
+    };
 
-    this._sidebarListService.setRequiredSections(this.sidebarSections)
+    this._sidebarListService.setRequiredSections(this.sidebarSections);
   }
 }

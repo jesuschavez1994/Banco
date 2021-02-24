@@ -1,6 +1,6 @@
 /* ---------------- Resets fot global stylings -------------- */
 * {
-  font-family: "Montserrat", "Segoe UI", sans-serif;
+  font-family: 'Montserrat', 'Segoe UI', sans-serif;
 }
 
 /* ------------ Main section stylings ---------------- */
@@ -10,7 +10,7 @@
 }
 
 .title > h2 {
-  font-family: "Montserrat", "Segoe UI", sans-serif;
+  font-family: 'Montserrat', 'Segoe UI', sans-serif;
 }
 
 .main-area p {
@@ -32,8 +32,8 @@
   grid-template-columns: auto;
   grid-template-rows: 50px auto;
   grid-template-areas:
-    "route"
-    "content";
+    'route'
+    'content';
   scroll-behavior: smooth;
 }
 

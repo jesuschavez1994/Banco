@@ -16,12 +16,12 @@ const routes: Routes = [
     children: [
       {
         path: 'exportar-lista-excel',
-        data: { title: "Exportar Excel | Founduss" },
+        data: { title: 'Stock de productos | Founduss' },
         component: ExportarListaExcelComponent,
       },
       {
         path: 'suggested-products',
-        data: { title: "Productos sugeridos | Founduss" },
+        data: { title: 'Productos sugeridos | Founduss' },
         component: SuggestedProductsComponent,
       },
       {
@@ -30,12 +30,12 @@ const routes: Routes = [
       },
       {
         path: 'synchronized-products',
-        data: { title: "Sincronizaciones | Founduss" },
+        data: { title: 'Sincronizaciones | Founduss' },
         component: SynchronizedProductsComponent,
       },
       {
         path: 'bank-product',
-        data: { title: "Banco de productos | Founduss" },
+        data: { title: 'Banco de productos | Founduss' },
         component: BankProductComponent,
       },
     ],

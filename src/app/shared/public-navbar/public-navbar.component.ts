@@ -40,8 +40,6 @@ export class PublicNavbarComponent implements OnInit, AfterViewInit {
   @Input() menuOptions: DropdownOption[] = []
   @Input() menuOptionsFavorite: DropdownOption[] = []
 
-  preloadedSearchValue = ''
-
   constructor(
     public homeService: HomeServiceService,
     public _searchService: SearchService,
@@ -54,33 +52,14 @@ export class PublicNavbarComponent implements OnInit, AfterViewInit {
     this.storeAct = this.homeService.storeActive()
   }
 
-  ngAfterViewInit(): void {
-    this.route.paramMap.subscribe((queryParams) =>
-      this.preloadSearchValue(queryParams)
-    )
-  }
+  ngAfterViewInit(): void {}
 
   // Handlers for events that happen in the component ----------------------
   handleSearch(searchTerm: string) {
-    let globalSearchPayload = {
-      name: searchTerm,
-    }
-
-    this._searchService
-      .globalProductSearch(globalSearchPayload)
-      .subscribe((productsData) => {
-        console.log('Global product search data: ')
-        console.log(productsData)
-
-        this.router.navigate(['search-results'], {
-          queryParams: searchTerm !== '' ? { name: searchTerm } : {},
-        })
+    if (searchTerm !== '') {
+      this.router.navigate(['search-results'], {
+        queryParams: searchTerm !== '' ? { name: searchTerm } : {},
       })
-  }
-
-  preloadSearchValue(queryParams: ParamMap) {
-    this.preloadedSearchValue = queryParams.has('name')
-      ? queryParams.get('name')
-      : ''
+    }
   }
 }

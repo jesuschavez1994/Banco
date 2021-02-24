@@ -37,7 +37,7 @@
     </div>
 
     <button class="btn" (click)="showMore()" *ngIf="!moreInfo" mat-button>
-      Ver más
+      <span [style.color]="planColor">Ver más</span>
     </button>
     <!-- Wrapper needed for the expand animation -->
     <div class="wrapper">
@@ -57,7 +57,7 @@
         <!-- #Price additional info -->
 
         <!-- Products sync info -->
-        <div class="sync">
+        <div class="sync founduss-plans-colors">
           <h5>Sincronización de productos</h5>
           <ul>
             <li
@@ -71,6 +71,7 @@
                 class="checkbox"
                 [value]="productBankDetails.price"
                 (change)="updatePrice(i, productBankDetails.price)"
+                [color]="materialColor"
               ></mat-checkbox>
               <p>
                 <span class="amount" [style.color]="planColor" *ngIf="i < 2"
