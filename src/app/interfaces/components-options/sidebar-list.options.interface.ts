@@ -48,6 +48,12 @@ export interface AnchorsMenu {
   salesLink?: string
 }
 
+export interface SidebarSections {
+  bussinessProfile?: boolean
+  anchorOptions?: boolean
+  filters?: boolean
+}
+
 // Filters
 export interface Filter {
   filterId?: number
