@@ -49,6 +49,7 @@
           *ngFor="let anchor of anchorsMenuData"
           [routerLink]="anchor.anchorLink"
           routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
         >
           <a>{{ anchor.anchorName }}</a>
         </li>
