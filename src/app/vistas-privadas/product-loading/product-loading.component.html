@@ -1,288 +1,328 @@
-
 <section class="display-flex mt-5">
+  <div class="container-fluid">
+    <div class="row content-center">
+      <div [ngSwitch]="sync" class="mx-3">
+        <app-breadcrumb></app-breadcrumb>
+      </div>
 
-    <div class="container-fluid">
-        <div class="row">
+      <button
+        class="btn my-3 mr-auto"
+        [routerLink]="['/my-store', 'sincronizacion', 'bank-product']"
+        mat-button
+      >
+        <i class="fas fa-caret-left"></i> Atrás
+      </button>
 
-            <div [ngSwitch]="sync">
+      <form
+        [formGroup]="forma"
+        (ngSubmit)="addProducts()"
+        novalidate="novalidate"
+        class="row width-100 pl-3"
+      >
+        <!-- ====== SUBIDA DE PRODUCTO =====-->
+        <!-- =============================== -->
+        <section class="col-12 col-md-6 mx-3 mx-md-0">
+          <div class="display-flex justify-content-center">
+            <div *ngFor="let item of [0, 1, 2, 3]; let i = index">
+              <figure
+                class="img-box{{ i }} mx-1"
+                (mouseover)="hover = true"
+                (mouseleave)="hover = false"
+              >
+                <i
+                  class="figure__icon material-icons"
+                  name="camera"
+                  *ngIf="hover"
+                >
+                  camera_alt
+                </i>
 
-                <app-breadcrumb></app-breadcrumb>
+                <input
+                  type="file"
+                  formControlName="input{{ i }}"
+                  (change)="onFileChange($event, i)"
+                  class="figure__input cursor-poniter"
+                />
 
+                <img
+                  [src]="this.File[i].image | boxDefault"
+                  style="width: 80px; height: 80px"
+                />
+              </figure>
             </div>
-                
+          </div>
 
-            <form   [formGroup]="forma"
-                    (ngSubmit)="addProducts()" 
-                    novalidate="novalidate"
-                    class="row width-100 pl-3"
-                    >
-                
-                    <!-- ====== SUBIDA DE PRODUCTO =====-->
-                    <!-- =============================== -->
-                    <section class="col-12 col-sm-12 col-md-4">
-                        <div class="display-flex justify-content-center">
-                            <div  *ngFor="let item of [0, 1, 2, 3]; let i = index">
-                                <figure class="img-box{{i}} ml-1 mr-1" 
-                                        (mouseover)="hover = true" 
-                                        (mouseleave)="hover = false"
-                                        >
-            
-                                        <i  class="figure__icon material-icons" 
-                                            name="camera"
-                                            *ngIf="hover"
-                                        >
-                                        camera_alt
-                                        </i>
-            
-                                        <input  type="file"
-                                                formControlName="input{{i}}"
-                                                (change)="onFileChange($event, i)"
-                                                class="figure__input cursor-poniter"
-                                        />
-            
-                                        <img    [src]="this.File[i].image | boxDefault " 
-                                                style="width: 80px; height: 80px" 
-                                        />
-                                </figure>
-                            </div>
-                        </div>
-            
-                        <figure (mouseover)="icon = true" 
-                                (mouseleave)="icon = false">
-            
-                                <i  class="figure material-icons" 
-                                    name="camera"
-                                    *ngIf="icon">
-                                    camera_alt
-                                </i>
-                                <input  type="file" 
-                                        (change)="onFileChange($event)"
-                                        formControlName="input4"
-                                        class="figure__input cursor-poniter" 
-                                                    
-                                />
-                                <img    class="width-95" 
-                                        src="assets/img/box.svg"
-                                        *ngIf="this.forma.value.file.length <= 1"
-                                                    
-                                        >
-                                <img    class="width-100"
-                                        [src]="this.forma.value.file"
-                                        *ngIf="this.forma.value.file.length > 1"
-                                >
-                        </figure>
-                        <!-- ====== END SUBIDA DE PRODUCTO =====-->
-                        <!-- ===================================-->
-                    </section>
+          <figure (mouseover)="icon = true" (mouseleave)="icon = false">
+            <i class="figure material-icons" name="camera" *ngIf="icon">
+              camera_alt
+            </i>
+            <input
+              type="file"
+              (change)="onFileChange($event)"
+              formControlName="input4"
+              class="figure__input cursor-poniter"
+            />
+            <img
+              class="width-95"
+              src="assets/img/box.svg"
+              *ngIf="this.forma.value.file.length <= 1"
+            />
+            <img
+              class="width-100"
+              [src]="this.forma.value.file"
+              *ngIf="this.forma.value.file.length > 1"
+            />
+          </figure>
+          <!-- ====== END SUBIDA DE PRODUCTO =====-->
+          <!-- ===================================-->
+        </section>
 
-                    <section class="col-12 col-sm-12 col-md-7">
+        <section class="col-12 col-md-6 col-lg-6 mx-3 mx-md-0">
+          <div class="form-group row">
+            <div class="col-12">
+              <label class="family-500 size-16">Nombre</label>
+              <textarea
+                class="form-control"
+                type="text"
+                placeholder="Ingresar nombre del producto"
+                formControlName="name"
+                [ngClass]="{
+                  'is-invalid':
+                    (!forma.controls['name'].valid ||
+                      forma.controls['name'].errors?.minlength) &&
+                    forma.controls['name'].touched,
+                  'is-valid': forma.controls['name'].valid
+                }"
+              ></textarea>
 
-                        <div class="form-group row">
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                <label class="family-500 size-16">Nombre</label>
-                                <textarea  class="form-control"
-                                        type="text"
-                                        placeholder="Ingresar nombre del producto"
-                                        formControlName="name"
-                                        [ngClass]="{'is-invalid':  (!forma.controls['name'].valid || forma.controls['name'].errors?.minlength)&& forma.controls['name'].touched, 'is-valid': forma.controls['name'].valid }"     
-                                ></textarea>
+              <mat-error
+                *ngIf="forma.get('name').errors?.required"
+                class="invalid-feedback"
+              >
+                Ingresa un nombre del producto
+              </mat-error>
 
-                                <mat-error  *ngIf="forma.get('name').errors?.required"  
-                                            class="invalid-feedback">
-                                            Ingresa un nombre del producto
-                                </mat-error>
+              <mat-error
+                *ngIf="forma.get('name').errors?.minlength"
+                class="invalid-feedback"
+              >
+                Por lo menos 5 caracteres
+              </mat-error>
+            </div>
+          </div>
 
-                                <mat-error    *ngIf="forma.get('name').errors?.minlength"  
-                                        class="invalid-feedback">
-                                        Por lo menos 5 caracteres
-                                </mat-error>
+          <div class="form-group row">
+            <div class="col-12">
+              <label class="family-500 size-16">Descripción</label>
+              <textarea
+                class="form-control text-area"
+                type="text"
+                placeholder="Ingresar descripción del producto"
+                formControlName="description"
+                [ngClass]="{
+                  'is-invalid':
+                    (!forma.controls['description'].valid ||
+                      forma.controls['description'].errors?.minlength) &&
+                    forma.controls['description'].touched,
+                  'is-valid': forma.controls['description'].valid
+                }"
+              ></textarea>
 
-                            </div>
-                        </div>
-    
-    
-                        <div class="form-group row">
-                            <div class="col-12 col-sm-10 col-md-12 col-lg-12 col-xl-12">
-                                <label class="family-500 size-16">Descripción</label>
-                                <textarea   class="form-control text-area" 
-                                            type="text"
-                                            placeholder="Ingresar descripción del producto" 
-                                            formControlName="description"
-                                            [ngClass]="{'is-invalid':  (!forma.controls['description'].valid || forma.controls['description'].errors?.minlength)&& forma.controls['description'].touched, 'is-valid': forma.controls['description'].valid }"     
-                                            ></textarea>
-    
-                                <mat-error  *ngIf="forma.get('description').errors?.required"  
-                                            class="invalid-feedback">
-                                            Debe indicar una descripción del producto
-                                </mat-error>
+              <mat-error
+                *ngIf="forma.get('description').errors?.required"
+                class="invalid-feedback"
+              >
+                Debe indicar una descripción del producto
+              </mat-error>
 
-                                <mat-error  *ngIf="forma.get('description').errors?.minlength"  
-                                            class="invalid-feedback">
-                                            Por lo menos 5 caracteres
-                                </mat-error>
+              <mat-error
+                *ngIf="forma.get('description').errors?.minlength"
+                class="invalid-feedback"
+              >
+                Por lo menos 5 caracteres
+              </mat-error>
+            </div>
+          </div>
 
-                            </div>
-                        </div>
-    
-                        <div class="row">
-    
-                            <div class="form-group col-md-4">
-                                <label for="Marca" class="family-500 size-14">Marca</label>
-                                <select id="Marca" 
-                                        class="form-control"
-                                        formControlName="mark">
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label for="Marca" class="family-500 size-14">Marca</label>
+              <select id="Marca" class="form-control" formControlName="mark">
+                <option class="family-300">Seleccionar</option>
+                <option [value]="item.name" *ngFor="let item of marks">
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
 
-                                        <option class="family-300">
-                                            Seleccionar
-                                        </option>
-                                        <option [value]="item.name" *ngFor="let item of marks">
-                                            {{item.name}}
-                                        </option>
+            <div class="form-group col-md-4">
+              <label for="Fabricante" class="family-500 size-14"
+                >Fabricante</label
+              >
+              <select
+                id="Fabricante"
+                class="form-control"
+                formControlName="factory"
+              >
+                <option class="family-300">Seleccionar</option>
+                <option [value]="item.name" *ngFor="let item of factories">
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
 
-                                </select>
-                            </div>
-    
-                            <div class="form-group col-md-4">
-                                <label for="Fabricante" class="family-500 size-14">Fabricante</label>
-                                <select id="Fabricante"
-                                        class="form-control"
-                                        formControlName="factory">
-                                        <option class="family-300">Seleccionar</option>
-                                        <option [value]="item.name" *ngFor="let item of factories">
-                                                {{item.name}}
-                                        </option>
-                                </select>
-                            </div>
-    
-    
-                            <div class="form-group col-md-4">
-                                <label for="Categoria" class="family-500 size-14 display-flex align-items-center">
-                                    Categoria
-                                    <i  class="material-icons add cursor-poniter plus"
-                                        title="agregar nueva categoria"
-                                        (click)="openDialog()">add
-                                    </i>
-                                </label>
-                                <select id="Categoria" 
-                                        class="form-control"
-                                        formControlName="category"
-                                        (change)="onChange($event.target.value)"
-                                        >
-                                    <option class="family-300">Seleccionar</option>
-                                    <option *ngFor="let item of category; let i = index" 
-                                            [value]="item.name"
-                                            >
-                                            {{item.name}}
-                                    </option>
-                                </select>
-                            </div>
-    
-                            
-    
-                        </div>
-    
-                        <div class="row">
+            <div class="form-group col-md-4">
+              <label
+                for="Categoria"
+                class="family-500 size-14 display-flex align-items-center"
+              >
+                Categoria
+                <i
+                  class="material-icons add cursor-poniter plus"
+                  title="agregar nueva categoria"
+                  (click)="openDialog()"
+                  >add
+                </i>
+              </label>
+              <select
+                id="Categoria"
+                class="form-control"
+                formControlName="category"
+                (change)="onChange($event.target.value)"
+              >
+                <option class="family-300">Seleccionar</option>
+                <option
+                  *ngFor="let item of category; let i = index"
+                  [value]="item.name"
+                >
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+          </div>
 
-                            <div class="form-group col-md-4">
-                                <label for="Subcategoria" class="family-500 size-14 display-flex align-items-center">
-                                    Subcategoria
-                                    <i class="material-icons add cursor-poniter plus"
-                                        (click)="openDialog()"
-                                        title="agregar nueva subcategoria">
-                                        add
-                                    </i>
-                                </label>
-                                <select id="Subcategoria" 
-                                        class="form-control"
-                                        formControlName="subcategory_id"
-                                        (change)="Subcategory($event.target.value)">
-                                        <option class="family-300">Seleccionar</option>
-                                        <option *ngFor="let item of subcategory" [value]="item.id">{{ item.name }}</option>
-                                </select>
-                            </div>
-    
-                            <div class="form-group col-md-4">
-                                <label class="family-500 size-16">Precio</label>
-                                <input  class="form-control"
-                                        type="number"
-                                        placeholder="Precio"
-                                        formControlName="price"
-                                >
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label
+                for="Subcategoria"
+                class="family-500 size-14 display-flex align-items-center"
+              >
+                Subcategoria
+                <i
+                  class="material-icons add cursor-poniter plus"
+                  (click)="openDialog()"
+                  title="agregar nueva subcategoria"
+                >
+                  add
+                </i>
+              </label>
+              <select
+                id="Subcategoria"
+                class="form-control"
+                formControlName="subcategory_id"
+                (change)="Subcategory($event.target.value)"
+              >
+                <option class="family-300">Seleccionar</option>
+                <option *ngFor="let item of subcategory" [value]="item.id">
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
 
-                                <mat-error  *ngIf="forma.get('price').errors?.required"  
-                                            class="invalid-feedback">
-                                            Debe indicar precio del producto.
-                                </mat-error>
+            <div class="form-group col-md-4">
+              <label class="family-500 size-16">Precio</label>
+              <input
+                class="form-control"
+                type="number"
+                placeholder="Precio"
+                formControlName="price"
+              />
 
-                            </div>
-    
-                            <div class="form-group col-md-4">
-                                <label class="family-500 size-16">Cantidad</label>
-                                <input  class="form-control"
-                                        formControlName="stock"
-                                        type="number"
-                                        placeholder="Cantidad"
-                                        [ngClass]="{'is-invalid':  (!forma.controls['stock'].valid || forma.controls['stock'].errors?.minlength)&& forma.controls['stock'].touched, 'is-valid': forma.controls['stock'].valid }" 
-                                >
-                                <mat-error    *ngIf="forma.get('stock').errors?.required"  
-                                        class="invalid-feedback">
-                                        Debe indicar la cantidad del producto.
-                                </mat-error>
+              <mat-error
+                *ngIf="forma.get('price').errors?.required"
+                class="invalid-feedback"
+              >
+                Debe indicar precio del producto.
+              </mat-error>
+            </div>
 
-                            </div>
-    
-                            <div class="form-group col-md-4">
-                                <label for="Receta" class="family-500 size-14">Recetas Médicas</label>
-                                <select id="Receta" 
-                                        class="form-control" 
-                                        formControlName="recipe">
-                                  <option selected class="family-300">Seleccionar</option>
-                                  <option *ngFor="let item of recipes">{{ item.name }}</option>
-                                </select>
-                            </div>
-    
-                            <div class="form-group col-md-4">
-                                <label for="Delivery" class="family-500 size-14">Delivery</label>
-                                <select id="Delivery" 
-                                        class="form-control"
-                                        formControlName="delivery"
-                                        >
-                                        <option selected class="family-300">Seleccionar</option>
-                                        <option [value]="true">Si</option>
-                                        <option [value]="false">No</option>
-                                </select>
-                            </div>
-    
-                            <div class="form-group col-md-4">
-                                <label for="Disponible" class="family-500 size-14">Disponible</label>
-                                <select id="Disponible" 
-                                        class="form-control"
-                                        formControlName="aviable"
-                                        >
-                                  <option selected class="family-300">Seleccionar</option>
-                                  <option [value]="true">Si</option>
-                                  <option [value]="false">No</option>
-                                </select>
-                            </div>
-                        </div>
+            <div class="form-group col-md-4">
+              <label class="family-500 size-16">Cantidad</label>
+              <input
+                class="form-control"
+                formControlName="stock"
+                type="number"
+                placeholder="Cantidad"
+                [ngClass]="{
+                  'is-invalid':
+                    (!forma.controls['stock'].valid ||
+                      forma.controls['stock'].errors?.minlength) &&
+                    forma.controls['stock'].touched,
+                  'is-valid': forma.controls['stock'].valid
+                }"
+              />
+              <mat-error
+                *ngIf="forma.get('stock').errors?.required"
+                class="invalid-feedback"
+              >
+                Debe indicar la cantidad del producto.
+              </mat-error>
+            </div>
 
-                    </section>
+            <div class="form-group col-md-4">
+              <label for="Receta" class="family-500 size-14"
+                >Recetas Médicas</label
+              >
+              <select id="Receta" class="form-control" formControlName="recipe">
+                <option selected class="family-300">Seleccionar</option>
+                <option *ngFor="let item of recipes">{{ item.name }}</option>
+              </select>
+            </div>
 
-                    <div class="col-md-11 display-flex justify-content-flex-end">
-                        <hr size=1 width="70%">
-                        <button class="btn btn-primary button fredoka" 
-                                type="submit"
-                                (click)="Send()"
-                                [disabled]="!forma.valid"
-                                >
-                                Guardar Cambios
-                        </button>
-                    </div>
-            </form>
+            <div class="form-group col-md-4">
+              <label for="Delivery" class="family-500 size-14">Delivery</label>
+              <select
+                id="Delivery"
+                class="form-control"
+                formControlName="delivery"
+              >
+                <option selected class="family-300">Seleccionar</option>
+                <option [value]="true">Si</option>
+                <option [value]="false">No</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="Disponible" class="family-500 size-14"
+                >Disponible</label
+              >
+              <select
+                id="Disponible"
+                class="form-control"
+                formControlName="aviable"
+              >
+                <option selected class="family-300">Seleccionar</option>
+                <option [value]="true">Si</option>
+                <option [value]="false">No</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <div class="col-md-12 display-flex justify-content-flex-end">
+          <div class="row content-center">
+            <hr size="1" class="line col-1 col-md-6" />
+            <button
+              class="btn btn-primary button fredoka col-11 col-md-4"
+              type="submit"
+              (click)="Send()"
+              [disabled]="!forma.valid"
+            >
+              Guardar Cambios
+            </button>
+          </div>
         </div>
+      </form>
     </div>
+  </div>
 </section>
-
-
-
-
