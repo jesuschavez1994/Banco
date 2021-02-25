@@ -171,9 +171,9 @@ export class DragDropZoneFileComponent implements OnInit {
   }
 
   public LoadFinally(event){
-    setTimeout(() => {
-      this.FileCompleted.emit(event);
-    }, 0);
+    // setTimeout(() => {
+    //   this.FileCompleted.emit(event);
+    // }, 0);
   }
 
 

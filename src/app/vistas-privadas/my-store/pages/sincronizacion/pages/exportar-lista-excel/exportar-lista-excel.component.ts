@@ -81,7 +81,7 @@ export class ExportarListaExcelComponent implements OnInit {
    private files: Array<FileUploadModel> = [];
 
   ngOnInit() {
-
+    console.log(this.forma);
     this.spinner();
 
     this.userId = localStorage.getItem('id'),
@@ -107,6 +107,8 @@ export class ExportarListaExcelComponent implements OnInit {
       }
     );
 
+    
+
   }
 
   spinner(): void{
@@ -126,7 +128,7 @@ export class ExportarListaExcelComponent implements OnInit {
 
   DataListExcel($event){
     this.Data = $event;
-    // console.log('DataEvent', $event);
+    console.log('DataEvent', $event);
   }
 
   exportData(tableId: string) {
@@ -158,8 +160,8 @@ export class ExportarListaExcelComponent implements OnInit {
   }
 
   FileCompleted($event){
-    this.FileCompletedLoad = $event;
-    console.log('carga completada', $event);
+    // this.FileCompletedLoad = $event;
+    // console.log('carga completada', $event);
   }
 
 
