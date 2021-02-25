@@ -1,9 +1,4 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import {
-  AnchorsMenu,
-  Filter,
-  Profile,
-} from '@interfaces/components-options/sidebar-list.options.interface';
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface';
 import { ActivatedRoute, ParamMap, Router, Params } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -15,7 +10,15 @@ import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.componen
 import { ToastComponent } from '../../modals/toast/toast.component';
 
 import { SearchService } from '@services/Search/search.service';
+import { SearchBarService } from '@shared/search-bar/services/search-bar.service';
 import { switchMap } from 'rxjs/operators';
+import {
+  Filter,
+  Profile,
+  AnchorsMenu,
+  SidebarSections,
+} from '@interfaces/components-options/sidebar-list.options.interface';
+import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service';
 
 @Component({
   selector: 'app-search-results',
@@ -172,22 +175,31 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   totalProducts: number;
   itemsPerPage = 16;
   showShimmeringCards = true;
+  // Search bar related values
+  searchValue: string;
+  sidebarSections: SidebarSections;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     public _searchService: SearchService,
-    private titleService: Title
-  ) {}
+    private titleService: Title,
+    private _searchBarService: SearchBarService,
+    private _sidebarListService: SidebarListService
+  ) {
+    _searchBarService.inputTextData$.subscribe((inputValue: string) => {
+      // This function triggers all the fecth and modeling of the data that goes
+      // on the products cards.
+      this.getQueryParamsData(inputValue);
+    });
+  }
 
   ngOnInit(): void {
     this.sidebarFilters = this.sidebarList.setFilters(this.sidebarFilters);
   }
 
   ngAfterViewInit(): void {
-    // This function triggers all the fecth and modeling of the data that goes
-    // on the products cards.
-    this.getQueryParamsData();
+    // this.getQueryParamsData();
   }
 
   // Handlers for events that happen in the component ----------------
@@ -223,7 +235,9 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
    * @date 23/02/2021
    * @memberof SearchResultsComponent
    */
-  getQueryParamsData() {
+  getQueryParamsData(searchValue: string) {
+    console.log('Values from search:');
+    console.log(searchValue);
     this.route.queryParamMap
       .pipe(
         switchMap((queryParams: ParamMap) => {
@@ -236,7 +250,7 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
           this.setNewTitle(`Buscar: ${queryParams.get('name')} | Founduss`);
 
           let globalSearchPayload = {
-            name: queryParams.has('name') ? queryParams.get('name') : '',
+            name: searchValue,
             marks: queryParams.has('marks') ? queryParams.get('marks') : '',
             subcategories: queryParams.has('subcategories')
               ? queryParams.get('subcategories')
@@ -326,5 +340,20 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
 
   setNewTitle(newTitle: string) {
     this.titleService.setTitle(newTitle);
+  }
+
+  private loadAnchorsMenuData() {
+    // Eliminamos los enlaces de la sidebar.
+    this._sidebarListService.setAnchors([]);
+  }
+
+  private setSidebarSections() {
+    this.sidebarSections = {
+      bussinessProfile: false,
+      anchorOptions: false,
+      filters: true,
+    };
+
+    this._sidebarListService.setRequiredSections(this.sidebarSections);
   }
 }
