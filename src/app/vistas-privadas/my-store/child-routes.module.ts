@@ -29,11 +29,12 @@ const childRoutes: Routes = [
   {
     path: 'sync-this-product/:id',
     component: FormBanckProductSyncComponent,
+    data: { title: 'Sincronizar producto | Founduss' },
   },
   {
     path: 'edit-product-sync/:id',
     component: EditSincronizacionComponent,
-    data: { title: 'Sincronizar producto | Founduss' },
+    data: { title: 'Editar sincronización | Founduss' },
   },
   {
     path: 'desincronizar/:id',
