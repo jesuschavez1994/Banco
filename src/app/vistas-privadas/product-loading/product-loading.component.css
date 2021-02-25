@@ -58,6 +58,16 @@ hr {
   width: 70%;
 }
 
+.content-center {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  align-self: flex-start;
+}
+
 @media (min-width: 1201px) {
   .card-columns {
     -moz-column-count: 4 !important;
@@ -88,6 +98,10 @@ hr {
     column-gap: 1.25rem;
     orphans: 1;
     widows: 1;
+  }
+
+  .line {
+    width: 50%;
   }
 }
 

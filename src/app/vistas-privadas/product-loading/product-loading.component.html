@@ -1,12 +1,12 @@
 <section class="display-flex mt-5">
   <div class="container-fluid">
-    <div class="row">
-      <div [ngSwitch]="sync">
+    <div class="row content-center">
+      <div [ngSwitch]="sync" class="mx-3">
         <app-breadcrumb></app-breadcrumb>
       </div>
 
       <button
-        class="btn my-3"
+        class="btn my-3 mr-auto"
         [routerLink]="['/my-store', 'sincronizacion', 'bank-product']"
         mat-button
       >
@@ -21,7 +21,7 @@
       >
         <!-- ====== SUBIDA DE PRODUCTO =====-->
         <!-- =============================== -->
-        <section class="col-12 col-md-5 mx-3">
+        <section class="col-12 col-md-6 mx-3 mx-md-0">
           <div class="display-flex justify-content-center">
             <div *ngFor="let item of [0, 1, 2, 3]; let i = index">
               <figure
@@ -77,7 +77,7 @@
           <!-- ===================================-->
         </section>
 
-        <section class="col-12 col-md-6 mx-3">
+        <section class="col-12 col-md-6 col-lg-6 mx-3 mx-md-0">
           <div class="form-group row">
             <div class="col-12">
               <label class="family-500 size-16">Nombre</label>
@@ -309,16 +309,18 @@
           </div>
         </section>
 
-        <div class="col-md-11 display-flex justify-content-flex-end">
-          <hr size="1" class="line" />
-          <button
-            class="btn btn-primary button fredoka"
-            type="submit"
-            (click)="Send()"
-            [disabled]="!forma.valid"
-          >
-            Guardar Cambios
-          </button>
+        <div class="col-md-12 display-flex justify-content-flex-end">
+          <div class="row content-center">
+            <hr size="1" class="line col-1 col-md-6" />
+            <button
+              class="btn btn-primary button fredoka col-11 col-md-4"
+              type="submit"
+              (click)="Send()"
+              [disabled]="!forma.valid"
+            >
+              Guardar Cambios
+            </button>
+          </div>
         </div>
       </form>
     </div>
