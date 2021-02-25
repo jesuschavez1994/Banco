@@ -30,18 +30,33 @@
             </label>
         </div>
 
-        <div *ngFor="let file of files">
+        <section *ngIf="!Hiden">
+            <div *ngFor="let file of files">
 
-            <!-- Size Files -->
-            <app-size-file [file]="file"></app-size-file>
-            
-            <!-- Progress bar-->
-            <!-- <app-progess-bar-file-excel [progress]="file?.progress"
-                                        (ProgressFinally) ="ProgressFinally($event, file?.progress)">
+                <!-- Size Files -->
+                <app-size-file 
+                    [file]="file" 
+                    #ProgressFilee
+                    (LoadFinally)="LoadFinally($event)">
+                </app-size-file>
 
-            </app-progess-bar-file-excel> -->
+            </div>
+        </section>
 
-        </div>
+        <ng-container>
+            <div class="alert alert-success mt-4" role="alert" *ngIf="SaveFile">
+                Cambios guardados exitosamente
+            </div>
+        </ng-container>
 
+        <ng-container>
+            <div *ngIf="ErrorMessage" class="mt-4">
+                <mat-error class="is-invalid">
+                    ¡Ha ocurrido un error!.
+                </mat-error>
+            </div>
+        </ng-container>
 
+        <app-spinner *ngIf="SpinnerShow"></app-spinner>
+           
     </div>
