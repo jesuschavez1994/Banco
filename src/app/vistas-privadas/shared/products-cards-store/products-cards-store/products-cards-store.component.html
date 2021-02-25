@@ -91,7 +91,7 @@
 
     <div class="products-container">
 
-      <ng-container *ngFor="let product of (products | excludeMacthes: 0 : 'stock') | paginate: { id:'pagination', itemsPerPage: itemsPerPage, currentPage: p, totalItems: totalItems}">
+      <ng-container *ngFor="let product of (products | excludeMacthes: 0 : 'stock') | paginate: { id:'pagination', itemsPerPage: itemsPerPage, currentPage: p, totalItems: totalItems}; let i = index">
 
         <article class="product" (click)="selectedProduct(product)">
 
@@ -103,9 +103,44 @@
               onerror="if (this.src != 'assets/img/Box/box.svg') this.src = 'assets/img/Box/box.svg';"
             >
 
-            <i class="fa-heart"
-              [ngClass]="{'fas': product.isFavorite,'far': !product.isFavorite}">
-            </i>
+            <div [ngSwitch]="product.sinchronized">
+              <div *ngSwitchCase="'sincronizado'">
+                <i  class="fas fa-pencil-alt" 
+                    title="Editar"
+                    (click)="Id(i)"
+                    [routerLink]="['/my-store/edit-product-sync', product.id]" 
+                >
+                </i>
+              </div>
+              <div *ngSwitchCase="'no disponible'">
+                <i  class="fas fa-pencil-alt" 
+                    title="Editar"
+                    (click)="Id(i)"
+                    [routerLink]="['/my-store/edit-product', product.id]" 
+                >
+                  
+                </i>
+              </div>
+              <div *ngSwitchCase="'no sincronizado'">
+                <i  class="fas fa-pencil-alt" 
+                    title="Editar"
+                    (click)="Id(i)"
+                    [routerLink]="['/my-store/edit-product', product.id]" 
+                >
+                </i>
+              </div>
+              <div *ngSwitchDefault>
+                <i  class="fas fa-pencil-alt" 
+                    title="Editar"
+                    (click)="Id(i)"
+                    [routerLink]="['/my-store/edit', product.id]" 
+                    >
+                </i>
+              </div>
+            </div>
+
+            <i class="fas fa-trash-alt" (click)="openDialog(i)"></i>
+            <i class="fas fa-sync-alt"></i>
 
           </div>
 

@@ -17,6 +17,12 @@ import { utf8Encode } from '@angular/compiler/src/util';
 
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
+import {
+  AnchorsMenu,
+  SidebarSections,
+} from '@interfaces/components-options/sidebar-list.options.interface';
+import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service'
+
 class Contact {
   cantidad = '';
   Nombre = '';
@@ -68,14 +74,19 @@ export class ExportarListaExcelComponent implements OnInit {
   // Open drog //
   isOpen = false;
 
+  // Sidebar related parameters
+  anchorsMenu: AnchorsMenu[] = []
+  sidebarSections: SidebarSections
+
 
   constructor(private sincronizacion: SincronizacionService,
               // tslint:disable-next-line: variable-name
               private _cd: ChangeDetectorRef,
               private route: ActivatedRoute,
               private router: Router,
-              private spinnerService: NgxSpinnerService
+              private spinnerService: NgxSpinnerService,
               // tslint:disable-next-line: variable-name
+              private _sidebarListService: SidebarListService
               ) {
 
     this.forma = new FormGroup({
@@ -114,6 +125,8 @@ export class ExportarListaExcelComponent implements OnInit {
     );
 
     
+    this.setSidebarSections()
+    this.loadAnchorsMenuData()
 
   }
 
@@ -185,6 +198,45 @@ export class ExportarListaExcelComponent implements OnInit {
   FileCompleted($event){
     // this.FileCompletedLoad = $event;
     // console.log('carga completada', $event);
+  }
+
+  private loadAnchorsMenuData() {
+    const id = localStorage.getItem('storeId')
+    this.anchorsMenu = [
+      {
+        anchorName: 'Contacto',
+        anchorLink: `/my-store/contact`,
+        wordToMatch: `products`,
+      },
+      {
+        anchorName: 'Productos',
+        anchorLink: `/my-store/product-catalogue/${id}`,
+        wordToMatch: `products`,
+      },
+      {
+        anchorName: 'Sincronización',
+        anchorLink: `/my-store/sincronizacion/exportar-lista-excel`,
+        wordToMatch: `products`,
+      },
+      {
+        anchorName: 'Ventas',
+        anchorLink: `/my-store/ventas`,
+        wordToMatch: `products`,
+      },
+    ]
+
+    // Eliminamos los enlaces de la sidebar.
+    this._sidebarListService.setAnchors(this.anchorsMenu)
+  }
+
+  private setSidebarSections() {
+    this.sidebarSections = {
+      bussinessProfile: true,
+      anchorOptions: true,
+      filters: false,
+    }
+
+    this._sidebarListService.setRequiredSections(this.sidebarSections)
   }
 
 

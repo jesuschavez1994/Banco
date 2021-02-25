@@ -29,7 +29,7 @@ export class RutStoreComponent implements OnInit {
 
     this.forma = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      rut: new FormControl('', [Validators.required, Validators.maxLength(9)]),
+      rut: new FormControl('', [Validators.required, Validators.maxLength(13)]),
     });
 
   }

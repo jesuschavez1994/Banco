@@ -14,7 +14,7 @@ export class ProductsCardsStoreComponent implements OnInit {
 
   // PARAMETROS //
   // p = 1;
-  // id: string;
+  id: number;
 
   // ENTADAS //
   // @Input() itemsPerPage = 16;
@@ -90,7 +90,8 @@ export class ProductsCardsStoreComponent implements OnInit {
 
 
   constructor(
-
+    public storeService: StoreService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -112,4 +113,39 @@ export class ProductsCardsStoreComponent implements OnInit {
     this.showShimmer = show;
   }
 
+  public Id(index){
+    // console.log(index);
+    // console.log(this.products[index].id);
+    // return this.id = this.products[index].id;
+  }
+
+  public Delete(index: number){
+    console.log(index);
+    this.storeService.DeleteProduct(
+      localStorage.getItem('id'),
+      localStorage.getItem('storeId'),
+      this.products[index].id
+    ).subscribe();
+  }
+
+ openDialog(index: number) {
+    const dialogRef = this.dialog.open(ModalDeleteProductComponent, {
+      width: '350px',
+      data: {
+        indexProductoDelete: index,
+        idProducto: this.products[index].id
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
+
+  }
+
+  
+
+
 }
+

@@ -54,12 +54,9 @@ export class StoreService extends Service{
 
   }
 
-  guardarStorage(id: string, token: string, user: Usuario){
+  guardarStorage(id: string, token: string){
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
-    localStorage.setItem('usuario', JSON.stringify(user));
-
-    this.usuario = user;
     this.token = token;
   }
 
@@ -89,15 +86,15 @@ export class StoreService extends Service{
   async crearStore(user: Usuario){
 
     const url = 'signup';
+    
 
-    await this.postQuery(url, user).subscribe( userStore => {
+    await this.postQuery(url, user).subscribe( (userStore: any) => {
 
       // Redux//
       this.respServidor = userStore;
       const storeconnect = new UserStore(this.respServidor.user);
       // End Redux//
-
-      this.guardarStorage(this.respServidor.user.id, this.respServidor.remember_token, this.respServidor);
+      this.guardarStorage(this.respServidor.user.id, this.respServidor.remember_token);
       this.router.navigate(['/rut-store']);
 
     },
@@ -137,9 +134,9 @@ export class StoreService extends Service{
 
     const url = 'signup/store';
 
-    this.postQuery(url, nameStore).subscribe( resp => {
-      window.location.href = '#/account';
-      // this.router.navigate(['/account']);
+    this.postQuery(url, nameStore).subscribe( (resp: any) => {
+      localStorage.setItem('storeId', resp.id)
+      window.location.href = '#/account/settings/store-edit';
     }, err => {
       console.log(err);
       swal({
