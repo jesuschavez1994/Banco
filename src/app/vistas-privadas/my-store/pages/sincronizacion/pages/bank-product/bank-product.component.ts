@@ -237,7 +237,7 @@ export class BankProductComponent implements OnInit {
     this.sidebarSections = {
       bussinessProfile: true,
       anchorOptions: true,
-      filters: false,
+      filters: true,
     };
 
     this._sidebarListService.setRequiredSections(this.sidebarSections);
