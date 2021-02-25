@@ -51,7 +51,7 @@ export class ExportarListaExcelComponent implements OnInit {
   userId: string;
   storeId: string;
   ProgressBarFull: number;
-  FileCompletedLoad: boolean;
+  FileCompletedLoad: number;
 
   // VARIABLES PAGINADOR //
   data = [];
@@ -118,75 +118,6 @@ export class ExportarListaExcelComponent implements OnInit {
     this.isOpen = $event;
   }
 
-  SendDocumentExcel(){}
-
-  onFileChange(evt: any){
-
-      // Aqui desciframos lo que contiene la tabla excel
-      const target: DataTransfer = (evt.target) as DataTransfer;
-      const reader: FileReader = new FileReader();
-      reader.onload = (e: any) => {
-
-        const bstr: string = e.target.result;
-        const data =  this.sincronizacion.ShowTableExcell(bstr) as any[];
-        // console.log('ARRAY', data.length);
-        const header: string[] = Object.getOwnPropertyNames(new Contact());
-        // console.log('HEADERS', header);
-        const importedData = data.slice(1, -1);
-        // console.log('slice', importedData);
-        this.importContacts = importedData.map(arr => {
-          // console.log(arr);
-          // debugger;
-          const obj = {};
-          for (let i = 0; i < header.length; i++) {
-            const k = header[i];
-            obj[k] = arr[i];
-            // debugger;
-          }
-          console.log('obj', obj);
-          console.log('Data', this.Data);
-          return  this.Data.push(obj as Contact);
-        });
-
-
-      };
-      reader.readAsBinaryString(target.files[0]);
-
-
-      // Aquí Envio el Documento Excel en base64
-      const readerImport = new FileReader();
-      // console.log(evt);
-      if (evt.target.files && evt.target.files.length) {
-        const [file] = evt.target.files;
-        readerImport.readAsDataURL(file);
-
-        readerImport.onload = (e: any) => {
-
-          const bstr: string = e.target.result;
-          console.log('EXCEL', bstr);
-          const data = this.sincronizacion.importFromFile(bstr) as any;
-          const header: string[] = Object.getOwnPropertyNames(new Contact());
-          // console.log('Data', data);
-          const importedData = data.slice(1, -1);
-          // console.log(header);
-
-          this.importContacts = importedData.map(arr => {
-            const obj = {};
-            for (let i = 0; i < header.length; i++) {
-              const k = header[i];
-              obj[k] = arr[i];
-            }
-            return obj as Contact;
-          });
-
-          this.archivo = readerImport.result;
-          // console.log('FILESSS', this.archivo);
-          // console.log('file', this.forma.value.file);
-          this._cd.markForCheck();
-        };
-      }
-
-  }
 
   ExistsFile($event){
     console.log('Exists', $event);
@@ -195,7 +126,7 @@ export class ExportarListaExcelComponent implements OnInit {
 
   DataListExcel($event){
     this.Data = $event;
-    console.log('DataEvent', $event);
+    // console.log('DataEvent', $event);
   }
 
   exportData(tableId: string) {

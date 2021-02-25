@@ -33,7 +33,11 @@
         <div *ngFor="let file of files">
 
             <!-- Size Files -->
-            <app-size-file [file]="file"></app-size-file>
+            <app-size-file 
+                [file]="file" 
+                #ProgressFilee
+                (LoadFinally)="LoadFinally($event)">
+            </app-size-file>
             
             <!-- Progress bar-->
             <!-- <app-progess-bar-file-excel [progress]="file?.progress"
