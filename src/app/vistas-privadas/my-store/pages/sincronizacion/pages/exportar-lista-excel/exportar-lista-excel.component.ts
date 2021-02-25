@@ -53,6 +53,12 @@ export class ExportarListaExcelComponent implements OnInit {
   ProgressBarFull: number;
   FileCompletedLoad: number;
 
+  // Estados del envio
+  Spinner: boolean;
+  saveFIle: boolean;
+  hiden: boolean = false;
+  ErrorMessage: boolean = false;
+
   // VARIABLES PAGINADOR //
   data = [];
   pagesActual = 1;
@@ -118,6 +124,8 @@ export class ExportarListaExcelComponent implements OnInit {
   CloseOverlay($event){
     console.log($event);
     this.isOpen = $event;
+    this.ErrorMessage = $event;
+    this.hiden = $event;
   }
 
 
@@ -137,7 +145,10 @@ export class ExportarListaExcelComponent implements OnInit {
 
   enviarExcel(){
 
-    this.spinner();
+    // this.spinner();
+    this.Spinner = true;
+    this.hiden = true;
+    this.ErrorMessage = false;
 
     const file = new DocumentExcel(
       this.archivo
@@ -151,6 +162,18 @@ export class ExportarListaExcelComponent implements OnInit {
       file).subscribe( response => {
       console.log(response);
       this.spinnerService.hide();
+      this.saveFIle = true;
+      this.Spinner = false;
+      setTimeout( ()=>
+        { 
+          this.isOpen = false
+          this.saveFIle = false;
+          this.hiden = false;
+        }, 7000
+      )
+    }, error => {
+      this.ErrorMessage = true;
+      this.Spinner = false;
     });
 
   }

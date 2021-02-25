@@ -22,6 +22,10 @@ export class DragDropZoneFileComponent implements OnInit {
 
   // Input //
   @Input() EstateisOpen: boolean;
+  @Input() SpinnerShow: boolean;
+  @Input() SaveFile: boolean;
+  @Input() Hiden: boolean;
+  @Input() ErrorMessage: boolean;
 
   // Output //
   @Output() CloseOverlay = new EventEmitter<boolean>();

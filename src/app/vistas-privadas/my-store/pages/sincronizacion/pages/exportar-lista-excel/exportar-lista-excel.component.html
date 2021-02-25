@@ -6,7 +6,7 @@ bdColor="rgba(0, 0, 0, .45)">
   <section class="container-fluid wrapper">
   
     <form [formGroup]="forma"
-          (ngSubmit)="enviarExcel()" >
+          >
 
           <section class="grid-container">
             <div class="form-group">
@@ -18,7 +18,7 @@ bdColor="rgba(0, 0, 0, .45)">
                         cdkOverlayOrigin 
                         #trigger="cdkOverlayOrigin"
                         >
-                        <span>Subir listado de excel</span>
+                        <span>Cargar listado de excel</span>
                 </button>
               </div>
 
@@ -26,7 +26,11 @@ bdColor="rgba(0, 0, 0, .45)">
                             [cdkConnectedOverlayOrigin]="trigger"
                             [cdkConnectedOverlayOpen]="isOpen">
 
-                            <app-drag-drop-zone-file  [EstateisOpen]="isOpen" 
+                            <app-drag-drop-zone-file  [EstateisOpen]="isOpen"
+                                                      [SpinnerShow]="Spinner"
+                                                      [SaveFile]="saveFIle" 
+                                                      [ErrorMessage]="ErrorMessage"
+                                                      [Hiden]="hiden"
                                                       (CloseOverlay)="CloseOverlay($event)"
                                                       (ExistsFile)="ExistsFile($event)"
                                                       (DataListExcel)="DataListExcel($event)"
@@ -62,6 +66,7 @@ bdColor="rgba(0, 0, 0, .45)">
               <div class="input-group">
                 <button type="submit" 
                         class="btn btn-primary button fredoka"
+                        (click)="enviarExcel()"
                         >
                         Cargar Lista
                 </button>
