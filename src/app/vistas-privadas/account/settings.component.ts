@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core'
-import { SidebarMenuOptions } from '@interfaces/components-options/sidebar-menu.options.interface'
-import { HomeServiceService } from '../../vistas-publicas/services/home-service.service'
+import { Component, OnInit } from '@angular/core';
+import { SidebarMenuOptions } from '@interfaces/components-options/sidebar-menu.options.interface';
+import { HomeServiceService } from '../../vistas-publicas/services/home-service.service';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  userLog = false
+  userLog = false;
 
   menuOptions: SidebarMenuOptions[] = [
     {
@@ -22,11 +22,11 @@ export class SettingsComponent implements OnInit {
       routerLink: ['/account/settings/plans/choose-plan'],
       // isActive: false,
     },
-  ]
+  ];
 
   constructor(private homeService: HomeServiceService) {}
 
   ngOnInit(): void {
-    this.userLog = this.homeService.islog()
+    this.userLog = this.homeService.islog();
   }
 }

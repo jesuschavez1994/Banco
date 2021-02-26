@@ -43,10 +43,12 @@ const childRoutes: Routes = [
   {
     path: 'edit/:id',
     component: EditProdutcComponent,
+    data: { title: 'Editar producto | Founduss' },
   },
   {
     path: 'edit-product/:id',
     component: EditProductNoDisponibleComponent,
+    data: { title: 'Agregar producto | Founduss' },
   },
   {
     path: 'sincronizacion',
