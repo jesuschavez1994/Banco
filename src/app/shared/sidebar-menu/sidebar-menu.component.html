@@ -6,17 +6,15 @@
         title="Menú"
         (click)="toggleMenu()"
       ></i>
-      <h2>configuración</h2>
+      <h2>Configuración</h2>
     </div>
 
     <ul class="items-menu">
-      <!-- [ngClass]="{ 'active': item.isActive }" -->
       <ng-container *ngFor="let item of menuOptions">
         <li
           class="item"
           [routerLink]="item.routerLink"
           routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
         >
           <i
             class="responsive--icon {{ item.iconClass }}"
