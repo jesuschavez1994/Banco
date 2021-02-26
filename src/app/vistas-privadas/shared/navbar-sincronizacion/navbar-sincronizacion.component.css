@@ -19,6 +19,6 @@ a {
   padding-left: 0px;
   display: flex;
   flex-direction: row;
-  overflow-x: auto;
+  overflow-x: scroll;
   overflow-y: hidden;
 }
