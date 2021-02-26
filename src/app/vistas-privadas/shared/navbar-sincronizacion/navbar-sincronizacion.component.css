@@ -16,6 +16,7 @@ a {
 }
 
 .navigation {
+  padding-left: 0px;
   display: flex;
   flex-direction: row;
   overflow-x: auto;
