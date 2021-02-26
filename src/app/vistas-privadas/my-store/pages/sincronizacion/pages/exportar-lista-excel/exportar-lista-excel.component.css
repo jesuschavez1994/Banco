@@ -97,6 +97,7 @@ footer {
   min-height: 80vh;
 }
 
+/* Responsive media queries */
 @media (max-width: 801px) {
   a {
     font-size: 12px;
