@@ -175,8 +175,8 @@ export class LoadProductComponent implements OnInit {
   }
 
   public loadDataStore(params, queryParam: ParamMap) {
-    if (params.has('idStore')) {
-      const idStore = parseInt(params.get('idStore'))
+    
+      const idStore = localStorage.getItem('storeId');
       console.log('IdStore', idStore)
 
       this.storeService.getStoreById(idStore).subscribe((storeResp) => {
@@ -240,13 +240,13 @@ export class LoadProductComponent implements OnInit {
           }
         }
       })
-    }
+    
   }
 
   public loadProductsCards(params: ParamMap, queryParams: ParamMap) {
-    if (params.has('idStore')) {
+
       // tslint:disable-next-line: radix
-      const idStore = parseInt(params.get('idStore'))
+      const idStore = localStorage.getItem('storeId');
       // tslint:disable-next-line: radix
       const page = queryParams.has('page')
         ? parseInt(queryParams.get('page'))
@@ -368,11 +368,11 @@ export class LoadProductComponent implements OnInit {
           console.log(error)
         }
       )
-    }
+    
   }
 
   public setSidebarOptions(storeResp: StoreResponse, queryParam: ParamMap) {
-    const idStore = storeResp.id
+    const idStore = localStorage.getItem('storeId');
 
     let contactStore
     contactStore = {
@@ -826,7 +826,7 @@ export class LoadProductComponent implements OnInit {
       },
       {
         anchorName: 'Productos',
-        anchorLink: `/my-store/product-catalogue/${id}`,
+        anchorLink: `/my-store/product-catalogue`,
         wordToMatch: `products`,
       },
       {

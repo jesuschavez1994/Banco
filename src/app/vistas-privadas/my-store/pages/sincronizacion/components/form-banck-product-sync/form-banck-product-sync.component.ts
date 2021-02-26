@@ -278,7 +278,7 @@ export class FormBanckProductSyncComponent implements OnInit {
       },
       {
         anchorName: 'Productos',
-        anchorLink: `/my-store/product-catalogue/${id}`,
+        anchorLink: `/my-store/product-catalogue`,
         wordToMatch: `products`,
       },
       {

@@ -12,6 +12,9 @@ import { switchMap } from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { NgxSpinnerService } from "ngx-spinner";
 import { URL_SERVICIOS } from '../../../config/config';
+import swal from 'sweetalert';
+import { Observable } from 'rxjs';
+import { throwError, concat, of } from 'rxjs';
 
 const URL = URL_SERVICIOS;
 
@@ -127,7 +130,7 @@ export class EditProductNoDisponibleComponent implements OnInit {
                     console.log(data);
 
                     this.valorForm = data;
-                    console.log('this.valorForm', this.valorForm);
+                    // console.log('this.valorForm', this.valorForm);
                     this.showImages = true;
                     this.showForm = true;
                     this.spinnerService.hide();
@@ -152,7 +155,7 @@ export class EditProductNoDisponibleComponent implements OnInit {
                       
                     }
 
-                    if( this.valorForm.images.length !== 0 ){
+                    if( this.valorForm.images.length !== 0 ){ // Si images.length > 0 signidfica que puedo editar la imagen del producto
                       this.LengtImgEdit = data.images;
                       /// CARGAMOS LAS IMAGENES PARA MOSTRARLAS CUANDO EL PRODUCTO YA HA SIDO EDITADO ANTERIORMENTE //
                       if( this.LengtImgEdit.length > 1){
@@ -168,6 +171,10 @@ export class EditProductNoDisponibleComponent implements OnInit {
                         }
                       }
 
+                    }
+
+                    if(this.valorForm.images.length === 0){
+                      
                     }
 
                     // SET DE FORMULARIO //
@@ -227,8 +234,8 @@ export class EditProductNoDisponibleComponent implements OnInit {
                 factory: new FormControl('Seleccionar'),
                 category: new FormControl('Seleccionar', [Validators.required]),
                 subcategory_id: new FormControl('Seleccionar', [Validators.required]),
-                delivery: new FormControl('Seleccionar'),
-                aviable: new FormControl('Seleccionar'),
+                delivery: new FormControl('Seleccionar', [Validators.required]),
+                aviable: new FormControl('Seleccionar', [Validators.required]),
                 stock: new FormControl('', [Validators.required, Validators.minLength(1)]),
                 recipe: new FormControl('Seleccionar', [Validators.required]),
                 file: new FormControl(''),
@@ -326,7 +333,7 @@ export class EditProductNoDisponibleComponent implements OnInit {
         this.forma.patchValue({
           file: reader.result
         });
-        console.log('imagen', this.forma.value.file);
+        // console.log('imagen', this.forma.value.file);
         // need to run CD since file load runs outside of zone
         this._cd.markForCheck();
         this.File.splice(index, 1, { image: this.forma.value.file, name: event.target.files[0].name, position: index + 1 });
@@ -353,6 +360,45 @@ export class EditProductNoDisponibleComponent implements OnInit {
       this.forma.value.recipe,
     );
 
+    if(this.valorForm.images.length === 0 ){
+
+      const images = new ImgLoad(this.File);
+
+
+      this.storeService.createProduct(
+        localStorage.getItem('id'),
+        localStorage.getItem('storeId'),
+        data).pipe( switchMap( ( response: DataProductDB ) => {
+          return this.storeService.ImagenProduct(localStorage.getItem('id'),
+          localStorage.getItem('storeId'),
+          response.id,
+          images).catch( err => {
+            console.log(err);
+            this.router.navigate(['/login']);
+            swal({
+              text: 'Ha ocurrido un error, verifique si todos los campos han sido rellenados',
+              icon: 'warning',
+              dangerMode: true,
+            });
+
+            return Observable.throw(err);
+          });
+        })).subscribe( (imgProduct: Image) => {
+          this.imagen.push(imgProduct[0]);
+          this.router.navigate(['/my-store/product-catalogue']);
+          this._snackBar.open('Se ha agregado un nuevo producto', 'Cerrar', {
+            duration: 2000,
+          });
+          console.log('RESPONSE', imgProduct);
+        });
+
+      // this.storeService.ImagenProduct(localStorage.getItem('id'),
+      // localStorage.getItem('storeId'),
+      // this.idProduct,
+      // images)
+
+    }
+
     if (this.valorForm.marks.length === 0 && this.valorForm.recipes.length === 0 && this.valorForm.subcategories.length === 0){
       const images = new ImgLoad(this.File);
 
@@ -363,7 +409,17 @@ export class EditProductNoDisponibleComponent implements OnInit {
           return this.storeService.ImagenProduct(localStorage.getItem('id'),
           localStorage.getItem('storeId'),
           response.id,
-          images);
+          images).catch( err => {
+            console.log(err);
+            this.router.navigate(['/login']);
+            swal({
+              text: 'Ha ocurrido un error, verifique si todos los campos han sido rellenados',
+              icon: 'warning',
+              dangerMode: true,
+            });
+
+            return Observable.throw(err);
+          });
         })).subscribe( (imgProduct: Image) => {
           this.imagen.push(imgProduct[0]);
           this.router.navigate(['/my-store/product-catalogue']);
@@ -371,7 +427,7 @@ export class EditProductNoDisponibleComponent implements OnInit {
             duration: 2000,
           });
           console.log('RESPONSE', imgProduct);
-      });
+        });
     }else{
 
 
@@ -382,46 +438,55 @@ export class EditProductNoDisponibleComponent implements OnInit {
         data).subscribe( resp => {
   
           console.log(resp);
-          for (let i = 0; i < this.File.length; i++ ){
-            console.log(i);
-            // console.log(this.File[i].name);
-            // console.log(this.LengtImgEdit[i].name);
-            // debugger
-            if(this.File[i].name !== this.LengtImgEdit[i].name){
-             
-              const imgEdit = new ImgEdit(
-                this.File[i].image,
-                this.File[i].name,
-                this.File[i].position,
-              )
-  
-              console.log(this.LengtImgEdit[i].id);
-  
-              console.log('Array', imgEdit);
-         
-              console.log(this.idProduct);
-  
-              if( imgEdit.image !== null ){
-  
-                this._productLoadingService.ImagenProductEdit(
-                  localStorage.getItem('id'),
-                  localStorage.getItem('storeId'),
-                  this.idProduct,
-                  this.LengtImgEdit[i].id,
-                  imgEdit
-                ).subscribe( resp => {
-                  console.log(resp);
-                  this._snackBar.open('Se ha editado el producto', 'Cerrar', {
-                    duration: 2000,
-                  });
-                  this.router.navigate(['/my-store/product-catalogue']);
-                })
-  
+          if( this.valorForm.images.length !== 0 ){ 
+
+            for (let i = 0; i < this.File.length; i++ ){
+              console.log(i);
+              
+              if(this.File[i].name !== this.LengtImgEdit[i].name){ // EStoy editando las images => Comparo si los nombres son iguales
+              
+                const imgEdit = new ImgEdit(
+                  this.File[i].image,
+                  this.File[i].name,
+                  this.File[i].position,
+                )
+    
+                console.log(this.LengtImgEdit[i].id);
+    
+                console.log('Array', imgEdit);
+          
+                console.log(this.idProduct);
+    
+                if( imgEdit.image !== null ){
+    
+                  this._productLoadingService.ImagenProductEdit(
+                    localStorage.getItem('id'),
+                    localStorage.getItem('storeId'),
+                    this.idProduct,
+                    this.LengtImgEdit[i].id,
+                    imgEdit
+                  ).subscribe( resp => {
+                    console.log(resp);
+                    this._snackBar.open('Se ha editado el producto', 'Cerrar', {
+                      duration: 2000,
+                    });
+                    this.router.navigate(['/my-store/product-catalogue']);
+                  })
+    
+                }
+            
               }
-           
             }
           }
+
           
+          
+        }, (error) =>{
+          swal({
+            text: 'Verifique si todos los campos han sido rellenados',
+            icon: 'warning',
+            dangerMode: true,
+          });
         })
 
     }

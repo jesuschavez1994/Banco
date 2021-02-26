@@ -184,7 +184,7 @@ export class StoreService extends Service{
     return this.postQuery(url, data);
   }
 
-  ImagenProduct(userId: string, storeId: string, idProduct: number, data: any){
+  ImagenProduct(userId: string, storeId: string, idProduct: any, data: any){
     const url = `users/${userId}/stores/${storeId}/products/${idProduct}/images`;
     return this.postQuery(url, data);
   }
@@ -223,7 +223,7 @@ export class StoreService extends Service{
    * @returns {*}  {Observable<CategoryProductStoreResp>}
    * @memberof StoreService
    */
-  public getCategoriesProducts(idStore: number): Observable<CategoryProductStoreResp> {
+  public getCategoriesProducts(idStore: any): Observable<CategoryProductStoreResp> {
     return this.execQuery<CategoryProductStoreResp>(`stores/${idStore}/categories`);
 
   }
