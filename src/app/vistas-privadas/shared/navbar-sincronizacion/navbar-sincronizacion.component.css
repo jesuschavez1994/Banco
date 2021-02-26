@@ -21,4 +21,11 @@ a {
   flex-direction: row;
   overflow-x: scroll;
   overflow-y: hidden;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.navigation::-webkit-scrollbar {
+  display: none;
 }
