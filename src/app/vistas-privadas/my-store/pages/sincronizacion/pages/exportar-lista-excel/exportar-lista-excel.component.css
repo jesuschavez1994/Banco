@@ -44,7 +44,7 @@ a {
   border: 1px solid #e9e9e9 !important;
   box-sizing: border-box;
   padding: 10px;
-  width: 70%;
+  width: 80%;
   background-image: url(../../../../../../../assets/img/sincronizacion/excel.svg);
   padding-right: calc(1.5em + 0.75rem);
   padding-left: calc(1em + 0.75rem);
@@ -112,6 +112,10 @@ footer {
   .margin-top {
     margin-top: 0rem;
   }
+
+  .button-upload-file {
+    width: 90%;
+  }
 }
 
 @media only screen and (max-width: 574px) {
@@ -141,5 +145,9 @@ footer {
 
   .margin-top {
     margin-top: 2rem;
+  }
+
+  .button-upload-file {
+    width: 100%;
   }
 }
