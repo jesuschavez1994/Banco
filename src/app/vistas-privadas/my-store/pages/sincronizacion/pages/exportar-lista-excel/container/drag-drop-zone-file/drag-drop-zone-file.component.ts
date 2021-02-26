@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild, 
 import { Items } from '@models/dataListExcel/dataListExcel.model';
 import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service';
 import { DocumentExcel } from '@models/sincronizacion/documentExcel.model';
+import { SizeFileComponent } from '../size-file/size-file.component';
 
 @Component({
   selector: 'app-drag-drop-zone-file',
@@ -21,6 +22,10 @@ export class DragDropZoneFileComponent implements OnInit {
 
   // Input //
   @Input() EstateisOpen: boolean;
+  @Input() SpinnerShow: boolean;
+  @Input() SaveFile: boolean;
+  @Input() Hiden: boolean;
+  @Input() ErrorMessage: boolean;
 
   // Output //
   @Output() CloseOverlay = new EventEmitter<boolean>();
@@ -28,6 +33,9 @@ export class DragDropZoneFileComponent implements OnInit {
   @Output() DataListExcel = new EventEmitter<any>();
   @Output() ProgressBar = new EventEmitter<number>();
   @Output() FileCompleted = new EventEmitter<boolean>();
+
+  // ViewChild//
+  @ViewChild('ProgressFilee') ProgressFilee: SizeFileComponent;
 
   constructor(  private _cd: ChangeDetectorRef,
                 private sincronizacion: SincronizacionService
@@ -150,6 +158,7 @@ export class DragDropZoneFileComponent implements OnInit {
             this.uploadFilesSimulator(index + 1);
           } else {
             this.files[index].progress += 5;
+            console.log()
           }
         }, 200);
       }
@@ -160,11 +169,15 @@ export class DragDropZoneFileComponent implements OnInit {
     console.log('Progress', progress);
     this.ProgressBar.emit(progress);
     if (progress === 100){
-      setTimeout(() => {
-        this.FileCompleted.emit(this.FileComplete);
-      }, 0);
+      
     }
 
+  }
+
+  public LoadFinally(event){
+    // setTimeout(() => {
+    //   this.FileCompleted.emit(event);
+    // }, 0);
   }
 
 

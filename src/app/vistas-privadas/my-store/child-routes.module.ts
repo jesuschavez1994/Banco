@@ -15,7 +15,7 @@ const childRoutes: Routes = [
     component: ContactComponent,
   },
   {
-    path: 'product-catalogue/:idStore', // Se obtiene el id de la tienda para mostrar su listo productos
+    path: 'product-catalogue', // Se obtiene el id de la tienda para mostrar su listo productos
     loadChildren: () =>
       import('./pages/load-product/load-product.module').then(
         (module) => module.LoadProductModule
@@ -43,10 +43,12 @@ const childRoutes: Routes = [
   {
     path: 'edit/:id',
     component: EditProdutcComponent,
+    data: { title: 'Editar producto | Founduss' },
   },
   {
     path: 'edit-product/:id',
     component: EditProductNoDisponibleComponent,
+    data: { title: 'Agregar producto | Founduss' },
   },
   {
     path: 'sincronizacion',

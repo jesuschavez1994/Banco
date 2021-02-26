@@ -67,6 +67,9 @@ form{
 }
 .email-icon {
   background-image: url(../../../../../../../assets/img/iconos/icons-main/icons/lock.svg) !important;
+  background-repeat: no-repeat;
+  background-position: right calc(.375em + .1875rem) center;
+  border-color: #28a745;
 }
 
 .form-control {
