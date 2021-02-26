@@ -50,7 +50,7 @@ export interface AnchorsMenu {
 export interface Filter {
   filterId?: number;
   title: string;
-  type: 'single' | 'multiple';
+  type: string;
   paramName: string;
   parentFilterId?: number;
   options: Option[];
