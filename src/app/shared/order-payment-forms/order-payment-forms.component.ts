@@ -12,17 +12,17 @@ export class OrderPaymentFormsComponent implements OnInit {
   step = 1;
   isAllowedSecondStep = false;
   regions = [
-    {id: 1, label: 'region1'}
+    {value: 1, label: 'region1'},
+    {value: 2, label: 'region2'}
   ];
 
   communes = [
-    {id: 1, label: 'comuna1'}
+    {value: 1, label: 'comuna1'}
   ];
-  // .map( r => r.id )
-  // .map( r => r.id )
+
   form = new FormGroup({
-    region: new FormControl('', [Validators.required, MyValidators.existInArray(this.regions)]),
-    comuna: new FormControl('', [Validators.required, MyValidators.existInArray(this.communes)]),
+    region: new FormControl('', [Validators.required, MyValidators.existInArray(this.regions.map(region => region.value))]),
+    comuna: new FormControl('', [Validators.required, MyValidators.existInArray(this.communes.map(commune => commune.value))]),
     direccion: new FormControl('', [Validators.required, Validators.minLength(10)]),
     hospedaje: new FormControl('', [Validators.required, Validators.minLength(6)]),
     telefono: new FormControl('', [
@@ -178,10 +178,14 @@ export class OrderPaymentFormsComponent implements OnInit {
           }
 
         });
+
       }
 
       return errorMessages;
     }
+
+    console.log('getErrorsWithMessages');
+    console.log(control);
 
   }
 
@@ -220,5 +224,6 @@ export class OrderPaymentFormsComponent implements OnInit {
     // el paquete.
 
   }
+
 
 }
