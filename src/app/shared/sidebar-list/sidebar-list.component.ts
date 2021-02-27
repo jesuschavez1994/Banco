@@ -272,6 +272,9 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     const queryKeys = queryParam.keys;
 
+    console.log('loadOptionsFilter antes');
+    console.log(queryParam);
+
     // retorna true o false, si la opción tiene el mismo valor que el valor pasado por argumento
     // Si existe el atributo value en el option toma ese atributo para la comparación
     function isSameValue(argOption: Option, argQueryValue) {
@@ -359,6 +362,9 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     }
 
+    console.log('loadOptionsFilter despues');
+    console.log(queryParam);
+
   }
 
 
@@ -369,6 +375,9 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     // seleccionamos las opciones de filtro y creamos el queryParam
     queryParams = this.markOption( option, filter );
+
+    console.log('selectOptionsFilter2 antes');
+    console.log(queryParams);
 
     // Navigation With Filters
 
@@ -443,12 +452,15 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     });
 
-    // console.log(queryParams);
+    // const inheritedQueryParams
+    console.log('selectOptionsFilter2 después');
+    console.log(queryParams);
 
     if (Object.keys(queryParams).length > 0) {
       navigationOptions = {
         relativeTo: this.route,
         queryParams,
+        queryParamsHandling: 'merge'
       };
     }
 
@@ -525,9 +537,12 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     optionSelected: Option,
     filterSelected: Filter,
     toggleOption: boolean = true,
-    selectTheOption: boolean = true
+    selectTheOption: boolean = true,
+    queryParamTest?
   ){
 
+    console.log('markOption queryParamTest');
+    console.log(queryParamTest);
     let queryParams;
     queryParams = {};
 

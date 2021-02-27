@@ -57,7 +57,7 @@
             <option value="-1">seleccione región</option>
 
             <ng-container *ngFor="let region of regions">
-              <option [value]="region.id">region.label</option>
+              <option [value]="region.id">{{region.label}}</option>
             </ng-container>
 
           </select>
@@ -81,8 +81,10 @@
 
           <select formControlName="comuna">
             <option value="-1">seleccione comuna</option>
-            <option value="hola">hola</option>
-            <option value="adios">adios</option>
+
+            <ng-container *ngFor="let commune of communes">
+              <option [value]="commune.id">{{commune.label}}</option>
+            </ng-container>
 
           </select>
 

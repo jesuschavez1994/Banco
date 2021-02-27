@@ -326,7 +326,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       let filter;
       filter = {};
 
-      console.log('queryParams Key: ', queryParams.keys);
+      // console.log('queryParams Key: ', queryParams.keys);
 
       const keysQueryParams = queryParams.keys;
 
@@ -389,7 +389,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
         filter = queryParamsAllowed;
 
-        console.log('queryParamsAllowed: ', queryParamsAllowed);
+        // console.log('queryParamsAllowed: ', queryParamsAllowed);
       }
 
       // this.showShimmerProductsCards = true;
@@ -482,11 +482,12 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   // Search-bar
   public search(ToSearch) {
-    console.log(ToSearch.value);
+    // console.log(ToSearch.value);
 
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: ToSearch.value !== '' ? { name: ToSearch.value } : {},
+      queryParamsHandling: 'merge'
     });
   }
 
