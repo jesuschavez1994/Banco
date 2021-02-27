@@ -12,8 +12,7 @@ export class OrderPaymentFormsComponent implements OnInit {
   step = 1;
   isAllowedSecondStep = false;
   regions = [
-    {value: 1, label: 'region1'},
-    {value: 2, label: 'region2'}
+    {id: 1, label: 'hola'}
   ];
 
   communes = [
@@ -21,8 +20,8 @@ export class OrderPaymentFormsComponent implements OnInit {
   ];
 
   form = new FormGroup({
-    region: new FormControl('', [Validators.required, MyValidators.existInArray(this.regions.map(region => region.value))]),
-    comuna: new FormControl('', [Validators.required, MyValidators.existInArray(this.communes.map(commune => commune.value))]),
+    region: new FormControl('', [Validators.required, MyValidators.existInArray( this.regions.map( r => r.id ) ) ]),
+    comuna: new FormControl('', [Validators.required, MyValidators.existInArray( this.regions.map( r => r.id ) ) ]),
     direccion: new FormControl('', [Validators.required, Validators.minLength(10)]),
     hospedaje: new FormControl('', [Validators.required, Validators.minLength(6)]),
     telefono: new FormControl('', [

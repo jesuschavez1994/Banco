@@ -66,19 +66,6 @@ export class MyValidators {
 
       const value = control.value;
 
-      // const isThereInOptions = options.find( option => option === value );
-
-      console.log('existInArray');
-      console.log(value);
-      console.log(options);
-      console.log(options.some(option => {
-        return 1 === value;
-      }));
-
-      if (options[0] === value) {
-
-      }
-
       if (options.indexOf(value) === -1) {
         return {
           existIn: true
