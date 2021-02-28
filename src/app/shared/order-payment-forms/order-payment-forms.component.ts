@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MyValidators } from '@utils/validators';
+import { PaymentProcessService } from '../../services/payment-process/payment-process.service';
 
 @Component({
   selector: 'app-order-payment-forms',
@@ -11,13 +12,8 @@ export class OrderPaymentFormsComponent implements OnInit {
 
   step = 1;
   isAllowedSecondStep = false;
-  regions = [
-    {id: 1, label: 'hola'}
-  ];
-
-  communes = [
-    {value: 1, label: 'comuna1'}
-  ];
+  regions = [];
+  communes = [];
 
   form = new FormGroup({
     // region: new FormControl('', [Validators.required, MyValidators.existInArray( this.regions.map( r => r.id ) ) ]),
@@ -63,7 +59,9 @@ export class OrderPaymentFormsComponent implements OnInit {
   @Output() submitForm = new EventEmitter();
   @Output() currentStep = new EventEmitter<number>();
 
-  constructor() {
+  constructor(
+    private paymentService: PaymentProcessService
+  ) {
   }
 
   ngOnInit(): void {
@@ -96,6 +94,8 @@ export class OrderPaymentFormsComponent implements OnInit {
       }
 
     });
+
+    this.loadDataOfSelects();
 
   }
 
@@ -185,8 +185,8 @@ export class OrderPaymentFormsComponent implements OnInit {
       return errorMessages;
     }
 
-    console.log('getErrorsWithMessages');
-    console.log(control);
+    // console.log('getErrorsWithMessages');
+    // console.log(control);
 
   }
 
@@ -213,6 +213,56 @@ export class OrderPaymentFormsComponent implements OnInit {
   public loadDataOfSelects() {
 
     // aquí cargamos las opciones del select
+    this.paymentService.getRegions().subscribe(
+      resp => {
+
+        resp.forEach( region => {
+
+          const communes = region.communes.map( commune => {
+            return {
+              value: commune.id,
+              label: commune.name
+            };
+          });
+
+          this.regions.push({
+            value: region.id,
+            label: region.name,
+            communes
+          });
+
+        });
+
+        // console.log('this.regions');
+        // console.log(this.regions);
+
+      }
+    );
+
+    this.getCommunesOfRegion();
+
+  }
+
+
+  public getCommunesOfRegion() {
+
+    this.form.controls.region.valueChanges.subscribe(
+      regionChange => {
+        // tslint:disable-next-line: radix
+        regionChange = parseInt(regionChange);
+
+        const regionSelected = this.regions.find( region => region.value === regionChange );
+
+        if (regionSelected) {
+          this.communes = regionSelected.communes;
+
+        }else {
+          this.communes = [];
+
+        }
+
+      }
+    );
 
   }
 
@@ -225,6 +275,5 @@ export class OrderPaymentFormsComponent implements OnInit {
     // el paquete.
 
   }
-
 
 }

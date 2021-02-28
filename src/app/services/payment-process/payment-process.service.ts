@@ -5,6 +5,7 @@ import { ProductToCartResp } from '@interfaces/productCart.interface';
 import { Observable } from 'rxjs';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Order, PaymentCreated, CreatedMallTransaction } from '../../interfaces/order.interface';
+import { Region, Commune } from '@interfaces/demography.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -166,16 +167,16 @@ export class PaymentProcessService extends Service {
 
   // Demography
 
-  public getRegions() {
-    return this.execQuery(`regions`);
+  public getRegions(): Observable<Region[]> {
+    return this.execQuery<Region[]>(`regions`);
   }
 
-  public getRegion(idRegion: number) {
-    return this.execQuery(`regions/${idRegion}`);
+  public getRegion(idRegion: number): Observable<Region> {
+    return this.execQuery<Region>(`regions/${idRegion}`);
   }
 
-  public getCommunesOfRegion(idRegion: number) {
-    return this.execQuery(`regions/${idRegion}/communes`);
+  public getCommunesOfRegion(idRegion: number): Observable<Commune> {
+    return this.execQuery<Commune>(`regions/${idRegion}/communes`);
   }
 
 }
