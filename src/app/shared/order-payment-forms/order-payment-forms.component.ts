@@ -1,7 +1,9 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MyValidators } from '@utils/validators';
-import { PaymentProcessService } from '../../services/payment-process/payment-process.service';
+import { PaymentProcessService } from '@services/payment-process/payment-process.service';
+import { UsuarioService } from '@services/usuario/usuario.service';
+import { OrderPaymentForm } from '@interfaces/components-options/order.options.interface';
 
 @Component({
   selector: 'app-order-payment-forms',
@@ -56,11 +58,12 @@ export class OrderPaymentFormsComponent implements OnInit {
 
   @Input() buttonDisabled = false;
 
-  @Output() submitForm = new EventEmitter();
+  @Output() submitForm = new EventEmitter<OrderPaymentForm>();
   @Output() currentStep = new EventEmitter<number>();
 
   constructor(
-    private paymentService: PaymentProcessService
+    private paymentService: PaymentProcessService,
+    private userService: UsuarioService,
   ) {
   }
 
@@ -240,6 +243,7 @@ export class OrderPaymentFormsComponent implements OnInit {
     );
 
     this.getCommunesOfRegion();
+    this.preLoadContactData();
 
   }
 
@@ -273,6 +277,13 @@ export class OrderPaymentFormsComponent implements OnInit {
     // Y con la api order_contact creamos una nueva dirección en donde el recibirá el paquete
     // así no tendrá que ser igual la dirección de contact del usuario con la de donde quiere que llegue
     // el paquete.
+
+    this.userService.getContact().subscribe(
+      contactResp => {
+        console.log('contactResp');
+        console.log(contactResp);
+      }
+    );
 
   }
 

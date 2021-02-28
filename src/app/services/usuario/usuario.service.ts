@@ -8,6 +8,8 @@ import 'rxjs/add/operator/catch';
 import { tokenName } from '@angular/compiler';
 import swal from 'sweetalert';
 import { Service } from '../service.service';
+import { UserContactResp } from '../../interfaces/user.interface';
+
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +21,17 @@ export class UsuarioService extends Service {
 
   private useApiUrl = false;
 
-  constructor(protected http: HttpClient) {
+  constructor(
+    protected http: HttpClient,
+  ) {
     super(http);
+  }
+
+  private idUser: number;
+
+  private setIdUser() {
+    this.idUser = this.getIdUser();
+
   }
 
   // tslint:disable-next-line: variable-name
@@ -124,7 +135,8 @@ export class UsuarioService extends Service {
     }
   }
 
-  public getContact(userId: number) {
-    return this.execQuery(`users/${userId}/contact`);
+  public getContact(): Observable<UserContactResp> {
+    this.setIdUser();
+    return this.execQuery<UserContactResp>(`users/${this.idUser}/contact`);
   }
 }

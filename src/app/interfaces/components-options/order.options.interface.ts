@@ -31,3 +31,20 @@ export interface Group {
   name: string;
   img: string;
 }
+
+export interface OrderPaymentForm {
+  comuna: number;
+  direccion: string;
+  hospedaje: string;
+  nombreDireccion: string;
+  paymentOption: OrderPaymentFormOption;
+  region: number;
+  rut: number;
+  telefono: number;
+}
+
+export interface OrderPaymentFormOption {
+  name: string;
+  image: string;
+  data: { id: number};
+}
