@@ -39,7 +39,7 @@ export class CropperImgPhotoAccountComponent implements OnInit {
     this.ImgNew = event;
     console.log(event);
     this.ShowNewImgCrop = true;
-    setTimeout( () => this.FileBase64.emit(event), 0);
+    setTimeout(() => this.FileBase64.emit(event), 0);
     console.log('Current',this.currentImg)
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {HomeServiceService} from '../../../vistas-publicas/services/home-service.service';
 import { SidebarMenuOptions } from '@interfaces/components-options/sidebar-menu.options.interface';
 import { CropperImgPhotoAccountComponent } from '../../../shared/cropper-img-photo-account/cropper-img-photo-account.component';
@@ -37,9 +37,9 @@ export class ViewFormAccountUserComponent implements OnInit {
     this.storeLog = this.homeService.storeActive();
   }
 
-  Img(event){
-    this.imgCropper = event;
-    console.log(event);
+  FileBase64($event){
+    // this.imgCropper = event;
+  console.log($event)
   }
 
 }
