@@ -69,6 +69,7 @@ input {
 
 .check {
   justify-content: space-between;
+  width: 100%;
 }
 
 .height {
@@ -102,21 +103,27 @@ input {
   .width-93 {
     width: 100% !important;
   }
+
+  .margin-top {
+    margin-top: 4rem;
+  }
 }
 
 @media (min-width: 250px) and (max-width: 350px) {
   .col-12.col-sm-12.col-lg-8.col-xl-8.flotador.height-100.animated.fadeIn {
     display: none !important;
   }
-  .col-10.col-sm-8.col-md-6.col-lg-4.col-xl-4.box.height.sobreEncima {
-    height: 75vh !important;
+
+  .margin-top {
+    margin-top: 2rem;
   }
+
   .form-group.mb-5.mt-5 {
     margin-bottom: 0% !important;
     margin-top: 0% !important;
   }
   .img-login {
-    top: -7%;
+    top: -10%;
     left: 34%;
   }
   .recorder {
@@ -129,5 +136,9 @@ input {
   }
   .user-naranja {
     width: 80%;
+  }
+
+  .form-height {
+    min-height: 420px;
   }
 }
