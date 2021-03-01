@@ -119,14 +119,14 @@ export class ProductsCardsStoreComponent implements OnInit {
     // return this.id = this.products[index].id;
   }
 
-  public Delete(index: number){
-    console.log(index);
-    this.storeService.DeleteProduct(
-      localStorage.getItem('id'),
-      localStorage.getItem('storeId'),
-      this.products[index].id
-    ).subscribe();
-  }
+  // public Delete(index: number){
+  //   console.log(index);
+  //   this.storeService.DeleteProduct(
+  //     localStorage.getItem('id'),
+  //     localStorage.getItem('storeId'),
+  //     this.products[index].id
+  //   ).subscribe();
+  // }
 
  openDialog(index: number) {
     const dialogRef = this.dialog.open(ModalDeleteProductComponent, {

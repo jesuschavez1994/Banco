@@ -16,6 +16,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router'
 export class PublicNavbarComponent implements OnInit, AfterViewInit {
   @Input() userLog: boolean
   @Input() storeAct: boolean | string
+  @Input() imgCropper: any;
 
   // Button DropDown - cart
   classIcon: ClassIcon = {

@@ -1,4 +1,4 @@
-<app-public-navbar [userLog]="userLog" [storeAct]="storeLog"></app-public-navbar>
+<app-public-navbar [userLog]="userLog" [storeAct]="storeLog" [imgCropper]="imgCropper"></app-public-navbar>
 
 <div id="main-wrapper" class="page">
 
@@ -22,7 +22,7 @@
                         
                     <div class="col-md-6">
                         <section>
-                            <app-cropper-img-photo-account></app-cropper-img-photo-account>
+                            <app-cropper-img-photo-account (FileBase64)="Img($event)"></app-cropper-img-photo-account>
                         </section>
                     </div>
 

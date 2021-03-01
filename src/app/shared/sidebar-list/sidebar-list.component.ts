@@ -21,6 +21,7 @@ import {
 import { ActivatedRoute, Router, ParamMap, Params } from '@angular/router';
 import { Utils } from '../../utils/utils';
 import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service';
+import { UsuarioService } from '@services/usuario/usuario.service';
 
 @Component({
   selector: 'app-sidebar-list',
@@ -36,6 +37,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   @Input() sidebarTarget: SidebarListComponent;
   @Input() anchorsMenu: AnchorsMenu;
   @Input() sidebarOptions: SidebarListOptions;
+  IMG_USER: string;
 
   // Outputs
   @Output() sidebarExpand = new EventEmitter<boolean>();
@@ -148,7 +150,8 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router,
     private utils: Utils,
-    private _sidebarListService: SidebarListService
+    private _sidebarListService: SidebarListService,
+    public usuarioService: UsuarioService,
   ) {
     _sidebarListService.anchorsMenuData$.subscribe(
       (anchorsData: AnchorsMenu[]) => {
@@ -172,6 +175,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     }
 
     this.initFilter();
+
   }
 
   ngAfterViewInit(): void {

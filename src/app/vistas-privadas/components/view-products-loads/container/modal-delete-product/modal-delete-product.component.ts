@@ -13,11 +13,13 @@ export class ModalDeleteProductComponent implements OnInit {
   spinner = false;
   deleteOk = false;
   ErrorMessage = false;
+  idElementDelete: string;
 
   constructor(public dialogRef: MatDialogRef<ModalDeleteProductComponent>,
               public storeService: StoreService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
                 console.log(data);
+                this.idElementDelete = this.data.indexProductoDelete
               }
 
   ngOnInit(): void {
@@ -39,11 +41,9 @@ export class ModalDeleteProductComponent implements OnInit {
     ).subscribe( resp => {
       this.spinner = false;
       this.deleteOk = true;
-      document.getElementById(this.data.indexProductoDelete).parentElement.style.display = 'none';
+      // let parent = document.getElementById(this.data.indexProductoDelete).parentElement.style.display = 'none';
+      // console.log(parent);
       this.dialogRef.close();
-    }, error => {
-      this.ErrorMessage = true;
-      this.spinner = false;
     });
 
   }

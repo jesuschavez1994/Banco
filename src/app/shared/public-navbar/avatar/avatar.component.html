@@ -3,13 +3,13 @@
 <!-- ============================================================== -->
 <li class="item navbar-collapse avat " *ngIf="userImg != undefined">
     <a class=" p-0 dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span *ngIf="(userImg.length > 0)">
+        <!-- <span *ngIf="(userImg.length > 0)">
             <img src="{{envApi+'/'+ userImg[0].src}}" alt="user" class="m-0 responsive--icon profile-pic" />
         </span> 
         <span *ngIf="(userImg.length == 0) || (userImg == undefined)">
             <img src="assets/img/avatar.svg" alt="user" class="m-0 responsive--icon profile-pic" />
-        </span>
-        
+        </span> -->
+        <img [src]="imgCropper">
     </a>
     <div class="dropdown-menu dropdown-menu-right mt-2 animated flipInY">
         <ul class="dropdown-user">

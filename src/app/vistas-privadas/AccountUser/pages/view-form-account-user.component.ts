@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {HomeServiceService} from '../../../vistas-publicas/services/home-service.service';
 import { SidebarMenuOptions } from '@interfaces/components-options/sidebar-menu.options.interface';
+import { CropperImgPhotoAccountComponent } from '../../../shared/cropper-img-photo-account/cropper-img-photo-account.component';
 
 @Component({
   selector: 'app-view-form-account-user',
@@ -11,6 +12,8 @@ export class ViewFormAccountUserComponent implements OnInit {
 
   userLog: boolean;
   storeLog: boolean | string;
+  imgCropper: any
+
 
   menuOptions: SidebarMenuOptions[] = [
     {
@@ -32,6 +35,11 @@ export class ViewFormAccountUserComponent implements OnInit {
   ngOnInit(): void {
     this.userLog = this.homeService.islog();
     this.storeLog = this.homeService.storeActive();
+  }
+
+  Img(event){
+    this.imgCropper = event;
+    console.log(event);
   }
 
 }
