@@ -32,98 +32,19 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   // Sidebar related parameters
   expandSidebar = true;
   sidebarFilters: Filter[] = [];
-  /*   sidebarFilters: Filter[] = [
-    {
-      filterId: 1,
-      title: 'categorías',
-      type: 'single',
-      paramName: 'categoria',
-      options: [
-        {
-          optionId: 1,
-          name: 'Cosmeticos',
-          totalFounds: 200,
-        },
-        {
-          optionId: 2,
-          name: 'Alimentos',
-          totalFounds: 200,
-        },
-      ],
-    },
-    {
-      filterId: 2,
-      title: 'sub categorías',
-      type: 'multiple',
-      paramName: 'sub-categoria',
-      parentFilterId: 1,
-      options: [
-        {
-          optionId: 1,
-          parentOptionId: 1,
-          name: 'labial',
-          totalFounds: 200,
-        },
-        {
-          optionId: 2,
-          parentOptionId: 1,
-          name: 'labia2',
-          totalFounds: 200,
-        },
-        {
-          optionId: 3,
-          parentOptionId: 2,
-          name: 'labial3',
-          totalFounds: 200,
-        },
-      ],
-    },
-    {
-      filterId: 3,
-      title: 'Precios',
-      type: 'single', // Determinamos que solo una opción puede ser seleccionada
-      paramName: 'price',
-      options: [
-        {
-          optionId: 1,
-          name: '$0 - $10,000',
-          totalFounds: 200,
-          // isSelected: false
-        },
-        {
-          optionId: 2,
-          name: '$10,000 - $20,000',
-          totalFounds: 200,
-          // isSelected: false
-        },
-        {
-          optionId: 3,
-          name: '$20,000 - $30,000',
-          totalFounds: 200,
-          // isSelected: false
-        },
-        {
-          optionId: 4,
-          name: '$30,000 - $40,000',
-          totalFounds: 200,
-          // isSelected: false
-        },
-        {
-          optionId: 5,
-          name: '$40,000 - $50,000',
-          totalFounds: 200,
-          // isSelected: false
-        },
-      ],
-    },
-  ]; */
 
   categoryFilter = {
     filterId: 1,
     title: 'categorías',
     type: 'single',
     paramName: 'categoria',
-    options: Option,
+    options: [
+      {
+        optionId: 1,
+        name: 'Alimentos',
+        totalFounds: 200,
+      },
+    ],
   };
 
   subCategoryFilter = {
@@ -132,10 +53,37 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
     type: 'multiple',
     paramName: 'sub-categorias',
     parentFilterId: 1,
-    options: Option,
+    options: [
+      {
+        optionId: 1,
+        name: 'Dolor e Inflamación',
+        totalFounds: 200,
+      },
+      {
+        optionId: 2,
+        name: 'Huesos y Articulaciones',
+        totalFounds: 200,
+      },
+      {
+        optionId: 3,
+        name: 'Corazón',
+        totalFounds: 200,
+      },
+      {
+        optionId: 4,
+        name: 'Defensas',
+        totalFounds: 200,
+      },
+      {
+        optionId: 5,
+        name: 'Vegano',
+        totalFounds: 200,
+      },
+    ],
   };
 
   priceFilter: Filter = {
+    filterId: 3,
     title: 'Precios',
     type: 'single', // Determinamos que solo una opción puede ser seleccionada
     paramName: 'precios',
@@ -168,6 +116,60 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
     ],
   };
 
+  factoriesFilter = {
+    filterId: 4,
+    title: 'Fabricante',
+    type: 'multiple', // Determinamos que solo una opción puede ser seleccionada
+    paramName: 'factories',
+    options: [
+      {
+        optionId: 1,
+        name: 'Abbot',
+        totalFounds: 200,
+        // isSelected: false
+      },
+      {
+        optionId: 2,
+        name: 'ANC',
+        totalFounds: 200,
+        // isSelected: false
+      },
+      {
+        optionId: 3,
+        name: 'Aura Vitals',
+        totalFounds: 200,
+        // isSelected: false
+      },
+    ],
+  };
+
+  marksFilter = {
+    filterId: 5,
+    title: 'Marca',
+    type: 'multiple', // Determinamos que solo una opción puede ser seleccionada
+    paramName: 'marks',
+    options: [
+      {
+        optionId: 1,
+        name: 'Aquasolar',
+        totalFounds: 200,
+        // isSelected: false
+      },
+      {
+        optionId: 2,
+        name: 'Arama',
+        totalFounds: 200,
+        // isSelected: false
+      },
+      {
+        optionId: 3,
+        name: 'Bosque Miel',
+        totalFounds: 200,
+        // isSelected: false
+      },
+    ],
+  };
+
   // Product's cards related parameters
   totalProducts: number;
   itemsPerPage = 16;
@@ -180,11 +182,10 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
     private titleService: Title
   ) {}
 
-  ngOnInit(): void {
-    this.sidebarFilters = this.sidebarList.setFilters(this.sidebarFilters);
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
+    this.setSidebarFilters();
     // This function triggers all the fecth and modeling of the data that goes
     // on the products cards.
     this.getQueryParamsData();
@@ -326,5 +327,21 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
 
   setNewTitle(newTitle: string) {
     this.titleService.setTitle(newTitle);
+  }
+
+  setSidebarFilters() {
+    let sidebarListFilters: Filter[] = [];
+    sidebarListFilters.push(
+      this.categoryFilter,
+      this.subCategoryFilter,
+      this.priceFilter,
+      this.factoriesFilter,
+      this.marksFilter
+    );
+    console.log('Sidebar list filters: ');
+    console.log(sidebarListFilters);
+    this.sidebarFilters = this.sidebarList.setFilters(sidebarListFilters);
+    console.log('Sidebar filters: ');
+    console.log(this.sidebarFilters);
   }
 }
