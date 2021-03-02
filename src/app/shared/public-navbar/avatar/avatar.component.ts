@@ -22,6 +22,7 @@ export class AvatarComponent implements OnInit, OnDestroy {
   @Input() imgCropper: any;
 
   storeAct: boolean | string = false;
+  imgSrc: string;
   subscription: Subscription;
 
   constructor(
@@ -34,7 +35,8 @@ export class AvatarComponent implements OnInit, OnDestroy {
       (imageData: Image[]) => {
         console.log('User image data:');
         console.log(imageData);
-        this.userImg = imageData;
+        // this.userImg = imageData;
+        this.formatImgSource(imageData);
       }
     );
   }
@@ -64,5 +66,19 @@ export class AvatarComponent implements OnInit, OnDestroy {
   logout() {
     this.auth.logout();
     // window.location.reload();
+  }
+
+  formatImgSource(imageData: any) {
+    this.userImg = imageData;
+
+    console.log('Checking if data is an array: ');
+    console.log(Array.isArray(imageData));
+
+    Array.isArray(imageData)
+      ? (this.imgSrc = `${this.envApi}/${this.userImg[0].src}`)
+      : (this.imgSrc = this.userImg);
+
+    console.log('Image source');
+    console.log(this.imgSrc);
   }
 }

@@ -10,11 +10,7 @@
     aria-expanded="false"
   >
     <span *ngIf="userImg.length > 0">
-      <img
-        src="{{ envApi + '/' + userImg[0].src }}"
-        alt="user"
-        class="m-0 responsive--icon profile-pic"
-      />
+      <img [src]="imgSrc" alt="user" class="m-0 responsive--icon profile-pic" />
     </span>
     <span *ngIf="userImg.length === 0 || userImg === undefined">
       <img
@@ -31,7 +27,7 @@
           <div class="u-img">
             <span *ngIf="userImg.length > 0 && userImg != undefined">
               <img
-                src="{{ envApi + '/' + userImg[0].src }}"
+                [src]="imgSrc"
                 alt="user"
                 class="m-0 responsive--icon profile-pic"
               />
