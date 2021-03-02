@@ -1,11 +1,18 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { FormControl } from '@angular/forms';
 import { UsuarioService } from '@services/usuario/usuario.service';
 
 import { environment } from '@environments/environment';
+import { URL_SERVICIOS } from '../../config/config';
 import { AvatarService } from '@shared/public-navbar/avatar/services/avatar.service';
-import { Image } from '@interfaces/userPublic.interface';
+import { CropperService } from '@shared/cropper-img-photo-account/services/cropper.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,7 +20,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './cropper-img-photo-account.component.html',
   styleUrls: ['./cropper-img-photo-account.component.scss'],
 })
-export class CropperImgPhotoAccountComponent implements OnInit {
+export class CropperImgPhotoAccountComponent implements OnInit, OnDestroy {
   currentImg: string;
   ImgNew: string;
   ShowNewImgCrop = false;
@@ -33,13 +40,25 @@ export class CropperImgPhotoAccountComponent implements OnInit {
   ];
   position = new FormControl(this.positionOptions[0]);
 
+  subscription: Subscription;
   constructor(
     public usuarioService: UsuarioService,
-    private _avatarService: AvatarService
-  ) {}
+    private _avatarService: AvatarService,
+    private _cropperService: CropperService
+  ) {
+    this.subscription = _cropperService.imageData$.subscribe(
+      (imageData: string) => {
+        this.currentImg = imageData;
+      }
+    );
+  }
 
   ngOnInit(): void {
     this.GetAvatar();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   CloseEvent(e: boolean) {
@@ -48,11 +67,10 @@ export class CropperImgPhotoAccountComponent implements OnInit {
 
   ShowImage(eventData) {
     this._avatarService.setImageData(eventData);
-    this.ImgNew = eventData;
-    this.ShowNewImgCrop = true;
+    // this.ShowNewImgCrop = true;
+    // this.ImgNew = eventData;
+    // this.currentImg = eventData;
     // setTimeout(() => this.FileBase64.emit(event), 0);
-    // console.log('Current', this.currentImg);
-    // this.fireEvents(eventData);
   }
 
   GetAvatar() {
@@ -61,18 +79,15 @@ export class CropperImgPhotoAccountComponent implements OnInit {
       .subscribe((Response: any) => {
         console.log('avatar', Response);
         if (Response.length >= 1) {
-          this.currentImg = Response[0].src_size.xl;
+          // this.currentImg = Response[0].src_size.xl;
+          this._cropperService.setImageSource(
+            `${URL_SERVICIOS}/${Response[0].src_size.xl}`
+          );
         }
       });
   }
 
   succesFull($event) {
     this.isOpen = !$event;
-  }
-
-  fireEvents(eventData) {
-    console.log('Image data to send with events:');
-    console.log(eventData);
-    this.fileBase64.emit(this.ImgNew);
   }
 }
