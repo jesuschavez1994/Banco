@@ -4,16 +4,17 @@ import { URL_SERVICIOS } from '../../config/config';
 const URL = URL_SERVICIOS;
 
 @Pipe({
-  name: 'imgFallback'
+  name: 'imgFallback',
 })
 export class ImgFallbackPipe implements PipeTransform {
-
-  transform(img: string, target: string = 'default', element?: ElementRef ): string {
-
+  transform(
+    img: string,
+    target: string = 'default',
+    element?: ElementRef
+  ): string {
     let imgDefault;
 
     switch (target) {
-
       case 'default':
         imgDefault = 'assets/img/no-image-banner.jpg';
         break;
@@ -23,16 +24,20 @@ export class ImgFallbackPipe implements PipeTransform {
       case 'box':
         imgDefault = 'assets/img/Box/box.svg';
         break;
-      case 'avatar':
-        imgDefault = 'assets/img/no-avatar.jpg';
-        break;
+      case 'avatar': {
+        console.log(img);
+        let image = '';
+        !img
+          ? (image = this.useDefaultImg())
+          : (image = this.formatAvatar(img));
+        return image;
+      }
       case 'avatar-hombre':
         imgDefault = 'assets/img/avatar-hombre.jpg';
         break;
       default:
         imgDefault = 'assets/img/no-image-banner.jpg';
         break;
-
     }
 
     // if (element){
@@ -48,24 +53,25 @@ export class ImgFallbackPipe implements PipeTransform {
     //   console.log('element', element);
     // }
 
-    if (!img){
-
+    if (!img) {
       return imgDefault;
-
     }
-
-    
-    if (img.slice(0, 5).indexOf('users') >= 0){
-      return `${URL}/${img}`;
-    }else{
-      return `${img}`;
-    }
-    
 
     console.log(img);
 
     return `${URL}/${img}`;
-
   }
 
+  // Avatar's image logic
+  private useDefaultImg(): string {
+    return 'assets/img/no-avatar.jpg';
+  }
+
+  private formatAvatar(imageData: string): string {
+    if (imageData.slice(0, 5).indexOf('users') >= 0) {
+      return `${URL}/${imageData}`;
+    } else {
+      return `${imageData}`;
+    }
+  }
 }
