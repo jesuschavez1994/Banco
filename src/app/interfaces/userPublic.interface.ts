@@ -13,7 +13,7 @@ export interface UserPublic {
   image: Image[];
 }
 
-interface Image {
+export interface Image {
   id: number;
   name: string;
   src: string;
