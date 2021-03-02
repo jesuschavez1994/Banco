@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 export class AvatarComponent implements OnInit, OnDestroy {
   userId: number | string;
   userImg: any;
+  actualImg: any; // Previous image fallback
   userName: string;
   userEmail: string;
   envApi = environment.url;
@@ -33,10 +34,7 @@ export class AvatarComponent implements OnInit, OnDestroy {
     this.imgUser();
     this.subscription = _avatarService.imageData$.subscribe(
       (imageData: Image[]) => {
-        console.log('User image data:');
-        console.log(imageData);
-        // this.userImg = imageData;
-        this.formatImgSource(imageData);
+        this.checkImgData(imageData);
       }
     );
   }
@@ -55,7 +53,7 @@ export class AvatarComponent implements OnInit, OnDestroy {
     if (this.auth) {
       this.userId = localStorage.getItem('id');
       this.homeService.obtUserData(this.userId).subscribe((data) => {
-        // this.userImg = data.image; // Testing the service
+        this.userImg = data.image;
         this._avatarService.setImageData(data.image);
         this.userEmail = data.email;
         this.userName = data.name;
@@ -68,17 +66,21 @@ export class AvatarComponent implements OnInit, OnDestroy {
     // window.location.reload();
   }
 
-  formatImgSource(imageData: any) {
-    this.userImg = imageData;
+  private checkImgData(imageData: any) {
+    imageData === 'Use previous image'
+      ? this.useFallback()
+      : this.formatImgSource(imageData);
+  }
 
-    console.log('Checking if data is an array: ');
-    console.log(Array.isArray(imageData));
+  private formatImgSource(imageData: any) {
+    this.actualImg = imageData;
 
     Array.isArray(imageData)
-      ? (this.imgSrc = this.userImg[0].src)
-      : (this.imgSrc = this.userImg);
+      ? (this.imgSrc = this.actualImg[0].src)
+      : (this.imgSrc = this.actualImg);
+  }
 
-    console.log('Image source');
-    console.log(this.imgSrc);
+  private useFallback() {
+    this.actualImg = this.userImg;
   }
 }
