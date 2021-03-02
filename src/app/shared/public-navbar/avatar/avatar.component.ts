@@ -75,7 +75,7 @@ export class AvatarComponent implements OnInit, OnDestroy {
     console.log(Array.isArray(imageData));
 
     Array.isArray(imageData)
-      ? (this.imgSrc = `${this.envApi}/${this.userImg[0].src}`)
+      ? (this.imgSrc = this.userImg[0].src)
       : (this.imgSrc = this.userImg);
 
     console.log('Image source');

@@ -54,6 +54,16 @@ export class ImgFallbackPipe implements PipeTransform {
 
     }
 
+    
+    if (img.indexOf('users/1/avatar_xl.jpeg') >= 0){
+      return `${URL}/${img}`;
+    }else{
+      return `${img}`;
+    }
+    
+
+    console.log(img);
+
     return `${URL}/${img}`;
 
   }
