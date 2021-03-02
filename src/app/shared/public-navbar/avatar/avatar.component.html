@@ -1,61 +1,111 @@
 <!-- ============================================================== -->
 <!-- Profile -->
 <!-- ============================================================== -->
-<li class="item navbar-collapse avat " *ngIf="userImg != undefined">
-    <a class=" p-0 dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span *ngIf="(userImg.length > 0)">
-            <img src="{{envApi+'/'+ userImg[0].src}}" alt="user" class="m-0 responsive--icon profile-pic" />
-        </span>
-        <span *ngIf="(userImg.length == 0) || (userImg == undefined)">
-            <img src="assets/img/avatar.svg" alt="user" class="m-0 responsive--icon profile-pic" />
-        </span>
-    </a>
-    <div class="dropdown-menu dropdown-menu-right mt-2 animated flipInY">
-        <ul class="dropdown-user">
-            <li>
-                <div class="dw-user-box display-flex align-items-center" align="center">
-                    <div class="u-img">
-                        <span *ngIf="(userImg.length > 0) && (userImg != undefined)">
-                            <img src="{{envApi+'/'+userImg[0].src}}" alt="user" class="m-0 responsive--icon profile-pic" />
-                        </span>
-                        <span *ngIf="(userImg.length === 0) || (userImg == undefined)">
-                            <img src="assets/img/avatar.svg" alt="user" class="m-0 responsive--icon profile-pic" />
-                        </span>
-                    </div>
-                    <div class="u-text">
-                        <h4 class="name-user OpenSans-700 text-left">
-                            {{userName}}
-
-                        </h4>
-                        <p class="text-muted">
-                            {{userEmail}}
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li role="separator" class="divider"></li>
-            <li class="nav-item">
-                <a class="a-menu-user nav-link OpenSans-400" [routerLink]="[storeAct ? '/account/settings/store-edit' : '/account/setting-user' ]">
-                    <img class="mr-2" src="../../../assets/img/iconos/icons-main/icons/person.svg" alt="" width="18" height="18" title="Person"> Perfil
-                </a>
-            </li>
-            <li class="nav-item" routerLinkActive="active">
-                <a class="a-menu-user nav-link OpenSans-400" [routerLink]="[storeAct ? '/account/settings/store-edit' : '/account/setting-user' ]">
-
-                    <img class="mr-2" src="../../../assets/img/iconos/icons-main/icons/gear.svg" alt="" width="18" height="18" title="Configuración"> Configuración de tu cuenta
-
-                </a>
-            </li>
-            <li class="nav-item" (click)="logout()">
-
-                <a class="a-menu-user nav-link OpenSans-400">
-
-                    <img class="mr-2" src="../../../assets/img/iconos/icons-main/icons/power.svg" alt="" width="18" height="18" title="Logout"> Salir
-
-                </a>
-            </li>
-        </ul>
-    </div>
+<li class="item navbar-collapse avat" *ngIf="userImg != undefined">
+  <a
+    class="p-0 dropdown-toggle waves-effect waves-dark"
+    href=""
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <span *ngIf="userImg.length > 0">
+      <img
+        src="{{ envApi + '/' + userImg[0].src }}"
+        alt="user"
+        class="m-0 responsive--icon profile-pic"
+      />
+    </span>
+    <span *ngIf="userImg.length === 0 || userImg === undefined">
+      <img
+        src="assets/img/avatar.svg"
+        alt="user"
+        class="m-0 responsive--icon profile-pic"
+      />
+    </span>
+  </a>
+  <div class="dropdown-menu dropdown-menu-right mt-2 animated flipInY">
+    <ul class="dropdown-user">
+      <li>
+        <div class="dw-user-box display-flex align-items-center" align="center">
+          <div class="u-img">
+            <span *ngIf="userImg.length > 0 && userImg != undefined">
+              <img
+                src="{{ envApi + '/' + userImg[0].src }}"
+                alt="user"
+                class="m-0 responsive--icon profile-pic"
+              />
+            </span>
+            <span *ngIf="userImg.length === 0 || userImg == undefined">
+              <img
+                src="assets/img/avatar.svg"
+                alt="user"
+                class="m-0 responsive--icon profile-pic"
+              />
+            </span>
+          </div>
+          <div class="u-text">
+            <h4 class="name-user OpenSans-700 text-left">
+              {{ userName }}
+            </h4>
+            <p class="text-muted">
+              {{ userEmail }}
+            </p>
+          </div>
+        </div>
+      </li>
+      <li role="separator" class="divider"></li>
+      <li class="nav-item">
+        <a
+          class="a-menu-user nav-link OpenSans-400"
+          [routerLink]="[
+            storeAct ? '/account/settings/store-edit' : '/account/setting-user'
+          ]"
+        >
+          <img
+            class="mr-2"
+            src="../../../assets/img/iconos/icons-main/icons/person.svg"
+            alt=""
+            width="18"
+            height="18"
+            title="Person"
+          />
+          Perfil
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a
+          class="a-menu-user nav-link OpenSans-400"
+          [routerLink]="[
+            storeAct ? '/account/settings/store-edit' : '/account/setting-user'
+          ]"
+        >
+          <img
+            class="mr-2"
+            src="../../../assets/img/iconos/icons-main/icons/gear.svg"
+            alt=""
+            width="18"
+            height="18"
+            title="Configuración"
+          />
+          Configuración de tu cuenta
+        </a>
+      </li>
+      <li class="nav-item" (click)="logout()">
+        <a class="a-menu-user nav-link OpenSans-400">
+          <img
+            class="mr-2"
+            src="../../../assets/img/iconos/icons-main/icons/power.svg"
+            alt=""
+            width="18"
+            height="18"
+            title="Logout"
+          />
+          Salir
+        </a>
+      </li>
+    </ul>
+  </div>
 </li>
 <!-- ============================================================== -->
 <!-- END Profile -->
