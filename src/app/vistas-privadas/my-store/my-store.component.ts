@@ -7,8 +7,6 @@ import {
   Bannerimage,
   Srcsize,
 } from '@interfaces/store.interface';
-import { SearchService } from '@services/Search/search.service';
-import { MyStoreService } from './services/my-store.service';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -26,11 +24,7 @@ import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.s
 
 import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component';
 import { DataProductDB, ProductosLoads } from '@interfaces/InterfaceProducto';
-import { UserStoreService } from '../../services/user-store/user-store.service';
 import { Option } from '@interfaces/components-options/sidebar-list.options.interface';
-
-import { BannerService } from '@shared/banner/services/banner.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-my-store',
@@ -40,9 +34,6 @@ import { Subscription } from 'rxjs';
 export class MyStoreComponent implements OnInit, OnDestroy {
   expandSidebar = true;
   StoreName = '';
-  BannerVerifiqued: any;
-  VerifiquedSuccesfull = false;
-  Onerror = false;
 
   profile: Profile;
   anchorsMenu: AnchorsMenu[] = [];
@@ -65,31 +56,13 @@ export class MyStoreComponent implements OnInit, OnDestroy {
   userLog: boolean;
   storeLog: boolean | string;
 
-  imgsBanners: Srcsize = {
-    xl: 'assets/img/Banner/Banner1.svg',
-    l: 'assets/img/Banner/Banner1.svg',
-    m: 'assets/img/Banner/Banner1.svg',
-    s: 'assets/img/Banner/Banner1.svg',
-  };
-
-  bannerSubscription: Subscription;
-  sidebarSubscription: Subscription;
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     public storeService: StoreService,
-    private _searchService: SearchService,
     private homeService: HomeServiceService,
-    private userStoreService: UserStoreService,
-    private _myStoreService: MyStoreService,
-    private _sidebarListService: SidebarListService,
-    private _bannerService: BannerService
-  ) {
-    this.sidebarSubscription = _myStoreService.sidebarExpanded$.subscribe(
-      (sidebarState) => (this.expandSidebar = sidebarState)
-    );
-  }
+    private _sidebarListService: SidebarListService
+  ) {}
 
   ngOnInit() {
     this.loadDataByParams();
@@ -98,10 +71,7 @@ export class MyStoreComponent implements OnInit, OnDestroy {
     // this.VeriquedBanner();
   }
 
-  ngOnDestroy(): void {
-    // Preventing memory leaks
-    this.sidebarSubscription.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 
   public loadDataByParams() {
     combineLatest([this.route.paramMap, this.route.queryParamMap])
@@ -123,33 +93,6 @@ export class MyStoreComponent implements OnInit, OnDestroy {
   }
 
   ngAfterViewInit() {}
-
-  // **** Verificamos si existe un Banner ****//
-  /*   VeriquedBanner() {
-    this.userStoreService
-      .getDataStore(localStorage.getItem('id'), localStorage.getItem('storeId'))
-      .subscribe(
-        (resp: StoreResponse) => {
-          console.log('Banner verifiqued', resp);
-
-          let banners: Srcsize = resp.banner_image[0].src_size;
-
-          if (resp.banner_image.length === 0) {
-            // this.BannerVerifiqued = this.imgsBanners;
-            this._bannerService.setBannerImage(this.imgsBanners);
-          } else {
-            // this.BannerVerifiqued = resp.banner_image[0].src_size;
-            this._bannerService.setBannerImage(banners);
-          }
-          this.VerifiquedSuccesfull = true;
-        },
-        (error) => {
-          this.BannerVerifiqued = 'assets/img/no-image-banner.JPG';
-          this.VerifiquedSuccesfull = true;
-          this.Onerror = true;
-        }
-      );
-  } */
 
   // Expand or contract sidebar-list on responsive mode
   public toogleSidebar(event) {

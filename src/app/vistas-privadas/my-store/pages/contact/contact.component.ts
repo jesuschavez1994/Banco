@@ -10,22 +10,14 @@ import { UserStoreService } from '@services/user-store/user-store.service';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { DataStore, Shedules } from '@models/dataStore.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NgForm } from '@angular/forms';
 import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-import { NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { StoreService } from '@services/store/store.service';
-import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
-import { ActivatedRoute, Params } from '@angular/router';
-import { StoreResponse } from '@interfaces/store.interface';
 import { Title } from '@angular/platform-browser';
-import { FileDetector } from 'protractor';
 import {
   AnchorsMenu,
   SidebarSections,
 } from '@interfaces/components-options/sidebar-list.options.interface';
 import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service';
-
-import { BannerService } from '@shared/banner/services/banner.service';
 
 declare let $: any;
 
@@ -101,8 +93,6 @@ export class ContactComponent implements OnInit {
   ArrayGlobal: any[] = [];
   SchedulesEnd: any[] = [];
   quitarValueUndefined: any[] = [];
-  BannerVerifiqued: any;
-  VerifiquedSuccesfull = false;
 
   Day = [
     {
@@ -174,11 +164,8 @@ export class ContactComponent implements OnInit {
     public storeService: StoreService,
     public snackBar: MatSnackBar,
     config: NgbTimepickerConfig,
-    private activateRoute: ActivatedRoute,
-    private userStoreService: UserStoreService,
     private titleService: Title,
-    private _sidebarListService: SidebarListService,
-    private _bannerService: BannerService
+    private _sidebarListService: SidebarListService
   ) {
     config.seconds = false;
     config.spinners = true;
@@ -241,35 +228,11 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
     this.traerIdStore();
-    // this.VeriquedBanner();
     console.log(this.Day);
 
     this.loadAnchorsMenuData();
     this.setSidebarSections();
   }
-
-  // **** Verificamos si existe un Banner ****//
-  /*   VeriquedBanner() {
-    this.userStoreService
-      .getDataStore(localStorage.getItem('id'), localStorage.getItem('storeId'))
-      .subscribe(
-        (resp: StoreResponse) => {
-          console.log('Banner verifiqued', resp);
-
-          if (resp.banner_image.length === 0) {
-            // this.BannerVerifiqued = this.imgsBanners
-            this._bannerService.setBannerImage(this.imgsBanners);
-          } else {
-            // this.BannerVerifiqued = resp.banner_image['0'].src
-            this._bannerService.setBannerImage(resp.banner_image[0].src_size);
-          }
-          this.VerifiquedSuccesfull = true;
-        },
-        (error) => {
-          this.BannerVerifiqued = 'assets/img/no-image-banner.JPG';
-        }
-      );
-  } */
 
   SocialReason(event: string) {
     console.log(event);

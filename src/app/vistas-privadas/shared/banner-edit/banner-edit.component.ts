@@ -162,6 +162,9 @@ export class BannerEditComponent implements OnInit, OnDestroy, AfterViewInit {
 
   imagePreview(event: ImageCroppedEvent) {
     this.croppedImage = event;
+    console.log('Cropper image data');
+    console.log(event);
+    this._bannerService.setBannerImage(event.base64);
   }
 
   NoImgCropper($event) {
