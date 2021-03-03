@@ -19,7 +19,7 @@ export class SearchService extends Service {
   // ================================= //
 
   SearchProductStore(userId: string, storeId: string, data: any) {
-    const url = `/api/users/${userId}/stores/${storeId}/products_search`
+    const url = `users/${userId}/stores/${storeId}/products_search`
     return this.postQuery(url, data)
   }
 

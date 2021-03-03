@@ -11,6 +11,7 @@ export class FooterCropperComponent implements OnInit {
 
   // Entradas //
   @Input() SaveImage: any ;
+  @Input() NameFile: string;
 
   // Salidas//
   @Output() CambiarImg = new EventEmitter<boolean>();
@@ -36,7 +37,7 @@ export class FooterCropperComponent implements OnInit {
     });
 
     const avatar = new Avatar(
-      this.SaveImage
+      this.SaveImage, this.NameFile
     );
 
     this.usuarioService.ImagenPerfil(avatar, localStorage.getItem('id')).subscribe((Response: any) => {
