@@ -70,8 +70,7 @@ export class BannerEditComponent implements OnInit, OnDestroy, AfterViewInit {
     this.verifyBackendBanner();
     this.bannerSubscription = _bannerService.bannerImageData$.subscribe(
       (bannerData: any) => {
-        this.images = bannerData;
-        this.currentImg = this.images.xl;
+        this.formatBannerImage(bannerData);
       }
     );
   }
@@ -105,8 +104,6 @@ export class BannerEditComponent implements OnInit, OnDestroy, AfterViewInit {
 
     if (widthWindow >= 1100) {
       this.currentImg = this.images.xl;
-      console.log('Current banner image:');
-      console.log(this.currentImg);
     }
   }
 
@@ -160,9 +157,6 @@ export class BannerEditComponent implements OnInit, OnDestroy, AfterViewInit {
 
   imagePreview(event: ImageCroppedEvent) {
     this.croppedImage = event;
-    console.log('Cropper image data');
-    console.log(event);
-    this._bannerService.setBannerImage(event.base64);
   }
 
   NoImgCropper($event) {
@@ -272,5 +266,16 @@ export class BannerEditComponent implements OnInit, OnDestroy, AfterViewInit {
         }, 200);
       }
     }, 1000);
+  }
+
+  formatBannerImage(bannerData: any) {
+    console.log('Typeof baer data ');
+    console.log(typeof bannerData);
+    if (typeof bannerData === 'object') {
+      this.images = bannerData;
+      this.currentImg = this.images.xl;
+    } else {
+      this.currentImg = bannerData;
+    }
   }
 }
