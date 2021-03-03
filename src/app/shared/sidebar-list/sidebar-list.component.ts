@@ -128,6 +128,8 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   productOptionMenu = false;
   contactOptionMenu = false;
 
+  queryParams;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -235,40 +237,36 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   public routerLinkActive() {
 
-    // if (this.productsOptionMenu){
-      this.productOptionMenu = false;
-      this.contactOptionMenu = false;
-      // this.productOptionMenu.nativeElement.classList.remove('active');
-      // this.contactOptionMenu.nativeElement.classList.remove('active');
+    this.productOptionMenu = false;
+    this.contactOptionMenu = false;
 
-      this.route.paramMap.subscribe(params => {
-        console.log('routerLinkActive');
-        // console.log(this.anchorsMenu.wordToMatch); // esto es undefined hay que arreglar
+    this.route.paramMap.subscribe(params => {
 
-        if ((params.has('show') )) {
+      if ((params.has('show') )) {
 
-          if (this.anchorsMenu) {
+        if (this.anchorsMenu) {
 
-            if (params.get('show') === this.anchorsMenu.wordToMatch) {
-              // this.productOptionMenu.nativeElement.classList.add('active');
-              this.productOptionMenu = true;
-            }
-
+          if (params.get('show') === this.anchorsMenu.wordToMatch) {
+            this.productOptionMenu = true;
           }
 
-        } else {
-          // this.contactOptionMenu.nativeElement.classList.add('active');
-          this.contactOptionMenu = true;
         }
 
-      });
-    // }
+      } else {
+
+        this.contactOptionMenu = true;
+      }
+
+    });
+
 
 
   }
 
   // // Standard Filter
   public loadOptionsFilter( queryParam: ParamMap) {
+
+    this.queryParams = queryParam;
 
     const queryKeys = queryParam.keys;
 
@@ -368,6 +366,15 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   }
 
 
+  /**
+   * @description Se ejecuta cuando se realiza click sobre alguna opción de un filtro
+   * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christopher<@>matiz.com.ve
+   * @date 03/03/2021
+   * @param {Option} option
+   * @param {Filter} filter
+   * @param {ParamMap} queryParam
+   * @memberof SidebarListComponent
+   */
   public selectOptionsFilter2( option: Option, filter: Filter ){
 
     let navigationOptions;
@@ -452,7 +459,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     });
 
-    // const inheritedQueryParams
     console.log('selectOptionsFilter2 después');
     console.log(queryParams);
 
@@ -479,28 +485,15 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   public getFilter( filter ) {
 
-    // console.log('getFilter');
-    // console.log(filter);
-    // console.log(this.filters);
-
     if (filter.parentFilterId) {
-
-      // console.log('filter.parentFilterId');
-      // console.log(filter.parentFilterId);
 
       const parentFilter = this.filters.find( optionsFilter => {
         return optionsFilter.filterId === filter.parentFilterId;
       });
 
-      // console.log('parentFilter');
-      // console.log(parentFilter);
-
       const parentOption = parentFilter.options.find ( parentFilterOption => {
         return parentFilterOption.isSelected;
       });
-
-      // console.log('parentOption');
-      // console.log(parentOption);
 
       // Si encuentra una opción del parent Filter seleccionada
       // Si es undefined es porque todos son false, es decir no están seleccionadas
@@ -509,9 +502,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
         const filterOptions = filter.options.filter(filterOption => {
           return filterOption.parentOptionId === parentOption.optionId;
         });
-
-        // console.log('filterOptions');
-        // console.log(filterOptions);
 
         return filterOptions;
 
@@ -537,14 +527,24 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     optionSelected: Option,
     filterSelected: Filter,
     toggleOption: boolean = true,
-    selectTheOption: boolean = true,
-    queryParamTest?
+    selectTheOption: boolean = true
   ){
 
-    console.log('markOption queryParamTest');
-    console.log(queryParamTest);
     let queryParams;
-    queryParams = {};
+    // queryParams = {};
+
+    //
+    queryParams = this.queryParams;
+    let queryParamsFormat;
+
+    queryParamsFormat = {};
+
+    queryParams.keys.forEach(paramKey => {
+      queryParamsFormat[paramKey] = queryParams.get(paramKey);
+    });
+
+    queryParams = queryParamsFormat;
+    //
 
     if (filterSelected.type === 'multiple') {
 
