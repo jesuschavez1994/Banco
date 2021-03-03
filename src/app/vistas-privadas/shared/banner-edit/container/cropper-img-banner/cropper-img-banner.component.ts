@@ -147,7 +147,7 @@ export class CropperImgBannerComponent implements OnInit {
                 this.AlertSucces = false;
                 this.SaveSucessFull.emit(this.AlertSucces);
                 this.DragZoneShow.emit(this.showInput);
-            }, 8000);
+            }, 2500);
         }, error => {
             this.ErrorAlert = true;
             this.spinner = false;

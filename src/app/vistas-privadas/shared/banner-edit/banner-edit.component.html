@@ -9,7 +9,6 @@
         type="button"
         cdkOverlayOrigin
         #trigger="cdkOverlayOrigin"
-        mat-button
       >
         <span *ngIf="!isOpen">Subir foto de portada</span>
         <!-- {{isOpen ? "Cerrar" : "Subir foto de portada"}} -->
@@ -86,7 +85,7 @@
             (NoCropperImg)="NoImgCropper($event)"
             (ErrorImage)="ShowError($event)"
             (SaveSucessFull)="SaveImgOk($event)"
-            *ngIf="showCropper && file?.progress === 100"
+            *ngIf="showCropper"
             (DragZoneShow)="DragZoneShow($event)"
           >
           </app-cropper-img-banner>
