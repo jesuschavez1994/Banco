@@ -212,11 +212,12 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             this.loadProductsCards(params, queryParam);
             this.wasFirstLoadedProducts = true;
           }
-        } else {
+        } else { // cuando los dato de tienda no cambian
 
           if (this.wasFirstLoadedProducts) {
 
-            if (this.wasChangedQueryParam) {
+            if (this.wasChangedQueryParam) { // pero los datos de queryParams si
+              this.sidebarList.loadOptionsFilter(queryParam); // actualizamos los valores queryParams internos del sidebar-list
               this.loadProductsCards(params, queryParam);
 
             }

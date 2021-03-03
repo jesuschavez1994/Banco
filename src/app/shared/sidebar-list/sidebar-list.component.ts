@@ -266,12 +266,12 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   // // Standard Filter
   public loadOptionsFilter( queryParam: ParamMap) {
 
-    this.queryParams = queryParam;
+    this.queryParams = queryParam; // guardamos de forma global los valores del queryParam de la URL
 
     const queryKeys = queryParam.keys;
 
-    console.log('loadOptionsFilter antes');
-    console.log(queryParam);
+    // console.log('loadOptionsFilter antes');
+    // console.log(queryParam);
 
     // retorna true o false, si la opción tiene el mismo valor que el valor pasado por argumento
     // Si existe el atributo value en el option toma ese atributo para la comparación
@@ -360,8 +360,8 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     }
 
-    console.log('loadOptionsFilter despues');
-    console.log(queryParam);
+    // console.log('loadOptionsFilter despues');
+    // console.log(queryParam);
 
   }
 
@@ -383,8 +383,8 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     // seleccionamos las opciones de filtro y creamos el queryParam
     queryParams = this.markOption( option, filter );
 
-    console.log('selectOptionsFilter2 antes');
-    console.log(queryParams);
+    // console.log('selectOptionsFilter2 antes');
+    // console.log(queryParams);
 
     // Navigation With Filters
 
@@ -459,15 +459,18 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     });
 
-    console.log('selectOptionsFilter2 después');
-    console.log(queryParams);
+    // console.log('selectOptionsFilter2 después');
+    // console.log(queryParams);
 
     if (Object.keys(queryParams).length > 0) {
+
+      this.queryParams = queryParams;
+
       navigationOptions = {
         relativeTo: this.route,
         queryParams,
-        queryParamsHandling: 'merge'
       };
+
     }
 
     this.router.navigate(
@@ -531,20 +534,31 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   ){
 
     let queryParams;
-    // queryParams = {};
-
-    //
-    queryParams = this.queryParams;
     let queryParamsFormat;
 
+    queryParams = {};
     queryParamsFormat = {};
 
-    queryParams.keys.forEach(paramKey => {
-      queryParamsFormat[paramKey] = queryParams.get(paramKey);
-    });
 
-    queryParams = queryParamsFormat;
-    //
+
+    if (Object.keys(this.queryParams).length > 0) {
+      if (this.queryParams.keys.length > 0) {
+
+        queryParams = this.queryParams; // asignamos los valores previos del queryParam para no perder esos datos
+
+        queryParams.keys.forEach(paramKey => {
+          queryParamsFormat[paramKey] = queryParams.get(paramKey);
+        });
+
+        // Agregamos los key y valor de los valores de los query params anteriores
+        // Para que no sean eliminado al agregar a la url los query params de las
+        // Opciones de filtrado
+        queryParams = queryParamsFormat;
+
+      }
+    }
+
+
 
     if (filterSelected.type === 'multiple') {
 
