@@ -23,8 +23,8 @@
             [ngClass]="{'image-cropper-flex': !containWithinAspectRatio,
             'image-cropper': containWithinAspectRatio}"
             [imageChangedEvent]="imageChangedEvent"
-            [aspectRatio]="4/1"
-            [maintainAspectRatio]="true"
+            [aspectRatio]="16/9"
+            [maintainAspectRatio]="false"
             format="png | jpeg"
             [transform]="transform"
             [onlyScaleDown]="false"
@@ -33,10 +33,10 @@
             (imageLoaded)="imageLoaded()"
             (cropperReady)="cropperReady($event)"
             (loadImageFailed)="loadImageFailed()"
-            [containWithinAspectRatio]="containWithinAspectRatio"
+            [containWithinAspectRatio]="false"
             [imageQuality]="100"
         ></image-cropper>
-        
+
         <ng-container *ngIf="spinner && !ErrorAlert && !AlertSucces">
             <app-spinner></app-spinner>
             <span class="mt-4 family-400">Procesando tu foto</span>

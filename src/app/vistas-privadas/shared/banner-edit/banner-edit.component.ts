@@ -54,15 +54,15 @@ export class BannerEditComponent implements OnInit, AfterViewInit {
     const widthWindow = window.innerWidth;
 
     if ( widthWindow <= 480 ){
-      this.currentImg = this.imgs.s;
+      this.currentImg = this.imgs.xl;
     }
 
     if (  widthWindow > 480 && widthWindow < 780){
-      this.currentImg = this.imgs.m;
+      this.currentImg = this.imgs.xl;
     }
 
     if (  widthWindow >= 781 && widthWindow < 1100 ) {
-      this.currentImg = this.imgs.l;
+      this.currentImg = this.imgs.xl;
     }
 
     if ( widthWindow >=  1100 ){
@@ -165,6 +165,9 @@ export class BannerEditComponent implements OnInit, AfterViewInit {
       this.isexpand = false;
     }else{
       this.isOpen = false;
+    }
+    if($event === false){
+      this.showCropper = false;
     }
   }
 
