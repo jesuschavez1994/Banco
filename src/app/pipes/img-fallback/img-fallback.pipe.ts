@@ -20,10 +20,14 @@ export class ImgFallbackPipe implements PipeTransform {
         break;
       case 'banner': {
         imgDefault = 'assets/img/no-image-banner.jpg';
+        console.log('Pipe input image');
+        console.log(img);
         let image = '';
         !img
           ? (image = this.useDefaultImg(imgDefault))
           : (image = this.formatImage(img));
+        console.log('Image returnig from pipe: ');
+        console.log(image);
         return image;
       }
       case 'banner-medick':
@@ -77,7 +81,7 @@ export class ImgFallbackPipe implements PipeTransform {
 
   private formatImage(imageData: string): string {
     // If the image is encrypted with base64, we return the image as is.
-    if (imageData.slice(0, 4).indexOf('data:') >= 0) {
+    if (imageData.slice(0, 5).indexOf('data:') >= 0) {
       return `${imageData}`;
     } else {
       return `${URL}/${imageData}`;
