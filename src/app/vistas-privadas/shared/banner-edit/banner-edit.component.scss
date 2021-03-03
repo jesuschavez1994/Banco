@@ -105,7 +105,7 @@
   position: relative;
 
   .imgPreview{
-    border: 1px dashed #bec0c2;
+    // border: 1px dashed #bec0c2;
   }
 
   img{
@@ -124,6 +124,12 @@
     line-height: 1.43;
     padding: 6px 13px;
 
+    button{
+      &:focus{
+        -webkit-box-shadow: none;
+      }
+    }
+
     .camera{
       background-image: url(../../../../assets/img/iconos/icons-main/icons/camera.svg);
       background-repeat: no-repeat;
@@ -133,6 +139,7 @@
       background-position-y: center;
       background-position-x: center;
       border: none;
+      
     }
 
     .button-upload-file{

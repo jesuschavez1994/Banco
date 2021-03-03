@@ -63,10 +63,10 @@ export class MyStoreComponent implements OnInit {
   storeLog: boolean | string
 
   imgsBanners: Srcsize = {
-    xl: 'assets/img/Banner/Banner1.svg',
-    l: 'assets/img/Banner/Banner1.svg',
-    m: 'assets/img/Banner/Banner1.svg',
-    s: 'assets/img/Banner/Banner1.svg',
+    xl: 'assets/img/no-image-banner.jpg',
+    l: 'assets/img/no-image-banner.jpg',
+    m: 'assets/img/no-image-banner.jpg',
+    s: 'assets/img/no-image-banner.jpg',
   }
 
   constructor(

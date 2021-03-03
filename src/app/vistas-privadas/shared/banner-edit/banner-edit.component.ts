@@ -129,10 +129,10 @@ export class BannerEditComponent implements OnInit, AfterViewInit {
     this.showInput = $event.Input;
     this.showCropper = $event.cropper;
     this.isexpand = false;
-    if (this.showInput === true){
-      // tslint:disable-next-line: max-line-length
-      this.croppedImage = 'assets/img/Banner/Banner1.svg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend
-    }
+    // if (this.showInput === true){
+    //   // tslint:disable-next-line: max-line-length
+    //   this.croppedImage = 'assets/img/no-image-banner.jpg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend
+    // }
     console.log($event);
   }
 
@@ -142,10 +142,10 @@ export class BannerEditComponent implements OnInit, AfterViewInit {
     this.isexpand = false;
     this.showInput = true;
     this.ErrorImageFailed = false;
-    if (this.showInput === true){
-      // tslint:disable-next-line: max-line-length
-      this.croppedImage = 'assets/img/Banner/Banner1.svg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend
-    }
+    // if (this.showInput === true){
+    //   // tslint:disable-next-line: max-line-length
+    //   this.croppedImage = 'assets/img/no-image-banner.jpg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend
+    // }
   }
 
   ShowError($event: boolean){
@@ -154,7 +154,7 @@ export class BannerEditComponent implements OnInit, AfterViewInit {
       this.showCropper = false;
 
       // tslint:disable-next-line: max-line-length
-      this.croppedImage = 'assets/img/Banner/Banner1.svg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend
+      //this.croppedImage = 'assets/img/no-image-banner.jpg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend
     }
     console.log(this.ErrorImageFailed);
   }
