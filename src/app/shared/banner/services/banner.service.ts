@@ -10,7 +10,7 @@ export class BannerService {
   private bannerImageDataSource = new Subject<
     BannerImage[] | Srcsize | string
   >();
-  private bannerEditImageDataSource = new Subject<BannerImage[] | string>();
+  private bannerEditImageDataSource = new Subject<BannerImage[] | any>();
 
   // Observable data streams
   bannerImageData$ = this.bannerImageDataSource.asObservable();
