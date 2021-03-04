@@ -33,7 +33,7 @@ export class BannerEditComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('dropzone') dropzone: ElementRef;
   isexpand = false;
 
-  currentImg: string;
+  currentImg: any;
   files: any[] = [];
   isOpen = false;
 
@@ -153,7 +153,7 @@ export class BannerEditComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   imagePreview(event: ImageCroppedEvent) {
-    this.croppedImage = event;
+    this.currentImg = event;
   }
 
   NoImgCropper($event) {
