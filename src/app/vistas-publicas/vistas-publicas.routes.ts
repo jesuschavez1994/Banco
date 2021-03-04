@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router'
-/* 
+/*
   Components used in the routes.
 */
 import { HomeComponent } from './home/home.component'
@@ -42,22 +42,22 @@ export const ROUTES: Routes = [
   {
     path: 'business-detail/:idStore', // Se obtiene el id de la tienda para mostrar su listo productos
     component: BusinessDetailComponent,
-    canActivate: [VerifyTokenGuard],
+    // canActivate: [VerifyTokenGuard],
   },
   {
     path: 'business-detail/:idStore/:show', // Se obtiene el id de la tienda para mostrar su listo productos
     component: BusinessDetailComponent,
-    canActivate: [VerifyTokenGuard],
-    
+    // canActivate: [VerifyTokenGuard],
+
   },
   {
     path: 'business-detail/:idStore/:show/:idProduct', // Se obtiene el id de la tienda para mostrar su listo productos
     component: BusinessDetailComponent,
-    canActivate: [VerifyTokenGuard],
+    // canActivate: [VerifyTokenGuard],
   },
   {
     path: 'page-under-construction',
     component: PageUnderConstructionComponent,
-    canActivate: [VerifyTokenGuard],
+    // canActivate: [VerifyTokenGuard],
   },
 ]

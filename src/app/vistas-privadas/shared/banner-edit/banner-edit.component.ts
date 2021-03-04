@@ -1,22 +1,33 @@
-import {  Component, HostBinding,
-          HostListener, Input, OnInit, AfterViewInit,
-          Renderer2, ViewChild,
-          ElementRef } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  HostListener,
+  Input,
+  OnInit,
+  OnDestroy,
+  AfterViewInit,
+  Renderer2,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { StoreResponse, Bannerimage, Srcsize } from '@interfaces/store.interface';
+import {
+  StoreResponse,
+  Bannerimage,
+  Srcsize,
+} from '@interfaces/store.interface';
 import { UserStoreService } from '@services/user-store/user-store.service';
+
+import { BannerService } from '@shared/banner/services/banner.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-banner-edit',
   templateUrl: './banner-edit.component.html',
-  styleUrls: ['./banner-edit.component.scss']
+  styleUrls: ['./banner-edit.component.scss'],
 })
-
-
-export class BannerEditComponent implements OnInit, AfterViewInit {
-
-  @Input() imgs: Srcsize;
+export class BannerEditComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() Onerror: boolean;
 
   @ViewChild('dropzone') dropzone: ElementRef;
@@ -39,67 +50,87 @@ export class BannerEditComponent implements OnInit, AfterViewInit {
 
   @HostBinding('class.fileover') fileover: boolean;
 
-  constructor(private renderer: Renderer2, private userStoreService: UserStoreService) { }
+  // Banner related parameters
+  images: any;
+  bannerSubscription: Subscription;
 
-  ngOnInit(): void {
-    this.currentImg = this.imgs.xl;
-    console.log('img Banner', this.imgs);
+  imgsBanners: Srcsize = {
+    xl: 'assets/img/Banner/Banner1.svg',
+    l: 'assets/img/Banner/Banner1.svg',
+    m: 'assets/img/Banner/Banner1.svg',
+    s: 'assets/img/Banner/Banner1.svg',
+  };
+
+  constructor(
+    private renderer: Renderer2,
+    private userStoreService: UserStoreService,
+    private _bannerService: BannerService
+  ) {
+    this.verifyBackendBanner();
+    this.bannerSubscription = _bannerService.bannerImageData$.subscribe(
+      (bannerData: any) => {
+        this.formatBannerImage(bannerData);
+      }
+    );
   }
 
-  ngAfterViewInit(){
+  ngOnInit(): void {}
+
+  ngAfterViewInit() {}
+
+  ngOnDestroy(): void {
+    // Preventing memory leaks
+    this.bannerSubscription.unsubscribe();
   }
 
   @HostListener('window:resize', ['$event'])
-  public changeImg( $event: Event){
+  public changeImg($event: Event) {
     const widthWindow = window.innerWidth;
 
-    if ( widthWindow <= 480 ){
-      this.currentImg = this.imgs.s;
+    if (widthWindow <= 480) {
+      this.currentImg = this.images.xl;
     }
 
-    if (  widthWindow > 480 && widthWindow < 780){
-      this.currentImg = this.imgs.m;
+    if (widthWindow > 480 && widthWindow < 780) {
+      this.currentImg = this.images.xl;
     }
 
-    if (  widthWindow >= 781 && widthWindow < 1100 ) {
-      this.currentImg = this.imgs.l;
+    if (widthWindow >= 781 && widthWindow < 1100) {
+      this.currentImg = this.images.xl;
     }
 
-    if ( widthWindow >=  1100 ){
-      this.currentImg = this.imgs.xl;
+    if (widthWindow >= 1100) {
+      this.currentImg = this.images.xl;
     }
-
   }
 
   // DragLeave Listener
-  @HostListener('dragover', ['$event']) onDragOver(evt){
+  @HostListener('dragover', ['$event']) onDragOver(evt) {
     evt.preventDefault();
     evt.stopPropagation();
     console.log('Drag Over');
     this.fileover = true;
   }
 
-
   // Drop Listener
-  @HostListener('drop', ['$event']) public ondrop(evt){
+  @HostListener('drop', ['$event']) public ondrop(evt) {
     evt.preventDefault();
     evt.stopPropagation();
     this.fileover = false;
     const files = evt.dataTransfer.files;
     console.log('Drag Over');
-    if (files.length > 0){
+    if (files.length > 0) {
       console.log('You droped');
     }
-
   }
 
-  public fileBrowseHandler(archivo: any){
-    if ( !archivo ) {
+  public fileBrowseHandler(archivo: any) {
+    if (!archivo) {
       this.imageChangedEvent = null;
       return;
     }
 
-    if ( archivo ) {
+    if (archivo) {
       this.type_fyle = archivo.target.files[0].type;
       this.prepareFilesList(archivo.target.files);
       this.showInput = false;
@@ -107,25 +138,25 @@ export class BannerEditComponent implements OnInit, AfterViewInit {
       // this.isexpand = true;
       this.imageChangedEvent = archivo;
       const longitud = archivo.target.files[0].name.length;
-      const  name = archivo.target.files[0].name.split(' ');
-      this.NameFile = this.modificarname(name, longitud),
-      console.log('names files', this.NameFile);
-
+      const name = archivo.target.files[0].name.split(' ');
+      (this.NameFile = this.modificarname(name, longitud)),
+        console.log('names files', this.NameFile);
     }
   }
 
-  modificarname(name: any, longitud: number){
+  modificarname(name: any, longitud: number) {
     // tslint:disable-next-line: forin
-    for ( const i in name){
-      return   name[i] = name[i][0].toUpperCase() + name[i].substr(1, longitud - 5);
+    for (const i in name) {
+      return (name[i] =
+        name[i][0].toUpperCase() + name[i].substr(1, longitud - 5));
     }
   }
 
-  imagePreview(event: ImageCroppedEvent){
+  imagePreview(event: ImageCroppedEvent) {
     this.croppedImage = event;
   }
 
-  NoImgCropper($event){
+  NoImgCropper($event) {
     this.showInput = $event.Input;
     this.showCropper = $event.cropper;
     this.isexpand = false;
@@ -136,65 +167,78 @@ export class BannerEditComponent implements OnInit, AfterViewInit {
     console.log($event);
   }
 
-  Close(){
+  Close() {
     this.isOpen = !this.isOpen;
     this.showCropper = false;
     this.isexpand = false;
     this.showInput = true;
     this.ErrorImageFailed = false;
-    // if (this.showInput === true){
-    //   // tslint:disable-next-line: max-line-length
-    //   this.croppedImage = 'assets/img/no-image-banner.jpg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend
-    // }
+    this.verifyBackendBanner();
+    /*     if (this.showInput === true) {
+      // tslint:disable-next-line: max-line-length
+      this.croppedImage = 'assets/img/Banner/Banner1.svg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend
+    } */
   }
 
-  ShowError($event: boolean){
+  ShowError($event: boolean) {
     this.ErrorImageFailed = $event;
-    if (this.ErrorImageFailed === true){
+    if (this.ErrorImageFailed === true) {
       this.showCropper = false;
-
+      this.verifyBackendBanner();
+      /* 
       // tslint:disable-next-line: max-line-length
-      //this.croppedImage = 'assets/img/no-image-banner.jpg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend
+      this.croppedImage = 'assets/img/Banner/Banner1.svg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend */
     }
     console.log(this.ErrorImageFailed);
   }
 
-  SaveImgOk($event){
+  SaveImgOk($event) {
     console.log('ok', $event);
-    if ( $event === true ){
+    if ($event === true) {
       this.isexpand = false;
-    }else{
+    } else {
       this.isOpen = false;
+    }
+    if ($event === false) {
+      this.showCropper = false;
     }
   }
 
-  DragZoneShow($event: boolean){
+  DragZoneShow($event: boolean) {
     this.showInput = $event;
   }
 
-
   // **** Verificamos si existe un Banner ****//
-  VeriquedBanner(){
-    this.userStoreService.getDataStore(
-      localStorage.getItem('id'),
-      localStorage.getItem('storeId'))
-      .subscribe( (resp: StoreResponse) => {
-        console.log('Banner verifiqued', resp);
-    });
+  verifyBackendBanner() {
+    this.userStoreService
+      .getDataStore(localStorage.getItem('id'), localStorage.getItem('storeId'))
+      .subscribe(
+        (resp: StoreResponse) => {
+          console.log('Banner verifiqued', resp);
+
+          if (resp.banner_image.length === 0) {
+            this._bannerService.setBannerImage(this.imgsBanners);
+          } else {
+            this._bannerService.setBannerImage(resp.banner_image[0].src_size);
+          }
+        },
+        (error) => {
+          this._bannerService.setBannerImage('assets/img/no-image-banner.JPG');
+        }
+      );
   }
 
   // Relcaion de progreso //
 
   prepareFilesList(files: Array<any>) {
-
-    if (this.files.length >= 1){
+    if (this.files.length >= 1) {
       this.files.splice(0, 1);
       for (const item of files) {
         item.progress = 0;
         this.files.push(item);
         console.log(this.files);
       }
-    }else{
+    } else {
       for (const item of files) {
         item.progress = 0;
         this.files.push(item);
@@ -202,7 +246,6 @@ export class BannerEditComponent implements OnInit, AfterViewInit {
       }
     }
     this.uploadFilesSimulator(0);
-
   }
 
   uploadFilesSimulator(index: number) {
@@ -224,4 +267,12 @@ export class BannerEditComponent implements OnInit, AfterViewInit {
     }, 1000);
   }
 
+  formatBannerImage(bannerData: any) {
+    if (typeof bannerData === 'object') {
+      this.images = bannerData;
+      this.currentImg = this.images.xl;
+    } else {
+      this.currentImg = bannerData;
+    }
+  }
 }

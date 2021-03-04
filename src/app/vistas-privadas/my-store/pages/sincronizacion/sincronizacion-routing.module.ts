@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
-/* 
+/*
   Components used in the routes.
 */
 import { BankProductComponent } from './pages/bank-product/bank-product.component'

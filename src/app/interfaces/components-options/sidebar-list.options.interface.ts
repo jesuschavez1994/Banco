@@ -22,68 +22,68 @@
  *
  */
 export interface SidebarListOptions {
-  anchorsMenu: AnchorsMenu
-  profile: Profile
+  anchorsMenu: AnchorsMenu;
+  profile: Profile;
 }
 
 export interface Profile {
-  name: string
-  contact: Contact
-  img: string
-  isVerified: boolean
+  name: string;
+  contact: Contact;
+  img: string;
+  isVerified: boolean;
 }
 
 export interface Contact {
-  url: string
-  name: string
+  url: string;
+  name: string;
 }
 
 export interface AnchorsMenu {
-  anchorName: string
-  anchorLink: string
-  productLink?: string
-  contactLink?: string
-  wordToMatch?: string
-  synchronizationLink?: string
-  salesLink?: string
+  anchorName: string;
+  anchorLink: string;
+  productLink?: string;
+  contactLink?: string;
+  wordToMatch?: string;
+  synchronizationLink?: string;
+  salesLink?: string;
 }
 
 export interface SidebarSections {
-  bussinessProfile?: boolean
-  anchorOptions?: boolean
-  filters?: boolean
+  bussinessProfile?: boolean;
+  anchorOptions?: boolean;
+  filters?: boolean;
 }
 
 // Filters
 export interface Filter {
-  filterId?: number
-  title: string
+  filterId?: number;
+  title: string;
   // type: 'single' | 'multiple';
-  type: string
-  paramName: string
-  parentFilterId?: number
-  options: Option[]
+  type: string;
+  paramName: string;
+  parentFilterId?: number;
+  options: Option[];
 }
 
 export interface Option {
-  optionId?: number
-  parentOptionId?: number
-  name: string
-  value?: any[] | any
-  totalFounds: number
-  isSelected?: boolean
+  optionId?: number;
+  parentOptionId?: number;
+  name: string;
+  value?: any[] | any;
+  totalFounds: number;
+  isSelected?: boolean;
 }
 
 // Others
 
 export interface SelectedEmitter {
-  currentCategory
-  isSelectedCategory: boolean
-  SelectedSubCategories?
+  currentCategory;
+  isSelectedCategory: boolean;
+  SelectedSubCategories?;
 }
 
 // Activated Routes //
 
 export interface ActivatedRoutesParams {
-  url: string
+  url: string;
 }
