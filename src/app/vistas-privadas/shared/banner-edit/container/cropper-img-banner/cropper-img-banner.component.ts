@@ -64,11 +64,11 @@ export class CropperImgBannerComponent implements OnInit {
   }
 
   imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event.base64;
+    // this.croppedImage = event.base64;
     // console.log(event, base64ToFile(event.base64));
     // console.log(event.base64);
     this._bannerService.setBannerImage(event.base64);
-    setTimeout(() => this.previewIMG.emit(this.croppedImage), 0);
+    // setTimeout(() => this.previewIMG.emit(this.croppedImage), 0);
     this.base64ToFileSave = event;
   }
 
