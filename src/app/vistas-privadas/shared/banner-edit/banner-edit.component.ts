@@ -28,7 +28,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./banner-edit.component.scss'],
 })
 export class BannerEditComponent implements OnInit, OnDestroy, AfterViewInit {
-  @Input() imgs: Srcsize;
   @Input() Onerror: boolean;
 
   @ViewChild('dropzone') dropzone: ElementRef;
@@ -75,9 +74,7 @@ export class BannerEditComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
-  ngOnInit(): void {
-    // this.verifyBackendBanner();
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {}
 
@@ -91,15 +88,15 @@ export class BannerEditComponent implements OnInit, OnDestroy, AfterViewInit {
     const widthWindow = window.innerWidth;
 
     if (widthWindow <= 480) {
-      this.currentImg = this.imgs.xl;
+      this.currentImg = this.images.xl;
     }
 
     if (widthWindow > 480 && widthWindow < 780) {
-      this.currentImg = this.imgs.xl;
+      this.currentImg = this.images.xl;
     }
 
     if (widthWindow >= 781 && widthWindow < 1100) {
-      this.currentImg = this.imgs.xl;
+      this.currentImg = this.images.xl;
     }
 
     if (widthWindow >= 1100) {
@@ -163,10 +160,11 @@ export class BannerEditComponent implements OnInit, OnDestroy, AfterViewInit {
     this.showInput = $event.Input;
     this.showCropper = $event.cropper;
     this.isexpand = false;
-    if (this.showInput === true) {
+    this.verifyBackendBanner();
+    /*     if (this.showInput === true) {
       // tslint:disable-next-line: max-line-length
       this.croppedImage = 'assets/img/Banner/Banner1.svg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend
-    }
+    } */
     console.log($event);
   }
 
@@ -176,19 +174,21 @@ export class BannerEditComponent implements OnInit, OnDestroy, AfterViewInit {
     this.isexpand = false;
     this.showInput = true;
     this.ErrorImageFailed = false;
-    if (this.showInput === true) {
+    this.verifyBackendBanner();
+    /*     if (this.showInput === true) {
       // tslint:disable-next-line: max-line-length
       this.croppedImage = 'assets/img/Banner/Banner1.svg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend
-    }
+    } */
   }
 
   ShowError($event: boolean) {
     this.ErrorImageFailed = $event;
     if (this.ErrorImageFailed === true) {
       this.showCropper = false;
-
+      this.verifyBackendBanner();
+      /* 
       // tslint:disable-next-line: max-line-length
-      this.croppedImage = 'assets/img/Banner/Banner1.svg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend
+      this.croppedImage = 'assets/img/Banner/Banner1.svg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend */
     }
     console.log(this.ErrorImageFailed);
   }
@@ -269,8 +269,6 @@ export class BannerEditComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   formatBannerImage(bannerData: any) {
-    console.log('Typeof baer data ');
-    console.log(typeof bannerData);
     if (typeof bannerData === 'object') {
       this.images = bannerData;
       this.currentImg = this.images.xl;
