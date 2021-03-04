@@ -9,7 +9,6 @@
         type="button"
         cdkOverlayOrigin
         #trigger="cdkOverlayOrigin"
-        mat-button
       >
         <span *ngIf="!isOpen">Subir foto de portada</span>
         <!-- {{isOpen ? "Cerrar" : "Subir foto de portada"}} -->
@@ -18,7 +17,7 @@
 
     <img
       *ngIf="!showCropper"
-      style="width: auto; height: auto"
+      style="width:100%"
       #imgBanner
       [src]="currentImg | imgFallback: 'banner'"
       alt="banner"

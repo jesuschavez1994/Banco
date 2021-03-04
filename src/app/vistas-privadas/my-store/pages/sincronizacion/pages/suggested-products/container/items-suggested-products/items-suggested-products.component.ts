@@ -1,20 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { StoreService } from '@services/store/store.service'
-import { ActivatedRoute, Params, Router } from '@angular/router'
-import { Descripcion } from '@interfaces/sincronizacion'
-import { Total, Suggestion, Datum } from '@interfaces/sincronizacion'
-import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service'
-import { FormGroup, FormControl } from '@angular/forms'
-import { ProductosLoads } from '@interfaces/InterfaceProducto'
-import { Termino } from '@models/buscador.model'
-import { BannerOptions } from '@interfaces/components-options/banner.options.interface'
-import { NgxSpinnerService } from 'ngx-spinner'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { SyncProductsDataService } from '../../../../services/sync-products-data.service'
-import { FilterOption } from '@interfaces/components-options/search-bar.options.interface'
+import { Component, Input, OnInit } from '@angular/core';
+import { StoreService } from '@services/store/store.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Descripcion } from '@interfaces/sincronizacion';
+import { Total, Suggestion, Datum } from '@interfaces/sincronizacion';
+import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service';
+import { FormGroup, FormControl } from '@angular/forms';
+import { ProductosLoads } from '@interfaces/InterfaceProducto';
+import { Termino } from '@models/buscador.model';
+import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SyncProductsDataService } from '../../../../services/sync-products-data.service';
+import { FilterOption } from '@interfaces/components-options/search-bar.options.interface';
 
-import { StoreResponse } from '@interfaces/store.interface'
-import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface'
+import { StoreResponse } from '@interfaces/store.interface';
+import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
 import {
   // Category,
   Profile,
@@ -23,22 +23,25 @@ import {
   SelectedEmitter,
   Filter,
   // PriceRange,
-} from '@interfaces/components-options/sidebar-list.options.interface'
+  Option,
+  SidebarSections,
+} from '@interfaces/components-options/sidebar-list.options.interface';
+import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service';
 
 export interface ICarouselItem {
-  bank_id: number
-  description: string
-  id: number
-  images: []
-  name: string
-  marginLeft?: number
+  bank_id: number;
+  description: string;
+  id: number;
+  images: [];
+  name: string;
+  marginLeft?: number;
 }
 
 interface ProductToSync {
-  bank_id: number
-  product_id: number
-  name: string
-  checkedState?: boolean
+  bank_id: number;
+  product_id: number;
+  name: string;
+  checkedState?: boolean;
 }
 
 @Component({
@@ -50,62 +53,64 @@ interface ProductToSync {
 export class ItemsSuggestedProductsComponent implements OnInit {
   imgsBanners: BannerOptions = {
     m: '.assets/img/Banner/Banner1.svg',
-  }
+  };
 
-  @Input() SetAllCheckbox: boolean
-  @Input() PalabraBuscador: ProductosLoads
-  @Input() isExpanded = false
+  @Input() SetAllCheckbox: boolean;
+  @Input() PalabraBuscador: ProductosLoads;
+  @Input() isExpanded = false;
 
-  expandSidebar = true
+  expandSidebar = true;
 
   // pagesActual = 69;
-  forma: FormGroup
-  slideIndex = 1
-  next = 0
-  palabra: any
-  suggestedShow = false
-  idProductoToSync: any
-  scroll = false
+  forma: FormGroup;
+  slideIndex = 1;
+  next = 0;
+  palabra: any;
+  suggestedShow = false;
+  idProductoToSync: any;
+  scroll = false;
 
   // tslint:disable-next-line: variable-name
-  last_Page_Pagination: number
+  last_Page_Pagination: number;
   // tslint:disable-next-line: no-inferrable-types
-  totalProductAPI = 0
-  Sugerenccias: any[]
+  totalProductAPI = 0;
+  Sugerenccias: any[];
   // tslint:disable-next-line: no-inferrable-types
-  page = 1
-  filtro_valor = ''
-  busqueda = false
-  textBuscador: any
+  page = 1;
+  filtro_valor = '';
+  busqueda = false;
+  textBuscador: any;
 
-  MyProduct: Descripcion[] = []
-  itemProductos: Descripcion[] = []
-  DescripcionProduct: Descripcion
-  Iterador: any[] = []
-  finalPercentage: any
-  showFooterPaginations = false
+  MyProduct: Descripcion[] = [];
+  itemProductos: Descripcion[] = [];
+  DescripcionProduct: Descripcion;
+  Iterador: any[] = [];
+  finalPercentage: any;
+  showFooterPaginations = false;
   // Used in responsiveness of Angular Material
-  headingRowHeight = '5:1'
-  innerRowHeight = '2:1.5'
+  headingRowHeight = '5:1';
+  innerRowHeight = '2:1.5';
 
-  productToSyncReference: ProductToSync
-  bulkSync: Array<ProductToSync> = []
-  useFilter = false
+  productToSyncReference: ProductToSync;
+  bulkSync: Array<ProductToSync> = [];
+  useFilter = false;
 
   filterOptions: FilterOption[] = [
     { label: 'filtrar por', value: 0 },
     { label: 'producto', value: 1 },
     { label: 'Empresa', value: 'hola' },
-  ]
+  ];
 
   // Sidebar related properties
-  profile: Profile
-  storeName = ''
-  anchorsMenu: AnchorsMenu
-  breadcrumb: BreadcrumbOptions[]
-  categories: any[] = []
+  profile: Profile;
+  storeName = '';
+  anchorsMenu: AnchorsMenu[] = [];
+  breadcrumb: BreadcrumbOptions[];
+  categories: any[] = [];
+  sidebarSections: SidebarSections;
+  sidebarFilters: Filter[] = [];
 
-  currentPosition = 0
+  currentPosition = 0;
 
   constructor(
     public storeService: StoreService,
@@ -114,47 +119,52 @@ export class ItemsSuggestedProductsComponent implements OnInit {
     private router: Router,
     private spinnerService: NgxSpinnerService,
     public snackBar: MatSnackBar,
-    private _syncProductsDataService: SyncProductsDataService
+    private _syncProductsDataService: SyncProductsDataService,
+    private _sidebarListService: SidebarListService
   ) {
     this.route.params.subscribe((params) => {
       // console.log('query', params)
-      this.textBuscador = params.id
-    })
+      this.textBuscador = params.id;
+    });
 
     this.forma = new FormGroup({
       banck_id: new FormControl(''),
-    })
+    });
   }
 
   ngOnInit() {
-    window.addEventListener('scroll', this.scrolling, true)
+    window.addEventListener('scroll', this.scrolling, true);
 
-    this.getData(this.page)
+    this.getData(this.page);
 
-    this.spinner()
+    this.spinner();
     // sistema que nos permita leer el parámetro de la página una vez que cambiamos entre estas usando la función
     this.route.queryParams.subscribe((params) => {
-      this.page = parseInt(params.page, 10) || 1
-      this.getData(this.page)
-    })
+      this.page = parseInt(params.page, 10) || 1;
+      this.getData(this.page);
+    });
+
+    this.setSidebarSections();
+    this.loadAnchorsMenuData();
+    this.setSidebarSections();
   }
 
   spinner(): void {
-    this.spinnerService.show()
+    this.spinnerService.show();
   }
 
   pageChanged(page: number) {
-    this.page = page
-    const queryParams: Params = { page }
+    this.page = page;
+    const queryParams: Params = { page };
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams,
-    })
-    this.getData(this.page)
+    });
+    this.getData(this.page);
   }
 
   getData(page?: number) {
-    this.spinner()
+    this.spinner();
     this.sincronizacion
       .GetAllProductSuggested(
         localStorage.getItem('id'),
@@ -162,49 +172,49 @@ export class ItemsSuggestedProductsComponent implements OnInit {
         page
       )
       .subscribe((resp: Total) => {
-        this.MyProduct = resp.data
-        this.suggestedShow = true
+        this.MyProduct = resp.data;
+        this.suggestedShow = true;
         // this.dataObject = resp.data.suggestion.data.JSON.parse();
         // console.log('MY PRODUCTOSSSS', this.MyProduct)
-        this.last_Page_Pagination = resp.last_page
-        this.totalProductAPI = resp.total
-        this.showFooterPaginations = true
-        this.spinnerService.hide()
+        this.last_Page_Pagination = resp.last_page;
+        this.totalProductAPI = resp.total;
+        this.showFooterPaginations = true;
+        this.spinnerService.hide();
 
-        this.scrollTop()
-      })
+        this.scrollTop();
+      });
   }
 
   scrolling = (s) => {
-    let sc = s.target.scrollingElement.scrollTop
+    let sc = s.target.scrollingElement.scrollTop;
     // console.log(sc)
     setTimeout(() => {
       if (sc >= 10602) {
-        this.scroll = true
+        this.scroll = true;
       } else {
-        this.scroll = false
+        this.scroll = false;
       }
-    }, 600)
-  }
+    }, 600);
+  };
 
   scrollDown() {
     window.scrollTo({
       top: 10000000,
-    })
+    });
   }
 
   scrollTop() {
     window.scrollTo({
       top: 600,
-    })
+    });
   }
 
   // BUSCADOR //
   handleSearch(value: string): void {
     // console.log(value)
-    this.filtro_valor = value
+    this.filtro_valor = value;
     if (value !== undefined) {
-      let comparacion = new Termino(value)
+      let comparacion = new Termino(value);
 
       this.sincronizacion
         .BuscadorSugerencias(
@@ -214,14 +224,14 @@ export class ItemsSuggestedProductsComponent implements OnInit {
         )
         .subscribe((resp: Total) => {
           // console.log(resp.data)
-          return (this.MyProduct = resp.data)
-        })
+          return (this.MyProduct = resp.data);
+        });
     }
   }
 
   // Expand or contract sidebar-list on responsive mode
   public toogleSidebar(event) {
-    this.expandSidebar = event
+    this.expandSidebar = event;
   }
 
   updateBulkArray(eventValues: ProductToSync) {
@@ -229,19 +239,19 @@ export class ItemsSuggestedProductsComponent implements OnInit {
       bank_id: eventValues.bank_id,
       product_id: eventValues.product_id,
       name: eventValues.name,
-    }
+    };
 
     if (eventValues.checkedState) {
       // Updating the bulk array
-      let updatedArray: ProductToSync[]
-      updatedArray = [...this.bulkSync, this.productToSyncReference]
+      let updatedArray: ProductToSync[];
+      updatedArray = [...this.bulkSync, this.productToSyncReference];
 
-      this.bulkSync = updatedArray
+      this.bulkSync = updatedArray;
     } else {
       // Deleting the product from bulk.
       this.bulkSync = this.bulkSync.filter(
         (element) => element.bank_id !== this.productToSyncReference.bank_id
-      )
+      );
     }
   }
 
@@ -250,10 +260,10 @@ export class ItemsSuggestedProductsComponent implements OnInit {
     this.storeService
       .getStoreById(localStorage.getItem('storeId'))
       .subscribe((storeResp) => {
-        this.storeName = storeResp.name
-        this.setBreadcrumbOptions(localStorage.getItem('storeId'), storeResp)
-        this.setSidebarOptions(storeResp)
-      })
+        this.storeName = storeResp.name;
+        this.setBreadcrumbOptions(localStorage.getItem('storeId'), storeResp);
+        this.setSidebarOptions(storeResp);
+      });
   }
 
   public setBreadcrumbOptions(idStore: string, storeResp: StoreResponse) {
@@ -266,22 +276,15 @@ export class ItemsSuggestedProductsComponent implements OnInit {
         title: 'farmacias',
         routerLink: [`/farmacias`],
       },
-    ]
+    ];
 
     this.breadcrumb[2] = {
       title: `${storeResp.name}`,
       routerLink: [`/business-detail/${idStore}`],
-    }
+    };
   }
 
   setSidebarOptions(storeResp: StoreResponse) {
-    this.anchorsMenu = {
-      productLink: `/product-catalogue`,
-      contactLink: `contact'`,
-      wordToMatch: `products`,
-      synchronizationLink: `/my-store/sincronizacion/exportar-lista-excel`,
-    }
-
     this.profile = {
       name: storeResp.name,
       contact: {
@@ -291,87 +294,44 @@ export class ItemsSuggestedProductsComponent implements OnInit {
       },
       img: 'assets/img/no-image-banner.jpg', // la base de datos no tiene el dato
       isVerified: storeResp.certification == 'true' ? true : false,
-    }
+    };
+  }
 
-    this.categories = [
+  private loadAnchorsMenuData() {
+    const id = localStorage.getItem('storeId');
+    this.anchorsMenu = [
       {
-        id: 1,
-        name: 'Cosmeticos',
-
-        subcategories: [
-          {
-            id: 1,
-            name: 'Dolor inflamación',
-          },
-          {
-            id: 2,
-            name: 'Belleza Higiene',
-          },
-          {
-            id: 3,
-            name: 'Dieta & Fitness',
-          },
-          {
-            id: 4,
-            name: 'Salud y vitaminas',
-          },
-          {
-            id: 5,
-            name: 'Vida sexual',
-          },
-          {
-            id: 6,
-            name: 'Ortopedia',
-          },
-          {
-            id: 7,
-            name: 'Homeopatia & natural',
-          },
-          {
-            id: 8,
-            name: 'Mascotas & veterinaria',
-          },
-        ],
+        anchorName: 'Contacto',
+        anchorLink: `/my-store/contact`,
+        wordToMatch: `products`,
       },
       {
-        id: 2,
-        name: 'Medicamentos2',
-
-        subcategories: [
-          {
-            id: 1,
-            name: 'Dolor & inflamación2',
-          },
-          {
-            id: 2,
-            name: 'Belleza & Higiene2',
-          },
-          {
-            id: 3,
-            name: 'Dieta & Fitness2',
-          },
-          {
-            id: 4,
-            name: 'Salud y vitaminas2',
-          },
-          {
-            id: 5,
-            name: 'Vida sexual2',
-          },
-          {
-            id: 6,
-            name: 'Ortopedia2',
-          },
-          {
-            id: 7,
-            name: 'Homeopatia & natural2',
-          },
-          {
-            id: 8,
-            name: 'Mascotas & veterinaria2',
-          },
-        ],
+        anchorName: 'Productos',
+        anchorLink: `/my-store/product-catalogue`,
+        wordToMatch: `products`,
       },
-    ]
+      {
+        anchorName: 'Sincronización',
+        anchorLink: `/my-store/sincronizacion/exportar-lista-excel`,
+        wordToMatch: `products`,
+      },
+      // {
+      //   anchorName: 'Ventas',
+      //   anchorLink: `/my-store/ventas`,
+      // },
+    ];
+
+    // Eliminamos los enlaces de la sidebar.
+    this._sidebarListService.setAnchors(this.anchorsMenu);
+  }
+
+  private setSidebarSections() {
+    this.sidebarSections = {
+      bussinessProfile: true,
+      anchorOptions: true,
+      filters: false,
+    };
+
+    this._sidebarListService.setRequiredSections(this.sidebarSections);
   }
 }

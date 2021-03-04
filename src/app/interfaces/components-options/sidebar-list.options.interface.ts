@@ -39,17 +39,26 @@ export interface Contact {
 }
 
 export interface AnchorsMenu {
-  productLink: string;
-  contactLink: string;
-  wordToMatch: string;
+  anchorName: string;
+  anchorLink: string;
+  productLink?: string;
+  contactLink?: string;
+  wordToMatch?: string;
   synchronizationLink?: string;
   salesLink?: string;
+}
+
+export interface SidebarSections {
+  bussinessProfile?: boolean;
+  anchorOptions?: boolean;
+  filters?: boolean;
 }
 
 // Filters
 export interface Filter {
   filterId?: number;
   title: string;
+  // type: 'single' | 'multiple';
   type: string;
   paramName: string;
   parentFilterId?: number;
@@ -75,6 +84,6 @@ export interface SelectedEmitter {
 
 // Activated Routes //
 
-export interface ActivatedRoutesParams{
+export interface ActivatedRoutesParams {
   url: string;
 }

@@ -17,6 +17,12 @@ import { utf8Encode } from '@angular/compiler/src/util';
 
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
+import {
+  AnchorsMenu,
+  SidebarSections,
+} from '@interfaces/components-options/sidebar-list.options.interface';
+import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service'
+
 class Contact {
   cantidad = '';
   Nombre = '';
@@ -51,7 +57,13 @@ export class ExportarListaExcelComponent implements OnInit {
   userId: string;
   storeId: string;
   ProgressBarFull: number;
-  FileCompletedLoad: boolean;
+  FileCompletedLoad: number;
+
+  // Estados del envio
+  Spinner: boolean;
+  saveFIle: boolean;
+  hiden: boolean = false;
+  ErrorMessage: boolean = false;
 
   // VARIABLES PAGINADOR //
   data = [];
@@ -62,14 +74,19 @@ export class ExportarListaExcelComponent implements OnInit {
   // Open drog //
   isOpen = false;
 
+  // Sidebar related parameters
+  anchorsMenu: AnchorsMenu[] = []
+  sidebarSections: SidebarSections
+
 
   constructor(private sincronizacion: SincronizacionService,
               // tslint:disable-next-line: variable-name
               private _cd: ChangeDetectorRef,
               private route: ActivatedRoute,
               private router: Router,
-              private spinnerService: NgxSpinnerService
+              private spinnerService: NgxSpinnerService,
               // tslint:disable-next-line: variable-name
+              private _sidebarListService: SidebarListService
               ) {
 
     this.forma = new FormGroup({
@@ -81,7 +98,7 @@ export class ExportarListaExcelComponent implements OnInit {
    private files: Array<FileUploadModel> = [];
 
   ngOnInit() {
-
+    console.log(this.forma);
     this.spinner();
 
     this.userId = localStorage.getItem('id'),
@@ -107,6 +124,10 @@ export class ExportarListaExcelComponent implements OnInit {
       }
     );
 
+    
+    this.setSidebarSections()
+    this.loadAnchorsMenuData()
+
   }
 
   spinner(): void{
@@ -116,77 +137,10 @@ export class ExportarListaExcelComponent implements OnInit {
   CloseOverlay($event){
     console.log($event);
     this.isOpen = $event;
+    this.ErrorMessage = $event;
+    this.hiden = $event;
   }
 
-  SendDocumentExcel(){}
-
-  onFileChange(evt: any){
-
-      // Aqui desciframos lo que contiene la tabla excel
-      const target: DataTransfer = (evt.target) as DataTransfer;
-      const reader: FileReader = new FileReader();
-      reader.onload = (e: any) => {
-
-        const bstr: string = e.target.result;
-        const data =  this.sincronizacion.ShowTableExcell(bstr) as any[];
-        // console.log('ARRAY', data.length);
-        const header: string[] = Object.getOwnPropertyNames(new Contact());
-        // console.log('HEADERS', header);
-        const importedData = data.slice(1, -1);
-        // console.log('slice', importedData);
-        this.importContacts = importedData.map(arr => {
-          // console.log(arr);
-          // debugger;
-          const obj = {};
-          for (let i = 0; i < header.length; i++) {
-            const k = header[i];
-            obj[k] = arr[i];
-            // debugger;
-          }
-          console.log('obj', obj);
-          console.log('Data', this.Data);
-          return  this.Data.push(obj as Contact);
-        });
-
-
-      };
-      reader.readAsBinaryString(target.files[0]);
-
-
-      // Aquí Envio el Documento Excel en base64
-      const readerImport = new FileReader();
-      // console.log(evt);
-      if (evt.target.files && evt.target.files.length) {
-        const [file] = evt.target.files;
-        readerImport.readAsDataURL(file);
-
-        readerImport.onload = (e: any) => {
-
-          const bstr: string = e.target.result;
-          console.log('EXCEL', bstr);
-          const data = this.sincronizacion.importFromFile(bstr) as any;
-          const header: string[] = Object.getOwnPropertyNames(new Contact());
-          // console.log('Data', data);
-          const importedData = data.slice(1, -1);
-          // console.log(header);
-
-          this.importContacts = importedData.map(arr => {
-            const obj = {};
-            for (let i = 0; i < header.length; i++) {
-              const k = header[i];
-              obj[k] = arr[i];
-            }
-            return obj as Contact;
-          });
-
-          this.archivo = readerImport.result;
-          // console.log('FILESSS', this.archivo);
-          // console.log('file', this.forma.value.file);
-          this._cd.markForCheck();
-        };
-      }
-
-  }
 
   ExistsFile($event){
     console.log('Exists', $event);
@@ -204,7 +158,10 @@ export class ExportarListaExcelComponent implements OnInit {
 
   enviarExcel(){
 
-    this.spinner();
+    // this.spinner();
+    this.Spinner = true;
+    this.hiden = true;
+    this.ErrorMessage = false;
 
     const file = new DocumentExcel(
       this.archivo
@@ -218,6 +175,18 @@ export class ExportarListaExcelComponent implements OnInit {
       file).subscribe( response => {
       console.log(response);
       this.spinnerService.hide();
+      this.saveFIle = true;
+      this.Spinner = false;
+      setTimeout( ()=>
+        { 
+          this.isOpen = false
+          this.saveFIle = false;
+          this.hiden = false;
+        }, 7000
+      )
+    }, error => {
+      this.ErrorMessage = true;
+      this.Spinner = false;
     });
 
   }
@@ -227,8 +196,47 @@ export class ExportarListaExcelComponent implements OnInit {
   }
 
   FileCompleted($event){
-    this.FileCompletedLoad = $event;
-    console.log('carga completada', $event);
+    // this.FileCompletedLoad = $event;
+    // console.log('carga completada', $event);
+  }
+
+  private loadAnchorsMenuData() {
+    const id = localStorage.getItem('storeId')
+    this.anchorsMenu = [
+      {
+        anchorName: 'Contacto',
+        anchorLink: `/my-store/contact`,
+        wordToMatch: `products`,
+      },
+      {
+        anchorName: 'Productos',
+        anchorLink: `/my-store/product-catalogue`,
+        wordToMatch: `products`,
+      },
+      {
+        anchorName: 'Sincronización',
+        anchorLink: `/my-store/sincronizacion/exportar-lista-excel`,
+        wordToMatch: `products`,
+      },
+      {
+        anchorName: 'Ventas',
+        anchorLink: `/my-store/ventas`,
+        wordToMatch: `products`,
+      },
+    ]
+
+    // Eliminamos los enlaces de la sidebar.
+    this._sidebarListService.setAnchors(this.anchorsMenu)
+  }
+
+  private setSidebarSections() {
+    this.sidebarSections = {
+      bussinessProfile: true,
+      anchorOptions: true,
+      filters: false,
+    }
+
+    this._sidebarListService.setRequiredSections(this.sidebarSections)
   }
 
 

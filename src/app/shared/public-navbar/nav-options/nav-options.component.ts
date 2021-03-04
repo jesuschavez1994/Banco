@@ -17,6 +17,8 @@ import { ToastComponent } from '../../../modals/toast/toast.component';
 export class NavOptionsComponent implements OnInit {
   @Input() auth: boolean;
   @Input() storeAct: boolean | string;
+  @Input() imgCropper: any;
+
   constructor(private modal : MatDialog, private paymentProcessService: PaymentProcessService,
     private dropdownIconComp: DropdownIconComponent,
     private productService: ProductService,) { }

@@ -24,9 +24,19 @@
   (window:scroll)="doSomethingOnWindowScroll($event)"
   #main
 >
+  <!-- <app-sidebar-list
+
+    [isExpanded]="expandSidebar"
+    (sidebarExpand)="toogleSidebar($event)"
+    [anchorsMenu]="anchorsMenu" [profile]="profile"
+    [filters]="sidebarFilters"
+    #sidebarList
+  >
+  </app-sidebar-list> -->
+
   <div class="container-fluid">
     <section class="row" *ngIf="!addProductNew">
-      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 pb-3">
         <app-search-store
           (searchEmitter)="handleSearch($event)"
           [isExpanded]="expandSidebar"
@@ -35,6 +45,7 @@
           [debounce]="1000"
           class="width-100"
           [filterOptions]="filterOptions"
+          
         >
         </app-search-store>
 
@@ -42,10 +53,10 @@
         <!--=========================================-->
         <app-products-cards-store
           #productCardsStore
-          [MyProduct]="this.MyProduct"
           (pagination)="pageChanged($event)"
-          [totalItems]="totalProductAPI"
+          [totalItems]="totalProducts"
           [itemsPerPage]="itemsPerPage"
+          [showShimmer]="showShimmerProductsCards"
         >
         </app-products-cards-store>
         <!--=========================================-->
@@ -54,3 +65,5 @@
     </section>
   </div>
 </main>
+
+<app-toast #toastRef></app-toast>

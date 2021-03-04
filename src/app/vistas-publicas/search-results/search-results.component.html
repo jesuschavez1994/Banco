@@ -3,21 +3,34 @@
 <main class="page">
   <app-sidebar-list
     [isExpanded]="expandSidebar"
-    (sidebarExpand)="toogleSidebar($event)"
+    (sidebarExpand)="toggleSidebar($event)"
     [filters]="sidebarFilters"
     #sidebarList
   >
   </app-sidebar-list>
 
-  <section class="products-info">
-    <app-products-cards
-      #productCards
-      (selected)="goToProductDetails($event)"
-      (pagination)="paginationProducts($event)"
-      [totalItems]="totalProducts"
-      [itemsPerPage]="itemsPerPage"
-      [showShimmer]="showShimmeringCards"
-    >
-    </app-products-cards>
-  </section>
+  <div class="column">
+    <ng-container>
+      <div class="toggler my-3">
+        <app-sidebar-list-button
+          (isExpanded)="toggleSidebar($event)"
+          [expand]="expandSidebar"
+        ></app-sidebar-list-button>
+      </div>
+
+      <section class="products-info">
+        <app-products-cards
+          #productCards
+          (selected)="goToProductDetails($event)"
+          (pagination)="productsPagination($event)"
+          [totalItems]="totalProducts"
+          [itemsPerPage]="itemsPerPage"
+          [showShimmer]="showShimmeringCards"
+        >
+        </app-products-cards>
+      </section>
+    </ng-container>
+  </div>
 </main>
+
+<app-toast #toastRef></app-toast>

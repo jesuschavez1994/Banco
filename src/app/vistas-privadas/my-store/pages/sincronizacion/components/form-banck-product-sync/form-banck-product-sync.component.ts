@@ -5,35 +5,36 @@ import { DetalleProduct, ImgLoad } from '@models/dataStore.model';
 import { StoreService } from '@services/store/store.service';
 import { ProductosLoads } from '@interfaces/InterfaceProducto';
 import { DataProductDB, Image } from '@interfaces/InterfaceProducto';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  AnchorsMenu,
+  SidebarSections,
+} from '@interfaces/components-options/sidebar-list.options.interface';
+import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service';
 
 class Sincronizacion {
-
   constructor(
-      public bank_id?: string,
-      public store_id?: string,
-      public price?: string,
-      public stock?: string,
-      public aviable?: string,
-      public delivery?: string,
-      public subcategory_id?: string,
-      public mark?: string,
-      public factory?: string,
-      public recipe?: string,
-
-  ) { }
-
+    public bank_id?: string,
+    public store_id?: string,
+    public price?: string,
+    public stock?: string,
+    public aviable?: string,
+    public delivery?: string,
+    public subcategory_id?: string,
+    public mark?: string,
+    public factory?: string,
+    public recipe?: string
+  ) {}
 }
 
 @Component({
   selector: 'app-form-banck-product-sync',
   templateUrl: './form-banck-product-sync.component.html',
-  styleUrls: ['./form-banck-product-sync.component.css']
+  styleUrls: ['./form-banck-product-sync.component.css'],
 })
 export class FormBanckProductSyncComponent implements OnInit {
-
   forma: FormGroup;
   hover = false;
   icon = false;
@@ -45,102 +46,115 @@ export class FormBanckProductSyncComponent implements OnInit {
   subcategoria: string;
   subcategoriaId: string;
   IMG: any[] = [];
-  
+
   valorForm: any;
   categoriaBanco: any;
   myFlag = false;
   sync: string;
   bankId: string;
 
-
-  File: any[] =
-  [
-    {image: null, name: null, position: null},
-    {image: null, name: null, position: null},
-    {image: null, name: null, position: null},
-    {image: null, name: null, position: null}
+  File: any[] = [
+    { image: null, name: null, position: null },
+    { image: null, name: null, position: null },
+    { image: null, name: null, position: null },
+    { image: null, name: null, position: null },
   ];
 
-  constructor(public _productLoadingService: ProductLoadingService, 
-              private _cd: ChangeDetectorRef,
-              private router: Router,
-              private route: ActivatedRoute,
-              private sincronizacion: SincronizacionService,
-              public snackBar: MatSnackBar) { 
+  // Sidebar related parameters
+  sidebarSections: SidebarSections;
+  anchorsMenu: AnchorsMenu[] = [];
 
-                this.route.params.subscribe( (params: Params) => {
-                  console.log(params);
-                  this.sincronizacion.GetBankProductSpecific(params.id).subscribe( (data: any) => {
-                    console.log('Banck Product', data);
-                    this.myFlag = true;
-                    this.bankId = data.id;
-                    this.sync = 'sync'
-                    this.valorForm = data;
-                    this.subcategoria = data.subcategories[0].name;
-                    this.subcategoriaId = data.subcategories[0].id;
+  constructor(
+    public _productLoadingService: ProductLoadingService,
+    private _cd: ChangeDetectorRef,
+    private router: Router,
+    private route: ActivatedRoute,
+    private sincronizacion: SincronizacionService,
+    public snackBar: MatSnackBar,
+    private _sidebarListService: SidebarListService
+  ) {
+    this.route.params.subscribe((params: Params) => {
+      console.log(params);
+      this.sincronizacion
+        .GetBankProductSpecific(params.id)
+        .subscribe((data: any) => {
+          console.log('Banck Product', data);
+          this.myFlag = true;
+          this.bankId = data.id;
+          this.sync = 'sync';
+          this.valorForm = data;
+          this.subcategoria = data.subcategories[0].name;
+          this.subcategoriaId = data.subcategories[0].id;
 
-                    this._productLoadingService.GetCategoriasBancoProduct(this.valorForm.subcategories[0].category_id).subscribe( (resp: any) =>{
-                      console.log('categorias', resp);
-                      this.categoriaBanco = resp.name;
+          this._productLoadingService
+            .GetCategoriasBancoProduct(
+              this.valorForm.subcategories[0].category_id
+            )
+            .subscribe((resp: any) => {
+              console.log('categorias', resp);
+              this.categoriaBanco = resp.name;
+            });
 
-                    });
-            
-                    // SET DE FORMULARIO //
-                    this.forma.controls['name'].setValue(this.valorForm.name);
-                    this.forma.controls['description'].setValue(this.valorForm.description);
-                    this.forma.controls['mark'].setValue(this.valorForm.marks[0].name);
-                    this.forma.controls['factory'].setValue(this.valorForm.factories[0].name);
+          // SET DE FORMULARIO //
+          this.forma.controls['name'].setValue(this.valorForm.name);
+          this.forma.controls['description'].setValue(
+            this.valorForm.description
+          );
+          this.forma.controls['mark'].setValue(this.valorForm.marks[0].name);
+          this.forma.controls['factory'].setValue(
+            this.valorForm.factories[0].name
+          );
 
+          if (data.images.length === 1) {
+            this.IMG.push(data.images[0].src_size.l);
+          }
 
-                    if(data.images.length === 1){
-                      this.IMG.push(data.images[0].src_size.l);
-                    }
+          if (data.images.length > 1 && data.images.length <= 2) {
+            this.IMG.push(data.images[0].src_size.l);
+            this.IMG.push(data.images[1].src_size.l);
+          }
 
-                    if(data.images.length > 1 && data.images.length <= 2){
-                      this.IMG.push(data.images[0].src_size.l);
-                      this.IMG.push(data.images[1].src_size.l);
-                    }
+          if (data.images.length > 2 && data.images.length <= 3) {
+            this.IMG.push(data.images[0].src_size.l);
+            this.IMG.push(data.images[1].src_size.l);
+            this.IMG.push(data.images[2].src_size.l);
+          }
 
-                    if(data.images.length > 2 && data.images.length <= 3){
-                      this.IMG.push(data.images[0].src_size.l);
-                      this.IMG.push(data.images[1].src_size.l);
-                      this.IMG.push(data.images[2].src_size.l);
-                    }
+          if (data.images.length > 3 && data.images.length <= 4) {
+            this.IMG.push(data.images[0].src_size.l);
+            this.IMG.push(data.images[1].src_size.l);
+            this.IMG.push(data.images[2].src_size.l);
+            this.IMG.push(data.images[3].src_size.l);
+          }
 
-                    if(data.images.length > 3 && data.images.length <= 4){
-                      this.IMG.push(data.images[0].src_size.l);
-                      this.IMG.push(data.images[1].src_size.l);
-                      this.IMG.push(data.images[2].src_size.l);
-                      this.IMG.push(data.images[3].src_size.l);
-                    }
+          if (data.images.length > 4 && data.images.length <= 5) {
+            this.IMG.push(data.images[0].src_size.l);
+            this.IMG.push(data.images[1].src_size.l);
+            this.IMG.push(data.images[2].src_size.l);
+            this.IMG.push(data.images[3].src_size.l);
+            this.IMG.push(data.images[4].src_size.l);
+          }
 
-                    if(data.images.length > 4 && data.images.length <= 5){
-                      this.IMG.push(data.images[0].src_size.l);
-                      this.IMG.push(data.images[1].src_size.l);
-                      this.IMG.push(data.images[2].src_size.l);
-                      this.IMG.push(data.images[3].src_size.l);
-                      this.IMG.push(data.images[4].src_size.l);
-                    }
-                    
-                    console.log('IMGPUSH', this.IMG);
-            
-                    // BLOQUEAMOS LOS CAMPOS RESPECTIVOS YA QUE NO LOS DEBE EDITAR //
-                    this.forma.get('name').disable();
-                    this.forma.get('description').disable();
-                    this.forma.get('mark').disable();
-                    this.forma.get('factory').disable();
-                    this.forma.get('category').disable();
-                    this.forma.get('subcategory_id').disable();
-                    // SETEAMOS LA CANTIDAD DEL PRODUCTO POR DEFAUL YA QUE DEBE SER DE 1 al menos //
-                    this.forma.get('stock').setValue('1');
-            
-                  });
-            
-                });  
+          console.log('IMGPUSH', this.IMG);
+
+          // BLOQUEAMOS LOS CAMPOS RESPECTIVOS YA QUE NO LOS DEBE EDITAR //
+          this.forma.get('name').disable();
+          this.forma.get('description').disable();
+          this.forma.get('mark').disable();
+          this.forma.get('factory').disable();
+          this.forma.get('category').disable();
+          this.forma.get('subcategory_id').disable();
+          // SETEAMOS LA CANTIDAD DEL PRODUCTO POR DEFAUL YA QUE DEBE SER DE 1 al menos //
+          this.forma.get('stock').setValue('1');
+        });
+    });
 
     this.forma = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      description: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      description: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+      ]),
       price: new FormControl('', [Validators.required]),
       mark: new FormControl(''),
       factory: new FormControl(''),
@@ -148,7 +162,10 @@ export class FormBanckProductSyncComponent implements OnInit {
       subcategory_id: new FormControl(''),
       delivery: new FormControl('Seleccionar'),
       aviable: new FormControl('Seleccionar'),
-      stock: new FormControl('', [Validators.required, Validators.minLength(1)]),
+      stock: new FormControl('', [
+        Validators.required,
+        Validators.minLength(1),
+      ]),
       recipe: new FormControl('', [Validators.required]),
       file: new FormControl(''),
       input0: new FormControl(''),
@@ -157,43 +174,42 @@ export class FormBanckProductSyncComponent implements OnInit {
       input3: new FormControl(''),
       input4: new FormControl(''),
     });
-
   }
 
   ngOnInit(): void {
+    // GET CATEGORIAS //
+    this._productLoadingService.GetCategorias().subscribe((response) => {
+      console.log(response);
+      return (this.category = response);
+    });
 
-      // GET CATEGORIAS //
-      this._productLoadingService.GetCategorias().subscribe( response => {
-       console.log(response);
-        return this.category = response;
-      });
-
-      this._productLoadingService.GetMark(
-        localStorage.getItem('id'))
-        .subscribe( response => {
+    this._productLoadingService
+      .GetMark(localStorage.getItem('id'))
+      .subscribe((response) => {
         this.marks = response;
         console.log(this.marks);
       });
 
-      // GET FABRICANTE //
-    this._productLoadingService.GetFactories(
-      localStorage.getItem('id'))
-      .subscribe( response => {
-      console.log('factories', response);
-      this.factories = response;
-    });
+    // GET FABRICANTE //
+    this._productLoadingService
+      .GetFactories(localStorage.getItem('id'))
+      .subscribe((response) => {
+        console.log('factories', response);
+        this.factories = response;
+      });
 
-      // RECETA MEDICA //
-      this._productLoadingService.GetRecetaMedica(
-        localStorage.getItem('id'))
-        .subscribe( response => {
+    // RECETA MEDICA //
+    this._productLoadingService
+      .GetRecetaMedica(localStorage.getItem('id'))
+      .subscribe((response) => {
         this.recipes = response;
       });
 
+    this.loadAnchorsMenuData();
+    this.setSidebarSections();
   }
 
-  addProducts(){}
-
+  addProducts() {}
 
   onFileChange(event, index?: number) {
     const reader = new FileReader();
@@ -205,21 +221,25 @@ export class FormBanckProductSyncComponent implements OnInit {
 
       reader.onload = () => {
         this.forma.patchValue({
-          file: reader.result
+          file: reader.result,
         });
 
         console.log('imagen', this.forma.value.file);
         // need to run CD since file load runs outside of zone
         this._cd.markForCheck();
-        this.File.splice(index, 1, { image: this.forma.value.file, name: event.target.files[0].name, position: index + 1 });
+        this.File.splice(index, 1, {
+          image: this.forma.value.file,
+          name: event.target.files[0].name,
+          position: index + 1,
+        });
         console.log(this.File);
       };
     }
   }
 
-  Send(){
+  Send() {
     const data = new Sincronizacion(
-      this.bankId ,
+      this.bankId,
       localStorage.getItem('storeId'),
       JSON.stringify(this.forma.value.price),
       this.forma.value.stock,
@@ -228,15 +248,62 @@ export class FormBanckProductSyncComponent implements OnInit {
       this.subcategoriaId,
       this.valorForm.marks[0].name,
       this.valorForm.factories[0].name,
-      this.forma.value.recipe,
-    )
+      this.forma.value.recipe
+    );
 
-    this.sincronizacion.SincronizarDesdeBancoPrdoducto(localStorage.getItem('id'), localStorage.getItem('storeId'), data).subscribe( resp => {
-      console.log('sincronizo', resp);
-      this.snackBar.open('¡Su producto ha sido sincronizado exitosamente!', 'cerrar', { duration: 4000 });
-      this.router.navigate(['/my-store/product-catalogue']);
-    })
-
+    this.sincronizacion
+      .SincronizarDesdeBancoPrdoducto(
+        localStorage.getItem('id'),
+        localStorage.getItem('storeId'),
+        data
+      )
+      .subscribe((resp) => {
+        console.log('sincronizo', resp);
+        this.snackBar.open(
+          '¡Su producto ha sido sincronizado exitosamente!',
+          'cerrar',
+          { duration: 4000 }
+        );
+        this.router.navigate(['/my-store/product-catalogue']);
+      });
   }
 
+  loadAnchorsMenuData() {
+    const id = localStorage.getItem('storeId');
+    this.anchorsMenu = [
+      {
+        anchorName: 'Contacto',
+        anchorLink: `/my-store/contact`,
+        wordToMatch: `products`,
+      },
+      {
+        anchorName: 'Productos',
+        anchorLink: `/my-store/product-catalogue`,
+        wordToMatch: `products`,
+      },
+      {
+        anchorName: 'Sincronización',
+        anchorLink: `/my-store/sincronizacion/exportar-lista-excel`,
+        wordToMatch: `products`,
+      },
+      {
+        anchorName: 'Ventas',
+        anchorLink: `/my-store/ventas`,
+        wordToMatch: `products`,
+      },
+    ];
+
+    // Eliminamos los enlaces de la sidebar.
+    this._sidebarListService.setAnchors(this.anchorsMenu);
+  }
+
+  private setSidebarSections() {
+    this.sidebarSections = {
+      bussinessProfile: true,
+      anchorOptions: true,
+      filters: false,
+    };
+
+    this._sidebarListService.setRequiredSections(this.sidebarSections);
+  }
 }

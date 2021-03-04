@@ -16,7 +16,7 @@ export class ProgessBarFileExcelComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
-    this.ProgressFinally.emit(this.ProgressFinally);
+    this.ProgressFinally.emit(this.progress);
   }
 
 }

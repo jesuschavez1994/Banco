@@ -1,12 +1,31 @@
-.active{
-    font-family: 'Montserrat', sans-serif;font-weight: 500;
-    color: #F09207 !important;
+ul {
+  margin-top: 70px;
+}
+a {
+  color: black;
 }
 
-ul{
-    margin-top:70px;
-}
-a{
-    color: black;
+.active {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  color: #f09207 !important;
 }
 
+.flex {
+  display: flex;
+}
+
+.navigation {
+  padding-left: 0px;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.navigation::-webkit-scrollbar {
+  display: none;
+}

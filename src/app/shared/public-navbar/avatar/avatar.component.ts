@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { StoreService } from '@services/store/store.service';
 import { HomeServiceService } from "../../../vistas-publicas/services/home-service.service";
 import { environment } from '@environments/environment';
@@ -14,6 +14,8 @@ export class AvatarComponent implements OnInit {
   userName: string;
   userEmail: string;
   envApi= environment.url;
+
+  @Input() imgCropper: any;
 
   storeAct: boolean | string = false;
   constructor(private auth: StoreService, public homeService: HomeServiceService,) {

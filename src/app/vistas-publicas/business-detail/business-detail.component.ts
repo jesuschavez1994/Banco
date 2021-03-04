@@ -1,4 +1,12 @@
-import { Component, OnInit, ViewChild, AfterViewInit, Pipe, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  Pipe,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { BannerOptions } from '@interfaces/components-options/banner.options.interface';
 import { ProductService } from '@services/product/product.service';
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface';
@@ -7,7 +15,12 @@ import { ProductsCardsComponent } from '@shared/products-cards/products-cards.co
 import { ProductDetailComponent } from '@shared/product-detail/product-detail.component';
 import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component';
 import { StoreService } from '@services/store/store.service';
-import { AnchorsMenu, Filter, Profile } from '@interfaces/components-options/sidebar-list.options.interface';
+import {
+  AnchorsMenu,
+  Filter,
+  Profile,
+} from '@interfaces/components-options/sidebar-list.options.interface';
+import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service';
 import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface';
 import { StoreResponse } from '@interfaces/store.interface';
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface';
@@ -18,10 +31,13 @@ import { PaymentProcessService } from '@services/payment-process/payment-process
 import { DropdownOption } from '@interfaces/components-options/dropdown.options.interface';
 import { DropdownIconComponent } from '../../shared/dropdown-icon/dropdown-icon.component';
 import { ToastComponent } from '../../modals/toast/toast.component';
-import {HomeServiceService} from '../services/home-service.service';
+import { HomeServiceService } from '../services/home-service.service';
 import { ProductModel } from '@app/models/product.model';
 import { Title } from '@angular/platform-browser';
-import { Option } from '../../interfaces/components-options/sidebar-list.options.interface';
+import {
+  Option,
+  SidebarSections,
+} from '../../interfaces/components-options/sidebar-list.options.interface';
 
 @Component({
   selector: 'app-business-detail',
@@ -29,7 +45,6 @@ import { Option } from '../../interfaces/components-options/sidebar-list.options
   styleUrls: ['./business-detail.component.scss'],
 })
 export class BusinessDetailComponent implements OnInit, AfterViewInit {
-
   readonly pageName = 'business-detail';
 
   // Components Controllers
@@ -48,9 +63,10 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
   // sidebar-list
   expandSidebar = true;
-  anchorsMenu: AnchorsMenu;
+  anchorsMenu: AnchorsMenu[] = [];
   profile: Profile;
   sidebarFilters: Filter[] = [];
+  sidebarSections: SidebarSections;
 
   // Products-cards
   showProducts = false;
@@ -89,12 +105,14 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     private utils: Utils,
     private dropdownIconComp: DropdownIconComponent,
     private productModel: ProductModel,
-    private titleService: Title
+    private titleService: Title,
+    private _sidebarListService: SidebarListService
   ) {}
 
   ngOnInit() {
     this.userLog = this.homeService.islog();
     this.storeLog = this.homeService.storeActive();
+    this.setSidebarSections();
   }
 
   ngAfterViewInit(): void {
@@ -134,17 +152,14 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         // console.log('QUERY PARAMS - this.storeData:');
 
         if (this.queryParam) {
-
           if (this.queryParam !== queryParam) {
             this.wasChangedQueryParam = true;
             this.queryParam = queryParam;
           } else {
             this.wasChangedQueryParam = false;
           }
-
         } else {
           this.queryParam = queryParam; // guardamos de forma global los datos de la tienda
-
         }
 
         this.loadDataStore(params, queryParam);
@@ -205,9 +220,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
           this.setBreadcrumbOptions(storeResp);
 
           if (this.wasFirstLoadedProducts) {
-
             this.loadProductsCards(params, queryParam);
-
           } else {
             this.loadProductsCards(params, queryParam);
             this.wasFirstLoadedProducts = true;
@@ -219,18 +232,13 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             if (this.wasChangedQueryParam) { // pero los datos de queryParams si
               this.sidebarList.loadOptionsFilter(queryParam); // actualizamos los valores queryParams internos del sidebar-list
               this.loadProductsCards(params, queryParam);
-
             }
-
           } else {
             this.loadProductsCards(params, queryParam);
             this.wasFirstLoadedProducts = true;
           }
-
         }
-
       });
-
     }
   }
 
@@ -274,47 +282,38 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       const idProduct = parseInt(params.get('idProduct'));
 
       this.productService.getProductByStore(idStore, idProduct).subscribe(
-        product => {
+        (product) => {
           // console.log('getProductByStore product', product);
           if (product) {
-
-            const productFormatead = this.productModel.productsCardsComponent.formatProductResp(product);
+            const productFormatead = this.productModel.productsCardsComponent.formatProductResp(
+              product
+            );
             this.productDetail.selectedProduct = productFormatead[0]; // el método devuelve un array así que obtengo el primer elemento
 
             this.setTitle(product.name + '' + ' | Founduss ');
             this.scrollToElement(document.querySelector('#profile-name'));
-
           } else {
-
             this.errorLoadProductDetail();
-
           }
-
-        }, error => {
-
+        },
+        (error) => {
           this.errorLoadProductDetail();
-
         }
-
       );
-
     }
   }
 
   public errorLoadProductDetail() {
-
-    this.toastRef.open(
-      'El producto a detallar no existe en la tienda',
-      { color: '#ffffff', background: '#900909c2'}
-    );
+    this.toastRef.open('El producto a detallar no existe en la tienda', {
+      color: '#ffffff',
+      background: '#900909c2',
+    });
 
     if (this.productDetail) {
       if (this.productDetail.selectedProduct) {
         this.productDetail.selectedProduct = null;
       }
-
     }
-
   }
 
   public loadProductsCards(params: ParamMap, queryParams: ParamMap) {
@@ -322,7 +321,9 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       // tslint:disable-next-line: radix
       const idStore = parseInt(params.get('idStore'));
       // tslint:disable-next-line: radix
-      const page = queryParams.has('page') ? parseInt(queryParams.get('page')) : 1;
+      const page = queryParams.has('page')
+        ? parseInt(queryParams.get('page'))
+        : 1;
 
       let filter;
       filter = {};
@@ -343,17 +344,23 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
               break;
 
             case 'marcas':
-              queryParamsAllowed.marks = this.utils.stringToArray(queryParams.get('marcas'));
+              queryParamsAllowed.marks = this.utils.stringToArray(
+                queryParams.get('marcas')
+              );
               // marks: ['generica', 'ALBENZA', 'XANAX', 'gillete'],
               break;
 
             case 'categoria':
-              queryParamsAllowed.categories = this.utils.stringToArray(queryParams.get('categoria'));
+              queryParamsAllowed.categories = this.utils.stringToArray(
+                queryParams.get('categoria')
+              );
               // categories: ['Cosmeticos', 'infantil'],
               break;
 
             case 'sub-categorias':
-              queryParamsAllowed.subcategories = this.utils.stringToArray(queryParams.get('sub-categorias'));
+              queryParamsAllowed.subcategories = this.utils.stringToArray(
+                queryParams.get('sub-categorias')
+              );
               // subcategories: ['Cutis', 'Analgesicos'],
 
               break;
@@ -368,7 +375,10 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             case 'precios':
               // console.log('queryParams.get(precios)');
               // console.log(queryParams.get('precios'));
-              queryParamsAllowed.price = this.utils.stringToArray(queryParams.get('precios'), true);
+              queryParamsAllowed.price = this.utils.stringToArray(
+                queryParams.get('precios'),
+                true
+              );
               // queryParams.get('price').split(',');
               // price: [1, 284],
               break;
@@ -408,9 +418,10 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
           this.itemsPerPage = resp.per_page;
 
           if (products.length > 0) {
-
             // Formateamos la respuesta del back y retornamos el formato correcto para el componente
-            this.productCards.products = this.productModel.productsCardsComponent.formatProductResp(products);
+            this.productCards.products = this.productModel.productsCardsComponent.formatProductResp(
+              products
+            );
 
             this.setTitle(`${this.storeData.name} | Founduss `);
             console.log('products loaded: ', this.productCards.products);
@@ -502,11 +513,19 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   public setSidebarOptions(storeResp: StoreResponse, queryParam: ParamMap) {
     const idStore = storeResp.id;
 
-    this.anchorsMenu = {
-      productLink: `/business-detail/${idStore}/products`,
-      contactLink: `/business-detail/${idStore}`,
-      wordToMatch: `products`,
-    };
+    this.anchorsMenu = [
+      {
+        anchorName: 'Productos',
+        anchorLink: `/business-detail/${idStore}/products`,
+        wordToMatch: `products`,
+      },
+      {
+        anchorName: 'Contacto',
+        anchorLink: `/business-detail/${idStore}`,
+        wordToMatch: `products`,
+      },
+    ];
+    this._sidebarListService.setAnchors(this.anchorsMenu);
 
     let contactStore;
     contactStore = {
@@ -551,14 +570,13 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     };
 
     // Obtenemos las categorías de los productos vinculados a una tienda
-    this.storeService.getCategoriesProducts(idStore).subscribe( resp => {
-
+    this.storeService.getCategoriesProducts(idStore).subscribe((resp) => {
       let sidebarListFilters: Filter[];
       sidebarListFilters = [];
 
       const respKeys = Object.keys(resp);
 
-      const categoriesResp = respKeys.map(respKey => {
+      const categoriesResp = respKeys.map((respKey) => {
         return resp[respKey];
       });
 
@@ -569,27 +587,21 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
       subCategoryOptions = [];
 
       // Llenamos las opciones de categoria y las opciones de sub-categorías, todas vinculadas mediante su id
-      categoriesResp.forEach( categoryResp => {
-
-        categoryOptions.push(
-            {
-                optionId: categoryResp.id,
-                name: categoryResp.name,
-                totalFounds: 200,
-            }
-        );
-
-        categoryResp.subcategories.forEach( subcategoryResp => {
-          subCategoryOptions.push(
-            {
-              optionId: subcategoryResp.id,
-              parentOptionId: subcategoryResp.category_id,
-              name: subcategoryResp.name,
-              totalFounds: 200,
-            },
-          );
+      categoriesResp.forEach((categoryResp) => {
+        categoryOptions.push({
+          optionId: categoryResp.id,
+          name: categoryResp.name,
+          totalFounds: 200,
         });
 
+        categoryResp.subcategories.forEach((subcategoryResp) => {
+          subCategoryOptions.push({
+            optionId: subcategoryResp.id,
+            parentOptionId: subcategoryResp.category_id,
+            name: subcategoryResp.name,
+            totalFounds: 200,
+          });
+        });
       });
 
       const categoryFilter = {
@@ -600,16 +612,16 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
         options: categoryOptions,
       };
 
-      const subCategoryFilter =  {
+      const subCategoryFilter = {
         filterId: 2,
         title: 'sub categorías',
         type: 'multiple',
         paramName: 'sub-categorias',
         parentFilterId: 1,
-        options: subCategoryOptions
+        options: subCategoryOptions,
       };
 
-      const priceFilter = {
+      const priceFilter: Filter = {
         title: 'Precios',
         type: 'single', // Determinamos que solo una opción puede ser seleccionada
         paramName: 'precios',
@@ -639,21 +651,16 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
             value: [40000, 50000],
             totalFounds: 200,
           },
-        ]
+        ],
       };
 
       // Agregamos todos los filtros
-      sidebarListFilters.push(
-        categoryFilter,
-        subCategoryFilter,
-        priceFilter
-      );
+      sidebarListFilters.push(categoryFilter, subCategoryFilter, priceFilter);
 
       // retornamos los filters con el formato correcto para el component
       this.sidebarFilters = this.sidebarList.setFilters(sidebarListFilters);
 
-      this.sidebarList.loadOptionsFilter( queryParam ); // seleccionamos las opciones filtradas por url
-
+      this.sidebarList.loadOptionsFilter(queryParam); // seleccionamos las opciones filtradas por url
     });
 
     this.sidebarList.loadOptionsFilter(queryParam); // seleccionamos las opciones filtradas por url
@@ -685,20 +692,26 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
   }
 
   public scrollToElement(element) {
-
     if (element) {
-      element.scrollIntoView(
-        {
-          behavior: 'smooth',
-          block: 'start',
-          inline: 'nearest'
-        }
-      );
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest',
+      });
     }
-
   }
 
   public setTitle(newTitle: string) {
     this.titleService.setTitle(newTitle);
+  }
+
+  private setSidebarSections() {
+    this.sidebarSections = {
+      bussinessProfile: true,
+      anchorOptions: true,
+      filters: true,
+    };
+
+    this._sidebarListService.setRequiredSections(this.sidebarSections);
   }
 }

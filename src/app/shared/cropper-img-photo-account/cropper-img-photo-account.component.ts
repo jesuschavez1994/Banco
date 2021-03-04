@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {TooltipPosition} from '@angular/material/tooltip';
 import {FormControl} from '@angular/forms';
 import { UsuarioService } from '@services/usuario/usuario.service';
@@ -20,6 +20,8 @@ export class CropperImgPhotoAccountComponent implements OnInit {
   isexpand = false;
   testImage: any
 
+  @Output() FileBase64 = new EventEmitter<any>();
+
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
@@ -35,7 +37,9 @@ export class CropperImgPhotoAccountComponent implements OnInit {
 
   ShowImage(event){
     this.ImgNew = event;
+    console.log(event);
     this.ShowNewImgCrop = true;
+    setTimeout(() => this.FileBase64.emit(event), 0);
     console.log('Current',this.currentImg)
   }
 

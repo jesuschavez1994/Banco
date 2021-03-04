@@ -10,3 +10,9 @@ export class SearchStore {
         public recipes?: string[]
     ) { }
 }
+
+export class specificSearchEngine {
+    constructor(
+        public name: string,
+    ) { }
+}

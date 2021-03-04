@@ -28,7 +28,7 @@
                 {{ formatBytes(file?.size) }}
             </p>
 
-            <app-progess-bar-file-excel [progress]="file?.progress">
+            <app-progess-bar-file-excel [progress]="file?.progress" (ProgressFinally)="ProgressFinally($event)">
 
             </app-progess-bar-file-excel>
 

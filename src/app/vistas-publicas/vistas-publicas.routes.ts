@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login/login.component'
 import { PageUnderConstructionComponent } from './page-under-construction/page-under-construction.component'
 import { BusinessDetailComponent } from './business-detail/business-detail.component'
 import { VerifyTokenGuard } from '@services/guards/verify-token.guard'
+import { FormDataNegocioComponent } from '../form-register/form-data-negocio/form-data-negocio.component'
 
 export const ROUTES: Routes = [
   {
@@ -16,6 +17,7 @@ export const ROUTES: Routes = [
       import('./home/home.module').then((module) => module.HomeModule),
     canActivate: [VerifyTokenGuard],
   },
+  { path: 'register-negocio', component: FormDataNegocioComponent },
   {
     path: 'search-results',
     loadChildren: () =>

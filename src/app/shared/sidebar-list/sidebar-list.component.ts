@@ -1,21 +1,34 @@
 import {
-  Component, OnInit, Input, Output, EventEmitter, ElementRef,
-  ViewChild, HostListener, AfterViewInit
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ElementRef,
+  ViewChild,
+  HostListener,
+  AfterViewInit,
 } from '@angular/core';
 import {
-  Profile, SidebarListOptions, AnchorsMenu,
-  SelectedEmitter, Filter, Option
+  Profile,
+  SidebarListOptions,
+  AnchorsMenu,
+  SelectedEmitter,
+  Filter,
+  Option,
+  SidebarSections,
 } from '@interfaces/components-options/sidebar-list.options.interface';
 import { ActivatedRoute, Router, ParamMap, Params } from '@angular/router';
 import { Utils } from '../../utils/utils';
+import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service';
+import { UsuarioService } from '@services/usuario/usuario.service';
 
 @Component({
   selector: 'app-sidebar-list',
   templateUrl: './sidebar-list.component.html',
-  styleUrls: ['./sidebar-list.component.scss']
+  styleUrls: ['./sidebar-list.component.scss'],
 })
 export class SidebarListComponent implements OnInit, AfterViewInit {
-
   // Elements
   @ViewChild('sidebarList') sidebarList: ElementRef;
 
@@ -24,6 +37,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   @Input() sidebarTarget: SidebarListComponent;
   @Input() anchorsMenu: AnchorsMenu;
   @Input() sidebarOptions: SidebarListOptions;
+  IMG_USER: string;
 
   // Outputs
   @Output() sidebarExpand = new EventEmitter<boolean>();
@@ -127,16 +141,35 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   productOptionMenu = false;
   contactOptionMenu = false;
+  // Anchor menu parameters
+  anchorsMenuData: AnchorsMenu[];
+  // Sections required to show
+  requiredSections: SidebarSections;
 
   queryParams;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private utils: Utils
-  ){ }
+    private utils: Utils,
+    private _sidebarListService: SidebarListService,
+    public usuarioService: UsuarioService,
+  ) {
+    _sidebarListService.anchorsMenuData$.subscribe(
+      (anchorsData: AnchorsMenu[]) => {
+        this.anchorsMenuData = anchorsData;
+      }
+    );
+
+    _sidebarListService.sectionsToShow$.subscribe(
+      (sectionsData: SidebarSections) => {
+        this.requiredSections = sectionsData;
+      }
+    );
+  }
 
   ngOnInit(): void {
+    console.log(this.sidebarOptions);
 
     if (this.sidebarOptions) {
       this.anchorsMenu = this.sidebarOptions.anchorsMenu;
@@ -149,30 +182,23 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.routerLinkActive();
-
   }
 
   public initFilter() {
-
     // Asignamos a los identificadores únicos sus valores únicos de los filtros
-    this.filters.forEach( (optionFilter, index) => {
-
+    this.filters.forEach((optionFilter, index) => {
       if (!optionFilter.filterId) {
         optionFilter.filterId = index += 1;
       }
 
-      optionFilter.options.forEach( (optionOfFilter, inx) => {
-
+      optionFilter.options.forEach((optionOfFilter, inx) => {
         if (!optionOfFilter.optionId) {
           optionOfFilter.optionId = inx += 1;
         }
 
         optionOfFilter.isSelected = false;
-
       });
-
     });
-
   }
 
   /**
@@ -184,24 +210,20 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
    * @returns {*}  Filter[]
    * @memberof SidebarListComponent
    */
-  public setFilters(filters: Filter[] ): Filter[] {
+  public setFilters(filters: Filter[]): Filter[] {
     // Asignamos a los identificadores únicos sus valores únicos de los filtros
-    filters.forEach( (optionFilter, index) => {
-
+    filters.forEach((optionFilter, index) => {
       if (!optionFilter.filterId) {
         optionFilter.filterId = index += 1;
       }
 
-      optionFilter.options.forEach( (optionOfFilter, inx) => {
-
+      optionFilter.options.forEach((optionOfFilter, inx) => {
         if (!optionOfFilter.optionId) {
           optionOfFilter.optionId = inx += 1;
         }
 
         optionOfFilter.isSelected = false;
-
       });
-
     });
 
     this.filters = filters;
@@ -210,29 +232,22 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
   @HostListener('window:scroll', ['$event'])
   public fixedSidebar($event: Event) {
-
     if (this.sidebarList) {
-
       const sidebarList = this.sidebarList.nativeElement;
       const pxTopElement = sidebarList.offsetTop;
       const pxTopDocument = document.documentElement.scrollTop;
 
       if (pxTopDocument > pxTopElement) {
         sidebarList.classList.add('aside--fixed');
-
       } else {
         sidebarList.classList.remove('aside--fixed');
-
       }
-
     }
-
   }
 
   public toggleSidebarList(event) {
     this.isExpanded = event;
     this.sidebarExpand.emit(this.isExpanded);
-
   }
 
   public routerLinkActive() {
@@ -276,9 +291,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     // retorna true o false, si la opción tiene el mismo valor que el valor pasado por argumento
     // Si existe el atributo value en el option toma ese atributo para la comparación
     function isSameValue(argOption: Option, argQueryValue) {
-
       if (argOption.value) {
-
         let argOptionValue;
         argOptionValue = argOption.value;
 
@@ -287,77 +300,64 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
         }
 
         return argOptionValue === argQueryValue;
-
       }
 
       return argOption.name === argQueryValue;
-
     }
 
     if (queryKeys.length > 0) {
-
-      queryKeys.forEach( queryKey => {
-
+      queryKeys.forEach((queryKey) => {
         let filterMatched;
 
-        filterMatched = this.filters.find( opFilter => {
+        filterMatched = this.filters.find((opFilter) => {
           return opFilter.paramName === queryKey;
         });
 
         if (filterMatched) {
-
           let queryValue;
           queryValue = queryParam.get(queryKey);
 
           if (filterMatched.type === 'single') {
-
-            const optionMatched = filterMatched.options.find( filterMatchedOption => {
-
-              return isSameValue(filterMatchedOption, queryValue);
-
-            });
+            const optionMatched = filterMatched.options.find(
+              (filterMatchedOption) => {
+                return isSameValue(filterMatchedOption, queryValue);
+              }
+            );
 
             if (optionMatched) {
-
-              const queryParams = this.markOption( optionMatched, filterMatched, false);
-
-              this.selected.emit(
-                {
-                  queryParams
-                }
+              const queryParams = this.markOption(
+                optionMatched,
+                filterMatched,
+                false
               );
 
+              this.selected.emit({
+                queryParams,
+              });
             }
-
-
-
-          }else if (filterMatched.type === 'multiple') {
-
+          } else if (filterMatched.type === 'multiple') {
             const queryValues = this.utils.stringToArray(queryValue);
 
             if (queryValues.length > 0) {
-
-              queryValues.forEach(queryValueForEach => {
-
-                const optionMatched = filterMatched.options.find( filterMatchedOption => {
-
-                  return isSameValue(filterMatchedOption, queryValueForEach);
-
-                });
+              queryValues.forEach((queryValueForEach) => {
+                const optionMatched = filterMatched.options.find(
+                  (filterMatchedOption) => {
+                    return isSameValue(filterMatchedOption, queryValueForEach);
+                  }
+                );
 
                 if (optionMatched) {
-                  const queryParams = this.markOption( optionMatched, filterMatched, false);
-
+                  const queryParams = this.markOption(
+                    optionMatched,
+                    filterMatched,
+                    false
+                  );
                 }
-
               });
-
             }
           }
         }
-
       });
-
     }
 
     // console.log('loadOptionsFilter despues');
@@ -381,7 +381,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     let queryParams;
 
     // seleccionamos las opciones de filtro y creamos el queryParam
-    queryParams = this.markOption( option, filter );
+    queryParams = this.markOption(option, filter);
 
     // console.log('selectOptionsFilter2 antes');
     // console.log(queryParams);
@@ -392,71 +392,61 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       relativeTo: this.route,
     };
 
-    this.filters.forEach( filterFor => {
-
+    this.filters.forEach((filterFor) => {
       if (filterFor.type === 'single') {
-
-        const optionSelected = filterFor.options.find( filterOption => {
+        const optionSelected = filterFor.options.find((filterOption) => {
           return filterOption.isSelected;
         });
 
         if (optionSelected) {
-
-          queryParams[filterFor.paramName] = this.getOptionSelectedValue(optionSelected);
-
+          queryParams[filterFor.paramName] = this.getOptionSelectedValue(
+            optionSelected
+          );
         } else {
-
           delete queryParams[filterFor.paramName];
-
         }
-
       } else if (filterFor.type === 'multiple') {
-
-        const optionsSelected = filterFor.options.filter( filterOption => {
-         return filterOption.isSelected;
+        const optionsSelected = filterFor.options.filter((filterOption) => {
+          return filterOption.isSelected;
         });
 
         if (optionsSelected.length > 0) {
-
-          const valuesOfQueryParam = optionsSelected.map( optionSelected => {
-
+          const valuesOfQueryParam = optionsSelected.map((optionSelected) => {
             return this.getOptionSelectedValue(optionSelected);
-
           });
 
           queryParams[filterFor.paramName] = valuesOfQueryParam.join();
 
-          if (filterFor.parentFilterId) { // En caso de tener un filtrado padre, agregar el query param del padre
+          if (filterFor.parentFilterId) {
+            // En caso de tener un filtrado padre, agregar el query param del padre
 
-            const parentFilter = this.filters.find( optionFilter => {
+            const parentFilter = this.filters.find((optionFilter) => {
               return optionFilter.filterId === filterFor.parentFilterId;
             });
 
-            const parentOptionSelected = parentFilter.options.find( parentFilterFind => {
-              return parentFilterFind.isSelected;
-            });
+            const parentOptionSelected = parentFilter.options.find(
+              (parentFilterFind) => {
+                return parentFilterFind.isSelected;
+              }
+            );
 
-            if (parentOptionSelected) { // si existe una opcion del padre seleccionada, agrego el queryParam del padre
+            if (parentOptionSelected) {
+              // si existe una opcion del padre seleccionada, agrego el queryParam del padre
 
               // agregamos el paramQuery del parentFilter
-              queryParams[parentFilter.paramName] = this.getOptionSelectedValue(parentOptionSelected);
-
-            } else { // en caso contrario elimino el queryParam
+              queryParams[parentFilter.paramName] = this.getOptionSelectedValue(
+                parentOptionSelected
+              );
+            } else {
+              // en caso contrario elimino el queryParam
 
               delete queryParams[parentFilter.paramName];
-
             }
-
           }
-
-        }else {
-
+        } else {
           delete queryParams[filterFor.paramName];
-
         }
-
       }
-
     });
 
     // console.log('selectOptionsFilter2 después');
@@ -473,17 +463,11 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     }
 
-    this.router.navigate(
-      [],
-      navigationOptions
-    );
+    this.router.navigate([], navigationOptions);
 
-    this.selected.emit(
-      {
-        queryParams
-      }
-    );
-
+    this.selected.emit({
+      queryParams,
+    });
   }
 
   public getFilter( filter ) {
@@ -501,29 +485,25 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       // Si encuentra una opción del parent Filter seleccionada
       // Si es undefined es porque todos son false, es decir no están seleccionadas
       if (parentOption) {
-
-        const filterOptions = filter.options.filter(filterOption => {
+        const filterOptions = filter.options.filter((filterOption) => {
           return filterOption.parentOptionId === parentOption.optionId;
         });
 
         return filterOptions;
-
-      }else { // si no hay ninguna parentOption seleccionada mostrar las primeras con el mismo parent Option Id
+      } else {
+        // si no hay ninguna parentOption seleccionada mostrar las primeras con el mismo parent Option Id
 
         const parentOptionId = filter.options[0].parentOptionId;
 
-        const filterOptionsByDefault = filter.options.filter(filterOption => {
+        const filterOptionsByDefault = filter.options.filter((filterOption) => {
           return filterOption.parentOptionId === parentOptionId;
         });
 
         return filterOptionsByDefault;
-
       }
-
     }
 
     return filter.options;
-
   }
 
   public markOption(
@@ -531,8 +511,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     filterSelected: Filter,
     toggleOption: boolean = true,
     selectTheOption: boolean = true
-  ){
-
+  ) {
     let queryParams;
     let queryParamsFormat;
 
@@ -561,103 +540,92 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
 
     if (filterSelected.type === 'multiple') {
-
       if (toggleOption) {
-
         optionSelected.isSelected = optionSelected.isSelected ? false : true; // Marca como check o no
-
-      }else {
-
+      } else {
         optionSelected.isSelected = selectTheOption; // Marca como check o no
-
       }
 
-      if (filterSelected.parentFilterId) { // se ejecuta cuando la lista determina que sus opciones dependen de una lista padre
+      if (filterSelected.parentFilterId) {
+        // se ejecuta cuando la lista determina que sus opciones dependen de una lista padre
 
         // Obtenemos al listado de opciones de filtro padre el cual es vinculado con su titulo como
         // padre del la lista de filtrado de la opción seleccionada
-        const parentOptionsFilter = this.filters.find( optionsFilter => optionsFilter.filterId === filterSelected.parentFilterId );
+        const parentOptionsFilter = this.filters.find(
+          (optionsFilter) =>
+            optionsFilter.filterId === filterSelected.parentFilterId
+        );
 
         if (parentOptionsFilter) {
-
           const parentOption = parentOptionsFilter.options.find(
-          parentFilterOption => parentFilterOption.optionId === optionSelected.parentOptionId
+            (parentFilterOption) =>
+              parentFilterOption.optionId === optionSelected.parentOptionId
           );
 
-
-          if (parentOption) { // Marcamos el parent option
+          if (parentOption) {
+            // Marcamos el parent option
 
             if (optionSelected.isSelected) {
               // Desmarcando todas las opciones del padre, porque los parent siempre serán de tipo single
-              parentOptionsFilter.options.forEach(parentFilterOption => {
+              parentOptionsFilter.options.forEach((parentFilterOption) => {
                 parentFilterOption.isSelected = false;
               });
 
               parentOption.isSelected = true; // Marcamos la opción padre
-
             }
 
             // Si todas las opciones est´n desmarcadas, desmarcamos al padre
             // y eliminamos el query param del padre e hijo
-            if ( filterSelected.options.every( lOption => lOption.isSelected === false) ) {
-
+            if (
+              filterSelected.options.every(
+                (lOption) => lOption.isSelected === false
+              )
+            ) {
               parentOption.isSelected = false;
-
             }
-
           }
         }
-
       }
-
     } else if (filterSelected.type === 'single') {
-
       // Desmarcando todas las opciones (parents o singles) que no sean la opción a seleccionar
-      const filterOptionsDisallowed = filterSelected.options.filter( lOption => {
-        return lOption.optionId !== optionSelected.optionId;
-      });
+      const filterOptionsDisallowed = filterSelected.options.filter(
+        (lOption) => {
+          return lOption.optionId !== optionSelected.optionId;
+        }
+      );
 
-      filterOptionsDisallowed.forEach(filterOptionDisallowed => {
+      filterOptionsDisallowed.forEach((filterOptionDisallowed) => {
         filterOptionDisallowed.isSelected = false;
       });
 
       if (toggleOption) {
-
         optionSelected.isSelected = optionSelected.isSelected ? false : true; // Marca como check o no 1 opción
-
-      }else {
-
+      } else {
         optionSelected.isSelected = selectTheOption; // Marca como check o no 1 opción
-
       }
 
       // Obtenemos los filtros que son hijos o subFiltros de este
       // Es decir, que posean el mismo parentFilterId que el filter Id del listado que estamos evaluando
-      const subFilters = this.filters.filter( optionsFilter => {
-
+      const subFilters = this.filters.filter((optionsFilter) => {
         if (optionsFilter.parentFilterId) {
-        return optionsFilter.parentFilterId === filterSelected.filterId;
+          return optionsFilter.parentFilterId === filterSelected.filterId;
         }
 
         return false;
-
       });
 
       // Desmarcamos todas las opciones de los sub filters del parentFilter correspondiente al cambiar de parentOption
-      if ( subFilters.length > 0 ) {
-
-        subFilters.forEach( subFilter => {
-
-          subFilter.options.forEach( subFilterOption => {
+      if (subFilters.length > 0) {
+        subFilters.forEach((subFilter) => {
+          subFilter.options.forEach((subFilterOption) => {
             subFilterOption.isSelected = false;
           });
-
         });
-
       }
 
-      queryParams[filterSelected.paramName] = this.getOptionSelectedValue(optionSelected);
-
+      queryParams[filterSelected.paramName] = this.getOptionSelectedValue(
+        optionSelected
+      );
     }
 
     return queryParams;
@@ -673,12 +641,10 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
    * @returns {*}  any
    * @memberof SidebarListComponent
    */
-  private getOptionSelectedValue(optionSelected: Option){
-
+  private getOptionSelectedValue(optionSelected: Option) {
     const keyValue = 'value';
 
     if (optionSelected[keyValue]) {
-
       let optionSelectedValue;
       optionSelectedValue = optionSelected[keyValue];
 
@@ -687,11 +653,24 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       }
 
       return optionSelectedValue;
-
     }
 
     return optionSelected.name;
-
   }
 
+  /**
+   * Check if the router url contains the specified route.
+   *
+   * @returns {boolean} boolean
+   */
+  hasRoute(): boolean {
+    if (
+      this.router.url.includes('/my-store/contact') ||
+      this.router.url.includes('/my-store/sincronizacion/')
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

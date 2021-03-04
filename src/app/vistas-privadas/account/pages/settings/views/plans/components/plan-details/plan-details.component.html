@@ -24,19 +24,17 @@
       PARA COMPLETAR LA COMPRA COMPLETE EL SIGUIENTE REQUERIMIENTO:
     </p>
 
-    <div class="payment-methods">
+    <div class="payment-methods founduss-plans-colors">
       <div class="webpay-banner">
         <p class="title">Método de pago:</p>
         <mat-checkbox
           class="checkbox"
+          [color]="materialColor"
           [(ngModel)]="webpayDebitCard"
         ></mat-checkbox>
 
         <div class="banner">
-          <img
-            src="../../../../../assets/img/Suscription/webpay-cl.png"
-            alt="webpay-banner"
-          />
+          <img src="assets/img/Suscription/webpay-cl.png" alt="webpay-banner" />
           <p>
             Tarjeta de Débito ó Crédito
             <br />

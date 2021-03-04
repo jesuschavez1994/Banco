@@ -29,7 +29,7 @@ export class ProductService extends Service{
 
 
   // Products By Store
-  public getProductsByStore( idStore: number, page: number = 1, filter?: FilterProductResp ): Observable<ProductsResponse> {
+  public getProductsByStore( idStore: any, page: number = 1, filter?: FilterProductResp ): Observable<ProductsResponse> {
 
     if (filter && Object.keys(filter).length > 0){
       return this.postQuery<ProductsResponse>(`stores/${idStore}/products_search?page=${page}`, filter);
