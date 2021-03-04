@@ -67,10 +67,6 @@ export class CropperImgPhotoAccountComponent implements OnInit, OnDestroy {
 
   ShowImage(eventData) {
     this._avatarService.setImageData(eventData);
-    // this.ShowNewImgCrop = true;
-    // this.ImgNew = eventData;
-    // this.currentImg = eventData;
-    // setTimeout(() => this.FileBase64.emit(event), 0);
   }
 
   GetAvatar() {

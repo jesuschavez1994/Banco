@@ -67,9 +67,7 @@ export class AvatarComponent implements OnInit, OnDestroy {
   }
 
   private checkImgData(imageData: any) {
-    imageData === 'Use previous image'
-      ? this.useFallback()
-      : this.formatImgSource(imageData);
+    this.formatImgSource(imageData);
   }
 
   private formatImgSource(imageData: any) {
@@ -78,9 +76,5 @@ export class AvatarComponent implements OnInit, OnDestroy {
     Array.isArray(imageData)
       ? (this.imgSrc = this.actualImg[0].src)
       : (this.imgSrc = this.actualImg);
-  }
-
-  private useFallback() {
-    this.actualImg = this.userImg;
   }
 }
