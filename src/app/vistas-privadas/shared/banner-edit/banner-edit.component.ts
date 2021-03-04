@@ -160,11 +160,10 @@ export class BannerEditComponent implements OnInit, OnDestroy, AfterViewInit {
     this.showInput = $event.Input;
     this.showCropper = $event.cropper;
     this.isexpand = false;
-    this.verifyBackendBanner();
-    /*     if (this.showInput === true) {
-      // tslint:disable-next-line: max-line-length
-      this.croppedImage = 'assets/img/Banner/Banner1.svg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend
-    } */
+    // if (this.showInput === true){
+    //   // tslint:disable-next-line: max-line-length
+    //   this.croppedImage = 'assets/img/no-image-banner.jpg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend
+    // }
     console.log($event);
   }
 

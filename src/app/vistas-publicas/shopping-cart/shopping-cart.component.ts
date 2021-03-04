@@ -6,7 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { SuccessComponent } from '../../modals/success/success.component';
 import { ConfirmWebpayPlusComponent } from '../../modals/confirm-webpay-plus/confirm-webpay-plus.component';
 import {HomeServiceService} from '../services/home-service.service';
-import { RecipientContactOfOrder } from '../../models/payment-process';
+import { DeliveryContactOfOrder } from '../../models/payment-process';
+import { OrderPaymentForm } from '../../interfaces/components-options/order.options.interface';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -341,10 +342,10 @@ export class ShoppingCartComponent implements OnInit {
 
   }
 
-  public formData(event) {
+  public formData(formData: OrderPaymentForm) {
 
     console.log('formData');
-    console.log(event);
+    console.log(formData);
 
     if (this.currentPaymentData.order){
 
@@ -353,35 +354,42 @@ export class ShoppingCartComponent implements OnInit {
         this.buttonDisabledForm = true;
 
         const orderId = this.currentPaymentData.order.id;
-        const recipientContact = new RecipientContactOfOrder(
+        const recipientContact = new DeliveryContactOfOrder(
           {
-            commune_id: 1,
-            direction: '',
+            commune_id: formData.comuna,
+            direction: formData.direccion,
             house: 1,
-            phone: 1,
-            rut: 1,
+            phone: formData.telefono,
+            rut: formData.rut,
             address_latitude: 1,
             address_longitude: 1
           }
         );
 
-        console.log('RecipientContactOfOrder');
+        console.log('DeliveryContactOfOrder');
         console.log(recipientContact);
 
-        //Agregamos los datos del destinatario y su dirección de destino del producto
-        // this.paymentService.addRecipientContactToOrder(orderId, recipientContact).subscribe(
-        //   resp => {
+        // Agregamos los datos del destinatario y su dirección de destino del producto
+        this.paymentService.addDeliveryContact(orderId, recipientContact).subscribe(
+          resp => {
 
+            console.log('addDeliveryContact');
+            console.log(resp);
 
+          }, error => {
+            console.log('addDeliveryContact - error');
+            console.log(error);
+          }
+        );
 
-        //   }, error => {
-
-        //   }
-        // );
+        // se supone que este id debería ser pasado a la siguiente ruta también
+        // para decirle al back que opción de pago selecciono el cliente
+        const idPaymentOptionSelected = formData.paymentOption.data.id;
 
         this.paymentService.addPaymentToOrder(orderId).subscribe(
 
           resp => {
+            console.log('addPaymentToOrder');
             console.log(resp);
 
             if (!resp.message) {

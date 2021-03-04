@@ -16,7 +16,8 @@
     </div>
 
     <img
-      style="width: auto; height: auto"
+      *ngIf="!showCropper"
+      style="width: 100%"
       #imgBanner
       [src]="currentImg | imgFallback: 'banner'"
       alt="banner"

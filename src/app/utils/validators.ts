@@ -62,14 +62,11 @@ export class MyValidators {
 
   static existInArray(options: any[]) {
 
-    return (control?: AbstractControl): { [key: string]: boolean} => {
+    return (control?: AbstractControl, option = options): { [key: string]: boolean} => {
 
       const value = control.value;
 
-      const isThereInOptions = options.find( option => option === value );
-
-      // if (options.indexOf(value) === -1) {
-      if (isThereInOptions) {
+      if (option.indexOf(value) === -1) {
         return {
           existIn: true
         };

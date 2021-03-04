@@ -56,6 +56,13 @@ export class MyStoreComponent implements OnInit, OnDestroy {
   userLog: boolean;
   storeLog: boolean | string;
 
+  imgsBanners: Srcsize = {
+    xl: 'assets/img/no-image-banner.jpg',
+    l: 'assets/img/no-image-banner.jpg',
+    m: 'assets/img/no-image-banner.jpg',
+    s: 'assets/img/no-image-banner.jpg',
+  };
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,

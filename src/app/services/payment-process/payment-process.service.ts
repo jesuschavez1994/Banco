@@ -5,6 +5,7 @@ import { ProductToCartResp } from '@interfaces/productCart.interface';
 import { Observable } from 'rxjs';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Order, PaymentCreated, CreatedMallTransaction } from '../../interfaces/order.interface';
+import { Region, Commune } from '@interfaces/demography.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +68,21 @@ export class PaymentProcessService extends Service {
   }
 
   /**
+   * @description Agregamos la dirección y datos de contacto de la persona a obtener el producto.
+   * Estos datos son adjuntados a la order
+   * creada
+   * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christopher<@>matiz.com.ve
+   * @date 18/02/2021
+   * @returns {*}
+   * @memberof PaymentProcessService
+   */
+  public addDeliveryContact(idOrder: number, data) {
+    this.setIdUser();
+    return this.postQuery(`users/${this.idUser}/orders/${idOrder}/order_contact`, {});
+  }
+
+
+  /**
    * @description Se obtiene el pedido a pagar, es importante porque
    * aquí se obtendrá las opciones de pago (payments)
    * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christopher@matiz.com.ve
@@ -117,7 +133,7 @@ export class PaymentProcessService extends Service {
     this.setIdUser();
     return this.execQuery<CreatedMallTransaction>(`webpayplus/createdMallTransaction?payment_id=${paymentId}&user_id=${this.idUser}`);
   }
-  // /
+
 
   public getTransactionStatus(token: string): Observable<CreatedMallTransaction> {
 
@@ -149,33 +165,18 @@ export class PaymentProcessService extends Service {
     return this.execQuery(`webpayplus/mallReturnUrl`);
   }
 
-  // Payment
-  /**
-   * @description Agregamos la dirección y datos de contacto de la persona a obtener el producto.
-   * Estos datos son adjuntados a la order
-   * creada
-   * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christopher<@>matiz.com.ve
-   * @date 18/02/2021
-   * @returns {*}
-   * @memberof PaymentProcessService
-   */
-  public addRecipientContactToOrder(idOrder: number, data) {
-    this.setIdUser();
-    return this.postQuery(`users/${this.idUser}/orders/${idOrder}/order_contact`, {});
-  }
-
   // Demography
 
-  public getRegions() {
-    return this.execQuery(`regions`);
+  public getRegions(): Observable<Region[]> {
+    return this.execQuery<Region[]>(`regions`);
   }
 
-  public getRegion(idRegion: number) {
-    return this.execQuery(`regions/${idRegion}`);
+  public getRegion(idRegion: number): Observable<Region> {
+    return this.execQuery<Region>(`regions/${idRegion}`);
   }
 
-  public getCommunesOfRegion(idRegion: number) {
-    return this.execQuery(`regions/${idRegion}/communes`);
+  public getCommunesOfRegion(idRegion: number): Observable<Commune> {
+    return this.execQuery<Commune>(`regions/${idRegion}/communes`);
   }
 
 }

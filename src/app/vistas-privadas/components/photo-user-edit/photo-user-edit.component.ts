@@ -80,7 +80,8 @@ export class PhotoUserEditComponent implements OnInit {
 
   cambiarImagen(){
     const avatar = new Avatar(
-      this.cropper.value.avatar
+      this.cropper.value.avatar,
+      ''
     );
     this.usuarioService.ImagenPerfil(avatar, localStorage.getItem('id')).subscribe((Response: any) => {
       console.log('Response Avatar', Response.src);

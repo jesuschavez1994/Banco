@@ -1,6 +1,9 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MyValidators } from '@utils/validators';
+import { PaymentProcessService } from '@services/payment-process/payment-process.service';
+import { UsuarioService } from '@services/usuario/usuario.service';
+import { OrderPaymentForm } from '@interfaces/components-options/order.options.interface';
 
 @Component({
   selector: 'app-order-payment-forms',
@@ -11,18 +14,14 @@ export class OrderPaymentFormsComponent implements OnInit {
 
   step = 1;
   isAllowedSecondStep = false;
-  regions = [
-    {id: 1, label: 'region1'}
-  ];
+  regions = [];
+  communes = [];
 
-  communes = [
-    {id: 1, label: 'comuna1'}
-  ];
-  // .map( r => r.id )
-  // .map( r => r.id )
   form = new FormGroup({
-    region: new FormControl('', [Validators.required, MyValidators.existInArray(this.regions)]),
-    comuna: new FormControl('', [Validators.required, MyValidators.existInArray(this.communes)]),
+    // region: new FormControl('', [Validators.required, MyValidators.existInArray( this.regions.map( r => r.id ) ) ]),
+    // comuna: new FormControl('', [Validators.required, MyValidators.existInArray( this.regions.map( r => r.id ) ) ]),
+    region: new FormControl('', [Validators.required]),
+    comuna: new FormControl('', [Validators.required]),
     direccion: new FormControl('', [Validators.required, Validators.minLength(10)]),
     hospedaje: new FormControl('', [Validators.required, Validators.minLength(6)]),
     telefono: new FormControl('', [
@@ -59,10 +58,13 @@ export class OrderPaymentFormsComponent implements OnInit {
 
   @Input() buttonDisabled = false;
 
-  @Output() submitForm = new EventEmitter();
+  @Output() submitForm = new EventEmitter<OrderPaymentForm>();
   @Output() currentStep = new EventEmitter<number>();
 
-  constructor() {
+  constructor(
+    private paymentService: PaymentProcessService,
+    private userService: UsuarioService,
+  ) {
   }
 
   ngOnInit(): void {
@@ -95,6 +97,8 @@ export class OrderPaymentFormsComponent implements OnInit {
       }
 
     });
+
+    this.loadDataOfSelects();
 
   }
 
@@ -178,10 +182,14 @@ export class OrderPaymentFormsComponent implements OnInit {
           }
 
         });
+
       }
 
       return errorMessages;
     }
+
+    // console.log('getErrorsWithMessages');
+    // console.log(control);
 
   }
 
@@ -208,6 +216,57 @@ export class OrderPaymentFormsComponent implements OnInit {
   public loadDataOfSelects() {
 
     // aquí cargamos las opciones del select
+    this.paymentService.getRegions().subscribe(
+      resp => {
+
+        resp.forEach( region => {
+
+          const communes = region.communes.map( commune => {
+            return {
+              value: commune.id,
+              label: commune.name
+            };
+          });
+
+          this.regions.push({
+            value: region.id,
+            label: region.name,
+            communes
+          });
+
+        });
+
+        // console.log('this.regions');
+        // console.log(this.regions);
+
+      }
+    );
+
+    this.getCommunesOfRegion();
+    this.preLoadContactData();
+
+  }
+
+
+  public getCommunesOfRegion() {
+
+    this.form.controls.region.valueChanges.subscribe(
+      regionChange => {
+        // tslint:disable-next-line: radix
+        regionChange = parseInt(regionChange);
+
+        const regionSelected = this.regions.find( region => region.value === regionChange );
+
+        if (regionSelected) {
+          this.communes = regionSelected.communes;
+
+        }else {
+          this.communes = [];
+
+        }
+
+      }
+    );
 
   }
 
@@ -218,6 +277,13 @@ export class OrderPaymentFormsComponent implements OnInit {
     // Y con la api order_contact creamos una nueva dirección en donde el recibirá el paquete
     // así no tendrá que ser igual la dirección de contact del usuario con la de donde quiere que llegue
     // el paquete.
+
+    this.userService.getContact().subscribe(
+      contactResp => {
+        console.log('contactResp');
+        console.log(contactResp);
+      }
+    );
 
   }
 
