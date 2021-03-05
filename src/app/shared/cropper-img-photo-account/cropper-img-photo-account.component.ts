@@ -52,7 +52,7 @@ export class CropperImgPhotoAccountComponent implements OnInit, OnDestroy {
     public usuarioService: UsuarioService,
     private _avatarService: AvatarService,
     private _cropperService: CropperService,
-    public homeService: HomeServiceService,
+    public homeService: HomeServiceService
   ) {
     this.subscription = _cropperService.imageData$.subscribe(
       (imageData: string) => {
@@ -67,12 +67,11 @@ export class CropperImgPhotoAccountComponent implements OnInit, OnDestroy {
     this.storeAct = this.homeService.storeActive();
     console.log('storeAct', this.storeAct);
 
-    if(this.storeAct){
+    if (this.storeAct) {
       this.options = this.store;
-    }else{
+    } else {
       this.options = this.avatar;
     }
-
   }
 
   ngOnDestroy(): void {
@@ -91,12 +90,8 @@ export class CropperImgPhotoAccountComponent implements OnInit, OnDestroy {
     this.usuarioService
       .datosUserImages(localStorage.getItem('id'))
       .subscribe((Response: any) => {
-        console.log('avatar', Response);
         if (Response.length >= 1) {
-          // this.currentImg = Response[0].src_size.xl;
-          this._cropperService.setImageSource(
-            `${Response[0].src_size.xl}`
-          );
+          this._cropperService.setImageSource(Response[0].src_size.xl);
         }
       });
   }
