@@ -26,6 +26,10 @@ export class AvatarComponent implements OnInit, OnDestroy {
   imgSrc: string;
   subscription: Subscription;
 
+  store: string = 'store';
+  avatar: string = 'avatar';
+  options: string;
+
   constructor(
     private auth: StoreService,
     public homeService: HomeServiceService,
@@ -42,6 +46,12 @@ export class AvatarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.storeAct = this.homeService.storeActive();
     console.log('storeAct', this.storeAct);
+
+    if(this.storeAct){
+      this.options = this.store;
+    }else{
+      this.options = this.avatar;
+    }
   }
 
   ngOnDestroy(): void {
@@ -72,7 +82,7 @@ export class AvatarComponent implements OnInit, OnDestroy {
 
   private formatImgSource(imageData: any) {
     this.actualImg = imageData;
-
+    
     Array.isArray(imageData)
       ? (this.imgSrc = this.actualImg[0].src)
       : (this.imgSrc = this.actualImg);

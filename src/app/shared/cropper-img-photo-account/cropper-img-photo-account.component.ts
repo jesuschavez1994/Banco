@@ -14,6 +14,7 @@ import { URL_SERVICIOS } from '../../config/config';
 import { AvatarService } from '@shared/public-navbar/avatar/services/avatar.service';
 import { CropperService } from '@shared/cropper-img-photo-account/services/cropper.service';
 import { Subscription } from 'rxjs';
+import { HomeServiceService } from '../../vistas-publicas/services/home-service.service';
 
 @Component({
   selector: 'app-cropper-img-photo-account',
@@ -38,13 +39,20 @@ export class CropperImgPhotoAccountComponent implements OnInit, OnDestroy {
     'left',
     'right',
   ];
+
+  store: string = 'store';
+  avatar: string = 'avatar';
+  options: string;
+  storeAct: boolean | string = false;
+
   position = new FormControl(this.positionOptions[0]);
 
   subscription: Subscription;
   constructor(
     public usuarioService: UsuarioService,
     private _avatarService: AvatarService,
-    private _cropperService: CropperService
+    private _cropperService: CropperService,
+    public homeService: HomeServiceService,
   ) {
     this.subscription = _cropperService.imageData$.subscribe(
       (imageData: string) => {
@@ -55,6 +63,16 @@ export class CropperImgPhotoAccountComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.GetAvatar();
+
+    this.storeAct = this.homeService.storeActive();
+    console.log('storeAct', this.storeAct);
+
+    if(this.storeAct){
+      this.options = this.store;
+    }else{
+      this.options = this.avatar;
+    }
+
   }
 
   ngOnDestroy(): void {
@@ -77,7 +95,7 @@ export class CropperImgPhotoAccountComponent implements OnInit, OnDestroy {
         if (Response.length >= 1) {
           // this.currentImg = Response[0].src_size.xl;
           this._cropperService.setImageSource(
-            `${URL_SERVICIOS}/${Response[0].src_size.xl}`
+            `${Response[0].src_size.xl}`
           );
         }
       });

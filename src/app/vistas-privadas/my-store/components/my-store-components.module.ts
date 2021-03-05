@@ -15,6 +15,7 @@ import { MapEditarComponent } from './map-editar/map-editar.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { ScheduleStoreComponent } from './schedule-store/schedule-store.component';
 import { SheduleStoreEditComponent } from './shedule-store-edit/shedule-store-edit.component';
+import { NoProductsComponent } from './no-products/no-products.component';
 /* 
   Components go here.
 */
@@ -29,6 +30,7 @@ const components = [
   MapaComponent,
   ScheduleStoreComponent,
   SheduleStoreEditComponent,
+  NoProductsComponent
 ];
 /* 
   Modules go here.

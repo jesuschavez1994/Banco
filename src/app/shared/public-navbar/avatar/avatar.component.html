@@ -10,7 +10,7 @@
     aria-expanded="false"
   >
     <span>
-      <img [src]="imgSrc | imgFallback:'avatar'" alt="user" class="m-0 responsive--icon profile-pic" />
+      <img [src]="imgSrc | imgFallback:(this.options)" alt="user" class="m-0 responsive--icon profile-pic" />
     </span>
   </a>
   <div class="dropdown-menu dropdown-menu-right mt-2 animated flipInY">
@@ -19,7 +19,7 @@
         <div class="dw-user-box display-flex align-items-center" align="center">
           <div class="u-img">
             <img
-              [src]="imgSrc | imgFallback:'avatar'"
+              [src]="imgSrc | imgFallback:(this.options)"
               alt="user"
               class="m-0 responsive--icon profile-pic"
             />

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { StoreService } from '@services/store/store.service';
 import { ProductosLoads, DataProductDB } from '@interfaces/InterfaceProducto';
 import { SincronizacionService } from '@services/sincronizacion/sincronizacion.service';
@@ -21,6 +21,8 @@ export class SynchronizedProductsTableComponent implements OnInit {
   totalPage: number = 0;
   showFooterPaginations = false;
   scroll:boolean=false;
+
+  @Output()  List = new EventEmitter<ListProductSyncAnNoSync>();
 
   constructor(  public storeService: StoreService,
                 private sincronizacion: SincronizacionService,
@@ -88,7 +90,7 @@ export class SynchronizedProductsTableComponent implements OnInit {
       this.totalPage = resp.total;
       this.showFooterPaginations = true;
       this.spinnerService.hide();
-
+      this.List.emit(resp);
       this.scrollTop();
     })
 

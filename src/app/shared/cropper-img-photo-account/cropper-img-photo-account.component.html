@@ -7,7 +7,7 @@
       padding: 10px;
     "
     #imgBanner
-    [src]="currentImg"
+    [src]="currentImg | imgFallback:(this.options)"
     alt="avatar-user"
     onerror="if (this.src != 'assets/img/avatar-hombre.jpg') this.src = 'assets/img/avatar-hombre.jpg';"
   />

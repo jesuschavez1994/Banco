@@ -33,7 +33,7 @@ export class ImgFallbackPipe implements PipeTransform {
         imgDefault = 'assets/img/Box/box.svg';
         break;
       case 'avatar': {
-        imgDefault = 'assets/img/no-avatar.jpg';
+        imgDefault = 'assets/img/avatar-hombre.jpg';
         let image = '';
         !img
           ? (image = this.useDefaultImg(imgDefault))
@@ -42,10 +42,10 @@ export class ImgFallbackPipe implements PipeTransform {
       }
       case 'avatar-hombre':
         imgDefault = 'assets/img/avatar-hombre.jpg';
-        break;
-        case 'banner':
-          imgDefault = 'assets/img/no-image-banner.jpg';
-          break;
+      break;
+      case 'store':
+        imgDefault = 'assets/img/store.jpg';
+      break;
       default:
         imgDefault = 'assets/img/no-image-banner.jpg';
         break;

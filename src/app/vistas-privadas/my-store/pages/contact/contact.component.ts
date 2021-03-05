@@ -67,6 +67,7 @@ export class ContactComponent implements OnInit {
   forma: FormGroup;
   schedule: FormGroup;
   MatSlide: FormGroup;
+  edit: boolean = false;
 
   showShedule = true;
   name: any = null;
