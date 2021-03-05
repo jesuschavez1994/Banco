@@ -1,6 +1,7 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { AppRoutingModule } from '../app-routing.module'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AppRoutingModule } from '../app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BusinessDetailModule } from './business-detail/business-detail.module';
 
 /* Modules is here */
 import {
@@ -13,35 +14,35 @@ import {
   PipesModule,
   // ShoppingCartModule,
   NgxSpinnerModule,
-} from './Module.index'
+} from './Module.index';
 
 /* Components is here */
 
 import {
   // HomeComponent,
   RegisterComponent,
-  BusinessDetailComponent,
+  // BusinessDetailComponent,
   // ToastComponent,
   LoginComponent,
   PageUnderConstructionComponent,
   // SliderCategoryComponent,
   ModalRecoverPasswordComponent,
-} from './vista-publicas.index'
+} from './vista-publicas.index';
 
-/* 
+/*
   Components go here.
 */
 const components = [
   // HomeComponent,
   RegisterComponent,
-  BusinessDetailComponent,
+  // BusinessDetailComponent,
   // ToastComponent,
   LoginComponent,
   PageUnderConstructionComponent,
   // SliderCategoryComponent,
   ModalRecoverPasswordComponent,
-]
-/* 
+];
+/*
   Modules go here.
 */
 const modules = [
@@ -57,11 +58,12 @@ const modules = [
   PipesModule,
   // ShoppingCartModule,
   NgxSpinnerModule,
-]
-/* 
+  BusinessDetailModule
+];
+/*
   If need that this module exports something, put those modules/components here.
 */
-const exportStuff = [RegisterComponent]
+const exportStuff = [RegisterComponent];
 
 @NgModule({
   declarations: [...components],

@@ -56,7 +56,8 @@ import {
   HammerModule,
   HammerGestureConfig,
   HAMMER_GESTURE_CONFIG,
-} from '@angular/platform-browser'
+} from '@angular/platform-browser';
+import { ViewsModule } from './views/views.module'
 
 registerLocaleData(ca)
 
@@ -102,6 +103,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    ViewsModule,
   ],
 
   providers: [
@@ -127,5 +129,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     },
   ],
   bootstrap: [AppComponent],
+  exports: [],
 })
 export class AppModule {}

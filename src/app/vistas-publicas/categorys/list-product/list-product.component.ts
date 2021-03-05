@@ -2,7 +2,7 @@ import { Component, OnInit,OnChanges,OnDestroy } from '@angular/core';
 import { ProductCategories } from '@interfaces/productCategories';
 import { Service } from '@services/service.service';
 import { Router, Params, ActivatedRoute } from '@angular/router';
-import { GetCategorysService } from '.././services/get-categorys.service';
+import { GetCategorysService } from '../services/get-categorys.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ModalErrComponent} from '@shared/modal-err/modal-err.component'
 import {MatDialog, MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog';

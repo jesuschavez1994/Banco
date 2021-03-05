@@ -1,0 +1,80 @@
+<app-public-navbar [userLog]="userLog" [storeAct]="storeLog"></app-public-navbar>
+
+<main class="page">
+
+  <!-- [filters]="sidebarFilters" -->
+  <!-- <ng-container *ngIf="anchorsMenu && profile">
+
+    <ng-container *ngIf="sidebarFilters"> -->
+
+      <app-sidebar-list
+
+        [isExpanded]="expandSidebar"
+        (sidebarExpand)="toogleSidebar($event)"
+        [anchorsMenu]="anchorsMenu" [profile]="profile"
+        [filters]="sidebarFilters"
+        #sidebarList
+      >
+      </app-sidebar-list>
+
+    <!-- </ng-container>
+
+  </ng-container> -->
+
+  <div class="column">
+
+    <section class="introduction-page">
+
+      <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+
+      <app-banner [imgs]="imgsBanners"></app-banner>
+
+
+    </section>
+
+    <!-- <ng-container *ngIf="showProducts"> -->
+
+      <section class="products-infomation">
+
+        <ng-container *ngIf="storeData">
+          <h1 class="profile-name" id="profile-name">
+            {{storeData.name}}
+          </h1>
+        </ng-container>
+
+        <app-product-detail #productDetail (clickButtonCart)="addProductToCart($event)">
+        </app-product-detail>
+
+        <app-search-bar
+          [preloadedValue]="preloadedValueSearch"
+          [debounce]="1000"
+          [isExpanded]="expandSidebar"
+          [buttonSidebarList]="true"
+          (sidebarExpand)="toogleSidebar($event)"
+          (search)="search($event)"
+          [filterOptions]="searchBarFilter">
+        </app-search-bar>
+
+        <!-- <ng-container *ngIf="products.length > 0"> -->
+          <app-products-cards
+            (selected)="goTodetailProduct($event)"
+            (pagination)="paginationProducts($event)"
+            [totalItems]="totalProducts"
+            [itemsPerPage]="itemsPerPage"
+            [showShimmer]="showShimmerProductsCards"
+
+            #productCards>
+          </app-products-cards>
+        <!-- </ng-container> -->
+
+
+
+      </section>
+
+    <!-- </ng-container> -->
+
+  </div>
+
+</main>
+
+<app-toast #toastRef></app-toast>

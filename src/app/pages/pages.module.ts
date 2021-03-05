@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { TerminosYCondicionesComponent } from '../views/terminos-ycondiciones/terminos-ycondiciones.component';
+import { TerminosYCondicionesComponent } from '../views/public/terminos-ycondiciones/terminos-ycondiciones.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { PublicViewsComponent } from './components/public-views/public-views.component';

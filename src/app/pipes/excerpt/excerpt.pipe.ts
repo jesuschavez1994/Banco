@@ -7,9 +7,13 @@ export class ExcerptPipe implements PipeTransform {
 
   transform(text: string, maxLength: number): string {
 
-    const textLength = text.length;
+    if (text) {
+      const textLength = text.length;
 
-    return textLength > maxLength ? text.substr(0, maxLength) + '...' : text;
+      return textLength > maxLength ? text.substr(0, maxLength) + '...' : text;
+    }
+
+    return '';
 
   }
 
