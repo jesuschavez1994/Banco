@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderListOptions } from '../../interfaces/components-options/order.options.interface';
-import { PaymentProcessService } from '../../services/payment-process/payment-process.service';
+import { OrderListOptions } from '../../../interfaces/components-options/order.options.interface';
+import { PaymentProcessService } from '../../../services/payment-process/payment-process.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ToastComponent } from '../../modals/toast/toast.component';
-import {HomeServiceService} from '../services/home-service.service';
+import { ToastComponent } from '../../../modals/toast/toast.component';
+import {HomeServiceService} from '../../../vistas-publicas/services/home-service.service';
 
 @Component({
   selector: 'app-sales',
