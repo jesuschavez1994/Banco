@@ -88,6 +88,7 @@ export class LoadProductComponent implements OnInit {
   totalProducts: number
   itemsPerPage = 16
   wasFirstLoadedProducts = false
+  Noproduct: boolean;
 
   imgsBanners: BannerOptions = {
     m: 'assets/img/Banner/Banner1.svg',
@@ -353,6 +354,8 @@ export class LoadProductComponent implements OnInit {
 
             this.productCardsStore.toggleShimmer(false)
           } else {
+            this.Noproduct = true;
+            this.productCardsStore.toggleShimmer(false)
             this.toastRef.open('Tienda sin productos disponibles', {
               color: '#ffffff',
               background: '#900909c2',
@@ -365,7 +368,7 @@ export class LoadProductComponent implements OnInit {
             { color: '#ffffff', background: '#900909c2' }
           )
           console.log('error al cargar productos')
-          console.log(error)
+          console.log(error);
         }
       )
     

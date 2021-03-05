@@ -2,11 +2,9 @@
   <p style="font-size: 20px; color: white">Cargando...</p>
 </ngx-spinner>
 
-<app-no-suggested-products
-  *ngIf="MyProduct.length === undefined"
-></app-no-suggested-products>
 
-<section class="container-fluid mt-5">
+
+<section class="container-fluid mt-4">
   <div class="row">
     <app-search-store
       (searchEmitter)="handleSearch($event)"
@@ -59,8 +57,12 @@
   </span>
 </div>
 
+<app-no-suggested-products
+  *ngIf="MyProduct.length === 0"
+></app-no-suggested-products>
+
 <!-- PAGINACIÓN -->
-<footer class="col-md-11" *ngIf="showFooterPaginations">
+<footer class="col-md-11" *ngIf="MyProduct.length > 0">
   <pagination-controls
     previousLabel="Anterior"
     nextLabel="Siguiente"

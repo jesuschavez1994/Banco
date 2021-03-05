@@ -32,7 +32,6 @@
                   <input     class="form-control"
                               type="text"
                               placeholder="Rut"
-                              
                               formControlName="rut"
                               [ngClass]="{'is-invalid':  (!forma.controls['rut'].valid || forma.controls['rut'].errors?.minlength)&& forma.controls['rut'].touched, 'is-valid': forma.controls['rut'].valid }" 
                   >

@@ -9,19 +9,8 @@
     aria-haspopup="true"
     aria-expanded="false"
   >
-    <span *ngIf="userImg.length > 0">
-      <img
-        src="{{ envApi + '/' + userImg[0].src }}"
-        alt="user"
-        class="m-0 responsive--icon profile-pic"
-      />
-    </span>
-    <span *ngIf="userImg.length === 0 || userImg === undefined">
-      <img
-        src="assets/img/avatar.svg"
-        alt="user"
-        class="m-0 responsive--icon profile-pic"
-      />
+    <span>
+      <img [src]="imgSrc | imgFallback:(this.options)" alt="user" class="m-0 responsive--icon profile-pic" />
     </span>
   </a>
   <div class="dropdown-menu dropdown-menu-right mt-2 animated flipInY">
@@ -29,20 +18,11 @@
       <li>
         <div class="dw-user-box display-flex align-items-center" align="center">
           <div class="u-img">
-            <span *ngIf="userImg.length > 0 && userImg != undefined">
-              <img
-                src="{{ envApi + '/' + userImg[0].src }}"
-                alt="user"
-                class="m-0 responsive--icon profile-pic"
-              />
-            </span>
-            <span *ngIf="userImg.length === 0 || userImg == undefined">
-              <img
-                src="assets/img/avatar.svg"
-                alt="user"
-                class="m-0 responsive--icon profile-pic"
-              />
-            </span>
+            <img
+              [src]="imgSrc | imgFallback:(this.options)"
+              alt="user"
+              class="m-0 responsive--icon profile-pic"
+            />
           </div>
           <div class="u-text">
             <h4 class="name-user OpenSans-700 text-left">

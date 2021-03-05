@@ -6,7 +6,7 @@
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="pt-3 pb-4" *ngFor="let data of dataStore">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="!edit">
               <h5 class="name-store family size-27 pl-2">
                 {{ data.name | capitalizado }}
               </h5>
@@ -34,7 +34,7 @@
 
                   <button
                     class="button-edit family-400 ml-3"
-                    (click)="atrasDescripcion()"
+                    (click)="atrasDescripcion(); edit = !edit"
                     *ngIf="editarDescripcion"
                     tupe="button"
                   >
@@ -43,7 +43,7 @@
 
                   <button
                     class="button-edit family-400 ml-3"
-                    (click)="EditarDescripcion()"
+                    (click)="EditarDescripcion(); edit = !edit"
                     *ngIf="!editarDescripcion"
                     tupe="button"
                   >

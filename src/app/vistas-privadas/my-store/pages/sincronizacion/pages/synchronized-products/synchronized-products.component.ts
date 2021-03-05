@@ -6,6 +6,7 @@ import {
   SidebarSections,
 } from '@interfaces/components-options/sidebar-list.options.interface'
 import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service'
+import { ListProductSyncAnNoSync, DataListProductSyncAnNoSync } from '@interfaces/table-product-sync-and-no-sync/ListProductSyncAndNosync';
 
 @Component({
   selector: 'app-synchronized-products',
@@ -13,11 +14,14 @@ import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.s
   styleUrls: ['./synchronized-products.component.css'],
 })
 export class SynchronizedProductsComponent implements OnInit {
+
   itemProductos: DataProductDB[] = []
-  sinchronized = false
+  sinchronized = false;
+  ListDAta: ListProductSyncAnNoSync;
   // Sidebar related parameters
   anchorsMenu: AnchorsMenu[] = []
-  sidebarSections: SidebarSections
+  sidebarSections: SidebarSections;
+  ShowElemets: boolean;
 
   constructor(
     public storeService: StoreService,
@@ -43,6 +47,17 @@ export class SynchronizedProductsComponent implements OnInit {
 
     this.setSidebarSections()
     this.loadAnchorsMenuData()
+  }
+
+  DataList($event){
+    this.ListDAta = $event;
+    console.log(this.ListDAta.data);
+    if(this.ListDAta.data.length === 0){
+      this.ShowElemets = false;
+    }
+    if(this.ListDAta.data.length > 0){
+      this.ShowElemets = true;
+    }
   }
 
   private loadAnchorsMenuData() {
