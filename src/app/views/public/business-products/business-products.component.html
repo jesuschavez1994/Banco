@@ -45,6 +45,7 @@
         <app-product-detail #productDetail (clickButtonCart)="addProductToCart($event)">
         </app-product-detail>
 
+        <!-- [filterOptions]="searchBarFilter" -->
         <app-search-bar
           [preloadedValue]="preloadedValueSearch"
           [debounce]="1000"
@@ -52,7 +53,8 @@
           [buttonSidebarList]="true"
           (sidebarExpand)="toogleSidebar($event)"
           (search)="search($event)"
-          [filterOptions]="searchBarFilter">
+          [showFilter]="false"
+          >
         </app-search-bar>
 
         <!-- <ng-container *ngIf="products.length > 0"> -->

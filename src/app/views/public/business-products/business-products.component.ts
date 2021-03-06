@@ -79,11 +79,11 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
 
   // SearchBar:
   preloadedValueSearch = '';
-  searchBarFilter: FilterOption[] = [
-    { label: 'filtrar por', value: 0 },
-    { label: 'producto', value: 1 },
-    { label: 'Empresa', value: 'hola' },
-  ];
+  // searchBarFilter: FilterOption[] = [
+  //   { label: 'filtrar por', value: 0 },
+  //   { label: 'producto', value: 1 },
+  //   { label: 'Empresa', value: 'hola' },
+  // ];
 
   // navbar
   menuOptionsShopping: DropdownOption[] = [];
