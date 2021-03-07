@@ -354,19 +354,18 @@ export class ShoppingCartComponent implements OnInit {
         this.buttonDisabledForm = true;
 
         const orderId = this.currentPaymentData.order.id;
-        const recipientContact = new DeliveryContactOfOrder(
-          {
-            commune_id: formData.comuna,
-            direction: formData.direccion,
-            house: 1,
-            phone: formData.telefono,
-            rut: formData.rut,
-            address_latitude: 1,
-            address_longitude: 1
-          }
-        );
+        const recipientContact =  {
+          commune_id: formData.comuna,
+          direction: formData.direccion,
+          house: 1,
+          phone: formData.telefono,
+          rut: formData.rut,
+          address_latitude: 1751.12,
+          address_longitude: 1447.47,
+          name: formData.nombreDireccion,
+        };
 
-        console.log('DeliveryContactOfOrder');
+        console.log('DeliveryContactOfOrder to add');
         console.log(recipientContact);
 
         // Agregamos los datos del destinatario y su dirección de destino del producto

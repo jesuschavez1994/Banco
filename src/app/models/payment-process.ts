@@ -7,6 +7,7 @@ export class DeliveryContactOfOrder implements DeliveryContactOfOrderData {
   rut: number;
   address_latitude: number;
   address_longitude: number;
+  name: string;
 
   constructor(
     data: DeliveryContactOfOrderData
@@ -18,11 +19,12 @@ export class DeliveryContactOfOrder implements DeliveryContactOfOrderData {
     this.rut = data.rut;
     this.address_latitude = data.address_latitude;
     this.address_longitude = data.address_longitude;
+    this.name = data.name;
   }
 
 }
 
-interface DeliveryContactOfOrderData {
+export interface DeliveryContactOfOrderData {
   commune_id: number;
   direction: string;
   house: number;
@@ -30,4 +32,5 @@ interface DeliveryContactOfOrderData {
   rut: number;
   address_latitude: number;
   address_longitude: number;
+  name: string;
 }

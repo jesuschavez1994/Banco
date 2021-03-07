@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Order, PaymentCreated, CreatedMallTransaction } from '../../interfaces/order.interface';
 import { Region, Commune } from '@interfaces/demography.interface';
+import { DeliveryContactOfOrderData } from '../../models/payment-process';
 
 @Injectable({
   providedIn: 'root'
@@ -76,9 +77,12 @@ export class PaymentProcessService extends Service {
    * @returns {*}
    * @memberof PaymentProcessService
    */
-  public addDeliveryContact(idOrder: number, data) {
+  public addDeliveryContact(idOrder: number, deliveryContact: DeliveryContactOfOrderData) {
     this.setIdUser();
-    return this.postQuery(`users/${this.idUser}/orders/${idOrder}/order_contact`, {});
+    const options = {
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    };
+    return this.postQuery(`users/${this.idUser}/orders/${idOrder}/order_delivery`, deliveryContact);
   }
 
 
