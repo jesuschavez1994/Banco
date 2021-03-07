@@ -66,20 +66,16 @@ export class LoginComponent implements OnInit {
     this.usuarioServices
       .login(usuario, this.forma.value.recuerdame)
       .subscribe((resp: any) => {
-        console.log(this.forma.value.recuerdame);
-        console.log('FFFF', resp);
         if (resp.mensaje) {
-          console.log(resp.mensaje);
           this.OnError = true;
           this.ErrorMessage = resp.mensaje;
         }
         this.guardarStorage(resp.remember_token, resp.user.id);
-        console.log(resp);
+
         if (resp.user.role === 'store') {
           this.userStoreService
             .getStoreAccountEdit(resp.user.id)
             .subscribe((StoreResponse: any) => {
-              console.log('StoreResponse', StoreResponse);
               this.guardarStorageStore(StoreResponse['0'].social.store_id);
               this.router.navigate(['account/settings/store-edit']);
             });
