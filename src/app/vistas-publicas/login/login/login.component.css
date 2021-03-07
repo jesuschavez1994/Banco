@@ -73,7 +73,7 @@ input {
 }
 
 .height {
-  height: 520px;
+  height: 480px;
 }
 
 .img-login {
@@ -83,7 +83,7 @@ input {
 }
 
 .form-height {
-  min-height: 520px;
+  min-height: 480px;
 }
 
 .margin-top {
@@ -99,13 +99,23 @@ input {
   color: #595959;
 }
 
-@media (min-width: 250px) and (max-width: 767px) {
+@media (min-width: 351px) and (max-width: 767px) {
   .width-93 {
     width: 100% !important;
   }
 
   .margin-top {
     margin-top: 4rem;
+  }
+
+  .img-login {
+    position: absolute;
+    top: -10%;
+    left: 39%;
+  }
+
+  .height {
+    height: 440px;
   }
 }
 
@@ -138,7 +148,11 @@ input {
     width: 80%;
   }
 
+  .height {
+    height: 380px;
+  }
+
   .form-height {
-    min-height: 420px;
+    min-height: 320px;
   }
 }

@@ -35,7 +35,6 @@
               type="email"
               placeholder="Ingrese el correo"
               formControlName="email"
-              [ngModel]="email"
               [ngClass]="{
                 'is-invalid':
                   (!forma.controls['email'].valid ||
@@ -104,7 +103,6 @@
                 type="checkbox"
                 class="filled-in chk-col-light-blue"
                 formControlName="recuerdame"
-                [(ngModel)]="isChecked"
               />
 
               <label for="checkbox-signup" class="ml-2 family-500 recorder">
