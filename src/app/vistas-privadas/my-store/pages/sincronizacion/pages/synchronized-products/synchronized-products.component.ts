@@ -22,6 +22,7 @@ export class SynchronizedProductsComponent implements OnInit {
   anchorsMenu: AnchorsMenu[] = []
   sidebarSections: SidebarSections;
   ShowElemets: boolean;
+  NoSincronyzed: boolean;
 
   constructor(
     public storeService: StoreService,
@@ -34,6 +35,10 @@ export class SynchronizedProductsComponent implements OnInit {
       .subscribe((resp: ProductosLoads) => {
         this.itemProductos = resp.data
         console.log('ITEM', this.itemProductos)
+
+        if(this.itemProductos.length === 0){
+          this.NoSincronyzed = true;
+        }
 
         // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < this.itemProductos.length; i++) {

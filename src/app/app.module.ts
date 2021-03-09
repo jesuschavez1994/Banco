@@ -95,7 +95,7 @@ export class MyHammerConfig extends HammerGestureConfig {
       logOnly: environment.production,
     }),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14',
+      apiKey: 'AIzaSyAHHP-2wKX86cAPLYp_VlV477o8D0kviYw',
     }),
     NgbModule,
 

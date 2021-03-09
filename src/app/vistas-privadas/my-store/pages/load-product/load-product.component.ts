@@ -632,6 +632,8 @@ export class LoadProductComponent implements OnInit {
 
             this.productCardsStore.toggleShimmer(false)
           } else {
+            this.Noproduct = true;
+            this.productCardsStore.toggleShimmer(false)
             this.toastRef.open('Tienda sin productos disponibles', {
               color: '#ffffff',
               background: '#900909c2',
