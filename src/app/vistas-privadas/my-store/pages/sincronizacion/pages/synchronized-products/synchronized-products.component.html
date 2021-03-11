@@ -1,4 +1,4 @@
 
 <!-- <app-no-synchronized-products *ngIf="!sinchronized"></app-no-synchronized-products> -->
 <app-synchronized-products-table (List)="DataList($event)" *ngIf="this.sinchronized === true"></app-synchronized-products-table>
-<app-no-synchronized-products *ngIf="this.sinchronized === false "></app-no-synchronized-products>
+<app-no-synchronized-products *ngIf="NoSincronyzed"></app-no-synchronized-products>

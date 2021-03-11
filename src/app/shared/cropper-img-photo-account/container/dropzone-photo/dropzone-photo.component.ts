@@ -233,9 +233,7 @@ export class DropzonePhotoComponent implements OnInit {
         if (responseImage.length >= 1) {
           this.croppedImage = responseImage[0].src_size.xl;
           this._avatarService.setImageData(responseImage[0].src_size.xl);
-          this._cropperService.setFallbackImage(
-            `${URL_SERVICIOS}/${this.croppedImage}`
-          );
+          this._cropperService.setFallbackImage(this.croppedImage);
         }
       });
   }

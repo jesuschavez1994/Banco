@@ -69,6 +69,8 @@ export class ItemsSuggestedProductsComponent implements OnInit {
   suggestedShow = false;
   idProductoToSync: any;
   scroll = false;
+  Nosuggested: boolean;
+
 
   // tslint:disable-next-line: variable-name
   last_Page_Pagination: number;
@@ -173,7 +175,10 @@ export class ItemsSuggestedProductsComponent implements OnInit {
       )
       .subscribe((resp: Total) => {
         this.MyProduct = resp.data;
-        this.suggestedShow = true;
+
+        if(this.MyProduct.length === 0){
+          this.Nosuggested = true;
+        }
         // this.dataObject = resp.data.suggestion.data.JSON.parse();
         // console.log('MY PRODUCTOSSSS', this.MyProduct)
         this.last_Page_Pagination = resp.last_page;

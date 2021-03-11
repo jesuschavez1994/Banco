@@ -42,10 +42,14 @@ export class ImgFallbackPipe implements PipeTransform {
       }
       case 'avatar-hombre':
         imgDefault = 'assets/img/avatar-hombre.jpg';
-      break;
+        break;
       case 'store':
         imgDefault = 'assets/img/store.jpg';
-      break;
+        let image = '';
+        !img
+          ? (image = this.useDefaultImg(imgDefault))
+          : (image = this.formatImage(img));
+        return image;
       default:
         imgDefault = 'assets/img/no-image-banner.jpg';
         break;
