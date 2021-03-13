@@ -1,45 +1,73 @@
 <!-- User Options -->
 <div class="options-user-log">
-    <nav class=" navbar navbar-toggler m-0 box-nav w-100">
-        <ul>
+  <nav class="navbar navbar-toggler m-0 box-nav w-100">
+    <ul>
+      <!-- btn Cart -->
+      <!--<app-button-shop class="btn-shop"></app-button-shop> -->
+      <app-dropdown-icon
+        *ngIf="auth && !storeAct"
+        class="btn-shop"
+        (extraButton)="deleteProductFromCart($event)"
+        [classIcon]="classIcon"
+        [menuOptions]="menuOptions"
+      ></app-dropdown-icon>
+      <!-- btn Cart -->
+      <!-- favorite btn -->
+      <app-dropdown-icon
+        *ngIf="auth && !storeAct"
+        class="btn-shop"
+        (extraButton)="deleteProductFromFavorite($event)"
+        [classIcon]="classIconFavorite"
+        [menuOptions]="menuOptionsFavorite"
+      ></app-dropdown-icon>
 
-            <!-- btn Cart -->
-            <!--<app-button-shop class="btn-shop"></app-button-shop> -->
-            <app-dropdown-icon *ngIf="auth && !storeAct" class="btn-shop" (extraButton)="deleteProductFromCart($event)" [classIcon]="classIcon" [menuOptions]="menuOptions"></app-dropdown-icon>
-            <!-- btn Cart -->
-            <!-- favorite btn -->
-            <app-dropdown-icon *ngIf="auth && !storeAct" class="btn-shop" (extraButton)="deleteProductFromFavorite($event)" [classIcon]="classIconFavorite" [menuOptions]="menuOptionsFavorite"></app-dropdown-icon>
-
-            <!-- favorite btn -->
-            <!-- btn config -->
-            <!--   <a href="" class="btn-u-settings" *ngIf="auth">
+      <!-- favorite btn -->
+      <!-- btn config -->
+      <!--   <a href="" class="btn-u-settings" *ngIf="auth">
                 <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M8.837 1.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 0 1 4.377 3.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 0 1-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 0 1 1.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 0 1 2.692 1.116l.094.318c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 0 1 2.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.291a1.873 1.873 0 0 1 1.116-2.693l.318-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 0 1-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159A1.873 1.873 0 0 1 8.93 1.945l-.094-.319zm-2.633-.283c.527-1.79 3.065-1.79 3.592 0l.094.319a.873.873 0 0 0 1.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 0 0 .52 1.255l.319.094c1.79.527 1.79 3.065 0 3.592l-.319.094a.873.873 0 0 0-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 0 0-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 0 0-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 0 0-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l.319-.094a.873.873 0 0 0 .52-1.255l-.16-.292c-.892-1.64.902-3.433 2.541-2.54l.292.159a.873.873 0 0 0 1.255-.52l.094-.319z"/>
                         <path fill-rule="evenodd" d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z"/>
                       </svg>
             </a> -->
-            <button class="fredoka  no-auth-btn" *ngIf="!auth" [routerLink]="['/login']">
-                    Ingresa
-                </button>
-            <button class="btn button fredoka  no-auth-btn" *ngIf="!auth" id="registrarme" (click)="openDialog()">
-                    Registrate
-                </button>
-            <!-- btn config -->
-            <!-- btn perfil -->
-            <button class="btn btn-primary button fredoka" *ngIf="auth && !storeAct" id="inisiar-sesion" [routerLink]="['/account/setting-user']">
-                    Mi perfil
-                </button>
-            <button class="btn btn-primary button fredoka" *ngIf="storeAct && auth" id="inisiar-sesion" [routerLink]="['/my-store/contact']">
-                    Tienda
-                </button>
-            <!-- btn perfil -->
-            <!-- Avatar -->
-            <app-avatar *ngIf="auth" [imgCropper]="imgCropper"></app-avatar>
-            <!-- Avatar -->
-        </ul>
-
-    </nav>
-
+      <button
+        class="fredoka no-auth-btn"
+        *ngIf="!auth"
+        [routerLink]="['/login']"
+      >
+        Ingresa
+      </button>
+      <button
+        class="btn button fredoka no-auth-btn"
+        *ngIf="!auth"
+        id="registrarme"
+        (click)="openDialog()"
+      >
+        Registrate
+      </button>
+      <!-- btn config -->
+      <!-- btn perfil -->
+      <button
+        class="btn btn-primary button fredoka"
+        *ngIf="auth && !storeAct"
+        id="inisiar-sesion"
+        [routerLink]="['/account/settings-user']"
+      >
+        Mi perfil
+      </button>
+      <button
+        class="btn btn-primary button fredoka"
+        *ngIf="storeAct && auth"
+        id="inisiar-sesion"
+        [routerLink]="['/my-store/contact']"
+      >
+        Tienda
+      </button>
+      <!-- btn perfil -->
+      <!-- Avatar -->
+      <app-avatar *ngIf="auth" [imgCropper]="imgCropper"></app-avatar>
+      <!-- Avatar -->
+    </ul>
+  </nav>
 </div>
 <app-toast #toastRef></app-toast>
 

@@ -1,41 +1,91 @@
 <section class="configuration-menu" #configurationMenu>
+  <div class="menu-container-fixed-" #menuContainerFixed>
+    <div class="heading">
+      <app-btn-action
+        (click)="toggleMenu()"
+        class="responsive--icon"
+      ></app-btn-action>
+      <h2>Menú</h2>
+    </div>
 
-    <div class="menu-container-fixed-" #menuContainerFixed>
+    <ul class="items-menu">
+      <li class="item pointer" RouterLinkActive="active">
+        <svg
+          class="responsive--icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 0 1-6-6V86a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v340a6 6 0 0 1-6 6zm-42-92v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm-252 12c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36z"
+          />
+        </svg>
+        <p>
+          <app-category-link class="caltegory-link"></app-category-link>
+        </p>
+      </li>
+      <li
+        class="item pointer"
+        *ngIf="!auth"
+        RouterLinkActive="active"
+        (click)="openDialog()"
+      >
+        <svg
+          class="responsive--icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 640 512"
+        >
+          <path
+            d="M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"
+          />
+        </svg>
+        <p>Registrarse</p>
+      </li>
+      <li
+        class="item pointer"
+        [routerLink]="['/login']"
+        *ngIf="!auth"
+        RouterLinkActive="active"
+      >
+        <svg
+          class="responsive--icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 496 512"
+        >
+          <path
+            d="M248 104c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96zm0 144c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm0-240C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-49.7 0-95.1-18.3-130.1-48.4 14.9-23 40.4-38.6 69.6-39.5 20.8 6.4 40.6 9.6 60.5 9.6s39.7-3.1 60.5-9.6c29.2 1 54.7 16.5 69.6 39.5-35 30.1-80.4 48.4-130.1 48.4zm162.7-84.1c-24.4-31.4-62.1-51.9-105.1-51.9-10.2 0-26 9.6-57.6 9.6-31.5 0-47.4-9.6-57.6-9.6-42.9 0-80.6 20.5-105.1 51.9C61.9 339.2 48 299.2 48 256c0-110.3 89.7-200 200-200s200 89.7 200 200c0 43.2-13.9 83.2-37.3 115.9z"
+          />
+        </svg>
+        <p>Iniciar Sesión</p>
+      </li>
+      <li
+        class="item pointer"
+        *ngIf="auth && !storeAct"
+        RouterLinkActive="active"
+      >
+        <app-dropdown-icon
+          *ngIf="auth"
+          class="responsive--icon"
+          (extraButton)="deleteProductFromFavorite($event)"
+          [classIcon]="classIconFavorite"
+          [menuOptions]="menuOptionsFavorite"
+        ></app-dropdown-icon>
+        <!-- <svg class="responsive--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M248 104c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96zm0 144c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm0-240C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-49.7 0-95.1-18.3-130.1-48.4 14.9-23 40.4-38.6 69.6-39.5 20.8 6.4 40.6 9.6 60.5 9.6s39.7-3.1 60.5-9.6c29.2 1 54.7 16.5 69.6 39.5-35 30.1-80.4 48.4-130.1 48.4zm162.7-84.1c-24.4-31.4-62.1-51.9-105.1-51.9-10.2 0-26 9.6-57.6 9.6-31.5 0-47.4-9.6-57.6-9.6-42.9 0-80.6 20.5-105.1 51.9C61.9 339.2 48 299.2 48 256c0-110.3 89.7-200 200-200s200 89.7 200 200c0 43.2-13.9 83.2-37.3 115.9z"/></svg> -->
+        <p>Favoritos</p>
+      </li>
+      <li
+        class="item pointer"
+        *ngIf="!storeAct && auth"
+        RouterLinkActive="active"
+      >
+        <app-dropdown-icon
+          class="responsive--icon"
+          (extraButton)="deleteProductFromCart($event)"
+          [classIcon]="classIcon"
+          [menuOptions]="menuOptions"
+        ></app-dropdown-icon>
+        <p>Mi Compra</p>
 
-        <div class="heading">
-
-            <app-btn-action (click)="toggleMenu()" class="responsive--icon"></app-btn-action>
-            <h2>Menú</h2>
-
-        </div>
-
-
-        <ul class="items-menu">
-
-            <li class="item pointer" RouterLinkActive="active">
-                <svg class="responsive--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 0 1-6-6V86a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v340a6 6 0 0 1-6 6zm-42-92v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm-252 12c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36z"/></svg>
-                <p>
-                    <app-category-link class="caltegory-link"></app-category-link>
-                </p>
-            </li>
-            <li class="item pointer" *ngIf="!auth" RouterLinkActive="active" (click)="openDialog()">
-                <svg class="responsive--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"/></svg>
-                <p>Registrarse</p>
-            </li>
-            <li class="item pointer" [routerLink]="['/login']" *ngIf="!auth" RouterLinkActive="active">
-                <svg class="responsive--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M248 104c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96zm0 144c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm0-240C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-49.7 0-95.1-18.3-130.1-48.4 14.9-23 40.4-38.6 69.6-39.5 20.8 6.4 40.6 9.6 60.5 9.6s39.7-3.1 60.5-9.6c29.2 1 54.7 16.5 69.6 39.5-35 30.1-80.4 48.4-130.1 48.4zm162.7-84.1c-24.4-31.4-62.1-51.9-105.1-51.9-10.2 0-26 9.6-57.6 9.6-31.5 0-47.4-9.6-57.6-9.6-42.9 0-80.6 20.5-105.1 51.9C61.9 339.2 48 299.2 48 256c0-110.3 89.7-200 200-200s200 89.7 200 200c0 43.2-13.9 83.2-37.3 115.9z"/></svg>
-                <p>Iniciar Sesión</p>
-            </li>
-            <li class="item pointer" *ngIf="auth && !storeAct" RouterLinkActive="active">
-                <app-dropdown-icon *ngIf="auth" class="responsive--icon" (extraButton)="deleteProductFromFavorite($event)" [classIcon]="classIconFavorite" [menuOptions]="menuOptionsFavorite"></app-dropdown-icon>
-                <!-- <svg class="responsive--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M248 104c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96zm0 144c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm0-240C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-49.7 0-95.1-18.3-130.1-48.4 14.9-23 40.4-38.6 69.6-39.5 20.8 6.4 40.6 9.6 60.5 9.6s39.7-3.1 60.5-9.6c29.2 1 54.7 16.5 69.6 39.5-35 30.1-80.4 48.4-130.1 48.4zm162.7-84.1c-24.4-31.4-62.1-51.9-105.1-51.9-10.2 0-26 9.6-57.6 9.6-31.5 0-47.4-9.6-57.6-9.6-42.9 0-80.6 20.5-105.1 51.9C61.9 339.2 48 299.2 48 256c0-110.3 89.7-200 200-200s200 89.7 200 200c0 43.2-13.9 83.2-37.3 115.9z"/></svg> -->
-                <p>Favoritos</p>
-            </li>
-            <li class="item pointer" *ngIf="!storeAct && auth" RouterLinkActive="active">
-                <app-dropdown-icon class="responsive--icon" (extraButton)="deleteProductFromCart($event)" [classIcon]="classIcon" [menuOptions]="menuOptions"></app-dropdown-icon>
-                <p>Mi Compra</p>
-
-                <!-- <svg id="icon-cart-list" class="responsive--icon" xmlns="http://www.w3.org/2000/svg" viewBox="-291 414.9 12 12">				 
+        <!-- <svg id="icon-cart-list" class="responsive--icon" xmlns="http://www.w3.org/2000/svg" viewBox="-291 414.9 12 12">				 
 		   <g>
 			   <path d="M-279.8,425.2h-0.7c-0.1-0.7-0.7-1.3-1.5-1.3s-1.4,0.5-1.5,1.3h-2.3c-0.1-0.7-0.7-1.3-1.5-1.3c-0.7,0-1.3,0.5-1.4,1.1
 				   c-0.5-0.2-0.8-0.6-0.8-1.1c0-0.6,0.5-1.1,1.1-1.2l0,0.1c0,0.2,0.2,0.3,0.4,0.3h6.8c0.2,0,0.3-0.1,0.4-0.3l1.1-4.5c0,0,0-0.1,0-0.1
@@ -48,81 +98,133 @@
 				   c-0.4,0-0.8-0.3-0.8-0.8s0.3-0.8,0.8-0.8s0.8,0.3,0.8,0.8S-281.6,426.1-282,426.1z"/>
 		   </g>
 		   </svg> -->
+      </li>
 
+      <!-- ============================================================== -->
+      <!-- Profile -->
+      <!-- ============================================================== -->
+      <li class="item navbar-collapse pointer" *ngIf="userImg != undefined">
+        <!--   <li class="item navbar-collapse " *ngIf="auth && (userName != undefined)"> -->
 
-            </li>
+        <ng-container *ngIf="userImg.length > 0 && userImg != undefined">
+          <img
+            src="{{ envApi + '/' + userImg[0].src }}"
+            alt="user"
+            class="m-0 responsive--icon profile-pic"
+          />
+        </ng-container>
 
-            <!-- ============================================================== -->
-            <!-- Profile -->
-            <!-- ============================================================== -->
-            <li class="item navbar-collapse pointer" *ngIf="userImg != undefined">
-                <!--   <li class="item navbar-collapse " *ngIf="auth && (userName != undefined)"> -->
+        <ng-container *ngIf="userImg.length === 0 && userImg != undefined">
+          <img
+            src="assets/img/avatar.svg"
+            alt="user"
+            class="m-0 responsive--icon profile-pic"
+          />
+        </ng-container>
 
-                <ng-container *ngIf="(userImg.length > 0 ) && (userImg != undefined)">
-                    <img src="{{envApi+'/'+userImg[0].src}}" alt="user" class="m-0 responsive--icon profile-pic" />
-                </ng-container>
+        <span
+          class="dropdown-toggle waves-effect waves-dark"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          >Mi usuario</span
+        >
 
-                <ng-container *ngIf="(userImg.length === 0) && (userImg != undefined)">
-                    <img src="assets/img/avatar.svg" alt="user" class="m-0 responsive--icon profile-pic" />
-                </ng-container>
-
-                <span class="dropdown-toggle waves-effect waves-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi usuario</span>
-
-                <div class="dropdown-menu dropdown-menu-right mt-2 animated flipInY">
-                    <ul class="dropdown-user">
-                        <li>
-                            <div class="dw-user-box display-flex align-items-center" align="center">
-                                <div class="u-img">
-                                    <ng-container *ngIf="(userImg.length > 0) ">
-                                        <img src="{{envApi+'/'+userImg[0].src}}" alt="user" class="m-0 responsive--icon profile-pic" />
-                                    </ng-container>
-                                    <ng-container *ngIf="(userImg.length === 0) ">
-                                        <img src="assets/img/avatar.svg" alt="user" class="m-0 responsive--icon profile-pic" />
-                                    </ng-container>
-                                </div>
-                                <div class="u-text">
-                                    <h4 class="name-user OpenSans-700 text-left">
-                                        {{userName}}
-                                    </h4>
-                                    <p class="text-muted">
-                                        {{userEmail}}
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li class="nav-item">
-                            <a class="a-menu-user nav-link OpenSans-400" [routerLink]="[storeAct ? '/account/settings/store-edit' : '/account/setting-user' ]">
-                                <img class="mr-2 img-menu" src="../../../assets/img/iconos/icons-main/icons/person.svg" alt="" width="18" height="18" title="Person"> Perfil
-                            </a>
-                        </li>
-                        <li class="nav-item" routerLinkActive="active">
-                            <a class="a-menu-user nav-link OpenSans-400" [routerLink]="[storeAct ? '/account/settings/store-edit' : '/account/setting-user' ]">
-
-                                <img class="mr-2 img-menu" src="../../../assets/img/iconos/icons-main/icons/gear.svg" alt="" width="18" height="18" title="Configuración"> Configuración de tu cuenta
-
-                            </a>
-                        </li>
-
-                        <li class="nav-item" (click)="logout();">
-
-                            <a class="a-menu-user nav-link OpenSans-400">
-
-                                <img class="mr-2 img-menu" src="../../../assets/img/iconos/icons-main/icons/power.svg" alt="" width="18" height="18" title="Logout"> Salir
-
-                            </a>
-                        </li>
-                    </ul>
+        <div class="dropdown-menu dropdown-menu-right mt-2 animated flipInY">
+          <ul class="dropdown-user">
+            <li>
+              <div
+                class="dw-user-box display-flex align-items-center"
+                align="center"
+              >
+                <div class="u-img">
+                  <ng-container *ngIf="userImg.length > 0">
+                    <img
+                      src="{{ envApi + '/' + userImg[0].src }}"
+                      alt="user"
+                      class="m-0 responsive--icon profile-pic"
+                    />
+                  </ng-container>
+                  <ng-container *ngIf="userImg.length === 0">
+                    <img
+                      src="assets/img/avatar.svg"
+                      alt="user"
+                      class="m-0 responsive--icon profile-pic"
+                    />
+                  </ng-container>
                 </div>
-
+                <div class="u-text">
+                  <h4 class="name-user OpenSans-700 text-left">
+                    {{ userName }}
+                  </h4>
+                  <p class="text-muted">
+                    {{ userEmail }}
+                  </p>
+                </div>
+              </div>
             </li>
-            <!-- ============================================================== -->
-            <!-- END Profile -->
-            <!-- ============================================================== -->
-        </ul>
+            <li role="separator" class="divider"></li>
+            <li class="nav-item">
+              <a
+                class="a-menu-user nav-link OpenSans-400"
+                [routerLink]="[
+                  storeAct
+                    ? '/account/settings/store-edit'
+                    : '/account/settings-user'
+                ]"
+              >
+                <img
+                  class="mr-2 img-menu"
+                  src="../../../assets/img/iconos/icons-main/icons/person.svg"
+                  alt=""
+                  width="18"
+                  height="18"
+                  title="Person"
+                />
+                Perfil
+              </a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a
+                class="a-menu-user nav-link OpenSans-400"
+                [routerLink]="[
+                  storeAct
+                    ? '/account/settings/store-edit'
+                    : '/account/settings-user'
+                ]"
+              >
+                <img
+                  class="mr-2 img-menu"
+                  src="../../../assets/img/iconos/icons-main/icons/gear.svg"
+                  alt=""
+                  width="18"
+                  height="18"
+                  title="Configuración"
+                />
+                Configuración de tu cuenta
+              </a>
+            </li>
 
-    </div>
-
-
+            <li class="nav-item" (click)="logout()">
+              <a class="a-menu-user nav-link OpenSans-400">
+                <img
+                  class="mr-2 img-menu"
+                  src="../../../assets/img/iconos/icons-main/icons/power.svg"
+                  alt=""
+                  width="18"
+                  height="18"
+                  title="Logout"
+                />
+                Salir
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <!-- ============================================================== -->
+      <!-- END Profile -->
+      <!-- ============================================================== -->
+    </ul>
+  </div>
 </section>
 <app-toast #toastRef></app-toast>
