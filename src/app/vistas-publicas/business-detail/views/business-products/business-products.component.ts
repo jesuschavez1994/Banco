@@ -13,7 +13,6 @@ import { ProductsCardsOptions } from '@interfaces/components-options/products-ca
 import { ActivatedRoute, ParamMap, Router, Params } from '@angular/router';
 import { ProductsCardsComponent } from '@shared/products-cards/products-cards.component';
 import { ProductDetailComponent } from '@shared/product-detail/product-detail.component';
-import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.component';
 import { StoreService } from '@services/store/store.service';
 import {
   AnchorsMenu,
@@ -51,7 +50,6 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
   // Components Controllers
   @ViewChild('productCards') productCards: ProductsCardsComponent;
   @ViewChild('productDetail') productDetail: ProductDetailComponent;
-  @ViewChild('sidebarList') sidebarList: SidebarListComponent;
   @ViewChild('toastRef') toastRef: ToastComponent;
   // @ViewChild('dropdownIcon') dropdownIcon: DropdownIconComponent;
 
@@ -258,7 +256,7 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
   public goTodetailProduct(product: ProductsCardsOptions) {
     if (product.id > -1 && product.idStore > -1) {
       this.router.navigate([
-        '/empresa',
+        '/store',
         product.idStore,
         'productos',
         product.id,
@@ -520,12 +518,12 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
     this.anchorsMenu = [
       {
         anchorName: 'Productos',
-        anchorLink: `/empresa/${idStore}/productos`,
+        anchorLink: `/store/${idStore}/productos`,
         wordToMatch: `productos`,
       },
       {
         anchorName: 'Contacto',
-        anchorLink: `/empresa/${idStore}/contacto`,
+        anchorLink: `/store/${idStore}/contact`,
         wordToMatch: `productos`,
       },
     ];
@@ -694,7 +692,7 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
 
     this.breadcrumb[2] = {
       title: `${storeResp.name}`,
-      routerLink: [`/empresa/${idStore}`],
+      routerLink: [`/store/${idStore}`],
     };
   }
 
