@@ -30,8 +30,8 @@ import { Utils } from '@utils/utils';
 import { PaymentProcessService } from '@services/payment-process/payment-process.service';
 import { DropdownOption } from '@interfaces/components-options/dropdown.options.interface';
 import { DropdownIconComponent } from '@shared/dropdown-icon/dropdown-icon.component';
-import { ToastComponent } from '../../../modals/toast/toast.component';
-import { HomeServiceService } from '../../../vistas-publicas/services/home-service.service';
+import { ToastComponent } from '@app/modals/toast/toast.component';
+import { HomeServiceService } from '../../../../vistas-publicas/services/home-service.service';
 import { ProductModel } from '@app/models/product.model';
 import { Title } from '@angular/platform-browser';
 import {
@@ -119,7 +119,6 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.loadDataByParams();
-
   }
 
   /**
@@ -228,11 +227,12 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
             this.loadProductsCards(params, queryParam);
             this.wasFirstLoadedProducts = true;
           }
-        } else { // cuando los dato de tienda no cambian
+        } else {
+          // cuando los dato de tienda no cambian
 
           if (this.wasFirstLoadedProducts) {
-
-            if (this.wasChangedQueryParam) { // pero los datos de queryParams si
+            if (this.wasChangedQueryParam) {
+              // pero los datos de queryParams si
               this.sidebarList.loadOptionsFilter(queryParam); // actualizamos los valores queryParams internos del sidebar-list
               this.loadProductsCards(params, queryParam);
             }
@@ -417,7 +417,6 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
 
       this.productService.getProductsByStore(idStore, page, filter).subscribe(
         (resp) => {
-
           const products = resp.data;
           this.totalProducts = resp.total;
           this.itemsPerPage = resp.per_page;
@@ -432,7 +431,6 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
             console.log('Products Loaded: ', this.productCards.products);
 
             this.productCards.toggleShimmer(false);
-
           } else {
             this.toastRef.open('Tienda sin productos disponibles', {
               color: '#ffffff',
@@ -505,7 +503,7 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: ToSearch.value !== '' ? { name: ToSearch.value } : {},
-      queryParamsHandling: 'merge'
+      queryParamsHandling: 'merge',
     });
   }
 
