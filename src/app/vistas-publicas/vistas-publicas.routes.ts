@@ -41,8 +41,11 @@ export const ROUTES: Routes = [
   },
 
   {
-    path: 'empresa/:idStore',
-    loadChildren: () => import('./business-detail/business-detail.module').then(m => m.BusinessDetailModule)
+    path: 'store/:idStore',
+    loadChildren: () =>
+      import('./business-detail/business-detail.module').then(
+        (m) => m.BusinessDetailModule
+      ),
   },
   // {
   //   path: 'business-detail/:idStore', // Se obtiene el id de la tienda para mostrar su listo productos
