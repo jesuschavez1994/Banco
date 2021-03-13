@@ -6,9 +6,9 @@ import { BusinessProductsComponent } from './views/business-products/business-pr
 import { BusinessDetailComponent } from './business-detail.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'productos' },
-  { path: 'productos', component: BusinessProductsComponent },
-  { path: 'productos/:idProduct', component: BusinessProductsComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'products' },
+  { path: 'products', component: BusinessProductsComponent },
+  { path: 'products/:idProduct', component: BusinessProductsComponent },
   // { path: 'contacto', component: BusinessContactComponent },
 ];
 
