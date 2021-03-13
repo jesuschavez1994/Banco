@@ -691,7 +691,7 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
 
     this.breadcrumb[2] = {
       title: `${storeResp.name}`,
-      routerLink: [`/business-detail/${idStore}`],
+      routerLink: [`/empresa/${idStore}`],
     };
   }
 
