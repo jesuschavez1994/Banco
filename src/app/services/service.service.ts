@@ -6,19 +6,15 @@ const apiUrl = environment.apiUrl;
 const baseUrl = environment.url;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class Service {
-
-  constructor(protected http: HttpClient){}
+  constructor(protected http: HttpClient) {}
 
   // Read
-  protected execQuery<T>(
-    query: string,
-    url: string | boolean = true
-  ){
+  protected execQuery<T>(query: string, url: string | boolean = true) {
     query = this.createUrlQuery(query, url);
-    return this.http.get<T>( query );
+    return this.http.get<T>(query);
   }
 
   // Create or Update
@@ -27,18 +23,15 @@ export class Service {
     data: any,
     url: string | boolean = true,
     options = {}
-  ){
+  ) {
     query = this.createUrlQuery(query, url);
-    return this.http.post<T>( query, data, options );
+    return this.http.post<T>(query, data, options);
   }
 
   // Delete
-  protected DeleteQuery<T>(
-    query: string,
-    url: string | boolean = true
-  ){
+  protected DeleteQuery<T>(query: string, url: string | boolean = true) {
     query = this.createUrlQuery(query, url);
-    return this.http.delete<T>( query );
+    return this.http.delete<T>(query);
   }
 
   /**
@@ -57,19 +50,11 @@ export class Service {
    * @returns {*}
    * @memberof Service
    */
-  private createUrlQuery(
-    query: string,
-    url: string | boolean = true
-  ){
-
-    if ( typeof url === 'boolean' ) {
+  private createUrlQuery(query: string, url: string | boolean = true) {
+    if (typeof url === 'boolean') {
       url = url ? apiUrl : baseUrl;
-
     }
 
     return url + query;
-
   }
-
-
 }
