@@ -51,7 +51,6 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
   @ViewChild('productCards') productCards: ProductsCardsComponent;
   @ViewChild('productDetail') productDetail: ProductDetailComponent;
   @ViewChild('toastRef') toastRef: ToastComponent;
-  // @ViewChild('dropdownIcon') dropdownIcon: DropdownIconComponent;
 
   // Components Inputs
   breadcrumb: BreadcrumbOptions[];
