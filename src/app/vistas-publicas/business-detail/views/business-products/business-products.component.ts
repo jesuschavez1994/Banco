@@ -233,7 +233,7 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
           if (this.wasFirstLoadedProducts) {
             if (this.wasChangedQueryParam) {
               // pero los datos de queryParams si
-              this.sidebarList.loadOptionsFilter(queryParam); // actualizamos los valores queryParams internos del sidebar-list
+              this._sidebarListService.loadFilterOptions(queryParam);
               this.loadProductsCards(params, queryParam);
             }
           } else {
@@ -662,12 +662,15 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
       sidebarListFilters.push(categoryFilter, subCategoryFilter, priceFilter);
 
       // retornamos los filters con el formato correcto para el component
-      this.sidebarFilters = this.sidebarList.setFilters(sidebarListFilters);
+      // this.sidebarFilters = this.sidebarList.setFilters(sidebarListFilters);
+      this._sidebarListService.setFilters(sidebarListFilters);
 
-      this.sidebarList.loadOptionsFilter(queryParam); // seleccionamos las opciones filtradas por url
+      // this.sidebarList.loadOptionsFilter(queryParam); // seleccionamos las opciones filtradas por url
+      this._sidebarListService.loadFilterOptions(queryParam);
     });
 
-    this.sidebarList.loadOptionsFilter(queryParam); // seleccionamos las opciones filtradas por url
+    // this.sidebarList.loadOptionsFilter(queryParam); // seleccionamos las opciones filtradas por url
+    this._sidebarListService.loadFilterOptions(queryParam);
   }
 
   // Expand or contract sidebar-list on responsive mode

@@ -152,6 +152,8 @@ export class SidebarListComponent implements OnInit, AfterViewInit, OnDestroy {
   // Data service subscription objects
   anchorsMenuDataSubscription: Subscription;
   sectionsToShowSubscription: Subscription;
+  filterValuesSubscription: Subscription;
+  checkedOptionsSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -166,9 +168,21 @@ export class SidebarListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
 
+    this.filterValuesSubscription = _sidebarListService.filterValues$.subscribe(
+      (filtersData: Filter[]) => {
+        this.setFilters(filtersData);
+      }
+    );
+
     this.sectionsToShowSubscription = _sidebarListService.sectionsToShow$.subscribe(
       (sectionsData: SidebarSections) => {
         this.requiredSections = sectionsData;
+      }
+    );
+
+    this.checkedOptionsSubscription = _sidebarListService.checkedOptions$.subscribe(
+      (checkedOptions: ParamMap) => {
+        this.loadOptionsFilter(checkedOptions);
       }
     );
   }
@@ -192,6 +206,8 @@ export class SidebarListComponent implements OnInit, AfterViewInit, OnDestroy {
     // Preventing data leaks
     this.anchorsMenuDataSubscription.unsubscribe();
     this.sectionsToShowSubscription.unsubscribe();
+    this.filterValuesSubscription.unsubscribe();
+    this.checkedOptionsSubscription.unsubscribe();
   }
 
   public initFilter() {
@@ -237,6 +253,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.filters = filters;
+
     return filters;
   }
 
