@@ -21,7 +21,7 @@ const routes: Routes = [
         canActivate: [EmptyShoppingCartGuard],
       },
       {
-        path: 'ventas',
+        path: 'sales',
         component: SalesComponent,
       },
       { path: '**', pathMatch: 'full', redirectTo: 'shopping-cart' },
