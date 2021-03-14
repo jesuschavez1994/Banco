@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderListOptions } from '@interfaces/components-options/order.options.interface';
 import { PaymentProcessService } from '@services/payment-process/payment-process.service';
-import { CurrentPaymentData } from '../../../interfaces/components-options/shopping-cart.options.interface';
+import { CurrentPaymentData } from '../../../../interfaces/components-options/shopping-cart.options.interface';
 import { MatDialog } from '@angular/material/dialog';
-import { SuccessComponent } from '../../../modals/success/success.component';
-import { ConfirmWebpayPlusComponent } from '../../../modals/confirm-webpay-plus/confirm-webpay-plus.component';
-import {HomeServiceService} from '../../../vistas-publicas/services/home-service.service';
-import { DeliveryContactOfOrder } from '../../../models/payment-process';
-import { OrderPaymentForm } from '../../../interfaces/components-options/order.options.interface';
+import { SuccessComponent } from '../../../../modals/success/success.component';
+import { ConfirmWebpayPlusComponent } from '../../../../modals/confirm-webpay-plus/confirm-webpay-plus.component';
+import { HomeServiceService } from '../../../services/home-service.service';
+import { DeliveryContactOfOrder } from '../../../../models/payment-process';
+import { OrderPaymentForm } from '../../../../interfaces/components-options/order.options.interface';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.scss']
+  styleUrls: ['./shopping-cart.component.scss'],
 })
 export class ShoppingCartComponent implements OnInit {
   userLog: boolean;
@@ -188,33 +188,25 @@ export class ShoppingCartComponent implements OnInit {
     private homeService: HomeServiceService,
     private paymentService: PaymentProcessService,
     public dialog: MatDialog
-  ){
-
-  }
+  ) {}
 
   ngOnInit(): void {
-
     this.userLog = this.homeService.islog();
     this.storeLog = this.homeService.storeActive();
 
     if (this.ordersLists) {
-
       if (this.ordersLists.length > 0) {
         this.ordersListSelected = this.ordersLists[0];
       }
-
     }
 
     this.loadProductsFromCart();
-
   }
-
 
   public loadProductsFromCart() {
     console.log('ShoppingCartComponent');
 
-    this.paymentService.getProductsFromCart().subscribe(resp => {
-
+    this.paymentService.getProductsFromCart().subscribe((resp) => {
       let storeNames: any[];
       let productCartOrdered: any[];
 
@@ -222,20 +214,17 @@ export class ShoppingCartComponent implements OnInit {
       productCartOrdered = [];
 
       if (resp.data) {
-
-        resp.data.forEach( productFor => {
-
+        resp.data.forEach((productFor) => {
           const storeName = productFor.attributes.store.name;
 
           if (!storeNames.includes(storeName)) {
-
             storeNames.push(storeName);
 
-            const productOfCart = resp.data.filter( productOfCartFil => {
+            const productOfCart = resp.data.filter((productOfCartFil) => {
               return storeName === productOfCartFil.attributes.store.name;
             });
 
-            const formatProductCart = productOfCart.map( productOfCartMap => {
+            const formatProductCart = productOfCart.map((productOfCartMap) => {
               return {
                 name: productOfCartMap.name,
                 description: 'el back no devuelve la descripción',
@@ -260,9 +249,7 @@ export class ShoppingCartComponent implements OnInit {
               orders: formatProductCart,
               hasPaid: false,
             });
-
           }
-
         });
 
         this.ordersLists = productCartOrdered;
@@ -270,8 +257,6 @@ export class ShoppingCartComponent implements OnInit {
         console.log('Products of cart loaded');
         console.log(resp);
       }
-
-
     });
 
     // Borrar el listado de pedidos y solo borrar el carrito al terminar con el proceso de compra.
@@ -288,7 +273,7 @@ export class ShoppingCartComponent implements OnInit {
     // y se carga el carrito de compras, con los productos aún no pagados.
   }
 
-  public filterByTab(tabNumber){
+  public filterByTab(tabNumber) {
     this.tabSelected = tabNumber;
   }
 
@@ -305,25 +290,18 @@ export class ShoppingCartComponent implements OnInit {
    * @memberof ShoppingCartComponent
    */
   public purchaseAction(event) {
-
     const modalConfirm = this.dialog.open(SuccessComponent, {
       data: {
         title: '¿Continuar con el proceso de pago?',
-        buttons: [
-          'Cancelar',
-          'Continuar',
-        ],
-      }
+        buttons: ['Cancelar', 'Continuar'],
+      },
     });
 
-    modalConfirm.componentInstance.emitSelectData.subscribe( result => {
-
+    modalConfirm.componentInstance.emitSelectData.subscribe((result) => {
       if (result === 'Continuar') {
-
         modalConfirm.componentInstance.buttonDisabled = true;
 
-        this.paymentService.createOrder().subscribe( orderCreated => {
-
+        this.paymentService.createOrder().subscribe((orderCreated) => {
           console.log('createOrder');
           console.log(orderCreated);
 
@@ -333,28 +311,21 @@ export class ShoppingCartComponent implements OnInit {
           this.tabSelected = 3;
 
           modalConfirm.componentInstance.buttonDisabled = false;
-
         });
-
       }
-
     });
-
   }
 
   public formData(formData: OrderPaymentForm) {
-
     console.log('formData');
     console.log(formData);
 
-    if (this.currentPaymentData.order){
-
+    if (this.currentPaymentData.order) {
       if (Object.keys(this.currentPaymentData.order).length > 0) {
-
         this.buttonDisabledForm = true;
 
         const orderId = this.currentPaymentData.order.id;
-        const recipientContact =  {
+        const recipientContact = {
           commune_id: formData.comuna,
           direction: formData.direccion,
           house: 1,
@@ -369,61 +340,54 @@ export class ShoppingCartComponent implements OnInit {
         console.log(recipientContact);
 
         // Agregamos los datos del destinatario y su dirección de destino del producto
-        this.paymentService.addDeliveryContact(orderId, recipientContact).subscribe(
-          resp => {
-
-            console.log('addDeliveryContact');
-            console.log(resp);
-
-          }, error => {
-            console.log('addDeliveryContact - error');
-            console.log(error);
-          }
-        );
+        this.paymentService
+          .addDeliveryContact(orderId, recipientContact)
+          .subscribe(
+            (resp) => {
+              console.log('addDeliveryContact');
+              console.log(resp);
+            },
+            (error) => {
+              console.log('addDeliveryContact - error');
+              console.log(error);
+            }
+          );
 
         // se supone que este id debería ser pasado a la siguiente ruta también
         // para decirle al back que opción de pago selecciono el cliente
         const idPaymentOptionSelected = formData.paymentOption.data.id;
 
         this.paymentService.addPaymentToOrder(orderId).subscribe(
-
-          resp => {
+          (resp) => {
             console.log('addPaymentToOrder');
             console.log(resp);
 
             if (!resp.message) {
-
               this.currentPaymentData.payment = resp;
 
               console.log('addPaymentToOrder');
               console.log(this.currentPaymentData);
 
-              this.paymentService.createTransaction(this.currentPaymentData.payment.id).subscribe(
-                mallTransactionResp => {
-
+              this.paymentService
+                .createTransaction(this.currentPaymentData.payment.id)
+                .subscribe((mallTransactionResp) => {
                   console.log('createTransaction');
                   console.log(mallTransactionResp);
 
                   this.currentPaymentData.mallTransaction = mallTransactionResp;
 
                   this.tabSelected = 4;
-
-                }
-              );
-
+                });
             }
 
             this.buttonDisabledForm = true;
-
-          }, error => {
+          },
+          (error) => {
             this.buttonDisabledForm = false;
           }
         );
-
       }
-
     }
-
   }
 
   public backProcessForm(event) {
@@ -441,5 +405,4 @@ export class ShoppingCartComponent implements OnInit {
 
     return false;
   }
-
 }

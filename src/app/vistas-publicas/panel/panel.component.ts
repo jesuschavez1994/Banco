@@ -6,7 +6,7 @@ import { HomeServiceService } from '../services/home-service.service';
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
-  styleUrls: ['./panel.component.scss']
+  styleUrls: ['./panel.component.scss'],
 })
 export class PanelComponent implements OnInit {
   userLog: boolean;
@@ -21,7 +21,7 @@ export class PanelComponent implements OnInit {
     {
       label: 'carrito de compras',
       iconClass: 'fas fa-user',
-      routerLink: ['carrito-compras'],
+      routerLink: ['shopping-cart'],
       // isActive: false,
     },
     {
@@ -32,11 +32,10 @@ export class PanelComponent implements OnInit {
     },
   ];
 
-  constructor(private homeService: HomeServiceService) { }
+  constructor(private homeService: HomeServiceService) {}
 
   ngOnInit(): void {
     this.userLog = this.homeService.islog();
     this.storeLog = this.homeService.storeActive();
   }
-
 }

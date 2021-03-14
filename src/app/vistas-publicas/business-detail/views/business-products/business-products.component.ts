@@ -246,7 +246,8 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
 
   /**
    * @description Al hacer click sobre un card de producto se dispara esta función a causá del evento (selected).
-   * De esta manera, manipulamos la siguiente acción la cual modifica el :idStore y :idProduct de la ruta business-detail
+   * De esta manera, manipulamos la siguiente acción la cual modifica el :idStore y :idProduct de la ruta
+   * '/store'
    * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christpherdallar1234@matiz.com.ve
    * @date 13/12/2020
    * @param {ProductsCardsOptions} product
@@ -254,12 +255,7 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
    */
   public goTodetailProduct(product: ProductsCardsOptions) {
     if (product.id > -1 && product.idStore > -1) {
-      this.router.navigate([
-        '/store',
-        product.idStore,
-        'productos',
-        product.id,
-      ]);
+      this.router.navigate(['/store', product.idStore, 'products', product.id]);
     }
   }
 
@@ -455,6 +451,8 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
 
     this.paymentProcessService.addProductToCart(idProduct, quantity).subscribe(
       (resp) => {
+        console.log('Add to cart response');
+        console.log(resp);
         if (resp.success) {
           const products = resp.data;
 

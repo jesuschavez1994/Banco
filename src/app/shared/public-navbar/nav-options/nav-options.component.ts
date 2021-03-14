@@ -1,7 +1,15 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import {ModalRegisterComponent} from '@shared/modal-register/modal-register.component';
-import {MatDialog, MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DropdownOption, ClassIcon, ExtraButtonEmitter } from '@interfaces/components-options/dropdown.options.interface';
+import { ModalRegisterComponent } from '@shared/modal-register/modal-register.component';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import {
+  DropdownOption,
+  ClassIcon,
+  ExtraButtonEmitter,
+} from '@interfaces/components-options/dropdown.options.interface';
 /******* */
 import { PaymentProcessService } from '@services/payment-process/payment-process.service';
 import { DropdownIconComponent } from '../../dropdown-icon/dropdown-icon.component';
@@ -12,16 +20,19 @@ import { ToastComponent } from '../../../modals/toast/toast.component';
 @Component({
   selector: 'app-nav-options',
   templateUrl: './nav-options.component.html',
-  styleUrls: ['./nav-options.component.scss']
+  styleUrls: ['./nav-options.component.scss'],
 })
 export class NavOptionsComponent implements OnInit {
   @Input() auth: boolean;
   @Input() storeAct: boolean | string;
   @Input() imgCropper: any;
 
-  constructor(private modal : MatDialog, private paymentProcessService: PaymentProcessService,
+  constructor(
+    private modal: MatDialog,
+    private paymentProcessService: PaymentProcessService,
     private dropdownIconComp: DropdownIconComponent,
-    private productService: ProductService,) { }
+    private productService: ProductService
+  ) {}
 
   // Button DropDown - cart
   classIcon: ClassIcon = {
@@ -30,8 +41,8 @@ export class NavOptionsComponent implements OnInit {
     extraButton: {
       name: 'delete',
       class: 'fas fa-trash',
-      color: '#f32323'
-    }
+      color: '#f32323',
+    },
   };
   // Button DropDown - favorite
   classIconFavorite: ClassIcon = {
@@ -40,46 +51,42 @@ export class NavOptionsComponent implements OnInit {
     extraButton: {
       name: 'delete',
       class: 'fas fa-trash',
-      color: '#f32323'
-    }
+      color: '#f32323',
+    },
   };
   @Input() menuOptions: DropdownOption[] = [];
   @Input() menuOptionsFavorite: DropdownOption[] = [];
   @ViewChild('toastRef') toastRef: ToastComponent;
   ngOnInit(): void {
-    this.menuOptionsFavorite.push(
-      {
-        title: 'name 1',
-        typeEvent: 'none',
-      }
-    );
+    this.menuOptionsFavorite.push({
+      title: 'name 1',
+      typeEvent: 'none',
+    });
     // Carga items dropdown
-    if(this.auth && !this.storeAct ){
+    if (this.auth && !this.storeAct) {
       this.loadProductCart();
-      this.loadFavoriteList()
+      this.loadFavoriteList();
     }
   }
 
   // BY: Christofer
   public loadProductCart() {
-    this.paymentProcessService.getProductsFromCart().subscribe(
-      resp => {
-        const products = resp.data;
-        this.menuOptions = this.dropdownIconComp.loadOptionsWithProductsCartResp(products);
-
-      }
-    );
+    this.paymentProcessService.getProductsFromCart().subscribe((resp) => {
+      const products = resp.data;
+      this.menuOptions = this.dropdownIconComp.loadOptionsWithProductsCartResp(
+        products
+      );
+    });
   }
-  
-  public loadFavoriteList() {
-    this.productService.getFavoriteProducts().subscribe(
-      resp => {
-        // console.log('loadFavoriteList');
-        // console.log(resp);
-        this.menuOptionsFavorite = this.dropdownIconComp.loadOptionsWithFavoriteProductResp(resp);
 
-      }
-    );
+  public loadFavoriteList() {
+    this.productService.getFavoriteProducts().subscribe((resp) => {
+      // console.log('loadFavoriteList');
+      // console.log(resp);
+      this.menuOptionsFavorite = this.dropdownIconComp.loadOptionsWithFavoriteProductResp(
+        resp
+      );
+    });
   }
   public deleteProductFromFavorite(data) {
     const idProductFav = data.option.data.productFavorite.id;
@@ -91,83 +98,63 @@ export class NavOptionsComponent implements OnInit {
     // console.log(idProductFav);
 
     this.productService.removeProductFromFavorite(idProductFav).subscribe(
-      resp => {
-
+      (resp) => {
         if (resp.deleted) {
+          this.productService
+            .getFavoriteProducts()
+            .subscribe((favoriteProduct) => {
+              this.menuOptionsFavorite = this.dropdownIconComp.loadOptionsWithFavoriteProductResp(
+                favoriteProduct
+              );
+            });
 
-          this.productService.getFavoriteProducts().subscribe(
-            favoriteProduct => {
-
-              this.menuOptionsFavorite = this.dropdownIconComp.loadOptionsWithFavoriteProductResp(favoriteProduct);
-
-            }
-          );
-
-          this.toastRef.open(
-            'Producto eliminado de favoritos'
-          );
-
+          this.toastRef.open('Producto eliminado de favoritos');
         }
-
       },
-      error => {
+      (error) => {
         console.log(error);
-        this.toastRef.open(
-          'Producto no eliminado de favoritos'
-        );
+        this.toastRef.open('Producto no eliminado de favoritos');
       }
     );
-
   }
-  
-  public deleteProductFromCart(event: ExtraButtonEmitter) {
 
+  public deleteProductFromCart(event: ExtraButtonEmitter) {
     const idProduct = event.option.data.id;
 
     this.paymentProcessService.deleteProductFromCart(idProduct).subscribe(
-
-      resp => {
-
+      (resp) => {
         this.menuOptions = [];
 
         if (resp.data) {
-
           if (resp.data.length > 0) {
-
-            resp.data.forEach( product => {
-
+            resp.data.forEach((product) => {
               let option;
 
               option = {
                 title: product.name,
                 typeEvent: 'routerLink',
-                eventValue: ['/panel/carrito-compras'],
-                data: product
+                eventValue: ['/panel/shopping-cart'],
+                data: product,
               };
 
               this.menuOptions.push(option);
             });
-
           }
-
         }
 
-        this.toastRef.open(
-          'Producto eliminado del carrito'
-        );
-
+        this.toastRef.open('Producto eliminado del carrito');
       },
-      error => {
-        this.toastRef.open(
-          'Producto eliminado del carrito'
-        );
+      (error) => {
+        this.toastRef.open('Producto eliminado del carrito');
       }
-
     );
-
   }
 
   openDialog(): void {
-    const dialogRef = this.modal.open(ModalRegisterComponent,{width: 'auto',height: 'auto', panelClass: 'custom-modalbox'} );
+    const dialogRef = this.modal.open(ModalRegisterComponent, {
+      width: 'auto',
+      height: 'auto',
+      panelClass: 'custom-modalbox',
+    });
   }
 }

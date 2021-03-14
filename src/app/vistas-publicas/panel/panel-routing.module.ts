@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PanelComponent } from './panel.component';
-import { ShoppingCartComponent } from '../../views/private/shopping-cart/shopping-cart.component';
-import { SalesComponent } from '../../views/private/sales/sales.component';
+import { ShoppingCartComponent } from './views/shopping-cart/shopping-cart.component';
+import { SalesComponent } from './views/sales/sales.component';
 import { EmptyShoppingCartGuard } from '@services/guards/empty-shopping-cart.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'carrito-compras',
+    redirectTo: 'shopping-cart',
     pathMatch: 'full',
   },
   {
@@ -16,7 +16,7 @@ const routes: Routes = [
     component: PanelComponent,
     children: [
       {
-        path: 'carrito-compras',
+        path: 'shopping-cart',
         component: ShoppingCartComponent,
         canActivate: [EmptyShoppingCartGuard],
       },
@@ -24,7 +24,7 @@ const routes: Routes = [
         path: 'ventas',
         component: SalesComponent,
       },
-      { path: '**', pathMatch: 'full', redirectTo: 'carrito-compras' },
+      { path: '**', pathMatch: 'full', redirectTo: 'shopping-cart' },
     ],
   },
 ];
