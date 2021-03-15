@@ -1,7 +1,6 @@
 @import 'src/assets/scss/style.scss';
 
 .page {
-
   display: flex;
 
   .shopping-cart {
@@ -10,12 +9,11 @@
 
     padding-top: 58px;
 
-    h1{
+    h1 {
       margin-bottom: 24px;
     }
 
     .tab-container {
-
       .tab-menu {
         display: flex;
 
@@ -33,14 +31,12 @@
           &:hover {
             border-color: #dee2e6 #dee2e6 #fff;
           }
-
         }
 
         .active {
           border-color: #dee2e6 #dee2e6 #fff;
           color: $color__text-orange;
         }
-
       }
 
       .tab-content {
@@ -60,15 +56,13 @@
             border-radius: 5px;
             background: #d3d1d1;
           }
-
         }
-
       }
     }
   }
 }
 
-
+/* 
 @media screen and (max-width: 480px) {
 
   .page {
@@ -82,33 +76,26 @@
     }
   }
 
-}
+} */
 
 @media screen and (max-width: 757px) {
-
   .page {
-
     .shopping-cart {
-
       .tab-content {
         flex-direction: column;
 
         .list-item {
           width: 100%;
         }
-
       }
     }
   }
 }
 
 @media screen and (min-width: 758px) {
-
   // globales para evitar el !important
   .page {
-
     .shopping-cart {
-
       .tab-content {
         justify-content: space-between;
 
@@ -124,10 +111,28 @@
 
         .order-payment-forms {
           width: 50%;
-
         }
-
       }
     }
+  }
+}
+
+/* -------------------- 
+  Responsive media queries
+   -------------------- */
+/* Extra small devices (phones, 320px and down) */
+@media only screen and (max-width: 320px) {
+  .page {
+    .shopping-cart {
+      min-width: initial;
+      margin: 0px 5px;
+    }
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .order-editor {
+    width: 100%;
   }
 }

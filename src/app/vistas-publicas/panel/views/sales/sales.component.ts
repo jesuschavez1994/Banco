@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderListOptions } from '../../../interfaces/components-options/order.options.interface';
-import { PaymentProcessService } from '../../../services/payment-process/payment-process.service';
+import { OrderListOptions } from '@app/interfaces/components-options/order.options.interface';
+import { PaymentProcessService } from '@app/services/payment-process/payment-process.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ToastComponent } from '../../../modals/toast/toast.component';
-import {HomeServiceService} from '../../../vistas-publicas/services/home-service.service';
+import { ToastComponent } from '@app/modals/toast/toast.component';
+import { HomeServiceService } from '@app/vistas-publicas/services/home-service.service';
 
 @Component({
   selector: 'app-sales',
   templateUrl: './sales.component.html',
-  styleUrls: ['./sales.component.scss']
+  styleUrls: ['./sales.component.scss'],
 })
 export class SalesComponent implements OnInit {
   userLog: boolean;
@@ -114,35 +114,33 @@ export class SalesComponent implements OnInit {
           deliveryCost: this.deliveryCost,
         },
       ],
-      hasPaid: true
-    }
+      hasPaid: true,
+    },
   ];
 
   ordersListSelected: OrderListOptions;
 
-
-
-  constructor(private homeService: HomeServiceService,
-    private paymentService: PaymentProcessService,
-  ) { }
+  constructor(
+    private homeService: HomeServiceService,
+    private paymentService: PaymentProcessService
+  ) {}
 
   ngOnInit(): void {
     this.userLog = this.homeService.islog();
-    this.storeLog= this.homeService.storeActive();
+    this.storeLog = this.homeService.storeActive();
     this.ordersListSelected = this.ordersLists[0];
 
     console.log('salesComponent');
 
-    this.paymentService.getCartResume().subscribe(resp => {
+    this.paymentService.getCartResume().subscribe((resp) => {
       console.log('getCartResume');
       console.log(resp);
     });
 
     console.log('salesComponent///');
-
   }
 
-  public filterByTab(tabNumber){
+  public filterByTab(tabNumber) {
     this.tabSelected = tabNumber;
   }
 
@@ -154,6 +152,4 @@ export class SalesComponent implements OnInit {
     console.log(event);
     this.tabSelected = 2;
   }
-
-
 }

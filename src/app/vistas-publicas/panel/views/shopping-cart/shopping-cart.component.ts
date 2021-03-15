@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderListOptions } from '@interfaces/components-options/order.options.interface';
 import { PaymentProcessService } from '@services/payment-process/payment-process.service';
-import { CurrentPaymentData } from '../../../../interfaces/components-options/shopping-cart.options.interface';
+import { CurrentPaymentData } from '@interfaces/components-options/shopping-cart.options.interface';
 import { MatDialog } from '@angular/material/dialog';
-import { SuccessComponent } from '../../../../modals/success/success.component';
-import { ConfirmWebpayPlusComponent } from '../../../../modals/confirm-webpay-plus/confirm-webpay-plus.component';
+import { SuccessComponent } from '@app/modals/success/success.component';
+import { ConfirmWebpayPlusComponent } from '@app/modals/confirm-webpay-plus/confirm-webpay-plus.component';
 import { HomeServiceService } from '../../../services/home-service.service';
 import { DeliveryContactOfOrder } from '../../../../models/payment-process';
-import { OrderPaymentForm } from '../../../../interfaces/components-options/order.options.interface';
+import { OrderPaymentForm } from '@interfaces/components-options/order.options.interface';
 
 @Component({
   selector: 'app-shopping-cart',

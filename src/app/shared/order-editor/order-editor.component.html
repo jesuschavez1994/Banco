@@ -1,163 +1,153 @@
 <div class="order-container">
-
   <div class="order-head">
     <h3 class="business">Farmacia Santa Isabel</h3>
     <div class="order-number">Orden #100245</div>
   </div>
 
   <form action="#">
-
     <div class="batch-actions">
-
-      <input
+      <mat-checkbox
+        type="checkbox"
+        name="select-all"
+        class="check"
+        (click)="selectAllOrder()"
+        [checked]="isAllChecked()"
+      ></mat-checkbox>
+      <!-- <input
         type="checkbox"
         name="select-all"
         class="checkbox-default"
         (click)="selectAllOrder()"
         [checked]="isAllChecked()"
-      >
+        /> -->
 
-      <label
-        class="option label-reset"
+      <button
+        class="btn-area"
+        class="option label-reset delete-btn"
         (click)="deleteOrdersSelected()"
+        mat-button
       >
         Eliminar
-      </label>
+      </button>
 
-      <label
-        class="option label-reset"
+      <button
+        class="option label-reset delivery-btn"
         (click)="setHasDeliveryToOrders()"
+        mat-button
       >
         Con delivery
-      </label>
+      </button>
 
-      <label
-        class="option label-reset"
+      <button
+        class="option label-reset takeout-btn"
         (click)="setHasDeliveryToOrders(false)"
+        mat-button
       >
         Retiro en tienda
-      </label>
-
+      </button>
     </div>
 
     <div class="order-list-container">
-
       <ul class="tab-menu">
-
-        <li class="tab-item"
-          [ngClass]="{'active': hasDelivery}"
+        <li
+          class="tab-item"
+          [ngClass]="{ active: hasDelivery }"
           (click)="setHasDelivery(true)"
         >
           con delivery
         </li>
-        <li class="tab-item"
-          [ngClass]="{'active': !hasDelivery}"
+        <li
+          class="tab-item"
+          [ngClass]="{ active: !hasDelivery }"
           (click)="setHasDelivery(false)"
         >
           Retiro en tienda
         </li>
-
       </ul>
 
       <div class="order-list">
-
-        <div class="colum-label">
-          <label>Unitario</label>
-          <label>Total</label>
-        </div>
-
-        <ng-container *ngFor="let order of orders | filter: hasDelivery : 'hasDelivery' : 'No hay productos agregados'; index as inx">
-
-          <ng-container *ngIf="!(order.error) else noProducts">
-
-            <article class="order-item fadeIn animated ">
-
+        <ng-container
+          *ngFor="
+            let order of orders
+              | filter: hasDelivery:'hasDelivery':'No hay productos agregados';
+            index as inx
+          "
+        >
+          <ng-container *ngIf="!order.error; else noProducts">
+            <article class="order-item fadeIn animated">
               <div class="checkbox">
-                <input
+                <mat-checkbox
                   type="checkbox"
                   name="select-all"
                   class="checkbox-default"
                   (click)="selectOrder(order)"
                   [checked]="isChecked(order)"
-                >
+                ></mat-checkbox>
               </div>
 
               <div class="content-flex">
-
                 <div class="info-product">
-
                   <figure class="img-principal">
-                    <img [src]="order.images[0] | imgFallback: 'box'" [alt]="order.name">
+                    <img
+                      [src]="order.images[0] | imgFallback: 'box'"
+                      [alt]="order.name"
+                    />
                   </figure>
 
-
                   <div class="title_quantity-container">
-
                     <div class="title-container">
-                      <h4 class="title">{{order.name}}</h4>
+                      <h4 class="title">{{ order.name }}</h4>
                     </div>
+                  </div>
 
+                  <div class="amount">
                     <app-quantity-counter
                       (currentValue)="currentValue($event, order)"
                       [isSmall]="true"
                       [initValue]="order.quantity"
-                      [maxValue]="order.stock">
+                      [maxValue]="order.stock"
+                    >
                     </app-quantity-counter>
-
                   </div>
-
                 </div>
 
-                <div class="price">
-                  {{order.price | currency}}
+                <label class="unit-price-lbl">Unitario</label>
+                <label class="total-price-lbl">Total</label>
+
+                <div class="price unit-price">${{ order.price | number }}</div>
+
+                <div class="price total-price">
+                  ${{ order.price * order.quantity | number }}
                 </div>
-
-                <div class="price">
-                  {{(order.price * order.quantity)| currency}}
-                </div>
-
-
               </div>
-
             </article>
-
           </ng-container>
 
           <ng-template #noProducts>
-
             <article class="order-item">
-              <p>{{order.error}}</p>
+              <p>{{ order.error }}</p>
             </article>
 
             <article class="order-item">
-
               <div class="checkbox">
                 <div class="fill--gray"></div>
               </div>
 
               <div class="content-flex">
-
                 <div class="info-product">
-
                   <figure class="img-principal">
                     <div class="fill--gray"></div>
                   </figure>
 
-
                   <div class="title_quantity-container">
-
                     <div class="title-container">
                       <h4 class="title">
                         <div class="fill--gray"></div>
                       </h4>
                     </div>
 
-                    <div class="quantity-fill--gray">
-
-                    </div>
-
+                    <div class="quantity-fill--gray"></div>
                   </div>
-
                 </div>
 
                 <div class="price">
@@ -167,52 +157,52 @@
                 <div class="price">
                   <div class="fill--gray"></div>
                 </div>
-
               </div>
-
             </article>
-
           </ng-template>
-
         </ng-container>
-
       </div>
-
     </div>
 
     <div class="resume">
-
       <table>
-
         <tr>
           <td>Impuesto (19%)</td>
-          <td>{{totalsCounts('tax') | currency}}</td>
+          <td>{{ totalsCounts('tax') | currency }}</td>
         </tr>
 
         <tr>
           <td>Delivery</td>
-          <td>{{totalsCounts('delivery') | currency}}</td>
+          <td>{{ totalsCounts('delivery') | currency }}</td>
         </tr>
 
         <tr>
           <td><strong>Total a pagar</strong></td>
-          <td><strong>{{totalsCounts() | currency}}</strong></td>
+          <td>
+            <strong>{{ totalsCounts() | currency }}</strong>
+          </td>
         </tr>
-
       </table>
 
-      <label
-        for="termsAndConditions"
-      >
-
-        <input
+      <label for="termsAndConditions">
+        <mat-checkbox
           #termsAndConditionsInput
-          id="termsAndConditions" name="termsAndConditions"
-          type="checkbox" class="checkbox-default"
+          id="termsAndConditions"
+          name="termsAndConditions"
+          type="checkbox"
+          class="checkbox-default"
           [checked]="isCheckedTermsAndConditions()"
         >
+        </mat-checkbox>
+        <!-- <input
+          #termsAndConditionsInput
+          id="termsAndConditions"
+          name="termsAndConditions"
+          type="checkbox"
+          class="checkbox-default"
+          [checked]="isCheckedTermsAndConditions()"
+        /> -->
         Acepto términos y condiciones
-
       </label>
 
       <div class="actions">
@@ -222,15 +212,13 @@
 
         <button
           [disabled]="!isCheckedTermsAndConditions()"
-          [ngClass]="{'disabled': !isCheckedTermsAndConditions()}"
+          [ngClass]="{ disabled: !isCheckedTermsAndConditions() }"
           class="button"
-          (click)="processPayment()">
+          (click)="processPayment()"
+        >
           pagar
         </button>
       </div>
-
     </div>
-
   </form>
-
 </div>

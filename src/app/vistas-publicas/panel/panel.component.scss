@@ -3,8 +3,19 @@
 .page {
   display: flex;
 
-  .page-column{
+  .page-column {
     width: 100%;
   }
+}
 
+/* -------------------- 
+  Responsive media queries
+   -------------------- */
+/* Extra small devices (phones, 320px and down) */
+@media only screen and (max-width: 320px) {
+  .page {
+    .page-column {
+      width: 80%;
+    }
+  }
 }
