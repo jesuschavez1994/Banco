@@ -129,7 +129,7 @@
       .content-flex {
         display: grid;
         grid-template-rows: auto auto auto;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: 2.5fr 1fr 1fr;
         grid-template-areas:
           'product-info unit-price-lbl total-price-lbl'
           'product-info unit-price total-price'

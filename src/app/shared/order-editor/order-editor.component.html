@@ -10,16 +10,9 @@
         type="checkbox"
         name="select-all"
         class="check"
-        (click)="selectAllOrder()"
+        (change)="selectAllOrder()"
         [checked]="isAllChecked()"
       ></mat-checkbox>
-      <!-- <input
-        type="checkbox"
-        name="select-all"
-        class="checkbox-default"
-        (click)="selectAllOrder()"
-        [checked]="isAllChecked()"
-        /> -->
 
       <button
         class="btn-area"
@@ -80,7 +73,7 @@
                   type="checkbox"
                   name="select-all"
                   class="checkbox-default"
-                  (click)="selectOrder(order)"
+                  (change)="selectOrder(order)"
                   [checked]="isChecked(order)"
                 ></mat-checkbox>
               </div>
@@ -186,37 +179,28 @@
 
       <label for="termsAndConditions">
         <mat-checkbox
-          #termsAndConditionsInput
           id="termsAndConditions"
           name="termsAndConditions"
           type="checkbox"
           class="checkbox-default"
-          [checked]="isCheckedTermsAndConditions()"
+          [(ngModel)]="acceptTermsAndConditions"
         >
         </mat-checkbox>
-        <!-- <input
-          #termsAndConditionsInput
-          id="termsAndConditions"
-          name="termsAndConditions"
-          type="checkbox"
-          class="checkbox-default"
-          [checked]="isCheckedTermsAndConditions()"
-        /> -->
         Acepto términos y condiciones
       </label>
 
       <div class="actions">
         <button class="button gray" (click)="cancelOrder()">
-          cancelar orden
+          Cancelar orden
         </button>
 
         <button
-          [disabled]="!isCheckedTermsAndConditions()"
-          [ngClass]="{ disabled: !isCheckedTermsAndConditions() }"
+          [disabled]="!acceptTermsAndConditions"
+          [ngClass]="{ disabled: !acceptTermsAndConditions }"
           class="button"
           (click)="processPayment()"
         >
-          pagar
+          Pagar
         </button>
       </div>
     </div>
