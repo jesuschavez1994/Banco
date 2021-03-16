@@ -1,108 +1,88 @@
+<!-- <p  class="back-process"><span><</span>Atrás</p> -->
+<button class="btn my-4" (click)="goBack()" mat-button>
+  <i class="fas fa-caret-left"></i> Atrás
+</button>
 
-
-<p (click)="goToBack()" class="back-process">
-  <span><</span>Atrás
+<p class="instruction">
+  para concretar la compra, complete los siguientes pasos:
 </p>
 
-<p class="instruction">para concretar la compra, complete los siguientes pasos:</p>
-
 <div class="breadcrumb-steps-container">
-
   <div class="breadcrumb-steps">
-
-    <div class="step"
-      [ngClass]="{'active': step === 1}"
-      (click)="step = 1"
-    >
-
+    <div class="step" [ngClass]="{ active: step === 1 }" (click)="step = 1">
       <p>paso 1</p>
       <div class="circle"></div>
-
     </div>
 
-    <div class="step"
-      [ngClass]="{'active': step === 2}"
+    <div
+      class="step"
+      [ngClass]="{ active: step === 2 }"
       (click)="goToNextStep()"
     >
-
       <p>paso 2</p>
       <div class="circle"></div>
-
     </div>
-
   </div>
 
   <div class="line"></div>
-
 </div>
 
 <div>
-
   <form
     class="form"
-    [formGroup]="form"
+    [formGroup]="paymentInfo"
     (ngSubmit)="processDataPay()"
-    novalidate="novalidate">
-
+    novalidate="novalidate"
+  >
     <ng-container *ngIf="step === 1 || step === 0">
-
       <div class="inputs-container">
-
         <div class="input-container">
-
           <p>región</p>
 
           <select formControlName="region">
-
             <option value="-1">seleccione región</option>
 
             <ng-container *ngFor="let region of regions">
-              <option [value]="region.value">{{region.label}}</option>
+              <option [value]="region.value">{{ region.label }}</option>
             </ng-container>
-
           </select>
 
           <!-- Errors -->
-          <ng-container *ngIf="form.get('region')">
-
+          <ng-container *ngIf="paymentInfo.get('region')">
             <ng-container
               [ngTemplateOutlet]="errorsList"
-              [ngTemplateOutletContext]="{controlErrors: form.get('region')}"
+              [ngTemplateOutletContext]="{
+                controlErrors: paymentInfo.get('region')
+              }"
             >
             </ng-container>
-
           </ng-container>
-
         </div>
 
         <div class="input-container">
-
           <p>comuna</p>
 
           <select formControlName="comuna">
             <option value="-1">seleccione comuna</option>
 
             <ng-container *ngFor="let commune of communes">
-              <option [value]="commune.value">{{commune.label}}</option>
+              <option [value]="commune.value">{{ commune.label }}</option>
             </ng-container>
-
           </select>
 
           <!-- Errors -->
-          <ng-container *ngIf="form.get('comuna')">
-
+          <ng-container *ngIf="paymentInfo.get('comuna')">
             <ng-container
               [ngTemplateOutlet]="errorsList"
-              [ngTemplateOutletContext]="{controlErrors: form.get('comuna')}"
+              [ngTemplateOutletContext]="{
+                controlErrors: paymentInfo.get('comuna')
+              }"
             >
             </ng-container>
-
           </ng-container>
-
         </div>
 
         <div class="input-container">
-
           <p>dirección*</p>
 
           <input
@@ -110,230 +90,201 @@
             formControlName="direccion"
             name="direccion"
             placeholder="Calle 10"
-          >
+          />
 
-        <!-- Errors -->
-          <ng-container *ngIf="form.get('direccion')">
-
+          <!-- Errors -->
+          <ng-container *ngIf="paymentInfo.get('direccion')">
             <ng-container
               [ngTemplateOutlet]="errorsList"
-              [ngTemplateOutletContext]="{controlErrors: form.get('direccion')}"
+              [ngTemplateOutletContext]="{
+                controlErrors: paymentInfo.get('direccion')
+              }"
             >
             </ng-container>
-
           </ng-container>
-
         </div>
 
         <div class="input-container">
-
           <p class="capitalize">casa/dpto/oficina</p>
 
-          <input type="text"
-          placeholder="Casa Nro. 94"
-          formControlName="hospedaje">
+          <input
+            type="text"
+            placeholder="Casa Nro. 94"
+            formControlName="hospedaje"
+          />
 
           <!-- Errors -->
-          <ng-container *ngIf="form.get('hospedaje')">
-
+          <ng-container *ngIf="paymentInfo.get('hospedaje')">
             <ng-container
               [ngTemplateOutlet]="errorsList"
-              [ngTemplateOutletContext]="{controlErrors: form.get('hospedaje')}"
+              [ngTemplateOutletContext]="{
+                controlErrors: paymentInfo.get('hospedaje')
+              }"
             >
             </ng-container>
-
           </ng-container>
-
         </div>
 
         <div class="input-container">
-
           <p>teléfono*</p>
 
-          <input type="tel"
-          placeholder="04240293382"
-          formControlName="telefono">
+          <input
+            type="tel"
+            placeholder="04240293382"
+            formControlName="telefono"
+          />
 
           <!-- Errors -->
-          <ng-container *ngIf="form.get('telefono')">
-
+          <ng-container *ngIf="paymentInfo.get('telefono')">
             <ng-container
               [ngTemplateOutlet]="errorsList"
-              [ngTemplateOutletContext]="{controlErrors: form.get('telefono')}"
+              [ngTemplateOutletContext]="{
+                controlErrors: paymentInfo.get('telefono')
+              }"
             >
             </ng-container>
-
           </ng-container>
-
         </div>
 
         <div class="input-container">
-
           <p class="uppercase">rut*</p>
 
-          <input type="text"
-          placeholder="30686957-4"
-          formControlName="rut">
+          <input type="text" placeholder="30686957-4" formControlName="rut" />
 
           <!-- Errors -->
-          <ng-container *ngIf="form.get('rut')">
-
+          <ng-container *ngIf="paymentInfo.get('rut')">
             <ng-container
               [ngTemplateOutlet]="errorsList"
-              [ngTemplateOutletContext]="{controlErrors: form.get('rut')}"
+              [ngTemplateOutletContext]="{
+                controlErrors: paymentInfo.get('rut')
+              }"
             >
             </ng-container>
-
           </ng-container>
-
         </div>
 
         <div class="input-container">
-
           <p class="small-type">Nombre para guardar dirección*</p>
 
           <input
-          type="text"
-          placeholder="Mi casa / Oficina Central"
-          formControlName="nombreDireccion">
+            type="text"
+            placeholder="Mi casa / Oficina Central"
+            formControlName="nombreDireccion"
+          />
 
           <!-- Errors -->
-          <ng-container *ngIf="form.get('nombreDireccion')">
-
+          <ng-container *ngIf="paymentInfo.get('nombreDireccion')">
             <ng-container
               [ngTemplateOutlet]="errorsList"
-              [ngTemplateOutletContext]="{controlErrors: form.get('nombreDireccion')}"
+              [ngTemplateOutletContext]="{
+                controlErrors: paymentInfo.get('nombreDireccion')
+              }"
             >
             </ng-container>
-
           </ng-container>
-
         </div>
-
       </div>
 
+      <!-- Angular's Google Map area -->
       <div class="map-container">
-
         <p class="small-type">detalle de la ubicación</p>
 
         <div class="map">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15712.645162131!2d-69.29967315!3d10.085867200000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e875d7e35e71cfb%3A0x298a7ddc3d27e065!2sPARQUE%20DEL%20ESTE!5e0!3m2!1ses-419!2sve!4v1609695798598!5m2!1ses-419!2sve" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+          <agm-map
+            [latitude]="actualLocationData.latitude"
+            [longitude]="actualLocationData.longitude"
+            [zoom]="actualLocationData.zoom"
+          >
+            <agm-marker
+              *ngFor="let marker of actualLocationData.markers"
+              [latitude]="marker.lat"
+              [longitude]="marker.lng"
+              [label]="marker.label"
+            >
+            </agm-marker>
+          </agm-map>
         </div>
-
       </div>
-
+      <!-- #Angular's Google Map area -->
     </ng-container>
 
     <!-- STEP 2 -->
     <ng-container *ngIf="step === 2">
-
       <div class="inputs-container">
-
         <div class="input-container">
-
           <div class="select-cards">
+            <mat-radio-group formControlName="paymentOption">
+              <ng-container *ngFor="let option of optionPayment">
+                <article>
+                  <mat-radio-button
+                    id="paymentOption-{{ option.data.id }}"
+                    type="radio"
+                    class="checkbox-default radio-default"
+                    [value]="option.data.id"
+                  ></mat-radio-button>
+                  <!-- [checked]="optionPaymentSelected.data.id === option.data.id" -->
 
-            <ng-container *ngFor="let option of optionPayment">
+                  <label for="paymentOption-{{ option.data.id }}">
+                    <div class="select-card">
+                      <div class="img">
+                        <img [src]="option.image" [alt]="option.name" />
+                      </div>
 
-              <article
-                (click)="optionPaymentSelected = option"
-              >
-
-                <input
-                  id="paymentOption-{{option.data.id}}"
-                  type="radio"
-                  class="checkbox-default radio-default"
-                  formControlName="paymentOption"
-                  [value]="option.data.id"
-
-                >
-                <!-- [checked]="optionPaymentSelected.data.id === option.data.id" -->
-
-                <label for="paymentOption-{{option.data.id}}">
-
-                  <div class="select-card">
-
-                    <div class="img">
-                      <img [src]="option.image" [alt]="option.name">
+                      <p>
+                        {{ option.name }}
+                      </p>
                     </div>
-
-                    <p>
-                      {{option.name}}
-                    </p>
-
-                  </div>
-                </label>
-
-              </article>
-
-            </ng-container>
-
+                  </label>
+                </article>
+              </ng-container>
+            </mat-radio-group>
           </div>
 
           <!-- Errors -->
-          <ng-container *ngIf="form.get('paymentOption')">
-
+          <ng-container *ngIf="paymentInfo.get('paymentOption')">
             <ng-container
               [ngTemplateOutlet]="errorsList"
-              [ngTemplateOutletContext]="{controlErrors: form.get('paymentOption')}"
+              [ngTemplateOutletContext]="{
+                controlErrors: paymentInfo.get('paymentOption')
+              }"
             >
             </ng-container>
-
           </ng-container>
-
         </div>
 
-
-
         <div class="note">
-
           <p>NOTA:</p>
 
           <p>
-            Te recomendamos no cerrar el navegador
-            hasta que la compra sea finalizada
+            Te recomendamos no cerrar el navegador hasta que la compra sea
+            finalizada
           </p>
-
         </div>
-
       </div>
-
     </ng-container>
 
     <button
       (click)="buttonSubmitWasCLicked = true"
-      [ngClass]="{'disabled': disabledBtnSubmit()}"
-      [disabled]="disabledBtnSubmit()"
+      [ngClass]="{ disabled: !paymentInfo.valid }"
+      [disabled]="!paymentInfo.valid"
       class="button button--full-width"
       type="submit"
-
     >
       Continuar
     </button>
-
   </form>
-
 </div>
-
 
 <!-- Template error -->
 
-<ng-template #errorsList let-controlErrors='controlErrors'>
-
+<ng-template #errorsList let-controlErrors="controlErrors">
   <div class="errors">
-
     <ul>
-
-      <ng-container *ngFor="let message of getErrorsWithMessages(controlErrors)">
-
-        <li>{{message}}</li>
-
+      <ng-container
+        *ngFor="let message of getErrorsWithMessages(controlErrors)"
+      >
+        <li>{{ message }}</li>
       </ng-container>
-
     </ul>
-
   </div>
-
 </ng-template>
-
-
