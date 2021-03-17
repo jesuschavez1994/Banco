@@ -26,9 +26,7 @@ export const ROUTES: Routes = [
   {
     path: 'panel',
     loadChildren: () =>
-      import('../vistas-publicas/panel/panel.module').then(
-        (m) => m.PanelModule
-      ),
+      import('./panel/panel.module').then((m) => m.PanelModule),
     // canLoad: [ LoginGuardGuard ],
     canActivate: [LoginGuardGuard, VerifyTokenGuard],
   },

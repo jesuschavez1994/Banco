@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PanelComponent } from './panel.component';
 import { ShoppingCartComponent } from './views/shopping-cart/shopping-cart.component';
-import { SalesComponent } from './views/sales/sales.component';
 import { EmptyShoppingCartGuard } from '@services/guards/empty-shopping-cart.guard';
 
 const routes: Routes = [
@@ -23,7 +22,10 @@ const routes: Routes = [
       },
       {
         path: 'sales',
-        component: SalesComponent,
+        loadChildren: () =>
+          import('./views/sales/sales.module').then(
+            (module) => module.SalesModule
+          ),
       },
       { path: '**', pathMatch: 'full', redirectTo: 'shopping-cart' },
     ],

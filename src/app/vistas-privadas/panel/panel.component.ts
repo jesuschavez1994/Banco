@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarMenuOptions } from '@interfaces/components-options/sidebar-menu.options.interface';
 // import {HomeServiceService} from '@services/home-service.service';
-import { HomeServiceService } from '../services/home-service.service';
+import { HomeServiceService } from '../../vistas-publicas/services/home-service.service';
 
 @Component({
   selector: 'app-panel',

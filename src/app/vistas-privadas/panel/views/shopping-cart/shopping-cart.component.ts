@@ -5,8 +5,7 @@ import { CurrentPaymentData } from '@interfaces/components-options/shopping-cart
 import { MatDialog } from '@angular/material/dialog';
 import { SuccessComponent } from '@app/modals/success/success.component';
 import { ConfirmWebpayPlusComponent } from '@app/modals/confirm-webpay-plus/confirm-webpay-plus.component';
-import { HomeServiceService } from '../../../services/home-service.service';
-import { DeliveryContactOfOrder } from '../../../../models/payment-process';
+import { HomeServiceService } from '../../../../vistas-publicas/services/home-service.service';
 import { OrderPaymentForm } from '@interfaces/components-options/order.options.interface';
 import {
   PaymentDetails,
