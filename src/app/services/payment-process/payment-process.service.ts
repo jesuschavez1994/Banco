@@ -143,7 +143,7 @@ export class PaymentProcessService extends Service {
 
   /**
    * @description Crea la transacción de compra con webPay.
-   * retorna el token y url de pago de webPay
+   * retorna el token y url de pago de WebPay.
    * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christopher@matiz.com.ve
    * @date 24/01/2021
    * @param {number} paymentId
