@@ -19,6 +19,7 @@ const routes: Routes = [
         path: 'shopping-cart',
         component: ShoppingCartComponent,
         canActivate: [EmptyShoppingCartGuard],
+        data: { title: 'Carrito de compras | Founduss' },
       },
       {
         path: 'sales',
