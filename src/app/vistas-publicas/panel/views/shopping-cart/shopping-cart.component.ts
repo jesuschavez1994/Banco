@@ -8,6 +8,12 @@ import { ConfirmWebpayPlusComponent } from '@app/modals/confirm-webpay-plus/conf
 import { HomeServiceService } from '../../../services/home-service.service';
 import { DeliveryContactOfOrder } from '../../../../models/payment-process';
 import { OrderPaymentForm } from '@interfaces/components-options/order.options.interface';
+import {
+  PaymentDetails,
+  PaymentCredentials,
+  MallTransactionCredentials,
+} from '@interfaces/shopping-cart/shopping-cart.interface';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -22,159 +28,6 @@ export class ShoppingCartComponent implements OnInit {
 
   tabSelected: 1 | 2 | 3 | 4 = 1;
   ordersLists: OrderListOptions[] = [];
-
-  // = [
-  //   {
-  //     id: 1,
-  //     group: {
-  //       name: 'farmacia santa isabel',
-  //       img: './assets/img/avatar.svg',
-  //     },
-  //     orders: [
-  //       {
-  //         name: 'Vegan Food',
-  //         description: '',
-  //         price: 10,
-  //         stock: 10,
-  //         quantity: 5,
-  //         images: [],
-  //         id: 1,
-  //         idStore: 1,
-  //         // taxPercentageByProduct: this.taxPercentage,
-  //         hasDelivery: true,
-  //         deliveryCost: this.deliveryCost,
-  //       },
-  //       {
-  //         name: 'Vegan Food 2',
-  //         description: '',
-  //         price: 10,
-  //         stock: 20,
-  //         quantity: 10,
-  //         images: [],
-  //         id: 2,
-  //         idStore: 1,
-  //         // taxPercentageByProduct: this.taxPercentage,
-  //         hasDelivery: false,
-  //         deliveryCost: this.deliveryCost,
-  //       },
-  //       {
-  //         name: 'Vegan Food 3',
-  //         description: '',
-  //         price: 10,
-  //         stock: 30,
-  //         quantity: 15,
-  //         images: [],
-  //         id: 3,
-  //         idStore: 1,
-  //         // taxPercentageByProduct: this.taxPercentage,
-  //         hasDelivery: false,
-  //         deliveryCost: this.deliveryCost,
-  //       },
-  //     ],
-  //     hasPaid: false,
-  //   },
-  // ];
-
-  // = [
-  //   {
-  //     id: 1,
-  //     group: {
-  //       name: 'farmacia santa isabel',
-  //       img: './assets/img/avatar.svg',
-  //     },
-  //     orders: [
-  //       {
-  //         name: 'Vegan Food',
-  //         description: '',
-  //         price: 10,
-  //         stock: 10,
-  //         quantity: 5,
-  //         images: [],
-  //         id: 1,
-  //         idStore: 1,
-  //         // taxPercentageByProduct: this.taxPercentage,
-  //         hasDelivery: true,
-  //         deliveryCost: this.deliveryCost,
-  //       },
-  //       {
-  //         name: 'Vegan Food 2',
-  //         description: '',
-  //         price: 10,
-  //         stock: 20,
-  //         quantity: 10,
-  //         images: [],
-  //         id: 2,
-  //         idStore: 1,
-  //         // taxPercentageByProduct: this.taxPercentage,
-  //         hasDelivery: false,
-  //         deliveryCost: this.deliveryCost,
-  //       },
-  //       {
-  //         name: 'Vegan Food 3',
-  //         description: '',
-  //         price: 10,
-  //         stock: 30,
-  //         quantity: 15,
-  //         images: [],
-  //         id: 3,
-  //         idStore: 1,
-  //         // taxPercentageByProduct: this.taxPercentage,
-  //         hasDelivery: false,
-  //         deliveryCost: this.deliveryCost,
-  //       },
-  //     ],
-  //     hasPaid: false,
-  //   },
-  //   {
-  //     id: 1,
-  //     group: {
-  //       name: 'farmacia santa isabel 2',
-  //       img: './assets/img/avatar.svg',
-  //     },
-  //     orders: [
-  //       {
-  //         name: 'Vegan Food 4',
-  //         description: '',
-  //         price: 10,
-  //         stock: 10,
-  //         quantity: 5,
-  //         images: [''],
-  //         id: 1,
-  //         idStore: 1,
-  //         // taxPercentageByProduct: this.taxPercentage,
-  //         hasDelivery: true,
-  //         deliveryCost: this.deliveryCost,
-  //       },
-  //       {
-  //         name: 'Vegan Food 5',
-  //         description: '',
-  //         price: 10,
-  //         stock: 20,
-  //         quantity: 10,
-  //         images: [''],
-  //         id: 2,
-  //         idStore: 1,
-  //         // taxPercentageByProduct: this.taxPercentage,
-  //         hasDelivery: false,
-  //         deliveryCost: this.deliveryCost,
-  //       },
-  //       {
-  //         name: 'Vegan Food 6',
-  //         description: '',
-  //         price: 10,
-  //         stock: 30,
-  //         quantity: 15,
-  //         images: [''],
-  //         id: 3,
-  //         idStore: 1,
-  //         // taxPercentageByProduct: this.taxPercentage,
-  //         hasDelivery: false,
-  //         deliveryCost: this.deliveryCost,
-  //       },
-  //     ],
-  //     hasPaid: true
-  //   }
-  // ];
 
   ordersListSelected: OrderListOptions;
 
@@ -204,8 +57,6 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   public loadProductsFromCart() {
-    console.log('ShoppingCartComponent');
-
     this.paymentService.getProductsFromCart().subscribe((resp) => {
       let storeNames: any[];
       let productCartOrdered: any[];
@@ -328,64 +179,43 @@ export class ShoppingCartComponent implements OnInit {
         const recipientContact = {
           commune_id: formData.comuna,
           direction: formData.direccion,
-          house: 1,
+          house: formData.hospedaje,
           phone: formData.telefono,
           rut: formData.rut,
-          address_latitude: 1751.12,
-          address_longitude: 1447.47,
+          address_latitude: formData.latitud,
+          address_longitude: formData.longitud,
           name: formData.nombreDireccion,
+          // paymentOption: formData.paymentOption,
         };
-
-        console.log('DeliveryContactOfOrder to add');
-        console.log(recipientContact);
 
         // Agregamos los datos del destinatario y su dirección de destino del producto
         this.paymentService
           .addDeliveryContact(orderId, recipientContact)
-          .subscribe(
-            (resp) => {
-              console.log('addDeliveryContact');
-              console.log(resp);
-            },
-            (error) => {
-              console.log('addDeliveryContact - error');
-              console.log(error);
-            }
-          );
-
-        // se supone que este id debería ser pasado a la siguiente ruta también
-        // para decirle al back que opción de pago selecciono el cliente
-        const idPaymentOptionSelected = formData.paymentOption.data.id;
-
-        this.paymentService.addPaymentToOrder(orderId).subscribe(
-          (resp) => {
-            console.log('addPaymentToOrder');
-            console.log(resp);
-
-            if (!resp.message) {
-              this.currentPaymentData.payment = resp;
-
-              console.log('addPaymentToOrder');
-              console.log(this.currentPaymentData);
-
-              this.paymentService
-                .createTransaction(this.currentPaymentData.payment.id)
-                .subscribe((mallTransactionResp) => {
-                  console.log('createTransaction');
-                  console.log(mallTransactionResp);
-
-                  this.currentPaymentData.mallTransaction = mallTransactionResp;
-
-                  this.tabSelected = 4;
-                });
-            }
-
-            this.buttonDisabledForm = true;
-          },
-          (error) => {
-            this.buttonDisabledForm = false;
-          }
-        );
+          .pipe(
+            switchMap((paymentDetails: PaymentDetails) => {
+              return this.paymentService
+                .addPaymentToOrder(paymentDetails.order_id)
+                .pipe(
+                  switchMap((paymentCredentials: PaymentCredentials) => {
+                    return this.paymentService.createTransaction(
+                      paymentCredentials.id
+                    );
+                  })
+                );
+            })
+          )
+          .subscribe((mallTransactionResponse: MallTransactionCredentials) => {
+            this.dialog.open(ConfirmWebpayPlusComponent, {
+              data: {
+                title:
+                  'Por favor presione el botón en la parte inferior de este mensaje para ser redirigido al sitio web de Transbank y así completar su proceso de pago.',
+                mallTransaction: {
+                  url: mallTransactionResponse.url,
+                  token: mallTransactionResponse.token,
+                },
+              },
+            });
+          });
       }
     }
   }
