@@ -19,14 +19,14 @@ export class PanelComponent implements OnInit {
       // isActive: false,
     },
     {
-      label: 'carrito de compras',
+      label: 'carrito',
       iconClass: 'fas fa-user',
       routerLink: ['shopping-cart'],
       // isActive: false,
     },
     {
       label: 'ventas',
-      iconClass: 'fab fa-sellsy',
+      iconClass: 'fab fa-sells',
       routerLink: ['ventas'],
       // isActive: false,
     },
