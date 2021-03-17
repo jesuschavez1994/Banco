@@ -81,12 +81,6 @@ export class OrderEditorComponent implements OnInit, AfterViewInit {
       return order.hasDelivery === this.hasDelivery;
     });
 
-    console.log('Selected orders');
-    console.log(this.orderSelected);
-
-    console.log('Filtered orders');
-    console.log(ordersFiltered);
-
     if (this.orderSelected.length === ordersFiltered.length) {
       this.orderSelected = [];
     } else {
@@ -95,21 +89,13 @@ export class OrderEditorComponent implements OnInit, AfterViewInit {
   }
 
   public isChecked(order: Order) {
-    //  const inxOrderSelected = this.orderSelected.findIndex((orderSelected)
     const inxOrderSelected = this.orderSelected.findIndex((orderSelected) => {
       return (
         orderSelected.id === order.id && orderSelected.idStore === order.idStore
       );
-      /*       if (
-        orderSelected.id === order.id &&
-        orderSelected.idStore === order.idStore
-      ) {
-        return true;
-      } */
     });
 
     return inxOrderSelected > -1;
-    //
   }
 
   public isAllChecked() {
@@ -160,12 +146,10 @@ export class OrderEditorComponent implements OnInit, AfterViewInit {
   }
 
   public processPayment() {
-    console.log('processPayment');
     this.purchaseAction.emit(this.orders);
   }
 
   public cancelOrder() {
-    console.log('cancelOrder');
     this.purchaseAction.emit(this.orders);
   }
 }
