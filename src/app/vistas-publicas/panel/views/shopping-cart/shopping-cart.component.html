@@ -69,26 +69,51 @@
           </ng-container>
 
           <ng-container *ngIf="tabSelected === 4">
-            <ng-container *ngIf="showFormToPay()">
-              <div class="order-payment-forms">
-                <div class="card-option-pay-redirect">
-                  <form
-                    method="post"
-                    [action]="currentPaymentData.mallTransaction.url"
-                    class="form"
-                  >
-                    <input
-                      type="hidden"
-                      name="token_ws"
-                      [value]="currentPaymentData.mallTransaction.token"
+            <ng-container>
+              <!-- Voucher details -->
+              <mat-card class="voucher">
+                <mat-card-header class="voucher-title" mat-card-image>
+                  <div class="check">
+                    <img
+                      src="assets/img/Suscription/CheckMark.svg"
+                      alt="CheckMark"
+                      height="80"
+                      width="80"
                     />
+                  </div>
+                  <small class="text">¡Tu pago fue realizado con éxito!</small>
+                </mat-card-header>
 
-                    <button class="button button--full-width" type="submit">
-                      Continuar con el tipo de pago seleccionado
-                    </button>
-                  </form>
-                </div>
-              </div>
+                <mat-card-content class="voucher-body">
+                  <ul>
+                    <li>
+                      <small><b>Total:</b></small>
+                      <p></p>
+                    </li>
+
+                    <li>
+                      <small>Hora:</small>
+                    </li>
+
+                    <li>
+                      <small>Fecha:</small>
+                    </li>
+
+                    <div class="square">
+                      <li>
+                        <small>Número de tarjeta:</small>
+                      </li>
+
+                      <li class="last">
+                        <small>Cód. autorización:</small>
+                      </li>
+                    </div>
+                  </ul>
+
+                  <!-- <button class="btn-details" mat-button>Ver detalles</button> -->
+                </mat-card-content>
+              </mat-card>
+              <!-- Voucher details -->
             </ng-container>
           </ng-container>
         </div>
