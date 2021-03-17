@@ -96,7 +96,6 @@ export class PlanDetailsComponent implements OnInit {
         })
       )
       .subscribe((paymentCredentials: PaymentCredentials) => {
-        console.log(paymentCredentials);
         this.openDialog(paymentCredentials.url, paymentCredentials.token);
       });
   }
