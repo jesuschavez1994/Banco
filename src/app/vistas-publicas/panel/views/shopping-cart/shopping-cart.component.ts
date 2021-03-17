@@ -54,6 +54,10 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     this.loadProductsFromCart();
+    this.paymentService.getOrders().subscribe((response) => {
+      console.log('All order details: ');
+      console.log(response);
+    });
   }
 
   public loadProductsFromCart() {
@@ -122,7 +126,6 @@ export class ShoppingCartComponent implements OnInit {
     // Lo ideal sería tener ambas opciones, pagar todo y pagar solo productos de la tienda.
     // Si el back actuá de esta manera igual, sería bueno borrar el listado de pedidos al venir al carrito de compras
     // y se carga el carrito de compras, con los productos aún no pagados.
-    //
   }
 
   public filterByTab(tabNumber) {
