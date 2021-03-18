@@ -4,7 +4,50 @@
     <h3 class="order-number">#{{ orderDetails.id }}</h3>
   </div>
 
-  <div class="order-details"></div>
+  <div class="order-details">
+    <!-- Pestañas para navegacion -->
+    <nav class="nav">
+      <ul class="navigation nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link family-400">Con delivery</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"> Retiro en tienda </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- #Pestañas para navegacion -->
 
-  <div class="amounts"></div>
+    <!-- Tabla de contenido -->
+    <table class="orders-table">
+      <tr class="main-row">
+        <th>Producto</th>
+        <th>Subtotal</th>
+      </tr>
+
+      <tr *ngFor="let cartItem of orderDetails.order_cart_items">
+        <td>{{ cartItem.product.name }} x{{ cartItem.product.stock }}</td>
+        <td>${{ cartItem.product.price | number }}</td>
+      </tr>
+    </table>
+    <!-- #Tabla de contenido -->
+  </div>
+
+  <div class="amounts">
+    <hr matLine class="my-1 line" />
+
+    <div class="info"></div>
+    <div class="tax">
+      <div class="grid">
+        <div class="text">Impuesto (19%):</div>
+        <div class="amount">$10</div>
+      </div>
+    </div>
+    <div class="total">
+      <div class="grid">
+        <div class="text">Total:</div>
+        <div class="amount">$500</div>
+      </div>
+    </div>
+  </div>
 </section>
