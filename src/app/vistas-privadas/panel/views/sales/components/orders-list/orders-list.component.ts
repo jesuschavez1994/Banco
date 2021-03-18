@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Orders } from '@services/store-sales/store-sales.service';
+import { Datum } from '@services/store-sales/store-sales.service';
 import { Image } from '@interfaces/userPublic.interface';
 
 @Component({
@@ -8,8 +8,8 @@ import { Image } from '@interfaces/userPublic.interface';
   styleUrls: ['./orders-list.component.scss'],
 })
 export class OrdersListComponent implements OnInit {
-  @Input() orderDetails: Orders;
-  @Output() selectedOrder = new EventEmitter<Orders>();
+  @Input() orderDetails: Datum;
+  @Output() selectedOrder = new EventEmitter<Datum>();
 
   userImageSrc: Image[];
   avatarBackground = 'assets/img/no-avatar.jpg';
