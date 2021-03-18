@@ -1,0 +1,16 @@
+.content {
+  padding-top: 1em;
+
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: 'orders orders details details details';
+
+  .orders-list {
+    grid-area: orders;
+  }
+
+  .order-details {
+    grid-area: details;
+  }
+}
