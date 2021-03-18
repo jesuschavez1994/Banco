@@ -7,7 +7,7 @@ import { EmptyShoppingCartGuard } from '@services/guards/empty-shopping-cart.gua
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'carrito-compras',
+    redirectTo: 'shopping-cart',
     pathMatch: 'full',
   },
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
     component: PanelComponent,
     children: [
       {
-        path: 'carrito-compras',
+        path: 'shopping-cart',
         component: ShoppingCartComponent,
         canActivate: [EmptyShoppingCartGuard],
         data: { title: 'Carrito de compras | Founduss' },
