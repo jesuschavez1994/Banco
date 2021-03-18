@@ -6,6 +6,7 @@ import { SalesDetailsComponent } from './views/sales-details/sales-details.compo
 import { DeliveriesComponent } from './views/deliveries/deliveries.component';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'sales-details' },
   {
     path: '',
     component: SalesComponent,
@@ -23,6 +24,7 @@ const routes: Routes = [
       },
     ],
   },
+  { path: '**', pathMatch: 'full', redirectTo: 'sales-details' },
 ];
 
 @NgModule({
