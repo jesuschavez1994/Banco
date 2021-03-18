@@ -1,0 +1,20 @@
+.skeleton-card {
+  width: 100%;
+
+  .mat-card-header {
+    .skeleton-card__avatar {
+      width: 3em;
+      height: 3em;
+    }
+
+    .skeleton-card__title {
+      width: 9em;
+      height: 1em;
+    }
+
+    .skeleton-card__subtitle {
+      width: 8em;
+      height: 1em;
+    }
+  }
+}
