@@ -1,1 +1,44 @@
-<p>skeleton-details works!</p>
+<section class="order-content">
+  <div class="skeleton__order-heading">
+    <h2 class="skeleton__client-name shimmer shine"></h2>
+    <h3 class="skeleton__order-number shimmer shine"></h3>
+  </div>
+
+  <div class="skeleton__order-details">
+    <!-- Pestañas para navegacion -->
+    <nav class="nav">
+      <ul class="navigation nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link family-400">Con delivery</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"> Retiro en tienda </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- #Pestañas para navegacion -->
+
+    <!-- Tabla de contenido -->
+    <table class="skeleton__orders-table">
+      <tr class="skeleton__main-row">
+        <th><div class="content shimmer shine"></div></th>
+        <th>
+          <div class="content shimmer shine"></div>
+        </th>
+      </tr>
+
+      <tr *ngFor="let skeleton of [0, 1, 2, 3]" class="skeleton__data-cells">
+        <td class="shimmer shine"></td>
+        <td class="shimmer shine"></td>
+      </tr>
+    </table>
+    <!-- #Tabla de contenido -->
+  </div>
+
+  <div class="skeleton__amounts">
+    <hr matLine class="my-1 line" />
+
+    <div class="skeleton__tax shimmer shine"></div>
+    <div class="skeleton__total shimmer shine"></div>
+  </div>
+</section>
