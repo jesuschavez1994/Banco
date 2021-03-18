@@ -1,0 +1,33 @@
+.order-content {
+  width: 100%;
+  padding: 2em;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: 'heading' 'details' 'amounts';
+
+  .order-heading {
+    grid-area: heading;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 'name number';
+
+    .client-name {
+      grid-area: name;
+    }
+
+    .order-number {
+      grid-area: number;
+      margin-left: auto;
+    }
+  }
+
+  .order-details {
+    grid-area: details;
+  }
+
+  .amounts {
+    grid-area: amounts;
+  }
+}
