@@ -29,11 +29,26 @@ export class StoreSalesService extends Service {
   public getStoreOrders() {
     this.setIdUser();
     this.storeId = localStorage.getItem('storeId');
-    return this.execQuery<Orders[]>(`users/${this.userId}/stores/2/sales`);
+    return this.execQuery<Orders>(`users/${this.userId}/stores/2/sales`);
   }
 }
 
 export interface Orders {
+  current_page: number;
+  data: Datum;
+  first_page_url: string;
+  from: number;
+  last_page: number;
+  last_page_url: string;
+  next_page_url: null;
+  path: string;
+  per_page: number;
+  prev_page_url: null;
+  to: number;
+  total: number;
+}
+
+export interface Datum {
   id: number;
   user_id: number;
   title: string;
@@ -153,4 +168,22 @@ export interface User {
   created_at: null;
   updated_at: null;
   deleted_at: null;
+  image: Image[];
+}
+
+export interface Image {
+  id: number;
+  name: string;
+  src: string;
+  src_size: string;
+  version: number;
+  created_at: string;
+  updated_at: string;
+  deleted_at: null;
+  pivot: Pivot;
+}
+
+export interface Pivot {
+  user_id: number;
+  image_id: number;
 }
