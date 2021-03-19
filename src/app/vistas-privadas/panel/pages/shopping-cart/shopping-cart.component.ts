@@ -43,16 +43,16 @@ export class ShoppingCartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userLog = this.homeService.islog();
-    this.storeLog = this.homeService.storeActive();
+    // this.userLog = this.homeService.islog();
+    // this.storeLog = this.homeService.storeActive();
 
-    if (this.ordersLists) {
-      if (this.ordersLists.length > 0) {
-        this.ordersListSelected = this.ordersLists[0];
-      }
-    }
+    // if (this.ordersLists) {
+    //   if (this.ordersLists.length > 0) {
+    //     this.ordersListSelected = this.ordersLists[0];
+    //   }
+    // }
 
-    this.loadProductsFromCart();
+    // this.loadProductsFromCart();
     this.paymentService.getOrders().subscribe((response) => {
       console.log('All order details: ');
       console.log(response);
@@ -60,65 +60,55 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   public loadProductsFromCart() {
-    this.paymentService.getProductsFromCart().subscribe((resp) => {
-      let storeNames: any[];
-      let productCartOrdered: any[];
-
-      storeNames = [];
-      productCartOrdered = [];
-
-      if (resp.data) {
-        resp.data.forEach((productFor) => {
-          const storeName = productFor.attributes.store.name;
-
-          if (!storeNames.includes(storeName)) {
-            storeNames.push(storeName);
-
-            const productOfCart = resp.data.filter((productOfCartFil) => {
-              return storeName === productOfCartFil.attributes.store.name;
-            });
-
-            const formatProductCart = productOfCart.map((productOfCartMap) => {
-              return {
-                name: productOfCartMap.name,
-                description: 'el back no devuelve la descripción',
-                price: productOfCartMap.price,
-                stock: productOfCartMap.quantity,
-                quantity: productOfCartMap.quantity,
-                images: [],
-                id: productOfCartMap.id,
-                idStore: productOfCartMap.attributes.store.store_id,
-                // taxPercentageByProduct: this.taxPercentage,
-                hasDelivery: false,
-                deliveryCost: this.deliveryCost,
-              };
-            });
-
-            productCartOrdered.push({
-              id: productOfCart[0].attributes.store.store_id,
-              group: {
-                name: storeName,
-                img: './assets/img/avatar.svg',
-              },
-              orders: formatProductCart,
-              hasPaid: false,
-            });
-          }
-        });
-
-        this.ordersLists = productCartOrdered;
-
-        console.log('Products of cart loaded');
-        console.log(resp);
-      }
-    });
-
+    // this.paymentService.getProductsFromCart().subscribe((resp) => {
+    //   let storeNames: any[];
+    //   let productCartOrdered: any[];
+    //   storeNames = [];
+    //   productCartOrdered = [];
+    //   if (resp.data) {
+    //     resp.data.forEach((productFor) => {
+    //       const storeName = productFor.attributes.store.name;
+    //       if (!storeNames.includes(storeName)) {
+    //         storeNames.push(storeName);
+    //         const productOfCart = resp.data.filter((productOfCartFil) => {
+    //           return storeName === productOfCartFil.attributes.store.name;
+    //         });
+    //         const formatProductCart = productOfCart.map((productOfCartMap) => {
+    //           return {
+    //             name: productOfCartMap.name,
+    //             description: 'el back no devuelve la descripción',
+    //             price: productOfCartMap.price,
+    //             stock: productOfCartMap.quantity,
+    //             quantity: productOfCartMap.quantity,
+    //             images: [],
+    //             id: productOfCartMap.id,
+    //             idStore: productOfCartMap.attributes.store.store_id,
+    //             // taxPercentageByProduct: this.taxPercentage,
+    //             hasDelivery: false,
+    //             deliveryCost: this.deliveryCost,
+    //           };
+    //         });
+    //         productCartOrdered.push({
+    //           id: productOfCart[0].attributes.store.store_id,
+    //           group: {
+    //             name: storeName,
+    //             img: './assets/img/avatar.svg',
+    //           },
+    //           orders: formatProductCart,
+    //           hasPaid: false,
+    //         });
+    //       }
+    //     });
+    //     this.ordersLists = productCartOrdered;
+    //     console.log('Products of cart loaded');
+    //     console.log(resp);
+    //   }
+    // });
     // Borrar el listado de pedidos y solo borrar el carrito al terminar con el proceso de compra.
     // Considero que si el back, crea un pedido entero de todos los productos
     // Y no un pedido por cada tienda, entonces no debería agregarse a un array de pedidos.
     // sino, ser un y al utilizar el agregar otro pedido, se reescriba, solo permitiendo tener 1 pedido.
     // a la vez.
-
     // Sino, el back debería permitir en la ruta, colocar el id de la tienda y revisar en el registro de carrito.
     // Para registrar los productos en el carrito que coincidan con el id de tienda, permitiendo así.
     // Crear un pedido por cada tienda.

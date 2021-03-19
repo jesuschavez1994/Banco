@@ -1,8 +1,13 @@
 <main class="page">
   <section class="shopping-cart">
-    <h1 class="text-capitalize">Carrito de compra</h1>
+    <h1 class="text-capitalize">Carrito de compras</h1>
 
-    <ng-container *ngIf="ordersLists.length > 0">
+    <router-outlet class="animated fadeIn"></router-outlet>
+  </section>
+</main>
+<!-- 
+
+      <ng-container *ngIf="ordersLists.length > 0">
       <div class="tab-container">
         <ng-container *ngIf="tabSelected === 1 || tabSelected === 2">
           <ul class="tab-menu">
@@ -29,9 +34,9 @@
           [ngClass]="{ 'justify--init': tabSelected === 3 }"
         >
           <!-- Order -> list, editor, e invoice -->
-          <ng-container *ngIf="tabSelected === 1 || tabSelected === 2">
-            <!-- Order list by business -->
-            <div class="order-list">
+<!-- <ng-container *ngIf="tabSelected === 1 || tabSelected === 2"> -->
+<!-- Order list by business -->
+<!-- <div class="order-list">
               <app-order-list
                 (selected)="selectedOrderList($event)"
                 [orderList]="ordersLists"
@@ -39,19 +44,19 @@
               </app-order-list>
             </div>
 
-            <div class="detail-content">
-              <!-- Order editor -->
-              <ng-container *ngIf="tabSelected === 1">
+            <div class="detail-content"> -->
+<!-- Order editor -->
+<!-- <ng-container *ngIf="tabSelected === 1">
                 <app-order-editor
                   [orders]="ordersListSelected.orders"
                   (purchaseAction)="purchaseAction($event)"
                   class="order-editor"
                 >
                 </app-order-editor>
-              </ng-container>
+              </ng-container> -->
 
-              <!-- invoice -->
-              <ng-container *ngIf="tabSelected === 2">
+<!-- invoice -->
+<!-- <ng-container *ngIf="tabSelected === 2">
                 <app-invoice></app-invoice>
               </ng-container>
             </div>
@@ -69,10 +74,10 @@
           </ng-container>
 
           <ng-container *ngIf="tabSelected === 4">
-            <ng-container>
-              <!-- Voucher details -->
-              <mat-card class="voucher">
-                <mat-card-header class="voucher-title" mat-card-image>
+            <ng-container> -->
+<!-- Voucher details -->
+<!-- <mat-card class="voucher"> -->
+<!-- <mat-card-header class="voucher-title" mat-card-image>
                   <div class="check">
                     <img
                       src="assets/img/Suscription/CheckMark.svg"
@@ -108,16 +113,15 @@
                         <small>Cód. autorización:</small>
                       </li>
                     </div>
-                  </ul>
+                  </ul> -->
 
-                  <!-- <button class="btn-details" mat-button>Ver detalles</button> -->
-                </mat-card-content>
-              </mat-card>
-              <!-- Voucher details -->
-            </ng-container>
+<!-- <button class="btn-details" mat-button>Ver detalles</button> -->
+<!-- </mat-card-content>
+              </mat-card> -->
+<!-- Voucher details -->
+<!-- </ng-container>
           </ng-container>
         </div>
       </div>
-    </ng-container>
-  </section>
-</main>
+    </ng-container> -->
+-->
