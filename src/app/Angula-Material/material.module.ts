@@ -27,6 +27,7 @@ import { MatDividerModule } from '@angular/material/divider';
 
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatStepperModule } from '@angular/material/stepper';
 
 const modules = [
   CommonModule,
@@ -52,6 +53,7 @@ const modules = [
   MatBottomSheetModule,
   OverlayModule,
   MatTooltipModule,
+  MatStepperModule,
 ];
 @NgModule({
   declarations: [],
