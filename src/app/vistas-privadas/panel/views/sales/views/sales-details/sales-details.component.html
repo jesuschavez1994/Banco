@@ -25,6 +25,8 @@
   <section class="order-details" *ngIf="!loading; else skeletonDetails">
     <app-order-details
       [orderDetails]="selectedOrderDetails"
+      [taxAmount]="taxAmount"
+      [totalAmount]="totalAmount"
     ></app-order-details>
   </section>
 
