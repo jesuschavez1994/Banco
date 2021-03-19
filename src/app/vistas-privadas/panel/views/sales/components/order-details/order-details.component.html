@@ -36,17 +36,16 @@
   <div class="amounts">
     <hr matLine class="my-1 line" />
 
-    <div class="info"></div>
     <div class="tax">
       <div class="grid">
         <div class="text">Impuesto (19%):</div>
-        <div class="amount">$10</div>
+        <div class="amount">${{ taxAmount | number }}</div>
       </div>
     </div>
     <div class="total">
       <div class="grid">
         <div class="text">Total:</div>
-        <div class="amount">$500</div>
+        <div class="amount">${{ totalAmount | number }}</div>
       </div>
     </div>
   </div>
