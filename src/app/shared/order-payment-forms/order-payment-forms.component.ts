@@ -7,7 +7,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MyValidators } from '@utils/validators';
 import { PaymentProcessService } from '@services/payment-process/payment-process.service';
 import { UsuarioService } from '@services/usuario/usuario.service';
 import {
@@ -16,7 +15,6 @@ import {
 } from '@services/geo-location/geo-location.service';
 import { OrderPaymentForm } from '@interfaces/components-options/order.options.interface';
 import { AgmMap, MouseEvent, MapsAPILoader } from '@agm/core';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-order-payment-forms',
@@ -47,6 +45,7 @@ export class OrderPaymentFormsComponent implements OnInit {
     telefono: new FormControl('', [
       Validators.required,
       Validators.minLength(10),
+      Validators.maxLength(14),
       Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g),
     ]),
     rut: new FormControl('', [
@@ -156,7 +155,7 @@ export class OrderPaymentFormsComponent implements OnInit {
         keysAvailable.forEach((key) => {
           switch (key) {
             case 'required':
-              errorMessages.push(`Campo Obligatorio`);
+              errorMessages.push(`Campo obligatorio`);
 
               break;
             case 'minlength':
@@ -165,8 +164,14 @@ export class OrderPaymentFormsComponent implements OnInit {
               );
 
               break;
+            case 'maxlength':
+              errorMessages.push(
+                `Caracteres máximos ${errorsObject.maxlength.requiredLength}`
+              );
+
+              break;
             case 'email':
-              errorMessages.push(`Email invalido`);
+              errorMessages.push(`Email inválido`);
 
               break;
             case 'pattern':
@@ -174,17 +179,17 @@ export class OrderPaymentFormsComponent implements OnInit {
                 errorsObject.pattern.requiredPattern ==
                 /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g
               ) {
-                errorMessages.push(`Nro. Teléfono invalido`);
+                errorMessages.push(`Nro. teléfono inválido`);
               } else if (
                 errorsObject.pattern.requiredPattern ==
                 /^[0-9]+[-|‐]{1}[0-9kK]{1}$/
               ) {
-                errorMessages.push(`Formato Rut inválido`);
+                errorMessages.push(`Formato RUT inválido`);
               }
 
               break;
             case 'existIn':
-              errorMessages.push(`Selecciona una opción valida`);
+              errorMessages.push(`Seleccione una opción válida`);
 
               break;
           }
@@ -230,8 +235,6 @@ export class OrderPaymentFormsComponent implements OnInit {
   }
 
   public getCommunesOfRegion(regionChange) {
-    console.log('getCommunesOfRegion');
-    console.log(regionChange);
     regionChange = parseInt(regionChange);
 
     const regionSelected = this.regions.find(
@@ -279,8 +282,6 @@ export class OrderPaymentFormsComponent implements OnInit {
         // solo utilizaremos los valores necesarios
 
         const contactValue = contactResp[contactRespKey];
-        console.log('preLoadContactData - ' + contactRespKey);
-        console.log(contactValue);
         if (contactValue) {
           // Validamos que no contenta valores null
 
