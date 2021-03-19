@@ -80,6 +80,23 @@
       }
 
       .skeleton__data-cells {
+        animation: verticalFlow 4s ease;
+        animation-iteration-count: infinite;
+        animation-fill-mode: forwards;
+        opacity: 0;
+
+        &:nth-child(2) {
+          animation-delay: 0.5s;
+        }
+
+        &:nth-child(3) {
+          animation-delay: 1s;
+        }
+
+        &:nth-child(4) {
+          animation-delay: 1.5s;
+        }
+
         td {
           width: 4em;
           height: 1em;
@@ -91,29 +108,86 @@
   .skeleton__amounts {
     grid-area: amounts;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 0.4em auto auto;
     grid-template-areas:
-      '... ... line line line line'
-      '... ... ... tax tax tax'
-      '... ... ... total total total';
+      '... line line'
+      '... tax tax'
+      '... total total';
 
     .line {
       grid-area: line;
       width: 100%;
     }
 
-    .skeleton__tax {
+    .tax {
       margin: 0.8em 0em;
       grid-area: tax;
-      width: 4em;
-      height: 1em;
+
+      .grid {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 'text amount';
+
+        .text {
+          grid-area: text;
+          text-align: left;
+        }
+
+        .amount {
+          grid-area: amount;
+          text-align: left;
+
+          width: 3em;
+          height: 1em;
+        }
+      }
     }
 
-    .skeleton__total {
+    .total {
       grid-area: total;
-      width: 4em;
-      height: 1em;
+
+      .grid {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 'text amount';
+
+        .text {
+          grid-area: text;
+          text-align: left;
+        }
+
+        .amount {
+          grid-area: amount;
+          text-align: left;
+
+          width: 3em;
+          height: 1em;
+        }
+      }
     }
+  }
+
+  .data-cell {
+    height: 1em;
+  }
+}
+
+/* ------------------
+  Animations
+  ------------------ */
+@keyframes verticalFlow {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
   }
 }

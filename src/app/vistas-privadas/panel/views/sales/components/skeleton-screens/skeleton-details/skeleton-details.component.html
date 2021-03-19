@@ -21,15 +21,31 @@
     <!-- Tabla de contenido -->
     <table class="skeleton__orders-table">
       <tr class="skeleton__main-row">
-        <th><div class="content shimmer shine"></div></th>
-        <th>
-          <div class="content shimmer shine"></div>
-        </th>
+        <th>Producto</th>
+        <th>Subtotal</th>
       </tr>
 
-      <tr *ngFor="let skeleton of [0, 1, 2, 3]" class="skeleton__data-cells">
-        <td class="shimmer shine"></td>
-        <td class="shimmer shine"></td>
+      <tr
+        *ngFor="let skeleton of [0, 1, 2, 3]; index as i"
+        class="skeleton__data-cells"
+      >
+        <td>
+          <span>
+            <div
+              class="shimmer shine data-cell"
+              [ngStyle]="{ 'width.%': (i + 1) * 25 }"
+            ></div>
+          </span>
+        </td>
+
+        <td>
+          <span>
+            <div
+              class="shimmer shine data-cell"
+              [ngStyle]="{ 'width.%': (i + 1) * 25 }"
+            ></div>
+          </span>
+        </td>
       </tr>
     </table>
     <!-- #Tabla de contenido -->
@@ -38,7 +54,17 @@
   <div class="skeleton__amounts">
     <hr matLine class="my-1 line" />
 
-    <div class="skeleton__tax shimmer shine"></div>
-    <div class="skeleton__total shimmer shine"></div>
+    <div class="tax">
+      <div class="grid">
+        <div class="text">Impuesto (19%):</div>
+        <div class="amount shimmer shine"></div>
+      </div>
+    </div>
+    <div class="total">
+      <div class="grid">
+        <div class="text">Total:</div>
+        <div class="amount shimmer shine"></div>
+      </div>
+    </div>
   </div>
 </section>
