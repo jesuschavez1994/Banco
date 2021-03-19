@@ -29,13 +29,15 @@ export class StoreSalesService extends Service {
   public getStoreOrders() {
     this.setIdUser();
     this.storeId = localStorage.getItem('storeId');
-    return this.execQuery<Orders>(`users/${this.userId}/stores/2/sales`);
+    return this.execQuery<Orders>(
+      `users/${this.userId}/stores/${this.storeId}/sales`
+    );
   }
 }
 
 export interface Orders {
   current_page: number;
-  data: Datum;
+  data: Datum[];
   first_page_url: string;
   from: number;
   last_page: number;
