@@ -12,14 +12,15 @@ export class OrdersListComponent implements OnInit {
   @Output() selectedOrder = new EventEmitter<Datum>();
 
   userImageSrc: Image[];
-  avatarBackground = 'assets/img/no-avatar.jpg';
+  avatarBackground: string;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.avatarBackground = this.orderDetails.user.image[0].src;
+  }
 
-  public selectOrder(order) {
-    // this.orderSelected = order;
+  public selectOrder(order: Datum) {
     this.selectedOrder.emit(this.orderDetails);
   }
 }
