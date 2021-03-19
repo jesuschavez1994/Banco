@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PanelComponent } from './panel.component';
-import { ShoppingCartComponent } from './views/shopping-cart/shopping-cart.component';
+import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
 import { EmptyShoppingCartGuard } from '@services/guards/empty-shopping-cart.guard';
 
 const routes: Routes = [
@@ -23,7 +23,7 @@ const routes: Routes = [
       {
         path: 'sales',
         loadChildren: () =>
-          import('./views/sales/sales.module').then(
+          import('./pages/sales/sales.module').then(
             (module) => module.SalesModule
           ),
       },
