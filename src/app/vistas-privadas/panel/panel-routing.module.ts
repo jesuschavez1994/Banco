@@ -16,9 +16,13 @@ const routes: Routes = [
     children: [
       {
         path: 'shopping-cart',
-        component: ShoppingCartComponent,
-        canActivate: [EmptyShoppingCartGuard],
-        data: { title: 'Carrito de compras | Founduss' },
+        loadChildren: () =>
+          import('./pages/shopping-cart/shopping-cart.module').then(
+            (module) => module.ShoppingCartModule
+          ),
+        // component: ShoppingCartComponent,
+        // canActivate: [EmptyShoppingCartGuard],
+        // data: { title: 'Carrito de compras | Founduss' },
       },
       {
         path: 'sales',
