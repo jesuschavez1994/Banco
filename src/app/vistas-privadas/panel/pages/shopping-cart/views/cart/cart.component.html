@@ -18,33 +18,34 @@
     </li>
   </ul>
   <!-- #Pestañas de navegación -->
-
-  <!-- Listado de ordenes por tienda -->
-  <div class="order-list">
-    <app-order-list
-      (selected)="selectedOrderList($event)"
-      [orderList]="ordersLists"
-    >
-    </app-order-list>
-  </div>
-  <!-- #Listado de ordenes por tienda -->
-
-  <div class="detail-content">
-    <!-- Editor de ordenes -->
-    <ng-container *ngIf="selectedTab === 1">
-      <app-order-editor
-        [orders]="ordersListSelected.orders"
-        (purchaseAction)="purchaseAction($event)"
-        class="order-editor"
+  <section class="content">
+    <!-- Listado de ordenes por tienda -->
+    <div class="order-list">
+      <app-order-list
+        (selected)="selectedOrderList($event)"
+        [orderList]="ordersLists"
       >
-      </app-order-editor>
-    </ng-container>
-    <!-- #Editor de ordenes -->
+      </app-order-list>
+    </div>
+    <!-- #Listado de ordenes por tienda -->
 
-    <!-- Invoice -->
-    <ng-container *ngIf="selectedTab === 2">
-      <app-invoice></app-invoice>
-    </ng-container>
-    <!-- #Invoice -->
-  </div>
+    <div class="detail-content">
+      <!-- Editor de ordenes -->
+      <ng-container *ngIf="selectedTab === 1">
+        <app-order-editor
+          [orders]="ordersListSelected.orders"
+          (purchaseAction)="purchaseAction($event)"
+          class="order-editor"
+        >
+        </app-order-editor>
+      </ng-container>
+      <!-- #Editor de ordenes -->
+
+      <!-- Invoice -->
+      <ng-container *ngIf="selectedTab === 2">
+        <app-invoice></app-invoice>
+      </ng-container>
+      <!-- #Invoice -->
+    </div>
+  </section>
 </section>

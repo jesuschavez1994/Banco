@@ -27,21 +27,14 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProductsFromCart();
-
-    if (this.ordersLists) {
-      if (this.ordersLists.length > 0) {
-        this.ordersListSelected = this.ordersLists[0];
-      }
-    }
   }
 
   private loadProductsFromCart() {
     this.paymentService.getProductsFromCart().subscribe((resp) => {
-      let storeNames: any[];
-      let productCartOrdered: any[];
-
-      storeNames = [];
-      productCartOrdered = [];
+      console.log('Orders received:');
+      console.log(resp);
+      let storeNames: any[] = [],
+        productCartOrdered: OrderListOptions[] = [];
 
       if (resp.data) {
         resp.data.forEach((productFor) => {
@@ -86,6 +79,12 @@ export class CartComponent implements OnInit {
 
         console.log('Products of cart loaded');
         console.log(resp);
+
+        if (this.ordersLists) {
+          if (this.ordersLists.length > 0) {
+            this.ordersListSelected = this.ordersLists[0];
+          }
+        }
       }
     });
 

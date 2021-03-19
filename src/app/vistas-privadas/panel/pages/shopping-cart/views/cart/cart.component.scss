@@ -1,4 +1,9 @@
+@import 'src/assets/scss/style.scss';
+
 .page {
+  display: flex;
+  flex-direction: column;
+
   .tab-menu {
     display: flex;
 
@@ -24,17 +29,24 @@
     }
   }
 
-  .order-list {
-    width: 35.4%;
-  }
+  .content {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas: 'order-list order-list order-editor  order-editor  order-editor  order-editor';
 
-  .detail-content {
-    width: 63.7%;
-    display: flex;
-    justify-content: center;
+    .order-list {
+      grid-area: order-list;
+    }
 
-    .order-editor {
-      width: 100%;
+    .detail-content {
+      grid-area: order-editor;
+      display: flex;
+      justify-content: center;
+
+      .order-editor {
+        width: 100%;
+      }
     }
   }
 }
