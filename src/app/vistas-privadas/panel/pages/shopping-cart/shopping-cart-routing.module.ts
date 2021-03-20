@@ -1,11 +1,36 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { ShoppingCartComponent } from './shopping-cart.component';
+import { CartComponent } from './views/cart/cart.component';
+import { PaymentComponent } from './views/payment/payment.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'shopping-cart',
+  },
+  {
+    path: '',
+    component: ShoppingCartComponent,
+    children: [
+      {
+        path: 'cart',
+        component: CartComponent,
+        data: { title: 'Carrito de compras | Founduss' },
+      },
+      {
+        path: 'payment-process',
+        component: PaymentComponent,
+        data: { title: 'Proceso de pago | Founduss' },
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ShoppingCartRoutingModule { }
+export class ShoppingCartRoutingModule {}
