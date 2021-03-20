@@ -1,14 +1,23 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
+import { SharedModule } from '@shared/shared.module';
 import { ShoppingCartRoutingModule } from './shopping-cart-routing.module';
 
+import { ShoppingCartComponent } from './shopping-cart.component';
+import { CartComponent } from './views/cart/cart.component';
+import { PaymentComponent } from './views/payment/payment.component';
+import { PaymentFormComponent } from './components/payment-form/payment-form.component';
+
+const modules = [ShoppingCartRoutingModule, SharedModule];
+
+const components = [
+  ShoppingCartComponent,
+  CartComponent,
+  PaymentComponent,
+  PaymentFormComponent,
+];
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    ShoppingCartRoutingModule
-  ]
+  declarations: [...components],
+  imports: [...modules],
 })
-export class ShoppingCartModule { }
+export class ShoppingCartModule {}
