@@ -275,3 +275,17 @@ interface Pivot {
   user_id: number;
   image_id: number;
 }
+
+export interface Delivery {
+  id: number;
+  order_id: number;
+  contact_id: number;
+  address_latitude: number;
+  address_longitude: number;
+  name: string;
+  dispatched: string;
+  delivered: string;
+  created_at: string;
+  updated_at: string;
+  contact: Contact;
+}
