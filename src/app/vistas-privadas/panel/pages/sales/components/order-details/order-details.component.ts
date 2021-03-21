@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Orders, Datum } from '@services/store-sales/store-sales.service';
+import {
+  Orders,
+  Datum,
+} from '@interfaces/shopping-cart/shopping-cart.interface';
 
 @Component({
   selector: 'app-order-details',

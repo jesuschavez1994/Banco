@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { StoreSalesService } from '@services/store-sales/store-sales.service';
 import {
-  StoreSalesService,
   Orders,
   Datum,
-} from '@services/store-sales/store-sales.service';
+} from '@interfaces/shopping-cart/shopping-cart.interface';
 
 @Component({
   selector: 'app-sales-details',

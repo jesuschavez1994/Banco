@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Datum } from '@services/store-sales/store-sales.service';
+import { Datum } from '@interfaces/shopping-cart/shopping-cart.interface';
 import { Image } from '@interfaces/userPublic.interface';
 
 @Component({
