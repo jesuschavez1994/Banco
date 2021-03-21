@@ -17,7 +17,7 @@ export class OrdersListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.avatarBackground = this.orderDetails.user.image[0].src;
+    this.avatarBackground = `url('${this.orderDetails.user.image[0].src}')`;
   }
 
   public selectOrder(order: Datum) {
