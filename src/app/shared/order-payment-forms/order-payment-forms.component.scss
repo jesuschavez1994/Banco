@@ -157,18 +157,6 @@
         }
       }
     }
-
-    [type='radio'] + label:before,
-    [type='radio'] + label:after {
-      content: none !important;
-    }
-
-    [type='radio']:not(:checked),
-    [type='radio']:checked {
-      position: initial !important;
-      left: initial !important;
-      opacity: initial !important;
-    }
   }
 }
 

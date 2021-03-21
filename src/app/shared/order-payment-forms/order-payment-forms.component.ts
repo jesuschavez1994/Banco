@@ -257,7 +257,8 @@ export class OrderPaymentFormsComponent implements OnInit {
 
     this.userService.getContact().subscribe((contactResp) => {
       const controls = this.paymentInfo.controls;
-
+      console.log('Informacion de contacto:');
+      console.log(contactResp);
       const contactRespKeys = [
         // determinamos los valores necesarios
         'commune',
