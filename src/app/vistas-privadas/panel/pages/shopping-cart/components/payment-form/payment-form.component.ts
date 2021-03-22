@@ -203,20 +203,24 @@ export class PaymentFormComponent implements OnInit {
 
   public processPaymentData() {
     let formData = this.paymentForm.value;
+    console.log('Payment process form data: ');
+    console.log(this.paymentForm.value);
 
     const orderId = parseInt(localStorage.getItem('shoppingCartOrderId'));
 
     const recipientContact = {
-      commune_id: formData.comuna,
-      direction: formData.direccion,
-      house: formData.hospedaje,
-      phone: formData.telefono,
-      rut: formData.rut,
-      address_latitude: formData.latitud,
-      address_longitude: formData.longitud,
-      name: formData.nombreDireccion,
+      commune_id: formData.paymentFormSteps[0].comuna,
+      direction: formData.paymentFormSteps[0].direccion,
+      house: formData.paymentFormSteps[0].hospedaje,
+      phone: formData.paymentFormSteps[0].telefono,
+      rut: formData.paymentFormSteps[1].rut,
+      address_latitude: formData.paymentFormSteps[1].latitud,
+      address_longitude: formData.paymentFormSteps[1].longitud,
+      name: formData.paymentFormSteps[1].aliasDireccion,
       // paymentOption: formData.paymentOption,
     };
+    console.log('Payload data: ');
+    console.log(recipientContact);
 
     // Agregamos los datos del destinatario y su dirección de destino del producto
     this.paymentService
