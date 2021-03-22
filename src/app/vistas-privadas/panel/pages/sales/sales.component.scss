@@ -1,8 +1,10 @@
+@import 'src/assets/scss/style.scss';
+
 .page {
   padding-top: 4.7em;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 2em 2em 2em auto;
+  grid-template-rows: auto auto auto auto;
   grid-template-areas:
     'title title title title'
     '... ... ... filter'
@@ -17,6 +19,9 @@
 
   .filters-dropdown {
     grid-area: filter;
+    padding: 0.5em;
+    width: 10em;
+    border: 1px solid #d8d8d8;
   }
 
   .nav {
@@ -31,15 +36,35 @@
 
       -ms-overflow-style: none;
       scrollbar-width: none;
-
-      .nav-tabs .nav-link.active {
-        color: #495057;
-        font-weight: 700;
-      }
     }
 
     .navigation::-webkit-scrollbar {
       display: none;
+    }
+  }
+
+  .tab-menu {
+    display: flex;
+
+    .tab-item {
+      border: 1px solid transparent;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      font-size: 15.2px;
+      font-weight: 500;
+      text-transform: capitalize;
+      padding: 11px 17px;
+      cursor: pointer;
+      transition: all $time-hover;
+
+      &:hover {
+        border-color: #dee2e6 #dee2e6 #fff;
+      }
+
+      .active {
+        border-color: #dee2e6 #dee2e6 #fff;
+        color: $color__text-orange;
+      }
     }
   }
 
