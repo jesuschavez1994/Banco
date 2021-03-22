@@ -1,0 +1,50 @@
+.skeleton-card {
+  width: 100%;
+
+  .mat-card-header {
+    .skeleton-card__avatar {
+      width: 5em;
+      height: 5em;
+    }
+
+    .skeleton-card__title {
+      width: 9em;
+      height: 1em;
+      margin-bottom: 1.3em;
+    }
+
+    .skeleton-card__subtitle {
+      span {
+        height: 1em;
+        width: 3em;
+      }
+    }
+  }
+}
+
+.delivery-details {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: 'amount paid date location-radius details';
+
+  .amount {
+    grid-area: amount;
+  }
+
+  .paid {
+    grid-area: paid;
+  }
+
+  .date {
+    grid-area: date;
+  }
+
+  .location-radius {
+    grid-area: location-radius;
+  }
+
+  .more-details {
+    grid-area: details;
+  }
+}
