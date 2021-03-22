@@ -1,9 +1,10 @@
-<mat-card (click)="selectOrder($event)">
+<mat-card (click)="selectOrder($event)" class="cards">
   <mat-card-header>
     <div
       mat-card-avatar
       class="card-avatar"
-      [ngStyle]="{ background: avatarBackground }"
+      [style.background]="avatarBackground"
+      [style.background-size]="'cover'"
     ></div>
     <mat-card-title class="title-text">{{
       orderDetails.user.name
