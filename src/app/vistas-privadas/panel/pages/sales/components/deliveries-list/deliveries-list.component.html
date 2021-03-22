@@ -1,1 +1,22 @@
-<p>deliveries-list works!</p>
+<mat-card class="my-2 card">
+  <mat-card-header>
+    <div mat-card-avatar class="card-avatar"></div>
+    <mat-card-title class="title-text">{{
+      orderInfo.user.name
+    }}</mat-card-title>
+    <mat-card-subtitle class="subtitle-text delivery-details">
+      <p class="amount">
+        Productos <span class="bold">({{ itemsCount }})</span>
+      </p>
+      <p class="paid">
+        Pagado: <span class="bold">${{ orderInfo.total_price }}</span>
+      </p>
+      <p class="date">
+        Fecha:
+        <span class="bold">{{ orderInfo.created_at | date: 'shortDate' }}</span>
+      </p>
+      <p class="location-radius">Geolocalización</p>
+      <button mat-button class="btn more-details">Ver ubicación</button>
+    </mat-card-subtitle>
+  </mat-card-header>
+</mat-card>

@@ -1,0 +1,53 @@
+.card:hover {
+  transform: scale(1.1);
+  -webkit-box-shadow: 7px 7px 18px -9px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 7px 7px 18px -9px rgba(0, 0, 0, 0.36);
+  box-shadow: 7px 7px 18px -9px rgba(0, 0, 0, 0.36);
+}
+
+.card-avatar {
+  background-size: cover;
+  background: url('src/assets/img/no-avatar.jpg');
+  height: 5em;
+  width: 5em;
+}
+
+.title-text {
+  font-size: 1rem;
+  margin-bottom: 1.3em;
+}
+
+.subtitle-text {
+  font-size: 0.8rem;
+}
+
+.delivery-details {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: 'amount paid date location-radius details';
+
+  .amount {
+    grid-area: amount;
+  }
+
+  .paid {
+    grid-area: paid;
+  }
+
+  .date {
+    grid-area: date;
+  }
+
+  .location-radius {
+    grid-area: location-radius;
+  }
+
+  .more-details {
+    grid-area: details;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
