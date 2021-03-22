@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ShoppingCartComponent } from './shopping-cart.component';
 import { CartComponent } from './views/cart/cart.component';
 import { PaymentComponent } from './views/payment/payment.component';
+import { VoucherComponent } from './views/voucher/voucher.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,11 @@ const routes: Routes = [
         path: 'payment-process',
         component: PaymentComponent,
         data: { title: 'Proceso de pago | Founduss' },
+      },
+      {
+        path: 'voucher',
+        component: VoucherComponent,
+        data: { title: 'Comprobante de pago | Founduss' },
       },
     ],
   },
