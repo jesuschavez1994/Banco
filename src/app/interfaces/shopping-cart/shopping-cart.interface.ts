@@ -72,17 +72,6 @@ export interface OrderDetails {
   order_cart_items: OrderCartItem[];
 }
 
-interface OrderCartItem {
-  id: number;
-  order_id: number;
-  product_id: number;
-  price: number;
-  quantity: number;
-  created_at: string;
-  updated_at: string;
-  product: Product;
-}
-
 interface Product {
   id: number;
   store_id: number;
@@ -152,7 +141,7 @@ export interface Datum {
   order_cart_items: OrderCartItem[];
 }
 
-interface OrderCartItem {
+export interface OrderCartItem {
   id: number;
   order_id: number;
   product_id: number;

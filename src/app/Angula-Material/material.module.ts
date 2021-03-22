@@ -1,7 +1,6 @@
-// Aquí Haremos el llamado de toda las importaciones de angular material //
+// Aquí haremos el llamado de toda las importaciones de Angular Material //
 
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
@@ -28,9 +27,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const modules = [
-  CommonModule,
   MatDividerModule,
   MatListModule,
   MatFormFieldModule,
@@ -54,6 +54,8 @@ const modules = [
   OverlayModule,
   MatTooltipModule,
   MatStepperModule,
+  MatTableModule,
+  MatPaginatorModule,
 ];
 @NgModule({
   declarations: [],
