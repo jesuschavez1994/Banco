@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Datum } from '@interfaces/shopping-cart/shopping-cart.interface';
 import { Image } from '@interfaces/userPublic.interface';
 
@@ -12,12 +13,16 @@ export class OrdersListComponent implements OnInit {
   @Output() selectedOrder = new EventEmitter<Datum>();
 
   userImageSrc: Image[];
-  avatarBackground: string;
+  avatarBackground: string | SafeStyle;
 
-  constructor() {}
+  constructor(private sanitization: DomSanitizer) {}
 
   ngOnInit(): void {
-    this.avatarBackground = `url('${this.orderDetails.user.image[0].src}')`;
+    this.orderDetails.user.image[0].src
+      ? (this.avatarBackground = this.sanitization.bypassSecurityTrustStyle(
+          `url('https://founduss.cl/${this.orderDetails.user.image[0].src}')`
+        ))
+      : (this.avatarBackground = `url('assets/img/no-avatar.jpg')`);
   }
 
   public selectOrder(order: Datum) {
