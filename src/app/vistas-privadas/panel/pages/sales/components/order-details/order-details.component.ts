@@ -1,7 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
 import {
-  Orders,
+  Component,
+  OnInit,
+  AfterViewInit,
+  Input,
+  ViewChild,
+} from '@angular/core';
+import {
   Datum,
+  OrderCartItem,
 } from '@interfaces/shopping-cart/shopping-cart.interface';
 
 @Component({
@@ -9,7 +15,7 @@ import {
   templateUrl: './order-details.component.html',
   styleUrls: ['./order-details.component.scss'],
 })
-export class OrderDetailsComponent implements OnInit {
+export class OrderDetailsComponent implements OnInit, AfterViewInit {
   @Input() orderDetails: Datum;
   @Input() totalAmount: number;
   @Input() taxAmount: number;
@@ -17,4 +23,6 @@ export class OrderDetailsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  ngAfterViewInit() {}
 }

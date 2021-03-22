@@ -19,19 +19,25 @@
     <!-- #Pestañas para navegacion -->
 
     <!-- Tabla de contenido -->
-    <table class="orders-table">
-      <tr class="main-row">
-        <th>Producto</th>
-        <th>Subtotal</th>
-      </tr>
+    <div class="table-container">
+      <table class="orders-table">
+        <thead>
+          <tr class="main-row">
+            <th>Producto</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
 
-      <tr *ngFor="let cartItem of orderDetails.order_cart_items">
-        <td>{{ cartItem.product.name }} x{{ cartItem.product.stock }}</td>
-        <td>${{ cartItem.product.price | number }}</td>
-      </tr>
-    </table>
-    <!-- #Tabla de contenido -->
+        <tbody class="table-body">
+          <tr *ngFor="let cartItem of orderDetails.order_cart_items">
+            <td>{{ cartItem.product.name }} x{{ cartItem.product.stock }}</td>
+            <td>${{ cartItem.product.price | number }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
+  <!-- #Tabla de contenido -->
 
   <div class="amounts">
     <hr matLine class="my-1 line" />
