@@ -1,3 +1,17 @@
 <section class="content">
-  <p>deliveries works!</p>
+  <div class="deliveries-list" *ngIf="!loadingData; else showSkeleton">
+    <ng-container *ngFor="let order of deliveryOrders">
+      <app-deliveries-list [orderInfo]="order"></app-deliveries-list>
+    </ng-container>
+  </div>
+
+  <ng-template #showSkeleton>
+    <div class="deliveries-list">
+      <!-- Componente 'Skeleton' -->
+      <div class="my-1 skeleton" *ngFor="let skeleton of [0, 1, 2, 3]">
+        <app-skeleton-deliveries></app-skeleton-deliveries>
+      </div>
+      <!-- #Componente 'Skeleton' -->
+    </div>
+  </ng-template>
 </section>
