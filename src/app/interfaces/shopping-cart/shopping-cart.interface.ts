@@ -278,3 +278,71 @@ export interface Delivery {
   updated_at: string;
   contact: Contact;
 }
+
+export interface OrdersList {
+  current_page: number;
+  data: Datum[];
+  first_page_url: string;
+  from: number;
+  last_page: number;
+  last_page_url: string;
+  next_page_url: string;
+  path: string;
+  per_page: number;
+  prev_page_url: null;
+  to: number;
+  total: number;
+}
+
+enum Currency {
+  Clp = 'CLP',
+}
+
+enum Status {
+  FinishSuccess = 'FINISH_SUCCESS',
+  PendingPayment = 'PENDING_PAYMENT',
+}
+
+enum PaymentType {
+  Webpayplus = 'webpayplus',
+}
+
+interface Webpayplusnormaltransaction {
+  id: number;
+  payment_id: number;
+  token: string;
+  url: string;
+  error: null;
+  created_at: string;
+  updated_at: string;
+  webpayplusnormalresponse: Webpayplusnormalresponse | null;
+}
+
+interface Webpayplusnormalresponse {
+  id: number;
+  webpayplus_n_transaction_id: number;
+  vci: string;
+  amount: number;
+  status: string;
+  buy_order: string;
+  session_id: string;
+  card_detail: string;
+  accounting_date: string;
+  transaction_date: string;
+  authorization_code: string;
+  payment_type_code: string;
+  response_code: string;
+  installments_amount: number | null;
+  installments_number: number;
+  balance: null;
+  created_at: string;
+  updated_at: string;
+}
+
+enum Title {
+  Subscripcion = 'subscripcion',
+}
+
+enum DatumType {
+  Subscription = 'subscription',
+}
