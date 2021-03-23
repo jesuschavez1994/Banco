@@ -1,7 +1,7 @@
 <div class="order-container">
   <div class="order-head">
-    <h3 class="business">Farmacia Santa Isabel</h3>
-    <div class="order-number">Orden #100245</div>
+    <h3 class="business">{{ orderDetails.group.name | titlecase }}</h3>
+    <div class="order-number">Orden #{{ orderDetails.id }}</div>
   </div>
 
   <form action="#">
@@ -177,7 +177,7 @@
         </tr>
       </table>
 
-      <label for="termsAndConditions">
+      <div class="label-area">
         <mat-checkbox
           id="termsAndConditions"
           name="termsAndConditions"
@@ -186,8 +186,9 @@
           [(ngModel)]="acceptTermsAndConditions"
         >
         </mat-checkbox>
-        Acepto términos y condiciones
-      </label>
+
+        <p class="label">Acepto los términos y condiciones</p>
+      </div>
 
       <div class="actions">
         <button class="button gray" (click)="cancelOrder()">
