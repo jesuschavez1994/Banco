@@ -9,6 +9,7 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { Order } from '@interfaces/components-options/order.options.interface';
+import { OrderListOptions } from '@interfaces/components-options/order.options.interface';
 
 @Component({
   selector: 'app-order-editor',
@@ -17,6 +18,7 @@ import { Order } from '@interfaces/components-options/order.options.interface';
 })
 export class OrderEditorComponent implements OnInit, AfterViewInit {
   @Input() orders: Order[] = [];
+  @Input() orderDetails: OrderListOptions;
   @Input() defaulTaxPercent = 19;
   @Output() purchaseAction = new EventEmitter();
 
