@@ -1,3 +1,7 @@
+.card {
+  transition: all 0.5s ease;
+}
+
 .card:hover {
   transform: scale(1.1);
   -webkit-box-shadow: 7px 7px 18px -9px rgba(0, 0, 0, 0.36);
@@ -23,9 +27,6 @@
 
 .delivery-details {
   display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-areas: 'amount paid date location-radius details';
 
   .amount {
     grid-area: amount;
@@ -50,4 +51,98 @@
 
 .bold {
   font-weight: bold;
+}
+
+/* ------------------------
+  Responsive media queries
+   ------------------------ */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 320px) {
+  .card-avatar {
+    height: 2.5em;
+    width: 2.5em;
+  }
+
+  .delivery-details {
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: auto;
+    grid-template-areas:
+      'amount'
+      'paid'
+      'date'
+      'location-radius'
+      'details';
+
+    .more-details {
+      font-size: 0.7rem;
+    }
+  }
+
+  .title-text {
+    font-size: 0.7rem;
+  }
+}
+
+@media only screen and (min-width: 465px) {
+  .card-avatar {
+    height: 8em;
+    width: 8em;
+  }
+
+  .delivery-details {
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      'amount paid'
+      'date location-radius'
+      'details details';
+  }
+
+  .title-text {
+    font-size: 0.8rem;
+  }
+
+  .subtitle-text {
+    font-size: 0.7rem;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .delivery-details {
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      'amount paid'
+      'date location-radius'
+      'details details';
+  }
+
+  .title-text {
+    font-size: 1.5rem;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .delivery-details {
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+      'amount paid date location-radius'
+      'details details details details';
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .delivery-details {
+    grid-template-rows: auto;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas: 'amount paid date location-radius details';
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
 }

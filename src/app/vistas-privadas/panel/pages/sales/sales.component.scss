@@ -15,6 +15,7 @@
     grid-area: title;
     font-size: 1.5rem;
     font-weight: bold;
+    margin-left: 1.3em;
   }
 
   .filters-dropdown {
@@ -22,6 +23,7 @@
     padding: 0.5em;
     width: 10em;
     border: 1px solid #d8d8d8;
+    margin: 0em 2em 0em auto;
   }
 
   .nav {
@@ -36,6 +38,12 @@
 
       -ms-overflow-style: none;
       scrollbar-width: none;
+      transition: all $time-hover;
+
+      .nav-item .nav-link.active {
+        color: #f09207;
+        font-weight: bold;
+      }
     }
 
     .navigation::-webkit-scrollbar {
@@ -43,32 +51,38 @@
     }
   }
 
-  .tab-menu {
-    display: flex;
-
-    .tab-item {
-      border: 1px solid transparent;
-      border-top-right-radius: 5px;
-      border-top-left-radius: 5px;
-      font-size: 15.2px;
-      font-weight: 500;
-      text-transform: capitalize;
-      padding: 11px 17px;
-      cursor: pointer;
-      transition: all $time-hover;
-
-      &:hover {
-        border-color: #dee2e6 #dee2e6 #fff;
-      }
-
-      .active {
-        border-color: #dee2e6 #dee2e6 #fff;
-        color: $color__text-orange;
-      }
-    }
-  }
-
   .content {
     grid-area: content;
   }
+}
+
+/* ------------------------
+  Responsive media queries
+   ------------------------ */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 320px) {
+  .page {
+    .filters-dropdown {
+      margin-right: 0em;
+    }
+  }
+}
+
+@media only screen and (min-width: 465px) {
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
 }

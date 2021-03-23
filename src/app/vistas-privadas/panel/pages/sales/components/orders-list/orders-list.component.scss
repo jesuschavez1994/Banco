@@ -21,3 +21,58 @@
 .subtitle-text {
   font-size: 0.8rem;
 }
+
+/* ------------------------
+  Responsive media queries
+   ------------------------ */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 320px) {
+  .cards {
+    padding: 0.3em;
+  }
+
+  .card-avatar {
+    height: 2.5em;
+    width: 2.5em;
+  }
+
+  .title-text {
+    font-size: 0.8rem;
+  }
+
+  .subtitle-text {
+    font-size: 0.6rem;
+  }
+}
+
+@media only screen and (min-width: 465px) {
+  .title-text {
+    font-size: 1.2rem;
+  }
+
+  .subtitle-text {
+    font-size: 1rem;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .title-text {
+    font-size: 1.2rem;
+  }
+
+  .subtitle-text {
+    font-size: 1rem;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .title-text {
+    font-size: 0.8rem;
+  }
+
+  .subtitle-text {
+    font-size: 0.6rem;
+  }
+}

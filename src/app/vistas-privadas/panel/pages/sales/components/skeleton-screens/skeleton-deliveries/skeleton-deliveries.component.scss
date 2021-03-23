@@ -48,3 +48,81 @@
     grid-area: details;
   }
 }
+
+/* ------------------------
+  Responsive media queries
+   ------------------------ */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 320px) {
+  .mat-card-header {
+    .skeleton-card__avatar {
+      width: 2.5em;
+      height: 2.5em;
+    }
+  }
+
+  .delivery-details {
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: auto;
+    grid-template-areas:
+      'amount'
+      'paid'
+      'date'
+      'location-radius'
+      'details';
+  }
+}
+
+@media only screen and (min-width: 465px) {
+  .mat-card-header {
+    .skeleton-card__avatar {
+      width: 8em;
+      height: 8em;
+    }
+  }
+
+  .delivery-details {
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      'amount paid'
+      'date location-radius'
+      'details details';
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .delivery-details {
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      'amount paid'
+      'date location-radius'
+      'details details';
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .delivery-details {
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+      'amount paid date location-radius'
+      'details details details details';
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .delivery-details {
+    grid-template-rows: auto;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas: 'amount paid date location-radius details';
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}

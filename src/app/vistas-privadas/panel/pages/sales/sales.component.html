@@ -6,14 +6,15 @@
     Filtrar por
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>Item 1</button>
-    <button mat-menu-item>Item 2</button>
+    <button mat-menu-item>Fecha de pago</button>
+    <button mat-menu-item>Distancia más cercana</button>
+    <button mat-menu-item>Distancia más lejana</button>
   </mat-menu>
   <!-- #Dropdown -->
 
   <nav class="nav">
-    <ul class="navigation tab-menu">
-      <li class="tab-item">
+    <ul class="navigation nav nav-tabs">
+      <li class="nav-item">
         <a
           routerLinkActive="active"
           [routerLink]="['sales-details']"
@@ -21,7 +22,7 @@
           >Ventas</a
         >
       </li>
-      <li class="tab-item">
+      <li class="nav-item">
         <a
           routerLinkActive="active"
           [routerLink]="['deliveries']"
@@ -37,52 +38,3 @@
     <router-outlet></router-outlet>
   </section>
 </main>
-
-<!-- <main class="page">
-  <section class="shopping-cart">
-    <h1 class="text-capitalize">Ventas</h1>
-
-    <div class="tab-container">
-      <ul class="tab-menu">
-        <li
-          class="tab-item"
-          [ngClass]="{ active: tabSelected === 1 }"
-          (click)="filterByTab(1)"
-        >
-          ventas
-        </li>
-
-        <li
-          class="tab-item"
-          [ngClass]="{ active: tabSelected === 2 }"
-          (click)="filterByTab(2)"
-        >
-          delivery
-        </li>
-      </ul> -->
-
-<!-- <div class="tab-content"> -->
-<!-- Order -> list, invoice -->
-<!-- <ng-container *ngIf="tabSelected === 1 || tabSelected === 2"> -->
-<!-- Order list by business -->
-<!--           <div class="order-list" [ngClass]="{ expanded: tabSelected === 2 }">
-            <app-order-list
-              [isListToPaid]="true"
-              [isExpanded]="tabSelected === 2"
-              (selected)="selectedOrderList($event)"
-              [orderList]="ordersLists"
-            >
-            </app-order-list>
-          </div> -->
-
-<!-- invoice -->
-<!--           <ng-container *ngIf="tabSelected === 1">
-            <div class="detail-content">
-              <app-invoice-b></app-invoice-b>
-            </div>
-          </ng-container>
-        </ng-container>
-      </div>
-    </div>
-  </section>
-</main> -->

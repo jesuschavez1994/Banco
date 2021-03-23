@@ -63,21 +63,70 @@
   Responsive media queries
    ------------------------ */
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 320px) {
+  .content {
+    grid-template-rows: auto auto;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas:
+      'orders orders orders orders orders orders'
+      'details details details details details details';
+
+    .orders-list {
+      height: 15em;
+    }
+
+    .order-details {
+      margin-top: 1em;
+    }
+  }
+}
+
+@media only screen and (min-width: 465px) {
+  .content {
+    grid-template-rows: auto auto;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas:
+      'orders orders orders orders orders orders'
+      'details details details details details details';
+
+    .orders-list {
+      height: 15em;
+    }
+
+    .order-details {
+      margin-top: 1em;
+    }
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-}
+  .content {
+    grid-template-rows: auto auto;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas:
+      'orders orders orders orders orders orders'
+      'details details details details details details';
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
+    .orders-list {
+      height: 15em;
+    }
+
+    .order-details {
+      margin-top: 1em;
+    }
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-}
+  .content {
+    grid-template-rows: auto;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas: 'orders orders details details details';
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
+    .orders-list {
+      height: 30em;
+    }
+  }
 }

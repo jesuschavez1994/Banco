@@ -44,6 +44,11 @@
       &::-webkit-scrollbar {
         display: none;
       }
+
+      .nav-item .nav-link.active {
+        color: #f09207;
+        font-weight: bold;
+      }
     }
 
     .table-container {
@@ -105,45 +110,104 @@
     .tax {
       margin: 0.8em 0em;
       grid-area: tax;
-
-      .grid {
-        display: grid;
-        grid-template-rows: auto;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-areas: 'text amount';
-
-        .text {
-          grid-area: text;
-          text-align: left;
-        }
-
-        .amount {
-          grid-area: amount;
-          text-align: left;
-        }
-      }
     }
 
     .total {
       grid-area: total;
       font-weight: bold;
+    }
+  }
 
-      .grid {
-        display: grid;
-        grid-template-rows: auto;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-areas: 'text amount';
+  .grid {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 'text amount';
 
-        .text {
-          grid-area: text;
-          text-align: left;
-        }
+    .text {
+      grid-area: text;
+      text-align: left;
+    }
 
-        .amount {
-          grid-area: amount;
-          text-align: left;
+    .amount {
+      grid-area: amount;
+      text-align: left;
+    }
+  }
+}
+
+/* ------------------------
+  Responsive media queries
+   ------------------------ */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 320px) {
+  .order-content {
+    padding: 0.5em;
+
+    .order-heading {
+      .client-name {
+        font-size: 0.8rem;
+      }
+
+      .order-number {
+        font-size: 0.8rem;
+      }
+    }
+
+    .order-details {
+      .nav-tabs {
+        padding: 0.2em;
+      }
+
+      .table-container {
+        padding-top: 1.3em;
+
+        .orders-table {
+          & th,
+          & td {
+            padding: 0.5em;
+          }
         }
       }
     }
+
+    .amounts {
+      grid-template-areas:
+        'line line line'
+        'tax tax tax'
+        'total total total';
+    }
+
+    .grid {
+      .amount {
+        text-align: right;
+      }
+    }
   }
+}
+
+@media only screen and (min-width: 465px) {
+  .order-content {
+    .grid {
+      .amount {
+        text-align: right;
+      }
+    }
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
 }

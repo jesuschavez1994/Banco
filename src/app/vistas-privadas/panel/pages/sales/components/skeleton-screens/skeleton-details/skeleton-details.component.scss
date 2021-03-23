@@ -191,3 +191,77 @@
     opacity: 0;
   }
 }
+
+/* ------------------------
+  Responsive media queries
+   ------------------------ */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 320px) {
+  .order-content {
+    padding: 0.5em;
+
+    .skeleton__order-heading {
+      .skeleton__client-name {
+        font-size: 0.8rem;
+      }
+
+      .skeleton__order-number {
+        font-size: 0.8rem;
+      }
+    }
+
+    .skeleton__order-details {
+      .nav-tabs {
+        padding: 0.2em;
+      }
+
+      .skeleton__orders-table {
+        padding-top: 1.3em;
+
+        & th,
+        & td {
+          padding: 0.5em;
+        }
+      }
+    }
+
+    .skeleton__amounts {
+      grid-template-areas:
+        'line line line'
+        'tax tax tax'
+        'total total total';
+    }
+
+    .grid {
+      .amount {
+        text-align: right;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 465px) {
+  .order-content {
+    .grid {
+      .amount {
+        text-align: right;
+      }
+    }
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}
