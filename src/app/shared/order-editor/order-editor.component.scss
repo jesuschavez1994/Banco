@@ -1,13 +1,11 @@
 @import 'src/assets/scss/style.scss';
 
+.gray {
+  background: #e4e4e4 !important;
+}
+
 .order-container {
   padding: 30px 30px 0 30px;
-
-  input[type='checkbox'] {
-    width: 9px;
-    margin-right: 10px;
-    border: solid $color__border-gray 2px;
-  }
 
   .order-head {
     width: 100%;
@@ -64,55 +62,6 @@
     }
   }
 
-  .tab-menu {
-    display: flex;
-
-    .tab-item {
-      border: 1px solid transparent; //
-      border-top-right-radius: 5px; //
-      border-top-left-radius: 5px; //
-      // font-size: 13.2px;
-      font-size: 15.2px;
-      // font-weight: bold;
-      font-weight: 500;
-      text-transform: capitalize;
-      // padding: 4px 10px;
-      padding: 11px 17px;
-      cursor: pointer;
-      transition: all $time-hover;
-
-      &:hover {
-        border-color: #dee2e6 #dee2e6 #fff;
-      }
-    }
-
-    .active {
-      border-color: #dee2e6 #dee2e6 #fff;
-      color: $color__text-orange;
-    }
-  }
-
-  .tab-menu {
-    padding-left: 0px;
-    display: flex;
-    flex-direction: row;
-    overflow-x: scroll;
-    overflow-y: hidden;
-
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-
-    border-bottom: 2px solid $color__border-gray;
-
-    .tab-item {
-      font-size: $font__size--small;
-    }
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-
   .order-list {
     .order-item {
       display: grid;
@@ -125,7 +74,6 @@
         grid-area: checkbox;
       }
 
-      // TODO: Cambiar a display grid
       .content-flex {
         display: grid;
         grid-template-rows: auto auto auto;
@@ -250,10 +198,21 @@
       }
     }
 
-    label[for='termsAndConditions'] {
-      margin-top: 20px;
-      font-weight: 500;
-      cursor: pointer;
+    .label-area {
+      display: grid;
+      grid-template-rows: auto;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-areas: 'checkbox label label';
+      justify-items: center;
+      align-items: center;
+
+      .checkbox-default {
+        grid-area: checkbox;
+      }
+
+      .label {
+        grid-area: label;
+      }
     }
 
     .actions {
@@ -409,15 +368,6 @@
 @media only screen and (min-width: 768px) {
   .order-container {
     width: 100%;
-
-    .batch-actions {
-      grid-template-columns: 30px auto;
-      grid-template-rows: auto auto auto;
-      grid-template-areas:
-        'checkbox-col delete'
-        '... delivery'
-        '... takeout';
-    }
   }
 }
 
