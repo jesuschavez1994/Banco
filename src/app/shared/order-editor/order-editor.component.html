@@ -41,20 +41,22 @@
     </div>
 
     <div class="order-list-container">
-      <ul class="tab-menu">
-        <li
-          class="tab-item"
-          [ngClass]="{ active: hasDelivery }"
-          (click)="setHasDelivery(true)"
-        >
-          con delivery
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a
+            [ngClass]="{ active: hasDelivery }"
+            (click)="setHasDelivery(true)"
+            class="nav-link"
+            >Con delivery</a
+          >
         </li>
-        <li
-          class="tab-item"
-          [ngClass]="{ active: !hasDelivery }"
-          (click)="setHasDelivery(false)"
-        >
-          Retiro en tienda
+        <li class="nav-item">
+          <a
+            [ngClass]="{ active: !hasDelivery }"
+            (click)="setHasDelivery(false)"
+            class="nav-link"
+            >Retiro en tienda</a
+          >
         </li>
       </ul>
 

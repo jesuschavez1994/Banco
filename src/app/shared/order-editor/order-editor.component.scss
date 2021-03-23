@@ -4,6 +4,13 @@
   background: #e4e4e4 !important;
 }
 
+.order-list-container {
+  .nav-item .nav-link.active {
+    color: #f09207;
+    font-weight: bold;
+  }
+}
+
 .order-container {
   padding: 30px 30px 0 30px;
 
