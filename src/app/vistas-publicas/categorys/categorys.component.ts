@@ -12,12 +12,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class CategorysComponent implements OnInit {
   userLog = false;
 
-  constructor(private getCategorysService: GetCategorysService,  
+  constructor(private getCategorysService: GetCategorysService,
     private homeService: HomeServiceService,
               private router: Router,  ) { }
 
     ngOnInit(): void {
-       
+
       this.userLog = this.homeService.islog();
     }
-} 
+}

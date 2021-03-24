@@ -24,7 +24,7 @@ export class FormDataNegocioComponent implements OnInit {
       username: new FormControl('', [Validators.required, Validators.minLength(5)], MyValidators.validateUserName(this.storeServices)),
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
       // tslint:disable-next-line: max-line-length
-      email: new FormControl('' , [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')], MyValidators.validateUserEmail(this.storeServices)),
+      email: new FormControl('' , [Validators.required, Validators.pattern('[aA-zZ0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')], MyValidators.validateUserEmail(this.storeServices)),
       password1: new FormControl('', [Validators.required, Validators.minLength(8), MyValidators.validPassword]),
       password2: new FormControl(),
       terminos: new FormControl('', Validators.required),

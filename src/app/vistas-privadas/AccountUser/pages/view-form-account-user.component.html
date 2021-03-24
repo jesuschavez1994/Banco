@@ -1,37 +1,42 @@
-<app-public-navbar [userLog]="userLog" [storeAct]="storeLog"></app-public-navbar>
+<app-public-navbar
+  [userLog]="userLog"
+  [storeAct]="storeLog"
+  [imgCropper]="imgCropper"
+></app-public-navbar>
 
 <div id="main-wrapper" class="page">
-
-    <app-sidebar-home class="aside-home" [auth]="userLog" [storeAct]="storeLog"></app-sidebar-home>
+  <app-sidebar-home
+    class="aside-home"
+    [auth]="userLog"
+    [storeAct]="storeLog"
+  ></app-sidebar-home>
+  <!-- ============================================================== -->
+  <!-- Page wrapper  -->
+  <!-- ============================================================== -->
+  <div class="page-wrapper animated fadeIn">
     <!-- ============================================================== -->
-    <!-- Page wrapper  -->
+    <!-- Container fluid  -->
     <!-- ============================================================== -->
-    <div class="page-wrapper animated fadeIn">
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
-        <div class="container-fluid pl-0 pr-0">
-            
-            <div class="container pt-4 pl-0">
+    <div class="container-fluid pl-0 pr-0">
+      <div class="container pt-4 pl-0">
+        <div class="row">
+          <div class="col-md-6">
+            <app-form-account-user></app-form-account-user>
+          </div>
 
-                <div class="row">
+          <div class="col-md-6">
+            <section>
+              <app-cropper-img-photo-account
+                (fileBase64)="FileBase64($event)"
+              ></app-cropper-img-photo-account>
+            </section>
+          </div>
 
-                    <div class="col-md-6">
-                        <app-form-account-user></app-form-account-user>
-                    </div>
-                        
-                    <div class="col-md-6">
-                        <section>
-                            <app-cropper-img-photo-account></app-cropper-img-photo-account>
-                        </section>
-                    </div>
-
-                   <app-footer-button-form-account class="col-md-6"></app-footer-button-form-account>
-
-                </div>
-
-            </div>
-
+          <app-footer-button-form-account
+            class="col-md-6"
+          ></app-footer-button-form-account>
         </div>
+      </div>
     </div>
+  </div>
 </div>

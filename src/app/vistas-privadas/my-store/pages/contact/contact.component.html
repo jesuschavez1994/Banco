@@ -6,7 +6,7 @@
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="pt-3 pb-4" *ngFor="let data of dataStore">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="!edit">
               <h5 class="name-store family size-27 pl-2">
                 {{ data.name | capitalizado }}
               </h5>
@@ -34,7 +34,7 @@
 
                   <button
                     class="button-edit family-400 ml-3"
-                    (click)="atrasDescripcion()"
+                    (click)="atrasDescripcion(); edit = !edit"
                     *ngIf="editarDescripcion"
                     tupe="button"
                   >
@@ -43,7 +43,7 @@
 
                   <button
                     class="button-edit family-400 ml-3"
-                    (click)="EditarDescripcion()"
+                    (click)="EditarDescripcion(); edit = !edit"
                     *ngIf="!editarDescripcion"
                     tupe="button"
                   >
@@ -160,9 +160,9 @@
                   (adrees_latitude)="adress_latitude($event)"
                   (adress_longitude)="adress_longitude($event)"
                 ></app-mapa> -->
-                <div class="map">
+                <!-- <div class="map">
                   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15712.645162131!2d-69.29967315!3d10.085867200000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e875d7e35e71cfb%3A0x298a7ddc3d27e065!2sPARQUE%20DEL%20ESTE!5e0!3m2!1ses-419!2sve!4v1609695798598!5m2!1ses-419!2sve" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-                </div>
+                </div> -->
                 <!-- ================================================ -->
                 <!-- ===================END GOOGLE MAPS============== -->
               </div>

@@ -214,7 +214,7 @@ export class BankProductComponent implements OnInit {
       },
       {
         anchorName: 'Productos',
-        anchorLink: `/my-store/product-catalogue/${id}`,
+        anchorLink: `/my-store/product-catalogue`,
         wordToMatch: `products`,
       },
       {
@@ -237,7 +237,7 @@ export class BankProductComponent implements OnInit {
     this.sidebarSections = {
       bussinessProfile: true,
       anchorOptions: true,
-      filters: true,
+      filters: false,
     };
 
     this._sidebarListService.setRequiredSections(this.sidebarSections);

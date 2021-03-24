@@ -1,6 +1,9 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MyValidators } from '@utils/validators';
+import { PaymentProcessService } from '@services/payment-process/payment-process.service';
+import { UsuarioService } from '@services/usuario/usuario.service';
+import { OrderPaymentForm } from '@interfaces/components-options/order.options.interface';
 
 @Component({
   selector: 'app-order-payment-forms',
@@ -11,18 +14,14 @@ export class OrderPaymentFormsComponent implements OnInit {
 
   step = 1;
   isAllowedSecondStep = false;
-  regions = [
-    {id: 1, label: 'region1'}
-  ];
+  regions: SelectOptionRegion[] = [];
+  communes: SelectOption[] = [];
 
-  communes = [
-    {id: 1, label: 'comuna1'}
-  ];
-  // .map( r => r.id )
-  // .map( r => r.id )
   form = new FormGroup({
-    region: new FormControl('', [Validators.required, MyValidators.existInArray(this.regions)]),
-    comuna: new FormControl('', [Validators.required, MyValidators.existInArray(this.communes)]),
+    // region: new FormControl('', [Validators.required, MyValidators.existInArray( this.regions.map( r => r.id ) ) ]),
+    // comuna: new FormControl('', [Validators.required, MyValidators.existInArray( this.regions.map( r => r.id ) ) ]),
+    region: new FormControl('', [Validators.required]),
+    comuna: new FormControl('', [Validators.required]),
     direccion: new FormControl('', [Validators.required, Validators.minLength(10)]),
     hospedaje: new FormControl('', [Validators.required, Validators.minLength(6)]),
     telefono: new FormControl('', [
@@ -45,24 +44,27 @@ export class OrderPaymentFormsComponent implements OnInit {
       name: 'tarjeta de débito (redcompra webpay)',
       image: 'assets/images/webpay-brand.png',
       data: {
-        id: 2
+        id: 1
       },
     },
     {
       name: 'Paypal',
       image: 'assets/images/webpay-brand.png',
       data: {
-        id: -1
+        id: 2
       },
     },
   ];
 
   @Input() buttonDisabled = false;
 
-  @Output() submitForm = new EventEmitter();
+  @Output() submitForm = new EventEmitter<OrderPaymentForm>();
   @Output() currentStep = new EventEmitter<number>();
 
-  constructor() {
+  constructor(
+    private paymentService: PaymentProcessService,
+    private userService: UsuarioService,
+  ) {
   }
 
   ngOnInit(): void {
@@ -95,6 +97,8 @@ export class OrderPaymentFormsComponent implements OnInit {
       }
 
     });
+
+    this.loadDataOfSelects();
 
   }
 
@@ -178,10 +182,14 @@ export class OrderPaymentFormsComponent implements OnInit {
           }
 
         });
+
       }
 
       return errorMessages;
     }
+
+    // console.log('getErrorsWithMessages');
+    // console.log(control);
 
   }
 
@@ -208,6 +216,68 @@ export class OrderPaymentFormsComponent implements OnInit {
   public loadDataOfSelects() {
 
     // aquí cargamos las opciones del select
+    this.paymentService.getRegions().subscribe(
+      resp => {
+
+        resp.forEach( region => {
+
+          const communes = region.communes.map( commune => {
+            return {
+              value: commune.id,
+              label: commune.name
+            };
+          });
+
+          this.regions.push({
+            value: region.id,
+            label: region.name,
+            communes
+          });
+
+        });
+
+        // console.log('this.regions');
+        // console.log(this.regions);
+
+      }
+    );
+
+    this.controlRegionChanges();
+    this.preLoadContactData();
+
+  }
+
+
+  public controlRegionChanges() {
+    this.form.controls.region.valueChanges.subscribe(
+      regionChange => {
+
+        this.getCommunesOfRegion(regionChange);
+
+      }
+    );
+  }
+
+  public getCommunesOfRegion(regionChange) {
+    console.log('getCommunesOfRegion');
+    console.log(regionChange);
+    // this.form.controls.region.valueChanges.subscribe(
+    //   regionChange => {
+    //     // tslint:disable-next-line: radix
+    regionChange = parseInt(regionChange);
+
+    const regionSelected = this.regions.find( region => region.value === regionChange );
+
+    if (regionSelected) {
+      this.communes = regionSelected.communes;
+
+    }else {
+      this.communes = [];
+
+    }
+
+    //   }
+    // );
 
   }
 
@@ -219,6 +289,114 @@ export class OrderPaymentFormsComponent implements OnInit {
     // así no tendrá que ser igual la dirección de contact del usuario con la de donde quiere que llegue
     // el paquete.
 
+    this.userService.getContact().subscribe(
+      contactResp => {
+        console.log('contactResp');
+        console.log(contactResp);
+
+        const controls = this.form.controls;
+
+        const contactRespKeys = [ // determinamos los valores necesarios
+          'commune',
+          'direction',
+          'house',
+          'phone',
+          'rut',
+          'address_latitude',
+          'address_longitude',
+        ];
+
+        // 'region',
+        // 'comuna',
+        // 'direccion',
+        // 'hospedaje',
+        // 'telefono',
+        // 'rut',
+        // 'nombreDireccion',
+        // 'paymentOption',
+
+
+        contactRespKeys.forEach(contactRespKey => { // solo utilizaremos los valores necesarios
+
+          const contactValue = contactResp[contactRespKey];
+          console.log('preLoadContactData - ' + contactRespKey);
+          console.log(contactValue);
+          if (contactValue) { // Validamos que no contenta valores null
+
+            switch (contactRespKey) {
+
+              case 'commune':
+
+                const communeId = contactValue.id;
+                const regionId = contactValue.region.id;
+
+                controls.region.setValue(regionId);
+                controls.comuna.setValue(communeId);
+
+                this.getCommunesOfRegion(contactValue.region.id);
+
+                break;
+
+              case 'direction':
+
+                controls.direccion.setValue(contactValue);
+
+                break;
+
+              case 'house':
+
+                controls.hospedaje.setValue(contactValue);
+
+                break;
+
+              case 'phone':
+
+                controls.telefono.setValue(contactValue);
+
+                break;
+
+              case 'rut':
+
+                controls.rut.setValue(contactValue);
+
+                break;
+
+              case 'address_latitude':
+
+                // Aún no hay control que guare esto
+
+                break;
+
+              case 'address_longitude':
+                  // Aún no hay control que guare esto
+
+                break;
+
+              default:
+                break;
+            }
+          }
+
+        });
+
+        controls.nombreDireccion.setValue('Mi residencia');
+        controls.paymentOption.setValue(1);
+
+      }
+    );
+
   }
 
+}
+
+
+interface SelectOption {
+  value: string | number;
+  label: string;
+}
+
+interface SelectOptionRegion {
+  value: string | number;
+  label: string;
+  communes: SelectOption[];
 }

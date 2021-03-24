@@ -6,6 +6,7 @@ import {
   SidebarSections,
 } from '@interfaces/components-options/sidebar-list.options.interface'
 import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service'
+import { ListProductSyncAnNoSync, DataListProductSyncAnNoSync } from '@interfaces/table-product-sync-and-no-sync/ListProductSyncAndNosync';
 
 @Component({
   selector: 'app-synchronized-products',
@@ -13,11 +14,15 @@ import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.s
   styleUrls: ['./synchronized-products.component.css'],
 })
 export class SynchronizedProductsComponent implements OnInit {
+
   itemProductos: DataProductDB[] = []
-  sinchronized = false
+  sinchronized = false;
+  ListDAta: ListProductSyncAnNoSync;
   // Sidebar related parameters
   anchorsMenu: AnchorsMenu[] = []
-  sidebarSections: SidebarSections
+  sidebarSections: SidebarSections;
+  ShowElemets: boolean;
+  NoSincronyzed: boolean;
 
   constructor(
     public storeService: StoreService,
@@ -30,6 +35,10 @@ export class SynchronizedProductsComponent implements OnInit {
       .subscribe((resp: ProductosLoads) => {
         this.itemProductos = resp.data
         console.log('ITEM', this.itemProductos)
+
+        if(this.itemProductos.length === 0){
+          this.NoSincronyzed = true;
+        }
 
         // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < this.itemProductos.length; i++) {
@@ -45,6 +54,17 @@ export class SynchronizedProductsComponent implements OnInit {
     this.loadAnchorsMenuData()
   }
 
+  DataList($event){
+    this.ListDAta = $event;
+    console.log(this.ListDAta.data);
+    if(this.ListDAta.data.length === 0){
+      this.ShowElemets = false;
+    }
+    if(this.ListDAta.data.length > 0){
+      this.ShowElemets = true;
+    }
+  }
+
   private loadAnchorsMenuData() {
     const id = localStorage.getItem('storeId')
     this.anchorsMenu = [
@@ -55,7 +75,7 @@ export class SynchronizedProductsComponent implements OnInit {
       },
       {
         anchorName: 'Productos',
-        anchorLink: `/my-store/product-catalogue/${id}`,
+        anchorLink: `/my-store/product-catalogue`,
         wordToMatch: `products`,
       },
       {

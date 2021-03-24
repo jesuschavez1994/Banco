@@ -1,20 +1,36 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Renderer2,
+  ViewChild,
+  ElementRef,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { CropperPosition, ImageTransform, Dimensions } from '@interfaces/cropper/cropper';
+import {
+  CropperPosition,
+  ImageTransform,
+  Dimensions,
+} from '@interfaces/cropper/cropper';
+
+import { AvatarService } from '@shared/public-navbar/avatar/services/avatar.service';
+import { UsuarioService } from '@services/usuario/usuario.service';
+import { CropperService } from '@shared/cropper-img-photo-account/services/cropper.service';
+import { URL_SERVICIOS } from '../../../../config/config';
 
 @Component({
   selector: 'app-dropzone-photo',
   templateUrl: './dropzone-photo.component.html',
-  styleUrls: ['./dropzone-photo.component.scss']
+  styleUrls: ['./dropzone-photo.component.scss'],
 })
 export class DropzonePhotoComponent implements OnInit {
-
   @ViewChild('dropzone') dropzone: ElementRef;
 
   //Output //
   @Output() HidenDropZone = new EventEmitter<any>();
   @Output() ImagenCropped = new EventEmitter<any>();
-  @Output() SaveSuccesFullImage = new EventEmitter<boolean>(); 
+  @Output() SaveSuccesFullImage = new EventEmitter<boolean>();
 
   isexpand = false;
 
@@ -37,58 +53,59 @@ export class DropzonePhotoComponent implements OnInit {
   // Estados del subscribe //
   state: boolean = false;
   AlertSucces = false;
-  ErrorAlert = false ;
+  ErrorAlert = false;
 
   transform: ImageTransform = {};
   scale = 1;
   containWithinAspectRatio = true;
-  
 
-  constructor(private renderer: Renderer2) { }
+  constructor(
+    private renderer: Renderer2,
+    private _usuarioService: UsuarioService,
+    private _avatarService: AvatarService,
+    private _cropperService: CropperService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  stateSpinner($event: any){
+  stateSpinner($event: any) {
     console.log($event);
     this.spinner = $event.spinner;
     this.AlertSucces = $event.AlertSucces;
     this.ErrorAlert = $event.ErrorAlert;
-    
-    if(this.AlertSucces){
-      setTimeout( () => this.SaveSuccesFullImage.emit(this.AlertSucces), 6000);
-    }
-    
 
+    if (this.AlertSucces) {
+      setTimeout(() => this.SaveSuccesFullImage.emit(this.AlertSucces), 6000);
+    }
   }
 
   toggleContainWithinAspectRatio() {
     this.containWithinAspectRatio = !this.containWithinAspectRatio;
   }
 
-      //  **** Disminuir el Zoom **** //
+  //  **** Disminuir el Zoom **** //
   zoomOut() {
-    this.scale -= .1;
+    this.scale -= 0.1;
     this.transform = {
-        ...this.transform,
-        scale: this.scale
+      ...this.transform,
+      scale: this.scale,
     };
   }
 
   // **** Aumentar el Zomm **** //
   zoomIn() {
-    this.scale += .1;
+    this.scale += 0.1;
     this.transform = {
       ...this.transform,
-        scale: this.scale
-      };
+      scale: this.scale,
+    };
   }
 
   // **** Girar Horizontalmente **** //
   flipHorizontal() {
-      this.transform = {
+    this.transform = {
       ...this.transform,
-      flipH: !this.transform.flipH
+      flipH: !this.transform.flipH,
     };
   }
 
@@ -96,7 +113,7 @@ export class DropzonePhotoComponent implements OnInit {
   flipVertical() {
     this.transform = {
       ...this.transform,
-      flipV: !this.transform.flipV
+      flipV: !this.transform.flipV,
     };
   }
 
@@ -104,20 +121,19 @@ export class DropzonePhotoComponent implements OnInit {
     this.imageChangedEvent = event;
   }
 
-  StateCambiarImg(event: boolean){
+  StateCambiarImg(event: boolean) {
     this.isexpand = false;
     this.showInput = true;
   }
 
   imageCropped(event: ImageCroppedEvent) {
+    console.log('ImageCroppedEvent', event);
 
-    console.log('ImageCroppedEvent', event)
-    
     this.croppedImage = event.base64;
     console.log('IMAGEN LOAD', this.croppedImage);
     this.showFooter = true;
     setTimeout(() => this.ImagenCropped.emit(this.croppedImage), 0);
-    
+    this._cropperService.setImageSource(this.croppedImage);
   }
 
   imageLoaded(image?: HTMLImageElement) {
@@ -132,41 +148,42 @@ export class DropzonePhotoComponent implements OnInit {
     // show message
   }
 
-  Close(){
+  Close() {
     this.isOpen = !this.isOpen;
     this.HidenDropZone.emit(this.isOpen);
     this.showCropper = false;
     this.isexpand = false;
     this.showInput = true;
     this.ErrorImageFailed = false;
-    if (this.showInput === true){
-      this.croppedImage = 'assets/img/Banner/Banner1.svg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend
+    this.getUserImage();
+    if (this.showInput === true) {
+      // this.croppedImage = 'assets/img/Banner/Banner1.svg'; // => Acá tengo hacer una promesa y verificar si no existe un banner en el backend
     }
   }
 
-  public fileBrowseHandler(archivo: any){
-    if ( !archivo ) {
+  public fileBrowseHandler(archivo: any) {
+    if (!archivo) {
       this.imageChangedEvent = null;
       return;
     }
 
-    if ( archivo ) {
+    if (archivo) {
       this.type_fyle = archivo.target.files[0].type;
       // this.prepareFilesList(archivo.target.files);
       this.showInput = false;
       this.renderer.removeClass(this.dropzone.nativeElement, 'min-dropzone');
       this.imageChangedEvent = archivo;
       const longitud = archivo.target.files[0].name.length;
-      const  name = archivo.target.files[0].name.split(' ');
-      this.NameFile = this.modificarname(name, longitud),
-      console.log('names files', this.NameFile);
-
+      const name = archivo.target.files[0].name.split(' ');
+      (this.NameFile = this.modificarname(name, longitud)),
+        console.log('names files', this.NameFile);
     }
   }
 
-  modificarname(name: any, longitud: number){
-    for ( const i in name){
-      return   name[i] = name[i][0].toUpperCase() + name[i].substr(1, longitud - 5);
+  modificarname(name: any, longitud: number) {
+    for (const i in name) {
+      return (name[i] =
+        name[i][0].toUpperCase() + name[i].substr(1, longitud - 5));
     }
   }
 
@@ -208,6 +225,16 @@ export class DropzonePhotoComponent implements OnInit {
   //     }
   //   }, 1000);
   // }
-  
 
+  private getUserImage() {
+    this._usuarioService
+      .datosUserImages(localStorage.getItem('id'))
+      .subscribe((responseImage: any) => {
+        if (responseImage.length >= 1) {
+          this.croppedImage = responseImage[0].src_size.xl;
+          this._avatarService.setImageData(responseImage[0].src_size.xl);
+          this._cropperService.setFallbackImage(this.croppedImage);
+        }
+      });
+  }
 }

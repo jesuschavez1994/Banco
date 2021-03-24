@@ -1,27 +1,28 @@
 <section class="configuration-menu" #configurationMenu>
-
   <div #menuContainerFixed>
-
     <div class="heading">
-      <i class="responsive--icon fas fa-bars" title="Menú" (click)="toggleMenu()"></i> <h2>configuración</h2>
+      <i
+        class="responsive--icon fas fa-bars"
+        title="Menú"
+        (click)="toggleMenu()"
+      ></i>
+      <h2>Configuración</h2>
     </div>
 
-
     <ul class="items-menu">
-      <!-- [ngClass]="{ 'active': item.isActive }" -->
       <ng-container *ngFor="let item of menuOptions">
-
-        <li class="item" [routerLink]="item.routerLink" routerLinkActive="active">
-
-          <i class="responsive--icon {{item.iconClass}}" title="{{item.label}}"></i> <p>{{item.label}}</p>
-
+        <li
+          class="item"
+          [routerLink]="item.routerLink"
+          routerLinkActive="active"
+        >
+          <i
+            class="responsive--icon {{ item.iconClass }}"
+            title="{{ item.label }}"
+          ></i>
+          <p>{{ item.label }}</p>
         </li>
-
       </ng-container>
-
     </ul>
-
   </div>
-
-
 </section>

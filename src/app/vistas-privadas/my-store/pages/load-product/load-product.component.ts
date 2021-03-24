@@ -20,7 +20,7 @@ import { FilstroStoreService } from '@services/FiltroStore/filstro-store.service
 import { ProductsCardsStoreComponent } from '../../../shared/products-cards-store/products-cards-store/products-cards-store.component'
 import { BreadcrumbOptions } from '@interfaces/components-options/breadcrumb.options.interface'
 import { StoreResponse } from '@interfaces/store.interface'
-import { SearchStore } from '@models/search/search-store.model'
+import { SearchStore, specificSearchEngine } from '@models/search/search-store.model'
 import { SearchService } from '@services/Search/search.service'
 import { MyStoreService } from '../../services/my-store.service'
 import { FilterOption } from '@interfaces/components-options/search-bar.options.interface'
@@ -88,6 +88,7 @@ export class LoadProductComponent implements OnInit {
   totalProducts: number
   itemsPerPage = 16
   wasFirstLoadedProducts = false
+  Noproduct: boolean;
 
   imgsBanners: BannerOptions = {
     m: 'assets/img/Banner/Banner1.svg',
@@ -175,8 +176,8 @@ export class LoadProductComponent implements OnInit {
   }
 
   public loadDataStore(params, queryParam: ParamMap) {
-    if (params.has('idStore')) {
-      const idStore = parseInt(params.get('idStore'))
+    
+      const idStore = localStorage.getItem('storeId');
       console.log('IdStore', idStore)
 
       this.storeService.getStoreById(idStore).subscribe((storeResp) => {
@@ -240,13 +241,13 @@ export class LoadProductComponent implements OnInit {
           }
         }
       })
-    }
+    
   }
 
   public loadProductsCards(params: ParamMap, queryParams: ParamMap) {
-    if (params.has('idStore')) {
+
       // tslint:disable-next-line: radix
-      const idStore = parseInt(params.get('idStore'))
+      const idStore = localStorage.getItem('storeId');
       // tslint:disable-next-line: radix
       const page = queryParams.has('page')
         ? parseInt(queryParams.get('page'))
@@ -353,6 +354,8 @@ export class LoadProductComponent implements OnInit {
 
             this.productCardsStore.toggleShimmer(false)
           } else {
+            this.Noproduct = true;
+            this.productCardsStore.toggleShimmer(false)
             this.toastRef.open('Tienda sin productos disponibles', {
               color: '#ffffff',
               background: '#900909c2',
@@ -365,14 +368,14 @@ export class LoadProductComponent implements OnInit {
             { color: '#ffffff', background: '#900909c2' }
           )
           console.log('error al cargar productos')
-          console.log(error)
+          console.log(error);
         }
       )
-    }
+    
   }
 
   public setSidebarOptions(storeResp: StoreResponse, queryParam: ParamMap) {
-    const idStore = storeResp.id
+    const idStore = localStorage.getItem('storeId');
 
     let contactStore
     contactStore = {
@@ -600,17 +603,13 @@ export class LoadProductComponent implements OnInit {
   // }
 
   public handleSearch(value: string): void {
+
+    this.productCardsStore.toggleShimmer(true)
+
     // console.log('value', value);
     if (value !== undefined) {
-      const comparacion = new SearchStore(
-        value,
-        this.marks,
-        this.subcategories,
-        this.categories,
-        this.factories,
-        this.price,
-        this.delivery,
-        this.recipes
+      const comparacion = new specificSearchEngine(
+        value
       )
       this._searchService
         .SearchProductStore(
@@ -618,8 +617,28 @@ export class LoadProductComponent implements OnInit {
           localStorage.getItem('storeId'), // id => store
           comparacion
         )
-        .subscribe((resp: ProductosLoads) => {
-          this.MyProduct = resp.data
+        .subscribe((resp: any) => {
+
+          const products = resp.data
+          this.totalProducts = resp.total
+          this.itemsPerPage = resp.per_page
+
+          if (products.length > 0) {
+            // Formateamos la respuesta del back y retornamos el formato correcto para el componente
+            this.productCardsStore.products = this.productModel.productsCardsComponent.formatProductResp(
+              products
+            )
+            console.log('products loaded: ', this.productCardsStore.products)
+
+            this.productCardsStore.toggleShimmer(false)
+          } else {
+            this.Noproduct = true;
+            this.productCardsStore.toggleShimmer(false)
+            this.toastRef.open('Tienda sin productos disponibles', {
+              color: '#ffffff',
+              background: '#900909c2',
+            })
+          }
         })
     }
   }
@@ -682,20 +701,6 @@ export class LoadProductComponent implements OnInit {
     }
   }
 
-  // Updating the sidebar options
-  // loadStoreData() {
-  //   this.storeService
-  //     .getStoreById(localStorage.getItem('storeId'))
-  //     .subscribe((storeResponse) => {
-  //       this.storeName = storeResponse.name
-  //       this.setBreadcrumbOptions(
-  //         localStorage.getItem('storeId'),
-  //         storeResponse
-  //       )
-  //       this.setSidebarOptions(storeResponse)
-  //     })
-  // }
-
   public setBreadcrumbOptions(storeResp: StoreResponse) {
     const idStore = storeResp.id
 
@@ -716,106 +721,7 @@ export class LoadProductComponent implements OnInit {
     }
   }
 
-  // setSidebarOptions(storeResp: StoreResponse) {
-  //   this.anchorsMenu = {
-  //     productLink: `/product-catalogue`,
-  //     contactLink: `contact'`,
-  //     wordToMatch: `products`,
-  //     synchronizationLink: `/my-store/sincronizacion/exportar-lista-excel`,
-  //   }
 
-  //   this.profile = {
-  //     name: storeResp.name,
-  //     contact: {
-  //       // la base de datos no tiene el dato
-  //       url: '',
-  //       name: '@medicalbackground',
-  //     },
-  //     img: 'assets/img/no-image-banner.jpg', // la base de datos no tiene el dato
-  //     isVerified: storeResp.certification == 'true' ? true : false,
-  //   }
-
-  //   this.categories = [
-  //     {
-  //       id: 1,
-  //       name: 'Cosmeticos',
-
-  //       subcategories: [
-  //         {
-  //           id: 1,
-  //           name: 'Dolor inflamación',
-  //         },
-  //         {
-  //           id: 2,
-  //           name: 'Belleza Higiene',
-  //         },
-  //         {
-  //           id: 3,
-  //           name: 'Dieta & Fitness',
-  //         },
-  //         {
-  //           id: 4,
-  //           name: 'Salud y vitaminas',
-  //         },
-  //         {
-  //           id: 5,
-  //           name: 'Vida sexual',
-  //         },
-  //         {
-  //           id: 6,
-  //           name: 'Ortopedia',
-  //         },
-  //         {
-  //           id: 7,
-  //           name: 'Homeopatia & natural',
-  //         },
-  //         {
-  //           id: 8,
-  //           name: 'Mascotas & veterinaria',
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       id: 2,
-  //       name: 'Medicamentos2',
-
-  //       subcategories: [
-  //         {
-  //           id: 1,
-  //           name: 'Dolor & inflamación2',
-  //         },
-  //         {
-  //           id: 2,
-  //           name: 'Belleza & Higiene2',
-  //         },
-  //         {
-  //           id: 3,
-  //           name: 'Dieta & Fitness2',
-  //         },
-  //         {
-  //           id: 4,
-  //           name: 'Salud y vitaminas2',
-  //         },
-  //         {
-  //           id: 5,
-  //           name: 'Vida sexual2',
-  //         },
-  //         {
-  //           id: 6,
-  //           name: 'Ortopedia2',
-  //         },
-  //         {
-  //           id: 7,
-  //           name: 'Homeopatia & natural2',
-  //         },
-  //         {
-  //           id: 8,
-  //           name: 'Mascotas & veterinaria2',
-  //         },
-  //       ],
-  //     },
-  //   ]
-  // }
   loadAnchorsMenuData() {
     const id = localStorage.getItem('storeId')
     this.anchorsMenu = [
@@ -826,7 +732,7 @@ export class LoadProductComponent implements OnInit {
       },
       {
         anchorName: 'Productos',
-        anchorLink: `/my-store/product-catalogue/${id}`,
+        anchorLink: `/my-store/product-catalogue`,
         wordToMatch: `products`,
       },
       {

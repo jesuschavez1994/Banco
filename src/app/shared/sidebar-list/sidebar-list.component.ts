@@ -21,6 +21,7 @@ import {
 import { ActivatedRoute, Router, ParamMap, Params } from '@angular/router';
 import { Utils } from '../../utils/utils';
 import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service';
+import { UsuarioService } from '@services/usuario/usuario.service';
 
 @Component({
   selector: 'app-sidebar-list',
@@ -36,6 +37,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   @Input() sidebarTarget: SidebarListComponent;
   @Input() anchorsMenu: AnchorsMenu;
   @Input() sidebarOptions: SidebarListOptions;
+  IMG_USER: string;
 
   // Outputs
   @Output() sidebarExpand = new EventEmitter<boolean>();
@@ -144,11 +146,14 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   // Sections required to show
   requiredSections: SidebarSections;
 
+  queryParams;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private utils: Utils,
-    private _sidebarListService: SidebarListService
+    private _sidebarListService: SidebarListService,
+    public usuarioService: UsuarioService,
   ) {
     _sidebarListService.anchorsMenuData$.subscribe(
       (anchorsData: AnchorsMenu[]) => {
@@ -172,6 +177,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     }
 
     this.initFilter();
+
   }
 
   ngAfterViewInit(): void {
@@ -245,36 +251,42 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   }
 
   public routerLinkActive() {
-    // if (this.productsOptionMenu){
+
     this.productOptionMenu = false;
     this.contactOptionMenu = false;
-    // this.productOptionMenu.nativeElement.classList.remove('active');
-    // this.contactOptionMenu.nativeElement.classList.remove('active');
 
-    this.route.paramMap.subscribe((params) => {
-      console.log('routerLinkActive');
-      // console.log(this.anchorsMenu.wordToMatch); // esto es undefined hay que arreglar
+    this.route.paramMap.subscribe(params => {
 
-      if (params.has('show')) {
+      if ((params.has('show') )) {
+
         if (this.anchorsMenu) {
-          // TODO: Mejorar esta implementacion, dado que ahora anchorsMenu se sustituyo por
-          //  anchorsMenuData, que es un array de objetos.
-          if (params.get('show') === this.anchorsMenuData[0].wordToMatch) {
-            // this.productOptionMenu.nativeElement.classList.add('active');
+
+          if (params.get('show') === this.anchorsMenu.wordToMatch) {
             this.productOptionMenu = true;
           }
+
         }
+
       } else {
-        // this.contactOptionMenu.nativeElement.classList.add('active');
+
         this.contactOptionMenu = true;
       }
+
     });
-    // }
+
+
+
   }
 
   // // Standard Filter
-  public loadOptionsFilter(queryParam: ParamMap) {
+  public loadOptionsFilter( queryParam: ParamMap) {
+
+    this.queryParams = queryParam; // guardamos de forma global los valores del queryParam de la URL
+
     const queryKeys = queryParam.keys;
+
+    // console.log('loadOptionsFilter antes');
+    // console.log(queryParam);
 
     // retorna true o false, si la opción tiene el mismo valor que el valor pasado por argumento
     // Si existe el atributo value en el option toma ese atributo para la comparación
@@ -347,14 +359,32 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
         }
       });
     }
+
+    // console.log('loadOptionsFilter despues');
+    // console.log(queryParam);
+
   }
 
-  public selectOptionsFilter2(option: Option, filter: Filter) {
+
+  /**
+   * @description Se ejecuta cuando se realiza click sobre alguna opción de un filtro
+   * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christopher<@>matiz.com.ve
+   * @date 03/03/2021
+   * @param {Option} option
+   * @param {Filter} filter
+   * @param {ParamMap} queryParam
+   * @memberof SidebarListComponent
+   */
+  public selectOptionsFilter2( option: Option, filter: Filter ){
+
     let navigationOptions;
     let queryParams;
 
     // seleccionamos las opciones de filtro y creamos el queryParam
     queryParams = this.markOption(option, filter);
+
+    // console.log('selectOptionsFilter2 antes');
+    // console.log(queryParams);
 
     // Navigation With Filters
 
@@ -419,13 +449,18 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
       }
     });
 
+    // console.log('selectOptionsFilter2 después');
     // console.log(queryParams);
 
     if (Object.keys(queryParams).length > 0) {
+
+      this.queryParams = queryParams;
+
       navigationOptions = {
         relativeTo: this.route,
         queryParams,
       };
+
     }
 
     this.router.navigate([], navigationOptions);
@@ -435,28 +470,17 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public getFilter(filter) {
-    // console.log('getFilter');
-    // console.log(filter);
-    // console.log(this.filters);
+  public getFilter( filter ) {
 
     if (filter.parentFilterId) {
-      // console.log('filter.parentFilterId');
-      // console.log(filter.parentFilterId);
 
-      const parentFilter = this.filters.find((optionsFilter) => {
+      const parentFilter = this.filters.find( optionsFilter => {
         return optionsFilter.filterId === filter.parentFilterId;
       });
 
-      // console.log('parentFilter');
-      // console.log(parentFilter);
-
-      const parentOption = parentFilter.options.find((parentFilterOption) => {
+      const parentOption = parentFilter.options.find ( parentFilterOption => {
         return parentFilterOption.isSelected;
       });
-
-      // console.log('parentOption');
-      // console.log(parentOption);
 
       // Si encuentra una opción del parent Filter seleccionada
       // Si es undefined es porque todos son false, es decir no están seleccionadas
@@ -464,9 +488,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
         const filterOptions = filter.options.filter((filterOption) => {
           return filterOption.parentOptionId === parentOption.optionId;
         });
-
-        // console.log('filterOptions');
-        // console.log(filterOptions);
 
         return filterOptions;
       } else {
@@ -492,7 +513,31 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     selectTheOption: boolean = true
   ) {
     let queryParams;
+    let queryParamsFormat;
+
     queryParams = {};
+    queryParamsFormat = {};
+
+
+
+    if (Object.keys(this.queryParams).length > 0) {
+      if (this.queryParams.keys.length > 0) {
+
+        queryParams = this.queryParams; // asignamos los valores previos del queryParam para no perder esos datos
+
+        queryParams.keys.forEach(paramKey => {
+          queryParamsFormat[paramKey] = queryParams.get(paramKey);
+        });
+
+        // Agregamos los key y valor de los valores de los query params anteriores
+        // Para que no sean eliminado al agregar a la url los query params de las
+        // Opciones de filtrado
+        queryParams = queryParamsFormat;
+
+      }
+    }
+
+
 
     if (filterSelected.type === 'multiple') {
       if (toggleOption) {

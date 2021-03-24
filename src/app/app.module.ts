@@ -56,7 +56,8 @@ import {
   HammerModule,
   HammerGestureConfig,
   HAMMER_GESTURE_CONFIG,
-} from '@angular/platform-browser'
+} from '@angular/platform-browser';
+import { ViewsModule } from './views/views.module'
 
 registerLocaleData(ca)
 
@@ -94,7 +95,7 @@ export class MyHammerConfig extends HammerGestureConfig {
       logOnly: environment.production,
     }),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14',
+      apiKey: 'AIzaSyAHHP-2wKX86cAPLYp_VlV477o8D0kviYw',
     }),
     NgbModule,
 
@@ -102,6 +103,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    ViewsModule,
   ],
 
   providers: [
@@ -127,5 +129,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     },
   ],
   bootstrap: [AppComponent],
+  exports: [],
 })
 export class AppModule {}

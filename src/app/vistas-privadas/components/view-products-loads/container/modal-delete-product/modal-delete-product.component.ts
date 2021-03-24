@@ -10,11 +10,16 @@ import { StoreService } from '../../../../../services/store/store.service';
 export class ModalDeleteProductComponent implements OnInit {
 
   value = {};
+  spinner = false;
+  deleteOk = false;
+  ErrorMessage = false;
+  idElementDelete: string;
 
   constructor(public dialogRef: MatDialogRef<ModalDeleteProductComponent>,
               public storeService: StoreService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
                 console.log(data);
+                this.idElementDelete = this.data.indexProductoDelete
               }
 
   ngOnInit(): void {
@@ -27,13 +32,18 @@ export class ModalDeleteProductComponent implements OnInit {
 
   deleteProdtuc(){
 
+    this.spinner = true;
+
     this.storeService.DeleteProduct(
       localStorage.getItem('id'),
       localStorage.getItem('storeId'),
       this.data.idProducto
     ).subscribe( resp => {
-    document.getElementById(this.data.indexProductoDelete).parentElement.style.display = 'none';
-    this.dialogRef.close();
+      this.spinner = false;
+      this.deleteOk = true;
+      // let parent = document.getElementById(this.data.indexProductoDelete).parentElement.style.display = 'none';
+      // console.log(parent);
+      this.dialogRef.close();
     });
 
   }
