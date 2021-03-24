@@ -20,12 +20,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 
 import { OverlayModule } from '@angular/cdk/overlay';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatStepperModule } from '@angular/material/stepper';
 
 const modules = [
   CommonModule,
@@ -46,10 +48,12 @@ const modules = [
   MatBadgeModule,
   MatIconModule,
   CdkTableModule,
+  MatMenuModule,
   MatProgressBarModule,
   MatBottomSheetModule,
   OverlayModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatStepperModule,
 ];
 @NgModule({
   declarations: [],

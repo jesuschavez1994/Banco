@@ -1,0 +1,126 @@
+<main class="page">
+  <section class="shopping-cart">
+    <h1 class="text-capitalize">Carrito de compras</h1>
+
+    <router-outlet class="animated fadeIn"></router-outlet>
+  </section>
+</main>
+<!-- 
+
+      <ng-container *ngIf="ordersLists.length > 0">
+      <div class="tab-container">
+        <ng-container *ngIf="tabSelected === 1 || tabSelected === 2">
+          <ul class="tab-menu">
+            <li
+              class="tab-item"
+              [ngClass]="{ active: tabSelected === 1 }"
+              (click)="filterByTab(1)"
+            >
+              pedidos
+            </li>
+
+            <li
+              class="tab-item"
+              [ngClass]="{ active: tabSelected === 2 }"
+              (click)="filterByTab(2)"
+            >
+              compras
+            </li>
+          </ul>
+        </ng-container>
+
+        <div
+          class="tab-content"
+          [ngClass]="{ 'justify--init': tabSelected === 3 }"
+        >
+          <!-- Order -> list, editor, e invoice -->
+<!-- <ng-container *ngIf="tabSelected === 1 || tabSelected === 2"> -->
+<!-- Order list by business -->
+<!-- <div class="order-list">
+              <app-order-list
+                (selected)="selectedOrderList($event)"
+                [orderList]="ordersLists"
+              >
+              </app-order-list>
+            </div>
+
+            <div class="detail-content"> -->
+<!-- Order editor -->
+<!-- <ng-container *ngIf="tabSelected === 1">
+                <app-order-editor
+                  [orders]="ordersListSelected.orders"
+                  (purchaseAction)="purchaseAction($event)"
+                  class="order-editor"
+                >
+                </app-order-editor>
+              </ng-container> -->
+
+<!-- invoice -->
+<!-- <ng-container *ngIf="tabSelected === 2">
+                <app-invoice></app-invoice>
+              </ng-container>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="tabSelected === 3">
+            <div class="order-payment-forms">
+              <app-order-payment-forms
+                [buttonDisabled]="buttonDisabledForm"
+                (currentStep)="backProcessForm($event)"
+                (submitForm)="formData($event)"
+              >
+              </app-order-payment-forms>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="tabSelected === 4">
+            <ng-container> -->
+<!-- Voucher details -->
+<!-- <mat-card class="voucher"> -->
+<!-- <mat-card-header class="voucher-title" mat-card-image>
+                  <div class="check">
+                    <img
+                      src="assets/img/Suscription/CheckMark.svg"
+                      alt="CheckMark"
+                      height="80"
+                      width="80"
+                    />
+                  </div>
+                  <small class="text">¡Tu pago fue realizado con éxito!</small>
+                </mat-card-header>
+
+                <mat-card-content class="voucher-body">
+                  <ul>
+                    <li>
+                      <small><b>Total:</b></small>
+                      <p></p>
+                    </li>
+
+                    <li>
+                      <small>Hora:</small>
+                    </li>
+
+                    <li>
+                      <small>Fecha:</small>
+                    </li>
+
+                    <div class="square">
+                      <li>
+                        <small>Número de tarjeta:</small>
+                      </li>
+
+                      <li class="last">
+                        <small>Cód. autorización:</small>
+                      </li>
+                    </div>
+                  </ul> -->
+
+<!-- <button class="btn-details" mat-button>Ver detalles</button> -->
+<!-- </mat-card-content>
+              </mat-card> -->
+<!-- Voucher details -->
+<!-- </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container> -->

@@ -1,3 +1,4 @@
+import { AgmCoreModule } from '@agm/core';
 import { NgModule } from '@angular/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CommonModule } from '@angular/common';
@@ -110,6 +111,7 @@ const components = [
   Modules go here.
 */
 const modules = [
+  AgmCoreModule,
   RouterModule,
   PipesModule,
   CommonModule,
@@ -124,7 +126,12 @@ const modules = [
 
 @NgModule({
   declarations: [...components],
-  imports: [...modules],
+  imports: [
+    ...modules,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAHHP-2wKX86cAPLYp_VlV477o8D0kviYw',
+    }),
+  ],
   exports: [...components, ...modules],
 })
 export class SharedModule {}

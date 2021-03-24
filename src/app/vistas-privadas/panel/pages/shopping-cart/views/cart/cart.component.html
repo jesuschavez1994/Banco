@@ -1,0 +1,51 @@
+<section class="page">
+  <!-- Pestañas de navegación -->
+  <ul class="tab-menu">
+    <li
+      class="tab-item"
+      [ngClass]="{ active: selectedTab === 1 }"
+      (click)="filterByTab(1)"
+    >
+      pedidos
+    </li>
+
+    <li
+      class="tab-item"
+      [ngClass]="{ active: selectedTab === 2 }"
+      (click)="filterByTab(2)"
+    >
+      compras
+    </li>
+  </ul>
+  <!-- #Pestañas de navegación -->
+  <section class="content">
+    <!-- Listado de ordenes por tienda -->
+    <div class="order-list">
+      <app-order-list
+        (selected)="selectedOrderList($event)"
+        [orderList]="ordersLists"
+      >
+      </app-order-list>
+    </div>
+    <!-- #Listado de ordenes por tienda -->
+
+    <div class="detail-content">
+      <!-- Editor de ordenes -->
+      <ng-container *ngIf="selectedTab === 1">
+        <app-order-editor
+          [orders]="ordersListSelected.orders"
+          (purchaseAction)="purchaseAction($event)"
+          class="order-editor"
+        >
+        </app-order-editor>
+      </ng-container>
+      <!-- #Editor de ordenes -->
+
+      <!-- Invoice -->
+      <ng-container *ngIf="selectedTab === 2">
+        <app-invoice></app-invoice>
+      </ng-container>
+      <!-- #Invoice -->
+    </div>
+  </section>
+</section>

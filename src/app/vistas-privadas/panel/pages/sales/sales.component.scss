@@ -1,0 +1,49 @@
+.page {
+  padding-top: 4.7em;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 2em 2em 2em auto;
+  grid-template-areas:
+    'title title title title'
+    '... ... ... filter'
+    'tabs tabs tabs tabs'
+    'content content content content';
+
+  .title {
+    grid-area: title;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .filters-dropdown {
+    grid-area: filter;
+  }
+
+  .nav {
+    grid-area: tabs;
+
+    .navigation {
+      padding-left: 0px;
+      display: flex;
+      flex-direction: row;
+      overflow-x: scroll;
+      overflow-y: hidden;
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      .nav-tabs .nav-link.active {
+        color: #495057;
+        font-weight: 700;
+      }
+    }
+
+    .navigation::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .content {
+    grid-area: content;
+  }
+}

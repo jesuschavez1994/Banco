@@ -1,15 +1,12 @@
 @import 'src/assets/scss/style.scss';
 
 .order-container {
-  padding-top: 30px;
-  padding-right: 30px;
-  padding-left: 30px;
+  padding: 30px 30px 0 30px;
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     width: 9px;
     margin-right: 10px;
     border: solid $color__border-gray 2px;
-
   }
 
   .order-head {
@@ -26,6 +23,29 @@
   }
 
   .batch-actions {
+    display: grid;
+    grid-template-columns: 30px auto auto auto;
+    grid-template-rows: auto;
+    grid-template-areas: 'checkbox-col delete delivery takeout';
+    margin-bottom: 10px;
+
+    .check {
+      grid-area: checkbox-col;
+      display: flex;
+      align-items: center;
+    }
+
+    .delete-btn {
+      grid-area: delete;
+    }
+
+    .delivery-btn {
+      grid-area: delivery;
+    }
+
+    .takeout-btn {
+      grid-area: takeout;
+    }
 
     .option {
       background: $color__background-gray;
@@ -35,18 +55,12 @@
       margin-bottom: 9px;
       margin-right: 9px;
       padding: 3px 18px;
-      transition: all .3s;
+      transition: all 0.3s;
 
       &:hover {
         background: none;
         color: $color__text-orange;
-
       }
-
-    }
-
-    .option:last-child {
-      margin-right: 0px;
     }
   }
 
@@ -70,113 +84,151 @@
       &:hover {
         border-color: #dee2e6 #dee2e6 #fff;
       }
-
     }
 
     .active {
       border-color: #dee2e6 #dee2e6 #fff;
       color: $color__text-orange;
     }
-
   }
 
   .tab-menu {
+    padding-left: 0px;
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
     border-bottom: 2px solid $color__border-gray;
 
     .tab-item {
       font-size: $font__size--small;
+    }
 
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
 
   .order-list {
-
-    .colum-label {
-
-      display: flex;
-      justify-content: flex-end;
-
-      label {
-        font-size: $font__size--small + 1;
-        padding: 10px 10px;
-      }
-    }
-
     .order-item {
-      display: flex;
-      margin-bottom: 35px;
+      display: grid;
+      grid-template-rows: auto;
+      grid-template-columns: 20px auto;
+      grid-template-areas: 'checkbox content';
+      margin: 15px 0;
 
+      .checkbox {
+        grid-area: checkbox;
+      }
+
+      // TODO: Cambiar a display grid
       .content-flex {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        display: grid;
+        grid-template-rows: auto auto auto;
+        grid-template-columns: 2.5fr 1fr 1fr;
+        grid-template-areas:
+          'product-info unit-price-lbl total-price-lbl'
+          'product-info unit-price total-price'
+          'product-info unit-price total-price';
+
+        padding-bottom: 5px;
+        border-right: 1px solid #dad5d5;
+        border-bottom: 1px solid #dad5d5;
+        border-bottom-right-radius: 5px;
+
+        .unit-price,
+        .total-price {
+          align-self: flex-end;
+        }
+
+        .info-product {
+          grid-area: product-info;
+          display: grid;
+          grid-template-columns: auto;
+          grid-template-rows: auto auto auto;
+          grid-template-areas: 'image' 'description' 'actions';
+
+          .img-principal {
+            grid-area: image;
+            min-width: 58px;
+            min-height: 74px;
+            width: 11%;
+            height: 5.8vw;
+            margin-right: 21px;
+
+            img {
+              height: 100%;
+              object-fit: contain;
+            }
+          }
+
+          .title_quantity-container {
+            grid-area: description;
+            width: 76%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            // justify-content: space-between;
+            justify-content: center;
+
+            .title-container {
+              min-width: 130px;
+              width: 50.5%;
+              padding: 14px 0px;
+
+              .title {
+                font-size: $font__size--small + 1;
+                font-weight: 500;
+                margin-bottom: 0px;
+                text-transform: capitalize;
+                word-wrap: break-word;
+              }
+            }
+
+            .quantity-fill--gray {
+              min-width: 311px;
+              height: 20px;
+            }
+          }
+
+          .amount {
+            grid-area: actions;
+            display: flex;
+            justify-content: center;
+          }
+        }
+
+        .unit-price-lbl {
+          grid-area: unit-price-lbl;
+        }
+
+        .total-price-lbl {
+          grid-area: total-price-lbl;
+        }
+
+        .unit-price {
+          grid-area: unit-price;
+        }
+
+        .total-price {
+          grid-area: total-price;
+        }
       }
 
       .content-flex--wrap {
         flex-wrap: wrap;
       }
 
-      .info-product {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-
-
-        .img-principal {
-          min-width: 58px;
-          min-height: 74px;
-          width: 11%;
-          height: 5.8vw;
-          margin-right: 21px;
-
-          img {
-            height: 100%;
-            object-fit: contain;
-          }
-        }
-
-        .title_quantity-container {
-          width: 76%;
-          display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          // justify-content: space-between;
-          justify-content: center;
-
-          .title-container {
-            min-width: 130px;
-            width: 50.5%;
-            padding: 14px 0px;
-
-            .title {
-              font-size: $font__size--small + 1;
-              font-weight: 500;
-              margin-bottom: 0px;
-              text-transform: capitalize;
-              word-wrap: break-word;
-
-            }
-          }
-
-          .quantity-fill--gray{
-            min-width: 311px;
-            height: 20px;
-          }
-
-        }
-
-      }
-
       .price {
         font-size: $font__size--small;
-        padding: 6px 10px; //25px
+        padding: 6px 10px 6px 0; //25px
         word-break: keep-all;
       }
-
     }
-
   }
 
   .resume {
@@ -184,21 +236,21 @@
     flex-direction: column;
     align-items: flex-end;
 
-    table{
-      tr{
-        td{
+    table {
+      tr {
+        td {
           font-size: 14px;
           padding-bottom: 12px;
         }
 
-        td:first-child{
+        td:first-child {
           text-align: end;
           padding-right: 26px;
         }
       }
     }
 
-    label[for="termsAndConditions"]{
+    label[for='termsAndConditions'] {
       margin-top: 20px;
       font-weight: 500;
       cursor: pointer;
@@ -209,24 +261,173 @@
 
       display: flex;
 
-      .button{
+      .button {
         margin-top: 6px;
 
         &:first-child {
           margin-right: 10px;
-
         }
+      }
+    }
+  }
+}
 
+/* -------------------- 
+  Responsive media queries
+   -------------------- */
+/* Extra small devices (phones, 320px and down) */
+@media only screen and (max-width: 320px) {
+  .order-container {
+    padding: 5px 5px 0 5px;
+
+    .order-head {
+      margin-bottom: 15px;
+    }
+
+    .batch-actions {
+      grid-template-columns: 30px auto;
+      grid-template-rows: auto auto auto;
+      grid-template-areas:
+        'checkbox-col delete'
+        '... delivery'
+        '... takeout';
+    }
+
+    .tab-menu {
+      .tab-item {
+        padding: 5px 10px;
       }
     }
 
+    .order-list {
+      .order-item {
+        grid-template-rows: auto;
+        grid-template-columns: 20px auto;
+        grid-template-areas: 'checkbox content';
+        margin: 15px 0;
+
+        .content-flex {
+          grid-template-rows: auto auto auto;
+          grid-template-columns: auto auto auto;
+          grid-template-areas:
+            'product-info unit-price-lbl total-price-lbl'
+            'product-info unit-price total-price'
+            'product-info unit-price total-price';
+
+          .info-product {
+            grid-area: product-info;
+            grid-template-columns: auto;
+            grid-template-rows: auto auto auto;
+            grid-template-areas: 'image' 'description' 'actions';
+
+            .img-principal {
+              grid-area: image;
+              min-width: 70px;
+              min-height: 74px;
+              width: 100%;
+            }
+
+            .title_quantity-container {
+              grid-area: description;
+              width: 100%;
+            }
+          }
+        }
+
+        .unit-price-lbl,
+        .total-price-lbl {
+          text-align: center;
+        }
+      }
+    }
   }
-
-
 }
 
-@media screen and (max-width: 757px) {
+@media only screen and (min-width: 321px) and (max-width: 464px) {
+  .order-container {
+    .batch-actions {
+      grid-template-columns: 30px auto;
+      grid-template-rows: auto auto auto;
+      grid-template-areas:
+        'checkbox-col delete'
+        '... delivery'
+        '... takeout';
+    }
+
+    .order-list {
+      .order-item {
+        .content-flex {
+          .info-product {
+            .img-principal {
+              min-width: 70px;
+              min-height: 74px;
+              width: 100%;
+            }
+
+            .title_quantity-container {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 465px) {
+  .order-container {
+    .batch-actions {
+      grid-template-columns: 30px auto;
+      grid-template-rows: auto auto auto;
+      grid-template-areas:
+        'checkbox-col delete'
+        '... delivery'
+        '... takeout';
+    }
+
+    .order-list {
+      .order-item {
+        .content-flex {
+          .info-product {
+            .img-principal {
+              min-width: 70px;
+              min-height: 74px;
+              width: 100%;
+            }
+
+            .title_quantity-container {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
   .order-container {
     width: 100%;
+
+    .batch-actions {
+      grid-template-columns: 30px auto;
+      grid-template-rows: auto auto auto;
+      grid-template-areas:
+        'checkbox-col delete'
+        '... delivery'
+        '... takeout';
+    }
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .order-container {
+    .batch-actions {
+      grid-template-columns: 30px auto auto auto;
+      grid-template-rows: auto;
+      grid-template-areas: 'checkbox-col delete delivery takeout';
+    }
   }
 }

@@ -1,0 +1,193 @@
+.order-content {
+  width: 100%;
+  padding: 1em;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: 'heading' 'details' 'amounts';
+
+  .skeleton__order-heading {
+    width: 100%;
+    grid-area: heading;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 'name number';
+
+    .skeleton__client-name {
+      grid-area: name;
+      width: 4em;
+      height: 1em;
+    }
+
+    .skeleton__order-number {
+      grid-area: number;
+      margin-left: auto;
+      width: 3em;
+      height: 1em;
+    }
+  }
+
+  .skeleton__order-details {
+    grid-area: details;
+    display: grid;
+    grid-template-rows: 2em auto;
+    grid-template-columns: auto;
+    grid-template-areas: 'tabs' 'table';
+
+    .navigation {
+      grid-area: table;
+      padding-left: 0px;
+      display: flex;
+      flex-direction: row;
+      overflow-x: scroll;
+      overflow-y: hidden;
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      .nav-tabs .nav-link.active {
+        color: #495057;
+        font-weight: 700;
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .skeleton__orders-table {
+      grid-area: table;
+      margin-top: 1em;
+
+      & th,
+      & td {
+        padding: 1em;
+      }
+
+      & .skeleton__main-row {
+        padding: 1em 0;
+        text-align: left;
+        background-color: #f3f3f3;
+        color: #212529;
+
+        th {
+          .content {
+            width: 4em;
+            height: 1em;
+          }
+        }
+      }
+
+      .skeleton__data-cells {
+        animation: verticalFlow 4s ease;
+        animation-iteration-count: infinite;
+        animation-fill-mode: forwards;
+        opacity: 0;
+
+        &:nth-child(2) {
+          animation-delay: 0.5s;
+        }
+
+        &:nth-child(3) {
+          animation-delay: 1s;
+        }
+
+        &:nth-child(4) {
+          animation-delay: 1.5s;
+        }
+
+        td {
+          width: 4em;
+          height: 1em;
+        }
+      }
+    }
+  }
+
+  .skeleton__amounts {
+    grid-area: amounts;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 0.4em auto auto;
+    grid-template-areas:
+      '... line line'
+      '... tax tax'
+      '... total total';
+
+    .line {
+      grid-area: line;
+      width: 100%;
+    }
+
+    .tax {
+      margin: 0.8em 0em;
+      grid-area: tax;
+
+      .grid {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 'text amount';
+
+        .text {
+          grid-area: text;
+          text-align: left;
+        }
+
+        .amount {
+          grid-area: amount;
+          text-align: left;
+
+          width: 3em;
+          height: 1em;
+        }
+      }
+    }
+
+    .total {
+      grid-area: total;
+
+      .grid {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 'text amount';
+
+        .text {
+          grid-area: text;
+          text-align: left;
+        }
+
+        .amount {
+          grid-area: amount;
+          text-align: left;
+
+          width: 3em;
+          height: 1em;
+        }
+      }
+    }
+  }
+
+  .data-cell {
+    height: 1em;
+  }
+}
+
+/* ------------------
+  Animations
+  ------------------ */
+@keyframes verticalFlow {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

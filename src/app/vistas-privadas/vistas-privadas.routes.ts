@@ -1,18 +1,18 @@
-import { Routes } from '@angular/router'
+import { Routes } from '@angular/router';
 /* 
   Services
 */
-import { LoginGuardGuard } from '@services/guards/login-guard.guard'
-import { VerifyTokenGuard } from '@services/guards/verify-token.guard'
+import { LoginGuardGuard } from '@services/guards/login-guard.guard';
+import { VerifyTokenGuard } from '@services/guards/verify-token.guard';
 /* 
   Components used in the views.
 */
-import { RutStoreComponent } from '../form-register/rut-store/rut-store.component'
-import { FormDataNegocioComponent } from '../form-register/form-data-negocio/form-data-negocio.component'
+import { RutStoreComponent } from '../form-register/rut-store/rut-store.component';
+import { FormDataNegocioComponent } from '../form-register/form-data-negocio/form-data-negocio.component';
 
 // FORM USER //
-import { ViewFormAccountUserComponent } from './AccountUser/pages/view-form-account-user.component'
-import { FormAccountUserComponent } from './AccountUser/pages/settings/views/form-account-user/form-account-user.component'
+import { ViewFormAccountUserComponent } from './AccountUser/pages/view-form-account-user.component';
+import { FormAccountUserComponent } from './AccountUser/pages/settings/views/form-account-user/form-account-user.component';
 
 export const ROUTES: Routes = [
   {
@@ -26,9 +26,7 @@ export const ROUTES: Routes = [
   {
     path: 'panel',
     loadChildren: () =>
-      import('../vistas-publicas/panel/panel.module').then(
-        (m) => m.PanelModule
-      ),
+      import('./panel/panel.module').then((m) => m.PanelModule),
     // canLoad: [ LoginGuardGuard ],
     canActivate: [LoginGuardGuard, VerifyTokenGuard],
   },
@@ -41,7 +39,7 @@ export const ROUTES: Routes = [
   {
     path: 'account',
     loadChildren: () =>
-    import('./account/account.module').then((module) => module.AccountModule),
+      import('./account/account.module').then((module) => module.AccountModule),
     canActivate: [LoginGuardGuard, VerifyTokenGuard],
   },
 
@@ -50,12 +48,12 @@ export const ROUTES: Routes = [
     path: 'account',
     component: ViewFormAccountUserComponent,
     canActivate: [LoginGuardGuard, VerifyTokenGuard],
-    
+
     children: [
       {
-        path: 'setting-user',
+        path: 'settings-user',
         component: FormAccountUserComponent,
-        data: { title: 'Founduss | settings' },
+        data: { title: 'Mi cuenta | Founduss' },
       },
     ],
   },
@@ -69,4 +67,4 @@ export const ROUTES: Routes = [
       ),
     canActivate: [LoginGuardGuard, VerifyTokenGuard],
   },
-]
+];

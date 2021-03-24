@@ -25,7 +25,6 @@ export interface Order {
   taxPorcentageByProduct?: number;
   hasDelivery?: boolean;
   deliveryCost?: number;
-
 }
 export interface Group {
   name: string;
@@ -41,10 +40,12 @@ export interface OrderPaymentForm {
   region: number;
   rut: number;
   telefono: number;
+  latitud?: number;
+  longitud?: number;
 }
 
 export interface OrderPaymentFormOption {
   name: string;
   image: string;
-  data: { id: number};
+  data: { id: number };
 }

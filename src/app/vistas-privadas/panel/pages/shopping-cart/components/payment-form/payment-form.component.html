@@ -1,0 +1,249 @@
+<form [formGroup]="paymentForm" (ngSubmit)="processPaymentData()">
+  <mat-horizontal-stepper formArrayName="paymentFormSteps" linear>
+    <mat-step formGroupName="0" [stepControl]="stepOneForms">
+      <ng-template matStepLabel>Complete los campos</ng-template>
+
+      <div class="inputs-container">
+        <!-- Selector de regiones -->
+        <mat-form-field class="input-margin" appearance="outline">
+          <mat-label>Elija una opción</mat-label>
+          <mat-select formControlName="region">
+            <mat-option value="-1">Seleccione región</mat-option>
+
+            <ng-container *ngFor="let region of regions">
+              <mat-option [value]="region.value">{{ region.label }}</mat-option>
+            </ng-container>
+          </mat-select>
+
+          <mat-error *ngIf="stepOneForms.get('region').invalid">
+            Seleccione una opción válida.
+          </mat-error>
+        </mat-form-field>
+        <!-- #Selector de regiones -->
+
+        <!-- Selector de comunas -->
+        <mat-form-field class="input-margin" appearance="outline">
+          <mat-label>Elija una opción</mat-label>
+          <mat-select formControlName="comuna">
+            <mat-option value="-1">Seleccione comuna</mat-option>
+
+            <ng-container *ngFor="let commune of communes">
+              <mat-option [value]="commune.value">{{
+                commune.label
+              }}</mat-option>
+            </ng-container>
+          </mat-select>
+
+          <mat-error *ngIf="stepOneForms.get('comuna').invalid">
+            Seleccione una opción válida.
+          </mat-error>
+        </mat-form-field>
+        <!-- #Selector de comunas -->
+
+        <!-- Formulario de dirección -->
+        <mat-form-field class="input-margin" appearance="outline">
+          <mat-label>Dirección</mat-label>
+          <input
+            matInput
+            formControlName="direccion"
+            type="text"
+            placeholder="Carretera 10"
+          />
+
+          <mat-error *ngIf="stepOneForms.get('direccion').errors?.minlength">
+            Debe escribir al menos 10 caracteres.
+          </mat-error>
+        </mat-form-field>
+        <!-- #Formulario de dirección -->
+
+        <!-- Formulario de hospedaje -->
+        <mat-form-field class="input-margin" appearance="outline">
+          <mat-label>Casa | Oficina</mat-label>
+          <input
+            matInput
+            formControlName="hospedaje"
+            type="text"
+            placeholder="Casa Nro. 94"
+          />
+
+          <mat-error *ngIf="stepOneForms.get('hospedaje').errors?.minlength">
+            Debe escribir al menos 6 caracteres.
+          </mat-error>
+        </mat-form-field>
+        <!-- #Formulario de hospedaje -->
+
+        <!-- Formulario de teléfono -->
+        <mat-form-field class="input-margin" appearance="outline">
+          <mat-label>Teléfono</mat-label>
+          <input
+            matInput
+            formControlName="telefono"
+            type="tel"
+            placeholder="+58123-1234567894"
+          />
+
+          <mat-error *ngIf="stepOneForms.get('telefono').errors?.minlength">
+            Debe escribir al menos 10 caracteres.
+          </mat-error>
+          <mat-error *ngIf="stepOneForms.get('telefono').errors?.maxlength">
+            Número máximo de caracteres excedido.
+          </mat-error>
+          <mat-error *ngIf="stepOneForms.get('telefono').errors?.pattern">
+            Formato de teléfono inválido.
+          </mat-error>
+        </mat-form-field>
+        <!-- #Formulario de teléfono -->
+
+        <div>
+          <button
+            mat-button
+            matStepperNext
+            type="button"
+            class="btn"
+            [disabled]="stepOneForms.invalid"
+          >
+            Siguiente
+          </button>
+        </div>
+      </div>
+    </mat-step>
+
+    <mat-step formGroupName="1" [stepControl]="stepTwoForms">
+      <ng-template matStepLabel>Complete los campos</ng-template>
+      <div class="inputs-container">
+        <!-- Formulario de RUT -->
+        <mat-form-field class="input-margin" appearance="outline">
+          <mat-label>RUT</mat-label>
+          <input
+            matInput
+            formControlName="rut"
+            type="text"
+            placeholder="1234567-7"
+          />
+
+          <mat-error *ngIf="stepTwoForms.get('rut').errors?.minlength">
+            Debe escribir al menos 5 caracteres.
+          </mat-error>
+          <mat-error *ngIf="stepTwoForms.get('rut').errors?.pattern">
+            Formato de teléfono inválido.
+          </mat-error>
+        </mat-form-field>
+        <!-- #Formulario de RUT -->
+
+        <!-- Formulario de alias de la dirección -->
+        <mat-form-field class="input-margin" appearance="outline">
+          <mat-label>Alias de la dirección</mat-label>
+          <input
+            matInput
+            formControlName="aliasDireccion"
+            type="text"
+            placeholder="Mi casa / Oficina Central"
+          />
+
+          <mat-error
+            *ngIf="stepTwoForms.get('aliasDireccion').errors?.minlength"
+          >
+            Debe escribir al menos 5 caracteres.
+          </mat-error>
+        </mat-form-field>
+        <!-- #Formulario de alias de la dirección -->
+
+        <!-- Angular's Google Map area -->
+        <div class="map-container">
+          <p class="small-type">Detalles de la ubicación</p>
+
+          <div class="map">
+            <agm-map
+              *ngIf="!loadingLocation"
+              [latitude]="actualLocationData.latitude"
+              [longitude]="actualLocationData.longitude"
+              [zoom]="actualLocationData.zoom"
+            >
+              <agm-marker
+                *ngFor="let marker of actualLocationData.markers"
+                [latitude]="marker.lat"
+                [longitude]="marker.lng"
+                [label]="marker.label"
+              >
+              </agm-marker>
+            </agm-map>
+          </div>
+        </div>
+        <!-- #Angular's Google Map area -->
+
+        <div>
+          <button mat-button matStepperPrevious class="btn" type="button">
+            Regresar
+          </button>
+          <button
+            mat-button
+            matStepperNext
+            type="button"
+            class="btn"
+            [disabled]="stepTwoForms.invalid"
+          >
+            Siguiente
+          </button>
+        </div>
+      </div>
+    </mat-step>
+
+    <mat-step formGroupName="2" [stepControl]="stepThreeForms">
+      <ng-template matStepLabel>Seleccione una opción</ng-template>
+
+      <!-- Grupo de radio buttons -->
+      <div class="inputs-container">
+        <div class="select-cards">
+          <mat-radio-group formControlName="metodoDePago">
+            <ng-container *ngFor="let option of optionPayment">
+              <article>
+                <mat-radio-button
+                  id="paymentOption-{{ option.data.id }}"
+                  type="radio"
+                  class="checkbox-default radio-default"
+                  [value]="option.data.id"
+                ></mat-radio-button>
+
+                <label for="paymentOption-{{ option.data.id }}">
+                  <div class="select-card">
+                    <div class="img">
+                      <img [src]="option.image" [alt]="option.name" />
+                    </div>
+
+                    <p>
+                      {{ option.name }}
+                    </p>
+                  </div>
+                </label>
+              </article>
+            </ng-container>
+          </mat-radio-group>
+        </div>
+
+        <div class="note">
+          <p>NOTA:</p>
+
+          <p>
+            Te recomendamos no cerrar el navegador hasta que la compra sea
+            finalizada
+          </p>
+        </div>
+      </div>
+      <!-- #Grupo de radio buttons -->
+
+      <div>
+        <button mat-button matStepperPrevious type="button" class="btn">
+          Regresar
+        </button>
+        <button
+          mat-button
+          type="submit"
+          class="btn"
+          [disabled]="stepThreeForms.invalid"
+        >
+          Pagar
+        </button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</form>

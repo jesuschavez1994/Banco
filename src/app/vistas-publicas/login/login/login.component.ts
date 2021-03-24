@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
             .subscribe((StoreResponse: any) => {
               console.log('StoreResponse', StoreResponse);
               this.guardarStorageStore(StoreResponse['0'].social.store_id);
-              this.router.navigate(['account/settings/store-edit'])
+              this.router.navigate(['account/settings/store-edit']);
             });
         }
 
@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
         }
         if (resp.user.role === 'user') {
           this.guardarStorage(resp.remember_token, resp.user.id);
-          this.router.navigate(['account/setting-user'])
+          this.router.navigate(['account/settings-user']);
         }
 
         console.log('You Are Going To: ', this.urlReturn);

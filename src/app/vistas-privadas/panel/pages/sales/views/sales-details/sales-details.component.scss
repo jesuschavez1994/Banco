@@ -1,0 +1,52 @@
+.content {
+  padding-top: 1em;
+
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: 'orders orders details details details';
+
+  .orders-list {
+    grid-area: orders;
+
+    .skeleton {
+      animation: verticalFlow 4s ease;
+      animation-iteration-count: infinite;
+      animation-fill-mode: forwards;
+      opacity: 0;
+
+      &:nth-child(2) {
+        animation-delay: 0.5s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 1s;
+      }
+
+      &:nth-child(4) {
+        animation-delay: 1.5s;
+      }
+    }
+  }
+
+  .order-details {
+    grid-area: details;
+  }
+}
+
+/* ------------------
+  Animations
+  ------------------ */
+@keyframes verticalFlow {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

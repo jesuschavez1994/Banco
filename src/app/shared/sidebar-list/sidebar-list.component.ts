@@ -1,6 +1,7 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
   Input,
   Output,
   EventEmitter,
@@ -22,13 +23,14 @@ import { ActivatedRoute, Router, ParamMap, Params } from '@angular/router';
 import { Utils } from '../../utils/utils';
 import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service';
 import { UsuarioService } from '@services/usuario/usuario.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar-list',
   templateUrl: './sidebar-list.component.html',
   styleUrls: ['./sidebar-list.component.scss'],
 })
-export class SidebarListComponent implements OnInit, AfterViewInit {
+export class SidebarListComponent implements OnInit, AfterViewInit, OnDestroy {
   // Elements
   @ViewChild('sidebarList') sidebarList: ElementRef;
 
@@ -147,23 +149,40 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   requiredSections: SidebarSections;
 
   queryParams;
+  // Data service subscription objects
+  anchorsMenuDataSubscription: Subscription;
+  sectionsToShowSubscription: Subscription;
+  filterValuesSubscription: Subscription;
+  checkedOptionsSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private utils: Utils,
     private _sidebarListService: SidebarListService,
-    public usuarioService: UsuarioService,
+    public usuarioService: UsuarioService
   ) {
-    _sidebarListService.anchorsMenuData$.subscribe(
+    this.anchorsMenuDataSubscription = _sidebarListService.anchorsMenuData$.subscribe(
       (anchorsData: AnchorsMenu[]) => {
         this.anchorsMenuData = anchorsData;
       }
     );
 
-    _sidebarListService.sectionsToShow$.subscribe(
+    this.filterValuesSubscription = _sidebarListService.filterValues$.subscribe(
+      (filtersData: Filter[]) => {
+        this.setFilters(filtersData);
+      }
+    );
+
+    this.sectionsToShowSubscription = _sidebarListService.sectionsToShow$.subscribe(
       (sectionsData: SidebarSections) => {
         this.requiredSections = sectionsData;
+      }
+    );
+
+    this.checkedOptionsSubscription = _sidebarListService.checkedOptions$.subscribe(
+      (checkedOptions: ParamMap) => {
+        this.loadOptionsFilter(checkedOptions);
       }
     );
   }
@@ -177,11 +196,18 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     }
 
     this.initFilter();
-
   }
 
   ngAfterViewInit(): void {
     this.routerLinkActive();
+  }
+
+  ngOnDestroy(): void {
+    // Preventing data leaks
+    this.anchorsMenuDataSubscription.unsubscribe();
+    this.sectionsToShowSubscription.unsubscribe();
+    this.filterValuesSubscription.unsubscribe();
+    this.checkedOptionsSubscription.unsubscribe();
   }
 
   public initFilter() {
@@ -227,6 +253,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     });
 
     this.filters = filters;
+
     return filters;
   }
 
@@ -251,36 +278,24 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
   }
 
   public routerLinkActive() {
-
     this.productOptionMenu = false;
     this.contactOptionMenu = false;
 
-    this.route.paramMap.subscribe(params => {
-
-      if ((params.has('show') )) {
-
+    this.route.paramMap.subscribe((params) => {
+      if (params.has('show')) {
         if (this.anchorsMenu) {
-
           if (params.get('show') === this.anchorsMenu.wordToMatch) {
             this.productOptionMenu = true;
           }
-
         }
-
       } else {
-
         this.contactOptionMenu = true;
       }
-
     });
-
-
-
   }
 
   // // Standard Filter
-  public loadOptionsFilter( queryParam: ParamMap) {
-
+  public loadOptionsFilter(queryParam: ParamMap) {
     this.queryParams = queryParam; // guardamos de forma global los valores del queryParam de la URL
 
     const queryKeys = queryParam.keys;
@@ -362,9 +377,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
 
     // console.log('loadOptionsFilter despues');
     // console.log(queryParam);
-
   }
-
 
   /**
    * @description Se ejecuta cuando se realiza click sobre alguna opción de un filtro
@@ -375,8 +388,7 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
    * @param {ParamMap} queryParam
    * @memberof SidebarListComponent
    */
-  public selectOptionsFilter2( option: Option, filter: Filter ){
-
+  public selectOptionsFilter2(option: Option, filter: Filter) {
     let navigationOptions;
     let queryParams;
 
@@ -453,14 +465,12 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     // console.log(queryParams);
 
     if (Object.keys(queryParams).length > 0) {
-
       this.queryParams = queryParams;
 
       navigationOptions = {
         relativeTo: this.route,
         queryParams,
       };
-
     }
 
     this.router.navigate([], navigationOptions);
@@ -470,15 +480,13 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public getFilter( filter ) {
-
+  public getFilter(filter) {
     if (filter.parentFilterId) {
-
-      const parentFilter = this.filters.find( optionsFilter => {
+      const parentFilter = this.filters.find((optionsFilter) => {
         return optionsFilter.filterId === filter.parentFilterId;
       });
 
-      const parentOption = parentFilter.options.find ( parentFilterOption => {
+      const parentOption = parentFilter.options.find((parentFilterOption) => {
         return parentFilterOption.isSelected;
       });
 
@@ -518,14 +526,11 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
     queryParams = {};
     queryParamsFormat = {};
 
-
-
     if (Object.keys(this.queryParams).length > 0) {
       if (this.queryParams.keys.length > 0) {
-
         queryParams = this.queryParams; // asignamos los valores previos del queryParam para no perder esos datos
 
-        queryParams.keys.forEach(paramKey => {
+        queryParams.keys.forEach((paramKey) => {
           queryParamsFormat[paramKey] = queryParams.get(paramKey);
         });
 
@@ -533,11 +538,8 @@ export class SidebarListComponent implements OnInit, AfterViewInit {
         // Para que no sean eliminado al agregar a la url los query params de las
         // Opciones de filtrado
         queryParams = queryParamsFormat;
-
       }
     }
-
-
 
     if (filterSelected.type === 'multiple') {
       if (toggleOption) {

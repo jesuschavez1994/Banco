@@ -4,18 +4,22 @@ import { Service } from '@services/service.service';
 import { ProductToCartResp } from '@interfaces/productCart.interface';
 import { Observable } from 'rxjs';
 import { UsuarioService } from '../usuario/usuario.service';
-import { Order, PaymentCreated, CreatedMallTransaction } from '../../interfaces/order.interface';
+import {
+  Order,
+  PaymentCreated,
+  CreatedMallTransaction,
+} from '../../interfaces/order.interface';
+import { OrderDetails } from '@interfaces/shopping-cart/shopping-cart.interface';
 import { Region, Commune } from '@interfaces/demography.interface';
 import { DeliveryContactOfOrderData } from '../../models/payment-process';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PaymentProcessService extends Service {
-
   constructor(
     protected http: HttpClient,
-    protected userService: UsuarioService,
+    protected userService: UsuarioService
   ) {
     super(http);
   }
@@ -24,35 +28,41 @@ export class PaymentProcessService extends Service {
 
   private setIdUser() {
     this.idUser = this.userService.getIdUser();
-
   }
 
   // Agregamos los productos al carrito
-  public addProductToCart(idProduct: number, quantity: number): Observable<ProductToCartResp> {
+  public addProductToCart(
+    idProduct: number,
+    quantity: number
+  ): Observable<ProductToCartResp> {
     console.log('adddProductTocart');
-    return this.postQuery<ProductToCartResp>(`cart`, {id: idProduct, qty: quantity});
+    return this.postQuery<ProductToCartResp>(`cart`, {
+      id: idProduct,
+      qty: quantity,
+    });
   }
 
   // Obtenemos los productos del carrito
-  public getProductsFromCart(): Observable<ProductToCartResp>{
+  public getProductsFromCart(): Observable<ProductToCartResp> {
     return this.execQuery<ProductToCartResp>(`cart`);
   }
 
   // Obtenemos los totales (dinero)
-  public getCartResume(){
+  public getCartResume() {
     return this.execQuery(`cart/details`);
   }
 
-  public deleteProductFromCart(idProduct: number): Observable<ProductToCartResp>{
+  public deleteProductFromCart(
+    idProduct: number
+  ): Observable<ProductToCartResp> {
     return this.DeleteQuery<ProductToCartResp>(`cart/${idProduct}`);
   }
 
-  public emptyCart(){
+  public emptyCart() {
     return this.DeleteQuery(`cart`);
   }
 
   // EndPoint Buy Orders
-
 
   /**
    * @description Registra la lista definitiva de productos próximos a pagar
@@ -77,14 +87,19 @@ export class PaymentProcessService extends Service {
    * @returns {*}
    * @memberof PaymentProcessService
    */
-  public addDeliveryContact(idOrder: number, deliveryContact: DeliveryContactOfOrderData) {
+  public addDeliveryContact(
+    idOrder: number,
+    deliveryContact: DeliveryContactOfOrderData
+  ) {
     this.setIdUser();
     const options = {
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     };
-    return this.postQuery(`users/${this.idUser}/orders/${idOrder}/order_delivery`, deliveryContact);
+    return this.postQuery(
+      `users/${this.idUser}/orders/${idOrder}/order_delivery`,
+      deliveryContact
+    );
   }
-
 
   /**
    * @description Se obtiene el pedido a pagar, es importante porque
@@ -99,10 +114,9 @@ export class PaymentProcessService extends Service {
     return this.execQuery<Order>(`users/${this.idUser}/orders`);
   }
 
-  public statusPayment(idProduct: number){
+  public statusPayment(idProduct: number) {
     return this.execQuery(`pago-tienda/${idProduct}/status`);
   }
-
 
   /**
    * @description Agrega los datos en el atributo payment de un order, el cual significa que
@@ -121,41 +135,64 @@ export class PaymentProcessService extends Service {
    */
   public addPaymentToOrder(idOrder: number): Observable<PaymentCreated> {
     this.setIdUser();
-    return this.postQuery<PaymentCreated>(`users/${this.idUser}/orders/${idOrder}/payments`, {});
+    return this.postQuery<PaymentCreated>(
+      `users/${this.idUser}/orders/${idOrder}/payments`,
+      {}
+    );
   }
 
   /**
    * @description Crea la transacción de compra con webPay.
-   * retorna el token y url de pago de webPay
+   * retorna el token y url de pago de WebPay.
    * @author Christopher Dallar, On GiLab and GitHub: christopherdal, Mail: christopher@matiz.com.ve
    * @date 24/01/2021
    * @param {number} paymentId
    * @returns {*}
    * @memberof PaymentProcessService
    */
-  public createTransaction(paymentId: number): Observable<CreatedMallTransaction> {
+  public createTransaction(
+    paymentId: number
+  ): Observable<CreatedMallTransaction> {
     this.setIdUser();
-    return this.execQuery<CreatedMallTransaction>(`webpayplus/createdMallTransaction?payment_id=${paymentId}&user_id=${this.idUser}`);
+    return this.execQuery<CreatedMallTransaction>(
+      `webpayplus/createdMallTransaction?payment_id=${paymentId}&user_id=${this.idUser}`
+    );
   }
 
+  /**
+   * @description Obtiene todas las ordenes de compra realizadas por el usuario. Dichas ordenes pueden
+   * ser filtradas para obtener la necesaria para el voucher.
+   * @param {number} paymentId
+   * @returns {*}
+   * @memberof PaymentProcessService
+   */
+  public getOrdersDetails(): any {
+    this.setIdUser();
+    return this.execQuery<OrderDetails[]>(`users/${this.idUser}/orders?page=1`);
+  }
 
-  public getTransactionStatus(token: string): Observable<CreatedMallTransaction> {
-
+  public getTransactionStatus(
+    token: string
+  ): Observable<CreatedMallTransaction> {
     const options = {
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     };
 
     const data = {
-      token
+      token,
     };
 
-    return this.postQuery<CreatedMallTransaction>(`webpayplus/mallTransactionStatus`, data, true, options);
+    return this.postQuery<CreatedMallTransaction>(
+      `webpayplus/mallTransactionStatus`,
+      data,
+      true,
+      options
+    );
   }
 
-  public getUrlTransaction( url: string, token: string ) {
-
+  public getUrlTransaction(url: string, token: string) {
     const options = {
-      headers: {'Content-Type': 'multipart/form-data'}
+      headers: { 'Content-Type': 'multipart/form-data' },
     };
 
     const data = {
@@ -182,5 +219,4 @@ export class PaymentProcessService extends Service {
   public getCommunesOfRegion(idRegion: number): Observable<Commune> {
     return this.execQuery<Commune>(`regions/${idRegion}/communes`);
   }
-
 }

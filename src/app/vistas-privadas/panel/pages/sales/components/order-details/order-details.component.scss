@@ -1,0 +1,131 @@
+.order-content {
+  width: 100%;
+  padding: 1em;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: 'heading' 'details' 'amounts';
+
+  .order-heading {
+    grid-area: heading;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 'name number';
+
+    .client-name {
+      grid-area: name;
+    }
+
+    .order-number {
+      grid-area: number;
+      margin-left: auto;
+    }
+  }
+
+  .order-details {
+    grid-area: details;
+    display: grid;
+    grid-template-rows: 2em auto;
+    grid-template-columns: auto;
+    grid-template-areas: 'tabs' 'table';
+
+    .navigation {
+      grid-area: table;
+      padding-left: 0px;
+      display: flex;
+      flex-direction: row;
+      overflow-x: scroll;
+      overflow-y: hidden;
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      .nav-tabs .nav-link.active {
+        color: #495057;
+        font-weight: 700;
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .orders-table {
+      grid-area: table;
+      margin-top: 1em;
+
+      & th,
+      & td {
+        padding: 1em;
+      }
+
+      & .main-row {
+        padding: 1em 0;
+        text-align: left;
+        background-color: #f3f3f3;
+        color: #212529;
+      }
+    }
+  }
+
+  .amounts {
+    grid-area: amounts;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 0.4em auto auto;
+    grid-template-areas:
+      '... line line'
+      '... tax tax'
+      '... total total';
+
+    .line {
+      grid-area: line;
+      width: 100%;
+    }
+
+    .tax {
+      margin: 0.8em 0em;
+      grid-area: tax;
+
+      .grid {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 'text amount';
+
+        .text {
+          grid-area: text;
+          text-align: left;
+        }
+
+        .amount {
+          grid-area: amount;
+          text-align: left;
+        }
+      }
+    }
+
+    .total {
+      grid-area: total;
+      font-weight: bold;
+
+      .grid {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 'text amount';
+
+        .text {
+          grid-area: text;
+          text-align: left;
+        }
+
+        .amount {
+          grid-area: amount;
+          text-align: left;
+        }
+      }
+    }
+  }
+}
