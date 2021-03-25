@@ -1,8 +1,9 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import {
-  AnchorsMenu,
   Filter,
   Profile,
+  AnchorsMenu,
+  SidebarSections,
 } from '@interfaces/components-options/sidebar-list.options.interface';
 import { ProductsCardsOptions } from '@interfaces/components-options/products-cards.option.interface';
 import { ActivatedRoute, ParamMap, Router, Params } from '@angular/router';
@@ -15,6 +16,7 @@ import { SidebarListComponent } from '@shared/sidebar-list/sidebar-list.componen
 import { ToastComponent } from '../../modals/toast/toast.component';
 
 import { SearchService } from '@services/Search/search.service';
+import { SidebarListService } from '@shared/sidebar-list/services/sidebar-list.service';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -32,113 +34,58 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   // Sidebar related parameters
   expandSidebar = true;
   sidebarFilters: Filter[] = [];
-  /*   sidebarFilters: Filter[] = [
-    {
-      filterId: 1,
-      title: 'categorías',
-      type: 'single',
-      paramName: 'categoria',
-      options: [
-        {
-          optionId: 1,
-          name: 'Cosmeticos',
-          totalFounds: 200,
-        },
-        {
-          optionId: 2,
-          name: 'Alimentos',
-          totalFounds: 200,
-        },
-      ],
-    },
-    {
-      filterId: 2,
-      title: 'sub categorías',
-      type: 'multiple',
-      paramName: 'sub-categoria',
-      parentFilterId: 1,
-      options: [
-        {
-          optionId: 1,
-          parentOptionId: 1,
-          name: 'labial',
-          totalFounds: 200,
-        },
-        {
-          optionId: 2,
-          parentOptionId: 1,
-          name: 'labia2',
-          totalFounds: 200,
-        },
-        {
-          optionId: 3,
-          parentOptionId: 2,
-          name: 'labial3',
-          totalFounds: 200,
-        },
-      ],
-    },
-    {
-      filterId: 3,
-      title: 'Precios',
-      type: 'single', // Determinamos que solo una opción puede ser seleccionada
-      paramName: 'price',
-      options: [
-        {
-          optionId: 1,
-          name: '$0 - $10,000',
-          totalFounds: 200,
-          // isSelected: false
-        },
-        {
-          optionId: 2,
-          name: '$10,000 - $20,000',
-          totalFounds: 200,
-          // isSelected: false
-        },
-        {
-          optionId: 3,
-          name: '$20,000 - $30,000',
-          totalFounds: 200,
-          // isSelected: false
-        },
-        {
-          optionId: 4,
-          name: '$30,000 - $40,000',
-          totalFounds: 200,
-          // isSelected: false
-        },
-        {
-          optionId: 5,
-          name: '$40,000 - $50,000',
-          totalFounds: 200,
-          // isSelected: false
-        },
-      ],
-    },
-  ]; */
-
+  sidebarSections: SidebarSections;
   categoryFilter = {
     filterId: 1,
     title: 'categorías',
     type: 'single',
-    paramName: 'categoria',
-    options: Option,
+    paramName: 'categories',
+    options: [
+      {
+        optionId: 1,
+        name: 'Cosmeticos',
+        totalFounds: 200,
+      },
+      {
+        optionId: 2,
+        name: 'Alimentos',
+        totalFounds: 200,
+      },
+    ],
   };
 
   subCategoryFilter = {
     filterId: 2,
     title: 'sub categorías',
     type: 'multiple',
-    paramName: 'sub-categorias',
+    paramName: 'sub-categories',
     parentFilterId: 1,
-    options: Option,
+    options: [
+      {
+        optionId: 1,
+        parentOptionId: 1, // El id identificador de la opción de la cual depende
+        name: 'labial', // nombre de la opción
+        totalFounds: 200, // total de resultados a esperar con este filtro
+      },
+      {
+        optionId: 2,
+        parentOptionId: 1,
+        name: 'labia2',
+        totalFounds: 200,
+      },
+      {
+        optionId: 3,
+        parentOptionId: 2,
+        name: 'labial3',
+        totalFounds: 200,
+      },
+    ],
   };
 
   priceFilter: Filter = {
     title: 'Precios',
     type: 'single', // Determinamos que solo una opción puede ser seleccionada
-    paramName: 'precios',
+    paramName: 'price',
     options: [
       {
         name: '$0 - $10,000',
@@ -177,11 +124,22 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router,
     public _searchService: SearchService,
-    private titleService: Title
+    private titleService: Title,
+    private _sidebarListService: SidebarListService
   ) {}
 
   ngOnInit(): void {
-    this.sidebarFilters = this.sidebarList.setFilters(this.sidebarFilters);
+    this.sidebarFilters.push(
+      this.categoryFilter,
+      this.subCategoryFilter,
+      this.priceFilter
+    );
+    console.log('Sidebar list filters: ');
+    console.log(this.sidebarFilters);
+    this._sidebarListService.setFilters(this.sidebarFilters);
+
+    this.setSidebarSections();
+    this.loadAnchorsMenuData();
   }
 
   ngAfterViewInit(): void {
@@ -199,18 +157,12 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { page },
-      queryParamsHandling: 'merge',
     });
   }
 
   goToProductDetails(product: ProductsCardsOptions) {
     if (product.id > -1 && product.idStore > -1) {
-      this.router.navigate([
-        '/business-detail',
-        product.idStore,
-        'products',
-        product.id,
-      ]);
+      this.router.navigate(['/store', product.idStore, 'products', product.id]);
     }
   }
 
@@ -237,14 +189,23 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
 
           let globalSearchPayload = {
             name: queryParams.has('name') ? queryParams.get('name') : '',
-            marks: queryParams.has('marks') ? queryParams.get('marks') : '',
-            subcategories: queryParams.has('subcategories')
-              ? queryParams.get('subcategories')
-              : '',
-            factories: queryParams.has('factories')
-              ? queryParams.get('factories')
-              : '',
+            marks: [queryParams.has('marks') ? queryParams.get('marks') : ''],
+            categories: [
+              queryParams.has('categories')
+                ? queryParams.get('categories')
+                : '',
+            ],
+            subcategories: [
+              queryParams.has('sub-categories')
+                ? queryParams.get('sub-categories')
+                : '',
+            ],
+            factories: [
+              queryParams.has('factories') ? queryParams.get('factories') : '',
+            ],
           };
+
+          this._sidebarListService.loadFilterOptions(queryParams);
 
           return this._searchService.globalProductSearch(
             globalSearchPayload,
@@ -326,5 +287,20 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
 
   setNewTitle(newTitle: string) {
     this.titleService.setTitle(newTitle);
+  }
+
+  private loadAnchorsMenuData() {
+    // Eliminamos los enlaces de la sidebar.
+    this._sidebarListService.setAnchors([]);
+  }
+
+  private setSidebarSections() {
+    this.sidebarSections = {
+      bussinessProfile: false,
+      anchorOptions: false,
+      filters: true,
+    };
+
+    this._sidebarListService.setRequiredSections(this.sidebarSections);
   }
 }
