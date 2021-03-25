@@ -45,3 +45,7 @@ testem.log
 .DS_Store
 Thumbs.db
 /public/assets
+
+# Build files
+/dist
+/build
