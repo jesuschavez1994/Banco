@@ -148,7 +148,6 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
         // Para detectar si los valores de queryParam han cambiado o no
         // y poder crear validaciones, como evitar que el listado de productos
         // se actualice si solo se cambio el id del producto a detallar
-        // console.log('QUERY PARAMS - this.storeData:');
 
         if (this.queryParam) {
           if (this.queryParam !== queryParam) {
@@ -277,12 +276,8 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
       const idStore = parseInt(params.get('idStore'));
       const idProduct = parseInt(params.get('idProduct'));
 
-      console.log('loadProductDetail');
-      console.log(idStore, idProduct);
-
       this.productService.getProductByStore(idStore, idProduct).subscribe(
         (product) => {
-          // console.log('getProductByStore product', product);
           if (product) {
             const productFormatead = this.productModel.productsCardsComponent.formatProductResp(
               product
@@ -327,8 +322,6 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
       let filter;
       filter = {};
 
-      // console.log('queryParams Key: ', queryParams.keys);
-
       const keysQueryParams = queryParams.keys;
 
       if (keysQueryParams.length > 0) {
@@ -372,8 +365,6 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
               break;
 
             case 'precios':
-              // console.log('queryParams.get(precios)');
-              // console.log(queryParams.get('precios'));
               queryParamsAllowed.price = this.utils.stringToArray(
                 queryParams.get('precios'),
                 true
@@ -398,8 +389,6 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
         });
 
         filter = queryParamsAllowed;
-
-        // console.log('queryParamsAllowed: ', queryParamsAllowed);
       }
 
       // this.showShimmerProductsCards = true;
@@ -421,7 +410,6 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
             );
 
             this.setTitle(`${this.storeData.name} | Founduss `);
-            console.log('Products Loaded: ', this.productCards.products);
 
             this.productCards.toggleShimmer(false);
           } else {
@@ -451,8 +439,6 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
 
     this.paymentProcessService.addProductToCart(idProduct, quantity).subscribe(
       (resp) => {
-        console.log('Add to cart response');
-        console.log(resp);
         if (resp.success) {
           const products = resp.data;
 
@@ -526,8 +512,7 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
     ];
     this._sidebarListService.setAnchors(this.anchorsMenu);
 
-    let contactStore;
-    contactStore = {
+    let contactStore = {
       // la base de datos no tiene el dato
       url: '',
       name: 'sin dato de contacto',
@@ -570,8 +555,7 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
 
     // Obtenemos las categorías de los productos vinculados a una tienda
     this.storeService.getCategoriesProducts(idStore).subscribe((resp) => {
-      let sidebarListFilters: Filter[];
-      sidebarListFilters = [];
+      let sidebarListFilters: Filter[] = [];
 
       const respKeys = Object.keys(resp);
 
@@ -579,11 +563,8 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
         return resp[respKey];
       });
 
-      let categoryOptions: Option[];
-      let subCategoryOptions: Option[];
-
-      categoryOptions = [];
-      subCategoryOptions = [];
+      let categoryOptions: Option[] = [];
+      let subCategoryOptions: Option[] = [];
 
       // Llenamos las opciones de categoria y las opciones de sub-categorías, todas vinculadas mediante su id
       categoriesResp.forEach((categoryResp) => {
@@ -657,14 +638,13 @@ export class BusinessProductsComponent implements OnInit, AfterViewInit {
       sidebarListFilters.push(categoryFilter, subCategoryFilter, priceFilter);
 
       // retornamos los filters con el formato correcto para el component
-      // this.sidebarFilters = this.sidebarList.setFilters(sidebarListFilters);
       this._sidebarListService.setFilters(sidebarListFilters);
 
-      // this.sidebarList.loadOptionsFilter(queryParam); // seleccionamos las opciones filtradas por url
+      // seleccionamos las opciones filtradas por url
       this._sidebarListService.loadFilterOptions(queryParam);
     });
 
-    // this.sidebarList.loadOptionsFilter(queryParam); // seleccionamos las opciones filtradas por url
+    // seleccionamos las opciones filtradas por url
     this._sidebarListService.loadFilterOptions(queryParam);
   }
 
