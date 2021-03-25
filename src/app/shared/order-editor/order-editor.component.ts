@@ -133,7 +133,7 @@ export class OrderEditorComponent implements OnInit, AfterViewInit {
 
     subTotal += subTotalDelivery;
     tax = taxTotalByProduct + subTotalDelivery * (this.defaulTaxPercent / 100);
-    total = tax + subTotal;
+    total = subTotal;
 
     switch (nameValueToGet) {
       case 'tax':
@@ -153,5 +153,20 @@ export class OrderEditorComponent implements OnInit, AfterViewInit {
 
   public cancelOrder() {
     this.purchaseAction.emit(this.orders);
+  }
+
+  /** Extrae el I.V.A del valor del producto que se pasa como parametro.
+   */
+  public extractIVA(productPrice: number): number {
+    return productPrice - productPrice * 0.19;
+  }
+
+  /** Calcula el valor total para un producto en el carrito de compras.
+   */
+  public totalProductValue(
+    productPrice: number,
+    productAmount: number
+  ): number {
+    return this.extractIVA(productPrice) * productAmount;
   }
 }

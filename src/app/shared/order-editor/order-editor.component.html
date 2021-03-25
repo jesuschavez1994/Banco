@@ -109,10 +109,12 @@
                 <label class="unit-price-lbl">Unitario</label>
                 <label class="total-price-lbl">Total</label>
 
-                <div class="price unit-price">${{ order.price | number }}</div>
+                <div class="price unit-price">
+                  ${{ extractIVA(order.price) | number }}
+                </div>
 
                 <div class="price total-price">
-                  ${{ order.price * order.quantity | number }}
+                  ${{ totalProductValue(order.price, order.quantity) | number }}
                 </div>
               </div>
             </article>
