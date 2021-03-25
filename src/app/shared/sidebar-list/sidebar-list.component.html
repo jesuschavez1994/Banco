@@ -45,19 +45,15 @@
       </div>
 
       <ul class="options" *ngIf="anchorsMenuData">
-
         <ng-container *ngFor="let anchor of anchorsMenuData">
-
           <li
             [routerLink]="anchor.anchorLink"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
-           >
+          >
             <a>{{ anchor.anchorName }}</a>
           </li>
-
         </ng-container>
-
       </ul>
     </ng-container>
   </div>

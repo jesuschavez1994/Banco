@@ -188,8 +188,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(this.sidebarOptions);
-
     if (this.sidebarOptions) {
       this.anchorsMenu = this.sidebarOptions.anchorsMenu;
       this.profile = this.sidebarOptions.profile;
@@ -299,9 +297,6 @@ export class SidebarListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.queryParams = queryParam; // guardamos de forma global los valores del queryParam de la URL
 
     const queryKeys = queryParam.keys;
-
-    // console.log('loadOptionsFilter antes');
-    // console.log(queryParam);
 
     // retorna true o false, si la opción tiene el mismo valor que el valor pasado por argumento
     // Si existe el atributo value en el option toma ese atributo para la comparación
