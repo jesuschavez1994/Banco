@@ -19,8 +19,8 @@ a {
   padding-left: 0px;
   display: flex;
   flex-direction: row;
-  overflow-x: scroll;
   overflow-y: hidden;
+  overflow-x: scroll;
 
   -ms-overflow-style: none;
   scrollbar-width: none;
