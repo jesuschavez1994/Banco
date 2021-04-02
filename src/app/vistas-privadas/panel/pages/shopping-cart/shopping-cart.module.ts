@@ -7,6 +7,8 @@ import { CartComponent } from './views/cart/cart.component';
 import { PaymentComponent } from './views/payment/payment.component';
 import { PaymentFormComponent } from './components/payment-form/payment-form.component';
 import { VoucherComponent } from './views/voucher/voucher.component';
+import { SkeletonListComponent } from './components/skeleton/skeleton-list/skeleton-list.component';
+import { SkeletonEditorComponent } from './components/skeleton/skeleton-editor/skeleton-editor.component';
 
 const modules = [ShoppingCartRoutingModule, SharedModule];
 
@@ -16,6 +18,8 @@ const components = [
   PaymentComponent,
   PaymentFormComponent,
   VoucherComponent,
+  SkeletonListComponent,
+  SkeletonEditorComponent,
 ];
 
 @NgModule({
