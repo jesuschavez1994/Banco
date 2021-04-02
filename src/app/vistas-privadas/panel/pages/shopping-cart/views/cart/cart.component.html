@@ -24,10 +24,15 @@
     <!-- Listado de ordenes por tienda -->
     <div class="order-list">
       <app-order-list
+        *ngIf="!loading; else skeletonList"
         (selected)="selectedOrderList($event)"
         [orderList]="ordersLists"
       >
       </app-order-list>
+
+      <ng-template #skeletonList>
+        <app-skeleton-list></app-skeleton-list>
+      </ng-template>
     </div>
     <!-- #Listado de ordenes por tienda -->
 
@@ -35,12 +40,17 @@
       <!-- Editor de ordenes -->
       <ng-container *ngIf="selectedTab === 1">
         <app-order-editor
+          *ngIf="!loading; else skeletonEditor"
           [orderDetails]="ordersListSelected"
           [orders]="ordersListSelected.orders"
           (purchaseAction)="purchaseAction($event)"
           class="order-editor"
         >
         </app-order-editor>
+
+        <ng-template #skeletonEditor>
+          <app-skeleton-editor></app-skeleton-editor>
+        </ng-template>
       </ng-container>
       <!-- #Editor de ordenes -->
 

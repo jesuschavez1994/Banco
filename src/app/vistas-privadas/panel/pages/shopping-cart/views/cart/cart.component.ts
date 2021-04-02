@@ -18,6 +18,7 @@ export class CartComponent implements OnInit {
 
   deliveryCost = 0;
   currentPaymentData: CurrentPaymentData = {};
+  loading = true;
 
   constructor(
     public dialog: MatDialog,
@@ -30,6 +31,7 @@ export class CartComponent implements OnInit {
   }
 
   private loadProductsFromCart() {
+    this.loading = true;
     this.paymentService.getProductsFromCart().subscribe((resp) => {
       console.log('Orders received:');
       console.log(resp);
@@ -85,6 +87,8 @@ export class CartComponent implements OnInit {
             this.ordersListSelected = this.ordersLists[0];
           }
         }
+
+        // this.loading = false;
       }
     });
 
