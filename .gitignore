@@ -47,5 +47,5 @@ Thumbs.db
 /public/assets
 
 # Build files
-/dist
-/build
+dist/
+build/
