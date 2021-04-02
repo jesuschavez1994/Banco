@@ -1,6 +1,11 @@
 <mat-card class="my-2 card">
   <mat-card-header>
-    <div mat-card-avatar class="card-avatar"></div>
+    <div
+      mat-card-avatar
+      class="card-avatar"
+      [style.background]="avatarBackground"
+      [style.background-size]="'cover'"
+    ></div>
     <mat-card-title class="title-text">{{
       orderInfo.user.name
     }}</mat-card-title>

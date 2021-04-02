@@ -1,17 +1,17 @@
 .card {
   transition: all 0.5s ease;
+  width: 90%;
 }
 
 .card:hover {
-  transform: scale(1.1);
+  transform: scale(1.01);
   -webkit-box-shadow: 7px 7px 18px -9px rgba(0, 0, 0, 0.36);
   -moz-box-shadow: 7px 7px 18px -9px rgba(0, 0, 0, 0.36);
   box-shadow: 7px 7px 18px -9px rgba(0, 0, 0, 0.36);
+  cursor: pointer;
 }
 
 .card-avatar {
-  background-size: cover;
-  background: url('src/assets/img/no-avatar.jpg');
   height: 5em;
   width: 5em;
 }
