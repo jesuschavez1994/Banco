@@ -1,0 +1,80 @@
+@import 'src/assets/scss/style.scss';
+
+.list-item {
+  min-width: 278px;
+  // width: 36.4%;
+  max-height: 58.5vh;
+
+  margin-bottom: 65px;
+  overflow: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  .item {
+    cursor: pointer;
+    padding: 11px 15px;
+    transition: all $time-hover;
+
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      background: $color__background-gray;
+    }
+
+    .img {
+      min-width: 71px;
+      width: 71px;
+      height: 71px;
+
+      border-radius: 42px;
+      margin-right: 18px;
+      overflow: hidden;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+
+      .name {
+        width: 4rem;
+        height: 1rem;
+      }
+
+      .more-info {
+        display: flex;
+        flex-direction: column;
+
+        .info {
+          font-size: 11px;
+          line-height: 17px;
+          display: grid;
+          grid-template-rows: auto;
+          grid-template-columns: 90% 10%;
+
+          .content {
+            width: 1rem;
+            height: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.list-item.expanded {
+  .item {
+    .content {
+      width: 100%;
+
+      .more-info {
+        flex-direction: row;
+        align-items: baseline;
+        // justify-content: space-between;
+        row-gap: 6px;
+        column-gap: 45px;
+      }
+    }
+  }
+}
