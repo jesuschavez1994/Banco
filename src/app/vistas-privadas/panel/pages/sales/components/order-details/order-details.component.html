@@ -9,10 +9,21 @@
     <nav class="nav">
       <ul class="navigation nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link">Con delivery</a>
+          <a
+            class="nav-link"
+            [ngClass]="{ active: selectedTab === 1 }"
+            (click)="selectTab(1)"
+            >Con delivery</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link"> Retiro en tienda </a>
+          <a
+            class="nav-link"
+            [ngClass]="{ active: selectedTab === 2 }"
+            (click)="selectTab(2)"
+          >
+            Retiro en tienda
+          </a>
         </li>
       </ul>
     </nav>

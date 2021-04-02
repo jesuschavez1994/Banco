@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  AfterViewInit,
-  Input,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import {
   Datum,
   OrderCartItem,
@@ -15,14 +9,16 @@ import {
   templateUrl: './order-details.component.html',
   styleUrls: ['./order-details.component.scss'],
 })
-export class OrderDetailsComponent implements OnInit, AfterViewInit {
+export class OrderDetailsComponent {
   @Input() orderDetails: Datum;
   @Input() totalAmount: number;
   @Input() taxAmount: number;
 
+  selectedTab = 1;
+
   constructor() {}
 
-  ngOnInit(): void {}
-
-  ngAfterViewInit() {}
+  public selectTab(tabNumber: number) {
+    this.selectedTab = tabNumber;
+  }
 }
