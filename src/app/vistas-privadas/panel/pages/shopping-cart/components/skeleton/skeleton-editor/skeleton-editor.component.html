@@ -1,0 +1,119 @@
+<div class="order-container">
+  <div class="order-head">
+    <h3 class="business shimmer shine"></h3>
+    <div class="order-number">
+      Orden #<span class="number shimmer shine"></span>
+    </div>
+  </div>
+
+  <form action="#">
+    <div class="batch-actions">
+      <mat-checkbox
+        type="checkbox"
+        name="select-all"
+        class="check"
+      ></mat-checkbox>
+
+      <button class="btn-area" class="option label-reset delete-btn" mat-button>
+        Eliminar
+      </button>
+
+      <button class="option label-reset delivery-btn" mat-button>
+        Con delivery
+      </button>
+
+      <button class="option label-reset takeout-btn" mat-button>
+        Retiro en tienda
+      </button>
+    </div>
+
+    <div class="order-list-container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link">Con delivery</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Retiro en tienda</a>
+        </li>
+      </ul>
+
+      <div class="order-list">
+        <ng-container *ngFor="let order of [0, 1]">
+          <ng-container>
+            <article class="order-item fadeIn animated">
+              <div class="checkbox">
+                <mat-checkbox
+                  type="checkbox"
+                  name="select-all"
+                  class="checkbox-default"
+                ></mat-checkbox>
+              </div>
+
+              <div class="content-flex">
+                <div class="info-product">
+                  <figure class="img-principal shimmer shine"></figure>
+
+                  <div class="title_quantity-container">
+                    <div class="title-container">
+                      <h4 class="title shimmer shine"></h4>
+                    </div>
+                  </div>
+                </div>
+
+                <label class="unit-price-lbl">Unitario</label>
+                <label class="total-price-lbl">Total</label>
+
+                <div class="price unit-price">
+                  $<span class="text shimmer shine"></span>
+                </div>
+
+                <div class="price total-price">
+                  $<span class="text shimmer shine"></span>
+                </div>
+              </div>
+            </article>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="resume">
+      <table>
+        <tr>
+          <td>Impuesto (19%)</td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>Delivery</td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><strong>Total a pagar</strong></td>
+          <td>
+            <strong></strong>
+          </td>
+        </tr>
+      </table>
+
+      <div class="label-area">
+        <mat-checkbox
+          id="termsAndConditions"
+          name="termsAndConditions"
+          type="checkbox"
+          class="checkbox-default"
+        >
+        </mat-checkbox>
+
+        <p class="label">Acepto los términos y condiciones</p>
+      </div>
+
+      <div class="actions">
+        <button>Cancelar orden</button>
+
+        <button class="button">Pagar</button>
+      </div>
+    </div>
+  </form>
+</div>
