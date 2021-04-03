@@ -1,85 +1,82 @@
-<ngx-spinner bdColor="rgba(0, 0, 0, .45)">
-  <p style="font-size: 20px; color: white">Cargando...</p>
+<ngx-spinner
+bdColor="rgba(0, 0, 0, .45)">
+<p style="font-size: 20px; color: white">Cargando...</p>
 </ngx-spinner>
-
-<section class="container-fluid wrapper">
-  <form [formGroup]="forma">
-    <section class="grid-container">
-      <div class="form-group">
-        <div class="content-button-upload-file">
-          <button
-            class="button-upload-file"
-            (click)="isOpen = !isOpen"
-            type="button"
-            cdkOverlayOrigin
-            #trigger="cdkOverlayOrigin"
+  
+  <section class="container-fluid wrapper">
+  
+    <form [formGroup]="forma"
           >
-            <span>Cargar listado de excel</span>
-          </button>
-        </div>
 
-        <ng-template
-          cdkConnectedOverlay
-          [cdkConnectedOverlayOrigin]="trigger"
-          [cdkConnectedOverlayOpen]="isOpen"
-        >
-          <app-drag-drop-zone-file
-            [EstateisOpen]="isOpen"
-            [SpinnerShow]="Spinner"
-            [SaveFile]="saveFIle"
-            [ErrorMessage]="ErrorMessage"
-            [Hiden]="hiden"
-            (CloseOverlay)="CloseOverlay($event)"
-            (ExistsFile)="ExistsFile($event)"
-            (DataListExcel)="DataListExcel($event)"
-            (ProgressBar)="ProgressBar($event)"
-            (FileCompleted)="FileCompleted($event)"
-          >
-          </app-drag-drop-zone-file>
-        </ng-template>
-      </div>
+          <section class="grid-container">
+            <div class="form-group">
+                  
+              <div class="content-button-upload-file">
+                <button class="button-upload-file" 
+                        (click)="isOpen = !isOpen" 
+                        type="button" 
+                        cdkOverlayOrigin 
+                        #trigger="cdkOverlayOrigin"
+                        >
+                        <span>Cargar listado de excel</span>
+                </button>
+              </div>
 
-      <div>
-        <a
-          *ngIf="dowloadExcel === false"
-          class="family-300 black"
-          href="assets/DocumentoExcel/Listado de carga de productos.xlsx"
-          download
-        >
-          Descargar Formato de excel
-          <mat-icon matBadge="!" matBadgeColor="warn"></mat-icon>
-        </a>
+              <ng-template  cdkConnectedOverlay
+                            [cdkConnectedOverlayOrigin]="trigger"
+                            [cdkConnectedOverlayOpen]="isOpen">
 
-        <a
-          *ngIf="dowloadExcel === true"
-          class="family-300 black"
-          href="{{ this.path }}"
-          download
-        >
-          Descargar Formato de excel
-          <mat-icon matBadge="!" matBadgeColor="warn"></mat-icon>
-        </a>
-      </div>
+                            <app-drag-drop-zone-file  [EstateisOpen]="isOpen"
+                                                      [SpinnerShow]="Spinner"
+                                                      [SaveFile]="saveFIle" 
+                                                      [ErrorMessage]="ErrorMessage"
+                                                      [Hiden]="hiden"
+                                                      (CloseOverlay)="CloseOverlay($event)"
+                                                      (ExistsFile)="ExistsFile($event)"
+                                                      (DataListExcel)="DataListExcel($event)"
+                                                      (ProgressBar)="ProgressBar($event)"
+                                                      (FileCompleted)="FileCompleted($event)">
+                            </app-drag-drop-zone-file>
+                                
 
-      <div class="form-group margin-top">
-        <div class="input-group">
-          <button
-            type="submit"
-            class="btn btn-primary button fredoka"
-            (click)="enviarExcel()"
-          >
-            Cargar Lista
-          </button>
-        </div>
-      </div>
-    </section>
-  </form>
+              </ng-template>
 
-  <table
-    class="table table-striped table-bordered"
-    *ngIf="archivo"
-    style="margin-top: 15%"
-  >
+            </div>
+
+            <div>
+
+              <a  *ngIf="dowloadExcel === false"
+                  class="family-300 black" 
+                  href="assets/DocumentoExcel/Listado de carga de productos.xlsx" 
+                  download>
+                  Descargar Formato de excel
+                  <mat-icon matBadge="!" matBadgeColor="warn"></mat-icon>
+              </a>
+
+              <a  *ngIf="dowloadExcel === true"
+                  class="family-300 black" 
+                  href="{{ this.path }}" 
+                  download>
+                  Descargar Formato de excel
+                  <mat-icon matBadge="!" matBadgeColor="warn"></mat-icon>
+              </a>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <button type="submit" 
+                        class="btn btn-primary button fredoka"
+                        (click)="enviarExcel()"
+                        >
+                        Cargar Lista
+                </button>
+              </div>
+            </div> 
+          </section>
+          
+   </form>
+
+   <table class="table table-striped table-bordered" *ngIf="archivo" style="margin-top: 15%;">
     <thead>
       <tr>
         <th scope="col" class="tex-align-center family-600">Stok</th>
@@ -89,39 +86,30 @@
         <th scope="col" class="tex-align-center family-600">Marca</th>
       </tr>
     </thead>
-    <tbody
-      *ngFor="
-        let FileExcel of Data
-          | paginate: { itemsPerPage: 28, currentPage: pagesActual };
-        let i = index;
-        let par = even;
-        let impar = odd
-      "
-    >
-      <tr [ngClass]="{ 'is-impar': par, 'is-par': impar }">
-        <th scope="row" class="tex-align-center family-500">
-          {{ FileExcel.cantidad }}
-        </th>
-        <td class="tex-align-center size-12 family-500">
-          {{ FileExcel.Nombre | excerpt: 45 }}
-        </td>
-        <td class="text-align-left size-12 family-500">
-          {{ FileExcel.Descripcion | excerpt: 66 }}
-        </td>
-        <td class="text-align-left size-12 family-500">
-          {{ FileExcel.Precio }}
-        </td>
-        <td class="tex-align-center size-12 family-500">
-          {{ FileExcel.Marca }}
-        </td>
+    <tbody *ngFor="let FileExcel of Data | paginate: { itemsPerPage: 28, currentPage: pagesActual };
+            let i = index;
+            let par = even;
+            let impar = odd">
+  
+      <tr [ngClass]="{'is-impar':  par, 'is-par': impar }">
+        <th scope="row" class="tex-align-center family-500">{{FileExcel.cantidad}}</th>
+        <td class="tex-align-center size-12 family-500">{{FileExcel.Nombre | excerpt: 45}}</td>
+        <td class="text-align-left  size-12 family-500">{{FileExcel.Descripcion | excerpt: 66}}</td>
+        <td class="text-align-left  size-12 family-500">{{FileExcel.Precio}}</td>
+        <td class="tex-align-center size-12 family-500">{{FileExcel.Marca}}</td>
       </tr>
+  
     </tbody>
-  </table>
+  </table>   
+  
 </section>
 
+
 <footer>
-  <pagination-controls
-    (pageChange)="pagesActual = $event"
-    *ngIf="archivo"
-  ></pagination-controls>
+  <pagination-controls (pageChange)="pagesActual = $event" *ngIf="archivo"></pagination-controls>
 </footer>
+
+
+
+
+    
