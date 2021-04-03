@@ -88,7 +88,7 @@ export class CartComponent implements OnInit {
           }
         }
 
-        // this.loading = false;
+        this.loading = false;
       }
     });
 
