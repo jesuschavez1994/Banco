@@ -24,7 +24,7 @@
       "@Cards-Shimmer/*": [
         "src/app/vistas-privadas/components/Cards-Shimmer/*"
       ],
-      "@Angula-Material/*": ["src/app/Angula-Material/*"],
+      "@Angula-Material/*": ["src/app/angular-material/*"],
       "@pipes/*": ["src/app/pipes/*"],
       "@environments/*": ["src/environments/*"]
     }

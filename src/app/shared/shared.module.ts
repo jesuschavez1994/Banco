@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 /* Modules is here */
 import { PipesModule } from '../pipes/pipes.module';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { MaterialModule } from '../Angula-Material/material.module';
+import { MaterialModule } from '../angular-material/material.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
 
 /* index is here */

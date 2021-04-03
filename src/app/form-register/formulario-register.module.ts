@@ -10,7 +10,7 @@ import { ComponentsModule } from '../components/components.module';
 import { SharedModule } from '../shared/shared.module';
 import { RutStoreComponent } from './rut-store/rut-store.component';
 import { ButtomGoogleRegisterComponent } from './buttom-google-register/buttom-google-register.component';
-import { MaterialModule } from '../Angula-Material/material.module';
+import { MaterialModule } from '../angular-material/material.module';
 
 @NgModule({
   // tslint:disable-next-line: max-line-length
