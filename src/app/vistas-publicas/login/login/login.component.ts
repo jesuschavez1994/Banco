@@ -17,7 +17,6 @@ import { HomeServiceService } from '../../services/home-service.service';
 export class LoginComponent implements OnInit {
   forma: FormGroup;
   usuario: Usuario;
-  isChecked = false;
   email: string;
   token: string;
   urlReturn = '';
@@ -72,12 +71,11 @@ export class LoginComponent implements OnInit {
           this.ErrorMessage = resp.mensaje;
         }
         this.guardarStorage(resp.remember_token, resp.user.id);
-        console.log(resp);
+
         if (resp.user.role === 'store') {
           this.userStoreService
             .getStoreAccountEdit(resp.user.id)
             .subscribe((StoreResponse: any) => {
-              console.log('StoreResponse', StoreResponse);
               this.guardarStorageStore(StoreResponse['0'].social.store_id);
               this.router.navigate(['account/settings/store-edit']);
             });
@@ -88,8 +86,10 @@ export class LoginComponent implements OnInit {
         }
         if (resp.user.role === 'user') {
           this.guardarStorage(resp.remember_token, resp.user.id);
-          this.router.navigate(['account/settings-user']);
+          this.router.navigate(['account/setting-user']);
         }
+
+        console.log('You Are Going To: ', this.urlReturn);
       });
   }
 
@@ -98,7 +98,6 @@ export class LoginComponent implements OnInit {
   guardarStorage(token: string, id: string) {
     localStorage.setItem('token', token);
     localStorage.setItem('id', id);
-    // localStorage.setItem('storeId', storeId);
     this.token = token;
   }
 
