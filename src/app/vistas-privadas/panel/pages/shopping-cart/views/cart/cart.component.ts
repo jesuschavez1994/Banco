@@ -15,10 +15,10 @@ export class CartComponent implements OnInit {
   selectedTab = 1;
   ordersLists: OrderListOptions[] = [];
   ordersListSelected: OrderListOptions;
+  loading = true;
 
   deliveryCost = 0;
   currentPaymentData: CurrentPaymentData = {};
-  loading = true;
 
   constructor(
     public dialog: MatDialog,
