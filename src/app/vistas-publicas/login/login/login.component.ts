@@ -67,10 +67,7 @@ export class LoginComponent implements OnInit {
     this.usuarioServices
       .login(usuario, this.forma.value.recuerdame)
       .subscribe((resp: any) => {
-        console.log(this.forma.value.recuerdame);
-        console.log('FFFF', resp);
         if (resp.mensaje) {
-          console.log(resp.mensaje);
           this.OnError = true;
           this.ErrorMessage = resp.mensaje;
         }
@@ -93,9 +90,6 @@ export class LoginComponent implements OnInit {
           this.guardarStorage(resp.remember_token, resp.user.id);
           this.router.navigate(['account/settings-user']);
         }
-
-        console.log('You Are Going To: ', this.urlReturn);
-        // this.router.navigateByUrl(this.urlReturn);
       });
   }
 
