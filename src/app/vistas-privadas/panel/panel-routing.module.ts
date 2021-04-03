@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PanelComponent } from './panel.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
 import { EmptyShoppingCartGuard } from '@services/guards/empty-shopping-cart.guard';
+import { VerifyTokenGuard } from '@services/guards/verify-token.guard';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
           import('./pages/shopping-cart/shopping-cart.module').then(
             (module) => module.ShoppingCartModule
           ),
+        canActivate: [VerifyTokenGuard],
         // component: ShoppingCartComponent,
         // canActivate: [EmptyShoppingCartGuard],
         // data: { title: 'Carrito de compras | Founduss' },
@@ -30,6 +32,7 @@ const routes: Routes = [
           import('./pages/sales/sales.module').then(
             (module) => module.SalesModule
           ),
+        canActivate: [VerifyTokenGuard],
       },
       { path: '**', pathMatch: 'full', redirectTo: 'shopping-cart' },
     ],
