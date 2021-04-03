@@ -20,9 +20,6 @@ export class OrderListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('Order list in order-list.component');
-    console.log(this.orderList);
-
     if (this.orderList) {
       if (this.orderList.length) {
         this.orderSelected = this.orderList[0];
