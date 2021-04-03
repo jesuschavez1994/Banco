@@ -7,7 +7,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // ANGULAR MATERIAL //
-import { MaterialModule } from '@app/angular-material/material.module';
+import { MaterialModule } from '@app/shared/angular-material/material.module';
 
 // Mapa //
 import { AgmCoreModule } from '@agm/core';
