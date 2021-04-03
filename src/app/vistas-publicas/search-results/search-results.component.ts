@@ -34,14 +34,20 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   // Sidebar related parameters
   expandSidebar = true;
   sidebarFilters: Filter[] = [];
+  sidebarSections: SidebarSections;
   categoryFilter = {
     filterId: 1,
     title: 'categorías',
     type: 'single',
-    paramName: 'categoria',
+    paramName: 'categories',
     options: [
       {
         optionId: 1,
+        name: 'Cosmeticos',
+        totalFounds: 200,
+      },
+      {
+        optionId: 2,
         name: 'Alimentos',
         totalFounds: 200,
       },
@@ -57,34 +63,26 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
     options: [
       {
         optionId: 1,
-        name: 'Dolor e Inflamación',
-        totalFounds: 200,
+        parentOptionId: 1, // El id identificador de la opción de la cual depende
+        name: 'labial', // nombre de la opción
+        totalFounds: 200, // total de resultados a esperar con este filtro
       },
       {
         optionId: 2,
-        name: 'Huesos y Articulaciones',
+        parentOptionId: 1,
+        name: 'labia2',
         totalFounds: 200,
       },
       {
         optionId: 3,
-        name: 'Corazón',
-        totalFounds: 200,
-      },
-      {
-        optionId: 4,
-        name: 'Defensas',
-        totalFounds: 200,
-      },
-      {
-        optionId: 5,
-        name: 'Vegano',
+        parentOptionId: 2,
+        name: 'labial3',
         totalFounds: 200,
       },
     ],
   };
 
   priceFilter: Filter = {
-    filterId: 3,
     title: 'Precios',
     type: 'single', // Determinamos que solo una opción puede ser seleccionada
     paramName: 'price',
@@ -117,60 +115,6 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
     ],
   };
 
-  factoriesFilter = {
-    filterId: 4,
-    title: 'Fabricante',
-    type: 'multiple', // Determinamos que solo una opción puede ser seleccionada
-    paramName: 'factories',
-    options: [
-      {
-        optionId: 1,
-        name: 'Abbot',
-        totalFounds: 200,
-        // isSelected: false
-      },
-      {
-        optionId: 2,
-        name: 'ANC',
-        totalFounds: 200,
-        // isSelected: false
-      },
-      {
-        optionId: 3,
-        name: 'Aura Vitals',
-        totalFounds: 200,
-        // isSelected: false
-      },
-    ],
-  };
-
-  marksFilter = {
-    filterId: 5,
-    title: 'Marca',
-    type: 'multiple', // Determinamos que solo una opción puede ser seleccionada
-    paramName: 'marks',
-    options: [
-      {
-        optionId: 1,
-        name: 'Aquasolar',
-        totalFounds: 200,
-        // isSelected: false
-      },
-      {
-        optionId: 2,
-        name: 'Arama',
-        totalFounds: 200,
-        // isSelected: false
-      },
-      {
-        optionId: 3,
-        name: 'Bosque Miel',
-        totalFounds: 200,
-        // isSelected: false
-      },
-    ],
-  };
-
   // Product's cards related parameters
   totalProducts: number;
   itemsPerPage = 16;
@@ -184,10 +128,21 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
     private _sidebarListService: SidebarListService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.sidebarFilters.push(
+      this.categoryFilter,
+      this.subCategoryFilter,
+      this.priceFilter
+    );
+    console.log('Sidebar list filters: ');
+    console.log(this.sidebarFilters);
+    this._sidebarListService.setFilters(this.sidebarFilters);
+
+    this.setSidebarSections();
+    this.loadAnchorsMenuData();
+  }
 
   ngAfterViewInit(): void {
-    this.setSidebarFilters();
     // This function triggers all the fecth and modeling of the data that goes
     // on the products cards.
     this.getQueryParamsData();
@@ -334,19 +289,18 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
     this.titleService.setTitle(newTitle);
   }
 
-  setSidebarFilters() {
-    let sidebarListFilters: Filter[] = [];
-    sidebarListFilters.push(
-      this.categoryFilter,
-      this.subCategoryFilter,
-      this.priceFilter,
-      this.factoriesFilter,
-      this.marksFilter
-    );
-    console.log('Sidebar list filters: ');
-    console.log(sidebarListFilters);
-    this.sidebarFilters = this.sidebarList.setFilters(sidebarListFilters);
-    console.log('Sidebar filters: ');
-    console.log(this.sidebarFilters);
+  private loadAnchorsMenuData() {
+    // Eliminamos los enlaces de la sidebar.
+    this._sidebarListService.setAnchors([]);
+  }
+
+  private setSidebarSections() {
+    this.sidebarSections = {
+      bussinessProfile: false,
+      anchorOptions: false,
+      filters: true,
+    };
+
+    this._sidebarListService.setRequiredSections(this.sidebarSections);
   }
 }
