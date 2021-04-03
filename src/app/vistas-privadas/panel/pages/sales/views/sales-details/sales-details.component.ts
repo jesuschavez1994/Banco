@@ -15,6 +15,7 @@ export class SalesDetailsComponent implements OnInit {
 
   storeOrders: Datum[];
   selectedOrderDetails: Datum;
+  activeOrder: Datum;
   totalAmount: number;
   taxAmount: number;
   loading = true;
@@ -26,6 +27,7 @@ export class SalesDetailsComponent implements OnInit {
       this.storeOrders = allOrders.data;
 
       this.selectedOrderDetails = this.storeOrders[0];
+      this.activeOrder = this.selectedOrderDetails;
       this.taxAmount = this.totalAmounts(this.storeOrders[0], 'tax');
       this.totalAmount = this.totalAmounts(this.storeOrders[0], '');
       this.loading = false;
@@ -34,6 +36,7 @@ export class SalesDetailsComponent implements OnInit {
 
   public getOrderDetails(orderDetails: Datum) {
     this.selectedOrderDetails = orderDetails;
+    this.activeOrder = this.selectedOrderDetails;
     this.taxAmount = this.totalAmounts(orderDetails, 'tax');
     this.totalAmount = this.totalAmounts(orderDetails, '');
   }

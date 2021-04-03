@@ -10,10 +10,12 @@ import { Image } from '@interfaces/userPublic.interface';
 })
 export class OrdersListComponent implements OnInit {
   @Input() orderDetails: Datum;
+  @Input() activeOrder: Datum;
   @Output() selectedOrder = new EventEmitter<Datum>();
 
   userImageSrc: Image[];
   avatarBackground: string | SafeStyle;
+  orderSelected: Datum;
 
   constructor(private sanitization: DomSanitizer) {}
 
@@ -25,7 +27,8 @@ export class OrdersListComponent implements OnInit {
       : (this.avatarBackground = `url('assets/img/no-avatar.jpg')`);
   }
 
-  public selectOrder(order: Datum) {
+  public selectOrder(order) {
+    this.orderSelected = this.orderDetails;
     this.selectedOrder.emit(this.orderDetails);
   }
 }

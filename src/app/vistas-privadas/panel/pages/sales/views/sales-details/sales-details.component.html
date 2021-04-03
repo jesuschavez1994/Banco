@@ -1,9 +1,10 @@
 <section class="content">
   <!-- Listado de ordenes por cliente -->
   <section class="orders-list" *ngIf="!loading; else skeletonList">
-    <div *ngFor="let order of storeOrders" class="my-1">
+    <div *ngFor="let order of storeOrders" class="mb-1">
       <app-orders-list
         [orderDetails]="order"
+        [activeOrder]="activeOrder"
         (selectedOrder)="getOrderDetails($event)"
       ></app-orders-list>
     </div>
@@ -12,7 +13,7 @@
   <!-- Componente 'Skeleton' -->
   <ng-template #skeletonList>
     <section class="orders-list">
-      <div class="my-1 skeleton" *ngFor="let skeleton of [0, 1, 2, 3]">
+      <div class="mb-1 skeleton" *ngFor="let skeleton of [0, 1, 2, 3]">
         <app-skeleton-list></app-skeleton-list>
       </div>
     </section>

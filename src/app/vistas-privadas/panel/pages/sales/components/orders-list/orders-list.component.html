@@ -1,4 +1,8 @@
-<mat-card (click)="selectOrder($event)" class="cards">
+<mat-card
+  (click)="selectOrder($event)"
+  class="cards"
+  [ngClass]="{ active: activeOrder === orderDetails }"
+>
   <mat-card-header>
     <div
       mat-card-avatar
