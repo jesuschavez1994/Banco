@@ -89,7 +89,7 @@ export class DropdownIconComponent implements OnInit, AfterViewInit {
           option = {
             title: product.name,
             typeEvent: 'routerLink',
-            eventValue: ['/panel/shopping-cart'],
+            eventValue: ['/panel/shopping-cart/cart'],
             data: product,
           };
 
