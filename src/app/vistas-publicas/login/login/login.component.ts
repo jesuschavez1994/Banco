@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
         }
         if (resp.user.role === 'user') {
           this.guardarStorage(resp.remember_token, resp.user.id);
-          this.router.navigate(['account/setting-user']);
+          this.router.navigate(['/account/settings-user']);
         }
 
         console.log('You Are Going To: ', this.urlReturn);
