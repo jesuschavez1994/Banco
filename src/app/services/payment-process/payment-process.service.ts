@@ -166,9 +166,11 @@ export class PaymentProcessService extends Service {
    * @returns {*}
    * @memberof PaymentProcessService
    */
-  public getOrdersDetails(): any {
+  public getOrdersDetails(page: number): any {
     this.setIdUser();
-    return this.execQuery<OrderDetails[]>(`users/${this.idUser}/orders?page=1`);
+    return this.execQuery<OrderDetails[]>(
+      `users/${this.idUser}/orders?page=${page}`
+    );
   }
 
   public getTransactionStatus(
