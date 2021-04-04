@@ -17,29 +17,56 @@
         <li>
           <small><b>Total:</b></small>
           <p>
-            <b></b>
+            <b *ngIf="!loading; else shimmer">
+              ${{ voucherDetails.amount | number }}
+            </b>
+            <ng-template #shimmer>
+              <b class="shimmer-text shimmer shine"></b>
+            </ng-template>
           </p>
         </li>
 
         <li>
           <small>Hora:</small>
-          <small></small>
+          <small *ngIf="!loading; else shimmer">{{
+            voucherDetails.updated_at | date: 'shortTime'
+          }}</small>
+          <ng-template #shimmer>
+            <small class="shimmer-text shimmer shine"></small>
+          </ng-template>
         </li>
 
         <li>
           <small>Fecha:</small>
-          <small></small>
+          <small *ngIf="!loading; else shimmer">{{
+            voucherDetails.updated_at | date: 'shortDate'
+          }}</small>
+          <ng-template #shimmer>
+            <small class="shimmer-text shimmer shine"></small>
+          </ng-template>
         </li>
 
         <div class="square">
           <li>
             <small>Número de tarjeta:</small>
-            <small> </small>
+            <small *ngIf="!loading; else shimmer">{{
+              voucherDetails.webpayplusmalltransaction.webpayplusmallresponse
+                .card_detail | slice: 16:20
+            }}</small>
+            <ng-template #shimmer>
+              <small class="shimmer-text shimmer shine"></small>
+            </ng-template>
           </li>
 
           <li class="last">
             <small>Cód. autorización:</small>
-            <small></small>
+            <small *ngIf="!loading; else shimmer">{{
+              voucherDetails.webpayplusmalltransaction.webpayplusmallresponse
+                .buy_order
+            }}</small>
+            <ng-template #shimmer>
+              <small class="shimmer-text shimmer shine"></small>
+            </ng-template>
           </li>
         </div>
       </ul>
