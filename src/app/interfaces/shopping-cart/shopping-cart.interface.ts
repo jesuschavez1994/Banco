@@ -181,7 +181,7 @@ interface Store {
   deleted_at: null;
 }
 
-interface Payment {
+export interface Payment {
   id: number;
   order_id: number;
   amount: number;
@@ -294,30 +294,6 @@ export interface OrdersList {
   total: number;
 }
 
-enum Currency {
-  Clp = 'CLP',
-}
-
-enum Status {
-  FinishSuccess = 'FINISH_SUCCESS',
-  PendingPayment = 'PENDING_PAYMENT',
-}
-
-enum PaymentType {
-  Webpayplus = 'webpayplus',
-}
-
-interface Webpayplusnormaltransaction {
-  id: number;
-  payment_id: number;
-  token: string;
-  url: string;
-  error: null;
-  created_at: string;
-  updated_at: string;
-  webpayplusnormalresponse: Webpayplusnormalresponse | null;
-}
-
 interface Webpayplusnormalresponse {
   id: number;
   webpayplus_n_transaction_id: number;
@@ -339,10 +315,58 @@ interface Webpayplusnormalresponse {
   updated_at: string;
 }
 
-enum Title {
-  Subscripcion = 'subscripcion',
+export interface AllOrders {
+  current_page: number;
+  data: Datums[];
+  first_page_url: string;
+  from: number;
+  last_page: number;
+  last_page_url: string;
+  next_page_url: null;
+  path: string;
+  per_page: number;
+  prev_page_url: string;
+  to: number;
+  total: number;
 }
 
-enum DatumType {
-  Subscription = 'subscription',
+export interface Datums {
+  id: number;
+  user_id: number;
+  title: string;
+  cart_data: string;
+  total_price: number;
+  currency: string;
+  status: string;
+  type: string;
+  created_at: string;
+  updated_at: string;
+  payment: Payment;
+  order_delivery: OrderDelivery;
+  order_cart_items: OrderCartItem[];
+}
+
+export interface OrderCartItem {
+  id: number;
+  order_id: number;
+  product_id: number;
+  price: number;
+  quantity: number;
+  created_at: string;
+  updated_at: string;
+  product: Product;
+}
+
+export interface OrderDelivery {
+  id: number;
+  order_id: number;
+  contact_id: number;
+  address_latitude: number;
+  address_longitude: number;
+  name: string;
+  dispatched: string;
+  delivered: string;
+  created_at: string;
+  updated_at: string;
+  contact: Contact;
 }
